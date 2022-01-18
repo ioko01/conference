@@ -1,0 +1,270 @@
+@extends('frontend.layouts.master_frontend')
+
+@section('content')
+<!-- Breadcrumb -->
+<div class="py-5">
+    <div class="row text-end m-0">
+        <div class="col-5 col-md-4 col-lg-3 col-xl-2 bg-white breadcrumb">
+            <p><strong>ลงทะเบียน > สมัครเข้าใช้ระบบ</strong></p>
+
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb -->
+
+<!-- Content -->
+<div id="register-content" class="bg-white text-blue p-5 mb-5">
+    <div class="inner-content-header">
+        <h4 class="text-center">ลงทะเบียนส่งผลงาน / เข้าร่วมงาน</h4>
+        <h4 class="text-green py-3">
+            LRU Conference 2022
+        </h4>
+    </div>
+    <div class="row w-100">
+        <div class="col-md-7">
+            <form action="{{ route('register') }}" method="POST">
+                @csrf
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="prefix">คำนำหน้า <span style="font-size: 12px;"
+                                class="text-bluesky">(ใช้ลงในเกียรติบัตร)</span></label>
+                        <input type="text" name="prefix" id="prefix" class="form-control @error('prefix')
+                            is-invalid
+                        @enderror" value="{{ old('prefix') }}" autocomplete="prefix" autofocus>
+
+                        @error('prefix')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="fullname">ชื่อ - สกุล</label>
+                        <input type="text" name="fullname" id="fullname" class="form-control @error('fullname')
+                            is-invalid
+                        @enderror" value="{{ old('fullname')}} " autocomplete="fullname">
+
+                        @error('fullname')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="sex">เพศ</label>
+                        <select name="sex" id="sex" class="form-select @error('sex')
+                            is-invalid
+                        @enderror">
+                            <option value="">---กรุณาเลือก---</option>
+                            <option value="male" @if (old('sex')==="male" ) selected @endif>ชาย</option>
+                            <option value="female" @if (old('sex')==="female" ) selected @endif>หญิง</option>
+                        </select>
+
+                        @error('sex')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone">เบอร์โทร</label>
+                        <input type="text" name="phone" id="phone" class="form-control @error('phone')
+                            is-invalid
+                        @enderror" value="{{ old('phone')}} " autocomplete="phone">
+
+                        @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-4">
+
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <label for="institution">สังกัด / หน่วยงาน</label>
+                        <input type="text" name="institution" id="institution" class="form-control @error('institution')
+                            is-invalid
+                        @enderror" value="{{ old('institution') }}" autocomplete="institution">
+
+                        @error('institution')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <label for="address">ที่อยู่ <span style="font-size: 12px;"
+                                class="text-bluesky">(ใช้ในการส่งเอกสาร)</span></label>
+                        <textarea class="form-control @error('address')
+                            is-invalid
+                        @enderror" name="address" id="address" cols="30" rows="5">{{old('address')}}</textarea>
+
+                        @error('address')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <label>เลือกสถานะของท่าน
+                            @error('personType')
+                            <span class="text-danger"> *กรุณาเลือกสถานะของท่าน</span>
+                            @enderror
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="personType" id="in"
+                                @if(old('personType')==="in" || empty(old('personType')) ) checked @endif value="in">
+                            <label class="form-check-label" for="in">
+                                บุคคลในมหาวิทยาลัยราชภัฏเลย
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="personType" id="out"
+                                @if(old('personType')==="out" ) checked @endif value="out">
+                            <label class="form-check-label" for="out">
+                                บุคคลภายนอก
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="personType" id="kota"
+                                @if(old('personType')==="kota" ) checked @endif value="kota">
+                            <label class="form-check-label" for="kota">
+                                ได้รับโควต้าเจ้าภาพร่วม
+                            </label>
+                        </div>
+                        <p style="color:red">* โควต้าเจ้าภาพร่วมกรุณาติดต่อต้นสังกัด
+                            หากท่านเป็นบุคลากรภายในมหาวิทยาลัยราชภัฏเลย และบทความของท่านเป็นของมหาวิทยาลัยอื่น
+                            จะต้องลงทะเบียนเป็น "บุคคลภายนอก"
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <label>ท่านลงทะเบียนส่งผลงาน หรือเข้าร่วมงานทั่วไป ? @error('personAttend')
+                            <span class="text-danger"> * กรุณาเลือกวิธีลงทะเบียน</span>
+                            @enderror
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="personAttend" id="send"
+                                @if(old('personAttend')==="send" || empty(old('personAttend'))) checked @endif
+                                value="send">
+                            <label class="form-check-label" for="send">
+                                ลงทะเบียนส่งผลงาน
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="personAttend" id="attend"
+                                @if(old('personAttend')==="attend" ) checked @endif value="attend">
+                            <label class="form-check-label" for="attend">
+                                ลงทะเบียนเข้าร่วมงานทั่วไป
+                            </label>
+                        </div>
+                        <p style="color: red;">* บุคคลภายนอกจะต้องชำระค่าลงทะเบียน 2,000 บาท ต่อ 1 ผลงาน /
+                            ลงทะเบียนเข้าร่วมงานทั่วไป 1,000 ต่อ 1 ท่าน * กรณีที่ท่านเป็นผู้ร่วมวิจัยฯ
+                            ให้หัวหน้าโครงการลงทะเบียนส่งผลงาน และท่านลงทะเบียนเข้าร่วมงานทั่วไป
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <label for="email">อีเมล <span style="font-size: 12px;"
+                                class="text-bluesky">(จำเป็นต้องยืนยันตัวตนในอีเมล)</span></label>
+                        <input type="text" name="email" id="email" class="form-control @error('email')
+                            is-invalid
+                        @enderror" value="{{ old('email') }}">
+
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="password">รหัสผ่าน</label>
+                        <input type="password" name="password" id="password" class="form-control @error('password')
+                            is-invalid
+                        @enderror">
+
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="password_confirmation">ยืนยันรหัสผ่าน</label>
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control @error('password_confirmation')
+                            is-invalid
+                        @enderror">
+                    </div>
+                </div>
+                <div class="d-block">
+                    <input class="btn btn-green rounded-0 text-white text-white w-100" type="submit" value="ลงทะเบียน">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5 tips">
+            <div class="tips-content">
+                <div class="tips-box py-5">
+                    <div class="icon"><img src="{{ asset('images/guide.png') }}" alt="guide-register"></div>
+                    <div class="content"><strong>แนะนำการลงทะเบียน</strong><br /><span>
+                            กรณีต้องการลงทะเบียนเข้าร่วมงานแต่ไม่ส่งบทความ หรือเป็นนักวิจัยร่วม ให้เลือก
+                            "ลงทะเบียนเข้าร่วมงานทั่วไป" หากสงสัยให้ติดต่อเจ้าหน้ที่หรือผู้ดูแลระบบ</span></div>
+                </div>
+                <div class="tips-box py-5">
+                    <div class="icon"><img src="{{ asset('images/folder.png') }}" alt="guide-send"></div>
+                    <div class="content"><strong>แนะนำการส่งผลงาน</strong><br /><span>
+                            เมื่อลงทะเบียนสำเร็จแล้ว ระบบจะส่งลิงก์
+                            ไปยังอีเมลของท่านเพื่อยืนยันตัวตน
+                            จึงจะสามารถใช้ระบบส่งผลงานได้
+                            (ผู้ที่ส่งผลงานจะต้องเลือก
+                            "ลงทะเบียนส่งผลงาน" เท่านั้น !)
+                            และจะต้องใส่ข้อมูลที่ถูกต้อง
+                            หากเกิดข้อผิดพลาดผู้ลงทะเบียน
+                            ใส่ข้อมูลมาผิด เจ้าหน้าที่จะไม่รับผิดชอบ</span></div>
+                </div>
+                <div class="tips-box py-5">
+                    <div class="icon"><img src="{{ asset('images/heart.png') }}" alt="guide"></div>
+                    <div class="content"><strong>การพิจารณาผลงาน</strong><br /><span>
+                            พิจารณาการเลือกกลุ่มการนำเสนอ
+                            ผลงานและประเภทของการนำเสนอ
+                            ผลงาน โดยผู้ทรงคุณวุฒิจากภายใน
+                            และภายนอกมหาวิทยาลัย อย่างน้อย 2 ท่าน
+                            และคัดเลือกผลงานที่นำเสนอในการประชุม
+                            รวบรวมเป็นรายงานสืบเนื่องจากการประชุม
+                            วิชาการระดับชาติ Proceedings
+                            (ทั้งนี้บทความต้องได้รับการชำระเงินเท่านั้น..!
+                            ที่จะได้รับสิทธิ์ให้ผู้ทรงคุณวิฒิพิจารณา)</span></div>
+                </div>
+                <div class="tips-box py-5">
+                    <div class="icon"><img src="{{ asset('images/money-exchange.png') }}" alt=""></div>
+                    <div class="content"><strong>การชำระเงิน</strong><br /><span>
+                            1. ผู้นำเสนอจากหน่วยงานภายนอก ที่ส่งผลงาน ค่าลงทะเบียนอัตรา 2,000 บาท ต่อ 1 ผลงาน <br />
+                            2. ผู้ร่วมงานทั่วไป/นิสิต/นักศึกษาจากหน่วยงานภายนอก ไม่เสียค่าใช้จ่าย <br />
+                            3. บุคลากรภายในมหาวิทยาลัยราชภัฏเลย ไม่เสียค่าใช้จ่าย <br />
+                            4.
+                            ข้าราชการหรือบุคลากรของรัฐที่เข้าร่วมประชุมสามารถเบิกจ่ายได้จากต้นสังกัดตามระเบียบของกระทรวงการคลัง
+                            <br />
+                            หมายเหตุ: กรณีที่ผู้สมัครเข้าร่วมงานและไม่สามารถมานำเสนอผลงานได้ สถาบันวิจัยและพัฒนา
+                            ขอสงวนสิทธิ์ ที่จะไม่คืนเงินค่าลงทะเบียนไม่ว่ากรณีใดๆ
+                            เนื่องจากต้องมีค่าใช้จ่ายในระหว่างการดำเนินงาน</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Content -->
+@endsection

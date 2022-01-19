@@ -22,6 +22,10 @@
         @yield('btn-to-top')
     </div>
 
+    @if (Request::is('employee*'))
+        <script src="{{ asset('js/select-option-group.js') }}"></script>
+    @endif
+
 </body>
 
 </html>

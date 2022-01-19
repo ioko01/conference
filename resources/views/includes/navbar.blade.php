@@ -58,8 +58,6 @@
                     {{ route('employee.research.index') }}
                 @endguest">ส่งบทความ</a>
                     @endguest
-
-
                 </li>
 
                 <li class="nav-item dropdown">

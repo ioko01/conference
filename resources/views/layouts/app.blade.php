@@ -1,1 +1,0 @@
-@extends('frontend.layout.master_frontend')

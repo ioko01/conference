@@ -15,9 +15,9 @@ class CreateResearchTable extends Migration
     {
         Schema::create('research', function (Blueprint $table) {
             $table->id();
-            $table->string('name_th');
-            $table->string('name_en');
-            $table->string('research_name');
+            $table->text('name_th');
+            $table->text('name_en');
+            $table->text('name_research');
             $table->string('group');
             $table->string('group2');
             $table->string('volumn');

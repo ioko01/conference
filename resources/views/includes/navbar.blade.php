@@ -12,7 +12,8 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ route('welcome') }}">หน้าหลัก</a>
+                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page"
+                        href="{{ route('welcome') }}">หน้าหลัก</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -37,22 +38,28 @@
                         </li>
                     </ul>
                 </li>
+
+                @guest
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         ลงทะเบียน
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @guest
                         <li><a class="dropdown-item" href="{{ route('register')}}">สมัครเข้าใช้งานระบบ</a></li>
-                        @endguest
-
-                        <li><a class="dropdown-item" href="@guest
-                            {{ route('login') }}
-                            @else
-                            {{ route('employee.research') }}
-                        @endguest">ส่งบทความ</a></li>
                     </ul>
+
+                </li>
+                @else
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('employee*') ? 'active' : ''}}" aria-current="page" href="@guest
+                    {{ route('login') }}
+                    @else
+                    {{ route('employee.research.index') }}
+                @endguest">ส่งบทความ</a>
+                    @endguest
+
+
                 </li>
 
                 <li class="nav-item dropdown">
@@ -65,9 +72,12 @@
                         <li><a class="dropdown-item" href="#">รายชื่อผู้ร่วมงาน</a></li>
                     </ul>
                 </li>
+                @auth
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route('welcome') }}">บทความของฉัน</a>
                 </li>
+                @endauth
+
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#">วิธีชำระเงิน</a>
                 </li>

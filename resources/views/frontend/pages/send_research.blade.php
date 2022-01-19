@@ -21,42 +21,73 @@
     </div>
     <div class="row w-100">
         <div class="col-md-7">
-            <form action="#">
+            <form action="{{ route('employee.research.store') }}" method="POST">
+                @csrf
                 <div class="mb-4">
-                    <label for="research-th">ชื่อบทความ (ภาษาไทย)</label>
-                    <input type="text" id="research-th" class="form-control">
+                    <label for="nameTh">ชื่อบทความ (ภาษาไทย)</label>
+                    <input type="text" id="nameTh" name="nameTh" value="{{ old('nameTh') }}" class="form-control @error('nameTh')
+                        is-invalid                        
+                    @enderror" autocomplete="nameTh" autofocus>
+
+                    @error('nameTh')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="research-en">ชื่อบทความ (ภาษาอังกฤษ)</label>
-                    <input type="text" id="research-en" class="form-control">
+                    <label for="nameEn">ชื่อบทความ (ภาษาอังกฤษ)</label>
+                    <input type="text" id="nameEn" name="nameEn" value="{{ old('nameEn') }}" class="form-control @error('nameEn')
+                        is-invalid
+                    @enderror" autocomplete="nameEn">
+
+                    @error('nameEn')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="research-person">ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย)</label>
+                    <label>ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย)</label>
                     <div class="d-flex mb-4">
-                        <label class="align-self-end" for="research-person1">1.&nbsp;</label>
-                        <input type="text" id="research-person1" class="form-control">
+                        <label class="align-self-end" for="nameResearch1">1.&nbsp;</label>
+                        <input type="text" id="nameResearch1" name="nameResearch1" class="form-control @error('nameResearch1')
+                            is-invalid
+                        @enderror" value="{{ old('nameResearch1') }}" autocomplete="nameResearch1">
+
+                        @error('nameResearch1')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="d-flex mb-4">
-                        <label class="align-self-end" for="research-person2">2.&nbsp;</label>
-                        <input type="text" id="research-person2" class="form-control">
+                        <label class="align-self-end" for="nameResearch2">2.&nbsp;</label>
+                        <input type="text" id="nameResearch2" name="nameResearch2" class="form-control"
+                            value="{{ old('nameResearch2')}}" autocomplete="nameResearch2">
                     </div>
                     <div class="d-flex mb-4">
-                        <label class="align-self-end" for="research-person3">3.&nbsp;</label>
-                        <input type="text" id="research-person3" class="form-control">
+                        <label class="align-self-end" for="nameResearch3">3.&nbsp;</label>
+                        <input type="text" id="nameResearch3" name="nameResearch3" class="form-control"
+                            value="{{ old('nameResearch3')}}" autocomplete="nameResearch3">
                     </div>
                     <div class="d-flex mb-4">
-                        <label class="align-self-end" for="research-person4">4.&nbsp;</label>
-                        <input type="text" id="research-person4" class="form-control">
+                        <label class="align-self-end" for="nameResearch4">4.&nbsp;</label>
+                        <input type="text" id="nameResearch4" name="nameResearch4" class="form-control"
+                            value="{{ old('nameResearch4')}}" autocomplete="nameResearch4">
                     </div>
                     <div class="d-flex mb-4">
-                        <label class="align-self-end" for="research-person5">5.&nbsp;</label>
-                        <input type="text" id="research-person5" class="form-control">
+                        <label class="align-self-end" for="nameResearch5">5.&nbsp;</label>
+                        <input type="text" id="nameResearch5" name="nameResearch5" class="form-control"
+                            value="{{ old('nameResearch5')}}" autocomplete="nameResearch5">
                     </div>
 
                 </div>
                 <div class="mb-4">
-                    <label for="research-group">บทความของท่านอยู่ในกลุ่ม</label>
-                    <select name="research-group" id="research-group" class="form-select">
+                    <label for="group">บทความของท่านอยู่ในกลุ่ม</label>
+                    <select name="group" id="group" class="form-select @error('group')
+                        is-invalid
+                    @enderror">
                         <option value="">---กรุณาเลือก---</option>
                         <option value="1">กลุ่มมนุษยศาสตร์/สังคมศาสตร์</option>
                         <option value="2">กลุ่มครุศาสตร์</option>
@@ -64,11 +95,39 @@
                         <option value="4">กลุ่มบริหารธุรกิจ การบริการ และการท่องเที่ยว</option>
                         <option value="5">กลุ่มวิศวกรรม และอุตสาหกรรม</option>
                     </select>
+
+                    @error('group')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
+
+                <div class="mb-4">
+                    <label for="group2">สาขาย่อย</label>
+                    <select name="group2" id="group2" class="form-select @error('group2')
+                        is-invalid
+                    @enderror">
+                        <option value="">---กรุณาเลือก---</option>
+                        <option value="1">กลุ่มมนุษยศาสตร์/สังคมศาสตร์</option>
+                        <option value="2">กลุ่มครุศาสตร์</option>
+                        <option value="3">กลุ่มวิทยาศาสตร์และเทคโนโลยี</option>
+                        <option value="4">กลุ่มบริหารธุรกิจ การบริการ และการท่องเที่ยว</option>
+                        <option value="5">กลุ่มวิศวกรรม และอุตสาหกรรม</option>
+                    </select>
+
+                    @error('group2')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+
                 <div class="mb-4" id="select-research-branch"></div>
                 <div class="mb-4">
-                    <label for="vol-research">ระดับบทความ</label>
-                    <select class="form-select" name="vol-research" id="vol-research">
+                    <label for="volResearch">ระดับบทความ</label>
+                    <select class="form-select" name="volResearch" id="volResearch">
                         <option value="">---กรุณาเลือก---</option>
                         <option value="1">บทความวิจัย</option>
                         <option value="2">บทความวิชาการ</option>
@@ -76,100 +135,47 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="present-types">รูปแบบการนำเสนอ</label>
+                    <label for="presentTypes">รูปแบบการนำเสนอ</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="present-type" id="oral" checked>
+                        <input class="form-check-input" type="radio" name="presentTypes" id="oral" value="oral" checked>
                         <label class="form-check-label" for="oral">
                             Oral (นำเสนอปากเปล่า)
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="present-type" id="poster">
+                        <input class="form-check-input" type="radio" name="presentTypes" id="poster" value="poster">
                         <label class="form-check-label" for="poster">
                             Poster (การนำเสนอแบบโปสเตอร์)
                         </label>
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="register-types">ประเภทบุคลากรที่คุณลงทะเบียน</label>
+                    <label>ประเภทบุคลากรที่คุณลงทะเบียน</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="register-type" id="in-person" checked>
-                        <label class="form-check-label" for="in-person">
+                        <input class="form-check-input" type="radio" name="personTypes" id="in" value="in" checked>
+                        <label class="form-check-label" for="in">
                             บุคคลภายในมหาวิทยาลัยราชภัฏเลย
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="register-type" id="out-person">
-                        <label class="form-check-label" for="out-person">
+                        <input class="form-check-input" type="radio" name="personTypes" id="out" value="out">
+                        <label class="form-check-label" for="out">
                             บุคคลภายนอก (มีค่าใช้จ่าย กรุณาชำระเงินก่อนส่งบทความ)
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="register-type" id="co-host">
-                        <label class="form-check-label" for="co-host">
+                        <input class="form-check-input" type="radio" name="personTypes" id="kota" value="kota">
+                        <label class="form-check-label" for="kota">
                             โควต้าเจ้าภาพร่วม
                         </label>
                     </div>
                     <span class="text-red">* หากสถานะไม่ถูกต้อง กรุณาแจ้งผู้ดูแลระบบ</span>
                 </div>
-                <div class="mb-4 border rounded p-4">
-                    <label class="d-block" for="word-upload">อัพโหลดบทความ (ไฟล์ Word)</label>
-                    <input class="w-100" accept=".doc, .docx, .dotx" type="file" name="word-upload" id="word-upload" />
-                </div>
 
-                <div class="mb-4 border rounded p-4">
-                    <label class="d-block" for="pdf-upload">อัพโหลดบทความ (ไฟล์ PDF)</label>
-                    <input class="w-100" accept=".pdf" type="file" name="pdf-upload" id="pdf-upload" />
-                </div>
-
-                <div class="mb-4">
-                    <p class="mb-4">แนบหลักฐานการชำระเงิน <span class="text-warning">(เฉพาะ .png, .jpg, .gif)</span>
-                    </p>
-                    <div class="mb-4">
-                        <label for="date-payment">วัน/เดือน/ปีที่ชำระเงิน</label><br />
-                        <div class="mt-2 d-flex">
-                            <input type="text" id="date-payment" readonly />
-                            <i class="fas fa-calendar-alt date-payment-icon"
-                                onclick="document.getElementById('date-payment').focus();"></i>
-                        </div>
-                    </div>
-
-                    <br>
-                    <img src="https://www.thaicontractor.com/wp-content/uploads/2019/11/pic-directory.png" id="output"
-                        width="450px" class="img-fluid rounded pb-2"
-                        onclick="document.getElementById('payment').click()">
-                    <br>
-                    <span class="btn btn-info rounded-0" onclick="document.getElementById('payment').click()">
-                        <i class="fas fa-upload"></i> อัพโหลดหลักฐานการชำระเงิน <input class="d-none" type="file"
-                            name="payment" id="payment" accept=".png, .jpg, .gif, .jpeg" required
-                            onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
-                    </span>
-                </div>
-                <div class="mb-4">
-                    <label for="address-payment">ชื่อ - สกุล/ที่อยู่ในการออกใบเสร็จรับเงิน</label>
-                    <textarea name="address-payment" id="address-payment" cols="30" rows="5"
-                        class="form-control"></textarea>
-
-                </div>
-
-                <div class="row border borber-primary p-3 mt-3 mb-3">
-                    <div class="form-group mt-2 mb-2 col-md-12">
-                        <label for="checkbox">
-                            <h5>โปรดยืนยันข้อตกลง</h5>
-                        </label>
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-                            <label class="form-check-label"
-                                for="exampleCheck1">ข้าพเจ้าขอยืนยันว่าผลงานบทความดังกล่าวไม่เคยนำไปเสนอในที่ประชุมวิชาการหรือตีพิมพ์เผยแพร่ในวารสารใดๆ
-                                มาก่อน</label>
-                        </div>
-                    </div>
-                </div>
                 <p class="text-red text-center">
                     * กรุณาตรวจสอบความถูกต้องก่อนกดส่งบทความของท่าน
                 </p>
-                <input class="btn btn-green text-white w-100 rounded-0" type="button" name="send-research"
-                    value="ส่งบทความ" />
+                <button class="btn btn-green text-white w-100 rounded-0" type="submit">ส่งบทความ</button>
             </form>
         </div>
         <div class="col-md-5 tips">

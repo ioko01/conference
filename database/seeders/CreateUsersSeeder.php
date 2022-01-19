@@ -26,7 +26,7 @@ class CreateUsersSeeder extends Seeder
                 "person_type" => "in",
                 "person_attend" => "attend",
                 "email" => "monday-december.1997@hotmail.com",
-                "is_admin" => "1",
+                "is_admin" => "2",
                 "password" => bcrypt("1234")
             ]
         ];

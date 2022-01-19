@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('employee/research', [ResearchController::class, 'index'])
-        ->name('employee.research');
+Route::prefix('employee')->group(function(){
+    Route::resource('research', ResearchController::class, ['names' => 'employee.research']);
+});
+        
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

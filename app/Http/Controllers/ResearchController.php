@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Research;
 
 class ResearchController extends Controller
 {
@@ -14,7 +16,27 @@ class ResearchController extends Controller
      */
      public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'is_login']);
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+     protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'nameTh' => 'required',
+            'nameEn' => 'required',
+            'nameResearch1' => 'required',
+            'group' => 'required',
+            'group2' => 'required',
+            'volResearch' => 'required',
+            'presentTypes' => 'required',
+            'personType' => 'required',
+        ]);
     }
 
     /**
@@ -33,9 +55,9 @@ class ResearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(array $data)
     {
-        //
+        
     }
 
     /**
@@ -46,7 +68,19 @@ class ResearchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        Research::create([
+            'name_th' => $request->nameTh,
+            'name_en' => $request->nameEn,
+            'name_research' => $request->nameResearch1,
+            'group' => $request->group,
+            'group2' => $request->group2,
+            'volumn' => $request->volResearch,
+            'type' => $request->presentTypes,
+            'person_type' => $request->personTypes,
+        ]);
+
+        return redirect()->route('employee.research.index');
     }
 
     /**

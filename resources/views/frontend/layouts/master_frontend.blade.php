@@ -1,8 +1,8 @@
-@include('frontend.includes.loading')
-@include('frontend.includes.head')
-@include('frontend.includes.navbar')
-@include('frontend.includes.footer')
-@include('frontend.includes.button_to_top')
+@include('includes.loading')
+@include('includes.head')
+@include('includes.navbar')
+@include('includes.footer')
+@include('includes.button_to_top')
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">

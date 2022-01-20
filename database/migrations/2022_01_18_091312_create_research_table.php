@@ -15,7 +15,7 @@ class CreateResearchTable extends Migration
     {
         Schema::create('research', function (Blueprint $table) {
             $table->id();
-            $table->sttring('user_id');
+            $table->string('user_id');
             $table->string('topic_id');
             $table->text('topic_th');
             $table->text('topic_en');

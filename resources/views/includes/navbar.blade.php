@@ -52,7 +52,7 @@
                 </li>
                 @else
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('employee*') ? 'active' : ''}}" aria-current="page" href="@guest
+                    <a class="nav-link {{ Request::is('employee/research') ? 'active' : ''}}" aria-current="page" href="@guest
                     {{ route('login') }}
                     @else
                     {{ route('employee.research.index') }}
@@ -72,7 +72,7 @@
                 </li>
                 @auth
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page"
+                    <a class="nav-link {{ Request::is('employee/research/*') ? 'active' : ''}}" aria-current="page"
                         href="{{ route('employee.research.show', auth()->user()->id) }}">บทความของฉัน</a>
                 </li>
                 @endauth

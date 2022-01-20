@@ -12,18 +12,20 @@ class Research extends Model
     
     protected $fillable = [
         'user_id',
-        'name_th',
-        'name_en',
-        'name_research',
+        'topic_id',
+        'topic_th',
+        'topic_en',
+        'topic_status',
+        'presenter',
         'group',
         'group2',
         'volumn',
         'type',
         'person_type',
-        'word',
-        'pdf',
+        'kota',
         'payment',
         'payment_date',
-        'payment_adderss'
+        'payment_adderss',
+        'payment_status'
     ];
 }

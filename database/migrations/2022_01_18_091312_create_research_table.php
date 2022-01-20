@@ -26,11 +26,7 @@ class CreateResearchTable extends Migration
             $table->string('volumn');
             $table->enum('type', ['oral', 'poster']);
             $table->enum('person_type', ['in', 'out', 'kota']);
-            $table->text('file_word')->nullable();
-            $table->text('file_pdf')->nullable();
-            $table->text('file_poster')->nullable();
-            $table->text('video_file')->nullable();
-            $table->text('video_link')->nullable();
+            $table->string('kota')->nullable();
             $table->text('payment')->nullable();
             $table->string('payment_date')->nullable();
             $table->text('payment_address')->nullable();

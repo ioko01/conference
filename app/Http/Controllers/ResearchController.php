@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Research;
 
 class ResearchController extends Controller
@@ -16,27 +15,7 @@ class ResearchController extends Controller
      */
      public function __construct()
     {
-        $this->middleware(['auth', 'is_login']);
-    }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-     protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'nameTh' => 'required',
-            'nameEn' => 'required',
-            'nameResearch1' => 'required',
-            'group' => 'required',
-            'group2' => 'required',
-            'volResearch' => 'required',
-            'presentTypes' => 'required',
-            'personType' => 'required',
-        ]);
+        $this->middleware(['auth']);
     }
 
     /**
@@ -68,8 +47,22 @@ class ResearchController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nameTh' => 'required',
+            'nameEn' => 'required',
+            'nameResearch1' => 'required',
+            'group' => 'required',
+            'group2' => 'required',
+            'volResearch' => 'required',
+            'presentTypes' => 'required',
+            'personType' => 'required',
+            ],[
+                'nameTh.required' => 'กรุณากรอกชื่อบทความ (ภาษาไทย)',
+                'nameEn.required' => 'กรุณากรอกชื่อบทความ (ภาษาอังกฤษ)',
+            ]);
         
         Research::create([
+            'user_id' => auth()->user()->id,
             'name_th' => $request->nameTh,
             'name_en' => $request->nameEn,
             'name_research' => $request->nameResearch1,
@@ -80,7 +73,7 @@ class ResearchController extends Controller
             'person_type' => $request->personTypes,
         ]);
 
-        return redirect()->route('employee.research.index');
+        return redirect()->route('employee.research.show', auth()->user()->id);
     }
 
     /**
@@ -92,6 +85,7 @@ class ResearchController extends Controller
     public function show($id)
     {
         //
+        return view('frontend.pages.show_research', compact('id'));
     }
 
     /**

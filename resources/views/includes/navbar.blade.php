@@ -72,7 +72,8 @@
                 </li>
                 @auth
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ route('welcome') }}">บทความของฉัน</a>
+                    <a class="nav-link" aria-current="page"
+                        href="{{ route('employee.research.show', auth()->user()->id) }}">บทความของฉัน</a>
                 </li>
                 @endauth
 

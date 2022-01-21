@@ -19,13 +19,13 @@ class CreateResearchTable extends Migration
             $table->string('topic_id');
             $table->text('topic_th');
             $table->text('topic_en');
-            $table->text('topic_status');
+            $table->string('topic_status')->default(0);
             $table->text('presenter');
             $table->string('group');
             $table->string('group2');
-            $table->string('volumn');
+            $table->enum('volumn', ['บทความวิจัย', 'บทความวิชาการ', 'บทความวิทยานิพนธ์']);
             $table->enum('type', ['oral', 'poster']);
-            $table->enum('person_type', ['in', 'out', 'kota']);
+            $table->enum('person_type', ['บุคคลภายในมหาวิทยาลัยราชภัฏเลย', 'บุคคลภายนอก', 'โควต้าเจ้าภาพร่วม']);
             $table->string('kota')->nullable();
             $table->text('payment')->nullable();
             $table->string('payment_date')->nullable();

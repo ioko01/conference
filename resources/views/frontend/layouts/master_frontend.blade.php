@@ -23,7 +23,11 @@
     </div>
 
     @if (Request::is('employee*'))
-        <script src="{{ asset('js/select-option-group.js') }}"></script>
+    <script src="{{ asset('js/select-option-group.js') }}"></script>
+    @endif
+    
+    @if (Request::is('employee/research/*'))
+    <script src="{{asset('js/paginate.js')}}"></script>
     @endif
 
 </body>

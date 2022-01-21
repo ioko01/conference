@@ -48,31 +48,32 @@ class ResearchController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nameTh' => 'required',
-            'nameEn' => 'required',
-            'nameResearch1' => 'required',
+            'topicTH' => 'required',
+            'topicEN' => 'required',
+            'presenter1' => 'required',
             'group' => 'required',
             'group2' => 'required',
             'volResearch' => 'required',
             'presentTypes' => 'required',
-            'personType' => 'required',
+            'personTypes' => 'required',
             ],[
-                'nameTh.required' => 'กรุณากรอกชื่อบทความ (ภาษาไทย)',
-                'nameEn.required' => 'กรุณากรอกชื่อบทความ (ภาษาอังกฤษ)',
+                'topicTH.required' => 'กรุณากรอกชื่อบทความ (ภาษาไทย)',
+                'topicEN.required' => 'กรุณากรอกชื่อบทความ (ภาษาอังกฤษ)',
             ]);
         
         Research::create([
             'user_id' => auth()->user()->id,
-            'name_th' => $request->nameTh,
-            'name_en' => $request->nameEn,
-            'name_research' => $request->nameResearch1,
+            'topic_id' => "1",
+            'topic_th' => $request->topicTH,
+            'topic_en' => $request->topicEN,
+            'presenter' => $request->presenter1,
             'group' => $request->group,
             'group2' => $request->group2,
             'volumn' => $request->volResearch,
             'type' => $request->presentTypes,
             'person_type' => $request->personTypes,
         ]);
-
+        
         return redirect()->route('employee.research.show', auth()->user()->id);
     }
 
@@ -84,8 +85,8 @@ class ResearchController extends Controller
      */
     public function show($id)
     {
-        //
-        return view('frontend.pages.show_research', compact('id'));
+        $data = Research::where('user_id', $id)->get();
+        return view('frontend.pages.show_research', compact('data'));
     }
 
     /**

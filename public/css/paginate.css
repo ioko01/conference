@@ -1,0 +1,48 @@
+:root {
+    --color-green: #30ac33;
+    --color-blue: #131f5b;
+    --color-yellow: #e8ee3b;
+    --color-bluesky: #2cb0c0;
+    --bg-color-cream: #f9ecde;
+    --bg-color-lightcream: #fefdf9;
+    --bg-color-shadowcream: #ede3e1;
+}
+
+div.paginate {
+    padding: 5px 0px;
+    margin: auto;
+}
+
+div.paginate input[type='button']:hover {
+    cursor: pointer;
+}
+
+div.paginate input[type='button'] {
+    margin: 0px 5px;
+    border: none;
+    color: var(--color-green);
+    background-color: transparent;
+    /* border-radius: 50%; */
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    outline: none;
+}
+
+div.paginate input[type='button'].active {
+    background-color: var(--color-green);
+    color: #fff;
+    font-weight: bold;
+}
+
+div.paginate input[type='button']:disabled {
+    color: grey!important;
+    cursor: not-allowed;
+}
+
+div.paginate input[type='number']#paginate_page_to_go {
+    max-width: 3rem;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid rgba(128, 128, 128, 0.65);
+    padding: 3px;
+}

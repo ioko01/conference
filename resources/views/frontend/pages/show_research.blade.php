@@ -36,11 +36,11 @@
             <thead>
                 <tr class="text-center pagination-header">
                     <th style="width: 5%;">#</th>
-                    <th style="width: 10%;">รหัสบทความ</th>
-                    <th style="width: 40%;">ชื่อบทความ/ผู้วิจัย</th>
-                    <th style="width: 25%;">สังกัด/กลุ่มคณะ</th>
-                    <th style="width: 10%;">สถานะ</th>
-                    <th style="width: 10%;">รูปแบบ</th>
+                    <th style="width: 30%;">ชื่อบทความ/ผู้วิจัย</th>
+                    <th style="width: 15%;">ชำระเงิน</th>
+                    <th style="width: 15%;">ไฟล์ WORD</th>
+                    <th style="width: 15%;">ไฟล์ PDF</th>
+                    <th style="width: 15%;">รายละเอียด</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,16 +48,38 @@
                 @forelse ($data as $key => $value)
                 <tr class="text-center">
                     <td>{{ ++$key }}</td>
-                    <td>{{ $value->topic_id }}</td>
                     <td>{{ $value->topic_th }}
                         <br /><span class="name-research text-small text-green">{{ $value->presenter }}</span>
                     </td>
-                    <td>{{ $value->group2 }}
-                        <br />
-                        <span class="faculty-research text-small text-green">{{ $value->group }}</span>
+                    <td>
+                        <button class="btn btn-warning rounded-0 text-white"
+                            onclick="document.getElementById('payment').click()">
+                            ชำระเงิน
+                            <input style="display: none;" type="file" name="payment" id="payment" accept=".jpg, .jpeg">
+                        </button>
                     </td>
-                    <td>{{ $value->person_type }}</td>
-                    <td>{{ $value->type }}</td>
+                    <td>
+                        <button class="btn btn-primary rounded-0 text-white"
+                            onclick="document.getElementById('word').click()">
+                            อัพโหลดไฟล์ WORD
+                            <input style="display: none;" type="file" name="word" id="word" accept=".doc, .docx">
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary rounded-0 text-white"
+                            onclick="document.getElementById('pdf').click()">
+                            อัพโหลดไฟล์ PDF
+                            <input style="display: none;" type="file" name="pdf" id="pdf" accept=".pdf">
+                        </button>
+                        <span></span>
+                    </td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-green rounded-0 text-white" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
+                            รายละเอียด
+                        </button>
+                    </td>
                 </tr>
                 @empty
                 <tr class="text-center">
@@ -69,4 +91,27 @@
     </div>
 </div>
 <!-- End Content -->
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">รายละเอียดทั้งหมด</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">ปิด</button>
+                <button type="button" class="btn btn-green rounded-0 text-white">บันทึกและปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

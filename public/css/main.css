@@ -414,3 +414,7 @@ a {
     font-size: 50px;
     color: white;
 }
+
+.modal-content {
+    border-radius: 0;
+}

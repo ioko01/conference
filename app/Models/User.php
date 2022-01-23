@@ -25,6 +25,7 @@ class User extends Authenticatable
         'institution',
         'address',
         'person_type',
+        'kota',
         'person_attend',
         'email',
         'password',

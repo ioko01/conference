@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResearchController;
+use App\Http\Controllers\FileUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Auth::routes();
 Route::middleware('auth')->group(function(){
     Route::prefix('employee')->group(function(){
         Route::resource('research', ResearchController::class, ['names' => 'employee.research']);
+        Route::resource('file-upload', FileUploadController::class, ['names' => 'employee.file-upload']);
     });
 });
         

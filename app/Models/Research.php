@@ -21,8 +21,6 @@ class Research extends Model
         'group2',
         'volumn',
         'type',
-        'person_type',
-        'kota',
         'payment',
         'payment_date',
         'payment_adderss',

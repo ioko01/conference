@@ -55,7 +55,6 @@ class ResearchController extends Controller
             'group2' => 'required',
             'volResearch' => 'required',
             'presentTypes' => 'required',
-            'personTypes' => 'required',
             ],[
                 'topicTH.required' => 'กรุณากรอกชื่อบทความ (ภาษาไทย)',
                 'topicEN.required' => 'กรุณากรอกชื่อบทความ (ภาษาอังกฤษ)',
@@ -71,7 +70,6 @@ class ResearchController extends Controller
             'group2' => $request->group2,
             'volumn' => $request->volResearch,
             'type' => $request->presentTypes,
-            'person_type' => $request->personTypes,
         ]);
         
         return redirect()->route('employee.research.show', auth()->user()->id);

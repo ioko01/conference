@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->text('institution');
             $table->text('address');
-            $table->enum('person_type', ['in', 'out', 'kota']);
+            $table->enum('person_type', ['บุคคลภายในมหาวิทยาลัยราชภัฏเลย', 'บุคคลภายนอก', 'โควต้าเจ้าภาพร่วม']);
+            $table->string('kota')->nullable();
             $table->enum('person_attend', ['send', 'attend']);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

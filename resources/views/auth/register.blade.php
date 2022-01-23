@@ -55,14 +55,21 @@
 
                 <div class="row mb-4">
                     <div class="col-md-6">
-                        <label for="sex">เพศ</label>
-                        <select name="sex" id="sex" class="form-select @error('sex')
-                            is-invalid
-                        @enderror">
-                            <option value="">---กรุณาเลือก---</option>
-                            <option value="male" @if (old('sex')==="male" ) selected @endif>ชาย</option>
-                            <option value="female" @if (old('sex')==="female" ) selected @endif>หญิง</option>
-                        </select>
+                        <label class="d-block">เพศ</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="male"
+                                @if(old('sex')==="male" || empty(old('sex')) ) checked @endif value="male">
+                            <label class="form-check-label" for="male">
+                                ชาย
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="female"
+                                @if(old('sex')==="female" ) checked @endif value="female">
+                            <label class="form-check-label" for="female">
+                                หญิง
+                            </label>
+                        </div>
 
                         @error('sex')
                         <span class="invalid-feedback" role="alert">
@@ -124,21 +131,21 @@
                         </label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="personType" id="in"
-                                @if(old('personType')==="in" || empty(old('personType')) ) checked @endif value="in">
+                                @if(old('personType')==="บุคคลภายในมหาวิทยาลัยราชภัฏเลย" || empty(old('personType')) ) checked @endif value="บุคคลภายในมหาวิทยาลัยราชภัฏเลย">
                             <label class="form-check-label" for="in">
                                 บุคคลในมหาวิทยาลัยราชภัฏเลย
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="personType" id="out"
-                                @if(old('personType')==="out" ) checked @endif value="out">
+                                @if(old('personType')==="บุคคลภายนอก" ) checked @endif value="บุคคลภายนอก">
                             <label class="form-check-label" for="out">
                                 บุคคลภายนอก
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="personType" id="kota"
-                                @if(old('personType')==="kota" ) checked @endif value="kota">
+                                @if(old('personType')==="โควต้าเจ้าภาพร่วม" ) checked @endif value="โควต้าเจ้าภาพร่วม">
                             <label class="form-check-label" for="kota">
                                 ได้รับโควต้าเจ้าภาพร่วม
                             </label>
@@ -147,6 +154,43 @@
                             หากท่านเป็นบุคลากรภายในมหาวิทยาลัยราชภัฏเลย และบทความของท่านเป็นของมหาวิทยาลัยอื่น
                             จะต้องลงทะเบียนเป็น "บุคคลภายนอก"
                         </p>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <label>โควต้าเจ้าภาพร่วม
+                            @error('personType')
+                            <span class="text-danger"> *กรุณาเลือกสถานะของท่าน</span>
+                            @enderror
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="kota" id="rmu"
+                                @if(old('kota')==="rmu" || empty(old('kota')) ) checked @endif value="rmu" disabled>
+                            <label class="form-check-label" for="rmu">
+                                มหาวิทยาลัยราชภัฏมหาสารคาม
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="kota" id="reru"
+                                @if(old('kota')==="reru" ) checked @endif value="reru" disabled>
+                            <label class="form-check-label" for="reru">
+                                มหาวิทยาลัยราชภัฏร้อยเอ็ด
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="kota" id="snru"
+                                @if(old('kota')==="snru" ) checked @endif value="snru" disabled>
+                            <label class="form-check-label" for="snru">
+                                มหาวิทยาลัยราชภัฏสกลนคร
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="kota" id="udru"
+                                @if(old('kota')==="udru" ) checked @endif value="udru" disabled>
+                            <label class="form-check-label" for="udru">
+                                มหาวิทยาลัยราชภัฏอุดรธานี
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="row mb-4">

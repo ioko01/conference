@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use Illuminate\Http\Request;
 
 class FileUploadController extends Controller
@@ -35,25 +36,32 @@ class FileUploadController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'payment' => 'mimes:jpg,jpeg|max:10240',
-            'word' => 'mimes:doc,docx|max:10240',
-            'pdf' => 'mimes:pdf|max:10240',
-        ],
-    [
-        'pdf.mimes' => "asd"
-    ]);
-            
-        $name = $request->file('file')->getClientOriginalName();
-        $path = $request->file('file')->store('public/files');
-            
-            
+        $request->validate([
+                'payment-upload' => 'file|mimes:jpg,jpeg|max:10240',
+                'word-upload' => 'file|mimes:doc,docx|max:10240',
+                'pdf-upload' => 'file|mimes:pdf|max:10240'
+            ],
+            [
+                'pdf-upload.mimes' => 'อัพโหลด pdf เท่านั้น'
+            ]
+        );
+
+        if($request->file('pdf-upload')){
+            $upload = $request->file('pdf-upload');
+        } else if($request->file('word-upload')){
+            $upload = $request->file('word-upload');
+        } else if($request->file('payment-upload')){
+            $upload = $request->file('payment-upload');
+        }
+        
+        $name = $upload->getClientOriginalName();
+        $path = $upload->store('public/files');
         $save = new File;
-            
+ 
         $save->name = $name;
         $save->path = $path;
             
-        return redirect()->route('employee.research.show', auth()->user()->id);
+        return back()->with('success', 'Success, upload file PDF');
     }
 
     /**

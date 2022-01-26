@@ -75,7 +75,33 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+
+                    @foreach ($data as $key => $value)
+                        <div>
+                            <strong>รหัสบทความ: </strong><span>{{ $value->topic_id }}</span>
+                        </div>
+                        <div>
+                            <strong>ชื่อบทความภาษาไทย: </strong><span>{{ $value->topic_th }}</span>
+                        </div>
+                        <div>
+                            <strong>ชื่อบทความภาษาอังกฤษ: </strong><span>{{ $value->topic_en }}</span>
+                        </div>
+                        <div>
+                            <strong>ชื่อผู้นำเสนอบทความ: </strong><span>{{ $value->presenter }}</span>
+                        </div>
+                        <div>
+                            <strong>กลุ่มบทความ: </strong><span>{{ $value->group }}</span>
+                        </div>
+                        <div>
+                            <strong>สาขาย่อย: </strong><span>{{ $value->group2 }}</span>
+                        </div>
+                        <div>
+                            <strong>รูปแบบบทความ: </strong><span>{{ $value->type }}</span>
+                        </div>
+                        <div>
+                            <strong>ชนิดบทความ: </strong><span>{{ $value->volumn }}</span>
+                        </div>
+                    @endforeach
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">ปิด</button>

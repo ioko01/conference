@@ -50,7 +50,7 @@ class ResearchController extends Controller
         $this->validate($request, [
             'topicTH' => 'required',
             'topicEN' => 'required',
-            'presenter1' => 'required',
+            'presenters.0' => 'required',
             'group' => 'required',
             'group2' => 'required',
             'volResearch' => 'required',
@@ -58,14 +58,18 @@ class ResearchController extends Controller
             ],[
                 'topicTH.required' => 'กรุณากรอกชื่อบทความ (ภาษาไทย)',
                 'topicEN.required' => 'กรุณากรอกชื่อบทความ (ภาษาอังกฤษ)',
+                'presenters.0.required' => 'กรุณาใส่ชื่อผู้นำเสนออย่างน้อย 1 คน'
             ]);
         
+        $presenters = join(',', array_filter($request->presenters));
+        
+        $topicId = '65'.sprintf("%03d",Research::count()+1);
         Research::create([
             'user_id' => auth()->user()->id,
-            'topic_id' => "1",
+            'topic_id' => $topicId,
             'topic_th' => $request->topicTH,
             'topic_en' => $request->topicEN,
-            'presenter' => $request->presenter1,
+            'presenter' => $presenters,
             'group' => $request->group,
             'group2' => $request->group2,
             'volumn' => $request->volResearch,

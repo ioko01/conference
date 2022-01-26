@@ -57,8 +57,8 @@
                     <div class="col-md-6">
                         <label class="d-block">เพศ</label>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sex" id="male"
-                                @if(old('sex')==="male" || empty(old('sex')) ) checked @endif value="male">
+                            <input class="form-check-input" type="radio" name="sex" id="male" @if(old('sex')==="male" ||
+                                empty(old('sex')) ) checked @endif value="male">
                             <label class="form-check-label" for="male">
                                 ชาย
                             </label>
@@ -77,6 +77,8 @@
                         </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-4">
                     <div class="col-md-6">
                         <label for="phone">เบอร์โทร</label>
                         <input type="text" name="phone" id="phone" class="form-control @error('phone')
@@ -89,9 +91,6 @@
                         </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-4">
-
                 </div>
                 <div class="row mb-4">
                     <div class="col-12">
@@ -131,21 +130,22 @@
                         </label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="personType" id="in"
-                                @if(old('personType')==="บุคคลภายในมหาวิทยาลัยราชภัฏเลย" || empty(old('personType')) ) checked @endif value="บุคคลภายในมหาวิทยาลัยราชภัฏเลย">
+                                @if(old('personType')==="บุคคลภายในมหาวิทยาลัยราชภัฏเลย" || empty(old('personType')) )
+                                checked @endif value="บุคคลภายในมหาวิทยาลัยราชภัฏเลย" onchange="toggleKota(this)">
                             <label class="form-check-label" for="in">
                                 บุคคลในมหาวิทยาลัยราชภัฏเลย
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="personType" id="out"
-                                @if(old('personType')==="บุคคลภายนอก" ) checked @endif value="บุคคลภายนอก">
+                                @if(old('personType')==="บุคคลภายนอก" ) checked @endif value="บุคคลภายนอก" onchange="toggleKota(this)">
                             <label class="form-check-label" for="out">
                                 บุคคลภายนอก
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="personType" id="kota"
-                                @if(old('personType')==="โควต้าเจ้าภาพร่วม" ) checked @endif value="โควต้าเจ้าภาพร่วม">
+                                @if(old('personType')==="โควต้าเจ้าภาพร่วม" ) checked @endif value="โควต้าเจ้าภาพร่วม" onchange="toggleKota(this)">
                             <label class="form-check-label" for="kota">
                                 ได้รับโควต้าเจ้าภาพร่วม
                             </label>
@@ -157,36 +157,36 @@
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <div class="col-12">
+                    <div class="col-12" id="select-kota">
                         <label>โควต้าเจ้าภาพร่วม
                             @error('personType')
                             <span class="text-danger"> *กรุณาเลือกสถานะของท่าน</span>
                             @enderror
                         </label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota" id="rmu"
-                                @if(old('kota')==="rmu" || empty(old('kota')) ) checked @endif value="rmu" disabled>
+                            <input class="form-check-input" type="radio" name="kota" id="rmu" @if(old('kota')==="rmu" ||
+                                empty(old('kota')) ) checked @endif value="rmu" disabled>
                             <label class="form-check-label" for="rmu">
                                 มหาวิทยาลัยราชภัฏมหาสารคาม
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota" id="reru"
-                                @if(old('kota')==="reru" ) checked @endif value="reru" disabled>
+                            <input class="form-check-input" type="radio" name="kota" id="reru" @if(old('kota')==="reru"
+                                ) checked @endif value="reru" disabled>
                             <label class="form-check-label" for="reru">
                                 มหาวิทยาลัยราชภัฏร้อยเอ็ด
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota" id="snru"
-                                @if(old('kota')==="snru" ) checked @endif value="snru" disabled>
+                            <input class="form-check-input" type="radio" name="kota" id="snru" @if(old('kota')==="snru"
+                                ) checked @endif value="snru" disabled>
                             <label class="form-check-label" for="snru">
                                 มหาวิทยาลัยราชภัฏสกลนคร
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota" id="udru"
-                                @if(old('kota')==="udru" ) checked @endif value="udru" disabled>
+                            <input class="form-check-input" type="radio" name="kota" id="udru" @if(old('kota')==="udru"
+                                ) checked @endif value="udru" disabled>
                             <label class="form-check-label" for="udru">
                                 มหาวิทยาลัยราชภัฏอุดรธานี
                             </label>

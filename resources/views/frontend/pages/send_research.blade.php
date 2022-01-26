@@ -55,13 +55,13 @@
                         <label>ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย)</label>
                         <div class="mb-4">
                             <span>1.&nbsp;</span>
-                            <input type="text" id="presenter1" name="presenter1"
-                                class="form-control w-100 @error('presenter1')
+                            <input type="text" id="presenters[]" name="presenters[]"
+                                class="form-control w-100 @error('presenters.0')
                             is-invalid
                         @enderror"
-                                value="{{ old('presenter1') }}" autocomplete="presenter1">
+                                value="{{ old('presenters.0') }}" autocomplete="presenters[0]">
 
-                            @error('presenter1')
+                            @error('presenters.0')
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -69,23 +69,23 @@
                         </div>
                         <div class="mb-4">
                             <span>2.&nbsp;</span>
-                            <input type="text" id="presenter2" name="presenter2" class="form-control w-100"
-                                value="{{ old('presenter2') }}" autocomplete="presenter2">
+                            <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                value="{{ old('presenters.1') }}" autocomplete="presenters[1]">
                         </div>
                         <div class="mb-4">
                             <span>3.&nbsp;</span>
-                            <input type="text" id="presenter3" name="presenter3" class="form-control w-100"
-                                value="{{ old('presenter3') }}" autocomplete="presenter3">
+                            <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                value="{{ old('presenters.2') }}" autocomplete="presenters[2]">
                         </div>
                         <div class="mb-4">
                             <span>4.&nbsp;</span>
-                            <input type="text" id="presenter4" name="presenter4" class="form-control w-100"
-                                value="{{ old('presenter4') }}" autocomplete="presenter4">
+                            <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                value="{{ old('presenters.3') }}" autocomplete="presenters[3]">
                         </div>
                         <div class="mb-4">
                             <span>5.&nbsp;</span>
-                            <input type="text" id="presenter5" name="presenter5" class="form-control w-100"
-                                value="{{ old('presenter5') }}" autocomplete="presenter5">
+                            <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                value="{{ old('presenters.4') }}" autocomplete="presenters[4]">
                         </div>
 
                     </div>

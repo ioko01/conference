@@ -15,12 +15,12 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('topic_id');
-            $table->text('file_word')->nullable();
-            $table->text('file_pdf')->nullable();
-            $table->text('file_poster')->nullable();
-            $table->text('video_file')->nullable();
-            $table->text('video_link')->nullable();
+            $table->string('topic_id')->comment('รหัสบทความ');
+            $table->text('file_word')->nullable()->comment('ไฟล์ word');
+            $table->text('file_pdf')->nullable()->comment('ไฟล์ pdf');
+            $table->text('file_poster')->nullable()->comment('ไฟล์โปรสเตอร์');
+            $table->text('video_file')->nullable()->comment('ไฟล์ video');
+            $table->text('video_link')->nullable()->comment('ลิงค์ video');
             $table->timestamps();
         });
     }

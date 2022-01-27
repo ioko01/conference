@@ -124,29 +124,29 @@
                 <div class="row mb-4">
                     <div class="col-12">
                         <label>เลือกสถานะของท่าน
-                            @error('personType')
+                            @error('position_id')
                             <span class="text-danger"> *กรุณาเลือกสถานะของท่าน</span>
                             @enderror
                         </label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="personType" id="in"
-                                @if(old('personType')==="บุคคลภายในมหาวิทยาลัยราชภัฏเลย" || empty(old('personType')) )
-                                checked @endif value="บุคคลภายในมหาวิทยาลัยราชภัฏเลย" onchange="toggleKota(this)">
+                            <input class="form-check-input" type="radio" name="position_id" id="in"
+                                @if(old('position_id')==="0" || empty(old('position_id')) )
+                                checked @endif value="0" onchange="toggleKota(this)">
                             <label class="form-check-label" for="in">
                                 บุคคลในมหาวิทยาลัยราชภัฏเลย
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="personType" id="out"
-                                @if(old('personType')==="บุคคลภายนอก" ) checked @endif value="บุคคลภายนอก" onchange="toggleKota(this)">
+                            <input class="form-check-input" type="radio" name="position_id" id="out"
+                                @if(old('position_id')==="1" ) checked @endif value="1" onchange="toggleKota(this)">
                             <label class="form-check-label" for="out">
                                 บุคคลภายนอก
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="personType" id="kota"
-                                @if(old('personType')==="โควต้าเจ้าภาพร่วม" ) checked @endif value="โควต้าเจ้าภาพร่วม" onchange="toggleKota(this)">
-                            <label class="form-check-label" for="kota">
+                            <input class="form-check-input" type="radio" name="position_id" id="kota_id"
+                                @if(old('position_id')==="2" ) checked @endif value="2" onchange="toggleKota(this)">
+                            <label class="form-check-label" for="kota_id">
                                 ได้รับโควต้าเจ้าภาพร่วม
                             </label>
                         </div>
@@ -159,33 +159,33 @@
                 <div class="row mb-4">
                     <div class="col-12" id="select-kota">
                         <label>โควต้าเจ้าภาพร่วม
-                            @error('personType')
+                            @error('position_id')
                             <span class="text-danger"> *กรุณาเลือกสถานะของท่าน</span>
                             @enderror
                         </label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota" id="rmu" @if(old('kota')==="rmu" ||
-                                empty(old('kota')) ) checked @endif value="rmu" disabled>
+                            <input class="form-check-input" type="radio" name="kota_id" id="rmu" @if(old('kota_id')==="rmu" ||
+                                empty(old('kota_id')) ) checked @endif value="rmu" disabled>
                             <label class="form-check-label" for="rmu">
                                 มหาวิทยาลัยราชภัฏมหาสารคาม
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota" id="reru" @if(old('kota')==="reru"
+                            <input class="form-check-input" type="radio" name="kota_id" id="reru" @if(old('kota_id')==="reru"
                                 ) checked @endif value="reru" disabled>
                             <label class="form-check-label" for="reru">
                                 มหาวิทยาลัยราชภัฏร้อยเอ็ด
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota" id="snru" @if(old('kota')==="snru"
+                            <input class="form-check-input" type="radio" name="kota_id" id="snru" @if(old('kota_id')==="snru"
                                 ) checked @endif value="snru" disabled>
                             <label class="form-check-label" for="snru">
                                 มหาวิทยาลัยราชภัฏสกลนคร
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota" id="udru" @if(old('kota')==="udru"
+                            <input class="form-check-input" type="radio" name="kota_id" id="udru" @if(old('kota_id')==="udru"
                                 ) checked @endif value="udru" disabled>
                             <label class="form-check-label" for="udru">
                                 มหาวิทยาลัยราชภัฏอุดรธานี
@@ -195,21 +195,21 @@
                 </div>
                 <div class="row mb-4">
                     <div class="col-12">
-                        <label>ท่านลงทะเบียนส่งผลงาน หรือเข้าร่วมงานทั่วไป ? @error('personAttend')
+                        <label>ท่านลงทะเบียนส่งผลงาน หรือเข้าร่วมงานทั่วไป ? @error('person_attend')
                             <span class="text-danger"> * กรุณาเลือกวิธีลงทะเบียน</span>
                             @enderror
                         </label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="personAttend" id="send"
-                                @if(old('personAttend')==="send" || empty(old('personAttend'))) checked @endif
+                            <input class="form-check-input" type="radio" name="person_attend" id="send"
+                                @if(old('person_attend')==="send" || empty(old('person_attend'))) checked @endif
                                 value="send">
                             <label class="form-check-label" for="send">
                                 ลงทะเบียนส่งผลงาน
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="personAttend" id="attend"
-                                @if(old('personAttend')==="attend" ) checked @endif value="attend">
+                            <input class="form-check-input" type="radio" name="person_attend" id="attend"
+                                @if(old('person_attend')==="attend" ) checked @endif value="attend">
                             <label class="form-check-label" for="attend">
                                 ลงทะเบียนเข้าร่วมงานทั่วไป
                             </label>

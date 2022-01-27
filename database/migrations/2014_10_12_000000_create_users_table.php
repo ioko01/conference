@@ -15,17 +15,17 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('prefix');
-            $table->string('fullname');
-            $table->enum('sex', ['male', 'female']);
-            $table->string('phone');
-            $table->text('institution');
-            $table->text('address');
-            $table->enum('person_type', ['บุคคลภายในมหาวิทยาลัยราชภัฏเลย', 'บุคคลภายนอก', 'โควต้าเจ้าภาพร่วม']);
-            $table->string('kota')->nullable();
-            $table->enum('person_attend', ['send', 'attend']);
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('prefix')->comment('คำนำหน้า');
+            $table->string('fullname')->comment('ชื่อ - สกุล');
+            $table->enum('sex', ['male', 'female'])->comment('เพศ');
+            $table->string('phone')->comment('เบอร์โทร');
+            $table->text('institution')->comment('สังกัด/หน่วยงาน');
+            $table->text('address')->comment('ที่อยู่');
+            $table->enum('position_id', ['0', '1', '2'])->comment('รหัสสถานะการเข้าร่วม');
+            $table->enum('kota_id', ['0','1','2','3'])->nullable()->comment('รหัสโควต้าเจ้าภาพร่วม');
+            $table->enum('person_attend', ['send', 'attend'])->comment('รหัสบทความ');
+            $table->string('email')->unique()->comment('อีเมล');
+            $table->timestamp('email_verified_at')->nullable()->comment('ยืนยันอีเมล');
             $table->boolean('is_admin')->default(0);
             $table->string('password');
             $table->rememberToken();

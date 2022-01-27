@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Research;
+use App\Models\Faculty;
 
 class ResearchController extends Controller
 {
@@ -25,8 +26,8 @@ class ResearchController extends Controller
      */
     public function index()
     {
-        //
-        return view('frontend.pages.send_research');
+        $faculties = Faculty::get();
+        return view('frontend.pages.send_research', compact('faculties'));
     }
 
     /**
@@ -48,16 +49,16 @@ class ResearchController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'topicTH' => 'required',
-            'topicEN' => 'required',
+            'topic_th' => 'required',
+            'topic_en' => 'required',
             'presenters.0' => 'required',
-            'group' => 'required',
-            'group2' => 'required',
-            'volResearch' => 'required',
-            'presentTypes' => 'required',
+            'faculty_id' => 'required',
+            'branch_id' => 'required',
+            'degree_id' => 'required',
+            'present_id' => 'required',
             ],[
-                'topicTH.required' => 'กรุณากรอกชื่อบทความ (ภาษาไทย)',
-                'topicEN.required' => 'กรุณากรอกชื่อบทความ (ภาษาอังกฤษ)',
+                'topic_th.required' => 'กรุณากรอกชื่อบทความ (ภาษาไทย)',
+                'topic_en.required' => 'กรุณากรอกชื่อบทความ (ภาษาอังกฤษ)',
                 'presenters.0.required' => 'กรุณาใส่ชื่อผู้นำเสนออย่างน้อย 1 คน'
             ]);
         
@@ -70,10 +71,10 @@ class ResearchController extends Controller
             'topic_th' => $request->topicTH,
             'topic_en' => $request->topicEN,
             'presenter' => $presenters,
-            'group' => $request->group,
-            'group2' => $request->group2,
-            'volumn' => $request->volResearch,
-            'type' => $request->presentTypes,
+            'faculty_id' => $request->faculty_id,
+            'branch_id' => $request->branch_id,
+            'degree_id' => $request->degree_id,
+            'present_id' => $request->present_id,
         ]);
         
         return redirect()->route('employee.research.show', auth()->user()->id);

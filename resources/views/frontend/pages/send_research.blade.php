@@ -24,28 +24,28 @@
                 <form action="{{ route('employee.research.store') }}" method="POST">
                     @csrf
                     <div class="mb-4">
-                        <label for="topicTH">ชื่อบทความ (ภาษาไทย)</label>
-                        <input type="text" id="topicTH" name="topicTH" value="{{ old('topicTH') }}"
-                            class="form-control @error('topicTH')
+                        <label for="topic_th">ชื่อบทความ (ภาษาไทย)</label>
+                        <input type="text" id="topic_th" name="topic_th" value="{{ old('topic_th') }}"
+                            class="form-control @error('topic_th')
                         is-invalid                        
                     @enderror"
-                            autocomplete="topicTH" autofocus>
+                            autocomplete="topic_th" autofocus>
 
-                        @error('topicTH')
+                        @error('topic_th')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <label for="topicEN">ชื่อบทความ (ภาษาอังกฤษ)</label>
-                        <input type="text" id="topicEN" name="topicEN" value="{{ old('topicEN') }}"
-                            class="form-control @error('topicEN')
+                        <label for="topic_en">ชื่อบทความ (ภาษาอังกฤษ)</label>
+                        <input type="text" id="topic_en" name="topic_en" value="{{ old('topic_en') }}"
+                            class="form-control @error('topic_en')
                         is-invalid
                     @enderror"
-                            autocomplete="topicEN">
+                            autocomplete="topic_en">
 
-                        @error('topicEN')
+                        @error('topic_en')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -90,27 +90,21 @@
 
                     </div>
                     <div class="mb-4">
-                        <label for="group">บทความของท่านอยู่ในกลุ่ม</label>
-                        <select name="group" id="group"
-                            class="form-select @error('group')
+                        <label for="faculty_id">บทความของท่านอยู่ในกลุ่ม</label>
+                        <select name="faculty_id" id="faculty_id"
+                            class="form-select @error('faculty_id')
                         is-invalid
                     @enderror"
                             onchange="selectGroup(this)">
-                            <option value="" @if (empty('group')) selected @endif>---กรุณาเลือก---</option>
-                            <option value="กลุ่มมนุษยศาสตร์/สังคมศาสตร์" @if (old('group') === 'กลุ่มมนุษยศาสตร์/สังคมศาสตร์') selected @endif>
-                                กลุ่มมนุษยศาสตร์/สังคมศาสตร์</option>
-                            <option value="กลุ่มครุศาสตร์/ศึกษาศาสตร์" @if (old('group') === 'กลุ่มครุศาสตร์/ศึกษาศาสตร์')
-                                selected @endif>กลุ่มครุศาสตร์/ศึกษาศาสตร์</option>
-                            <option value="กลุ่มวิทยาศาสตร์และเทคโนโลยี" @if (old('group') === 'กลุ่มวิทยาศาสตร์และเทคโนโลยี') selected @endif>
-                                กลุ่มวิทยาศาสตร์และเทคโนโลยี</option>
-                            <option value="กลุ่มบริหารธุรกิจ การบริการ และการท่องเที่ยว" @if (old('group') === 'กลุ่มบริหารธุรกิจ การบริการ และการท่องเที่ยว') selected @endif>
-                                กลุ่มบริหารธุรกิจ การบริการ
-                                และการท่องเที่ยว</option>
-                            <option value="กลุ่มวิศวกรรม และอุตสาหกรรม" @if (old('group') === 'กลุ่มวิศวกรรม และอุตสาหกรรม')
-                                selected @endif>กลุ่มวิศวกรรม และอุตสาหกรรม</option>
+                            <option value="" @if (empty('faculty_id')) selected @endif>---กรุณาเลือก---</option>
+                            @foreach ($faculties as $faculty)
+                                <option value="{{ $faculty->id }}" @if (old("faculty_id") === "{{ $faculty->id }}") selected @endif>
+                                    {{ $faculty->name }}
+                                </option>
+                            @endforeach
                         </select>
 
-                        @error('group')
+                        @error('faculty_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -118,16 +112,16 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="group2">สาขาย่อย</label>
-                        <select name="group2" id="group2"
-                            class="form-select @error('group2')
+                        <label for="branch_id">สาขาย่อย</label>
+                        <select name="branch_id" id="branch_id"
+                            class="form-select @error('branch_id')
                         is-invalid
                     @enderror"
                             disabled>
                             <option value="">---กรุณาเลือก---</option>
                         </select>
 
-                        @error('group2')
+                        @error('branch_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -137,30 +131,30 @@
 
                     <div class="mb-4" id="select-research-branch"></div>
                     <div class="mb-4">
-                        <label for="volResearch">ระดับบทความ</label>
-                        <select class="form-select" name="volResearch" id="volResearch">
-                            <option value="" @if (empty(old('volResearch'))) selected @endif>---กรุณาเลือก---</option>
-                            <option value="บทความวิจัย" @if (old('volResearch') === 'บทความวิจัย') selected @endif>
+                        <label for="degree_id">ระดับบทความ</label>
+                        <select class="form-select" name="degree_id" id="degree_id">
+                            <option value="" @if (empty(old('degree_id'))) selected @endif>---กรุณาเลือก---</option>
+                            <option value="บทความวิจัย" @if (old('degree_id') === 'บทความวิจัย') selected @endif>
                                 บทความวิจัย</option>
-                            <option value="บทความวิชาการ" @if (old('volResearch') === 'บทความวิชาการ') selected @endif>
+                            <option value="บทความวิชาการ" @if (old('degree_id') === 'บทความวิชาการ') selected @endif>
                                 บทความวิชาการ</option>
-                            <option value="บทความวิทยานิพนธ์" @if (old('volResearch') === 'บทความวิทยานิพนธ์') selected
+                            <option value="บทความวิทยานิพนธ์" @if (old('degree_id') === 'บทความวิทยานิพนธ์') selected
                                 @endif>บทความวิทยานิพนธ์</option>
                         </select>
                     </div>
                     <div class="mb-4">
-                        <label for="presentTypes">รูปแบบการนำเสนอ</label>
+                        <label for="present_id">รูปแบบการนำเสนอ</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="presentTypes" id="oral" value="oral"
-                                @if (empty(old('presentTypes')) || old('presentTypes') === 'oral') checked @endif>
-                            <label class="form-check-label" for="oral">
+                            <input class="form-check-input" type="radio" name="present_id" id="0" value="0"
+                                @if (empty(old('present_id')) || old('present_id') === '0') checked @endif>
+                            <label class="form-check-label" for="0">
                                 Oral (นำเสนอปากเปล่า)
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="presentTypes" id="poster" value="poster"
-                                @if (old('presentTypes') === 'poster') checked @endif>
-                            <label class="form-check-label" for="poster">
+                            <input class="form-check-input" type="radio" name="present_id" id="1" value="1"
+                                @if (old('present_id') === '1') checked @endif>
+                            <label class="form-check-label" for="1">
                                 Poster (การนำเสนอแบบโปสเตอร์)
                             </label>
                         </div>

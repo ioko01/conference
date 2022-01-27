@@ -2,7 +2,7 @@
 
 function toggleKota(e) {
     const kota = document.getElementById("select-kota");
-    e.value === "โควต้าเจ้าภาพร่วม" ?
+    e.value === "2" ?
         kota.querySelectorAll("input[type=radio]").forEach((item) => {
             item.removeAttribute("disabled");
         }) :

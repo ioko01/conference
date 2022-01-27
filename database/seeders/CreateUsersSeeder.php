@@ -23,7 +23,7 @@ class CreateUsersSeeder extends Seeder
                 "phone" => "0997711531",
                 "institution" => "มหาวิทยาลัยราชภัฏเลย",
                 "address" => "อาคาร 20 ชั้น 4 234 ถนน เลย-เชียงคาน ตำบลเมือง อำเภอเมืองเลย เลย 42000",
-                "person_type" => "บุคคลภายในมหาวิทยาลัยราชภัฏเลย",
+                "position_id" => "1",
                 "person_attend" => "attend",
                 "email" => "monday-december.1997@hotmail.com",
                 "is_admin" => "2",

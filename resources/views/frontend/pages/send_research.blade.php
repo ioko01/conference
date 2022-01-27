@@ -96,9 +96,13 @@
                         is-invalid
                     @enderror"
                             onchange="selectGroup(this)">
-                            <option value="" @if (empty('faculty_id')) selected @endif>---กรุณาเลือก---</option>
+                            <option value="" @if (!old('faculty_id')) selected @endif>---กรุณาเลือก---</option>
                             @foreach ($faculties as $faculty)
-                                <option value="{{ $faculty->id }}" @if (old("faculty_id") === "{{ $faculty->id }}") selected @endif>
+                                {{ $selected = '' }}
+                                @if ($faculty->id == old('faculty_id'))
+                                    {{ $selected = 'selected' }}
+                                @endif
+                                <option value="{{ $faculty->id }}" {{ $selected }}>
                                     {{ $faculty->name }}
                                 </option>
                             @endforeach

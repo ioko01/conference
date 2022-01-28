@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Kota;
+use App\Models\Position;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -39,6 +41,14 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function showRegistrationForm()
+    {
+        $kotas = Kota::get();
+        $positions = Position::get();
+
+        return view('auth.register', compact('kotas', 'positions'));
     }
 
     /**
@@ -79,6 +89,7 @@ class RegisterController extends Controller
             'institution' => $data['institution'],
             'address' => $data['address'],
             'position_id' => $data['position_id'],
+            'kota_id' => isset($data['kota_id']) ? $data['kota_id'] : null,
             'person_attend' => $data['person_attend'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),

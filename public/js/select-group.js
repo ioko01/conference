@@ -5,11 +5,18 @@ function selectGroup(e) {
         const nextSelector = e.parentElement.nextElementSibling.children[1];
         nextSelector.innerHTML = `<option>---กรุณาเลือก---</option>`;
         if (e.value) {
-            researchGroup.forEach((item) => {
-                const result = Object.keys(item).find(
-                    (item) => item === e.value
-                );
-                createOption(nextSelector, item[result]);
+            $.ajax({
+                type: "GET",
+                url: "/api/branches",
+                data: {
+                    faculty_id: e.value,
+                },
+                success: function(data) {
+                    data.forEach((item) => {
+                        const result = Object.values(item).map(value => value);
+                        createOption(nextSelector, result);
+                    });
+                },
             });
             nextSelector.removeAttribute("disabled");
         } else {
@@ -20,12 +27,10 @@ function selectGroup(e) {
     }
 }
 
-function createOption(element, value) {
+function createOption(element, result) {
     try {
-        if (value) {
-            value.forEach((item) => {
-                element.innerHTML += `<option value="${item}" name="group2">${item}</option>`;
-            });
+        if (result) {
+            element.innerHTML += `<option value="${result[0]}" name="group2">${result[1]}</option>`;
         }
     } catch (error) {
         throw error;

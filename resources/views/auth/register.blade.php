@@ -128,28 +128,18 @@
                             <span class="text-danger"> *กรุณาเลือกสถานะของท่าน</span>
                             @enderror
                         </label>
+
+                        @foreach ($positions as $position)
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="position_id" id="in"
-                                @if(old('position_id')==="0" || empty(old('position_id')) )
-                                checked @endif value="0" onchange="toggleKota(this)">
-                            <label class="form-check-label" for="in">
-                                บุคคลในมหาวิทยาลัยราชภัฏเลย
+                            <input class="form-check-input" type="radio" name="position_id"
+                                id="position_{{ $position->id }}" value="{{ $position->id }}"
+                                onchange="toggleKota(this)" @if($position->id===$positions->first()->id) checked @endif>
+                            <label class="form-check-label" for="position_{{ $position->id }}">
+                                {{ $position->name }}
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="position_id" id="out"
-                                @if(old('position_id')==="1" ) checked @endif value="1" onchange="toggleKota(this)">
-                            <label class="form-check-label" for="out">
-                                บุคคลภายนอก
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="position_id" id="kota_id"
-                                @if(old('position_id')==="2" ) checked @endif value="2" onchange="toggleKota(this)">
-                            <label class="form-check-label" for="kota_id">
-                                ได้รับโควต้าเจ้าภาพร่วม
-                            </label>
-                        </div>
+                        @endforeach
+
                         <p style="color:red">* โควต้าเจ้าภาพร่วมกรุณาติดต่อต้นสังกัด
                             หากท่านเป็นบุคลากรภายในมหาวิทยาลัยราชภัฏเลย และบทความของท่านเป็นของมหาวิทยาลัยอื่น
                             จะต้องลงทะเบียนเป็น "บุคคลภายนอก"
@@ -163,34 +153,17 @@
                             <span class="text-danger"> *กรุณาเลือกสถานะของท่าน</span>
                             @enderror
                         </label>
+
+                        @foreach ($kotas as $kota)
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota_id" id="rmu" @if(old('kota_id')==="rmu" ||
-                                empty(old('kota_id')) ) checked @endif value="rmu" disabled>
-                            <label class="form-check-label" for="rmu">
-                                มหาวิทยาลัยราชภัฏมหาสารคาม
+                            <input class="form-check-input" type="radio" name="kota_id" id="kota_{{ $kota->id }}"
+                                value="{{ $kota->id }}" @if($kota->id === $kotas->first()->id) checked @endif disabled>
+                            <label class="form-check-label" for="kota_{{ $kota->id }}">
+                                {{ $kota->name }}
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota_id" id="reru" @if(old('kota_id')==="reru"
-                                ) checked @endif value="reru" disabled>
-                            <label class="form-check-label" for="reru">
-                                มหาวิทยาลัยราชภัฏร้อยเอ็ด
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota_id" id="snru" @if(old('kota_id')==="snru"
-                                ) checked @endif value="snru" disabled>
-                            <label class="form-check-label" for="snru">
-                                มหาวิทยาลัยราชภัฏสกลนคร
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kota_id" id="udru" @if(old('kota_id')==="udru"
-                                ) checked @endif value="udru" disabled>
-                            <label class="form-check-label" for="udru">
-                                มหาวิทยาลัยราชภัฏอุดรธานี
-                            </label>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
                 <div class="row mb-4">

@@ -2,7 +2,7 @@
 
 function toggleKota(e) {
     const kota = document.getElementById("select-kota");
-    e.value === "2" ?
+    e.value === "3" ?
         kota.querySelectorAll("input[type=radio]").forEach((item) => {
             item.removeAttribute("disabled");
         }) :

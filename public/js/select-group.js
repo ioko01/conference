@@ -30,7 +30,7 @@ function selectGroup(e) {
 function createOption(element, result) {
     try {
         if (result) {
-            element.innerHTML += `<option value="${result[0]}" name="group2">${result[1]}</option>`;
+            element.innerHTML += `<option value="${result[0]}">${result[1]}</option>`;
         }
     } catch (error) {
         throw error;

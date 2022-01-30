@@ -1,6 +1,6 @@
 "use strict";
 
-function toggleKota(e) {
+function toggle_kota(e) {
     const kota = document.getElementById("select-kota");
     e.value === "3" ?
         kota.querySelectorAll("input[type=radio]").forEach((item) => {

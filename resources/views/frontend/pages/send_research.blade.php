@@ -95,16 +95,14 @@
                             class="form-select @error('faculty_id')
                         is-invalid
                     @enderror"
-                            onchange="selectGroup(this)">
+                            onchange="select_faculty(this)">
                             <option value="" @if (!old('faculty_id')) selected @endif>---กรุณาเลือก---</option>
                             @foreach ($faculties as $faculty)
-                                {{ $selected = '' }}
-                                @if ($faculty->id == old('faculty_id'))
-                                    {{ $selected = 'selected' }}
-                                @endif
-                                <option value="{{ $faculty->id }}" {{ $selected }}>
-                                    {{ $faculty->name }}
-                                </option>
+                                <option value="{{ $faculty->id }}" @if ($faculty->id == old('faculty_id'))
+                                    selected
+                            @endif>
+                            {{ $faculty->name }}
+                            </option>
                             @endforeach
                         </select>
 
@@ -121,8 +119,19 @@
                             class="form-select @error('branch_id')
                         is-invalid
                     @enderror"
-                            disabled>
-                            <option value="">---กรุณาเลือก---</option>
+                            @if (!old('faculty_id'))
+                            disabled
+                            @endif>
+                            <option value="" @if (!old('branch_id')) selected @endif>---กรุณาเลือก---</option>
+                            @foreach ($branches as $branch)
+                                @if ($branch->faculty_id == old('faculty_id'))
+                                    <option value="{{ $branch->id }}" @if ($branch->id == old('branch_id'))
+                                        selected
+                                @endif>
+                                {{ $branch->name }}
+                                </option>
+                            @endif
+                            @endforeach
                         </select>
 
                         @error('branch_id')
@@ -138,12 +147,10 @@
                         <label for="degree_id">ระดับบทความ</label>
                         <select class="form-select" name="degree_id" id="degree_id">
                             <option value="" @if (empty(old('degree_id'))) selected @endif>---กรุณาเลือก---</option>
-                            <option value="บทความวิจัย" @if (old('degree_id') === 'บทความวิจัย') selected @endif>
-                                บทความวิจัย</option>
-                            <option value="บทความวิชาการ" @if (old('degree_id') === 'บทความวิชาการ') selected @endif>
-                                บทความวิชาการ</option>
-                            <option value="บทความวิทยานิพนธ์" @if (old('degree_id') === 'บทความวิทยานิพนธ์') selected
-                                @endif>บทความวิทยานิพนธ์</option>
+                            @foreach ($degrees as $degree)
+                                <option value="{{ $degree->id }}" @if ($degree->id == old('degree_id')) selected @endif>
+                                    {{ $degree->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-4">

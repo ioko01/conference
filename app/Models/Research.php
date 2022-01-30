@@ -9,7 +9,7 @@ class Research extends Model
 {
     use HasFactory;
 
-    
+    protected $table = 'researchs';
     protected $fillable = [
         'user_id',
         'topic_id',
@@ -19,7 +19,7 @@ class Research extends Model
         'presenter',
         'faculty_id',
         'branch_id',
-        'degrees_id',
+        'degree_id',
         'present_id',
         'payment',
         'payment_date',

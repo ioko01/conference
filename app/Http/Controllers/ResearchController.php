@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Research;
 use App\Models\Faculty;
+use App\Models\Degree;
+use App\Models\Branch;
 
 class ResearchController extends Controller
 {
@@ -16,7 +18,7 @@ class ResearchController extends Controller
      */
      public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware('auth');
     }
 
     /**
@@ -27,7 +29,9 @@ class ResearchController extends Controller
     public function index()
     {
         $faculties = Faculty::get();
-        return view('frontend.pages.send_research', compact('faculties'));
+        $degrees = Degree::get();
+        $branches = Branch::get();
+        return view('frontend.pages.send_research', compact('faculties', 'degrees', 'branches'));
     }
 
     /**
@@ -64,12 +68,12 @@ class ResearchController extends Controller
         
         $presenters = join(',', array_filter($request->presenters));
         
-        $topicId = '65'.sprintf("%03d",Research::count()+1);
+        $topic_id = '65'.sprintf("%03d",Research::count()+1);
         Research::create([
             'user_id' => auth()->user()->id,
-            'topic_id' => $topicId,
-            'topic_th' => $request->topicTH,
-            'topic_en' => $request->topicEN,
+            'topic_id' => $topic_id,
+            'topic_th' => $request->topic_th,
+            'topic_en' => $request->topic_en,
             'presenter' => $presenters,
             'faculty_id' => $request->faculty_id,
             'branch_id' => $request->branch_id,

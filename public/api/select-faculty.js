@@ -1,6 +1,6 @@
 "use strict";
 
-function selectGroup(e) {
+function select_faculty(e) {
     try {
         const nextSelector = e.parentElement.nextElementSibling.children[1];
         nextSelector.innerHTML = `<option>---กรุณาเลือก---</option>`;
@@ -11,10 +11,10 @@ function selectGroup(e) {
                 data: {
                     faculty_id: e.value,
                 },
-                success: function(data) {
+                success: function (data) {
                     data.forEach((item) => {
                         const result = Object.values(item).map(value => value);
-                        createOption(nextSelector, result);
+                        show_branches(nextSelector, result);
                     });
                 },
             });
@@ -27,7 +27,7 @@ function selectGroup(e) {
     }
 }
 
-function createOption(element, result) {
+function show_branches(element, result) {
     try {
         if (result) {
             element.innerHTML += `<option value="${result[0]}">${result[1]}</option>`;

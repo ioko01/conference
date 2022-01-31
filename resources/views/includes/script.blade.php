@@ -9,6 +9,7 @@
     @endif
 
     @if (Request::is('employee/research/*'))
+        <script src="{{ asset('js/preview-image-payment.js') }}"></script>
         <script src="{{ asset('js/paginate.js') }}"></script>
         <script>
             let options = {

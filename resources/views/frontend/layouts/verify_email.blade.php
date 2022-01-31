@@ -5,7 +5,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 @yield('head')
 
-<body>
+<body style="background-color: #dfdfdf">
     @yield('loading')
 
     <div id="page" class="hidden">

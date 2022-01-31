@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\File;
 use Illuminate\Http\Request;
 use App\Models\Research;
+use App\Models\File;
 
 class FileUploadController extends Controller
 {
@@ -37,34 +37,7 @@ class FileUploadController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'payment-upload' => 'file|mimes:jpg,jpeg|max:10240',
-            'word-upload' => 'file|mimes:doc,docx|max:10240',
-            'pdf-upload' => 'file|mimes:pdf|max:10240'
-        ],
-        [
-            'pdf-upload.mimes' => 'อัพโหลด pdf เท่านั้น'
-        ]
-    );
-
-    $topicId = Research::select('topic_id')->where('user_id', auth()->user()->id)->get();
-    if($request->file('pdf-upload')){
-        $type = "Pdf";
-        $upload = $request->file('pdf-upload');
-        $path = $upload->storeAs('private/files/pdf', strval($topicId[0]->topic_id).".".$upload->extension());
-
-    } else if($request->file('word-upload')){
-        $type = "Word";
-        $upload = $request->file('word-upload');
-        $path = $upload->storeAs('private/files/words', strval($topicId[0]->topic_id).".".$upload->extension());
-
-    } else if($request->file('payment-upload')){
-        $type = "Slip";
-        $upload = $request->file('payment-upload');
-        $path = $upload->storeAs('private/files/slips', strval($topicId[0]->topic_id).".".$upload->extension());
-    }
-
-    return back()->with('success', 'Success, upload file '.$type);
+        
     }
 
     /**
@@ -98,7 +71,55 @@ class FileUploadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'payment_upload' => 'file|mimes:jpg,jpeg|max:10240',
+            'word_upload' => 'file|mimes:doc,docx|max:10240',
+            'pdf_upload' => 'file|mimes:pdf|max:10240'
+        ],
+        [
+            'pdf_upload.mimes' => 'อัพโหลด pdf เท่านั้น',
+            'word_upload.mimes' => 'อัพโหลด doc, docx เท่านั้น',
+            'payment_upload.mimes' => 'อัพโหลด jpg, jpeg เท่านั้น',
+            'pdf_upload.max' => 'ไฟล์ต้องมีขนาดไม่เกิน 10 MB',
+            'word_upload.max' => 'ไฟล์ต้องมีขนาดไม่เกิน 10 MB',
+            'payment_upload.max' => 'ไฟล์ต้องมีขนาดไม่เกิน 10 MB',
+        ]
+    );
+
+    $word_path = null;
+    $pdf_path = null;
+    $payment_path = null;
+    if($request->file('pdf_upload')){
+        $upload = $request->file('pdf_upload');
+        $pdf_path = $upload->storeAs('private/files/pdf', strval($id).".".$upload->extension());
+
+    } else if($request->file('word_upload')){
+        $upload = $request->file('word_upload');
+        $word_path = $upload->storeAs('private/files/words', strval($id).".".$upload->extension());
+
+    } else if($request->file('payment_upload')){
+        $upload = $request->file('payment_upload');
+        $payment_path = $upload->storeAs('private/files/slips', strval($id).".".$upload->extension());
+    }
+
+    if(File::where('topic_id', $id)->get()->count() === 0){
+        File::create([
+        'topic_id' => $id,
+        'file_word' => $word_path,
+        'file_pdf' => $pdf_path,
+        'file_payment' => $payment_path,
+    ]);
+    }else {
+        File::where('topic_id', $id)->update([
+            'topic_id' => $id,
+            'file_word' => $word_path,
+            'file_pdf' => $pdf_path,
+            'file_payment' => $payment_path,
+        ]);
+    }
+    
+
+    return back()->with('success', true);
     }
 
     /**

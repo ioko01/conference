@@ -14,7 +14,8 @@ class File extends Model
         'file_word',
         'file_pdf',
         'file_poster',
-        'video_file',
-        'video_link'
+        'file_payment',
+        'date_payment',
+        'address_payment'
     ];
 }

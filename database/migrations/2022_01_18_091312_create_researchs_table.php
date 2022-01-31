@@ -25,10 +25,6 @@ class CreateResearchsTable extends Migration
             $table->string('branch_id')->comment('ไอดีสาขา');
             $table->integer('degree_id')->comment('รหัสระดับบทความ');
             $table->integer('present_id')->comment('รหัสชนิดการนำเสนอ');
-            $table->text('payment')->nullable()->comment('ไฟล์สลิปการจ่ายเงิน');
-            $table->string('payment_date')->nullable()->comment('วันที่จ่ายเงิน');
-            $table->text('payment_address')->nullable()->comment('ที่อยู่ผู้ชำระเงิน');
-            $table->text('payment_status')->nullable()->comment('สถานะการชำระเงิน');
             $table->timestamps();
         });
     }

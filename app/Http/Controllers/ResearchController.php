@@ -81,7 +81,7 @@ class ResearchController extends Controller
             'present_id' => $request->present_id,
         ]);
         
-        return redirect()->route('employee.research.show', auth()->user()->id);
+        return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
     }
 
     /**

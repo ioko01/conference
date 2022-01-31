@@ -14,7 +14,7 @@
     <!-- Content -->
     <div id="register-content" class="bg-white text-blue p-5 mb-5">
         <div class="inner-content-header">
-            <h4 class="text-center">ส่งบทความ</h4>
+            <h2 class="text-center">ส่งบทความ</h2>
             <h4 class="text-green py-3">
                 LRU Conference 2022
             </h4>
@@ -174,7 +174,7 @@
                     <p class="text-red text-center">
                         * กรุณาตรวจสอบความถูกต้องก่อนกดส่งบทความของท่าน
                     </p>
-                    <button class="btn btn-green text-white w-100 rounded-0" type="submit">ส่งบทความ</button>
+                    <button class="btn btn-green text-white w-100 rounded-0" name="send_research" type="submit">ส่งบทความ</button>
                 </form>
             </div>
             <div class="col-md-5 tips">

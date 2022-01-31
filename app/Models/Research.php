@@ -21,9 +21,5 @@ class Research extends Model
         'branch_id',
         'degree_id',
         'present_id',
-        'payment',
-        'payment_date',
-        'payment_adderss',
-        'payment_status'
     ];
 }

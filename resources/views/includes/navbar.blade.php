@@ -71,11 +71,22 @@
                 </li>
                 @endauth
 
+                @auth
+                @if (auth()->user()->is_admin === 2)
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">วิธีชำระเงิน</a>
+                    <a class="nav-link {{ Request::is('admin/research') ? 'active' : '' }}" aria-current="page"
+                        href="{{ route('admin.research.index') }}">จัดการบทความ</a>
+                </li>
+                @endif
+                @endauth
+
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('payment') ? 'active' : '' }}" aria-current="page"
+                        href="{{ route('payment') }}">วิธีชำระเงิน</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">ติดต่อ</a>
+                    <a class="nav-link {{ Request::is('contract') ? 'active' : '' }}" aria-current="page"
+                        href="{{ route('contract') }}">ติดต่อ</a>
                 </li>
             </ul>
             @guest

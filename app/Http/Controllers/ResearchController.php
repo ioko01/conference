@@ -7,6 +7,8 @@ use App\Models\Research;
 use App\Models\Faculty;
 use App\Models\Degree;
 use App\Models\Branch;
+use App\Models\Present;
+use App\Models\Tip;
 
 class ResearchController extends Controller
 {
@@ -31,7 +33,9 @@ class ResearchController extends Controller
         $faculties = Faculty::get();
         $degrees = Degree::get();
         $branches = Branch::get();
-        return view('frontend.pages.send_research', compact('faculties', 'degrees', 'branches'));
+        $presents = Present::get();
+        $tips = Tip::where('group', '1')->get();
+        return view('frontend.pages.send_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips'));
     }
 
     /**
@@ -60,10 +64,6 @@ class ResearchController extends Controller
             'branch_id' => 'required',
             'degree_id' => 'required',
             'present_id' => 'required',
-            ],[
-                'topic_th.required' => 'กรุณากรอกชื่อบทความ (ภาษาไทย)',
-                'topic_en.required' => 'กรุณากรอกชื่อบทความ (ภาษาอังกฤษ)',
-                'presenters.0.required' => 'กรุณาใส่ชื่อผู้นำเสนออย่างน้อย 1 คน'
             ]);
         
         $presenters = join(',', array_filter($request->presenters));
@@ -92,7 +92,19 @@ class ResearchController extends Controller
      */
     public function show($id)
     {
-        $data = Research::where('user_id', $id)->get();
+        $data = Research::
+                        select('topic_id', 'topic_th', 'topic_en', 'presenter', 'faculties.name as faculty', 
+                        'branches.name as branch', 'degrees.name as degree', 'presents.name as present', 
+                        'users.phone as phone', 'users.institution as institution', 'users.address as address', 
+                        'users.email as email', 'users.person_attend as attend', 'kotas.name as kota')
+                        ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
+                        ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')
+                        ->leftjoin('degrees', 'researchs.degree_id', '=', 'degrees.id')
+                        ->leftjoin('presents', 'researchs.present_id', '=', 'presents.id')
+                        ->leftjoin('users', 'researchs.user_id', '=', 'users.id')
+                        ->leftjoin('kotas', 'users.kota_id', '=', 'kotas.id')
+                        ->where('user_id', $id)
+                        ->get();
         return view('frontend.pages.show_research', compact('data'));
     }
 

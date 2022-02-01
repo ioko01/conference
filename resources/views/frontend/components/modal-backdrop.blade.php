@@ -26,10 +26,11 @@
 
 
 <!-- Modal WORD -->
-<form enctype="multipart/form-data" method="POST" action="{{ route('employee.file-upload.store') }}" class="modal fade"
+<form enctype="multipart/form-data" method="POST" action="{{ route('employee.file-upload.update', $value->topic_id) }}" class="modal fade"
     id="word-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="อัพโหลดไฟล์ WORD"
     aria-hidden="true">
     @csrf
+    @method('PUT')
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -47,10 +48,11 @@
 </form>
 
 <!-- Modal PDF -->
-<form enctype="multipart/form-data" method="POST" action="{{ route('employee.file-upload.store') }}" class="modal fade"
+<form enctype="multipart/form-data" method="POST" action="{{ route('employee.file-upload.update', $value->topic_id) }}" class="modal fade"
     id="pdf-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="อัพโหลดไฟล์ PDF"
     aria-hidden="true">
     @csrf
+    @method('PUT')
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -82,29 +84,50 @@
             <div class="modal-body">
 
                 @foreach ($data as $key => $value)
-                <div>
-                    <strong>รหัสบทความ: </strong><span>{{ $value->topic_id }}</span>
+                <div class="mb-3">
+                    <strong class="text-green">รหัสบทความ: </strong><span class="text-dark">{{ $value->topic_id }}</span>
                 </div>
-                <div>
-                    <strong>ชื่อบทความภาษาไทย: </strong><span>{{ $value->topic_th }}</span>
+                <div class="mb-3">
+                    <strong class="text-green">ชื่อบทความภาษาไทย: </strong><span class="text-dark">{{ $value->topic_th }}</span>
                 </div>
-                <div>
-                    <strong>ชื่อบทความภาษาอังกฤษ: </strong><span>{{ $value->topic_en }}</span>
+                <div class="mb-3">
+                    <strong class="text-green">ชื่อบทความภาษาอังกฤษ: </strong><span class="text-dark">{{ $value->topic_en }}</span>
                 </div>
-                <div>
-                    <strong>ชื่อผู้นำเสนอบทความ: </strong><span>{{ $value->presenter }}</span>
+                <div class="mb-3">
+                    <strong class="text-green">ชื่อผู้นำเสนอบทความ: </strong><span class="text-dark">{{ $value->presenter }}</span>
                 </div>
-                <div>
-                    <strong>กลุ่มบทความ: </strong><span>{{ $value->group }}</span>
+                <div class="mb-3">
+                    <strong class="text-green">กลุ่มบทความ: </strong><span class="text-dark">{{ $value->faculty }}</span>
                 </div>
-                <div>
-                    <strong>สาขาย่อย: </strong><span>{{ $value->group2 }}</span>
+                <div class="mb-3">
+                    <strong class="text-green">สาขาย่อย: </strong><span class="text-dark">{{ $value->branch }}</span>
                 </div>
-                <div>
-                    <strong>รูปแบบบทความ: </strong><span>{{ $value->type }}</span>
+                <div class="mb-3">
+                    <strong class="text-green">ชนิดบทความ: </strong><span class="text-dark">{{ $value->degree }}</span>
                 </div>
-                <div>
-                    <strong>ชนิดบทความ: </strong><span>{{ $value->volumn }}</span>
+                <div class="mb-3">
+                    <strong class="text-green">รูปแบบการนำเสนอ: </strong><span class="text-dark">{{ $value->present }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong class="text-green">เบอร์โทร: </strong><span class="text-dark">{{ $value->phone }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong class="text-green">อีเมล: </strong><span class="text-dark">{{ $value->email }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong class="text-green">สังกัด/หน่วยงาน: </strong><span class="text-dark">{{ $value->institution }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong class="text-green">ที่อยู่: </strong><span class="text-dark">{{ $value->address }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong class="text-green">โควต้าเจ้าภาพร่วม: </strong><span class="text-dark">
+                        @if ($value->kota)
+                            {{ $value->kota }}
+                        @else
+                            -
+                        @endif
+                </span>
                 </div>
                 @endforeach
             </div>

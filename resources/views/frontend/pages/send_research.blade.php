@@ -145,30 +145,37 @@
                     <div class="mb-4" id="select-research-branch"></div>
                     <div class="mb-4">
                         <label for="degree_id">ระดับบทความ</label>
-                        <select class="form-select" name="degree_id" id="degree_id">
+                        <select class="form-select @error('degree_id') is-invalid @enderror" name="degree_id" id="degree_id">
                             <option value="" @if (empty(old('degree_id'))) selected @endif>---กรุณาเลือก---</option>
                             @foreach ($degrees as $degree)
                                 <option value="{{ $degree->id }}" @if ($degree->id == old('degree_id')) selected @endif>
                                     {{ $degree->name }}</option>
                             @endforeach
                         </select>
+
+                        @error('degree_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-4">
-                        <label for="present_id">รูปแบบการนำเสนอ</label>
+                        <label>รูปแบบการนำเสนอ</label>
+                        @foreach ($presents as $present)    
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="present_id" id="0" value="0"
-                                @if (empty(old('present_id')) || old('present_id') === '0') checked @endif>
-                            <label class="form-check-label" for="0">
-                                Oral (นำเสนอปากเปล่า)
+                            <input class="form-check-input" type="radio" name="present_id" id="present_{{ $present->id }}" value="{{ $present->id }}"
+                                @if (!old('present_id'))
+                                    @if ($present->id == $presents->first()->id)
+                                        checked
+                                    @endif
+                                @elseif ($present->id == old('present_id'))
+                                    checked
+                                @endif>
+                            <label class="form-check-label" for="present_{{ $present->id }}">
+                                {{ $present->name }}
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="present_id" id="1" value="1"
-                                @if (old('present_id') === '1') checked @endif>
-                            <label class="form-check-label" for="1">
-                                Poster (การนำเสนอแบบโปสเตอร์)
-                            </label>
-                        </div>
+                        @endforeach
                     </div>
 
                     <p class="text-red text-center">
@@ -179,50 +186,12 @@
             </div>
             <div class="col-md-5 tips">
                 <div class="tips-content">
+                    @foreach ($tips as $tip)    
                     <div class="tips-box py-5">
-                        <div class="icon"><img src="{{ asset('images/guide.png') }}" alt=""></div>
-                        <div class="content"><strong>แนะนำการลงทะเบียน</strong><br /><span>
-                                กรณีต้องการลงทะเบียนเข้าร่วมงานแต่ไม่ส่งบทความ หรือเป็นนักวิจัยร่วม ให้เลือก
-                                "ลงทะเบียนเข้าร่วมงานทั่วไป" หากสงสัยให้ติดต่อเจ้าหน้ที่หรือผู้ดูแลระบบ</span></div>
+                        <div class="icon"><img src="{{ asset($tip->image) }}" alt="{{ $tip->head }}"></div>
+                        <div class="content"><strong>{{ $tip->head }}</strong><br /><span><textarea readonly style="width: 100%;" class="txt-tips autosize">{{ $tip->detail }}</textarea></span></div>
                     </div>
-                    <div class="tips-box py-5">
-                        <div class="icon"><img src="{{ asset('images/folder.png') }}" alt=""></div>
-                        <div class="content"><strong>แนะนำการส่งผลงาน</strong><br /><span>
-                                เมื่อลงทะเบียนสำเร็จแล้ว ระบบจะส่งลิงก์
-                                ไปยังอีเมลของท่านเพื่อยืนยันตัวตน
-                                จึงจะสามารถใช้ระบบส่งผลงานได้
-                                (ผู้ที่ส่งผลงานจะต้องเลือก
-                                "ลงทะเบียนส่งผลงาน" เท่านั้น !)
-                                และจะต้องใส่ข้อมูลที่ถูกต้อง
-                                หากเกิดข้อผิดพลาดผู้ลงทะเบียน
-                                ใส่ข้อมูลมาผิด เจ้าหน้าที่จะไม่รับผิดชอบ</span></div>
-                    </div>
-                    <div class="tips-box py-5">
-                        <div class="icon"><img src="{{ asset('images/heart.png') }}" alt=""></div>
-                        <div class="content"><strong>การพิจารณาผลงาน</strong><br /><span>
-                                พิจารณาการเลือกกลุ่มการนำเสนอ
-                                ผลงานและประเภทของการนำเสนอ
-                                ผลงาน โดยผู้ทรงคุณวุฒิจากภายใน
-                                และภายนอกมหาวิทยาลัย อย่างน้อย 2 ท่าน
-                                และคัดเลือกผลงานที่นำเสนอในการประชุม
-                                รวบรวมเป็นรายงานสืบเนื่องจากการประชุม
-                                วิชาการระดับชาติ Proceedings
-                                (ทั้งนี้บทความต้องได้รับการชำระเงินเท่านั้น..!
-                                ที่จะได้รับสิทธิ์ให้ผู้ทรงคุณวิฒิพิจารณา)</span></div>
-                    </div>
-                    <div class="tips-box py-5">
-                        <div class="icon"><img src="{{ asset('images/money-exchange.png') }}" alt=""></div>
-                        <div class="content"><strong>การชำระเงิน</strong><br /><span>
-                                1. ผู้นำเสนอจากหน่วยงานภายนอก ที่ส่งผลงาน ค่าลงทะเบียนอัตรา 2,000 บาท ต่อ 1 ผลงาน <br />
-                                2. ผู้ร่วมงานทั่วไป/นิสิต/นักศึกษาจากหน่วยงานภายนอก ไม่เสียค่าใช้จ่าย <br />
-                                3. บุคลากรภายในมหาวิทยาลัยราชภัฏเลย ไม่เสียค่าใช้จ่าย <br />
-                                4.
-                                ข้าราชการหรือบุคลากรของรัฐที่เข้าร่วมประชุมสามารถเบิกจ่ายได้จากต้นสังกัดตามระเบียบของกระทรวงการคลัง
-                                <br />
-                                หมายเหตุ: กรณีที่ผู้สมัครเข้าร่วมงานและไม่สามารถมานำเสนอผลงานได้ สถาบันวิจัยและพัฒนา
-                                ขอสงวนสิทธิ์ ที่จะไม่คืนเงินค่าลงทะเบียนไม่ว่ากรณีใดๆ
-                                เนื่องจากต้องมีค่าใช้จ่ายในระหว่างการดำเนินงาน</span></div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

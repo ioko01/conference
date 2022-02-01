@@ -28,6 +28,19 @@ class CreateUsersSeeder extends Seeder
                 "email" => "monday-december.1997@hotmail.com",
                 "is_admin" => "2",
                 "password" => bcrypt("1234")
+            ],
+            [
+                "prefix" => "Mr.",
+                "fullname" => "Thanapong Soontarawirat",
+                "sex" => "male",
+                "phone" => "0997711531",
+                "institution" => "มหาวิทยาลัยราชภัฏเลย",
+                "address" => "อาคาร 20 ชั้น 4 234 ถนน เลย-เชียงคาน ตำบลเมือง อำเภอเมืองเลย เลย 42000",
+                "position_id" => "1",
+                "person_attend" => "attend",
+                "email" => "ioko.peezaza@gmail.com",
+                "is_admin" => "0",
+                "password" => bcrypt("1234")
             ]
         ];
 

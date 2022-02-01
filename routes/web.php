@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ManageResearchController;
+use App\Http\Controllers\FileDownloadController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -21,6 +24,12 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+Route::get('/contract', function () {
+    return view('frontend.pages.contract');
+})->name('contract');
+
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
 
 
 
@@ -46,9 +55,18 @@ Route::post('email/verification-notification', function (Request $request) {
 Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'verified'])->group(function(){
+
+    Route::get('download', [FileDownloadController::class, 'index'])->name('download');
+
     Route::prefix('employee')->group(function(){
         Route::resource('research', ResearchController::class, ['names' => 'employee.research']);
         Route::resource('file-upload', FileUploadController::class, ['names' => 'employee.file-upload']);
+    });
+
+    Route::middleware('is_admin')->group(function(){
+        Route::prefix('admin')->group(function(){
+            Route::resource('research', ManageResearchController::class, ['names' => 'admin.research']);
+        });
     });
 });
        

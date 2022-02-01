@@ -91,15 +91,15 @@ class FileUploadController extends Controller
     $payment_path = null;
     if($request->file('pdf_upload')){
         $upload = $request->file('pdf_upload');
-        $pdf_path = $upload->storeAs('private/files/pdf', strval($id).".".$upload->extension());
+        $pdf_path = $upload->storeAs('public/files/pdf', strval($id).".".$upload->extension());
 
     } else if($request->file('word_upload')){
         $upload = $request->file('word_upload');
-        $word_path = $upload->storeAs('private/files/words', strval($id).".".$upload->extension());
+        $word_path = $upload->storeAs('public/files/words', strval($id).".".$upload->extension());
 
     } else if($request->file('payment_upload')){
         $upload = $request->file('payment_upload');
-        $payment_path = $upload->storeAs('private/files/slips', strval($id).".".$upload->extension());
+        $payment_path = $upload->storeAs('public/files/slips', strval($id).".".$upload->extension());
     }
 
     if(File::where('topic_id', $id)->get()->count() === 0){

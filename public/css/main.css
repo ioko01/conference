@@ -418,3 +418,9 @@ a {
 .modal-content {
     border-radius: 0;
 }
+
+.tips .tips-content .tips-box .txt-tips {
+    resize: none;
+    border: none;
+    background-color: transparent;
+}

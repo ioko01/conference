@@ -43,6 +43,12 @@ class CreateTipsSeeder extends Seeder
                 'image' => 'images/money-exchange.png',
                 'group' => '1'
             ],
+            [
+                'head' => 'วิธีการชำระเงิน',
+                'detail' => 'ชำระค่าลงทะเบียนผ่านธนาคาร เข้าบัญชีออมทรัพย์ชื่อบัญชี “วารสารวิจัยและพัฒนา ม.ราชภัฏเลย”เลขที่บัญชี 981-2-85863-6 ธนาคารกรุงไทย สาขาเลย',
+                'image' => 'images/guide.png',
+                'group' => '2'
+            ],
         ];
 
         foreach ($tips as $key => $value) {

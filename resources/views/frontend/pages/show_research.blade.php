@@ -92,10 +92,9 @@
                         @if (isset($value->word_path))
                         {{ $value->word }}
                         <div class="d-flex">
-                            <button type="button" class="btn btn-green text-white rounded-0" data-bs-toggle="modal"
-                                data-bs-target="#word-modal">
+                            <a class="btn btn-green text-white rounded-0" href="{{ Storage::url($value->word_path) }}">
                                 ดูตัวอย่าง
-                            </button>
+                            </a>
                             <button type="button" class="btn btn-warning text-white rounded-0" data-bs-toggle="modal"
                                 data-bs-target="#word-modal">
                                 แก้ไขไฟล์ WORD
@@ -118,10 +117,9 @@
                         @if (isset($value->pdf_path))
                         {{ $value->pdf }}
                         <div class="d-flex">
-                            <button type="button" class="btn btn-green text-white rounded-0" data-bs-toggle="modal"
-                                data-bs-target="#pdf-modal">
+                            <a class="btn btn-green text-white rounded-0" href="{{ Storage::url($value->pdf_path) }}">
                                 ดูตัวอย่าง
-                            </button>
+                            </a>
                             <button type="button" class="btn btn-warning text-white rounded-0" data-bs-toggle="modal"
                                 data-bs-target="#pdf-modal">
                                 แก้ไขไฟล์ PDF

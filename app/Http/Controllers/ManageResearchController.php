@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Research;
+use App\Models\StatusResearch;
 
 class ManageResearchController extends Controller
 {
@@ -14,6 +15,7 @@ class ManageResearchController extends Controller
      */
     public function index()
     {
+        $topic_status = StatusResearch::get();
         $data = Research::
                         select('researchs.topic_id as topic_id', 'status_researchs.name as topic_status',
                         'topic_th', 'topic_en', 'presenter', 'faculties.name as faculty', 
@@ -34,7 +36,7 @@ class ManageResearchController extends Controller
                         ->leftjoin('slips', 'researchs.topic_id', '=', 'slips.topic_id')
                         ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
                         ->get();
-        return view('frontend.pages.manage_research', compact('data'));
+        return view('frontend.pages.manage_research', compact('data', 'topic_status'));
     }
 
     /**

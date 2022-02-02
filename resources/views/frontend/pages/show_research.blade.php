@@ -65,16 +65,14 @@
                     <td>
                         @if (isset($value->payment_path))
                         <img width="100%" src="{{ Storage::url($value->payment_path) }}" alt="slip">
-                        <div class="d-flex">
-                            <button type="button" class="btn btn-green text-white rounded-0" data-bs-toggle="modal"
-                                data-bs-target="#payment-modal-example">
-                                ดูตัวอย่าง
-                            </button>
-                            <button type="button" class="btn btn-warning text-white rounded-0" data-bs-toggle="modal"
-                                data-bs-target="#payment-modal">
-                                แก้ไขสลิปชำระเงิน
-                            </button>
-                        </div>
+                        <button type="button" class="btn btn-green text-white rounded-0 w-100 my-1" data-bs-toggle="modal"
+                            data-bs-target="#payment-modal-example">
+                            ดูตัวอย่าง
+                        </button>
+                        <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1" data-bs-toggle="modal"
+                            data-bs-target="#payment-modal">
+                            แก้ไขสลิปชำระเงิน
+                        </button>
                         @else
                         <button type="button" class="btn btn-warning text-white rounded-0 w-100" data-bs-toggle="modal"
                             data-bs-target="#payment-modal">
@@ -90,15 +88,14 @@
                     <td>
                         @if (isset($value->word_path))
                         {{ $value->word }}
-                        <div class="d-flex">
-                            <a class="btn btn-green text-white rounded-0" href="{{ Storage::url($value->word_path) }}">
-                                ดูตัวอย่าง
-                            </a>
-                            <button type="button" class="btn btn-warning text-white rounded-0" data-bs-toggle="modal"
-                                data-bs-target="#word-modal">
-                                แก้ไขไฟล์ WORD
-                            </button>
-                        </div>
+                        <a class="btn btn-green text-white rounded-0 w-100 my-1"
+                            href="{{ Storage::url($value->word_path) }}">
+                            ดูตัวอย่าง
+                        </a>
+                        <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
+                            data-bs-toggle="modal" data-bs-target="#word-modal">
+                            แก้ไขไฟล์ WORD
+                        </button>
                         @else
                         <button type="button" class="btn btn-primary rounded-0 w-100" data-bs-toggle="modal"
                             data-bs-target="#word-modal">
@@ -115,15 +112,14 @@
 
                         @if (isset($value->pdf_path))
                         {{ $value->pdf }}
-                        <div class="d-flex">
-                            <a class="btn btn-green text-white rounded-0" href="{{ Storage::url($value->pdf_path) }}">
-                                ดูตัวอย่าง
-                            </a>
-                            <button type="button" class="btn btn-warning text-white rounded-0" data-bs-toggle="modal"
-                                data-bs-target="#pdf-modal">
-                                แก้ไขไฟล์ PDF
-                            </button>
-                        </div>
+                        <a class="btn btn-green text-white rounded-0 w-100 my-1"
+                            href="{{ Storage::url($value->pdf_path) }}">
+                            ดูตัวอย่าง
+                        </a>
+                        <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
+                            data-bs-toggle="modal" data-bs-target="#pdf-modal">
+                            แก้ไขไฟล์ PDF
+                        </button>
                         @else
                         <button type="button" class="btn btn-secondary rounded-0 w-100" data-bs-toggle="modal"
                             data-bs-target="#pdf-modal">

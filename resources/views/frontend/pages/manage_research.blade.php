@@ -37,11 +37,12 @@
             <thead>
                 <tr class="text-center pagination-header">
                     <th style="width: 5%;">#</th>
-                    <th style="width: 35%;">ชื่อบทความ/ผู้นำเสนอผลงาน</th>
-                    <th style="width: 15%;">สังกัด/หน่วยงาน</th>
-                    <th style="width: 10%;">Slip ชำระเงิน</th>
-                    <th style="width: 10%;">ไฟล์ WORD</th>
-                    <th style="width: 10%;">ไฟล์ PDF</th>
+                    <th style="width: 25%;">ชื่อบทความ/ผู้นำเสนอผลงาน</th>
+                    <th style="width: 11%;">สังกัด/หน่วยงาน</th>
+                    <th style="width: 8%;">Slip ชำระเงิน</th>
+                    <th style="width: 8%;">ไฟล์ WORD</th>
+                    <th style="width: 8%;">ไฟล์ PDF</th>
+                    <th style="width: 20%;">สถานะบทความ</th>
                     <th style="width: 15%;">รายละเอียด</th>
                 </tr>
             </thead>
@@ -61,7 +62,7 @@
                         -
                         @else
                         <a target="_blank"
-                            href="{{ route('download', 'file='.$value->payment_path.'&user_id='.$value->user_id) }}">SLIP</a>
+                            href="{{ Storage::url($value->payment_path) }}">SLIP</a>
                         @endif
                     </td>
                     <td>
@@ -69,7 +70,7 @@
                         -
                         @else
                         <a target="_blank"
-                            href="{{ route('download', 'file='.$value->word_path.'&user_id='.$value->user_id) }}">WORD</a>
+                            href="{{ Storage::url($value->word_path) }}">WORD</a>
                         @endif
                     </td>
                     <td>
@@ -77,8 +78,15 @@
                         -
                         @else
                         <a target="_blank"
-                            href="{{ route('download', 'file='.$value->pdf_path.'&user_id='.$value->user_id) }}">PDF</a>
+                            href="{{ Storage::url($value->pdf_path) }}">PDF</a>
                         @endif
+                    </td>
+                    <td>
+                        <select name="topic_status" id="topic_status" class="form-select">
+                            @foreach ($topic_status as $status)
+                                <option value="{{ $status->id }}" id="topic_status_{{ $status->id }}">{{ $status->name }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                         <button type="button" class="btn btn-green rounded-0 text-white" data-bs-toggle="modal"

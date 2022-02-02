@@ -92,6 +92,7 @@ class ResearchController extends Controller
      */
     public function show($id)
     {
+        if(auth()->user()->id != $id) return "unauthorized";
         $data = Research::
                         select('researchs.topic_id as topic_id', 'status_researchs.name as topic_status',
                         'topic_th', 'topic_en', 'presenter', 'faculties.name as faculty', 
@@ -111,7 +112,7 @@ class ResearchController extends Controller
                         ->leftjoin('pdf', 'researchs.topic_id', '=', 'pdf.topic_id')
                         ->leftjoin('slips', 'researchs.topic_id', '=', 'slips.topic_id')
                         ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
-                        ->where('user_id', $id)
+                        ->where('researchs.user_id', $id)
                         ->get();
         return view('frontend.pages.show_research', compact('data'));
     }

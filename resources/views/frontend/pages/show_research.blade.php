@@ -88,7 +88,6 @@
 
                     </td>
                     <td>
-
                         @if (isset($value->word_path))
                         {{ $value->word }}
                         <div class="d-flex">

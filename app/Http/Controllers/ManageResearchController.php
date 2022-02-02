@@ -15,19 +15,24 @@ class ManageResearchController extends Controller
     public function index()
     {
         $data = Research::
-                        select('researchs.user_id as user_id', 'researchs.topic_id as topic_id', 'topic_th', 'topic_en', 'presenter', 'faculties.name as faculty', 
+                        select('researchs.topic_id as topic_id', 'status_researchs.name as topic_status',
+                        'topic_th', 'topic_en', 'presenter', 'faculties.name as faculty', 
                         'branches.name as branch', 'degrees.name as degree', 'presents.name as present', 
                         'users.phone as phone', 'users.institution as institution', 'users.address as address', 
                         'users.email as email', 'users.person_attend as attend', 'kotas.name as kota',
-                        'files.file_word as word', 'files.file_pdf as pdf', 'files.file_payment as payment',
-                        'files.address_payment as address_payment', 'files.date_payment as date_payment')
+                        'words.name as word', 'pdf.name as pdf', 'slips.name as payment',
+                        'slips.address as address_payment', 'slips.date as date_payment',
+                        'words.path as word_path', 'pdf.path as pdf_path', 'slips.path as payment_path')
                         ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
                         ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')
                         ->leftjoin('degrees', 'researchs.degree_id', '=', 'degrees.id')
                         ->leftjoin('presents', 'researchs.present_id', '=', 'presents.id')
                         ->leftjoin('users', 'researchs.user_id', '=', 'users.id')
                         ->leftjoin('kotas', 'users.kota_id', '=', 'kotas.id')
-                        ->leftjoin('files', 'researchs.topic_id', '=', 'files.topic_id')
+                        ->leftjoin('words', 'researchs.topic_id', '=', 'words.topic_id')
+                        ->leftjoin('pdf', 'researchs.topic_id', '=', 'pdf.topic_id')
+                        ->leftjoin('slips', 'researchs.topic_id', '=', 'slips.topic_id')
+                        ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
                         ->get();
         return view('frontend.pages.manage_research', compact('data'));
     }

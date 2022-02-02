@@ -61,7 +61,7 @@
                         -
                         @else
                         <a target="_blank"
-                            href="{{ route('download', 'file='.$value->payment.'&user_id='.$value->user_id) }}">SLIP</a>
+                            href="{{ route('download', 'file='.$value->payment_path.'&user_id='.$value->user_id) }}">SLIP</a>
                         @endif
                     </td>
                     <td>
@@ -69,7 +69,7 @@
                         -
                         @else
                         <a target="_blank"
-                            href="{{ route('download', 'file='.$value->word.'&user_id='.$value->user_id) }}">WORD</a>
+                            href="{{ route('download', 'file='.$value->word_path.'&user_id='.$value->user_id) }}">WORD</a>
                         @endif
                     </td>
                     <td>
@@ -77,7 +77,7 @@
                         -
                         @else
                         <a target="_blank"
-                            href="{{ route('download', 'file='.$value->pdf.'&user_id='.$value->user_id) }}">PDF</a>
+                            href="{{ route('download', 'file='.$value->pdf_path.'&user_id='.$value->user_id) }}">PDF</a>
                         @endif
                     </td>
                     <td>

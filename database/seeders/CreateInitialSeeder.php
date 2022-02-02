@@ -9,6 +9,7 @@ use App\Models\Faculty;
 use App\Models\Branch;
 use App\Models\Degree;
 use App\Models\Present;
+use App\Models\StatusResearch;
 
 class CreateInitialSeeder extends Seeder
 {
@@ -86,6 +87,21 @@ class CreateInitialSeeder extends Seeder
         ];
         foreach ($kotas as $key => $value) {
             Kota::create($value);
+        }
+
+        $status_researchs = [
+            ['name' => 'รอการตรวจสอบ'],
+            ['name' => 'ชำระเงินแล้ว'],
+            ['name' => 'รอการตรวจสอบการชำระเงิน'],
+            ['name' => 'รอชำระเงิน'],
+            ['name' => 'อยู่ระหว่างการส่งผู้ทรงคุณวุฒิ'],
+            ['name' => 'ผู้ทรงคุณวุฒิพิจารณา'],
+            ['name' => 'รอการส่งบทความไปยังนักวิจัยแก้ไข'],
+            ['name' => 'ส่งบทความให้นักวิจัยแก้ไขแล้ว'],
+            ['name' => 'รอบทความแก้ไขจากนักวิจัย'],
+        ];
+        foreach ($status_researchs as $key => $value) {
+            StatusResearch::create($value);
         }
     }
 }

@@ -15,12 +15,12 @@ class ManageResearchController extends Controller
     public function index()
     {
         $data = Research::
-                        select('researchs.user_id as user_id','researchs.topic_id as topic_id', 'topic_th', 'topic_en', 'presenter', 'faculties.name as faculty', 
+                        select('researchs.user_id as user_id', 'researchs.topic_id as topic_id', 'topic_th', 'topic_en', 'presenter', 'faculties.name as faculty', 
                         'branches.name as branch', 'degrees.name as degree', 'presents.name as present', 
                         'users.phone as phone', 'users.institution as institution', 'users.address as address', 
                         'users.email as email', 'users.person_attend as attend', 'kotas.name as kota',
                         'files.file_word as word', 'files.file_pdf as pdf', 'files.file_payment as payment',
-                        'files.address_payment as address_payment', 'files.date_payment as adte_payment')
+                        'files.address_payment as address_payment', 'files.date_payment as date_payment')
                         ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
                         ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')
                         ->leftjoin('degrees', 'researchs.degree_id', '=', 'degrees.id')

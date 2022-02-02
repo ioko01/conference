@@ -1,6 +1,6 @@
 @section('modal')
 <!-- Modal PAYMENT -->
-@foreach ($data as $key => $value)
+@foreach ($data as $value)
 <form enctype="multipart/form-data" method="POST" action="{{ route('employee.file-upload.update', $value->topic_id) }}"
     class="modal fade" id="payment-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
     aria-labelledby="ชำระเงิน" aria-hidden="true">
@@ -26,6 +26,7 @@
 
 
 <!-- Modal WORD -->
+@foreach ($data as $value)
 <form enctype="multipart/form-data" method="POST" action="{{ route('employee.file-upload.update', $value->topic_id) }}" class="modal fade"
     id="word-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="อัพโหลดไฟล์ WORD"
     aria-hidden="true">
@@ -46,8 +47,10 @@
         </div>
     </div>
 </form>
+@endforeach
 
 <!-- Modal PDF -->
+@foreach ($data as $value)
 <form enctype="multipart/form-data" method="POST" action="{{ route('employee.file-upload.update', $value->topic_id) }}" class="modal fade"
     id="pdf-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="อัพโหลดไฟล์ PDF"
     aria-hidden="true">
@@ -68,6 +71,7 @@
         </div>
     </div>
 </form>
+@endforeach
 
 
 
@@ -83,9 +87,12 @@
             </div>
             <div class="modal-body">
 
-                @foreach ($data as $key => $value)
+                @foreach ($data as $value)
                 <div class="mb-3">
                     <strong class="text-green">รหัสบทความ: </strong><span class="text-dark">{{ $value->topic_id }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong class="text-green">สถานะบทความ: </strong><span class="text-dark">{{ $value->topic_status }}</span>
                 </div>
                 <div class="mb-3">
                     <strong class="text-green">ชื่อบทความภาษาไทย: </strong><span class="text-dark">{{ $value->topic_th }}</span>

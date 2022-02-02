@@ -39,6 +39,17 @@
                     </ul>
                 </li>
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        รายชื่อ
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">รายชื่อบทความ</a></li>
+                        <li><a class="dropdown-item" href="#">รายชื่อผู้ร่วมงาน</a></li>
+                    </ul>
+                </li>
+
                 @guest
                 <li class="nav-item">
                 <li><a class="nav-link {{ Request::is('register') ? 'active' : '' }}" aria-current="page"
@@ -54,16 +65,6 @@
                 </li>
                 @endguest
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        รายชื่อ
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">รายชื่อบทความ</a></li>
-                        <li><a class="dropdown-item" href="#">รายชื่อผู้ร่วมงาน</a></li>
-                    </ul>
-                </li>
                 @auth
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('employee/research/*') ? 'active' : '' }}" aria-current="page"

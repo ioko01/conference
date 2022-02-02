@@ -44,7 +44,8 @@
             <thead>
                 <tr class="text-center pagination-header">
                     <th style="width: 5%;">#</th>
-                    <th style="width: 30%;">ชื่อบทความ/ผู้วิจัย</th>
+                    <th style="width: 20%;">ชื่อบทความ/ผู้วิจัย</th>
+                    <th style="width: 10%;">สถานะ</th>
                     <th style="width: 15%;">ชำระเงิน</th>
                     <th style="width: 15%;">ไฟล์ WORD</th>
                     <th style="width: 15%;">ไฟล์ PDF</th>
@@ -52,7 +53,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 @forelse ($data as $key => $value)
                 <tr class="text-center">
                     <td>{{ ++$key }}</td>
@@ -60,25 +60,81 @@
                         <br /><span class="name-research text-small text-green">{{ $value->presenter }}</span>
                     </td>
                     <td>
+                        <strong class="text-red">{{ $value->topic_status }}</strong>
+                    </td>
+                    <td>
+                        @if (isset($value->payment_path))
+                        <img width="100%" src="{{ Storage::url($value->payment_path) }}" alt="slip">
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-green text-white rounded-0" data-bs-toggle="modal"
+                                data-bs-target="#payment-modal">
+                                ดูตัวอย่าง
+                            </button>
+                            <button type="button" class="btn btn-warning text-white rounded-0" data-bs-toggle="modal"
+                                data-bs-target="#payment-modal">
+                                แก้ไขสลิปชำระเงิน
+                            </button>
+                        </div>
+                        @else
                         <button type="button" class="btn btn-warning text-white rounded-0 w-100" data-bs-toggle="modal"
                             data-bs-target="#payment-modal">
                             ชำระเงิน
                         </button>
+                        @endif
+
+                        @error('payment_upload')
+                        <strong>{{ $message }}</strong>
+                        @enderror
+
                     </td>
                     <td>
-                        <!-- Button trigger modal -->
+
+                        @if (isset($value->word_path))
+                        {{ $value->word }}
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-green text-white rounded-0" data-bs-toggle="modal"
+                                data-bs-target="#word-modal">
+                                ดูตัวอย่าง
+                            </button>
+                            <button type="button" class="btn btn-warning text-white rounded-0" data-bs-toggle="modal"
+                                data-bs-target="#word-modal">
+                                แก้ไขไฟล์ WORD
+                            </button>
+                        </div>
+                        @else
                         <button type="button" class="btn btn-primary rounded-0 w-100" data-bs-toggle="modal"
                             data-bs-target="#word-modal">
                             อัพโหลดไฟล์ WORD
                         </button>
+                        @endif
+
+                        @error('word_upload')
+                        <strong>{{ $message }}</strong>
+                        @enderror
+
                     </td>
                     <td>
+
+                        @if (isset($value->pdf_path))
+                        {{ $value->pdf }}
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-green text-white rounded-0" data-bs-toggle="modal"
+                                data-bs-target="#pdf-modal">
+                                ดูตัวอย่าง
+                            </button>
+                            <button type="button" class="btn btn-warning text-white rounded-0" data-bs-toggle="modal"
+                                data-bs-target="#pdf-modal">
+                                แก้ไขไฟล์ PDF
+                            </button>
+                        </div>
+                        @else
                         <button type="button" class="btn btn-secondary rounded-0 w-100" data-bs-toggle="modal"
                             data-bs-target="#pdf-modal">
                             อัพโหลดไฟล์ PDF
                         </button>
+                        @endif
 
-                        @error('pdf-upload')
+                        @error('pdf_upload')
                         <strong>{{ $message }}</strong>
                         @enderror
                     </td>
@@ -91,7 +147,7 @@
                 </tr>
                 @empty
                 <tr class="text-center">
-                    <td colspan="6">ไม่มีบทความของท่าน</td>
+                    <td colspan="7">ไม่มีบทความของท่าน</td>
                 </tr>
                 @endforelse
             </tbody>

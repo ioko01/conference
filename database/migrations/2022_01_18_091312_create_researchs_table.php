@@ -19,7 +19,7 @@ class CreateResearchsTable extends Migration
             $table->string('topic_id')->comment('รหัสบทความ');
             $table->text('topic_th')->comment('ชื่อบทความภาษาไทย');
             $table->text('topic_en')->comment('ชื่อบทความภาษาอังกฤษ');
-            $table->string('topic_status')->default(0)->comment('สถานะของบทความ');
+            $table->string('topic_status')->default(1)->comment('สถานะของบทความ');
             $table->text('presenter')->comment('ชื่อผู้นำเสนอ');
             $table->string('faculty_id')->comment('ไอดีกลุ่มคณะ');
             $table->string('branch_id')->comment('ไอดีสาขา');

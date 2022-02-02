@@ -16,8 +16,9 @@ class CreateVideosTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->string('topic_id')->comment('รหัสบทความ');
-            $table->text('video_file')->nullable()->comment('ไฟล์ video');
-            $table->text('video_link')->nullable()->comment('ลิงค์ video');
+            $table->text('name')->nullable()->comment('ชื่อ video');
+            $table->text('file')->nullable()->comment('ไฟล์ video');
+            $table->text('link')->nullable()->comment('ลิงค์ video');
             $table->timestamps();
         });
     }

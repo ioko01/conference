@@ -61,30 +61,30 @@
                         @if (empty($value->payment))
                         -
                         @else
-                        <a target="_blank"
-                            href="{{ Storage::url($value->payment_path) }}">SLIP</a>
+                        <a target="_blank" href="{{ Storage::url($value->payment_path) }}">SLIP</a>
                         @endif
                     </td>
                     <td>
                         @if (empty($value->word))
                         -
                         @else
-                        <a target="_blank"
-                            href="{{ Storage::url($value->word_path) }}">WORD</a>
+                        <a target="_blank" href="{{ Storage::url($value->word_path) }}">WORD</a>
                         @endif
                     </td>
                     <td>
                         @if (empty($value->pdf))
                         -
                         @else
-                        <a target="_blank"
-                            href="{{ Storage::url($value->pdf_path) }}">PDF</a>
+                        <a target="_blank" href="{{ Storage::url($value->pdf_path) }}">PDF</a>
                         @endif
                     </td>
                     <td>
                         <select name="topic_status" id="topic_status" class="form-select">
                             @foreach ($topic_status as $status)
-                                <option value="{{ $status->id }}" id="topic_status_{{ $status->id }}">{{ $status->name }}</option>
+                            <option value="{{ $status->id }}" 
+                            @if ($status->name == $value->topic_status)
+                                selected
+                            @endif>{{ $status->name }}</option>
                             @endforeach
                         </select>
                     </td>

@@ -67,7 +67,7 @@
                         <img width="100%" src="{{ Storage::url($value->payment_path) }}" alt="slip">
                         <div class="d-flex">
                             <button type="button" class="btn btn-green text-white rounded-0" data-bs-toggle="modal"
-                                data-bs-target="#payment-modal">
+                                data-bs-target="#payment-modal-example">
                                 ดูตัวอย่าง
                             </button>
                             <button type="button" class="btn btn-warning text-white rounded-0" data-bs-toggle="modal"

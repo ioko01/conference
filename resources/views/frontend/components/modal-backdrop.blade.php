@@ -1,4 +1,27 @@
 @section('modal')
+
+<!-- Modal PAYMENT Example -->
+@foreach ($data as $value)
+<div class="modal fade" id="payment-modal-example" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+    aria-labelledby="ตัวอย่างการชำระเงิน" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">สลิปการชำระเงิน</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img width="100%" src="{{ Storage::url($value->payment_path) }}" alt="{{ $value->payment }}">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary rounded-0 text-white" data-bs-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+
 <!-- Modal PAYMENT -->
 @foreach ($data as $value)
 <form enctype="multipart/form-data" method="POST" action="{{ route('employee.file-upload.update', $value->topic_id) }}"

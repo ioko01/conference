@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Branch;
 use App\Http\Controllers\StatusUpdateController;
+use App\Http\Controllers\ManageResearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,5 @@ Route::get('branches', function(Request $request){
 
 Route::middleware(['auth', 'verified', 'is_admin'])->group(function(){
     Route::put('update-status/{id}', [StatusUpdateController::class, 'update']);
+    Route::get('show-research-detail/{id}', [ManageResearchController::class, 'show']);
 });

@@ -80,7 +80,7 @@
                             </td>
                             <td>
                                 <select name="topic_status" class="form-select"
-                                    onchange="open_update_status_modal(this, 'เปลี่ยนสถานะ')">
+                                    onchange="open_modal(this, 'เปลี่ยนสถานะ')">
                                     @foreach ($topic_status as $status)
                                         <option value="{{ $status->id }}" @if ($status->name == $value->topic_status)
                                             selected
@@ -90,94 +90,12 @@
                     <input type="hidden" value="{{ $value->topic_id }}">
                     </td>
                     <td>
-                        <button type="button" class="btn btn-green rounded-0 text-white" data-bs-toggle="modal"
-                            data-bs-target="#detail_{{ $key }}">
+                        <button type="button" class="btn btn-green rounded-0 text-white" onclick="open_modal(this, 'รายละเอียด')">
                             รายละเอียด
                         </button>
+                        <input type="hidden" value="{{ $value->topic_id }}">
                     </td>
                     </tr>
-                    <div class="modal fade" id="detail_{{ $key }}" data-bs-backdrop="static"
-                        data-bs-keyboard="true" tabindex="-1" aria-labelledby="รายละเอียด" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">รายละเอียดทั้งหมด</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <strong class="text-green">รหัสบทความ: </strong><span
-                                            class="text-dark">{{ $value->topic_id }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">สถานะบทความ: </strong><span
-                                            class="text-dark">{{ $value->topic_status }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">ชื่อบทความภาษาไทย: </strong><span
-                                            class="text-dark">{{ $value->topic_th }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">ชื่อบทความภาษาอังกฤษ: </strong><span
-                                            class="text-dark">{{ $value->topic_en }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">ชื่อผู้นำเสนอบทความ: </strong><span
-                                            class="text-dark">{{ $value->presenter }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">กลุ่มบทความ: </strong><span
-                                            class="text-dark">{{ $value->faculty }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">สาขาย่อย: </strong><span
-                                            class="text-dark">{{ $value->branch }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">ชนิดบทความ: </strong><span
-                                            class="text-dark">{{ $value->degree }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">รูปแบบการนำเสนอ: </strong><span
-                                            class="text-dark">{{ $value->present }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">เบอร์โทร: </strong><span
-                                            class="text-dark">{{ $value->phone }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">อีเมล: </strong><span
-                                            class="text-dark">{{ $value->email }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">สังกัด/หน่วยงาน: </strong><span
-                                            class="text-dark">{{ $value->institution }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">ที่อยู่: </strong><span
-                                            class="text-dark">{{ $value->address }}</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <strong class="text-green">โควต้าเจ้าภาพร่วม: </strong><span
-                                            class="text-dark">
-                                            @if ($value->kota)
-                                                {{ $value->kota }}
-                                            @else
-                                                -
-                                            @endif
-                                        </span>
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary rounded-0"
-                                        data-bs-dismiss="modal">ปิด</button>
-                                    <button type="button" class="btn btn-green rounded-0 text-white">บันทึกและปิด</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 @empty
                     <tr class="text-center">
                         <td colspan="6">ไม่มีบทความ</td>

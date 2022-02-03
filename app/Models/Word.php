@@ -10,6 +10,7 @@ class Word extends Model
     use HasFactory;
     protected $table = 'words';
     protected $fillable = [
+        'user_id',
         'topic_id',
         'name',
         'path'

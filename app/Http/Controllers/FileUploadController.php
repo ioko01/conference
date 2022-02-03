@@ -72,6 +72,7 @@ class FileUploadController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
                 'payment_upload' => 'file|mimes:jpg,jpeg|max:10240',
                 'word_upload' => 'file|mimes:doc,docx|max:10240',
@@ -87,55 +88,68 @@ class FileUploadController extends Controller
             ]
         );
 
-        $word_path = null;
-        $pdf_path = null;
-        $payment_path = null;
+        $path = null;
         
         if($request->file('pdf_upload')){
             $upload = $request->file('pdf_upload');
             $name = strval($id).".".$upload->extension();
-            $pdf_path = $upload->storeAs('public/files/pdf', $name);
+            $path = 'public/files/pdf';
 
         } else if($request->file('word_upload')){
             $upload = $request->file('word_upload');
             $name = strval($id).".".$upload->extension();
-            $word_path = $upload->storeAs('public/files/words', $name);
+            $path = 'public/files/words';
 
         } else if($request->file('payment_upload')){
             $upload = $request->file('payment_upload');
             $name = strval($id).".".$upload->extension();
-            $payment_path = $upload->storeAs('public/files/slips', $name);
+            $path = 'public/files/slips';
+            
         }
 
-        $path = isset($pdf_path) ? $pdf_path : (isset($word_path) ? $word_path : (isset($payment_path) ? $payment_path : null));
         $data = array_filter([
+            'user_id' => auth()->user()->id,
             'topic_id' => $id,
             'name' => $name,
-            'path' => $path,
+            'path' => $path."/".$name,
         ]);
 
         if($request->file('pdf_upload')){
             if(Pdf::where('topic_id', $id)->get()->count() === 0){
+                $pdf = Pdf::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'pdf.topic_id')->where('researchs.topic_id', $id)->first();
+                $this->authorize('update', $pdf);
+
                 Pdf::create($data);
             } else {
                 Pdf::where('topic_id', $id)->update($data);
             }
+            $upload->storeAs($path, $name);
         }
         
         if($request->file('word_upload')){
             if(Word::where('topic_id', $id)->get()->count() === 0){
+                $word = Word::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'words.topic_id')->where('researchs.topic_id', $id)->first();
+                $this->authorize('update', $word);
+
                 Word::create($data);
             } else {
                 Word::where('topic_id', $id)->update($data);
             }
+            $upload->storeAs($path, $name);
         }
         
         if($request->file('payment_upload')){
             if(Slip::where('topic_id', $id)->get()->count() === 0){
+                $slip = Slip::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'slips.topic_id')->where('researchs.topic_id', $id)->first();
+                $this->authorize('update', $slip);
+                
                 Slip::create($data);
             } else {
                 Slip::where('topic_id', $id)->update($data);
+
+                
             }
+            $upload->storeAs($path, $name);
         }
 
         return back()->with('success', true);

@@ -10,6 +10,7 @@ class Slip extends Model
     use HasFactory;
     protected $table = 'slips';
     protected $fillable = [
+        'user_id',
         'topic_id',
         'name',
         'path',

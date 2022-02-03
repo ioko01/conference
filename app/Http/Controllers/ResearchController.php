@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\Research;
 use App\Models\Faculty;
@@ -9,6 +10,7 @@ use App\Models\Degree;
 use App\Models\Branch;
 use App\Models\Present;
 use App\Models\Tip;
+use App\Models\User;
 
 class ResearchController extends Controller
 {
@@ -92,7 +94,12 @@ class ResearchController extends Controller
      */
     public function show($id)
     {
-        if(auth()->user()->id != $id) return "unauthorized";
+        $research = Research::
+                            select('users.id as id')
+                            ->rightjoin('users', 'users.id', 'researchs.user_id')
+                            ->where('users.id', $id)
+                            ->first();
+        $this->authorize('view', $research);
         $data = Research::
                         select('researchs.topic_id as topic_id', 'status_researchs.name as topic_status',
                         'topic_th', 'topic_en', 'presenter', 'faculties.name as faculty', 

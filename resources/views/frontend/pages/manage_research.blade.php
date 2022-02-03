@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master_frontend')
-@include('frontend.components.modal-backdrop')
+@include('frontend.components.modal')
 
 @section('content')
 <!-- Breadcrumb -->
@@ -79,12 +79,11 @@
                         @endif
                     </td>
                     <td>
-                        <select name="topic_status" id="topic_status" class="form-select">
+                        <select name="topic_status" id="topic_status" class="form-select" onchange="open_status_update_modal()">
                             @foreach ($topic_status as $status)
-                            <option value="{{ $status->id }}" 
-                            @if ($status->name == $value->topic_status)
+                            <option value="{{ $status->id }}" @if ($status->name == $value->topic_status)
                                 selected
-                            @endif>{{ $status->name }}</option>
+                                @endif>{{ $status->name }}</option>
                             @endforeach
                         </select>
                     </td>

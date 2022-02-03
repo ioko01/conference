@@ -6,6 +6,7 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ManageResearchController;
 use App\Http\Controllers\FileDownloadController;
+use App\Http\Controllers\StatusUpdateController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -25,11 +26,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/contract', function () {
+Route::get('contract', function () {
     return view('frontend.pages.contract');
 })->name('contract');
 
-Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
+Route::get('payment', [PaymentController::class, 'index'])->name('payment');
 
 
 
@@ -52,6 +53,8 @@ Route::post('email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware('throttle:6,1')->name('verification.send');
 
+
+
 Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'verified'])->group(function(){
@@ -65,6 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     Route::middleware('is_admin')->group(function(){
         Route::prefix('admin')->group(function(){
+            Route::post('update-status', [StatusUpdateController::class, 'update'])->name('admin.research.status');
             Route::resource('research', ManageResearchController::class, ['names' => 'admin.research']);
         });
     });

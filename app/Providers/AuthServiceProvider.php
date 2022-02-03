@@ -6,6 +6,8 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Models\Research;
+use App\Policies\ResearchPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,9 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array<class-string, class-string>
      */
-    protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-    ];
+    protected $policies = [];
 
     /**
      * Register any authentication / authorization services.
@@ -30,9 +30,9 @@ class AuthServiceProvider extends ServiceProvider
         //
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
             return (new MailMessage)
-                ->subject('Verify Email Address')
-                ->line('Click the button below to verify your email address.')
-                ->action('Verify Email Address', $url);
+                ->subject('ยืนยันอีเมล')
+                ->line('คลิกที่ปุ่มเพื่อยืนยันอีเมล')
+                ->action('ยืนยันอีเมล', $url);
         });
     }
 }

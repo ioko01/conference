@@ -6,7 +6,6 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ManageResearchController;
 use App\Http\Controllers\FileDownloadController;
-use App\Http\Controllers\StatusUpdateController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -63,13 +62,15 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     Route::prefix('employee')->group(function(){
         Route::resource('research', ResearchController::class, ['names' => 'employee.research']);
+        Route::put('file-upload/{id}', [FileUploadController::class, 'update'])->name('employee.file-upload.update');
         Route::resource('file-upload', FileUploadController::class, ['names' => 'employee.file-upload']);
     });
 
     Route::middleware('is_admin')->group(function(){
         Route::prefix('admin')->group(function(){
-            Route::post('update-status', [StatusUpdateController::class, 'update'])->name('admin.research.status');
-            Route::resource('research', ManageResearchController::class, ['names' => 'admin.research']);
+            Route::prefix('research')->group(function(){
+                Route::resource('/', ManageResearchController::class, ['names' => 'admin.research']);
+            });
         });
     });
 });

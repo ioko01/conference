@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Research;
 
 class StatusUpdateController extends Controller
 {
@@ -15,6 +16,7 @@ class StatusUpdateController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-        return view('frontend.pages.manage_research');
+        Research::where('topic_id', $id)->update(['topic_status' => $request->topic_status]);
+        return response()->json(['success' => true]);
     }
 }

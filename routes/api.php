@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Branch;
-use App\Models\Research;
+use App\Http\Controllers\StatusUpdateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +23,8 @@ use App\Models\Research;
 
 Route::get('branches', function(Request $request){
     return Branch::select('id', 'name')->where('faculty_id', $request->faculty_id)->get();
+});
+
+Route::middleware(['auth', 'verified', 'is_admin'])->group(function(){
+    Route::put('update-status/{id}', [StatusUpdateController::class, 'update']);
 });

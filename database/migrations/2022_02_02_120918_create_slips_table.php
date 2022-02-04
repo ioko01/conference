@@ -19,8 +19,9 @@ class CreateSlipsTable extends Migration
             $table->text('topic_id')->comment('รหัสบทความ');
             $table->text('name')->comment('ชื่อไฟล์');
             $table->text('path')->comment('path ไฟล์');
+            $table->string('extension')->comment('นามสกุลไฟล์');
             $table->text('address')->nullable()->comment('ที่อยู่ผู้ชำระเงิน');
-            $table->text('date')->nullable()->comment('วันที่ชำระเงิน');
+            $table->datetime('date')->nullable()->comment('วันที่ชำระเงิน');
             $table->timestamps();
         });
     }

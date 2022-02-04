@@ -6,6 +6,7 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ManageResearchController;
 use App\Http\Controllers\FileDownloadController;
+use App\Http\Controllers\EditFileUploadController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -62,14 +63,18 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     Route::prefix('employee')->group(function(){
         Route::resource('research', ResearchController::class, ['names' => 'employee.research']);
-        Route::put('file-upload/{id}', [FileUploadController::class, 'update'])->name('employee.file-upload.update');
-        Route::resource('file-upload', FileUploadController::class, ['names' => 'employee.file-upload']);
+        Route::put('file-upload/{file_upload}', [FileUploadController::class, 'update'])->name('employee.file-upload.update');
     });
 
     Route::middleware('is_admin')->group(function(){
+        Route::get('generate', function (){
+            \Illuminate\Support\Facades\Artisan::call('storage:link');
+            echo 'ok';
+        });
         Route::prefix('admin')->group(function(){
             Route::prefix('research')->group(function(){
                 Route::resource('/', ManageResearchController::class, ['names' => 'admin.research']);
+                Route::put('create-editresearch-upload/{topic_id}', [EditFileUploadController::class, 'update']);
             });
         });
     });

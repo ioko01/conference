@@ -10,59 +10,7 @@ use App\Models\Slip;
 
 class FileUploadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -76,7 +24,7 @@ class FileUploadController extends Controller
         $request->validate([
                 'payment_upload' => 'file|mimes:jpg,jpeg|max:10240',
                 'word_upload' => 'file|mimes:doc,docx|max:10240',
-                'pdf_upload' => 'file|mimes:pdf|max:10240'
+                'pdf_upload' => 'file|mimes:pdf|max:10240',
             ],
             [
                 'pdf_upload.mimes' => 'อัพโหลด pdf เท่านั้น',
@@ -89,20 +37,24 @@ class FileUploadController extends Controller
         );
 
         $path = null;
+        $extension = null;
         
         if($request->file('pdf_upload')){
             $upload = $request->file('pdf_upload');
-            $name = strval($id).".".$upload->extension();
+            $extension = $upload->extension();
+            $name = strval($id).".".$extension;
             $path = 'public/files/pdf';
 
         } else if($request->file('word_upload')){
             $upload = $request->file('word_upload');
-            $name = strval($id).".".$upload->extension();
+            $extension = $upload->extension();
+            $name = strval($id).".".$extension;
             $path = 'public/files/words';
 
         } else if($request->file('payment_upload')){
             $upload = $request->file('payment_upload');
-            $name = strval($id).".".$upload->extension();
+            $extension = $upload->extension();
+            $name = strval($id).".".$extension;
             $path = 'public/files/slips';
             
         }
@@ -112,6 +64,9 @@ class FileUploadController extends Controller
             'topic_id' => $id,
             'name' => $name,
             'path' => $path."/".$name,
+            'extension' => $extension,
+            'address' => $request->address,
+            'date' => $request->date
         ]);
 
         if($request->file('pdf_upload')){
@@ -153,16 +108,5 @@ class FileUploadController extends Controller
         }
 
         return back()->with('success', true);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

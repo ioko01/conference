@@ -13,6 +13,7 @@ class Word extends Model
         'user_id',
         'topic_id',
         'name',
-        'path'
+        'path',
+        'extension',
     ];
 }

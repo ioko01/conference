@@ -13,7 +13,7 @@
     </div>
     <div class="footer-content-2 bg-blue p-5">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <img src="{{ asset('images/logo-invert.png')}}" alt="logo-footer" width="180">
                 <p>
                     การประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ ครั้งที่ 8 ประจำปี 2565 “การวิจัยเพื่อ
@@ -22,19 +22,7 @@
                     2022 วันศุกร์ที่ 25 มีนาคม 2565 ผ่านระบบ Teleconference (Zoom meeting)
                 </p>
             </div>
-            <div class="col-md-3 footer-menu">
-                <p>
-                    เมนู<br />
-                <ul>
-                    <li><a href="index.html">หน้าหลัก</a></li>
-                    <li><a href="#">ลงทะเบียน</a></li>
-                    <li><a href="#">ส่งบทความ</a></li>
-                    <li><a href="#">รายชื่อลงทะเบียน</a></li>
-                    <li><a href="#">เข้าระบบ</a></li>
-                </ul>
-                </p>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-3 offset-md-5 d-flex align-self-end">
                 <p>
                     ติดต่อเรา<br />lru.conference@gmail.com<br />สถาบันวิจัยและพัฒนา มหาวิทยาลัยราชภัฏเลย
                     <br />โทรศัพท์ 0-4283-5224-8 ต่อ 41141-2, 51143

@@ -125,7 +125,7 @@ return [
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
     'unique' => 'The :attribute has already been taken.',
-    'uploaded' => 'The :attribute failed to upload.',
+    'uploaded' => 'ไม่สามารถอัพโหลด :attribute ได้',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
@@ -178,7 +178,10 @@ return [
         'presenters.4' => 'ชื่อนักวิจัยคนที่ 5',
         'faculty_id' => 'กลุ่มบทความ',
         'branch_id' => 'สาขาย่อย',
-        'degree_id' => 'ระดับบทความ'
+        'degree_id' => 'ระดับบทความ',
+        'word_upload' => 'File WORD',
+        'pdf_upload' => 'File PDF',
+        'payment_upload' => 'SLIP'
     ],
 
 ];

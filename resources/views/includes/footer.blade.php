@@ -14,7 +14,7 @@
     <div class="footer-content-2 bg-blue p-5">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{ asset('images/logo-invert.png')}}" alt="logo-footer" width="180">
+                <img src="{{ secure_asset('images/logo-invert.png')}}" alt="logo-footer" width="180">
                 <p>
                     การประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ ครั้งที่ 8 ประจำปี 2565 “การวิจัยเพื่อ
                     พัฒนาท้องถิ่นด้วยโมเดล เศรษฐกิจใหม่สู่เป้าหมายการ พัฒนาที่ยั่งยืน” (Research for Community

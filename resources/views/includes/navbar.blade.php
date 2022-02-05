@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg shadow-sm bg-white">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('welcome') }}">
-            <img src="{{ asset('images/logo.png') }}" alt="logo" width="130">
+            <img src="{{ secure_asset('images/logo.png') }}" alt="logo" width="130">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

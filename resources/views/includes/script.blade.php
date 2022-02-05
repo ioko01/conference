@@ -1,5 +1,5 @@
 @section('script')
-<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ secure_asset('js/jquery-3.6.0.min.js') }}"></script>
 
 @if (Request::is('admin*'))
 <script src="{{ secure_asset('api/manage-research.js') }}"></script>

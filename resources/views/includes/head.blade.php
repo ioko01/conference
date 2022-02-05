@@ -18,8 +18,8 @@
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
         @if (Request::is('employee/research/*') || Request::is('admin/research'))
-            <link rel="stylesheet" href="{{ secure_asset('css/paginate.css') }}">
-            <link rel="stylesheet" href="{{ secure_asset('css/ligne.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/paginate.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/ligne.css') }}">
         @endif
 
         <title>{{ config('app.name') }}</title>

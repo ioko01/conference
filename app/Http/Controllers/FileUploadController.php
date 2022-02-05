@@ -22,17 +22,9 @@ class FileUploadController extends Controller
     {
 
         $request->validate([
-                'payment_upload' => 'mimes:jpg,jpeg|size:10240',
-                'word_upload' => 'mimes:doc,docx|size:10240',
-                'pdf_upload' => 'mimes:pdf|size:10240',
-            ],
-            [
-                'pdf_upload.mimes' => 'อัพโหลด pdf เท่านั้น',
-                'word_upload.mimes' => 'อัพโหลด doc, docx เท่านั้น',
-                'payment_upload.mimes' => 'อัพโหลด jpg, jpeg เท่านั้น',
-                'pdf_upload.max' => 'ไฟล์ต้องมีขนาดไม่เกิน 10 MB',
-                'word_upload.max' => 'ไฟล์ต้องมีขนาดไม่เกิน 10 MB',
-                'payment_upload.max' => 'ไฟล์ต้องมีขนาดไม่เกิน 10 MB',
+                'payment_upload' => 'mimes:jpg,jpeg|max:10240',
+                'word_upload' => 'mimes:doc,docx|max:10240',
+                'pdf_upload' => 'mimes:pdf|max:10240',
             ]
         );
 

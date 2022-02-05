@@ -11,11 +11,11 @@
 
         <!-- Scripts -->
         <script src="{{ secure_asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/main.js') }}" defer></script>
+        <script src="{{ secure_asset('js/main.js') }}" defer></script>
 
         <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('css/main.css') }}" rel="stylesheet">
 
         @if (Request::is('employee/research/*') || Request::is('admin/research'))
             <link rel="stylesheet" href="{{ asset('css/paginate.css') }}">

@@ -100,11 +100,13 @@
                         @if ($value->status_id >= 7)
                         <div class="d-flex justify-content-around">
                             <div>
+                                @if ($value->ext_word)
                                 <a href="{{ Storage::url($value->path_word) }}" title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
                                     <img width="40" src="{{ asset('images/doc.png') }}"
                                         alt="{{ $value->ext_word }}"><br />
                                     <i style="font-size: 10px;">{{ $value->new_word }}</i><br />
                                 </a>
+                                @endif
                                 <button type="button" class="btn btn-info rounded-0 text-white"
                                     onclick="open_modal(this, 'word')">
                                     @if ($value->ext_word)
@@ -116,11 +118,13 @@
                                 <input type="hidden" value="{{ $value->topic_id }}">
                             </div>
                             <div>
+                                @if ($value->ext_pdf)
                                 <a href="{{ Storage::url($value->path_pdf) }}" title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
                                     <img width="40" src="{{ asset('images/pdf.png') }}"
                                         alt="{{ $value->ext_pdf }}"><br />
                                     <i style="font-size: 10px;">{{ $value->new_pdf }}</i><br />
                                 </a>
+                                @endif
                                 <button type="button" class="btn btn-warning rounded-0 text-white"
                                     onclick="open_modal(this, 'pdf')">
                                     @if ($value->ext_pdf)

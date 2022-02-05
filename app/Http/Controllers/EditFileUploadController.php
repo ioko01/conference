@@ -10,8 +10,8 @@ class EditFileUploadController extends Controller
 {
     public function update(Request $request, $id){
         $request->validate([
-                'new_word' => 'file|mimes:doc,docx|max:10240',
-                'new_pdf' => 'file|mimes:pdf|max:10240',
+                'new_word' => 'mimes:doc,docx|max:10240',
+                'new_pdf' => 'mimes:pdf|max:10240',
             ],
             [
                 'new_word.mimes' => 'อัพโหลด pdf เท่านั้น',

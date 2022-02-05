@@ -1,5 +1,9 @@
 @section('script')
+<!-- Scripts -->
 <script src="{{ secure_asset('js/jquery-3.6.0.min.js') }}"></script>
+
+<script src="{{ secure_asset('js/app.js') }}" defer></script>
+<script src="{{ secure_asset('js/main.js') }}" defer></script>
 
 @if (Request::is('admin*'))
 <script src="{{ secure_asset('api/manage-research.js') }}"></script>

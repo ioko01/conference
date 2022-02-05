@@ -65,7 +65,7 @@
                     </td>
                     <td>
                         @if (isset($value->payment_path))
-                        <img width="40" src="{{ secure_asset('images/jpg.png') }}" alt="{{ $value->slip_ext }}">
+                        <img width="40" src="{{ asset('images/jpg.png') }}" alt="{{ $value->slip_ext }}">
                         <p>{{ $value->payment }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
                             strtotime($value->slip_update))
@@ -94,7 +94,7 @@
                     </td>
                     <td>
                         @if (isset($value->word_path))
-                        <img width="40" src="{{ secure_asset('images/doc.png') }}" alt="{{ $value->word_ext }}">
+                        <img width="40" src="{{ asset('images/doc.png') }}" alt="{{ $value->word_ext }}">
                         <p>{{ $value->word }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
                             strtotime($value->word_update))
@@ -124,7 +124,7 @@
                     <td>
 
                         @if (isset($value->pdf_path))
-                        <img width="40" src="{{ secure_asset('images/pdf.png') }}" alt="{{ $value->pdf_ext }}">
+                        <img width="40" src="{{ asset('images/pdf.png') }}" alt="{{ $value->pdf_ext }}">
                         <p>{{ $value->pdf }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
                             strtotime($value->pdf_update))

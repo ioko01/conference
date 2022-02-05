@@ -10,15 +10,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
         {{-- script --}}
-        <script src="{{ secure_asset('js/preloading.js') }}"></script>
+        <script src="{{ asset('js/preloading.js') }}"></script>
 
         <!-- Styles -->
-        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ secure_asset('css/main.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
         @if (Request::is('employee/research/*') || Request::is('admin/research'))
-            <link rel="stylesheet" href="{{ secure_asset('css/paginate.css') }}">
-            <link rel="stylesheet" href="{{ secure_asset('css/ligne.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/paginate.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/ligne.css') }}">
         @endif
 
         <title>{{ config('app.name') }}</title>

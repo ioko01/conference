@@ -267,14 +267,14 @@
     <div class="col-md-5 tips">
         <div class="tips-content">
             <div class="tips-box py-5">
-                <div class="icon"><img src="{{ secure_asset('images/guide.png') }}" alt="guide-register">
+                <div class="icon"><img src="{{ asset('images/guide.png') }}" alt="guide-register">
                 </div>
                 <div class="content"><strong>แนะนำการลงทะเบียน</strong><br /><span>
                         กรณีต้องการลงทะเบียนเข้าร่วมงานแต่ไม่ส่งบทความ หรือเป็นนักวิจัยร่วม ให้เลือก
                         "ลงทะเบียนเข้าร่วมงานทั่วไป" หากสงสัยให้ติดต่อเจ้าหน้ที่หรือผู้ดูแลระบบ</span></div>
             </div>
             <div class="tips-box py-5">
-                <div class="icon"><img src="{{ secure_asset('images/folder.png') }}" alt="guide-send"></div>
+                <div class="icon"><img src="{{ asset('images/folder.png') }}" alt="guide-send"></div>
                 <div class="content"><strong>แนะนำการส่งผลงาน</strong><br /><span>
                         เมื่อลงทะเบียนสำเร็จแล้ว ระบบจะส่งลิงก์
                         ไปยังอีเมลของท่านเพื่อยืนยันตัวตน
@@ -286,7 +286,7 @@
                         ใส่ข้อมูลมาผิด เจ้าหน้าที่จะไม่รับผิดชอบ</span></div>
             </div>
             <div class="tips-box py-5">
-                <div class="icon"><img src="{{ secure_asset('images/heart.png') }}" alt="guide"></div>
+                <div class="icon"><img src="{{ asset('images/heart.png') }}" alt="guide"></div>
                 <div class="content"><strong>การพิจารณาผลงาน</strong><br /><span>
                         พิจารณาการเลือกกลุ่มการนำเสนอ
                         ผลงานและประเภทของการนำเสนอ
@@ -299,7 +299,7 @@
                         ที่จะได้รับสิทธิ์ให้ผู้ทรงคุณวิฒิพิจารณา)</span></div>
             </div>
             <div class="tips-box py-5">
-                <div class="icon"><img src="{{ secure_asset('images/money-exchange.png') }}" alt=""></div>
+                <div class="icon"><img src="{{ asset('images/money-exchange.png') }}" alt=""></div>
                 <div class="content"><strong>การชำระเงิน</strong><br /><span>
                         1. ผู้นำเสนอจากหน่วยงานภายนอก ที่ส่งผลงาน ค่าลงทะเบียนอัตรา 2,000 บาท ต่อ 1 ผลงาน <br />
                         2. ผู้ร่วมงานทั่วไป/นิสิต/นักศึกษาจากหน่วยงานภายนอก ไม่เสียค่าใช้จ่าย <br />

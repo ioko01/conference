@@ -3,16 +3,16 @@
 @section('content')
 <!-- Poster -->
 <header id="poster1">
-    <img src="{{ secure_asset('images/banner-01.jpeg')}}" alt="banner" width="100%">
+    <img src="{{ asset('images/banner-01.jpeg')}}" alt="banner" width="100%">
 </header>
 
 <div id="poster2" style="padding: 10rem 0 10rem 0" class="container">
     <div class="row m-0">
         <div class="col-6">
-            <img src="{{ secure_asset('images/banner1-v2.1.png')}}" alt="banner" width="100%">
+            <img src="{{ asset('images/banner1-v2.1.png')}}" alt="banner" width="100%">
         </div>
         <div class="col-6">
-            <img src="{{ secure_asset('images/Poster-eddit.png')}}" alt="banner" width="100%">
+            <img src="{{ asset('images/Poster-eddit.png')}}" alt="banner" width="100%">
         </div>
     </div>
 </div>

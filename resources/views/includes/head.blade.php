@@ -9,6 +9,9 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
+        {{-- script --}}
+        <script src="{{ secure_asset('js/preloading.js') }}"></script>
+
         <!-- Styles -->
         <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ secure_asset('css/main.css') }}" rel="stylesheet">

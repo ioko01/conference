@@ -2,20 +2,20 @@
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 
 @if (Request::is('admin*'))
-<script src="{{ asset('api/manage-research.js') }}"></script>
+<script src="{{ secure_asset('api/manage-research.js') }}"></script>
 @endif
 
 @if (Request::is('employee*') || Request::is('admin*'))
-<script src="{{ asset('api/select-faculty.js') }}"></script>
+<script src="{{ secure_asset('api/select-faculty.js') }}"></script>
 @endif
 
 @if (Request::is('register'))
-<script src="{{ asset('js/select-kota.js') }}"></script>
+<script src="{{ secure_asset('js/select-kota.js') }}"></script>
 @endif
 
 @if (Request::is('employee/research/*') || Request::is('admin/research'))
-<script src="{{ asset('js/preview-image-payment.js') }}"></script>
-<script src="{{ asset('js/paginate.js') }}"></script>
+<script src="{{ secure_asset('js/preview-image-payment.js') }}"></script>
+<script src="{{ secure_asset('js/paginate.js') }}"></script>
 <script>
     let options = {
                 numberPerPage: 10, //Cantidad de datos por pagina

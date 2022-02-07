@@ -1,25 +1,25 @@
 @section('script')
 <!-- Scripts -->
-<script src="{{ secure_asset('js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('js/jquery-3.6.0.min.js', env('REDIRECT_HTTPS')) }}"></script>
 
-<script src="{{ secure_asset('js/app.js') }}" defer></script>
-<script src="{{ secure_asset('js/main.js') }}" defer></script>
+<script src="{{ asset('js/app.js', env('REDIRECT_HTTPS')) }}" defer></script>
+<script src="{{ asset('js/main.js', env('REDIRECT_HTTPS')) }}" defer></script>
 
 @if (Request::is('admin*'))
-<script src="{{ secure_asset('api/manage-research.js') }}"></script>
+<script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('employee*') || Request::is('admin*'))
-<script src="{{ secure_asset('api/select-faculty.js') }}"></script>
+<script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('register'))
-<script src="{{ secure_asset('js/select-kota.js') }}"></script>
+<script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('employee/research/*') || Request::is('admin/research'))
-<script src="{{ secure_asset('js/preview-image-payment.js') }}"></script>
-<script src="{{ secure_asset('js/paginate.js') }}"></script>
+<script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
+<script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
 <script>
     let options = {
                 numberPerPage: 10, //Cantidad de datos por pagina

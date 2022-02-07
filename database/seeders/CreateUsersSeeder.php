@@ -14,7 +14,6 @@ class CreateUsersSeeder extends Seeder
      */
     public function run()
     {
-        //
         $users = [
             [
                 "prefix" => "นาย",
@@ -41,7 +40,47 @@ class CreateUsersSeeder extends Seeder
                 "email" => "ioko.peezaza@gmail.com",
                 "is_admin" => "0",
                 "password" => bcrypt("1234")
-            ]
+            ],
+            [
+                "prefix" => "นาย",
+                "fullname" => "ทดสอบ1",
+                "sex" => "male",
+                "phone" => "0123456789",
+                "institution" => "ทดสอบ1",
+                "address" => "ทดสอบ1",
+                "position_id" => "1",
+                "person_attend" => "attend",
+                "email" => "test1@test.com",
+                "is_admin" => "0",
+                "password" => bcrypt("1234")
+            ],
+            [
+                "prefix" => "นาย",
+                "fullname" => "ทดสอบ2",
+                "sex" => "female",
+                "phone" => "0123456789",
+                "institution" => "ทดสอบ2",
+                "address" => "ทดสอบ2",
+                "position_id" => "1",
+                "person_attend" => "attend",
+                "email" => "test2@test.com",
+                "is_admin" => "0",
+                "password" => bcrypt("1234")
+            ],
+            
+            [
+                "prefix" => "นาย",
+                "fullname" => "ทดสอบ3",
+                "sex" => "female",
+                "phone" => "0123456789",
+                "institution" => "ทดสอบ3",
+                "address" => "ทดสอบ3",
+                "position_id" => "1",
+                "person_attend" => "attend",
+                "email" => "test3@test.com",
+                "is_admin" => "0",
+                "password" => bcrypt("1234")
+            ],
         ];
 
         foreach ($users as $key => $value) {

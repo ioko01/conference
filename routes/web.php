@@ -10,6 +10,10 @@ use App\Http\Controllers\EditFileUploadController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +35,6 @@ Route::get('contract', function () {
 })->name('contract');
 
 Route::get('payment', [PaymentController::class, 'index'])->name('payment');
-
 
 
 //Email Verify Notification
@@ -62,7 +65,9 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('download', [FileDownloadController::class, 'index'])->name('download');
 
     Route::prefix('employee')->group(function(){
+        Route::resource('research/edit', ResearchController::class, ['names' => 'employee.research.edit']);
         Route::resource('research', ResearchController::class, ['names' => 'employee.research']);
+
         Route::put('file-upload/{file_upload}', [FileUploadController::class, 'update'])->name('employee.file-upload.update');
     });
 

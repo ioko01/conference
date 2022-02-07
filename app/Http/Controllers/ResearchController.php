@@ -140,6 +140,12 @@ class ResearchController extends Controller
     public function edit($id)
     {
         //
+        $faculties = Faculty::get();
+        $degrees = Degree::get();
+        $branches = Branch::get();
+        $presents = Present::get();
+        $tips = Tip::where('group', '1')->get();
+        return view('frontend.pages.send_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips'));
     }
 
     /**

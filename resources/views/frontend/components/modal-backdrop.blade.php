@@ -128,6 +128,10 @@
             <div class="modal-body">
 
                 @foreach ($data as $value)
+                <div class="text-end">
+                    <a href="{{ route('employee.research.edit', ['research' => $value->topic_id]) }}" class="text-warning">
+                        <i class="fas fa-edit"></i> แก้ไขรายละเอียด</a>
+                </div>
                 <div class="mb-3">
                     <strong class="text-green">รหัสบทความ: </strong><span class="text-dark">{{ $value->topic_id
                         }}</span>
@@ -188,7 +192,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">ปิด</button>
-                <button type="button" class="btn btn-green rounded-0 text-white">บันทึกและปิด</button>
             </div>
         </div>
     </div>

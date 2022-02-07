@@ -30,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         //
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
             return (new MailMessage)
+                ->greeting('สวัสดีคุณ '.$notifiable->fullname)
                 ->subject('ยืนยันอีเมล')
                 ->line('คลิกที่ปุ่มเพื่อยืนยันอีเมล')
                 ->action('ยืนยันอีเมล', $url);

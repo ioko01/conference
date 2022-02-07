@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('frontend.layouts.master_frontend')
 
 @section('content')
-<div class="container">
+<div class="container-md mx-auto m-5 p-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header">{{ __('รีเซ็ตรหัสผ่าน') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -18,10 +18,10 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-12 col-form-label">{{ __('อีเมล') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <div class="col-md-12">
+                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -32,9 +32,9 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-green text-white rounded-0 w-100">
+                                    {{ __('ส่งลิงค์รีเซ๊ตรหัสผ่าน') }}
                                 </button>
                             </div>
                         </div>

@@ -44,8 +44,7 @@
                     <button type="submit" class="btn btn-login w-100 py-2 rounded-0">ล็อกอินเข้าใช้งานระบบ</button>
                 </div>
                 <div class="mb-4">
-                    <a href="./forgotpassword.html">ลืมรหัสผ่าน</a> / <a
-                        href="./changepassword.html">เปลี่ยนรหัสผ่าน</a>
+                    <a href="{{ route('password.request') }}">ลืมรหัสผ่าน/เปลี่ยนรหัสผ่าน</a>
                 </div>
             </form>
         </div>

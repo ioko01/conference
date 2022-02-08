@@ -26,7 +26,11 @@
 <!-- Modal PAYMENT -->
 @foreach ($data as $value)
 <form enctype="multipart/form-data" method="POST"
-    action="{{ route('employee.file-upload.update', ['file_upload' => $value->topic_id]) }}" class="modal fade"
+    @if ($value->payment_path)
+    action="{{ route('employee.payment.update', ['payment_upload' => $value->topic_id]) }}"
+    @else
+    action="{{ route('employee.payment.store', ['payment_upload' => $value->topic_id]) }}"
+    @endif  class="modal fade"
     id="payment-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="ชำระเงิน"
     aria-hidden="true">
     @csrf
@@ -38,13 +42,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="file" class="mb-3" name="payment_upload" id="payment_upload" accept=".jpg, .jpeg"
-                    onchange="image(this)">
+                <div class="mb-3">
+                    <input type="file" class="form-control @error('payment_upload') is-invalid @enderror"
+                        name="payment_upload" id="payment_upload" accept=".jpg, .jpeg" onchange="image(this)">
+                    @error('payment_upload')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
                 <div class="mb-3">
                     <label for="date">วันที่ชำระเงิน</label>
                     <input type="datetime-local" name="date" id="date" class="form-control @error('date')
                                     is-invalid
                                 @enderror">
+                    @error('date')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -52,6 +69,11 @@
                     <textarea class="form-control @error('address')
                         is-invalid
                     @enderror" name="address" id="address" cols="30" rows="10"></textarea>
+                    @error('address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
             <div class="modal-footer">
@@ -66,8 +88,8 @@
 <!-- Modal WORD -->
 @foreach ($data as $value)
 <form enctype="multipart/form-data" method="POST"
-    action="{{ route('employee.file-upload.update', ['file_upload' => $value->topic_id]) }}" class="modal fade"
-    id="word-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="อัพโหลดไฟล์ WORD"
+    action="{{ route('employee.word.update', ['word_upload' => $value->topic_id]) }}" class="modal fade" id="word-modal"
+    data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="อัพโหลดไฟล์ WORD"
     aria-hidden="true">
     @csrf
     @method('PUT')
@@ -78,7 +100,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="file" name="word_upload" id="word_upload" accept=".doc, .docx">
+                <input type="file" class="form-control @error('word_upload') is-invalid @enderror" name="word_upload"
+                    id="word_upload" accept=".doc, .docx">
+                @error('word_upload')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>
@@ -91,8 +119,8 @@
 <!-- Modal PDF -->
 @foreach ($data as $value)
 <form enctype="multipart/form-data" method="POST"
-    action="{{ route('employee.file-upload.update', ['file_upload' => $value->topic_id]) }}" class="modal fade"
-    id="pdf-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="อัพโหลดไฟล์ PDF"
+    action="{{ route('employee.pdf.update', ['pdf_upload' => $value->topic_id]) }}" class="modal fade" id="pdf-modal"
+    data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="อัพโหลดไฟล์ PDF"
     aria-hidden="true">
     @csrf
     @method('PUT')
@@ -103,7 +131,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="file" name="pdf_upload" id="pdf_upload" accept=".pdf">
+                <input type="file" class="form-control @error('pdf_upload') is-invalid @enderror" name="pdf_upload"
+                    id="pdf_upload" accept=".pdf">
+                @error('pdf_upload')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>
@@ -129,7 +163,8 @@
 
                 @foreach ($data as $value)
                 <div class="text-end">
-                    <a href="{{ route('employee.research.edit', ['research' => $value->topic_id]) }}" class="text-warning">
+                    <a href="{{ route('employee.research.edit', ['research' => $value->topic_id]) }}"
+                        class="text-warning">
                         <i class="fas fa-edit"></i> แก้ไขรายละเอียด</a>
                 </div>
                 <div class="mb-3">

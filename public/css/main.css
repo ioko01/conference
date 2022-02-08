@@ -278,11 +278,12 @@ a {
 }
 
 .dropdown-item.active {
-    color: var(--color-green);
-    background-color: transparent;
+    color: white;
+    background-color: var(--color-green);
 }
 
-.dropdown-item:active {
+.dropdown-item.active:focus,
+.dropdown-item.active:hover {
     opacity: 1;
 }
 

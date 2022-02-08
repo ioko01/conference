@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResearchController;
-use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\WordController;
 use App\Http\Controllers\ManageResearchController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\EditFileUploadController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
@@ -36,27 +37,10 @@ Route::get('contract', function () {
 
 Route::get('payment', [PaymentController::class, 'index'])->name('payment');
 
-
-//Email Verify Notification
-Route::get('email/verify', function () {
-    return view('auth.verify-email');
-})->name('verification.notice');
-
-//Email Verify Handle
-Route::get('email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-
-    return redirect('/');
-})->middleware('signed')->name('verification.verify');
-
-//Resend Email Verify
-Route::post('email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-
-    return back()->with('message', 'Verification link sent!');
-})->middleware('throttle:6,1')->name('verification.send');
-
-
+// Email Verify
+Route::get('email/verify', [MailController::class, 'verify'])->name('verification.notice');
+Route::get('email/verify/{id}/{hash}', [MailController::class, 'verify_id'])->middleware('signed')->name('verification.verify');
+Route::post('email/verification-notification', [MailController::class, 'verify_notification'])->middleware('throttle:6,1')->name('verification.send');
 
 Auth::routes(['verify' => true]);
 
@@ -68,7 +52,12 @@ Route::middleware(['auth', 'verified'])->group(function(){
         Route::resource('research/edit', ResearchController::class, ['names' => 'employee.research.edit']);
         Route::resource('research', ResearchController::class, ['names' => 'employee.research']);
 
-        Route::put('file-upload/{file_upload}', [FileUploadController::class, 'update'])->name('employee.file-upload.update');
+        Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
+        Route::post('payment/{payment_upload}/create', [PaymentController::class, 'store'])->name('employee.payment.store');
+        
+        Route::put('pdf/{pdf_upload}/upload', [PdfController::class, 'update'])->name('employee.pdf.update');
+        Route::put('word/{word_upload}/upload', [WordController::class, 'update'])->name('employee.word.update');
+
     });
 
     Route::middleware('is_admin')->group(function(){

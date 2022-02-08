@@ -56,30 +56,37 @@
                         href="{{ route('register') }}">ลงทะเบียน</a></li>
                 </li>
                 @else
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('employee/research') ? 'active' : '' }}" aria-current="page" href="@guest
-                                    {{ route('login') }}
-                                @else
-                                    {{ route('employee.research.index') }}
-                            @endguest">ส่งบทความ</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        บทความ
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item {{ Request::is('employee/research') ? 'active' : '' }}"
+                                aria-current="page" href="@guest
+                                            {{ route('login') }}
+                                        @else
+                                            {{ route('employee.research.index') }}
+                                    @endguest">ส่งบทความ</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item {{ Request::is('employee/research/*') ? 'active' : '' }}"
+                                aria-current="page"
+                                href="{{ route('employee.research.show', auth()->user()->id) }}">บทความของฉัน</a>
+                        </li>
+
+                        @if (auth()->user()->is_admin === 2)
+                        <li>
+                            <a class="dropdown-item {{ Request::is('admin/research') ? 'active' : '' }}" aria-current="page"
+                                href="{{ route('admin.research.index') }}">จัดการบทความ (เฉพาะแอดมิน)</a>
+                        </li>
+                        @endif
+                    </ul>
                 </li>
+
                 @endguest
-
-                @auth
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('employee/research/*') ? 'active' : '' }}" aria-current="page"
-                        href="{{ route('employee.research.show', auth()->user()->id) }}">บทความของฉัน</a>
-                </li>
-                @endauth
-
-                @auth
-                @if (auth()->user()->is_admin === 2)
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('admin/research') ? 'active' : '' }}" aria-current="page"
-                        href="{{ route('admin.research.index') }}">จัดการบทความ</a>
-                </li>
-                @endif
-                @endauth
 
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('payment') ? 'active' : '' }}" aria-current="page"

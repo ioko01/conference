@@ -65,90 +65,91 @@
                     </td>
                     <td>
                         @if (isset($value->payment_path))
-                        <img width="40" src="{{ asset('images/jpg.png', env('REDIRECT_HTTPS')) }}" alt="{{ $value->slip_ext }}">
+                        <img width="40" src="{{ asset('images/jpg.png', env('REDIRECT_HTTPS')) }}"
+                            alt="{{ $value->slip_ext }}">
                         <p>{{ $value->payment }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
                             strtotime($value->slip_update))
                             }}</i>
-                            @if ($value->status_id <= 4)
-                                <button type="button" class="btn btn-green text-white rounded-0 w-100 my-1"
-                                    data-bs-toggle="modal" data-bs-target="#payment-modal-example">
-                                    ดูตัวอย่าง
-                                </button>
-                                <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                    data-bs-toggle="modal" data-bs-target="#payment-modal">
-                                    แก้ไขสลิปชำระเงิน
-                                </button>
+                        @if ($value->status_id <= 4) <button type="button"
+                            class="btn btn-green text-white rounded-0 w-100 my-1" data-bs-toggle="modal"
+                            data-bs-target="#payment-modal-example">
+                            ดูตัวอย่าง
+                            </button>
+                            <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
+                                data-bs-toggle="modal" data-bs-target="#payment-modal">
+                                แก้ไขสลิปชำระเงิน
+                            </button>
                             @endif
-                        @else
-                        <button type="button" class="btn btn-warning text-white rounded-0 w-100" data-bs-toggle="modal"
-                            data-bs-target="#payment-modal">
-                            ชำระเงิน
-                        </button>
-                        @endif
+                            @else
+                            <button type="button" class="btn btn-warning text-white rounded-0 w-100"
+                                data-bs-toggle="modal" data-bs-target="#payment-modal">
+                                ชำระเงิน
+                            </button>
+                            @endif
 
-                        @error('payment_upload')
-                        <strong>{{ $message }}</strong>
-                        @enderror
-
+                            @error('payment_upload')
+                            <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                            @enderror
                     </td>
                     <td>
                         @if (isset($value->word_path))
-                        <img width="40" src="{{ asset('images/doc.png', env('REDIRECT_HTTPS')) }}" alt="{{ $value->word_ext }}">
+                        <img width="40" src="{{ asset('images/doc.png', env('REDIRECT_HTTPS')) }}"
+                            alt="{{ $value->word_ext }}">
                         <p>{{ $value->word }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
                             strtotime($value->word_update))
                             }}</i>
-                            @if ($value->status_id <= 4)
-                                <a class="btn btn-green text-white rounded-0 w-100 my-1"
-                                    href="{{ Storage::url($value->word_path) }}">
-                                    ดูตัวอย่าง
-                                </a>
-                                <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                    data-bs-toggle="modal" data-bs-target="#word-modal">
-                                    แก้ไขไฟล์ WORD
-                                </button>
+                        @if ($value->status_id <= 4) <a class="btn btn-green text-white rounded-0 w-100 my-1"
+                            href="{{ Storage::url($value->word_path) }}">
+                            ดูตัวอย่าง
+                            </a>
+                            <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
+                                data-bs-toggle="modal" data-bs-target="#word-modal">
+                                แก้ไขไฟล์ WORD
+                            </button>
                             @endif
-                        @else
-                        <button type="button" class="btn btn-primary rounded-0 w-100" data-bs-toggle="modal"
-                            data-bs-target="#word-modal">
-                            อัพโหลดไฟล์ WORD
-                        </button>
-                        @endif
+                            @else
+                            <button type="button" class="btn btn-primary rounded-0 w-100" data-bs-toggle="modal"
+                                data-bs-target="#word-modal">
+                                อัพโหลดไฟล์ WORD
+                            </button>
+                            @endif
 
-                        @error('word_upload')
-                        <strong>{{ $message }}</strong>
-                        @enderror
+                            @error('word_upload')
+                            <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                            @enderror
 
                     </td>
                     <td>
 
                         @if (isset($value->pdf_path))
-                        <img width="40" src="{{ asset('images/pdf.png', env('REDIRECT_HTTPS')) }}" alt="{{ $value->pdf_ext }}">
+                        <img width="40" src="{{ asset('images/pdf.png', env('REDIRECT_HTTPS')) }}"
+                            alt="{{ $value->pdf_ext }}">
                         <p>{{ $value->pdf }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
                             strtotime($value->pdf_update))
                             }}</i>
-                            @if ($value->status_id <= 4)
-                            <a class="btn btn-green text-white rounded-0 w-100 my-1"
+                        @if ($value->status_id <= 4) <a class="btn btn-green text-white rounded-0 w-100 my-1"
                             href="{{ Storage::url($value->pdf_path) }}">
-                                ดูตัวอย่าง
+                            ดูตัวอย่าง
                             </a>
                             <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
                                 data-bs-toggle="modal" data-bs-target="#pdf-modal">
                                 แก้ไขไฟล์ PDF
                             </button>
                             @endif
-                        @else
-                        <button type="button" class="btn btn-secondary rounded-0 w-100" data-bs-toggle="modal"
-                            data-bs-target="#pdf-modal">
-                            อัพโหลดไฟล์ PDF
-                        </button>
-                        @endif
+                            @else
+                            <button type="button" class="btn btn-secondary rounded-0 w-100" data-bs-toggle="modal"
+                                data-bs-target="#pdf-modal">
+                                อัพโหลดไฟล์ PDF
+                            </button>
+                            @endif
 
-                        @error('pdf_upload')
-                        <strong>{{ $message }}</strong>
-                        @enderror
+                            @error('pdf_upload')
+                            <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                            @enderror
+
                     </td>
                     <td>
                         <button type="button" class="btn btn-green rounded-0 text-white" data-bs-toggle="modal"

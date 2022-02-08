@@ -179,9 +179,10 @@ return [
         'faculty_id' => 'กลุ่มบทความ',
         'branch_id' => 'สาขาย่อย',
         'degree_id' => 'ระดับบทความ',
-        'word_upload' => 'File WORD',
-        'pdf_upload' => 'File PDF',
-        'payment_upload' => 'SLIP'
+        'word_upload' => 'ไฟล์ WORD',
+        'pdf_upload' => 'ไฟล์ PDF',
+        'payment_upload' => 'สลิปการชำระเงิน',
+        'date' => 'วันที่'
     ],
 
 ];

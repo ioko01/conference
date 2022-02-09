@@ -180,7 +180,7 @@
 
                 @foreach ($data as $value)
                 <div class="text-end">
-                    <a href="{{ route('employee.research.edit', ['research' => $value->topic_id]) }}"
+                    <a href="{{ route('employee.research.edit', ['topic_id' => $value->topic_id]) }}"
                         class="text-warning">
                         <i class="fas fa-edit"></i> แก้ไขรายละเอียด</a>
                 </div>

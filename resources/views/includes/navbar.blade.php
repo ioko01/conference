@@ -63,7 +63,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item {{ Request::is('employee/research') ? 'active' : '' }}"
+                            <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
                                 aria-current="page" href="@guest
                                             {{ route('login') }}
                                         @else
@@ -72,16 +72,16 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item {{ Request::is('employee/research/*') ? 'active' : '' }}"
+                            <a class="dropdown-item {{ Request::is('employee/research/show/*') ? 'active' : '' }}"
                                 aria-current="page"
                                 href="{{ route('employee.research.show', auth()->user()->id) }}">บทความของฉัน</a>
                         </li>
 
-                        {{-- <li>
-                            <a class="dropdown-item {{ Request::is('employee/research/send-edit') ? 'active' : '' }}"
+                        <li>
+                            <a class="dropdown-item {{ Request::is('research/send-edit/show/*') ? 'active' : '' }}"
                                 aria-current="page"
                                 href="{{ route('employee.research.send.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไข</a>
-                        </li> --}}
+                        </li>
 
                         @if (auth()->user()->is_admin === 2)
                         <li>

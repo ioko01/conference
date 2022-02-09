@@ -2,71 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+
 use App\Models\Research;
-use App\Models\Faculty;
-use App\Models\Degree;
-use App\Models\Branch;
-use App\Models\Present;
-use App\Models\Tip;
-use App\Models\User;
 
-class ResearchController extends Controller
+class EditResearchController extends Controller
 {
-
-     public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    public function index()
-    {
-        $faculties = Faculty::get();
-        $degrees = Degree::get();
-        $branches = Branch::get();
-        $presents = Present::get();
-        $tips = Tip::where('group', '1')->get();
-        return view('frontend.pages.send_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips'));
-    }
-
-    public function create(array $data)
-    {
-        
-    }
-
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'topic_th' => 'required',
-            'topic_en' => 'required',
-            'presenters.0' => 'required',
-            'faculty_id' => 'required',
-            'branch_id' => 'required',
-            'degree_id' => 'required',
-            'present_id' => 'required',
-            ]);
-        
-        $presenters = join(',', array_filter($request->presenters));
-        
-        $topic_id = '65'.sprintf("%03d",Research::count()+1);
-        Research::create([
-            'user_id' => auth()->user()->id,
-            'topic_id' => $topic_id,
-            'topic_th' => $request->topic_th,
-            'topic_en' => $request->topic_en,
-            'presenter' => $presenters,
-            'faculty_id' => $request->faculty_id,
-            'branch_id' => $request->branch_id,
-            'degree_id' => $request->degree_id,
-            'present_id' => $request->present_id,
-        ]);
-        
-        return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
-    }
-
-    public function show($id)
-    {
+    public function show($id){
         $research = Research::
                             select('users.id as id')
                             ->rightjoin('users', 'users.id', 'researchs.user_id')
@@ -127,56 +69,6 @@ class ResearchController extends Controller
                         ->where('researchs.user_id', $id)
                         ->get()
                         ->sortBy('id');
-        return view('frontend.pages.show_research', compact('data'));
-    }
-
-    public function edit($id)
-    {
-        $faculties = Faculty::get();
-        $degrees = Degree::get();
-        $branches = Branch::get();
-        $presents = Present::get();
-        $tips = Tip::where('group', '1')->get();
-        $researchs = Research::where('topic_id', $id)->get();
-        return view('frontend.pages.edit_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips', 'researchs'));
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'topic_th' => 'required',
-            'topic_en' => 'required',
-            'presenters.0' => 'required',
-            'faculty_id' => 'required',
-            'branch_id' => 'required',
-            'degree_id' => 'required',
-            'present_id' => 'required',
-            ]);
-        
-        $presenters = join(',', array_filter($request->presenters));
-        
-        Research::where('topic_id', $id)->update([
-            'topic_th' => $request->topic_th,
-            'topic_en' => $request->topic_en,
-            'presenter' => $presenters,
-            'faculty_id' => $request->faculty_id,
-            'branch_id' => $request->branch_id,
-            'degree_id' => $request->degree_id,
-            'present_id' => $request->present_id,
-        ]);
-        
-        return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('frontend.pages.send_edit_research', compact('data'));
     }
 }

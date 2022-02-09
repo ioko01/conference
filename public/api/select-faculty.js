@@ -3,7 +3,7 @@
 function select_faculty(e) {
     try {
         const nextSelector = e.parentElement.nextElementSibling.children[1];
-        nextSelector.innerHTML = `<option>---กรุณาเลือก---</option>`;
+        nextSelector.innerHTML = `<option value="" selected>---กรุณาเลือก---</option>`;
         if (e.value) {
             $.ajax({
                 type: "GET",

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PdfController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\ManageResearchController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\EditFileUploadController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\EditResearchController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\PasswordReset;
@@ -49,8 +52,15 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('download', [FileDownloadController::class, 'index'])->name('download');
 
     Route::prefix('employee')->group(function(){
-        Route::resource('research/edit', ResearchController::class, ['names' => 'employee.research.edit']);
-        Route::resource('research', ResearchController::class, ['names' => 'employee.research']);
+        // ส่งบทความฉบับแก้ไข
+        Route::get('research/send', [ResearchController::class, 'index'])->name('employee.research.index');
+        Route::get('research/show/{topic_id}', [ResearchController::class, 'show'])->name('employee.research.show');
+        Route::post('research/send/create', [ResearchController::class, 'store'])->name('employee.research.store');
+        Route::get('research/edit/{topic_id}', [ResearchController::class, 'edit'])->name('employee.research.edit');
+        Route::put('research/edit/{topic_id}/update', [ResearchController::class, 'update'])->name('employee.research.update');
+
+        // ส่งบทความฉบับแก้ไข
+        Route::get('research/send-edit/show/{id}', [EditResearchController::class, 'show'])->name('employee.research.send.edit');
 
         Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
         Route::post('payment/{payment_upload}/create', [PaymentController::class, 'store'])->name('employee.payment.store');

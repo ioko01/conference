@@ -1,18 +1,9 @@
 @extends('frontend.layouts.master_frontend')
 
 @section('content')
-<!-- Breadcrumb -->
-<div class="py-5">
-    <div class="row text-end m-0">
-        <div class="col-5 col-md-4 col-lg-3 col-xl-2 bg-white breadcrumb">
-            <p><strong>แอดมิน > จัดการบทความ</strong></p>
-        </div>
-    </div>
-</div>
-<!-- End Breadcrumb -->
 
 <!-- Content -->
-<div class="bg-white text-blue p-5 mb-5">
+<div class="bg-white text-blue p-5 my-5">
     <div class="inner-content-header">
         <h2 class="text-center">จัดการรายชื่อรายชื่อบทความ ในงานการประชุมวิชาการ ราชภัฏเลยวิชาการ ครั้งที่ 8</h2>
         <h4 class="text-green py-3">

@@ -8,33 +8,30 @@ use App\Models\Slip;
 
 class PaymentController extends Controller
 {
-    //
     public function index(){
         $tips = Tip::where('group', '2')->get();
         return view('frontend.pages.payment', compact('tips'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-     public function store(Request $request)
-    {
+    public function validation($request){
         $request->validate([
                 'payment_upload' => 'required|mimes:jpg,jpeg|max:10240',
                 'date' => 'required',
                 'address' => 'required'
             ]
         );
-        
-        if($request->file('payment_upload')){
-            $upload = $request->file('payment_upload');
-            $extension = $upload->extension();
-            $name = strval($id).".".$extension;
-            $path = 'public/files/slips';
-        }
+
+        return $request;
+    }
+
+    public function file($request, $id){
+        $result = new Slip;
+        $this->validation($request);
+
+        $upload = $request->file('payment_upload');
+        $extension = $upload->extension();
+        $name = strval($id).".".$extension;
+        $path = 'public/files/slips';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,
@@ -46,57 +43,28 @@ class PaymentController extends Controller
             'date' => $request->date
         ]);
 
-        $slip = Slip::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'slips.topic_id')->where('researchs.topic_id', $id)->first();
+        $result->data = $data;
+        $result->upload = $upload->storeAs($path, $name);
         
-        $this->authorize('update', $slip);    
-        Slip::create($data);
+        return $result;
+    }
 
-        $upload->storeAs($path, $name);
+    public function store(Request $request, $id)
+    {
+        $slip = Slip::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'slips.topic_id')->where('researchs.topic_id', $id)->first();
+        $this->authorize('update', $slip);    
+
+        Slip::create($this->file($request, $id)->data);
+        $this->file($request, $id)->upload;
 
         return back()->with('success', true);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
      public function update(Request $request, $id)
-    {
-        
-        $request->validate([
-                'payment_upload' => 'required|mimes:jpg,jpeg|max:10240',
-                'date' => 'required',
-                'address' => 'required'
-            ]
-        );
+    { 
+        Slip::where('topic_id', $id)->update($this->file($request, $id)->data);
+        $this->file($request, $id)->upload;
 
-        $path = null;
-        $extension = null;
-        
-        if($request->file('payment_upload')){
-            $upload = $request->file('payment_upload');
-            $extension = $upload->extension();
-            $name = strval($id).".".$extension;
-            $path = 'public/files/slips';
-            
-        }
-
-        $data = array_filter([
-            'user_id' => auth()->user()->id,
-            'topic_id' => $id,
-            'name' => $name,
-            'path' => $path."/".$name,
-            'extension' => $extension,
-            'address' => $request->address,
-            'date' => $request->date
-        ]);
-
-        Slip::where('topic_id', $id)->update($data);
-        $upload->storeAs($path, $name);
         return back()->with('success', true);
     }
 }

@@ -7,28 +7,20 @@ use App\Models\Pdf;
 
 class PdfController extends Controller
 {
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-     public function update(Request $request, $id)
-    {
 
+    public function validation($request){
         $request->validate(['pdf_upload' => 'required|mimes:pdf|max:10240']);
+        return $request;
+    }
 
-        $path = null;
-        $extension = null;
-        
-        if($request->file('pdf_upload')){
-            $upload = $request->file('pdf_upload');
-            $extension = $upload->extension();
-            $name = strval($id).".".$extension;
-            $path = 'public/files/pdf';
+    public function file($request, $id = null){
+        $result = new Pdf;
+        $this->validation($request);
 
-        }
+        $upload = $request->file('pdf_upload');
+        $extension = $upload->extension();
+        $name = strval($id).".".$extension;
+        $path = 'public/files/pdf';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,
@@ -40,17 +32,28 @@ class PdfController extends Controller
             'date' => $request->date
         ]);
 
-        if($request->file('pdf_upload')){
-            if(Pdf::where('topic_id', $id)->get()->count() === 0){
-                $pdf = Pdf::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'pdf.topic_id')->where('researchs.topic_id', $id)->first();
-                $this->authorize('update', $pdf);
+        $result->data = $data;
+        $result->upload = $upload->storeAs($path, $name);
+        
+        return $result;
+    }
+    
 
-                Pdf::create($data);
-            } else {
-                Pdf::where('topic_id', $id)->update($data);
-            }
-            $upload->storeAs($path, $name);
-        }
+    public function store(Request $request, $id)
+    {
+        $pdf = Pdf::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'pdf.topic_id')->where('researchs.topic_id', $id)->first();
+        $this->authorize('update', $pdf);
+
+        Pdf::create($this->file($request, $id)->data);
+        $this->file($request, $id)->upload;
+
+        return back()->with('success', true);
+    }
+
+    public function update(Request $request, $id)
+    {
+        Pdf::where('topic_id', $id)->update($this->file($request, $id)->data);
+        $this->file($request, $id)->upload;
 
         return back()->with('success', true);
     }

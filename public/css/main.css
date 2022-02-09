@@ -246,18 +246,16 @@ a {
     position: relative;
     display: inline-block;
     text-align: center;
-}
-
-.breadcrumb p {
-    margin: 5px 5px 5px 0;
+    border-top-right-radius: 5px;
 }
 
 .breadcrumb::before {
     content: "";
     position: absolute;
+    border-top-right-radius: inherit;
     left: 0;
     width: 100%;
-    border-bottom: 2px solid var(--color-green);
+    border-bottom: 4px solid var(--color-green);
 }
 
 .dropdown .dropdown-menu::before {

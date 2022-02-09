@@ -77,12 +77,20 @@
                                 href="{{ route('employee.research.show', auth()->user()->id) }}">บทความของฉัน</a>
                         </li>
 
+                        {{-- <li>
+                            <a class="dropdown-item {{ Request::is('employee/research/send-edit') ? 'active' : '' }}"
+                                aria-current="page"
+                                href="{{ route('employee.research.send.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไข</a>
+                        </li> --}}
+
                         @if (auth()->user()->is_admin === 2)
                         <li>
-                            <a class="dropdown-item {{ Request::is('admin/research') ? 'active' : '' }}" aria-current="page"
-                                href="{{ route('admin.research.index') }}">จัดการบทความ (เฉพาะแอดมิน)</a>
+                            <a class="dropdown-item {{ Request::is('admin/research') ? 'active' : '' }}"
+                                aria-current="page" href="{{ route('admin.research.index') }}">จัดการบทความ
+                                (เฉพาะแอดมิน)</a>
                         </li>
                         @endif
+
                     </ul>
                 </li>
 

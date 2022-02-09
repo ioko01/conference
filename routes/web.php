@@ -56,7 +56,10 @@ Route::middleware(['auth', 'verified'])->group(function(){
         Route::post('payment/{payment_upload}/create', [PaymentController::class, 'store'])->name('employee.payment.store');
         
         Route::put('pdf/{pdf_upload}/upload', [PdfController::class, 'update'])->name('employee.pdf.update');
+        Route::post('pdf/{pdf_upload}/create', [PdfController::class, 'store'])->name('employee.pdf.store');
+
         Route::put('word/{word_upload}/upload', [WordController::class, 'update'])->name('employee.word.update');
+        Route::post('word/{word_upload}/create', [WordController::class, 'store'])->name('employee.word.store');
 
     });
 

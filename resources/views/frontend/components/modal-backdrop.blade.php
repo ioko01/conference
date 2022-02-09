@@ -25,16 +25,19 @@
 
 <!-- Modal PAYMENT -->
 @foreach ($data as $value)
-<form enctype="multipart/form-data" method="POST"
-    @if ($value->payment_path)
+<form enctype="multipart/form-data" method="POST" @if ($value->payment_path)
     action="{{ route('employee.payment.update', ['payment_upload' => $value->topic_id]) }}"
     @else
     action="{{ route('employee.payment.store', ['payment_upload' => $value->topic_id]) }}"
-    @endif  class="modal fade"
+    @endif class="modal fade"
     id="payment-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="ชำระเงิน"
     aria-hidden="true">
+
     @csrf
+    @if ($value->payment_path)
     @method('PUT')
+    @endif
+
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -87,12 +90,19 @@
 
 <!-- Modal WORD -->
 @foreach ($data as $value)
-<form enctype="multipart/form-data" method="POST"
-    action="{{ route('employee.word.update', ['word_upload' => $value->topic_id]) }}" class="modal fade" id="word-modal"
+<form enctype="multipart/form-data" method="POST" @if ($value->word_path)
+    action="{{ route('employee.word.update', ['word_upload' => $value->topic_id]) }}"
+    @else
+    action="{{ route('employee.word.store', ['word_upload' => $value->topic_id]) }}"
+    @endif class="modal fade" id="word-modal"
     data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="อัพโหลดไฟล์ WORD"
     aria-hidden="true">
+
     @csrf
+    @if ($value->word_path)
     @method('PUT')
+    @endif
+
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -118,12 +128,19 @@
 
 <!-- Modal PDF -->
 @foreach ($data as $value)
-<form enctype="multipart/form-data" method="POST"
-    action="{{ route('employee.pdf.update', ['pdf_upload' => $value->topic_id]) }}" class="modal fade" id="pdf-modal"
+<form enctype="multipart/form-data" method="POST" @if ($value->pdf_path)
+    action="{{ route('employee.pdf.update', ['pdf_upload' => $value->topic_id]) }}"
+    @else
+    action="{{ route('employee.pdf.store', ['pdf_upload' => $value->topic_id]) }}"
+    @endif class="modal fade" id="pdf-modal"
     data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="อัพโหลดไฟล์ PDF"
     aria-hidden="true">
+
     @csrf
+    @if ($value->pdf_path)
     @method('PUT')
+    @endif
+
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

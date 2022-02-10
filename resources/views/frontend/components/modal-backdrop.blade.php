@@ -179,11 +179,13 @@
             <div class="modal-body">
 
                 @foreach ($data as $value)
+                @if ($value->status_id < 5)
                 <div class="text-end">
                     <a href="{{ route('employee.research.edit', ['topic_id' => $value->topic_id]) }}"
                         class="text-warning">
                         <i class="fas fa-edit"></i> แก้ไขรายละเอียด</a>
                 </div>
+                @endif
                 <div class="mb-3">
                     <strong class="text-green">รหัสบทความ: </strong><span class="text-dark">{{ $value->topic_id
                         }}</span>

@@ -101,10 +101,10 @@ function detail_modal(topic_id) {
     });
 }
 
-function update_modal(topic_id, type, title, status_value, text_status) {
+function update_modal(topic_id, title, status_value, text_status) {
     const createModal = `
     <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
-    aria-labelledby="${type}" aria-hidden="true">
+    aria-labelledby="เปลี่ยนสถานะ" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -130,30 +130,24 @@ function update_modal(topic_id, type, title, status_value, text_status) {
 
 function send_research_modal(topic_id, type) {
     const _token = $('meta[name="csrf-token"]').attr("content");
-    topic_id
 
     const createModal = `
-    <form enctype="multipart/form-data" method="POST" action="/admin/research/create-editresearch-upload/${topic_id}">
+    <form enctype="multipart/form-data" method="POST" action="/admin/research/comment-file-upload/${topic_id}">
         <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
-        aria-labelledby="ส่งไฟล์ ${type.toUpperCase()}" aria-hidden="true">
+        aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
             <input type="hidden" name="_token" value="${_token}" />
             <input type="hidden" name="_method" value="PUT" />
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">ส่งไฟล์ ${type.toUpperCase()}</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">อัพโหลดไฟล์</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    ${
-                        type == "word"
-                            ? '<input type="file" name="new_word" accept=".doc, .docx">'
-                            : '<input type="file" name="new_pdf" accept=".pdf">'
-                    }
-                    
+                    <input type="file" name="file_comment" accept=".doc, .docx, .pdf">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์ ${type.toUpperCase()}</button>
+                        <button type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์</button>
                     </div>
                 </div>
             </div>
@@ -170,7 +164,7 @@ function open_modal(e, type) {
         const title = type;
         const status_value = e.value;
         const text_status =
-            type == "เปลี่ยนสถานะ" ? e[e.selectedIndex].text : null;
+            type == "change_status" ? e[e.selectedIndex].text : null;
         check_type(type, topic_id, title, status_value, text_status);
     } catch (error) {
         throw error;
@@ -179,16 +173,13 @@ function open_modal(e, type) {
 
 function check_type(type, topic_id, title, status_value, text_status) {
     switch (type) {
-        case "เปลี่ยนสถานะ":
-            update_modal(topic_id, type, title, status_value, text_status);
+        case "change_status":
+            update_modal(topic_id, title, status_value, text_status);
             break;
-        case "รายละเอียด":
-            detail_modal(topic_id, type);
+        case "detail":
+            detail_modal(topic_id);
             break;
-        case "word":
-            send_research_modal(topic_id, type);
-            break;
-        case "pdf":
+        case "file":
             send_research_modal(topic_id, type);
             break;
         default:

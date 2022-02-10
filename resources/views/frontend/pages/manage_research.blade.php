@@ -71,7 +71,7 @@
                         @endif
                     </td>
                     <td>
-                        <select name="topic_status" class="form-select" onchange="open_modal(this, 'เปลี่ยนสถานะ')">
+                        <select name="topic_status" class="form-select" onchange="open_modal(this, 'change_status')">
                             @foreach ($topic_status as $status)
                             <option value="{{ $status->id }}" @if ($status->name == $value->topic_status)
                                 selected
@@ -82,50 +82,37 @@
                     </td>
                     <td>
                         <button type="button" class="btn btn-green rounded-0 text-white"
-                            onclick="open_modal(this, 'รายละเอียด')">
+                            onclick="open_modal(this, 'detail')">
                             รายละเอียด
                         </button>
                         <input type="hidden" value="{{ $value->topic_id }}">
                     </td>
                     <td>
                         @if ($value->status_id >= 7)
-                        <div class="d-flex justify-content-around">
-                            <div>
-                                @if ($value->ext_word)
-                                <a href="{{ Storage::url($value->path_word) }}" title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
-                                    <img width="40" src="{{ asset('images/doc.png', env('REDIRECT_HTTPS')) }}"
-                                        alt="{{ $value->ext_word }}"><br />
-                                    <i style="font-size: 10px;">{{ $value->new_word }}</i><br />
-                                </a>
+                        <div>
+                            @if ($value->comment_path)
+                            <a href="{{ Storage::url($value->comment_path) }}" title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
+                                <img width="40" src="{{ asset("images/$value->comment_ext.png", env('REDIRECT_HTTPS'))
+                                }}"
+                                alt="{{ $value->comment_ext }}"><br />
+                                <i style="font-size: 10px;" class="mb-0">{{ $value->comment_name }}</i><br />
+                                <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
+                                    strtotime($value->comment_update))
+                                    }}</i>
+                            </a>
+                            @endif
+                            <button type="button" class="btn btn-warning rounded-0 text-white w-100"
+                                onclick="open_modal(this, 'file')">
+                                @if ($value->comment_ext)
+                                แก้ไขไฟล์
+                                @else
+                                อัพโหลดไฟล์
                                 @endif
-                                <button type="button" class="btn btn-info rounded-0 text-white"
-                                    onclick="open_modal(this, 'word')">
-                                    @if ($value->ext_word)
-                                    แก้ไข WORD
-                                    @else
-                                    ส่งไฟล์ WORD
-                                    @endif
-                                </button>
-                                <input type="hidden" value="{{ $value->topic_id }}">
-                            </div>
-                            <div>
-                                @if ($value->ext_pdf)
-                                <a href="{{ Storage::url($value->path_pdf) }}" title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
-                                    <img width="40" src="{{ asset('images/pdf.png', env('REDIRECT_HTTPS')) }}"
-                                        alt="{{ $value->ext_pdf }}"><br />
-                                    <i style="font-size: 10px;">{{ $value->new_pdf }}</i><br />
-                                </a>
-                                @endif
-                                <button type="button" class="btn btn-warning rounded-0 text-white"
-                                    onclick="open_modal(this, 'pdf')">
-                                    @if ($value->ext_pdf)
-                                    แก้ไข PDF
-                                    @else
-                                    ส่งไฟล์ PDF
-                                    @endif
-                                </button>
-                                <input type="hidden" value="{{ $value->topic_id }}">
-                            </div>
+                            </button>
+                            <input type="hidden" value="{{ $value->topic_id }}">
+                            @error('file_comment')
+                            asd
+                            @enderror
                         </div>
 
                         @else

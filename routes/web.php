@@ -8,9 +8,9 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\WordController;
 use App\Http\Controllers\ManageResearchController;
 use App\Http\Controllers\FileDownloadController;
-use App\Http\Controllers\EditFileUploadController;
+use App\Http\Controllers\CommentFileUploadController;
 use App\Http\Controllers\MailController;
-use App\Http\Controllers\EditResearchController;
+use App\Http\Controllers\SendEditResearchController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -60,7 +60,8 @@ Route::middleware(['auth', 'verified'])->group(function(){
         Route::put('research/edit/{topic_id}/update', [ResearchController::class, 'update'])->name('employee.research.update');
 
         // ส่งบทความฉบับแก้ไข
-        Route::get('research/send-edit/show/{id}', [EditResearchController::class, 'show'])->name('employee.research.send.edit');
+        Route::get('research/send-edit/show/{id}', [SendEditResearchController::class, 'show'])->name('employee.research.send.edit');
+        Route::post('research/send-edit/{id}/create', [SendEditResearchController::class, 'store'])->name('employee.research.send.store');
 
         Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
         Route::post('payment/{payment_upload}/create', [PaymentController::class, 'store'])->name('employee.payment.store');
@@ -81,7 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
         Route::prefix('admin')->group(function(){
             Route::prefix('research')->group(function(){
                 Route::resource('/', ManageResearchController::class, ['names' => 'admin.research']);
-                Route::put('create-editresearch-upload/{topic_id}', [EditFileUploadController::class, 'update']);
+                Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
             });
         });
     });

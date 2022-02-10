@@ -42,13 +42,10 @@ class ManageResearchController extends Controller
                             'pdf.path as pdf_path', 
                             'slips.path as payment_path',
                             'researchs.topic_status as status_id', 
-                            'new_word', 
-                            'new_pdf', 
-                            'path_word', 
-                            'path_pdf',
-                            'extension_word as ext_word', 
-                            'extension_pdf as ext_pdf', 
-                            'edit_researchs.updated_at as edit_research_update', 
+                            'comments.name as comment_name', 
+                            'comments.path as comment_path', 
+                            'comments.extension as comment_ext', 
+                            'comments.updated_at as comment_update', 
                             'researchs.topic_status as status_id'
                         )
                         ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
@@ -61,7 +58,7 @@ class ManageResearchController extends Controller
                         ->leftjoin('pdf', 'researchs.topic_id', '=', 'pdf.topic_id')
                         ->leftjoin('slips', 'researchs.topic_id', '=', 'slips.topic_id')
                         ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
-                        ->leftjoin('edit_researchs', 'researchs.topic_id', '=', 'edit_researchs.topic_id')
+                        ->leftjoin('comments', 'researchs.topic_id', '=', 'comments.topic_id')
                         ->get()
                         ->sortBy('id');
         return view('frontend.pages.manage_research', compact('data', 'topic_status'));

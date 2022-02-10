@@ -48,70 +48,69 @@
                         <br /><span class="name-research text-small text-green">{{ $value->presenter }}</span>
                     </td>
                     <td>
-                        @if (isset($value->word_path))
-                        <img width="40" src="{{ asset('images/doc.png', env('REDIRECT_HTTPS')) }}"
-                            alt="{{ $value->word_ext }}">
-                        <p class="mb-0">{{ $value->word }}</p>
+                        @if (isset($value->edit_word_path))
+                        <img width="40" src="{{ asset(" images/$value->edit_word_ext.png", env('REDIRECT_HTTPS')) }}"
+                        alt="{{ $value->edit_word_ext }}">
+                        <p class="mb-0">{{ $value->edit_word_name }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
-                            strtotime($value->word_update))
+                            strtotime($value->edit_word_update))
                             }}</i>
                         <a class="btn btn-green text-white rounded-0 w-100 my-1"
-                            href="{{ Storage::url($value->word_path) }}">
+                            href="{{ Storage::url($value->edit_word_path) }}">
                             ดูตัวอย่าง
                         </a>
-                        @if ($value->status_id <= 4) <button type="button"
-                            class="btn btn-warning text-white rounded-0 w-100 my-1" data-bs-toggle="modal"
-                            data-bs-target="#word-modal">
+                        @endif
+                        @if ($value->status_id >= 8) <button type="button"
+                            class="btn btn-warning text-white rounded-0 w-100 my-1" onclick="open_modal(this, 'word'@if (isset($value->edit_pdf_path)), 'PUT' @endif)">
+                            @if (isset($value->edit_word_path))
                             แก้ไขไฟล์ WORD ฉบับแก้ไข
-                            </button>
-                            @endif
                             @else
-                            <button type="button" class="btn btn-primary rounded-0 w-100" data-bs-toggle="modal"
-                                data-bs-target="#word-modal">
-                                อัพโหลดไฟล์ WORD ฉบับแก้ไข
-                            </button>
+                            อัพโหลดไฟล์ WORD ฉบับแก้ไข
                             @endif
+                        </button>
+                        <input type="hidden" value="{{ $value->topic_id }}">
+                        @endif
 
-                            @error('word_upload')
-                            <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
-                            @enderror
+                        @error('word_upload')
+                        <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                        @enderror
 
                     </td>
                     <td>
-                        @if (isset($value->pdf_path))
-                        <img width="40" src="{{ asset('images/pdf.png', env('REDIRECT_HTTPS')) }}"
-                            alt="{{ $value->pdf_ext }}">
-                        <p class="mb-0">{{ $value->pdf }}</p>
+                        @if (isset($value->edit_pdf_path))
+                        <img width="40" src="{{ asset(" images/$value->edit_pdf_ext.png", env('REDIRECT_HTTPS')) }}"
+                        alt="{{ $value->edit_pdf_ext }}">
+                        <p class="mb-0">{{ $value->edit_pdf_name }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
-                            strtotime($value->pdf_update))
+                            strtotime($value->edit_pdf_update))
                             }}</i>
                         <a class="btn btn-green text-white rounded-0 w-100 my-1"
-                            href="{{ Storage::url($value->pdf_path) }}">
+                            href="{{ Storage::url($value->edit_pdf_path) }}">
                             ดูตัวอย่าง
                         </a>
-                        @if ($value->status_id <= 4) <button type="button"
-                            class="btn btn-warning text-white rounded-0 w-100 my-1" data-bs-toggle="modal"
-                            data-bs-target="#pdf-modal">
+                        @endif
+                        @if ($value->status_id >= 8) <button type="button"
+                            class="btn btn-warning text-white rounded-0 w-100 my-1" onclick="open_modal(this, 'pdf'@if (isset($value->edit_pdf_path)), 'PUT' @endif)">
+                            @if (isset($value->edit_pdf_path))
                             แก้ไขไฟล์ PDF ฉบับแก้ไข
-                            </button>
-                            @endif
                             @else
-                            <button type="button" class="btn btn-secondary rounded-0 w-100" data-bs-toggle="modal"
-                                data-bs-target="#pdf-modal">
-                                อัพโหลดไฟล์ PDF ฉบับแก้ไข
-                            </button>
+                            อัพโหลดไฟล์ PDF ฉบับแก้ไข
                             @endif
+                        </button>
+                        <input type="hidden" value="{{ $value->topic_id }}">
+                        @endif
 
-                            @error('pdf_upload')
-                            <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
-                            @enderror
 
+                        @error('pdf_upload')
+                        <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                        @enderror
                     </td>
                     <td>
-                        <button type="button" class="btn btn-green rounded-0 text-white" data-bs-toggle="modal"
-                            data-bs-target="#detail">
+                        <button type="button" class="btn btn-green rounded-0 text-white"
+                            onclick="open_modal(this, 'detail')">
                             รายละเอียด
                         </button>
+                        <input type="hidden" value="{{ $value->topic_id }}">
                     </td>
                 </tr>
                 @empty
@@ -125,6 +124,6 @@
 </div>
 <!-- End Content -->
 
-@yield('modal')
+<div id="modal"></div>
 
 @endsection

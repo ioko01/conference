@@ -53,14 +53,12 @@
                         <strong class="text-red">{{ $value->topic_status }}</strong>
                         <br />
                         @if ( $value->status_id >= 7 )
-                        @if (isset($value->path_word) && isset($value->path_pdf))
+                        @if (isset($value->comment_path))
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
-                            strtotime($value->edit_research_update))
+                            strtotime($value->comment_update))
                             }}</i>
-                        <a class="btn btn-primary rounded-0 w-100 my-1" href="{{ Storage::url($value->path_word) }}"
-                            target="_blank">ดาวน์โหลด WORD</a>
-                        <a class="btn btn-primary rounded-0 w-100 my-1" href="{{ Storage::url($value->path_pdf) }}"
-                            target="_blank">ดาวน์โหลด PDF</a>
+                        <a class="btn btn-primary rounded-0 w-100 my-1" href="{{ Storage::url($value->comment_path) }}"
+                            target="_blank">ดูคอมเมนต์</a>
                         @else
                         <strong class="text-warning">(รอบทความจากผู้ทรงคุณวุฒิ)</strong>
                         @endif
@@ -68,7 +66,7 @@
                     </td>
                     <td>
                         @if (isset($value->payment_path))
-                        <img width="40" src="{{ asset('images/jpg.png', env('REDIRECT_HTTPS')) }}"
+                        <img width="40" src="{{ asset("images/$value->slip_ext.png", env('REDIRECT_HTTPS')) }}"
                             alt="{{ $value->slip_ext }}">
                         <p class="mb-0">{{ $value->payment }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
@@ -97,7 +95,7 @@
                     </td>
                     <td>
                         @if (isset($value->word_path))
-                        <img width="40" src="{{ asset('images/doc.png', env('REDIRECT_HTTPS')) }}"
+                        <img width="40" src="{{ asset("images/$value->word_ext.png", env('REDIRECT_HTTPS')) }}"
                             alt="{{ $value->word_ext }}">
                         <p class="mb-0">{{ $value->word }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
@@ -127,7 +125,7 @@
                     </td>
                     <td>
                         @if (isset($value->pdf_path))
-                        <img width="40" src="{{ asset('images/pdf.png', env('REDIRECT_HTTPS')) }}"
+                        <img width="40" src="{{ asset("images/$value->pdf_ext.png", env('REDIRECT_HTTPS')) }}"
                             alt="{{ $value->pdf_ext }}">
                         <p class="mb-0">{{ $value->pdf }}</p>
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',

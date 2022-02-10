@@ -9,6 +9,10 @@
 <script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
+@if (Request::is('employee/research/send-edit/show/*'))
+<script src="{{ asset('api/uploadfile-research.js', env('REDIRECT_HTTPS')) }}"></script>
+@endif
+
 @if (Request::is('employee*') || Request::is('admin*'))
 <script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif

@@ -52,7 +52,7 @@
                     <td>
                         <strong class="text-red">{{ $value->topic_status }}</strong>
                         <br />
-                        @if ( $value->status_id >= 7 )
+                        @if ( $value->status_id == 7 )
                         @if (isset($value->comment_path))
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
                             strtotime($value->comment_update))

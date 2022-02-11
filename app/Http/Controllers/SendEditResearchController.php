@@ -57,8 +57,4 @@ class SendEditResearchController extends Controller
                         ->sortBy('id');
         return view('frontend.pages.send_edit_research', compact('data'));
     }
-
-    public function store(Request $request){
-        print_r($request->all());
-    }
 }

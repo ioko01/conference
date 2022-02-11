@@ -1,31 +1,31 @@
 @section('script')
-<!-- Scripts -->
-<script src="{{ asset('js/jquery-3.6.0.min.js', env('REDIRECT_HTTPS')) }}"></script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/jquery-3.6.0.min.js', env('REDIRECT_HTTPS')) }}"></script>
 
-<script src="{{ asset('js/app.js', env('REDIRECT_HTTPS')) }}" defer></script>
-<script src="{{ asset('js/main.js', env('REDIRECT_HTTPS')) }}" defer></script>
+    <script src="{{ asset('js/app.js', env('REDIRECT_HTTPS')) }}" defer></script>
+    <script src="{{ asset('js/main.js', env('REDIRECT_HTTPS')) }}" defer></script>
 
-@if (Request::is('admin*'))
-<script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
-@endif
+    @if (Request::is('admin*'))
+        <script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
+    @endif
 
-@if (Request::is('employee/research/send-edit/show/*'))
-<script src="{{ asset('api/uploadfile-research.js', env('REDIRECT_HTTPS')) }}"></script>
-@endif
+    @if (Request::is('employee/research/send-edit/show/*'))
+        <script src="{{ asset('api/send-edit-upload-research.js', env('REDIRECT_HTTPS')) }}"></script>
+    @endif
 
-@if (Request::is('employee*') || Request::is('admin*'))
-<script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
-@endif
+    @if (Request::is('employee*') || Request::is('admin*'))
+        <script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
+    @endif
 
-@if (Request::is('register'))
-<script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
-@endif
+    @if (Request::is('register'))
+        <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
+    @endif
 
-@if (Request::is('employee/research/*') || Request::is('admin/research'))
-<script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
-<script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
-<script>
-    let options = {
+    @if (Request::is('employee/research/*') || Request::is('admin/research'))
+        <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
+        <script>
+            let options = {
                 numberPerPage: 10, //Cantidad de datos por pagina
                 goBar: true, //Barra donde puedes digitar el numero de la pagina al que quiere ir
                 pageCounter: true, //Contador de paginas, en cual estas, de cuantas paginas
@@ -36,6 +36,6 @@
             };
 
             paginate.init(".list", options, filterOptions);
-</script>
-@endif
+        </script>
+    @endif
 @endsection

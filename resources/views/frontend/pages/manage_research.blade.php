@@ -111,7 +111,7 @@
                             </button>
                             <input type="hidden" value="{{ $value->topic_id }}">
                             @error('file_comment')
-                            asd
+                            {{ $message }}
                             @enderror
                         </div>
 

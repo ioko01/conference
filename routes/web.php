@@ -11,6 +11,8 @@ use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\CommentFileUploadController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendEditResearchController;
+use App\Http\Controllers\SendEditWordController;
+use App\Http\Controllers\SendEditPdfController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -61,7 +63,10 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
         // ส่งบทความฉบับแก้ไข
         Route::get('research/send-edit/show/{id}', [SendEditResearchController::class, 'show'])->name('employee.research.send.edit');
-        Route::post('research/send-edit/{id}/create', [SendEditResearchController::class, 'store'])->name('employee.research.send.store');
+        Route::post('research/send-edit/word/{id}/create', [SendEditWordController::class, 'store'])->name('employee.research.send.word.store');
+        Route::put('research/send-edit/word/{id}/update', [SendEditWordController::class, 'update'])->name('employee.research.send.word.update');
+        Route::post('research/send-edit/pdf/{id}/create', [SendEditPdfController::class, 'store'])->name('employee.research.send.pdf.store');
+        Route::put('research/send-edit/pdf/{id}/update', [SendEditPdfController::class, 'update'])->name('employee.research.send.pdf.update');
 
         Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
         Route::post('payment/{payment_upload}/create', [PaymentController::class, 'store'])->name('employee.payment.store');
@@ -85,6 +90,8 @@ Route::middleware(['auth', 'verified'])->group(function(){
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
             });
         });
+
+
     });
 });
        

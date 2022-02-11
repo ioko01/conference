@@ -78,7 +78,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item {{ Request::is('research/send-edit/show/*') ? 'active' : '' }}"
+                            <a class="dropdown-item {{ Request::is('employee/research/send-edit/show/*') ? 'active' : '' }}"
                                 aria-current="page"
                                 href="{{ route('employee.research.send.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไข</a>
                         </li>

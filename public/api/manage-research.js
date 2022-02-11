@@ -22,7 +22,7 @@ function detail_modal(topic_id) {
     $.ajax({
         method: "GET",
         url: "/api/show-research-detail/" + topic_id,
-        success: function(res) {
+        success: function (res) {
             res.forEach((data) => {
                 $("#modal_body").html(`
                 <div class="mb-3">
@@ -86,14 +86,14 @@ function detail_modal(topic_id) {
                 `);
             });
         },
-        beforeSend: function() {
+        beforeSend: function () {
             $("#modal").html(createModal);
             $("#modal_body").html(
                 `<div class="text-center">กำลังโหลดข้อมูล กรุณารอสักครู่</div>`
             );
             $("#research_modal").modal("show");
         },
-        error: function(event, request, settings) {
+        error: function (event, request, settings) {
             if (!navigator.onLine) {
                 $("#modal_body").html(`<div>Internet Disconnection</div>`);
             }
@@ -128,7 +128,7 @@ function update_modal(topic_id, title, status_value, text_status) {
     $("#research_modal").modal("show");
 }
 
-function send_research_modal(topic_id, type) {
+function send_comment_modal(topic_id, type) {
     const _token = $('meta[name="csrf-token"]').attr("content");
 
     const createModal = `
@@ -144,7 +144,7 @@ function send_research_modal(topic_id, type) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <input type="file" name="file_comment" accept=".doc, .docx, .pdf">
+                    <input type="file" name="file_comment[]" accept=".pdf" multiple>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์</button>
@@ -180,7 +180,7 @@ function check_type(type, topic_id, title, status_value, text_status) {
             detail_modal(topic_id);
             break;
         case "file":
-            send_research_modal(topic_id, type);
+            send_comment_modal(topic_id, type);
             break;
         default:
             break;
@@ -197,12 +197,12 @@ function update_status(topic_id, status) {
                 topic_status: status,
                 _token,
             },
-            success: function(data) {
+            success: function (data) {
                 data.success ?
                     window.location.replace("/admin/research") :
                     null;
             },
-            error: function(error) {
+            error: function (error) {
                 console.log(error);
             },
         });

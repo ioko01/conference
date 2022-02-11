@@ -9,33 +9,34 @@ use App\Models\Comment;
 class CommentFileUploadController extends Controller
 {
     public function update(Request $request, $id){
-        $request->validate(['file_comment' => 'mimes:doc,docx,pdf|max:10240']);
-
-        if($request->file('file_comment')){
-            $upload = $request->file('file_comment');
-            $extension = $upload->extension();
-            $name = strval($id)."_comment".".".$extension;
-            $path = 'public/comments';
-            $full_path = $path."/".$name;
-        }
+        $request->validate(['file_comment*' => 'mimes:pdf|max:10240']);
 
         $user = Research::select('user_id')->where('topic_id', $id)->first();
+        if($request->file('file_comment')){
+            
+            foreach ($request->file('file_comment') as $key => $value) {
+                $upload = $value;
+                $extension = $upload->extension();
+                $name = strval($id)."_comment_".$key.".".$extension;
+                $path = 'public/comments';
+                $full_path = $path."/".$name;
 
-        $data = array_filter([
-            'user_id' => $user->user_id,
-            'topic_id' => $id,
-            'name' => $name,
-            'path' => $full_path,
-            'extension' => $extension
-        ]);
+                $data = array_filter([
+                    'user_id' => $user->user_id,
+                    'topic_id' => $id,
+                    'name' => $name,
+                    'path' => $full_path,
+                    'extension' => $extension
+                ]);
 
-        if(Comment::where('topic_id', $id)->get()->count() === 0){
-            Comment::create($data);
-        } else {
-            Comment::where('topic_id', $id)->update($data);
+                if($key == 0){
+                    Comment::where('topic_id', $id)->delete($data);
+                }
+                
+                Comment::create($data);
+                $upload->storeAs($path, $name);
+            }
         }
-
-        $upload->storeAs($path, $name);
        
         return back()->with('success', true);
     }

@@ -17,8 +17,8 @@ class CommentFileUploadController extends Controller
             foreach ($request->file('file_comment') as $key => $value) {
                 $upload = $value;
                 $extension = $upload->extension();
-                $name = strval($id)."_comment_".$key.".".$extension;
-                $path = 'public/comments';
+                $name = $upload->getClientOriginalName();
+                $path = "public/comments/$id";
                 $full_path = $path."/".$name;
 
                 $data = array_filter([

@@ -86,7 +86,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
         });
         Route::prefix('admin')->group(function(){
             Route::prefix('research')->group(function(){
-                Route::resource('/', ManageResearchController::class, ['names' => 'admin.research']);
+                Route::resource('management', ManageResearchController::class, ['names' => 'admin.research']);
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
             });
         });

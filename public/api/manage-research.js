@@ -22,7 +22,7 @@ function detail_modal(topic_id) {
     $.ajax({
         method: "GET",
         url: "/api/show-research-detail/" + topic_id,
-        success: function (res) {
+        success: function(res) {
             res.forEach((data) => {
                 $("#modal_body").html(`
                 <div class="mb-3">
@@ -86,14 +86,14 @@ function detail_modal(topic_id) {
                 `);
             });
         },
-        beforeSend: function () {
+        beforeSend: function() {
             $("#modal").html(createModal);
             $("#modal_body").html(
                 `<div class="text-center">กำลังโหลดข้อมูล กรุณารอสักครู่</div>`
             );
             $("#research_modal").modal("show");
         },
-        error: function (event, request, settings) {
+        error: function(event, request, settings) {
             if (!navigator.onLine) {
                 $("#modal_body").html(`<div>Internet Disconnection</div>`);
             }
@@ -197,12 +197,12 @@ function update_status(topic_id, status) {
                 topic_status: status,
                 _token,
             },
-            success: function (data) {
+            success: function(data) {
                 data.success ?
-                    window.location.replace("/admin/research") :
+                    window.location.replace("/admin/research/management") :
                     null;
             },
-            error: function (error) {
+            error: function(error) {
                 console.log(error);
             },
         });

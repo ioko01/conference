@@ -90,29 +90,30 @@
                     <td>
                         @if ($value->status_id >= 7)
                         <div>
-                            @if ($value->comment_path)
-                            <a href="{{ Storage::url($value->comment_path) }}" title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
-                                <img width="40" src="{{ asset("images/$value->comment_ext.png", env('REDIRECT_HTTPS'))
+                            @foreach ($comments as $comment)
+                            @if($value->topic_id == $comment->comment_topic_id)
+
+                            @if ($comment->comment_path)
+                            <a href="{{ Storage::url($comment->comment_path) }}" title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
+                                <img width="40" src="{{ asset("images/$comment->comment_ext.png",
+                                env('REDIRECT_HTTPS'))
                                 }}"
-                                alt="{{ $value->comment_ext }}"><br />
-                                <i style="font-size: 10px;" class="mb-0">{{ $value->comment_name }}</i><br />
-                                <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
-                                    strtotime($value->comment_update))
-                                    }}</i>
+                                alt="{{ $comment->comment_ext }}"><br />
+                                <i style="font-size: 10px;" class="mb-0">{{ $comment->comment_name }}</i><br />
                             </a>
                             @endif
+                            @endif
+
+                            @endforeach
                             <button type="button" class="btn btn-warning rounded-0 text-white w-100"
                                 onclick="open_modal(this, 'file')">
-                                @if ($value->comment_ext)
-                                แก้ไขไฟล์
-                                @else
                                 อัพโหลดไฟล์
-                                @endif
                             </button>
                             <input type="hidden" value="{{ $value->topic_id }}">
                             @error('file_comment')
                             {{ $message }}
                             @enderror
+
                         </div>
 
                         @else

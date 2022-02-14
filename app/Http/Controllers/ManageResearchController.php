@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Research;
 use App\Models\StatusResearch;
+use App\Models\Comment;
 
 class ManageResearchController extends Controller
 {
@@ -41,11 +42,7 @@ class ManageResearchController extends Controller
                             'words.path as word_path', 
                             'pdf.path as pdf_path', 
                             'slips.path as payment_path',
-                            'researchs.topic_status as status_id', 
-                            'comments.name as comment_name', 
-                            'comments.path as comment_path', 
-                            'comments.extension as comment_ext', 
-                            'comments.updated_at as comment_update', 
+                            'researchs.topic_status as status_id',
                             'researchs.topic_status as status_id'
                         )
                         ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
@@ -58,10 +55,18 @@ class ManageResearchController extends Controller
                         ->leftjoin('pdf', 'researchs.topic_id', '=', 'pdf.topic_id')
                         ->leftjoin('slips', 'researchs.topic_id', '=', 'slips.topic_id')
                         ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
-                        ->leftjoin('comments', 'researchs.topic_id', '=', 'comments.topic_id')
                         ->get()
                         ->sortBy('id');
-        return view('frontend.pages.manage_research', compact('data', 'topic_status'));
+        $comments = Comment::
+                            select(
+                                'comments.topic_id as comment_topic_id',
+                                'comments.name as comment_name', 
+                                'comments.path as comment_path',
+                                'comments.extension as comment_ext',
+                                'comments.created_at as comment_update')
+                            ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
+                            ->get();
+        return view('frontend.pages.manage_research', compact('data', 'topic_status', 'comments'));
     }
 
     /**

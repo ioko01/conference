@@ -39,7 +39,7 @@
                     <th style="width: 10%;">ชำระเงิน</th>
                     <th style="width: 10%;">ไฟล์ WORD</th>
                     <th style="width: 10%;">ไฟล์ PDF</th>
-                    <th style="width: 10%;">ไฟล์แก้ไขจากผู้ทรง</th>
+                    <th style="width: 10%;">ไฟล์แก้ไขจากผู้ทรงฯ</th>
                     <th style="width: 5%;">รายละเอียด</th>
                 </tr>
             </thead>
@@ -90,7 +90,7 @@
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
                             strtotime($value->word_update))
                             }}</i>
-                        <a class="btn btn-green text-white rounded-0 w-100 my-1"
+                        <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                             href="{{ Storage::url($value->word_path) }}">
                             ดูตัวอย่าง
                         </a>
@@ -120,7 +120,7 @@
                         <i style="font-size: 10px;">แก้ไขครั้งล่าสุด {{ date('d-m-Y H:i:s',
                             strtotime($value->pdf_update))
                             }}</i>
-                        <a class="btn btn-green text-white rounded-0 w-100 my-1"
+                        <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                             href="{{ Storage::url($value->pdf_path) }}">
                             ดูตัวอย่าง
                         </a>
@@ -142,12 +142,14 @@
                             @enderror
 
                     </td>
-                    <td class="text-start">
+                    <td>
                         @if ( $value->status_id >= 8 )
                         @forelse ($comments as $key => $comment)
-                        <a href="{{ Storage::url($comment->comment_path)}}">
-                            {{ ++$key }}. <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
-                        </a><br />
+                        <div class="text-start">
+                            <a target="_blank" href="{{ Storage::url($comment->comment_path)}}">
+                                {{ ++$key }}. <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
+                            </a>
+                        </div>
                         @empty
                         <strong class="text-warning">(รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)</strong>
                         @endforelse

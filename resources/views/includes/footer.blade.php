@@ -28,6 +28,11 @@
                     <br />โทรศัพท์ 0-4283-5224-8 ต่อ 41141-2, 51143
                 </p>
             </div>
+            <div class="col-md-12 d-flex align-self-end">
+                <p>
+                    แจ้งปัญหาได้ที่<br/>Email: monday-december.1997@hotmail.com
+                </p>
+            </div>
         </div>
     </div>
 </footer>

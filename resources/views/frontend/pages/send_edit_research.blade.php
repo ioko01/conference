@@ -34,10 +34,12 @@
                 <thead>
                     <tr class="text-center pagination-header">
                         <th style="width: 5%;">#</th>
-                        <th style="width: 20%;">ชื่อบทความ/ผู้วิจัย</th>
-                        <th style="width: 10%;">ไฟล์ WORD ฉบับแก้ไข</th>
-                        <th style="width: 10%;">ไฟล์ PDF ฉบับแก้ไข</th>
-                        <th style="width: 5%;">รายละเอียด</th>
+                        <th style="width: 25%;">ชื่อบทความ/ผู้วิจัย</th>
+                        <th style="width: 15%;">สถานะ</th>
+                        <th style="width: 15%;">ไฟล์แก้ไขจากผู้ทรงฯ</th>
+                        <th style="width: 15%;">ไฟล์ WORD ฉบับแก้ไข</th>
+                        <th style="width: 15%;">ไฟล์ PDF ฉบับแก้ไข</th>
+                        <th style="width: 10%;">รายละเอียด</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +50,24 @@
                                 <br /><span class="name-research text-small text-green">{{ $value->presenter }}</span>
                             </td>
                             <td>
+                                <strong class="text-red">{{ $value->topic_status }}</strong>
+                            </td>
+                            <td>
+                                @if ( $value->status_id >= 8 )
+                                @forelse ($comments as $key => $comment)
+                                <div class="text-start">
+                                    <a target="_blank" href="{{ Storage::url($comment->comment_path)}}">
+                                        {{ ++$key }}. <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
+                                    </a>
+                                </div>
+                                @empty
+                                <strong class="text-warning">(รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)</strong>
+                                @endforelse
+                                @else
+                                -
+                                @endif
+                            </td>
+                            <td>
                                 @if (isset($value->edit_word_path))
                                     <img width="40"
                                         src="{{ asset("images/$value->edit_word_ext.png", env('REDIRECT_HTTPS')) }}"
@@ -55,7 +75,7 @@
                                     <p class="mb-0">{{ $value->edit_word_name }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
                                         {{ date('d-m-Y H:i:s', strtotime($value->edit_word_update)) }}</i>
-                                    <a class="btn btn-green text-white rounded-0 w-100 my-1"
+                                    <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->edit_word_path) }}">
                                         ดูตัวอย่าง
                                     </a>
@@ -71,7 +91,7 @@
                                     </button>
                                     <input type="hidden" value="{{ $value->topic_id }}">
                                 @else
-                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไข<br/>กรุณารอบทความแก้ไขจากผู้ทรงฯ</strong>
+                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไข<br/>สถานะบทความต้องเป็น<br/>"รอบทความแก้ไขจากนักวิจัย"</strong>
                                 @endif
 
                                 @error('word_upload')
@@ -87,7 +107,7 @@
                                     <p class="mb-0">{{ $value->edit_pdf_name }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
                                         {{ date('d-m-Y H:i:s', strtotime($value->edit_pdf_update)) }}</i>
-                                    <a class="btn btn-green text-white rounded-0 w-100 my-1"
+                                    <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->edit_pdf_path) }}">
                                         ดูตัวอย่าง
                                     </a>
@@ -103,7 +123,7 @@
                                     </button>
                                     <input type="hidden" value="{{ $value->topic_id }}">
                                 @else
-                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไข<br/>กรุณารอบทความแก้ไขจากผู้ทรงฯ</strong>
+                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไข<br/>สถานะบทความต้องเป็น<br/>"รอบทความแก้ไขจากนักวิจัย"</strong>
                                 @endif
 
 

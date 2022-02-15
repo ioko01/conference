@@ -94,7 +94,7 @@
                             @if($value->topic_id == $comment->comment_topic_id)
 
                             @if ($comment->comment_path)
-                            <a href="{{ Storage::url($comment->comment_path) }}" title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
+                            <a target="_blank" href="{{ Storage::url($comment->comment_path) }}" title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
                                 <i style="font-size: 10px;" class="mb-0">{{ $comment->comment_name }}</i><br />
                             </a>
                             @endif

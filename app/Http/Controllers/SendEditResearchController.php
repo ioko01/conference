@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Research;
+use App\Models\Comment;
 
 class SendEditResearchController extends Controller
 {
@@ -54,6 +55,16 @@ class SendEditResearchController extends Controller
                         ->where('researchs.user_id', $id)
                         ->get()
                         ->sortBy('id');
-        return view('frontend.pages.send_edit_research', compact('data'));
+        $comments = Comment::
+            select(
+                'comments.topic_id as comment_topic_id',
+                'comments.name as comment_name', 
+                'comments.path as comment_path',
+                'comments.extension as comment_ext',
+                'comments.created_at as comment_update')
+            ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
+            ->where('researchs.user_id', $id)
+            ->get();            
+        return view('frontend.pages.send_edit_research', compact('data', 'comments'));
     }
 }

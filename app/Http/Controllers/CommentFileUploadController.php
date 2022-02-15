@@ -8,6 +8,13 @@ use App\Models\Comment;
 
 class CommentFileUploadController extends Controller
 {
+
+    //Deleted All Files
+    public function destroyFile($path){
+        if(\Storage::exists($path)){
+            \Storage::deleteDirectory($path);
+        }
+    }
     public function update(Request $request, $id){
         $request->validate(['file_comment*' => 'mimes:pdf|max:10240']);
 
@@ -30,14 +37,33 @@ class CommentFileUploadController extends Controller
                 ]);
 
                 if($key == 0){
-                    Comment::where('topic_id', $id)->delete($data);
+                    Comment::where('name', '!=', $name)
+                            ->where('topic_id', $id)
+                            ->delete($data);
+                    
                 }
-                
-                Comment::create($data);
+
+                $comment = Comment::select('name')->where('topic_id', $id)->first();
+                $count = Comment::select('name')->where('topic_id', $id)->count();
+
+                if($key == 0){
+                    $this->destroyFile($path);
+                }
+
+                if($count == 0 || $comment->name != $name){
+                    Comment::create($data);
+                }else if($comment->name == $name){
+                    Comment::where('name', $name)
+                            ->where('topic_id', $id)
+                            ->update($data);
+                }
+
                 $upload->storeAs($path, $name);
             }
         }
        
         return back()->with('success', true);
     }
+
+    
 }

@@ -30,7 +30,7 @@
                     <th style="width: 5%;">#</th>
                     <th style="width: 20%;">ชื่อบทความ/ผู้วิจัย</th>
                     <th style="width: 15%;">ลิงค์วิดีโอ</th>
-                    <th style="width: 10%;">ไฟล์ Video</th>
+                    <th style="width: 10%;">ไฟล์ Poster</th>
                     <th style="width: 5%;">รายละเอียด</th>
                 </tr>
             </thead>

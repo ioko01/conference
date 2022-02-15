@@ -60,7 +60,7 @@
                                         ดูตัวอย่าง
                                     </a>
                                 @endif
-                                @if ($value->status_id >= 8)
+                                @if ($value->status_id == 9)
                                     <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
                                         onclick="open_modal(this, 'word'@if (isset($value->edit_pdf_path)), 'PUT' @endif)">
                                         @if (isset($value->edit_word_path))
@@ -71,7 +71,7 @@
                                     </button>
                                     <input type="hidden" value="{{ $value->topic_id }}">
                                 @else
-                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไข</strong>
+                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไข<br/>กรุณารอบทความแก้ไขจากผู้ทรงฯ</strong>
                                 @endif
 
                                 @error('word_upload')
@@ -92,7 +92,7 @@
                                         ดูตัวอย่าง
                                     </a>
                                 @endif
-                                @if ($value->status_id >= 8)
+                                @if ($value->status_id == 9)
                                     <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
                                         onclick="open_modal(this, 'pdf'@if (isset($value->edit_pdf_path)), 'PUT' @endif)">
                                         @if (isset($value->edit_pdf_path))
@@ -103,7 +103,7 @@
                                     </button>
                                     <input type="hidden" value="{{ $value->topic_id }}">
                                 @else
-                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไข</strong>
+                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไข<br/>กรุณารอบทความแก้ไขจากผู้ทรงฯ</strong>
                                 @endif
 
 

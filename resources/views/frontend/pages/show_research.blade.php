@@ -34,11 +34,12 @@
             <thead>
                 <tr class="text-center pagination-header">
                     <th style="width: 5%;">#</th>
-                    <th style="width: 20%;">ชื่อบทความ/ผู้วิจัย</th>
-                    <th style="width: 15%;">สถานะ</th>
+                    <th style="width: 15%;">ชื่อบทความ/ผู้วิจัย</th>
+                    <th style="width: 10%;">สถานะ</th>
                     <th style="width: 10%;">ชำระเงิน</th>
                     <th style="width: 10%;">ไฟล์ WORD</th>
                     <th style="width: 10%;">ไฟล์ PDF</th>
+                    <th style="width: 10%;">ไฟล์แก้ไขจากผู้ทรง</th>
                     <th style="width: 5%;">รายละเอียด</th>
                 </tr>
             </thead>
@@ -51,18 +52,6 @@
                     </td>
                     <td>
                         <strong class="text-red">{{ $value->topic_status }}</strong>
-                        <br />
-                        @if ( $value->status_id >= 8 )
-                        @foreach ($comments as $comment)
-                        @if (isset($comment->comment_path))
-                        <a href="{{ Storage::url($comment->comment_path)}}">
-                            <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
-                        </a><br />
-                        @else
-                        <strong class="text-warning">(รอบทความจากผู้ทรงคุณวุฒิ)</strong>
-                        @endif
-                        @endforeach
-                        @endif
                     </td>
                     <td>
                         @if (isset($value->payment_path))
@@ -152,6 +141,19 @@
                             <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
                             @enderror
 
+                    </td>
+                    <td class="text-start">
+                        @if ( $value->status_id >= 8 )
+                        @forelse ($comments as $key => $comment)
+                        <a href="{{ Storage::url($comment->comment_path)}}">
+                            {{ ++$key }}. <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
+                        </a><br />
+                        @empty
+                        <strong class="text-warning">(รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)</strong>
+                        @endforelse
+                        @else
+                        -
+                        @endif
                     </td>
                     <td>
                         <button type="button" class="btn btn-green rounded-0 text-white" data-bs-toggle="modal"

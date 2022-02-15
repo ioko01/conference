@@ -49,7 +49,6 @@ class SendEditResearchController extends Controller
                         ->leftjoin('users', 'researchs.user_id', '=', 'users.id')
                         ->leftjoin('kotas', 'users.kota_id', '=', 'kotas.id')
                         ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
-                        ->leftjoin('comments', 'researchs.topic_id', '=', 'comments.topic_id')
                         ->leftjoin('send_edit_words', 'researchs.topic_id', '=', 'send_edit_words.topic_id')
                         ->leftjoin('send_edit_pdf', 'researchs.topic_id', '=', 'send_edit_pdf.topic_id')
                         ->where('researchs.user_id', $id)

@@ -13,6 +13,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendEditResearchController;
 use App\Http\Controllers\SendEditWordController;
 use App\Http\Controllers\SendEditPdfController;
+use App\Http\Controllers\VideoController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -67,6 +68,8 @@ Route::middleware(['auth', 'verified'])->group(function(){
         Route::put('research/send-edit/word/{id}/update', [SendEditWordController::class, 'update'])->name('employee.research.send.word.update');
         Route::post('research/send-edit/pdf/{id}/create', [SendEditPdfController::class, 'store'])->name('employee.research.send.pdf.store');
         Route::put('research/send-edit/pdf/{id}/update', [SendEditPdfController::class, 'update'])->name('employee.research.send.pdf.update');
+
+        Route::get('research/video/{id}', [VideoController::class, 'show'])->name('employee.research.video');
 
         Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
         Route::post('payment/{payment_upload}/create', [PaymentController::class, 'store'])->name('employee.payment.store');

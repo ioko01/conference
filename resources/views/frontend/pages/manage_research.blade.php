@@ -95,10 +95,6 @@
 
                             @if ($comment->comment_path)
                             <a href="{{ Storage::url($comment->comment_path) }}" title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
-                                <img width="40" src="{{ asset("images/$comment->comment_ext.png",
-                                env('REDIRECT_HTTPS'))
-                                }}"
-                                alt="{{ $comment->comment_ext }}"><br />
                                 <i style="font-size: 10px;" class="mb-0">{{ $comment->comment_name }}</i><br />
                             </a>
                             @endif

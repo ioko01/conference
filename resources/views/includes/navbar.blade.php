@@ -83,6 +83,12 @@
                                 href="{{ route('employee.research.send.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไข</a>
                         </li>
 
+                        <li>
+                            <a class="dropdown-item {{ Request::is('employee/research/video/*') ? 'active' : '' }}"
+                                aria-current="page"
+                                href="{{ route('employee.research.video', auth()->user()->id) }}">อัพโหลดลิงค์วิดีโอ</a>
+                        </li>
+
                         @if (auth()->user()->is_admin === 2)
                         <li>
                             <a class="dropdown-item {{ Request::is('admin/research/management') ? 'active' : '' }}"

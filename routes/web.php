@@ -13,6 +13,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendEditResearchController;
 use App\Http\Controllers\SendEditWordController;
 use App\Http\Controllers\SendEditPdfController;
+use App\Http\Controllers\SendEditStatementController;
 use App\Http\Controllers\VideoController;
 
 use Illuminate\Support\Facades\Auth;
@@ -50,11 +51,11 @@ Route::post('email/verification-notification', [MailController::class, 'verify_n
 
 Auth::routes(['verify' => true]);
 
-Route::middleware(['auth', 'verified'])->group(function(){
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('download', [FileDownloadController::class, 'index'])->name('download');
 
-    Route::prefix('employee')->group(function(){
+    Route::prefix('employee')->group(function () {
         // ส่งบทความฉบับแก้ไข
         Route::get('research/send', [ResearchController::class, 'index'])->name('employee.research.index');
         Route::get('research/show/{topic_id}', [ResearchController::class, 'show'])->name('employee.research.show');
@@ -68,33 +69,32 @@ Route::middleware(['auth', 'verified'])->group(function(){
         Route::put('research/send-edit/word/{id}/update', [SendEditWordController::class, 'update'])->name('employee.research.send.word.update');
         Route::post('research/send-edit/pdf/{id}/create', [SendEditPdfController::class, 'store'])->name('employee.research.send.pdf.store');
         Route::put('research/send-edit/pdf/{id}/update', [SendEditPdfController::class, 'update'])->name('employee.research.send.pdf.update');
+        Route::post('research/send-edit/stm/{id}/create', [SendEditStatementController::class, 'store'])->name('employee.research.send.stm.store');
+        Route::put('research/send-edit/stm/{id}/update', [SendEditStatementController::class, 'update'])->name('employee.research.send.stm.update');
 
         Route::get('research/video/{id}', [VideoController::class, 'show'])->name('employee.research.video');
 
         Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
         Route::post('payment/{payment_upload}/create', [PaymentController::class, 'store'])->name('employee.payment.store');
-        
+
         Route::put('pdf/{pdf_upload}/upload', [PdfController::class, 'update'])->name('employee.pdf.update');
         Route::post('pdf/{pdf_upload}/create', [PdfController::class, 'store'])->name('employee.pdf.store');
 
         Route::put('word/{word_upload}/upload', [WordController::class, 'update'])->name('employee.word.update');
         Route::post('word/{word_upload}/create', [WordController::class, 'store'])->name('employee.word.store');
-
     });
 
-    Route::middleware('is_admin')->group(function(){
-        Route::get('generate', function (){
+    Route::middleware('is_admin')->group(function () {
+        Route::get('generate', function () {
             \Illuminate\Support\Facades\Artisan::call('storage:link');
             echo 'ok';
         });
-        Route::prefix('admin')->group(function(){
-            Route::prefix('research')->group(function(){
+        Route::prefix('admin')->group(function () {
+            Route::prefix('research')->group(function () {
                 Route::resource('management', ManageResearchController::class, ['names' => 'admin.research']);
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
             });
         });
-
-
     });
 });
        

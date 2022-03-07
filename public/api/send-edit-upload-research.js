@@ -103,16 +103,18 @@ function detail_modal(topic_id) {
 
 function send_research_modal(topic_id, type, method) {
     const _token = $('meta[name="csrf-token"]').attr("content");
-
+    const iType = ["word", "pdf", "stm"];
     const createModal = `
-    <form enctype="multipart/form-data" method="POST" action="/employee/research/send-edit/${type == "word" ? "word" : "pdf"}/${topic_id}/${method ? `update`:`create`}">
+    <form enctype="multipart/form-data" method="POST" action="/employee/research/send-edit/${
+        iType.filter((item) => item === type) ? type : ""
+    }/${topic_id}/${method ? `update` : `create`}">
         <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
         aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
             <input type="hidden" name="_token" value="${_token}" />
             ${
                 method
                     ? `<input type="hidden" name="_method" value="PUT" />`
-                    : null
+                    : ""
             }
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -128,7 +130,9 @@ function send_research_modal(topic_id, type, method) {
                                 name="word_upload"
                                 accept=".doc, .docx"
                             />`
-                            : `<input type="file" name="pdf_upload" accept=".pdf" />`
+                            : type == "pdf"
+                            ? `<input type="file" name="pdf_upload" accept=".pdf" />`
+                            : `<input type="file" name="stm_upload" accept=".pdf" />`
                     }
                     </div>
                     <div class="modal-footer">
@@ -161,6 +165,9 @@ function check_type(type, topic_id, method) {
             send_research_modal(topic_id, type, method);
             break;
         case "pdf":
+            send_research_modal(topic_id, type, method);
+            break;
+        case "stm":
             send_research_modal(topic_id, type, method);
             break;
         default:

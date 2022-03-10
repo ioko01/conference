@@ -4,12 +4,6 @@
 @section('content')
 <!-- Content -->
 <div class="bg-white text-blue p-5 my-5">
-    @if(session('success'))
-    <div class="alert alert-success" role="alert">
-        เพิ่มบทความสำเร็จ
-    </div>
-    @endif
-
     <div class="inner-content-header">
         <h2 class="text-center">รายชื่อบทความ ในงานการประชุมวิชาการ ราชภัฏเลยวิชาการ ครั้งที่ 8</h2>
         <h4 class="text-green py-3">
@@ -78,8 +72,10 @@
                             </button>
                             @endif
 
-                            @if ($errors->first('payment_upload') || $errors->first('date') ||$errors->first('address'))
-                            <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                            @if (session('payment_upload') || session('date') || session('address'))
+                            <div class="alert alert-error">
+                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                            </div>
                             @endif
                     </td>
                     <td>
@@ -107,9 +103,11 @@
                             </button>
                             @endif
 
-                            @error('word_upload')
-                            <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
-                            @enderror
+                            @if(session('word_upload'))
+                            <div class="alert alert-error">
+                                <strong class="text-red">{{ $message }}</strong>
+                            </div>
+                            @endif
 
                     </td>
                     <td>
@@ -137,9 +135,9 @@
                             </button>
                             @endif
 
-                            @error('pdf_upload')
+                            @if(session('pdf_upload'))
                             <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
-                            @enderror
+                            @endif
 
                     </td>
                     <td>

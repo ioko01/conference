@@ -4,11 +4,6 @@
 @section('content')
     <!-- Content -->
     <div class="bg-white text-blue p-5 my-5">
-        @if (session('success'))
-            <div class="alert alert-success" role="alert">
-                เพิ่มบทความสำเร็จ
-            </div>
-        @endif
 
         <div class="inner-content-header">
             <h2 class="text-center">รายชื่อรายชื่อบทความ ในงานการประชุมวิชาการ ราชภัฏเลยวิชาการ ครั้งที่ 8</h2>

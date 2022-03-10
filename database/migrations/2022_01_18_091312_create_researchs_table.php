@@ -16,6 +16,7 @@ class CreateResearchsTable extends Migration
         Schema::create('researchs', function (Blueprint $table) {
             $table->id();
             $table->string('user_id')->comment('ไอดีผู้เข้าสู่ระบบ');
+            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ');
             $table->string('topic_id')->comment('รหัสบทความ');
             $table->text('topic_th')->comment('ชื่อบทความภาษาไทย');
             $table->text('topic_en')->comment('ชื่อบทความภาษาอังกฤษ');

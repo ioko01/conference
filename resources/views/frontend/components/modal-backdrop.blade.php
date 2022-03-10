@@ -46,37 +46,37 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <input type="file" class="form-control @error('payment_upload') is-invalid @enderror"
+                    <input type="file" class="form-control @if(session('payment_upload')) is-invalid @endif"
                         name="payment_upload" id="payment_upload" accept=".jpg, .jpeg" onchange="image(this)">
-                    @error('payment_upload')
+                    @if(session('payment_upload'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @enderror
+                    @endif
                 </div>
 
                 <div class="mb-3">
                     <label for="date">วันที่ชำระเงิน</label>
-                    <input type="datetime-local" name="date" id="date" class="form-control @error('date')
+                    <input type="datetime-local" name="date" id="date" class="form-control @if(session('date'))
                                     is-invalid
-                                @enderror">
-                    @error('date')
+                                @endif">
+                    @if(session('date'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @enderror
+                    @endif
                 </div>
 
                 <div class="mb-3">
                     <label for="address">ที่อยู่ผู้ชำระเงิน</label>
-                    <textarea class="form-control @error('address')
+                    <textarea class="form-control @if(session('address'))
                         is-invalid
-                    @enderror" name="address" id="address" cols="30" rows="10"></textarea>
-                    @error('address')
+                    @endif" name="address" id="address" cols="30" rows="10"></textarea>
+                    @if(session('address'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @enderror
+                    @endif
                 </div>
             </div>
             <div class="modal-footer">
@@ -110,13 +110,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="file" class="form-control @error('word_upload') is-invalid @enderror" name="word_upload"
+                <input type="file" class="form-control @if(session('word_upload')) is-invalid @endif" name="word_upload"
                     id="word_upload" accept=".doc, .docx">
-                @error('word_upload')
+                @if(session('word_upload'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
-                @enderror
+                @endif
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>
@@ -148,13 +148,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="file" class="form-control @error('pdf_upload') is-invalid @enderror" name="pdf_upload"
+                <input type="file" class="form-control @if(session('pdf_upload')) is-invalid @endif" name="pdf_upload"
                     id="pdf_upload" accept=".pdf">
-                @error('pdf_upload')
+                @if(session('pdf_upload'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
-                @enderror
+                @endif
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>

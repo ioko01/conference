@@ -9,6 +9,7 @@ use App\Http\Controllers\WordController;
 use App\Http\Controllers\ManageResearchController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\CommentFileUploadController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendEditResearchController;
 use App\Http\Controllers\SendEditWordController;
@@ -17,11 +18,6 @@ use App\Http\Controllers\SendEditStatementController;
 use App\Http\Controllers\VideoController;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,15 +81,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::middleware('is_admin')->group(function () {
-        Route::get('generate', function () {
-            \Illuminate\Support\Facades\Artisan::call('storage:link');
-            echo 'ok';
-        });
+
         Route::prefix('admin')->group(function () {
             Route::prefix('research')->group(function () {
                 Route::resource('management', ManageResearchController::class, ['names' => 'admin.research']);
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
             });
+        });
+    });
+
+    Route::middleware('is_super_admin')->group(function () {
+        Route::get('generate', function () {
+            \Illuminate\Support\Facades\Artisan::call('storage:link');
+            echo 'storage-link:successfully';
+        });
+        Route::prefix('backend')->group(function () {
+            Route::get('dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
+            Route::get('conference', [DashboardController::class, 'index'])->name('backend.conference.index');
         });
     });
 });

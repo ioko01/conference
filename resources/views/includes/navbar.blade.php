@@ -89,7 +89,7 @@
                                 href="{{ route('employee.research.video', auth()->user()->id) }}">อัพโหลดลิงค์วิดีโอ</a>
                         </li>
 
-                        @if (auth()->user()->is_admin === 2)
+                        @if (auth()->user()->is_admin === 1 || auth()->user()->is_admin === 2)
                         <li>
                             <a class="dropdown-item {{ Request::is('admin/research/management') ? 'active' : '' }}"
                                 aria-current="page" href="{{ route('admin.research.index') }}">จัดการบทความ
@@ -109,6 +109,10 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('contract') ? 'active' : '' }}" aria-current="page"
                         href="{{ route('contract') }}">ติดต่อ</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color: sandybrown!important;" class="nav-link" aria-current="page"
+                        href="{{ route('backend.dashboard.index') }}">แผงควบคุม</a>
                 </li>
             </ul>
             @guest

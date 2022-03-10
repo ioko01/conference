@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,7 +15,11 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        [
+            RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        ];
     }
+
 
     /**
      * Bootstrap any application services.
@@ -24,8 +29,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        if(env('REDIRECT_HTTPS')) {
-            \URL::forceScheme('https');
+        if (env('REDIRECT_HTTPS')) {
+            URL::forceScheme('https');
         }
     }
 }

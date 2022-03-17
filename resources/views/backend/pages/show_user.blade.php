@@ -98,7 +98,10 @@
                             <label for="institution">สังกัด / หน่วยงาน</label>
                             <input type="text" name="institution" id="institution"
                                 class="form-control @error('institution') is-invalid @enderror"
-                                value="{{ old('institution') }}" autocomplete="institution">
+                                @if (old('institution')) value="{{ old('institution') }}"
+                                @else 
+                                value="{{ $user->institution }}" @endif
+                                autocomplete="institution">
 
                             @error('institution')
                                 <span class="invalid-feedback" role="alert">
@@ -111,8 +114,9 @@
                         <div class="col-12">
                             <label for="address">ที่อยู่ <span style="font-size: 12px;"
                                     class="text-bluesky">(ใช้ในการส่งเอกสาร)</span></label>
-                            <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" cols="30"
-                                rows="5">{{ old('address') }}</textarea>
+                            <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" cols="30" rows="5">
+@if (old('address')){{ old('address') }}@else{{ $user->address }}@endif
+</textarea>
 
                             @error('address')
                                 <span class="invalid-feedback" role="alert">

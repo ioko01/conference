@@ -20,6 +20,7 @@ class CreateCommentsTable extends Migration
             $table->text('name')->nullable()->comment('ชื่อไฟล์');
             $table->text('path')->nullable()->comment('path');
             $table->string('extension')->nullable()->comment('นามสกุลไฟล์');
+            $table->string('year')->comment('ปีที่จัดงานประชุม');
             $table->timestamps();
         });
     }

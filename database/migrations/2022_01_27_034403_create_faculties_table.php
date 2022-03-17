@@ -16,6 +16,7 @@ class CreateFacultiesTable extends Migration
         Schema::create('faculties', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('ชื่อกลุ่มคณะ');
+            $table->string('year')->comment('ปีที่จัดงานประชุม');
             $table->timestamps();
         });
     }

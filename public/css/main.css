@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap");
 :root {
     --color-green: #30ac33;
     --color-blue: #131f5b;
@@ -15,10 +15,9 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-
 /* Firefox */
 
-input[type=number] {
+input[type="number"] {
     -moz-appearance: textfield;
 }
 
@@ -27,11 +26,11 @@ body {
 }
 
 .hidden {
-    display: none!important;
+    display: none !important;
 }
 
 .show {
-    display: block!important;
+    display: block !important;
 }
 
 #loading {
@@ -41,9 +40,9 @@ body {
     z-index: 999999;
     opacity: 1;
     background-color: rgba(255, 255, 255, 1);
-    -webkit-transition: all .5s linear;
-    -moz-transition: all .5s linear;
-    transition: all .5s linear;
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    transition: all 0.5s linear;
 }
 
 #loading .loading-content {
@@ -54,7 +53,7 @@ body {
     width: 100px;
     height: 100px;
     padding: 15px;
-    box-shadow: 0 0 5px 0 #ccc!important;
+    box-shadow: 0 0 5px 0 #ccc !important;
     -webkit-border-redius: 50%;
     -moz-border-redius: 50%;
     border-radius: 50%;
@@ -102,7 +101,7 @@ body {
 }
 
 .btn-green:hover {
-    opacity: .8;
+    opacity: 0.8;
     background-color: var(--color-green);
     border-color: var(--color-green);
 }
@@ -111,7 +110,7 @@ body {
 html {
     margin: 0;
     padding: 0;
-    font-family: 'Kanit', sans-serif;
+    font-family: "Kanit", sans-serif;
     outline: 0;
     box-shadow: none !important;
 }
@@ -123,7 +122,7 @@ a {
 .nav-sticky {
     position: sticky;
     top: 0;
-    animation: fadeDown .2s ease;
+    animation: fadeDown 0.2s ease;
 }
 
 @keyframes fadeDown {
@@ -135,18 +134,22 @@ a {
     }
 }
 
-.nav-link {
+#navbar-conference-backend .nav-link.active {
+    background-color: var(--color-green) !important;
+}
+
+#navbar-conference .nav-link {
     color: #343a40 !important;
 }
 
-.nav-link.active {
+#navbar-conference .nav-link.active {
     color: var(--color-green) !important;
 }
 
-.nav-link:not(.active):focus,
-.nav-link:not(.active):hover {
+#navbar-conference .nav-link:not(.active):focus,
+#navbar-conference .nav-link:not(.active):hover {
     color: inherit;
-    opacity: .8;
+    opacity: 0.8;
 }
 
 .navbar {
@@ -184,10 +187,10 @@ a {
     border: none;
     color: white;
     font-size: 30px;
-    opacity: .5;
-    -webkit-transition: bottom .3s ease;
-    -moz-transition: bottom .3s ease;
-    transition: .3s;
+    opacity: 0.5;
+    -webkit-transition: bottom 0.3s ease;
+    -moz-transition: bottom 0.3s ease;
+    transition: 0.3s;
 }
 
 .btn-to-top:hover {
@@ -196,7 +199,7 @@ a {
 
 .bg-blue {
     background-color: var(--color-blue);
-    color: white
+    color: white;
 }
 
 .bg-green {
@@ -239,7 +242,7 @@ a {
 }
 
 .footer-menu ul li a:hover {
-    opacity: .8;
+    opacity: 0.8;
 }
 
 .breadcrumb {
@@ -272,7 +275,7 @@ a {
 .dropdown-item:hover {
     color: white;
     background-color: var(--color-green);
-    opacity: .8;
+    opacity: 0.8;
 }
 
 .dropdown-item.active {
@@ -321,7 +324,7 @@ a {
     min-width: 50px;
     height: 50px;
     min-height: 50px;
-    box-shadow: 5px 5px 0 0 var(--bg-color-shadowcream)!important;
+    box-shadow: 5px 5px 0 0 var(--bg-color-shadowcream) !important;
     background-color: var(--bg-color-cream);
 }
 
@@ -337,7 +340,6 @@ a {
     color: #5b5757;
 }
 
-
 /* Medium Screen */
 
 @media screen and (max-width: 767px) {
@@ -345,7 +347,6 @@ a {
         display: none;
     }
 }
-
 
 /* Small Screen */
 
@@ -362,7 +363,7 @@ a {
     height: 50px;
     min-height: 50px;
     padding: 5px;
-    filter: opacity(.6);
+    filter: opacity(0.6);
 }
 
 #date-payment,
@@ -373,9 +374,9 @@ a {
 #date-payment {
     border: none;
     border-bottom: 2px solid #ced4da;
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    transition: all .2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 #date-payment:hover,
@@ -386,14 +387,14 @@ a {
 .date-payment-icon {
     color: #bdc1c5;
     font-size: 18px;
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    transition: all .2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
-#date-payment:hover+.date-payment-icon,
-#date-payment:focus+.date-payment-icon,
-#date-payment+.date-payment-icon:hover {
+#date-payment:hover + .date-payment-icon,
+#date-payment:focus + .date-payment-icon,
+#date-payment + .date-payment-icon:hover {
     color: var(--color-green);
 }
 

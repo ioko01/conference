@@ -182,7 +182,11 @@ return [
         'word_upload' => 'ไฟล์ WORD',
         'pdf_upload' => 'ไฟล์ PDF',
         'payment_upload' => 'สลิปการชำระเงิน',
-        'date' => 'วันที่'
+        'date' => 'วันที่',
+        'topic' => 'หัวข้อ',
+        'year' => 'ปี',
+        'start' => 'วันที่เริ่ม',
+        'end' => 'วันสิ้นสุด'
     ],
 
 ];

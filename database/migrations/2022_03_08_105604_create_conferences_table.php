@@ -15,11 +15,11 @@ class CreateConferencesTable extends Migration
     {
         Schema::create('conferences', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('ชื่องานประชุม');
-            $table->number('status')->comment('สถานะงานประชุม')->default(0);
+            $table->text('name')->comment('ชื่องานประชุม');
+            $table->tinyInteger('status')->comment('สถานะงานประชุม')->default(0);
             $table->string('year')->comment('ปีที่จัดงานประชุม');
-            $table->string('start')->comment('วันที่เริ่มจัดงานประชุม');
-            $table->string('end')->comment('วันที่สิ้นสุดการจัดงานประชุม');
+            $table->datetime('start')->comment('วันที่เริ่มจัดงานประชุม');
+            $table->datetime('end')->comment('วันที่สิ้นสุดการจัดงานประชุม');
             $table->timestamps();
         });
     }

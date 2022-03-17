@@ -9,7 +9,9 @@ use App\Http\Controllers\WordController;
 use App\Http\Controllers\ManageResearchController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\CommentFileUploadController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Backend\ConferenceController;
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendEditResearchController;
 use App\Http\Controllers\SendEditWordController;
@@ -97,7 +99,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
         Route::prefix('backend')->group(function () {
             Route::get('dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
-            Route::get('conference', [DashboardController::class, 'index'])->name('backend.conference.index');
+            Route::get('conference', [ConferenceController::class, 'index'])->name('backend.conference.index');
+
+            Route::get('users', [UserController::class, 'index'])->name('backend.users.index');
+            Route::get('user/{id}/show', [UserController::class, 'show'])->name('backend.user.show');
+            Route::put('user/{id}/update', [UserController::class, 'update'])->name('backend.user.update');
+
+
+            Route::post('conference/create', [ConferenceController::class, 'store'])->name('backend.conference.store');
+            Route::put('conference/{id}/update', [ConferenceController::class, 'update'])->name('backend.conference.update');
         });
     });
 });

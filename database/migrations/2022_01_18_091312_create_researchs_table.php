@@ -26,6 +26,7 @@ class CreateResearchsTable extends Migration
             $table->string('branch_id')->comment('ไอดีสาขา');
             $table->integer('degree_id')->comment('รหัสระดับบทความ');
             $table->integer('present_id')->comment('รหัสชนิดการนำเสนอ');
+            $table->string('year')->comment('ปีที่จัดงานประชุม');
             $table->timestamps();
         });
     }

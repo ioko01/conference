@@ -19,6 +19,7 @@ class CreateTipsTable extends Migration
             $table->text('detail')->comment('รายละเอียดคำแนะนำ');
             $table->text('image')->comment('รูปภาพ');
             $table->integer('group')->comment('กลุ่มที่');
+            $table->string('year')->comment('ปีที่จัดงานประชุม');
             $table->timestamps();
         });
     }

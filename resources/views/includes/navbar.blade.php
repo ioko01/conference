@@ -1,6 +1,6 @@
 @section('navbar-topbar')
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg shadow-sm bg-white">
+    <nav id="navbar-conference" class="navbar navbar-expand-lg shadow-sm bg-white">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('welcome') }}">
                 <img src="{{ asset('images/logo.png', env('REDIRECT_HTTPS')) }}" alt="logo" width="130">

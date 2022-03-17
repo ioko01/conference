@@ -1,36 +1,33 @@
-@extends('frontend.layouts.master_frontend')
+@extends('backend.layouts.master_backend')
 
 @section('content')
-    <!-- Breadcrumb -->
-    <div class="py-5">
-        <div class="row text-end m-0">
-            <div class="col-5 col-md-4 col-lg-3 col-xl-2 bg-white breadcrumb">
-                <p><strong>ลงทะเบียน > สมัครเข้าใช้ระบบ</strong></p>
-
+    <div class="card">
+        <div class="card-content">
+            <div class="card-header">
+                <h1>รายละเอียดผู้ใช้งาน</h1>
             </div>
-        </div>
-    </div>
-    <!-- End Breadcrumb -->
-
-    <!-- Content -->
-    <div id="register-content" class="bg-white text-blue p-5 mb-5">
-        <div class="inner-content-header">
-            <h4 class="text-center">ลงทะเบียนส่งผลงาน / เข้าร่วมงาน</h4>
-            <h4 class="text-green py-3">
-                LRU Conference 2022
-            </h4>
-        </div>
-        <div class="row w-100">
-            <div class="col-md-7">
-                <form action="{{ route('register') }}" method="POST">
+            <div class="card-body">
+                <form action="#" method="POST">
                     @csrf
+                    @method('PUT')
+
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <label for="status">สถานะ</label>
+                            <select name="suatus" id="status" class="form-control">
+                                <option value="0">ผู้ใช้งานทั่วไป</option>
+                                <option value="1">แอดมิน</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <label for="prefix">คำนำหน้า <span style="font-size: 12px;"
                                     class="text-bluesky">(ใช้ลงในเกียรติบัตร)</span></label>
                             <input type="text" name="prefix" id="prefix"
-                                class="form-control @error('prefix') is-invalid @enderror" value="{{ old('prefix') }}"
-                                autocomplete="prefix" autofocus>
+                                class="form-control @error('prefix') is-invalid @enderror"
+                                @if (old('prefix')) value="{{ old('prefix') }}" @else value="{{ $user->prefix }}" @endif
+                                autocomplete="prefix">
 
                             @error('prefix')
                                 <span class="invalid-feedback" role="alert">
@@ -43,7 +40,8 @@
                             <label for="fullname">ชื่อ - สกุล</label>
                             <input type="text" name="fullname" id="fullname"
                                 class="form-control @error('fullname') is-invalid @enderror"
-                                value="{{ old('fullname') }} " autocomplete="fullname">
+                                @if (old('fullname')) value="{{ old('fullname') }}" @else value="{{ $user->fullname }}" @endif
+                                autocomplete="fullname">
 
                             @error('fullname')
                                 <span class="invalid-feedback" role="alert">
@@ -58,14 +56,14 @@
                             <label class="d-block">เพศ</label>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="sex" id="male"
-                                    @if (old('sex') === 'male' || empty(old('sex'))) checked @endif value="male">
+                                    @if ($user->sex === 'male') checked @endif value="male">
                                 <label class="form-check-label" for="male">
                                     ชาย
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="sex" id="female"
-                                    @if (old('sex') === 'female') checked @endif value="female">
+                                    @if ($user->sex === 'female') checked @endif value="female">
                                 <label class="form-check-label" for="female">
                                     หญิง
                                 </label>
@@ -82,7 +80,10 @@
                         <div class="col-md-6">
                             <label for="phone">เบอร์โทร</label>
                             <input type="text" name="phone" id="phone"
-                                class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }} "
+                                class="form-control @error('phone') is-invalid @enderror"
+                                @if (old('phone')) value="{{ old('phone') }}"
+                                @else
+                                value="{{ $user->phone }}" @endif
                                 autocomplete="phone">
 
                             @error('phone')
@@ -233,64 +234,11 @@
                         </div>
                     </div>
                     <div class="d-block">
-                        <input class="btn btn-green rounded-0 text-white text-white w-100" type="submit" value="ลงทะเบียน">
+                        <input class="btn btn-success rounded-0 text-white text-white w-100" type="submit"
+                            value="ลงทะเบียน">
                     </div>
                 </form>
             </div>
-            <div class="col-md-5 tips">
-                <div class="tips-content">
-                    <div class="tips-box py-5">
-                        <div class="icon"><img src="{{ asset('images/guide.png', env('REDIRECT_HTTPS')) }}"
-                                alt="guide-register">
-                        </div>
-                        <div class="content"><strong>แนะนำการลงทะเบียน</strong><br /><span>
-                                กรณีต้องการลงทะเบียนเข้าร่วมงานแต่ไม่ส่งบทความ หรือเป็นนักวิจัยร่วม ให้เลือก
-                                "ลงทะเบียนเข้าร่วมงานทั่วไป" หากสงสัยให้ติดต่อเจ้าหน้ที่หรือผู้ดูแลระบบ</span></div>
-                    </div>
-                    <div class="tips-box py-5">
-                        <div class="icon"><img src="{{ asset('images/folder.png', env('REDIRECT_HTTPS')) }}"
-                                alt="guide-send"></div>
-                        <div class="content"><strong>แนะนำการส่งผลงาน</strong><br /><span>
-                                เมื่อลงทะเบียนสำเร็จแล้ว ระบบจะส่งลิงก์
-                                ไปยังอีเมลของท่านเพื่อยืนยันตัวตน
-                                จึงจะสามารถใช้ระบบส่งผลงานได้
-                                (ผู้ที่ส่งผลงานจะต้องเลือก
-                                "ลงทะเบียนส่งผลงาน" เท่านั้น !)
-                                และจะต้องใส่ข้อมูลที่ถูกต้อง
-                                หากเกิดข้อผิดพลาดผู้ลงทะเบียน
-                                ใส่ข้อมูลมาผิด เจ้าหน้าที่จะไม่รับผิดชอบ</span></div>
-                    </div>
-                    <div class="tips-box py-5">
-                        <div class="icon"><img src="{{ asset('images/heart.png', env('REDIRECT_HTTPS')) }}"
-                                alt="guide"></div>
-                        <div class="content"><strong>การพิจารณาผลงาน</strong><br /><span>
-                                พิจารณาการเลือกกลุ่มการนำเสนอ
-                                ผลงานและประเภทของการนำเสนอ
-                                ผลงาน โดยผู้ทรงคุณวุฒิจากภายใน
-                                และภายนอกมหาวิทยาลัย อย่างน้อย 2 ท่าน
-                                และคัดเลือกผลงานที่นำเสนอในการประชุม
-                                รวบรวมเป็นรายงานสืบเนื่องจากการประชุม
-                                วิชาการระดับชาติ Proceedings
-                                (ทั้งนี้บทความต้องได้รับการชำระเงินเท่านั้น..!
-                                ที่จะได้รับสิทธิ์ให้ผู้ทรงคุณวิฒิพิจารณา)</span></div>
-                    </div>
-                    <div class="tips-box py-5">
-                        <div class="icon"><img
-                                src="{{ asset('images/money-exchange.png', env('REDIRECT_HTTPS')) }}" alt=""></div>
-                        <div class="content"><strong>การชำระเงิน</strong><br /><span>
-                                1. ผู้นำเสนอจากหน่วยงานภายนอก ที่ส่งผลงาน ค่าลงทะเบียนอัตรา 2,000 บาท ต่อ 1 ผลงาน <br />
-                                2. ผู้ร่วมงานทั่วไป/นิสิต/นักศึกษาจากหน่วยงานภายนอก ไม่เสียค่าใช้จ่าย <br />
-                                3. บุคลากรภายในมหาวิทยาลัยราชภัฏเลย ไม่เสียค่าใช้จ่าย <br />
-                                4.
-                                ข้าราชการหรือบุคลากรของรัฐที่เข้าร่วมประชุมสามารถเบิกจ่ายได้จากต้นสังกัดตามระเบียบของกระทรวงการคลัง
-                                <br />
-                                หมายเหตุ: กรณีที่ผู้สมัครเข้าร่วมงานและไม่สามารถมานำเสนอผลงานได้ สถาบันวิจัยและพัฒนา
-                                ขอสงวนสิทธิ์ ที่จะไม่คืนเงินค่าลงทะเบียนไม่ว่ากรณีใดๆ
-                                เนื่องจากต้องมีค่าใช้จ่ายในระหว่างการดำเนินงาน</span></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-    <!-- End Content -->
 @endsection

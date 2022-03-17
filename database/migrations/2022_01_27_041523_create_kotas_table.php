@@ -16,6 +16,7 @@ class CreateKotasTable extends Migration
         Schema::create('kotas', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('ชื่อเจ้าภาพร่วม');
+            $table->string('year')->comment('ปีที่จัดงานประชุม');
             $table->timestamps();
         });
     }

@@ -27,7 +27,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $user->email }}</td>
-                                    <td><i>{{ ThaiDateHelper::thaiDateFormat($user->created_at, true) }}</i></td>
+                                    <td><i>{{ thaiDateFormat($user->created_at, true) }}</i></td>
                                     <td>
                                         <a href="{{ route('backend.user.edit', $user->id) }}" class=" text-warning"><i
                                                 class="nav-icon fas fa-pen"></i>

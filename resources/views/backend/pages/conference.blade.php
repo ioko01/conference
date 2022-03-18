@@ -79,8 +79,8 @@
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $conference->name }}</td>
                                     <td>{{ $conference->year }}</td>
-                                    <td class="text-center">{{ ThaiDateHelper::thaiDateFormat($conference->start) }}</td>
-                                    <td class="text-center">{{ ThaiDateHelper::thaiDateFormat($conference->end) }}</td>
+                                    <td class="text-center">{{ thaiDateFormat($conference->start) }}</td>
+                                    <td class="text-center">{{ thaiDateFormat($conference->end) }}</td>
                                     <td>
                                         <form method="POST"
                                             action="{{ route('backend.conference.update', $conference->id) }}"

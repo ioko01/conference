@@ -40,7 +40,7 @@
                                         <br />
                                         <strong style="font-size: 12px"
                                             class="text-green">{{ str_replace('|', ', ', $research->presenter) }}</strong>
-                                            
+
                                     </td>
                                     <td>{{ $research->year }}</td>
                                     <td>
@@ -54,10 +54,10 @@
                                     </td>
                                     <td>
                                         <i style="font-size: 12px" class="text-info">อัพโหลดเมื่อ
-                                            {{ ThaiDateHelper::thaiDateFormat($research->created_at, true) }}</i>
+                                            {{ thaiDateFormat($research->created_at, true) }}</i>
                                         <br />
                                         <i style="font-size: 12px" class="text-info">แก้ไขล่าสุดเมื่อ
-                                            {{ ThaiDateHelper::thaiDateFormat($research->updated_at, true) }}</i>
+                                            {{ thaiDateFormat($research->updated_at, true) }}</i>
                                     </td>
                                     <td>
                                         <a href="{{ route('backend.research.edit', $research->topic_id) }}"

@@ -1,8 +1,6 @@
 <?php
 
-class ThaiDateHelper
-{
-    public function thaiDateFormat($date, $time = false)
+function thaiDateFormat($date, $time = false)
     {
         $monthTh = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
         $getYear = date("Y", strtotime($date)) + 543;
@@ -17,4 +15,3 @@ class ThaiDateHelper
 
         return $fullDateTh;
     }
-}

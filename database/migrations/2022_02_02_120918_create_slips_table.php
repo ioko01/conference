@@ -22,7 +22,7 @@ class CreateSlipsTable extends Migration
             $table->string('extension')->comment('นามสกุลไฟล์');
             $table->text('address')->nullable()->comment('ที่อยู่ผู้ชำระเงิน');
             $table->datetime('date')->nullable()->comment('วันที่ชำระเงิน');
-            $table->string('year')->comment('ปีที่จัดงานประชุม');
+            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->timestamps();
         });
     }

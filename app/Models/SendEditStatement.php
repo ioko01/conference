@@ -15,5 +15,6 @@ class SendEditStatement extends Model
         'name',
         'path',
         'extension',
+        'conference_id'
     ];
 }

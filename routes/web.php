@@ -11,6 +11,8 @@ use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\CommentFileUploadController;
 use App\Http\Controllers\Backend\ConferenceController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
+use App\Http\Controllers\Backend\StatementController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendEditResearchController;
@@ -100,9 +102,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('backend')->group(function () {
             Route::get('dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
             Route::get('conference', [ConferenceController::class, 'index'])->name('backend.conference.index');
+            Route::get('statement', [StatementController::class, 'index'])->name('backend.statement.index');
+
+
+            Route::get('researchs', [BackendResearchController::class, 'index'])->name('backend.researchs.index');
+            Route::get('research/{topic_id}/edit', [BackendResearchController::class, 'edit'])->name('backend.research.edit');
+            Route::put('research/{topic_id}/update', [BackendResearchController::class, 'update'])->name('backend.research.update');
 
             Route::get('users', [UserController::class, 'index'])->name('backend.users.index');
-            Route::get('user/{id}/show', [UserController::class, 'show'])->name('backend.user.show');
+            Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('backend.user.edit');
             Route::put('user/{id}/update', [UserController::class, 'update'])->name('backend.user.update');
 
 

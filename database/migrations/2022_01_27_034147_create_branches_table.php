@@ -17,7 +17,7 @@ class CreateBranchesTable extends Migration
             $table->id();
             $table->string('name')->comment('ชื่อสาขา');
             $table->integer('faculty_id')->comment('รหัสกลุ่มคณะ');
-            $table->string('year')->comment('ปีที่จัดงานประชุม');
+            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->timestamps();
         });
     }

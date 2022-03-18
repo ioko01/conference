@@ -15,5 +15,6 @@ class Pdf extends Model
         'name',
         'path',
         'extension',
+        'conference_id'
     ];
 }

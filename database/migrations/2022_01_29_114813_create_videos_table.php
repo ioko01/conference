@@ -22,7 +22,7 @@ class CreateVideosTable extends Migration
             $table->text('path')->comment('path video');
             $table->text('link')->nullable()->comment('ลิงค์ video');
             $table->string('extension')->comment('นามสกุล video');
-            $table->string('year')->comment('ปีที่จัดงานประชุม');
+            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->timestamps();
         });
     }

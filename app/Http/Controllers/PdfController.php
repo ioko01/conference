@@ -32,7 +32,8 @@ class PdfController extends Controller
                 'path' => $path . "/" . $name,
                 'extension' => $extension,
                 'address' => $request->address,
-                'date' => $request->date
+                'date' => $request->date,
+                'conference_id' => auth()->user()->conference_id
             ]);
 
             $result->data = $data;

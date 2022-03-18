@@ -124,7 +124,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => ':attributeไม่พร้อมใช้งานหรือมีผู้ใช้อีเมลนี้อยู่แล้ว',
     'uploaded' => 'ไม่สามารถอัพโหลด :attribute ได้',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',

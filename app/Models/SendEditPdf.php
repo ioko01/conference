@@ -15,5 +15,6 @@ class SendEditPdf extends Model
         'name',
         'path',
         'extension',
+        'conference_id'
     ];
 }

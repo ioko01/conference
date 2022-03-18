@@ -16,7 +16,7 @@ class CreatePresentsTable extends Migration
         Schema::create('presents', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('รูปแบบการพรีเซ้นท์');
-            $table->string('year')->comment('ปีที่จัดงานประชุม');
+            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->timestamps();
         });
     }

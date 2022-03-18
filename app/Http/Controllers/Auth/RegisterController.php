@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Conference;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Kota;
@@ -48,8 +49,9 @@ class RegisterController extends Controller
     {
         $kotas = Kota::get();
         $positions = Position::get();
+        $conference_id = Conference::where('status', 1)->first();
 
-        return view('auth.register', compact('kotas', 'positions'));
+        return view('auth.register', compact('kotas', 'positions', 'conference_id'));
     }
 
     /**
@@ -82,6 +84,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $conference_id = Conference::where('status', 1)->first();
         return User::create([
             'prefix' => $data['prefix'],
             'fullname' => $data['fullname'],
@@ -94,6 +97,7 @@ class RegisterController extends Controller
             'person_attend' => $data['person_attend'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'conference_id' => isset($conference_id->id) ? $conference_id->id : null
         ]);
     }
 }

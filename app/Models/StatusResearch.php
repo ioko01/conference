@@ -11,6 +11,7 @@ class StatusResearch extends Model
 
     protected $table = 'status_researchs';
     protected $fillable = [
-        'name'
+        'name',
+        'conference_id'
     ];
 }

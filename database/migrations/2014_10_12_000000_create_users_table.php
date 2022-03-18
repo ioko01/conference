@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('prefix')->comment('คำนำหน้า');
             $table->string('fullname')->comment('ชื่อ - สกุล');
             $table->enum('sex', ['male', 'female'])->comment('เพศ');
@@ -28,7 +29,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable()->comment('ยืนยันอีเมล');
             $table->boolean('is_admin')->default(0);
             $table->string('password');
-            $table->string('year')->comment('ปีที่จัดงานประชุม');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,5 +11,6 @@ class Present extends Model
     protected $table = 'presents';
     protected $fillable = [
         'name',
+        'conference_id'
     ];
 }

@@ -22,12 +22,15 @@
                             @foreach ($users as $key => $user)
                                 <tr>
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $user->fullname }}</td>
+                                    <td>{{ $user->fullname }}@if ($user->id == auth()->user()->id)
+                                            <i class="text-bluesky"> (ฉัน)</i>
+                                        @endif
+                                    </td>
                                     <td>{{ $user->email }}</td>
                                     <td><i>{{ ThaiDateHelper::thaiDateFormat($user->created_at, true) }}</i></td>
                                     <td>
-                                        <a href="{{ route('backend.user.show', $user->id) }}"
-                                            class="btn btn-warning text-white rounded-0"><i class="nav-icon fas fa-pen"></i>
+                                        <a href="{{ route('backend.user.edit', $user->id) }}" class=" text-warning"><i
+                                                class="nav-icon fas fa-pen"></i>
                                             แก้ไข</a>
                                     </td>
                                 </tr>

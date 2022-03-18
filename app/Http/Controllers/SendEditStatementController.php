@@ -30,6 +30,7 @@ class SendEditStatementController extends Controller
             'name' => $name,
             'path' => $path . "/" . $name,
             'extension' => $extension,
+            'conference_id' => auth()->user()->conference_id
         ]);
 
         $result->data = $data;

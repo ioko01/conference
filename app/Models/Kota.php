@@ -11,5 +11,6 @@ class Kota extends Model
     protected $table = 'kotas';
     protected $fillable = [
         'name',
+        'conference_id'
     ];
 }

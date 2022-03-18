@@ -65,7 +65,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>ไอดี</th>
+                                <th>#</th>
                                 <th>หัวข้อ</th>
                                 <th>ปี (พ.ศ.)</th>
                                 <th class="text-center">เริ่ม</th>

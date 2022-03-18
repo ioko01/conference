@@ -45,7 +45,7 @@ class ResearchController extends Controller
             'present_id' => 'required',
         ]);
 
-        $presenters = join(',', array_filter($request->presenters));
+        $presenters = join('|', array_filter($request->presenters));
 
         $topic_id = '65' . sprintf("%03d", Research::count() + 1);
         Research::create([
@@ -58,6 +58,7 @@ class ResearchController extends Controller
             'branch_id' => $request->branch_id,
             'degree_id' => $request->degree_id,
             'present_id' => $request->present_id,
+            'conference_id' => auth()->user()->conference_id
         ]);
 
         return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
@@ -118,12 +119,12 @@ class ResearchController extends Controller
             ->sortBy('id');
 
         $comments = Comment::select(
-                'comments.topic_id as comment_topic_id',
-                'comments.name as comment_name',
-                'comments.path as comment_path',
-                'comments.extension as comment_ext',
-                'comments.created_at as comment_update'
-            )
+            'comments.topic_id as comment_topic_id',
+            'comments.name as comment_name',
+            'comments.path as comment_path',
+            'comments.extension as comment_ext',
+            'comments.created_at as comment_update'
+        )
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->where('researchs.user_id', $id)
             ->get();
@@ -162,7 +163,7 @@ class ResearchController extends Controller
             'present_id' => 'required',
         ]);
 
-        $presenters = join(',', array_filter($request->presenters));
+        $presenters = join('|', array_filter($request->presenters));
 
         Research::where('topic_id', $id)->update([
             'topic_th' => $request->topic_th,

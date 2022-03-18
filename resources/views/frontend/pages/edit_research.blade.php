@@ -53,7 +53,7 @@
                                     class="form-control w-100 @error('presenters.0')
                             is-invalid
                         @enderror"
-                                    @if (isset(explode(',', $research->presenter)[0])) value="{{ explode(',', $research->presenter)[0] }}" @endif autocomplete="presenters[0]">
+                                    @if (isset(explode('|', $research->presenter)[0])) value="{{ explode('|', $research->presenter)[0] }}" @endif autocomplete="presenters[0]">
 
                                 @error('presenters.0')
                                     <span class="invalid-feedback d-block" role="alert">
@@ -64,22 +64,22 @@
                             <div class="mb-4">
                                 <span>2.&nbsp;</span>
                                 <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode(',', $research->presenter)[1])) value="{{ explode(',', $research->presenter)[1] }}" @endif autocomplete="presenters[1]">
+                                    @if (isset(explode('|', $research->presenter)[1])) value="{{ explode('|', $research->presenter)[1] }}" @endif autocomplete="presenters[1]">
                             </div>
                             <div class="mb-4">
                                 <span>3.&nbsp;</span>
                                 <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode(',', $research->presenter)[2])) value="{{ explode(',', $research->presenter)[2] }}" @endif autocomplete="presenters[2]">
+                                    @if (isset(explode('|', $research->presenter)[2])) value="{{ explode('|', $research->presenter)[2] }}" @endif autocomplete="presenters[2]">
                             </div>
                             <div class="mb-4">
                                 <span>4.&nbsp;</span>
                                 <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode(',', $research->presenter)[3])) value="{{ explode(',', $research->presenter)[3] }}" @endif autocomplete="presenters[3]">
+                                    @if (isset(explode('|', $research->presenter)[3])) value="{{ explode('|', $research->presenter)[3] }}" @endif autocomplete="presenters[3]">
                             </div>
                             <div class="mb-4">
                                 <span>5.&nbsp;</span>
                                 <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode(',', $research->presenter)[4])) value="{{ explode(',', $research->presenter)[4] }}" @endif autocomplete="presenters[4]">
+                                    @if (isset(explode('|', $research->presenter)[4])) value="{{ explode('|', $research->presenter)[4] }}" @endif autocomplete="presenters[4]">
                             </div>
 
                         </div>

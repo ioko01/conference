@@ -10,6 +10,8 @@ src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.
 <!-- AdminLTE App -->
 <script src="{{ asset('vendor/dist/js/adminlte.js', env('REDIRECT_HTTPS')) }}"></script>
 
+<script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
+
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
 <script src="{{ asset('vendor/plugins/jquery-mousewheel/jquery.mousewheel.js', env('REDIRECT_HTTPS')) }}"></script>
@@ -23,3 +25,5 @@ src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.
 <script src="{{ asset('vendor/dist/js/demo.js', env('REDIRECT_HTTPS')) }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('vendor/dist/js/pages/dashboard2.js', env('REDIRECT_HTTPS')) }}"></script>
+
+<script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>

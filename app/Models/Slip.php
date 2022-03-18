@@ -16,6 +16,7 @@ class Slip extends Model
         'path',
         'extension',
         'address',
-        'date'
+        'date',
+        'conference_id'
     ];
 }

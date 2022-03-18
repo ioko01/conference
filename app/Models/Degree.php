@@ -11,5 +11,6 @@ class Degree extends Model
     protected $table = 'degrees';
     protected $fillable = [
         'name',
+        'conference_id'
     ];
 }

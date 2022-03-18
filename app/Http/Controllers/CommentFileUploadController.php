@@ -36,7 +36,8 @@ class CommentFileUploadController extends Controller
                     'topic_id' => $id,
                     'name' => $name,
                     'path' => $full_path,
-                    'extension' => $extension
+                    'extension' => $extension,
+                    'conference_id' => auth()->user()->conference_id
                 ]);
 
                 if ($key == 0) {

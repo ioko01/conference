@@ -13,6 +13,7 @@ class Tip extends Model
         'head',
         'detail',
         'image',
-        'group'
+        'group',
+        'conference_id'
     ];
 }

@@ -11,6 +11,7 @@ class Branch extends Model
     protected $table = 'branches';
     protected $fillable = [
         'name',
-        'faculty_id'
+        'faculty_id',
+        'conference_id'
     ];
 }

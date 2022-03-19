@@ -95,10 +95,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::middleware('is_super_admin')->group(function () {
-        Route::get('generate', function () {
-            \Illuminate\Support\Facades\Artisan::call('storage:link');
-            echo 'storage-link:successfully';
-        });
+
+        Route::get('storage/open', [DashboardController::class, 'storage'])->name('backend.storage.open');
+
         Route::prefix('backend')->group(function () {
             Route::get('dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
             Route::get('conference', [ConferenceController::class, 'index'])->name('backend.conference.index');

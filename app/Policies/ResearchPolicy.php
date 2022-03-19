@@ -53,7 +53,7 @@ class ResearchPolicy
      */
     public function update(User $user, Research $research)
     {
-        return $user->id == $research->id && $research->status_id < 5;
+        return $user->id == $research->id;
     }
 
     /**

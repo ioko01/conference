@@ -61,12 +61,12 @@ class SendEditResearchController extends Controller
             ->get()
             ->sortBy('id');
         $comments = Comment::select(
-                'comments.topic_id as comment_topic_id',
-                'comments.name as comment_name',
-                'comments.path as comment_path',
-                'comments.extension as comment_ext',
-                'comments.created_at as comment_update'
-            )
+            'comments.topic_id as comment_topic_id',
+            'comments.name as comment_name',
+            'comments.path as comment_path',
+            'comments.extension as comment_ext',
+            'comments.created_at as comment_update'
+        )
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->where('researchs.user_id', $id)
             ->get();

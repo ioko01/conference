@@ -29,13 +29,10 @@ class ResearchController extends Controller
         return view('frontend.pages.send_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips'));
     }
 
-    public function create(array $data)
+    public function validator($request)
     {
-    }
-
-    public function store(Request $request)
-    {
-        $this->validate($request, [
+        alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
+        return $request->validate([
             'topic_th' => 'required',
             'topic_en' => 'required',
             'presenters.0' => 'required',
@@ -44,7 +41,15 @@ class ResearchController extends Controller
             'degree_id' => 'required',
             'present_id' => 'required',
         ]);
+    }
 
+    public function create(array $data)
+    {
+    }
+
+    public function store(Request $request)
+    {
+        $this->validator($request);
         $presenters = join('|', array_filter($request->presenters));
 
         $topic_id = '65' . sprintf("%03d", Research::count() + 1);
@@ -61,6 +66,7 @@ class ResearchController extends Controller
             'conference_id' => auth()->user()->conference_id
         ]);
 
+        alert('สำเร็จ', 'เพิ่มบทความเรียบร้อย', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
     }
 
@@ -142,10 +148,7 @@ class ResearchController extends Controller
 
         $this->authorize(
             'update',
-            Research::select(
-                'topic_status as status_id',
-                'user_id as id'
-            )->where('topic_id', $id)->first()
+            Research::select('user_id as id')->where('topic_id', $id)->first()
         );
         return view('frontend.pages.edit_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips', 'researchs'));
     }
@@ -153,16 +156,7 @@ class ResearchController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'topic_th' => 'required',
-            'topic_en' => 'required',
-            'presenters.0' => 'required',
-            'faculty_id' => 'required',
-            'branch_id' => 'required',
-            'degree_id' => 'required',
-            'present_id' => 'required',
-        ]);
-
+        $this->validator($request);
         $presenters = join('|', array_filter($request->presenters));
 
         Research::where('topic_id', $id)->update([
@@ -175,6 +169,7 @@ class ResearchController extends Controller
             'present_id' => $request->present_id,
         ]);
 
+        alert('สำเร็จ', 'แก้ไขบทความสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
     }
 

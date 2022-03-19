@@ -8,7 +8,6 @@ use App\Models\Degree;
 use App\Models\Faculty;
 use App\Models\Present;
 use App\Models\Research;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class ResearchController extends Controller
@@ -44,9 +43,9 @@ class ResearchController extends Controller
         return view('backend.pages.edit_research', compact('faculties', 'degrees', 'branches', 'presents', 'research'));
     }
 
-    public function update(Request $request, $id)
+    public function validator($request)
     {
-        $this->validate($request, [
+        return $request->validate([
             'topic_th' => 'required',
             'topic_en' => 'required',
             'presenters.0' => 'required',
@@ -55,6 +54,11 @@ class ResearchController extends Controller
             'degree_id' => 'required',
             'present_id' => 'required',
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validator($request);
 
         $presenters = join('|', array_filter($request->presenters));
 

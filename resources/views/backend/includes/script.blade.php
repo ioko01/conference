@@ -21,8 +21,8 @@ src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.
 <!-- ChartJS -->
 <script src="{{ asset('vendor/plugins/chart.js/Chart.min.js', env('REDIRECT_HTTPS')) }}"></script>
 
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('vendor/dist/js/demo.js', env('REDIRECT_HTTPS')) }}"></script>
+{{-- <!-- AdminLTE for demo purposes -->
+<script src="{{ asset('vendor/dist/js/demo.js', env('REDIRECT_HTTPS')) }}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('vendor/dist/js/pages/dashboard2.js', env('REDIRECT_HTTPS')) }}"></script>
 

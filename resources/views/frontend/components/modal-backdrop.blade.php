@@ -46,37 +46,37 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <input type="file" class="form-control @if(session('payment_upload')) is-invalid @endif"
+                    <input type="file" class="form-control @error('payment_upload') is-invalid @enderror"
                         name="payment_upload" id="payment_upload" accept=".jpg, .jpeg" onchange="image(this)">
-                    @if(session('payment_upload'))
+                    @error('payment_upload')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @endif
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="date">วันที่ชำระเงิน</label>
-                    <input type="datetime-local" name="date" id="date" class="form-control @if(session('date'))
+                    <input type="datetime-local" name="date" id="date" class="form-control @error('date')
                                     is-invalid
-                                @endif">
-                    @if(session('date'))
+                                @enderror">
+                    @error('date')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @endif
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="address">ที่อยู่ผู้ชำระเงิน</label>
-                    <textarea class="form-control @if(session('address'))
+                    <textarea class="form-control @error('address')
                         is-invalid
-                    @endif" name="address" id="address" cols="30" rows="10"></textarea>
-                    @if(session('address'))
+                    @enderror" name="address" id="address" cols="30" rows="10"></textarea>
+                    @error('address')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @endif
+                    @enderror
                 </div>
             </div>
             <div class="modal-footer">
@@ -110,13 +110,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="file" class="form-control @if(session('word_upload')) is-invalid @endif" name="word_upload"
+                <input type="file" class="form-control @error('word_upload') is-invalid @enderror" name="word_upload"
                     id="word_upload" accept=".doc, .docx">
-                @if(session('word_upload'))
+                @error('word_upload')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
-                @endif
+                @enderror
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>
@@ -148,13 +148,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="file" class="form-control @if(session('pdf_upload')) is-invalid @endif" name="pdf_upload"
+                <input type="file" class="form-control @error('pdf_upload')) is-invalid @enderror" name="pdf_upload"
                     id="pdf_upload" accept=".pdf">
-                @if(session('pdf_upload'))
+                @error('pdf_upload')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
-                @endif
+                @enderror
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>
@@ -179,13 +179,11 @@
             <div class="modal-body">
 
                 @foreach ($data as $value)
-                @if ($value->status_id < 5)
                 <div class="text-end">
                     <a href="{{ route('employee.research.edit', ['topic_id' => $value->topic_id]) }}"
                         class="text-warning">
                         <i class="fas fa-edit"></i> แก้ไขรายละเอียด</a>
                 </div>
-                @endif
                 <div class="mb-3">
                     <strong class="text-green">รหัสบทความ: </strong><span class="text-dark">{{ $value->topic_id
                         }}</span>

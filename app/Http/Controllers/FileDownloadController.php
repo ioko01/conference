@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Storage;
 class FileDownloadController extends Controller
 {
     //
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         return Storage::download($request->file);
     }
 }

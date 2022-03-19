@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Conference;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 
 class ConferenceController extends Controller
 {
@@ -17,14 +16,20 @@ class ConferenceController extends Controller
         return view('backend.pages.conference', compact('conferences'));
     }
 
-    public function store(Request $request)
+    public function validator($request)
     {
-        $request->validate([
+        return $request->validate([
             'topic' => 'required',
             'year' => 'required',
             'start' => 'required|date',
             'end' => 'required|date'
         ]);
+    }
+
+    public function store(Request $request)
+    {
+
+        $this->validator($request);
 
         Conference::create([
             'name' => $request->topic,
@@ -52,7 +57,7 @@ class ConferenceController extends Controller
         return back()->with('success', 'เปลี่ยนสถานะสำเร็จ');
     }
 
-    public function destroy($id){
-
+    public function destroy($id)
+    {
     }
 }

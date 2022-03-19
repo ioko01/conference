@@ -7,7 +7,6 @@ use App\Models\Kota;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -25,9 +24,9 @@ class UserController extends Controller
         return view('backend.pages.edit_user', compact('user', 'positions', 'kotas'));
     }
 
-    public function update(Request $request, $id)
+    public function validator($request)
     {
-        $request->validate([
+        return $request->validate([
             'prefix' => 'required',
             'fullname' => 'required',
             'sex' => 'required',
@@ -37,7 +36,12 @@ class UserController extends Controller
             'position_id' => 'required',
             'person_attend' => 'required',
         ]);
+    }
 
+    public function update(Request $request, $id)
+    {
+
+        $this->validator($request);
         User::where('id', $id)->update(
             [
                 'prefix' => $request->prefix,

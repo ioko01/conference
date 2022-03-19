@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap");
+
 :root {
     --color-green: #30ac33;
     --color-blue: #131f5b;
@@ -7,6 +8,11 @@
     --bg-color-cream: #f9ecde;
     --bg-color-lightcream: #fefdf9;
     --bg-color-shadowcream: #ede3e1;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: var(--color-green)!important;
+    background-color: var(--color-green)!important;
 }
 
 input::-webkit-outer-spin-button,
@@ -84,6 +90,7 @@ body {
         -moz-transform: rotate(0);
         transform: rotate(0);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         -moz-transform: rotate(360deg);
@@ -129,6 +136,7 @@ a {
     0% {
         top: -50px;
     }
+
     100% {
         top: 0;
     }
@@ -392,9 +400,9 @@ a {
     transition: all 0.2s ease;
 }
 
-#date-payment:hover + .date-payment-icon,
-#date-payment:focus + .date-payment-icon,
-#date-payment + .date-payment-icon:hover {
+#date-payment:hover+.date-payment-icon,
+#date-payment:focus+.date-payment-icon,
+#date-payment+.date-payment-icon:hover {
     color: var(--color-green);
 }
 

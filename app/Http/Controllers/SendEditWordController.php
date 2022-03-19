@@ -8,35 +8,37 @@ use App\Models\SendEditWord;
 
 class SendEditWordController extends Controller
 {
-    public function validation($request){
+    public function validation($request)
+    {
         $request->validate(['word_upload' => 'required|mimes:doc,docx|max:10240']);
         return $request;
     }
 
-    public function file($request, $id = null){
+    public function file($request, $id = null)
+    {
         $result = new SendEditWord;
         $this->validation($request);
 
         $upload = $request->file('word_upload');
         $extension = $upload->extension();
-        $name = strval($id)."_edit.".$extension;
+        $name = strval($id) . "_edit." . $extension;
         $path = 'public/edits/words';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,
             'topic_id' => $id,
             'name' => $name,
-            'path' => $path."/".$name,
+            'path' => $path . "/" . $name,
             'extension' => $extension,
             'conference_id' => auth()->user()->conference_id
         ]);
 
         $result->data = $data;
         $result->upload = $upload->storeAs($path, $name);
-        
+
         return $result;
     }
-    
+
 
     public function store(Request $request, $id)
     {

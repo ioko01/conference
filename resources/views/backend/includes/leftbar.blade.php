@@ -24,7 +24,7 @@
                 <li class="nav-item">
                     <a href="/backend/dashboard" class="nav-link @if (Request::is('backend/dashboard')) active @endif">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>หน้าแรก</p>
+                        <p>แผงควบคุม</p>
                     </a>
                 </li>
                 <li class="nav-item">

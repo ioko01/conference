@@ -18,7 +18,11 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendEditResearchController;
 use App\Http\Controllers\SendEditWordController;
 use App\Http\Controllers\SendEditPdfController;
+use App\Http\Controllers\SendEditPdfTwoController;
+use App\Http\Controllers\SendEditResearchTwoController;
 use App\Http\Controllers\SendEditStatementController;
+use App\Http\Controllers\SendEditStatementTwoController;
+use App\Http\Controllers\SendEditWordTwoController;
 use App\Http\Controllers\VideoController;
 
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('research/edit/{topic_id}', [ResearchController::class, 'edit'])->name('employee.research.edit');
         Route::put('research/edit/{topic_id}/update', [ResearchController::class, 'update'])->name('employee.research.update');
 
-        // ส่งบทความฉบับแก้ไข
+        // ส่งบทความฉบับแก้ไข ครั้งที่ 1
         Route::get('research/send-edit/show/{id}', [SendEditResearchController::class, 'show'])->name('employee.research.send.edit');
         Route::post('research/send-edit/word/{id}/create', [SendEditWordController::class, 'store'])->name('employee.research.send.word.store');
         Route::put('research/send-edit/word/{id}/update', [SendEditWordController::class, 'update'])->name('employee.research.send.word.update');
@@ -71,6 +75,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('research/send-edit/pdf/{id}/update', [SendEditPdfController::class, 'update'])->name('employee.research.send.pdf.update');
         Route::post('research/send-edit/stm/{id}/create', [SendEditStatementController::class, 'store'])->name('employee.research.send.stm.store');
         Route::put('research/send-edit/stm/{id}/update', [SendEditStatementController::class, 'update'])->name('employee.research.send.stm.update');
+
+        // ส่งบทความฉบับแก้ไข ครั้งที่ 2
+        Route::get('research/send-edit-2/show/{id}', [SendEditResearchTwoController::class, 'show'])->name('employee.research.send.two.edit');
+        Route::post('research/send-edit/word_2/{id}/create', [SendEditWordTwoController::class, 'store'])->name('employee.research.send.two.word.store');
+        Route::put('research/send-edit/word_2/{id}/update', [SendEditWordTwoController::class, 'update'])->name('employee.research.send.two.word.update');
+        Route::post('research/send-edit/pdf_2/{id}/create', [SendEditPdfTwoController::class, 'store'])->name('employee.research.send.two.pdf.store');
+        Route::put('research/send-edit/pdf_2/{id}/update', [SendEditPdfTwoController::class, 'update'])->name('employee.research.send.two.pdf.update');
+        Route::post('research/send-edit/stm_2/{id}/create', [SendEditStatementTwoController::class, 'store'])->name('employee.research.send.two.stm.store');
+        Route::put('research/send-edit/stm_2/{id}/update', [SendEditStatementTwoController::class, 'update'])->name('employee.research.send.two.stm.update');
+
 
         Route::get('research/video/{id}', [VideoController::class, 'show'])->name('employee.research.video');
 

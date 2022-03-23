@@ -10,6 +10,7 @@ use App\Models\Branch;
 use App\Models\Present;
 use App\Models\Tip;
 use App\Models\Comment;
+use App\Models\Conference;
 
 class ResearchController extends Controller
 {
@@ -26,7 +27,9 @@ class ResearchController extends Controller
         $branches = Branch::get();
         $presents = Present::get();
         $tips = Tip::where('group', '1')->get();
-        return view('frontend.pages.send_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips'));
+        $conference_id = Conference::where('status', 1)->first();
+
+        return view('frontend.pages.send_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips', 'conference_id'));
     }
 
     public function validator($request)

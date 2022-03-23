@@ -10,8 +10,8 @@ class SendEditPdfController extends Controller
 {
     public function validation($request)
     {
-        $request->validate(['pdf_upload' => 'required|mimes:pdf|max:10240']);
-        return $request;
+        alert('ผิดพลาด', 'ไม่สามารถอัพโหลด PDF ได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
+        return $request->validate(['pdf_upload' => 'required|mimes:pdf|max:10240']);
     }
 
     public function file($request, $id = null)
@@ -48,7 +48,8 @@ class SendEditPdfController extends Controller
         SendEditPdf::create($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
-        return back()->with('success', true);
+        alert('สำเร็จ', 'อัพโหลดบทความแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        return back()->with('success', 'อัพโหลดบทความแก้ไขสำเร็จ');
     }
 
     public function update(Request $request, $id)
@@ -56,6 +57,7 @@ class SendEditPdfController extends Controller
         SendEditPdf::where('topic_id', $id)->update($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
-        return back()->with('success', true);
+        alert('สำเร็จ', 'แก้ไขบทความแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        return back()->with('success', 'แก้ไขบทความแก้ไขสำเร็จ');
     }
 }

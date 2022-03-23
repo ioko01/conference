@@ -4,25 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\SendEditWord;
+use App\Models\SendEditStatementTwo;
 
-class SendEditWordController extends Controller
+class SendEditStatementTwoController extends Controller
 {
     public function validation($request)
     {
-        alert('ผิดพลาด', 'ไม่สามารถอัพโหลด PDF ได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
-        return $request->validate(['word_upload' => 'required|mimes:doc,docx|max:10240']);
+        alert('ผิดพลาด', 'ไม่สามารถอัพโหลด แบบคำชี้แจงได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
+        return $request->validate(['stm_upload' => 'required|mimes:pdf|max:10240']);
     }
 
     public function file($request, $id = null)
     {
-        $result = new SendEditWord;
+        $result = new SendEditStatementTwo;
         $this->validation($request);
 
-        $upload = $request->file('word_upload');
+        $upload = $request->file('stm_upload');
         $extension = $upload->extension();
-        $name = strval($id) . "_edit." . $extension;
-        $path = 'public/edits/words';
+        $name = strval($id) . "_statement_2." . $extension;
+        $path = 'public/edits_two/statements';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,
@@ -42,10 +42,10 @@ class SendEditWordController extends Controller
 
     public function store(Request $request, $id)
     {
-        $word = SendEditWord::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'send_edit_words.topic_id')->where('researchs.topic_id', $id)->first();
-        $this->authorize('update', $word);
+        $stm = SendEditStatementTwo::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'send_edit_statements_two.topic_id')->where('researchs.topic_id', $id)->first();
+        $this->authorize('update', $stm);
 
-        SendEditWord::create($this->file($request, $id)->data);
+        SendEditStatementTwo::create($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
         alert('สำเร็จ', 'อัพโหลดบทความแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
@@ -54,7 +54,7 @@ class SendEditWordController extends Controller
 
     public function update(Request $request, $id)
     {
-        SendEditWord::where('topic_id', $id)->update($this->file($request, $id)->data);
+        SendEditStatementTwo::where('topic_id', $id)->update($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
         alert('สำเร็จ', 'แก้ไขบทความแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');

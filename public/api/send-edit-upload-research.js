@@ -103,7 +103,7 @@ function detail_modal(topic_id) {
 
 function send_research_modal(topic_id, type, method) {
     const _token = $('meta[name="csrf-token"]').attr("content");
-    const iType = ["word", "pdf", "stm"];
+    const iType = ["word", "pdf", "stm", "word_2", "pdf_2", "stm_2"];
     const createModal = `
     <form enctype="multipart/form-data" method="POST" action="/employee/research/send-edit/${
         iType.filter((item) => item === type) ? type : ""
@@ -124,15 +124,15 @@ function send_research_modal(topic_id, type, method) {
                     </div>
                     <div class="modal-body">
                     ${
-                        type == "word"
-                            ? `<input
+                        type == "word" || type == "word_2"
+                            ? `<input class="form-control"
                                 type="file"
                                 name="word_upload"
                                 accept=".doc, .docx"
                             />`
-                            : type == "pdf"
-                            ? `<input type="file" name="pdf_upload" accept=".pdf" />`
-                            : `<input type="file" name="stm_upload" accept=".pdf" />`
+                            : type == "pdf" || type == "pdf_2"
+                            ? `<input class="form-control" type="file" name="pdf_upload" accept=".pdf" />`
+                            : `<input class="form-control" type="file" name="stm_upload" accept=".pdf" />`
                     }
                     </div>
                     <div class="modal-footer">
@@ -168,6 +168,15 @@ function check_type(type, topic_id, method) {
             send_research_modal(topic_id, type, method);
             break;
         case "stm":
+            send_research_modal(topic_id, type, method);
+            break;
+        case "word_2":
+            send_research_modal(topic_id, type, method);
+            break;
+        case "pdf_2":
+            send_research_modal(topic_id, type, method);
+            break;
+        case "stm_2":
             send_research_modal(topic_id, type, method);
             break;
         default:

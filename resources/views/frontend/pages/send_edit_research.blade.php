@@ -31,9 +31,9 @@
                         <th style="width: 5%;">#</th>
                         <th style="width: 25%;">ชื่อบทความ/ผู้วิจัย</th>
                         <th style="width: 15%;">ไฟล์แก้ไขจากผู้ทรงฯ</th>
-                        <th style="width: 15%;">ไฟล์ WORD ฉบับแก้ไข</th>
-                        <th style="width: 15%;">ไฟล์ PDF ฉบับแก้ไข</th>
-                        <th style="width: 15%;">แบบคำชี้แจงการปรับแก้ไขบทความ</th>
+                        <th style="width: 15%;">ไฟล์ WORD ฉบับแก้ไขครั้งที่ 1</th>
+                        <th style="width: 15%;">ไฟล์ PDF ฉบับแก้ไขครั้งที่ 1</th>
+                        <th style="width: 15%;">แบบคำชี้แจงการปรับแก้ไขบทความครั้งที่ 1</th>
                         <th style="width: 10%;">รายละเอียด</th>
                     </tr>
                 </thead>

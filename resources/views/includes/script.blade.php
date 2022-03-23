@@ -9,7 +9,7 @@
         <script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('employee/research/send-edit/show/*'))
+    @if (Request::is('employee/research/send-edit/show/*') || Request::is('employee/research/send-edit-2/show/*'))
         <script src="{{ asset('api/send-edit-upload-research.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 

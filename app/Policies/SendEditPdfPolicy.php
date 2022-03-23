@@ -4,13 +4,15 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\SendEditPdf;
+use App\Models\SendEditPdfTwo;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SendEditPdfPolicy
 {
     use HandlesAuthorization;
 
-    public function update(User $user, SendEditPdf $send_edit_pdf){
+    public function update(User $user, SendEditPdf $send_edit_pdf)
+    {
         return $user->id == $send_edit_pdf->user_id;
     }
 }

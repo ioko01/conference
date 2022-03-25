@@ -21,7 +21,7 @@
         <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('employee/research/*') || Request::is('admin/research/management'))
+    @if (Request::is('employee/research/*') || Request::is('admin/research/management') || Request::is('list/*'))
         <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
         <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
         <script>

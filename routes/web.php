@@ -14,6 +14,8 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
 use App\Http\Controllers\Backend\StatementController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\ListAttendController;
+use App\Http\Controllers\ListResearchController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendEditResearchController;
 use App\Http\Controllers\SendEditWordController;
@@ -47,6 +49,8 @@ Route::get('contract', function () {
 })->name('contract');
 
 Route::get('payment', [PaymentController::class, 'index'])->name('payment');
+Route::get('list/research', [ListResearchController::class, 'index'])->name('list.research.index');
+Route::get('list/attend', [ListAttendController::class, 'index'])->name('list.attend.index');
 
 // Email Verify
 Route::get('email/verify', [MailController::class, 'verify'])->name('verification.notice');

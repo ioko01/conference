@@ -45,8 +45,8 @@
                         รายชื่อ
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">รายชื่อบทความ</a></li>
-                        <li><a class="dropdown-item" href="#">รายชื่อผู้ร่วมงาน</a></li>
+                        <li><a class="dropdown-item" href="{{ route('list.research.index') }}">รายชื่อบทความ</a></li>
+                        <li><a class="dropdown-item" href="{{ route('list.attend.index') }}">รายชื่อผู้ร่วมงาน</a></li>
                     </ul>
                 </li>
 

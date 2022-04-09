@@ -73,7 +73,7 @@ class CreateInitialSeeder extends Seeder
 
         $presents = [
             ['name' => 'Oral (นำเสนอปากเปล่า)'],
-            ['name' => 'Poster (การนำเสนอแบบโปสเตอร์)'],
+            ['name' => 'Poster (นำเสนอแบบโปสเตอร์)'],
         ];
         foreach ($presents as $key => $value) {
             Present::create($value);

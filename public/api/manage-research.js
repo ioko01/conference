@@ -22,7 +22,7 @@ function detail_modal(topic_id) {
     $.ajax({
         method: "GET",
         url: "/api/show-research-detail/" + topic_id,
-        success: function(res) {
+        success: function (res) {
             res.forEach((data) => {
                 $("#modal_body").html(`
                 <div class="mb-3">
@@ -86,16 +86,18 @@ function detail_modal(topic_id) {
                 `);
             });
         },
-        beforeSend: function() {
+        beforeSend: function () {
             $("#modal").html(createModal);
             $("#modal_body").html(
                 `<div class="text-center">กำลังโหลดข้อมูล กรุณารอสักครู่</div>`
             );
             $("#research_modal").modal("show");
         },
-        error: function(event, request, settings) {
+        error: function (event, request, settings) {
             if (!navigator.onLine) {
-                $("#modal_body").html(`<div>Internet Disconnection</div>`);
+                $("#modal_body").html(`<div class="text-center">ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน</div>`);
+            } else if (!navigator.doNotTrack) {
+                $("#modal_body").html(`<div class="text-center">เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง</div>`);
             }
         },
     });
@@ -161,7 +163,7 @@ function send_comment_modal(topic_id, type) {
 function open_modal(e, type) {
     try {
         const topic_id = e.nextElementSibling.value;
-        const title = type;
+        const title = "เปลี่ยนสถานะ";
         const status_value = e.value;
         const text_status =
             type == "change_status" ? e[e.selectedIndex].text : null;
@@ -197,13 +199,20 @@ function update_status(topic_id, status) {
                 topic_status: status,
                 _token,
             },
-            success: function(data) {
+            success: function (data) {
                 data.success ?
                     window.location.replace("/admin/research/management") :
                     null;
             },
-            error: function(error) {
-                console.log(error);
+            beforeSend: function () {
+                console.log("กำลังโหลด");
+            },
+            error: function (error) {
+                if (!navigator.onLine) {
+                    console.log("ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน");
+                } else if (!navigator.doNotTrack) {
+                    console.log("เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง");
+                }
             },
         });
     } catch (error) {

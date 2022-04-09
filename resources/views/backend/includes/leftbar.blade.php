@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
         <img src="{{ asset('images/logo.png', env('REDIRECT_HTTPS')) }}" alt="AdminLTE Logo" class="brand-image">
-        <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
+        <span>ราชภัฏเลยวิชาการ</span>
     </a>
 
     <!-- Sidebar -->
@@ -21,14 +21,22 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
+                <li class="nav-header">แผงควบคุม</li>
                 <li class="nav-item">
-                    <a href="/backend/dashboard" class="nav-link @if (Request::is('backend/dashboard')) active @endif">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>แผงควบคุม</p>
+                    <a href="/" class="nav-link text-info">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>เว็บไซต์ประชุมวิชาการ</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/conference" class="nav-link @if (Request::is('backend/conference')) active @endif">
+                    <a href="/backend/dashboard" class="nav-link @if (Request::is('backend/dashboard')) active @endif">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>หน้าแรก</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/backend/conference"
+                        class="nav-link @if (Request::is('backend/conference')) active @endif">
                         <i class="nav-icon fas fa-th"></i>
                         <p>หัวข้อ</p>
                     </a>
@@ -47,16 +55,16 @@
                 </li>
                 <li class="nav-item">
                     <a href="/backend/statement" class="nav-link @if (Request::is('backend/statement')) active @endif">
-                        <i class="nav-icon fas fa-book"></i>
+                        <i class="nav-icon fas fa-bullhorn"></i>
                         <p>ประกาศผลพิจารณา</p>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
-                            Forms
+                            Proceedings
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -64,25 +72,13 @@
                         <li class="nav-item">
                             <a href="pages/forms/general.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>General Elements</p>
+                                <p>2565</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="pages/forms/advanced.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Advanced Elements</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/forms/editors.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Editors</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/forms/validation.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Validation</p>
+                                <p>2564</p>
                             </a>
                         </li>
                     </ul>

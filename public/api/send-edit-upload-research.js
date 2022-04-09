@@ -95,7 +95,9 @@ function detail_modal(topic_id) {
         },
         error: function (event, request, settings) {
             if (!navigator.onLine) {
-                $("#modal_body").html(`<div>Internet Disconnection</div>`);
+                $("#modal_body").html(`<div class="text-center">ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน</div>`);
+            } else if (!navigator.doNotTrack) {
+                $("#modal_body").html(`<div class="text-center">เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง</div>`);
             }
         },
     });
@@ -161,22 +163,7 @@ function check_type(type, topic_id, method) {
         case "detail":
             detail_modal(topic_id, type);
             break;
-        case "word":
-            send_research_modal(topic_id, type, method);
-            break;
-        case "pdf":
-            send_research_modal(topic_id, type, method);
-            break;
-        case "stm":
-            send_research_modal(topic_id, type, method);
-            break;
-        case "word_2":
-            send_research_modal(topic_id, type, method);
-            break;
-        case "pdf_2":
-            send_research_modal(topic_id, type, method);
-            break;
-        case "stm_2":
+        case "word" || "pdf" || "stm" || "word_2" || "pdf_2" || "stm_2":
             send_research_modal(topic_id, type, method);
             break;
         default:

@@ -202,7 +202,7 @@
                 </div>
                 <div class="mb-3">
                     <strong class="text-green">ชื่อผู้นำเสนอบทความ: </strong><span class="text-dark">{{
-                        $value->presenter }}</span>
+                        str_replace('|', ', ', $value->presenter) }}</span>
                 </div>
                 <div class="mb-3">
                     <strong class="text-green">กลุ่มบทความ: </strong><span class="text-dark">{{ $value->faculty

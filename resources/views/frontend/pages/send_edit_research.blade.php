@@ -42,7 +42,7 @@
                         <tr class="text-center">
                             <td>{{ $value->id }}</td>
                             <td>{{ $value->topic_th }}
-                                <br /><span class="name-research text-small text-green">{{ $value->presenter }}</span>
+                                <br /><span class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
                             </td>
                             <td>
                                 @if ( $value->status_id >= 8 )

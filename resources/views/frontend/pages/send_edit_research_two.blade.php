@@ -41,7 +41,7 @@
                 <tr class="text-center">
                     <td>{{ $value->id }}</td>
                     <td>{{ $value->topic_th }}
-                        <br /><span class="name-research text-small text-green">{{ $value->presenter }}</span>
+                        <br /><span class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
                     </td>
                     @if(isset($value->edit_word_path) || isset($value->edit_pdf_path) || isset($value->edit_stm_path))
                     <td>

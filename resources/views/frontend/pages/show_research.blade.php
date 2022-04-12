@@ -42,7 +42,7 @@
                 <tr class="text-center">
                     <td>{{ $value->id }}</td>
                     <td>{{ $value->topic_th }}
-                        <br /><span class="name-research text-small text-green">{{ $value->presenter }}</span>
+                        <br /><span class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
                     </td>
                     <td>
                         <strong class="text-red">{{ $value->topic_status }}</strong>
@@ -76,7 +76,7 @@
                             <div class="alert alert-error">
                                 <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
                             </div>
-                            @endif
+                        @endif
                     </td>
                     <td>
                         @if (isset($value->word_path))

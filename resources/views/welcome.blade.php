@@ -6,7 +6,9 @@
     <img src="{{ asset('images/banner-01.jpeg', env('REDIRECT_HTTPS'))}}" alt="banner" width="100%">
 </header>
 
-<div id="poster2" style="padding: 10rem 0 10rem 0" class="container">
+<div style="opacity: .8;" class="p-md-5 py-5 bg-white w-100 my-5" id="timeleft"></div>
+
+<div id="poster2" class="container mb-5">
     <div class="row m-0">
         <div class="col-6">
             <img src="{{ asset('images/banner1-v2.1.png', env('REDIRECT_HTTPS'))}}" alt="banner" width="100%">

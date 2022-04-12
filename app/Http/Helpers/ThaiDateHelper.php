@@ -4,7 +4,7 @@ function thaiDateFormat($date, $time = false)
     {
         $monthTh = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
         $getYear = date("Y", strtotime($date)) + 543;
-        $getMonth = date("n", strtotime($date));
+        $getMonth = date("n", strtotime($date)) - 1;
         $getTime = date("H:i:s", strtotime($date));
 
         if ($time) {

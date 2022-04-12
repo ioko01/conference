@@ -26,7 +26,7 @@ use App\Http\Controllers\SendEditStatementController;
 use App\Http\Controllers\SendEditStatementTwoController;
 use App\Http\Controllers\SendEditWordTwoController;
 use App\Http\Controllers\VideoController;
-
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function(){
     return view('welcome');
 })->name('welcome');
 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Branch;
 use App\Http\Controllers\StatusUpdateController;
 use App\Http\Controllers\ManageResearchController;
+use App\Models\Conference;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,21 @@ use App\Http\Controllers\ManageResearchController;
 
 Route::get('branches', function(Request $request){
     return Branch::select('id', 'name')->where('faculty_id', $request->faculty_id)->get();
+});
+
+Route::get('timeleft', function(){
+    return Conference::select('end as timeleft')
+                        ->where('conferences.status', 1)
+                        ->get();
+    // return Conference::select(
+    //     Conference::raw(
+    //         "floor(timestampdiff(second, now(), end)/(60*60*24)) as day
+    //         ,floor(timestampdiff(second, now(), end)/(60*60)%24) as hour
+    //         ,floor(timestampdiff(second, now(), end)/(60)%60) as minute
+    //         ,floor(timestampdiff(second, now(), end)%60) as second"
+    //     ))
+    //     ->where('conferences.status', 1)
+    //     ->get();
 });
 
 Route::middleware(['auth', 'verified', 'is_admin'])->group(function(){

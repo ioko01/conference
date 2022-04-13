@@ -8,13 +8,13 @@ use App\Models\SendEditStatement;
 
 class SendEditStatementController extends Controller
 {
-    public function validation($request)
+    protected function validation($request)
     {
         alert('ผิดพลาด', 'ไม่สามารถอัพโหลด แบบคำชี้แจงได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate(['stm_upload' => 'required|mimes:pdf|max:10240']);
     }
 
-    public function file($request, $id = null)
+    protected function file($request, $id = null)
     {
         $result = new SendEditStatement;
         $this->validation($request);
@@ -40,7 +40,7 @@ class SendEditStatementController extends Controller
     }
 
 
-    public function store(Request $request, $id)
+    protected function store(Request $request, $id)
     {
         $stm = SendEditStatement::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'send_edit_statements.topic_id')->where('researchs.topic_id', $id)->first();
         $this->authorize('update', $stm);
@@ -52,7 +52,7 @@ class SendEditStatementController extends Controller
         return back()->with('success', 'อัพโหลดบทความแก้ไขสำเร็จ');
     }
 
-    public function update(Request $request, $id)
+    protected function update(Request $request, $id)
     {
         SendEditStatement::where('topic_id', $id)->update($this->file($request, $id)->data);
         $this->file($request, $id)->upload;

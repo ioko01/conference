@@ -15,7 +15,7 @@ class StatusUpdateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    protected function update(Request $request, $id)
     {
         Research::where('topic_id', $id)->update(['topic_status' => $request->topic_status]);
         return response()->json(['success' => true]);

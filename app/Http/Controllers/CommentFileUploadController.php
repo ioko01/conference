@@ -11,13 +11,13 @@ class CommentFileUploadController extends Controller
 {
 
     //Deleted All Files
-    public function destroyFile($path)
+    protected function destroyFile($path)
     {
         if (Storage::exists($path)) {
             Storage::deleteDirectory($path);
         }
     }
-    public function update(Request $request, $id)
+    protected function update(Request $request, $id)
     {
         $request->validate(['file_comment*' => 'mimes:pdf|max:10240']);
 

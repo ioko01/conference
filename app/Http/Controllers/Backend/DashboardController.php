@@ -17,7 +17,7 @@ class DashboardController extends Controller
         return view('backend.pages.dashboard', compact('storage'));
     }
 
-    public function storage()
+    protected function storage()
     {
         $path = public_path('storage');
         $storage = File::exists($path);

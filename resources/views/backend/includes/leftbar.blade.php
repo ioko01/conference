@@ -42,6 +42,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/backend/download"
+                        class="nav-link @if (Request::is('backend/download')) active @endif">
+                        <i class="nav-icon fas fa-download"></i>
+                        <p>ดาวน์โหลด</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/backend/users" class="nav-link @if (Request::is('backend/users')) active @endif">
                         <i class="nav-icon fas fa-user"></i>
                         <p>ผู้ใช้งาน</p>

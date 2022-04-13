@@ -11,6 +11,7 @@ use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\CommentFileUploadController;
 use App\Http\Controllers\Backend\ConferenceController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\DownloadController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
 use App\Http\Controllers\Backend\StatementController;
 use App\Http\Controllers\Backend\UserController;
@@ -40,7 +41,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function(){
+Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
@@ -118,9 +119,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::prefix('backend')->group(function () {
             Route::get('dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
-            Route::get('conference', [ConferenceController::class, 'index'])->name('backend.conference.index');
             Route::get('statement', [StatementController::class, 'index'])->name('backend.statement.index');
-
 
             Route::get('researchs', [BackendResearchController::class, 'index'])->name('backend.researchs.index');
             Route::get('research/{topic_id}/edit', [BackendResearchController::class, 'edit'])->name('backend.research.edit');
@@ -130,9 +129,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('backend.user.edit');
             Route::put('user/{id}/update', [UserController::class, 'update'])->name('backend.user.update');
 
-
+            Route::get('conference', [ConferenceController::class, 'index'])->name('backend.conference.index');
+            Route::get('conference/{conference_id}/edit', [ConferenceController::class, 'edit'])->name('backend.conference.edit');
             Route::post('conference/create', [ConferenceController::class, 'store'])->name('backend.conference.store');
-            Route::put('conference/{id}/update', [ConferenceController::class, 'update'])->name('backend.conference.update');
+            Route::put('conference/{id}/update_status', [ConferenceController::class, 'update_status'])->name('backend.conference.update_status');
+            Route::put('conference/{id}/update_topic', [ConferenceController::class, 'update_topic'])->name('backend.conference.update_topic');
+
+
+            Route::get('download', [DownloadController::class, 'index'])->name('backend.download.index');
         });
     });
 });

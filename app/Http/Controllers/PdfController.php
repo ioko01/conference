@@ -8,13 +8,13 @@ use App\Models\Pdf;
 class PdfController extends Controller
 {
 
-    public function validation($request)
+    protected function validation($request)
     {
         alert('ผิดพลาด', 'ไม่สามารถอัพโหลด PDF ได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate(['pdf_upload' => 'required|mimes:pdf|max:10240']);
     }
 
-    public function file($request, $id = null)
+    protected function file($request, $id = null)
     {
         $result = new Pdf;
         $this->validation($request);
@@ -41,7 +41,7 @@ class PdfController extends Controller
     }
 
 
-    public function store(Request $request, $id)
+    protected function store(Request $request, $id)
     {
         $pdf = Pdf::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'pdf.topic_id')->where('researchs.topic_id', $id)->first();
         $this->authorize('update', $pdf);
@@ -53,7 +53,7 @@ class PdfController extends Controller
         return back()->with('success', 'อัพโหลด PDF สำเร็จ');
     }
 
-    public function update(Request $request, $id)
+    protected function update(Request $request, $id)
     {
         Pdf::where('topic_id', $id)->update($this->file($request, $id)->data);
         $this->file($request, $id)->upload;

@@ -15,7 +15,7 @@ class PaymentController extends Controller
         return view('frontend.pages.payment', compact('tips'));
     }
 
-    public function validation($request)
+    protected function validation($request)
     {
         alert('ผิดพลาด', 'ไม่สามารถอัพโหลด SLIP ได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
@@ -25,7 +25,7 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function file($request, $id)
+    protected function file($request, $id)
     {
         $result = new Slip;
         $this->validation($request);
@@ -52,7 +52,7 @@ class PaymentController extends Controller
         return $result;
     }
 
-    public function store(Request $request, $id)
+    protected function store(Request $request, $id)
     {
         $slip = Slip::select('researchs.user_id as user_id')->rightjoin('researchs', 'researchs.topic_id', 'slips.topic_id')->where('researchs.topic_id', $id)->first();
         $this->authorize('update', $slip);
@@ -63,7 +63,7 @@ class PaymentController extends Controller
         return back()->with('success', 'อัพโหลด SLIP สำเร็จ');
     }
 
-    public function update(Request $request, $id)
+    protected function update(Request $request, $id)
     {
         Slip::where('topic_id', $id)->update($this->file($request, $id)->data);
         $this->file($request, $id)->upload;

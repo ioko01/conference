@@ -11,8 +11,16 @@
 }
 
 .custom-control-input:checked~.custom-control-label::before {
-    border-color: var(--color-green)!important;
-    background-color: var(--color-green)!important;
+    border-color: var(--color-green) !important;
+    background-color: var(--color-green) !important;
+}
+
+.custom-switch .custom-control-label::before {
+    top: 0;
+}
+
+.custom-switch .custom-control-label::after {
+    top: calc(0.25rem - 2px) !important;
 }
 
 input::-webkit-outer-spin-button,

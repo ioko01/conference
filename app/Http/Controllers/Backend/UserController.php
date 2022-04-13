@@ -24,7 +24,7 @@ class UserController extends Controller
         return view('backend.pages.edit_user', compact('user', 'positions', 'kotas'));
     }
 
-    public function validator($request)
+    protected function validator($request)
     {
         return $request->validate([
             'prefix' => 'required',
@@ -38,7 +38,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    protected function update(Request $request, $id)
     {
 
         $this->validator($request);

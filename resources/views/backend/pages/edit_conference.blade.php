@@ -4,11 +4,12 @@
 <div class="card">
     <div class="card-content">
         <div class="card-body">
-            <form method="POST" action="{{ route('backend.conference.store') }}" class="mb-3">
+            <form method="POST" action="{{ route('backend.conference.update_topic', $conference->id) }}" class="mb-3">
                 @csrf
+                @method('PUT')
                 <div class="col-12 mb-3">
                     <label for="topic">เพิ่มหัวข้อการประชุมวิชาการ</label>
-                    <input value="{{ old('topic') }}" type="text" name="topic" id="topic"
+                    <input value="{{ $conference->name }}" type="text" name="topic" id="topic"
                         class="form-control rounded-0 @error('topic') is-invalid @enderror">
                     @error('topic')
                     <span class="invalid-feedback" role="alert">
@@ -18,7 +19,7 @@
                 </div>
                 <div class="col-12 col-md-4 mb-3">
                     <label for="year">เพิ่มปีที่ประชุมวิชาการ (พ.ศ.)</label>
-                    <input value="{{ old('year') }}" type="number" name="year" id="year"
+                    <input value="{{ $conference->year }}" type="number" name="year" id="year"
                         class="form-control rounded-0 @error('year') is-invalid @enderror">
                     @error('year')
                     <span class="invalid-feedback" role="alert">
@@ -29,8 +30,8 @@
                 <div class="row m-0">
                     <div class="col-lg-4 col-md-6 mb-3">
                         <label for="start">วันที่เริ่มจัดงานประชุม</label>
-                        <input value="{{ old('start') }}" type="datetime-local" name="start" id="start"
-                            class="form-control rounded-0 @error('start') is-invalid @enderror">
+                        <input value="{{ date('Y-m-d\TH:i', strtotime($conference->start)) }}" type="datetime-local" name="start"
+                            id="start" class="form-control rounded-0 @error('start') is-invalid @enderror">
                         @error('start')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -39,8 +40,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 mb-3">
                         <label for="final">วันสิ้นสุดจัดงานประชุม</label>
-                        <input value="{{ old('final') }}" type="datetime-local" name="final" id="final"
-                            class="form-control rounded-0 @error('final') is-invalid @enderror">
+                        <input value="{{ date('Y-m-d\TH:i', strtotime($conference->final)) }}" type="datetime-local" name="final"
+                            id="final" class="form-control rounded-0 @error('final') is-invalid @enderror">
                         @error('final')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -51,7 +52,8 @@
                 <div class="row m-0">
                     <div class="col-lg-4 col-md-6 mb-3">
                         <label for="start_research">วันที่เปิดรับบทความ</label>
-                        <input value="{{ old('start_research') }}" type="datetime-local" name="start_research" id="start_research"
+                        <input value="{{ date('Y-m-d\TH:i', strtotime($conference->start_research)) }}" type="datetime-local"
+                            name="start_research" id="start_research"
                             class="form-control rounded-0 @error('start_research') is-invalid @enderror">
                         @error('start_research')
                         <span class="invalid-feedback" role="alert">
@@ -61,7 +63,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 mb-3">
                         <label for="end_research">วันสิ้นสุดการรับบทความ</label>
-                        <input value="{{ old('end_research') }}" type="datetime-local" name="end_research" id="end_research"
+                        <input value="{{ date('Y-m-d\TH:i', strtotime($conference->end_research)) }}" type="datetime-local"
+                            name="end_research" id="end_research"
                             class="form-control rounded-0 @error('end_research') is-invalid @enderror">
                         @error('end_research')
                         <span class="invalid-feedback" role="alert">
@@ -73,7 +76,8 @@
                 <div class="row m-0">
                     <div class="col-lg-4 col-md-6 mb-3">
                         <label for="end_payment">วันสิ้นสุดการชำระเงิน</label>
-                        <input value="{{ old('end_payment') }}" type="datetime-local" name="end_payment" id="end_payment"
+                        <input value="{{ date('Y-m-d\TH:i', strtotime($conference->end_payment)) }}" type="datetime-local"
+                            name="end_payment" id="end_payment"
                             class="form-control rounded-0 @error('end_payment') is-invalid @enderror">
                         @error('end_payment')
                         <span class="invalid-feedback" role="alert">
@@ -85,7 +89,8 @@
                 <div class="row m-0">
                     <div class="col-lg-4 col-md-6 mb-3">
                         <label for="end_attend">วันสิ้นสุดการลงทะเบียนเข้าร่วมงาน</label>
-                        <input value="{{ old('end_attend') }}" type="datetime-local" name="end_attend" id="end_attend"
+                        <input value="{{ date('Y-m-d\TH:i', strtotime($conference->end_attend)) }}" type="datetime-local"
+                            name="end_attend" id="end_attend"
                             class="form-control rounded-0 @error('end_attend') is-invalid @enderror">
                         @error('end_attend')
                         <span class="invalid-feedback" role="alert">
@@ -97,8 +102,8 @@
                 <div class="row m-0">
                     <div class="col-lg-4 col-md-6 mb-3">
                         <label for="end_research_edit">วันสิ้นสุดการรับบทความฉบับแก้ไข</label>
-                        <input value="{{ old('end_research_edit') }}" type="datetime-local" name="end_research_edit"
-                            id="end_research_edit"
+                        <input value="{{ date('Y-m-d\TH:i', strtotime($conference->end_research_edit)) }}" type="datetime-local"
+                            name="end_research_edit" id="end_research_edit"
                             class="form-control rounded-0 @error('end_research_edit') is-invalid @enderror">
                         @error('end_research_edit')
                         <span class="invalid-feedback" role="alert">
@@ -108,8 +113,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 mb-3">
                         <label for="end_research_edit_two">วันสิ้นสุดการรับบทความฉบับแก้ไข ครั้งที่ 2</label>
-                        <input value="{{ old('end_research_edit_two') }}" type="datetime-local" name="end_research_edit_two"
-                            id="end_research_edit_two"
+                        <input value="{{ date('Y-m-d\TH:i', strtotime($conference->end_research_edit_two)) }}" type="datetime-local"
+                            name="end_research_edit_two" id="end_research_edit_two"
                             class="form-control rounded-0 @error('end_research_edit_two') is-invalid @enderror">
                         @error('end_research_edit_two')
                         <span class="invalid-feedback" role="alert">
@@ -121,8 +126,8 @@
                 <div class="row m-0">
                     <div class="col-lg-4 col-md-6 mb-3">
                         <label for="end_poster_and_video">วันสิ้นสุดการส่งไฟล์โปสเตอร์และวิดีโอ</label>
-                        <input value="{{ old('end_poster_and_video') }}" type="datetime-local" name="end_poster_and_video"
-                            id="end_poster_and_video"
+                        <input value="{{ date('Y-m-d\TH:i', strtotime($conference->end_poster_and_video)) }}" type="datetime-local"
+                            name="end_poster_and_video" id="end_poster_and_video"
                             class="form-control rounded-0 @error('end_poster_and_video') is-invalid @enderror">
                         @error('end_poster_and_video')
                         <span class="invalid-feedback" role="alert">
@@ -132,8 +137,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 mb-3">
                         <label for="end_poster_and_video_two">วันสิ้นสุดการส่งไฟล์โปสเตอร์และวิดีโอ ครั้งที่ 2</label>
-                        <input value="{{ old('end_poster_and_video_two') }}" type="datetime-local" name="end_poster_and_video_two"
-                            id="end_poster_and_video_two"
+                        <input value="{{ date('Y-m-d\TH:i', strtotime($conference->end_poster_and_video_two)) }}" type="datetime-local"
+                            name="end_poster_and_video_two" id="end_poster_and_video_two"
                             class="form-control rounded-0 @error('end_poster_and_video_two') is-invalid @enderror">
                         @error('end_poster_and_video_two')
                         <span class="invalid-feedback" role="alert">
@@ -143,7 +148,8 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button class="btn btn-success rounded-0">เพิ่มหัวข้อ</button>
+                    <button class="btn btn-warning rounded-0 text-white" name="edit_conference"
+                        value="edit">แก้ไขหัวข้อ</button>
                 </div>
             </form>
         </div>

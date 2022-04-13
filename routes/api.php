@@ -23,14 +23,14 @@ use App\Models\Conference;
 //         });
 //     });
 
-Route::get('branches', function(Request $request){
+Route::get('branches', function (Request $request) {
     return Branch::select('id', 'name')->where('faculty_id', $request->faculty_id)->get();
 });
 
-Route::get('timeleft', function(){
-    return Conference::select('end as timeleft')
-                        ->where('conferences.status', 1)
-                        ->get();
+Route::get('research/timeleft', function () {
+    return Conference::select('end_research')
+        ->where('conferences.status_research', 1)
+        ->first();
     // return Conference::select(
     //     Conference::raw(
     //         "floor(timestampdiff(second, now(), end)/(60*60*24)) as day
@@ -42,7 +42,7 @@ Route::get('timeleft', function(){
     //     ->get();
 });
 
-Route::middleware(['auth', 'verified', 'is_admin'])->group(function(){
+Route::middleware(['auth', 'verified', 'is_admin'])->group(function () {
     Route::put('update-status/{id}', [StatusUpdateController::class, 'update']);
     Route::get('show-research-detail/{id}', [ManageResearchController::class, 'show']);
 });

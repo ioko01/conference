@@ -18,36 +18,22 @@ class ResearchController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    public function closeResearch(){
-        $conferences = Conference::select(
-                Conference::raw(
-                    "floor(timestampdiff(second, now(), end)/(60*60*24)) as day"
-                ))
-                ->where('conferences.status', 1)
-                ->get();
-        foreach ($conferences as $conference) {
-            if($conference->day < 0){
-                Conference::where('status', 1)->update(['status' => 0]);
-            }
-        }
+        $this->middleware('close_research');
     }
 
     public function index()
     {
-        $this->closeResearch();
         $faculties = Faculty::get();
         $degrees = Degree::get();
         $branches = Branch::get();
         $presents = Present::get();
         $tips = Tip::where('group', '1')->get();
-        $conference_id = Conference::where('status', 1)->first();
+        $conference_id = Conference::where('status_research', 1)->first();
 
         return view('frontend.pages.send_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips', 'conference_id'));
     }
 
-    public function validator($request)
+    protected function validator($request)
     {
         alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
@@ -65,7 +51,7 @@ class ResearchController extends Controller
     {
     }
 
-    public function store(Request $request)
+    protected function store(Request $request)
     {
         $this->validator($request);
         $presenters = join('|', array_filter($request->presenters));
@@ -174,7 +160,7 @@ class ResearchController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    protected function update(Request $request, $id)
     {
         $this->validator($request);
         $presenters = join('|', array_filter($request->presenters));

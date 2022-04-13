@@ -7,7 +7,7 @@
                 <h1>ผู้ใช้งาน</h1>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="table-responsive text-xs">
                     <table class="table">
                         <thead>
                             <tr>

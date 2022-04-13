@@ -42,6 +42,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('close_research');
     }
 
 
@@ -49,7 +50,7 @@ class RegisterController extends Controller
     {
         $kotas = Kota::get();
         $positions = Position::get();
-        $conference_id = Conference::where('status', 1)->first();
+        $conference_id = Conference::where('status_research', 1)->first();
 
         return view('auth.register', compact('kotas', 'positions', 'conference_id'));
     }

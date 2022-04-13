@@ -43,7 +43,7 @@ class ResearchController extends Controller
         return view('backend.pages.edit_research', compact('faculties', 'degrees', 'branches', 'presents', 'research'));
     }
 
-    public function validator($request)
+    protected function validator($request)
     {
         return $request->validate([
             'topic_th' => 'required',
@@ -56,7 +56,7 @@ class ResearchController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    protected function update(Request $request, $id)
     {
         $this->validator($request);
 

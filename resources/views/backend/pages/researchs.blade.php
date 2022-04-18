@@ -6,11 +6,20 @@
             <div class="card-header">
                 <h1>รายการบทความ</h1>
             </div>
-            <div class="card-body">
+            <div class="panel">
+                <div class="body">
+                    <div class="input-group">
+                        <label for="search">ค้นหาบทความ</label>
+                        <input type="text" class="form-control" name="search" id="search"
+                            placeholder="ค้นหาผ่านลำดับ, รายละเอียด, ปีที่ส่งผลงาน, ชนิดารเข้าร่วม, เวลา">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body text-xs">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="list table responsive hover">
                         <thead>
-                            <tr>
+                            <tr class="text-center pagination-header">
                                 <th>#</th>
                                 <th>รายละเอียดบทความ</th>
                                 <th>ปีที่ส่งผลงาน</th>

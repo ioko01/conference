@@ -6,7 +6,7 @@
     <script src="{{ asset('js/main.js', env('REDIRECT_HTTPS')) }}" defer></script>
 
     @if (Request::is('/'))
-        <script src="{{ asset('api/timeleft.js', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('api/countdown.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('admin*'))

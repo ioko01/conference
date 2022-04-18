@@ -27,3 +27,20 @@ src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.
 <script src="{{ asset('vendor/dist/js/pages/dashboard2.js', env('REDIRECT_HTTPS')) }}"></script>
 
 <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
+
+@if (Request::is('backend/researchs') || Request::is('backend/users'))
+    <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script>
+        let options = {
+            numberPerPage: 10, //Cantidad de datos por pagina
+            goBar: true, //Barra donde puedes digitar el numero de la pagina al que quiere ir
+            pageCounter: true, //Contador de paginas, en cual estas, de cuantas paginas
+        };
+
+        let filterOptions = {
+            el: "#search", //Caja de texto para filtrar, puede ser una clase o un ID
+        };
+
+        paginate.init(".list", options, filterOptions);
+    </script>
+@endif

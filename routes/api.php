@@ -27,7 +27,7 @@ Route::get('branches', function (Request $request) {
     return Branch::select('id', 'name')->where('faculty_id', $request->faculty_id)->get();
 });
 
-Route::get('research/timeleft', function () {
+Route::get('research/countdown', function () {
     return Conference::select('end_research')
         ->where('conferences.status_research', 1)
         ->first();

@@ -6,7 +6,7 @@
     <img src="{{ asset('images/banner-01.jpeg', env('REDIRECT_HTTPS'))}}" alt="banner" width="100%">
 </header>
 
-<div style="opacity: .8;" class="p-md-5 py-5 bg-white w-100 my-5" id="timeleft"></div>
+<div style="opacity: .8;" class="p-md-5 py-5 bg-white w-100 my-5" id="countdown"></div>
 
 <div id="poster2" class="container mb-5">
     <div class="row m-0">
@@ -22,7 +22,9 @@
 
 <!-- กำหนดการ -->
 
-<div class="p-md-5 py-5">
+<div style="position: relative;" class="p-md-5 py-5">
+    <div style="position: absolute; top: inherit; left: inherit; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid green;"></div>
+    <div style="position: absolute; top: inherit; right: inherit; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid green;"></div>
     <div class="row justify-content-center m-0">
         <div style="opacity: .8;" class="col-md-10 bg-white p-5 w-100">
             <div class="table-responsive-sm">
@@ -97,7 +99,9 @@
 
 
 <!-- Content -->
-<div class="p-md-5 py-5">
+<div style="position: relative;" class="p-md-5 py-5">
+    <div style="position: absolute; top: inherit; left: inherit; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid green;"></div>
+    <div style="position: absolute; top: inherit; right: inherit; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid green;"></div>
     <div class="row justify-content-center m-0">
         <div style="opacity: .8;" class="col-md-10 bg-white p-5 w-100">
             <h1 style="color: #2cb0c0;">หลักการและเหตุผล</h1>

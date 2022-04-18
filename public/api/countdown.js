@@ -1,20 +1,20 @@
 "use strict";
 
-function timeleft() {
+function countdown() {
     try {
         $.ajax({
             method: "GET",
-            url: "/api/research/timeleft",
+            url: "/api/research/countdown",
             beforeSend: function () {
-                const timeleftHtml = $("#timeleft");
+                const countdownHtml = $("#countdown");
                 const h1 = document.createElement("h1");
                 h1.classList.add("text-red");
                 h1.classList.add("text-center");
-                h1.textContent = `กรุณารอสักครู่`;
-                timeleftHtml.html(h1);
+                h1.innerHTML = `กรุณารอสักครู่`;
+                countdownHtml.html(h1);
             },
             success: function (res) {
-                const timeleftHtml = $("#timeleft");
+                const countdownHtml = $("#countdown");
                 const h1 = document.createElement("h1");
 
                 h1.classList.add("text-center");
@@ -30,27 +30,27 @@ function timeleft() {
 
                     if (res) {
                         h1.classList.add("text-green");
-                        h1.textContent = `ปิดรับบทความในอีก ${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
+                        h1.innerHTML = `ปิดรับบทความในอีก<br/>${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
                     } else {
                         clearInterval(interval);
                         h1.classList.add("text-red");
-                        h1.textContent = `ยังไม่เปิดรับบทความ`;
+                        h1.innerHTML = `ยังไม่เปิดรับบทความ`;
                     }
                     if (days < 0) {
                         clearInterval(interval);
                         h1.classList.add("text-red");
-                        h1.textContent = `ยังไม่เปิดรับบทความ`;
+                        h1.innerHTML = `ยังไม่เปิดรับบทความ`;
                     }
-                    timeleftHtml.html(h1);
+                    countdownHtml.html(h1);
                 }, 1000);
             },
             error: function (err) {
                 h1.classList.add("text-red");
-                h1.textContent = err;
-                timeleftHtml.html(h1);
+                h1.innerHTML = err;
+                countdownHtml.html(h1);
             }
         });
     } catch (error) {}
 }
 
-document.addEventListener("load", timeleft());
+document.addEventListener("load", countdown());

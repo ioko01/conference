@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Research;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -13,8 +14,9 @@ class DashboardController extends Controller
     {
         $path = public_path('storage');
         $storage = File::exists($path);
+        $researchs = Research::get();
 
-        return view('backend.pages.dashboard', compact('storage'));
+        return view('backend.pages.dashboard', compact('storage', 'researchs'));
     }
 
     protected function storage()

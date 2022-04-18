@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Research;
 use App\Models\Comment;
+use App\Models\Conference;
 
 class SendEditResearchController extends Controller
 {
@@ -70,6 +71,14 @@ class SendEditResearchController extends Controller
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->where('researchs.user_id', $id)
             ->get();
-        return view('frontend.pages.send_edit_research', compact('data', 'comments'));
+
+        $conference = Conference::select(
+            'conferences.status_research_edit as status_research_edit'
+        )
+            ->where('conferences.status_research_edit', 1)
+            ->where('conferences.status', 1)
+            ->first();
+
+        return view('frontend.pages.send_edit_research', compact('data', 'comments', 'conference'));
     }
 }

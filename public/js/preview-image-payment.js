@@ -13,12 +13,15 @@ function setAttribute(elment, value) {
 function image(e) {
     try {
         const [file] = e.files;
-        if (file) {
-            const imgElm = document.createElement("img");
+        const imgElm = document.createElement("img");
+        if (file && file.type == "image/jpeg") {
             e.nextSibling.remove();
             insertAfter(e, imgElm);
             setAttribute(imgElm, { class: "my-3", width: "100%" });
             imgElm.src = URL.createObjectURL(file);
+        } else {
+            e.nextSibling.remove();
+            insertAfter(e, imgElm);
         }
     } catch (error) {
         throw error;

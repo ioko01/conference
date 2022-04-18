@@ -8,7 +8,7 @@
                 @csrf
                 @method('PUT')
                 <div class="col-12 mb-3">
-                    <label for="topic">เพิ่มหัวข้อการประชุมวิชาการ</label>
+                    <label for="topic">เพิ่มหัวข้อการประชุมวิชาการ <i style="font-size: 12px;" class="text-red">(ตัวอย่าง: งานประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ มหาวิทยาลัยราชภัฏเลย ครั้งที่ 1)</i></label>
                     <input value="{{ $conference->name }}" type="text" name="topic" id="topic"
                         class="form-control rounded-0 @error('topic') is-invalid @enderror">
                     @error('topic')
@@ -18,7 +18,7 @@
                     @enderror
                 </div>
                 <div class="col-12 col-md-4 mb-3">
-                    <label for="year">เพิ่มปีที่ประชุมวิชาการ (พ.ศ.)</label>
+                    <label for="year">เพิ่มปีที่ประชุมวิชาการ (พ.ศ.) <i style="font-size: 12px;" class="text-red">(ตัวอย่าง: 2565)</i></label>
                     <input value="{{ $conference->year }}" type="number" name="year" id="year"
                         class="form-control rounded-0 @error('year') is-invalid @enderror">
                     @error('year')

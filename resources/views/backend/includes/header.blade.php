@@ -11,6 +11,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/main.css', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
+    <link href="{{ asset('css/app.css', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet"
@@ -20,4 +21,6 @@
         href="{{ asset('vendor/plugins/overlayScrollbars/css/OverlayScrollbars.min.css', env('REDIRECT_HTTPS')) }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('vendor/dist/css/adminlte.min.css', env('REDIRECT_HTTPS')) }}">
+
+    
 </head>

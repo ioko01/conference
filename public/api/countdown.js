@@ -45,8 +45,13 @@ function countdown() {
                 }, 1000);
             },
             error: function (err) {
+                const countdownHtml = $("#countdown");
+                const h1 = document.createElement("h1");
+
+                h1.classList.add("text-center");
+                //err.responseJSON.message
                 h1.classList.add("text-red");
-                h1.innerHTML = err;
+                h1.innerHTML = err.statusText;
                 countdownHtml.html(h1);
             }
         });

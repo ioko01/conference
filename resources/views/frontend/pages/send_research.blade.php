@@ -12,7 +12,6 @@
     </div>
     @if (isset($conference_id->id))
     @if(auth()->user()->person_attend == 'send')
-    <h1 class="text-danger text-center">ท่านไม่ได้ลงทะเบียนส่งผลงาน</h1>
     <div class="row w-100">
         <div class="col-md-7">
             <form action="{{ route('employee.research.store') }}" method="POST">

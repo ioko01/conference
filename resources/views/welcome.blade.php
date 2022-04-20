@@ -103,7 +103,7 @@
     <div style="position: absolute; top: inherit; left: inherit; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid green;"></div>
     <div style="position: absolute; top: inherit; right: inherit; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid green;"></div>
     <div class="row justify-content-center m-0">
-        <div style="opacity: .8;" class="col-md-10 bg-white p-5 w-100">
+        <div style="opacity: .8;word-break: break-all;" class="col-md-10 bg-white p-5 w-100">
             <h1 style="color: #2cb0c0;">หลักการและเหตุผล</h1>
             <p>&emsp;การเปลี่ยนแปลงที่เกิดจากโลกาภิวัตน์ในทศวรรษที่ผ่านมาส่งผลกระทบในวงกว้างต่อคนทั้งโลก
                 ในรูปแบบการดำเนินชีวิต องค์การสหประชาชาติ หรือ UN (United Nations)

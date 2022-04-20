@@ -128,11 +128,11 @@
                 @endauth
             </ul>
             @guest
-            <a href="{{ route('login') }}" class="btn rounded-0 btn-green text-white mx-3">เข้าสู่ระบบ</a>
+            <a href="{{ route('login') }}" class="btn rounded-0 btn-green text-white mx-3"><i class="fas fa-sign-in"></i> เข้าสู่ระบบ</a>
             @else
             <form action="{{ route('logout') }}" method="post">
                 @csrf
-                <button type="submit" class="btn rounded-0 btn-danger text-white mx-3">ออกจากระบบ</button>
+                <button type="submit" class="btn rounded-0 btn-danger text-white mx-3"><i class="fas fa-sign-out"></i> ออกจากระบบ</button>
             </form>
             @endguest
         </div>

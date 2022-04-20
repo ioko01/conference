@@ -41,26 +41,29 @@
                     @forelse ($data as $key => $value)
                         <tr class="text-center">
                             <td>{{ $value->id }}</td>
-                            <td>{{ $value->topic_th }}
-                                <br /><span class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
+                            <td style="vertical-align: middle;">{{ $value->topic_th }}
+                                <br /><span
+                                    class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
                             </td>
-                            <td>
-                                @if ( $value->status_id >= 8 )
-                                @forelse ($comments as $key => $comment)
-                                <div class="text-start">
-                                    <a target="_blank" href="{{ Storage::url($comment->comment_path)}}">
-                                        {{ ++$key }}. <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
-                                    </a>
-                                </div>
-                                @empty
-                                <strong class="text-warning">(รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)</strong>
-                                @endforelse
+                            <td style="vertical-align: middle;">
+                                @if ($value->status_id >= 8)
+                                    @forelse ($comments as $key => $comment)
+                                        <div class="text-start">
+                                            <a target="_blank" href="{{ Storage::url($comment->comment_path) }}">
+                                                {{ ++$key }}. <i
+                                                    style="font-size: 10px;">{{ $comment->comment_name }}</i>
+                                            </a>
+                                        </div>
+                                    @empty
+                                        <strong class="text-warning">(รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)</strong>
+                                    @endforelse
                                 @else
-                                -
+                                    -
                                 @endif
                             </td>
-                            <td>
-                                @if (isset($value->edit_word_path))
+
+                            @if (isset($value->edit_word_path))
+                                <td>
                                     <img width="40"
                                         src="{{ asset("images/$value->edit_word_ext.png", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->edit_word_ext }}">
@@ -71,10 +74,12 @@
                                         href="{{ Storage::url($value->edit_word_path) }}">
                                         ดูตัวอย่าง
                                     </a>
-                                @endif
-                                @if ($value->status_id == 9)
-                                    <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                        onclick="open_modal(this, 'word'@if (isset($value->edit_pdf_path)), 'PUT' @endif)">
+                                </td>
+                            @endif
+                            @if ($value->status_research_edit === 1)
+                                <td style="vertical-align: middle;">
+                                    <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
+                                        onclick="open_modal(this, 'word'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
                                         @if (isset($value->edit_word_path))
                                             แก้ไขไฟล์ WORD ฉบับแก้ไข
                                         @else
@@ -82,17 +87,22 @@
                                         @endif
                                     </button>
                                     <input type="hidden" value="{{ $value->topic_id }}">
-                                @else
-                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไข<br/>สถานะบทความต้องเป็น<br/>"รอบทความแก้ไขจากนักวิจัย"</strong>
-                                @endif
+                                </td>
+                            @else
+                                <td colspan="3" style="vertical-align: middle;">
+                                    <strong
+                                        class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
+                                </td>
+                            @endif
 
-                                @error('word_upload')
-                                    <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
-                                @enderror
+                            @error('word_upload')
+                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                            @enderror
 
-                            </td>
-                            <td>
-                                @if (isset($value->edit_pdf_path))
+
+
+                            @if (isset($value->edit_pdf_path))
+                                <td>
                                     <img width="40"
                                         src="{{ asset("images/$value->edit_pdf_ext.png", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->edit_pdf_ext }}">
@@ -103,10 +113,12 @@
                                         href="{{ Storage::url($value->edit_pdf_path) }}">
                                         ดูตัวอย่าง
                                     </a>
-                                @endif
-                                @if ($value->status_id == 9)
-                                    <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                        onclick="open_modal(this, 'pdf'@if (isset($value->edit_pdf_path)), 'PUT' @endif)">
+                                </td>
+                            @endif
+                            @if ($value->status_research_edit === 1)
+                                <td style="vertical-align: middle;">
+                                    <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
+                                        onclick="open_modal(this, 'pdf'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
                                         @if (isset($value->edit_pdf_path))
                                             แก้ไขไฟล์ PDF ฉบับแก้ไข
                                         @else
@@ -114,17 +126,17 @@
                                         @endif
                                     </button>
                                     <input type="hidden" value="{{ $value->topic_id }}">
-                                @else
-                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไข<br/>สถานะบทความต้องเป็น<br/>"รอบทความแก้ไขจากนักวิจัย"</strong>
-                                @endif
+                                </td>
+                            @endif
 
 
-                                @error('pdf_upload')
-                                    <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
-                                @enderror
-                            </td>
-                            <td>
-                                @if (isset($value->edit_stm_path))
+                            @error('pdf_upload')
+                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                            @enderror
+
+
+                            @if (isset($value->edit_stm_path))
+                                <td>
                                     <img width="40"
                                         src="{{ asset("images/$value->edit_stm_ext.png", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->edit_stm_path }}">
@@ -135,27 +147,28 @@
                                         href="{{ Storage::url($value->edit_stm_path) }}">
                                         ดูตัวอย่าง
                                     </a>
-                                @endif
-                                @if ($value->status_id == 9)
-                                    <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                        onclick="open_modal(this, 'stm'@if (isset($value->edit_stm_path)), 'PUT' @endif)">
+                                </td>
+                            @endif
+                            @if ($value->status_research_edit === 1)
+                                <td style="vertical-align: middle;">
+                                    <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
+                                        onclick="open_modal(this, 'stm'@if (isset($value->edit_stm_path)) , 'PUT' @endif)">
                                         @if (isset($value->edit_stm_path))
-                                            แก้ไขแบบคำชี้แจงการปรับแก้ไขบทความ
+                                            แก้ไขแบบคำชี้แจง
                                         @else
-                                            อัพโหลดแบบคำชี้แจงการปรับแก้ไขบทความ
+                                            อัพโหลดแบบคำชี้แจง
                                         @endif
                                     </button>
                                     <input type="hidden" value="{{ $value->topic_id }}">
-                                @else
-                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดแบบคำชี้แจงการปรับแก้ไขบทความ<br/>สถานะบทความต้องเป็น<br/>"รอบทความแก้ไขจากนักวิจัย"</strong>
-                                @endif
+                                </td>
+                            @endif
 
 
-                                @error('stm_upload')
-                                    <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
-                                @enderror
-                            </td>
-                            <td>
+                            @error('stm_upload')
+                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                            @enderror
+
+                            <td style="vertical-align: middle;">
                                 <button type="button" class="btn btn-green rounded-0 text-white"
                                     onclick="open_modal(this, 'detail')">
                                     รายละเอียด
@@ -163,17 +176,17 @@
                                 <input type="hidden" value="{{ $value->topic_id }}">
                             </td>
                         </tr>
-                    @empty
-                        <tr class="text-center">
-                            <td colspan="8">ไม่มีบทความของท่าน</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                        @empty
+                            <tr class="text-center">
+                                <td colspan="8" style="vertical-align: middle;">ไม่มีบทความของท่าน</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <!-- End Content -->
+        <!-- End Content -->
 
-    <div id="modal"></div>
+        <div id="modal"></div>
 
-@endsection
+    @endsection

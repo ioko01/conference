@@ -38,7 +38,7 @@
                     @foreach ($researchs as $research)
                     <td>{{ $research->topic_id }}</td>
                     <td>{{ $research->topic_th }}
-                        <br /><span class="name-research text-small text-green">{{ $research->presenter }}</span>
+                        <br /><span class="name-research text-small text-green">{{ str_replace('|', ', ', $research->presenter) }}</span>
                     </td>
                     <td>{{ $research->present_name }}</td>
                     <td class="text-small text-green">{{ $research->faculty_name }}</td>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conference;
 use Illuminate\Http\Request;
 use App\Models\Tip;
 use App\Models\Slip;

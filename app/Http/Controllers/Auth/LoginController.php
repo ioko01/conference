@@ -63,10 +63,12 @@ class LoginController extends Controller
             }
 
             $conference_id = Conference::select('id')->where('status', 1)->first();
-            User::where('email', $request->email)
+            if($conference_id){
+                User::where('email', $request->email)
                 ->update([
                     'conference_id' => $conference_id->id
                 ]);
+            }
 
             return $this->sendLoginResponse($request);
         }

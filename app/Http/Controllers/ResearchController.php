@@ -14,11 +14,9 @@ use App\Models\Conference;
 
 class ResearchController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('close_research');
     }
 
     public function index()
@@ -113,7 +111,9 @@ class ResearchController extends Controller
             'words.updated_at as word_update',
             'pdf.updated_at as pdf_update',
             'researchs.topic_status as status_id',
-            'conferences.status as status_id_conference'
+            'conferences.status as status_id_conference',
+            'conferences.status_payment as status_payment',
+            'conferences.status_research as status_research'
         )
             ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
             ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')
@@ -127,6 +127,7 @@ class ResearchController extends Controller
             ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
             ->leftjoin('conferences', 'researchs.conference_id', '=', 'conferences.id')
             ->where('researchs.user_id', $id)
+            ->where('conferences.status', 1)
             ->get()
             ->sortBy('id');
 

@@ -44,6 +44,8 @@
                         <br /><span class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
                     </td>
                     @if(isset($value->edit_word_path) || isset($value->edit_pdf_path) || isset($value->edit_stm_path))
+                        @if(endDate("end_research_edit_two")->day >= 0)
+                        @if($value->status_payment)
                     <td>
                         @if (isset($value->edit_word_path_two))
                         <img width="40" src="{{ asset("images/$value->edit_word_ext_two.png", env('REDIRECT_HTTPS'))
@@ -126,7 +128,16 @@
                         <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
                         @enderror
                     </td>
-
+                    @else
+                    <td colspan="3">
+                        <strong class="text-red">ยังไม่เปิดรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                    </td>
+                    @endif
+                    @else
+                    <td colspan="3">
+                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                    </td>
+                    @endif
                     @else
                     <td colspan="3">
                         <strong class="text-red">ไม่สามารถอัพโหลดแก้ไขครั้งที่ 2 ได้</strong>

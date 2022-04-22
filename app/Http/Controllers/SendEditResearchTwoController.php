@@ -58,6 +58,7 @@ class SendEditResearchTwoController extends Controller
             'send_edit_statements_two.path as edit_stm_path_two',
             'send_edit_statements_two.extension as edit_stm_ext_two',
             'send_edit_statements_two.updated_at as edit_stm_update_two',
+            'conferences.status_payment as status_payment',
         )
             ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
             ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')
@@ -72,7 +73,9 @@ class SendEditResearchTwoController extends Controller
             ->leftjoin('send_edit_words_two', 'researchs.topic_id', '=', 'send_edit_words_two.topic_id')
             ->leftjoin('send_edit_pdf_two', 'researchs.topic_id', '=', 'send_edit_pdf_two.topic_id')
             ->leftjoin('send_edit_statements_two', 'researchs.topic_id', '=', 'send_edit_statements_two.topic_id')
+            ->leftjoin('conferences', 'conferences.id', '=', 'researchs.conference_id')
             ->where('researchs.user_id', $id)
+            ->where('conferences.status', 1)
             ->get()
             ->sortBy('id');
         $comments = Comment::select(

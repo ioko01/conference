@@ -61,9 +61,8 @@
                                     -
                                 @endif
                             </td>
-
-                            @if (isset($value->edit_word_path))
-                                <td>
+                            <td style="vertical-align: middle;">
+                                @if (isset($value->edit_word_path))
                                     <img width="40"
                                         src="{{ asset("images/$value->edit_word_ext.png", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->edit_word_ext }}">
@@ -74,35 +73,37 @@
                                         href="{{ Storage::url($value->edit_word_path) }}">
                                         ดูตัวอย่าง
                                     </a>
-                                </td>
-                            @endif
-                            @if ($value->status_research_edit === 1)
-                                <td style="vertical-align: middle;">
-                                    <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
-                                        onclick="open_modal(this, 'word'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
-                                        @if (isset($value->edit_word_path))
-                                            แก้ไขไฟล์ WORD ฉบับแก้ไข
+                                @endif
+                                @if ($value->status_research_edit == 1)
+                                    @if (endDate('end_research_edit')->day >= 0)
+                                        @if ($value->status_id >= 8)
+                                            <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
+                                                onclick="open_modal(this, 'word'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
+                                                @if (isset($value->edit_word_path))
+                                                    แก้ไขไฟล์ WORD ฉบับแก้ไข
+                                                @else
+                                                    อัพโหลดไฟล์ WORD ฉบับแก้ไข
+                                                @endif
+                                            </button>
+                                            <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            อัพโหลดไฟล์ WORD ฉบับแก้ไข
+                                            <strong class="text-red">ต้องมีสถานะรอบทความแก้ไขจากนักวิจัย</strong>
                                         @endif
-                                    </button>
-                                    <input type="hidden" value="{{ $value->topic_id }}">
-                                </td>
-                            @else
-                                <td colspan="3" style="vertical-align: middle;">
-                                    <strong
-                                        class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
-                                </td>
-                            @endif
+                                    @else
+                                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
+                                    @endif
+                                @else
+                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
+                                @endif
+                            </td>
 
                             @error('word_upload')
                                 <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
                             @enderror
 
 
-
-                            @if (isset($value->edit_pdf_path))
-                                <td>
+                            <td style="vertical-align: middle;">
+                                @if (isset($value->edit_pdf_path))
                                     <img width="40"
                                         src="{{ asset("images/$value->edit_pdf_ext.png", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->edit_pdf_ext }}">
@@ -113,30 +114,36 @@
                                         href="{{ Storage::url($value->edit_pdf_path) }}">
                                         ดูตัวอย่าง
                                     </a>
-                                </td>
-                            @endif
-                            @if ($value->status_research_edit === 1)
-                                <td style="vertical-align: middle;">
-                                    <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
-                                        onclick="open_modal(this, 'pdf'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
-                                        @if (isset($value->edit_pdf_path))
-                                            แก้ไขไฟล์ PDF ฉบับแก้ไข
+                                @endif
+                                @if ($value->status_research_edit === 1)
+                                    @if (endDate('end_research_edit')->day >= 0)
+                                        @if ($value->status_id >= 8)
+                                            <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
+                                                onclick="open_modal(this, 'pdf'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
+                                                @if (isset($value->edit_pdf_path))
+                                                    แก้ไขไฟล์ PDF ฉบับแก้ไข
+                                                @else
+                                                    อัพโหลดไฟล์ PDF ฉบับแก้ไข
+                                                @endif
+                                            </button>
+                                            <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            อัพโหลดไฟล์ PDF ฉบับแก้ไข
+                                            <strong class="text-red">ต้องมีสถานะรอบทความแก้ไขจากนักวิจัย</strong>
                                         @endif
-                                    </button>
-                                    <input type="hidden" value="{{ $value->topic_id }}">
-                                </td>
-                            @endif
-
+                                    @else
+                                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
+                                    @endif
+                                @else
+                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
+                                @endif
+                            </td>
 
                             @error('pdf_upload')
                                 <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
                             @enderror
 
-
-                            @if (isset($value->edit_stm_path))
-                                <td>
+                            <td style="vertical-align: middle;">
+                                @if (isset($value->edit_stm_path))
                                     <img width="40"
                                         src="{{ asset("images/$value->edit_stm_ext.png", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->edit_stm_path }}">
@@ -147,23 +154,30 @@
                                         href="{{ Storage::url($value->edit_stm_path) }}">
                                         ดูตัวอย่าง
                                     </a>
-                                </td>
-                            @endif
-                            @if ($value->status_research_edit === 1)
-                                <td style="vertical-align: middle;">
-                                    <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
-                                        onclick="open_modal(this, 'stm'@if (isset($value->edit_stm_path)) , 'PUT' @endif)">
-                                        @if (isset($value->edit_stm_path))
-                                            แก้ไขแบบคำชี้แจง
+                                @endif
+                                @if ($value->status_research_edit === 1)
+                                    @if (endDate('end_research_edit')->day >= 0)
+                                        @if ($value->status_id >= 8)
+                                            <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
+                                                onclick="open_modal(this, 'stm'@if (isset($value->edit_stm_path)) , 'PUT' @endif)">
+                                                @if (isset($value->edit_stm_path))
+                                                    แก้ไขแบบคำชี้แจง
+                                                @else
+                                                    อัพโหลดแบบคำชี้แจง
+                                                @endif
+                                            </button>
+                                            <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            อัพโหลดแบบคำชี้แจง
+                                            <strong class="text-red">ต้องมีสถานะรอบทความแก้ไขจากนักวิจัย</strong>
                                         @endif
-                                    </button>
-                                    <input type="hidden" value="{{ $value->topic_id }}">
-                                </td>
-                            @endif
+                                    @else
+                                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
+                                    @endif
+                                @else
+                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
+                                @endif
 
-
+                            </td>
                             @error('stm_upload')
                                 <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
                             @enderror

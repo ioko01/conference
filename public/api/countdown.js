@@ -39,7 +39,7 @@ function countdown() {
                     if (days < 0) {
                         clearInterval(interval);
                         h1.classList.add("text-red");
-                        h1.innerHTML = `ยังไม่เปิดรับบทความ`;
+                        h1.innerHTML = `สิ้นสุดเวลาการส่งบทความ`;
                     }
                     countdownHtml.html(h1);
                 }, 1000);

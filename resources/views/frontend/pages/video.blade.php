@@ -44,6 +44,7 @@
 
                     <td>
                         <a href="https://www.youtube.com">https://www.youtube.com</a>
+                        <button class="btn btn-link text-warning rounded-0"><i class="fas fa-pencil"></i> แก้ไข</button>
                     </td>
                     <td>
                         

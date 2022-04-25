@@ -59,6 +59,8 @@
                             ดูตัวอย่าง
                         </a>
                         @endif
+                        @if ($value->status_research_edit_two === 1)
+                            @if (endDate('end_research_edit_two')->day >= 0)
                         <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
                             onclick="open_modal(this, 'word_2'@if (isset($value->edit_word_path_two)), 'PUT' @endif)">
                             @if (isset($value->edit_word_path_two))
@@ -68,7 +70,12 @@
                             @endif
                         </button>
                         <input type="hidden" value="{{ $value->topic_id }}">
-
+                        @else
+                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                            @endif
+                        @else
+                            <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2</strong>
+                        @endif
                         @error('word_upload')
                         <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
                         @enderror
@@ -86,6 +93,8 @@
                             ดูตัวอย่าง
                         </a>
                         @endif
+                        @if ($value->status_research_edit_two === 1)
+                            @if (endDate('end_research_edit_two')->day >= 0)
                         <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
                             onclick="open_modal(this, 'pdf_2'@if (isset($value->edit_pdf_path_two)), 'PUT' @endif)">
                             @if (isset($value->edit_pdf_path_two))
@@ -95,7 +104,12 @@
                             @endif
                         </button>
                         <input type="hidden" value="{{ $value->topic_id }}">
-
+                        @else
+                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                            @endif
+                        @else
+                            <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2</strong>
+                        @endif
 
                         @error('pdf_upload')
                         <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
@@ -113,6 +127,8 @@
                             ดูตัวอย่าง
                         </a>
                         @endif
+                        @if ($value->status_research_edit_two === 1)
+                            @if (endDate('end_research_edit_two')->day >= 0)
                         <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
                             onclick="open_modal(this, 'stm_2'@if (isset($value->edit_stm_path_two)), 'PUT' @endif)">
                             @if (isset($value->edit_stm_path_two))
@@ -122,7 +138,12 @@
                             @endif
                         </button>
                         <input type="hidden" value="{{ $value->topic_id }}">
-
+                        @else
+                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                            @endif
+                        @else
+                            <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2</strong>
+                        @endif
 
                         @error('stm_upload')
                         <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>

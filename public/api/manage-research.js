@@ -118,7 +118,7 @@ function update_modal(topic_id, title, status_value, text_status) {
                     ต้องการเปลี่ยนสถานะเป็น <strong id="text_status" class="text-red">${text_status}</strong> ใช่หรือไม่ ?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-green rounded-0 text-white" onclick="update_status(${topic_id}, ${status_value})">ตกลง</button>
+                    <button type="button" class="btn btn-success rounded-0 text-white" onclick="update_status(${topic_id}, ${status_value})">ตกลง</button>
                     <button type="button" class="btn btn-danger rounded-0 text-white"
                         data-bs-dismiss="modal">ยกเลิก</button>
                 </div>
@@ -134,7 +134,7 @@ function send_comment_modal(topic_id, type) {
     const _token = $('meta[name="csrf-token"]').attr("content");
 
     const createModal = `
-    <form enctype="multipart/form-data" method="POST" action="/admin/research/comment-file-upload/${topic_id}">
+    <form enctype="multipart/form-data" method="POST" action="/backend/researchs/comment-file-upload/${topic_id}">
         <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
         aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
             <input type="hidden" name="_token" value="${_token}" />
@@ -149,7 +149,7 @@ function send_comment_modal(topic_id, type) {
                     <input type="file" name="file_comment[]" accept=".pdf" multiple>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์</button>
+                        <button type="submit" class="btn btn-success text-white rounded-0">อัพโหลดไฟล์</button>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@ function update_status(topic_id, status) {
             },
             success: function (data) {
                 data.success ?
-                    window.location.replace("/admin/research/management") :
+                    window.location.replace("/backend/researchs/management") :
                     null;
             },
             beforeSend: function () {

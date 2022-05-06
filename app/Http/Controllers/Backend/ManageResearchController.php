@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Research;
 use App\Models\StatusResearch;
@@ -58,15 +59,15 @@ class ManageResearchController extends Controller
             ->get()
             ->sortBy('id');
         $comments = Comment::select(
-                'comments.topic_id as comment_topic_id',
-                'comments.name as comment_name',
-                'comments.path as comment_path',
-                'comments.extension as comment_ext',
-                'comments.created_at as comment_update'
-            )
+            'comments.topic_id as comment_topic_id',
+            'comments.name as comment_name',
+            'comments.path as comment_path',
+            'comments.extension as comment_ext',
+            'comments.created_at as comment_update'
+        )
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->get();
-        return view('frontend.pages.manage_research', compact('data', 'topic_status', 'comments'));
+        return view('backend.pages.manage_research', compact('data', 'topic_status', 'comments'));
     }
 
     /**

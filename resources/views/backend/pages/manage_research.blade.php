@@ -1,4 +1,4 @@
-@extends('frontend.layouts.master_frontend')
+@extends('backend.layouts.master_backend')
 
 @section('content')
 
@@ -81,7 +81,7 @@
                         <input type="hidden" value="{{ $value->topic_id }}">
                     </td>
                     <td>
-                        <button type="button" class="btn btn-green rounded-0 text-white"
+                        <button type="button" class="btn btn-success rounded-0 text-white"
                             onclick="open_modal(this, 'detail')">
                             รายละเอียด
                         </button>

@@ -17,7 +17,7 @@
         <link href="{{ asset('css/app.css', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
         <link href="{{ asset('css/main.css', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
 
-        @if (Request::is('employee/research/*') || Request::is('admin/research/management') || Request::is('list/*'))
+        @if (Request::is('employee/research/*') || Request::is('list/*'))
             <link rel="stylesheet" href="{{ asset('css/paginate.css', env('REDIRECT_HTTPS')) }}" defer>
             <link rel="stylesheet" href="{{ asset('css/ligne.css', env('REDIRECT_HTTPS')) }}" defer>
         @endif

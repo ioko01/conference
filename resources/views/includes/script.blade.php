@@ -9,10 +9,6 @@
         <script src="{{ asset('api/countdown.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('admin*'))
-        <script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
-    @endif
-
     @if (Request::is('employee/research/send-edit/show/*') || Request::is('employee/research/send-edit-2/show/*'))
         <script src="{{ asset('api/send-edit-upload-research.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
@@ -25,7 +21,7 @@
         <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('employee/research/show/*') || Request::is('admin/research/management') || Request::is('list/*'))
+    @if (Request::is('employee/research/show/*') || Request::is('list/*'))
         <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
         <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
         <script>

@@ -1,6 +1,10 @@
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="{{ asset('vendor/plugins/jquery/jquery.min.js', env('REDIRECT_HTTPS')) }}"></script>
+
+<script src="{{ asset('js/app.js', env('REDIRECT_HTTPS')) }}" defer></script>
+<script src="{{ asset('js/main.js', env('REDIRECT_HTTPS')) }}" defer></script>
+
 <!-- Bootstrap -->
 <script src="{{ asset('vendor/plugins/bootstrap/js/bootstrap.bundle.min.js', env('REDIRECT_HTTPS')) }}"></script>
 <!-- overlayScrollbars -->
@@ -11,6 +15,8 @@ src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.
 <script src="{{ asset('vendor/dist/js/adminlte.js', env('REDIRECT_HTTPS')) }}"></script>
 
 <script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
+
+<script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
@@ -28,7 +34,8 @@ src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.
 
 <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
 
-@if (Request::is('backend/researchs') || Request::is('backend/users'))
+@if (Request::is('backend/researchs') || Request::is('backend/users') || Request::is('backend/researchs/management'))
+    <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
     <script>
         let options = {

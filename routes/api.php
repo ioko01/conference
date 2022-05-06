@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Backend\ManageResearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Branch;
 use App\Http\Controllers\StatusUpdateController;
-use App\Http\Controllers\ManageResearchController;
 use App\Models\Conference;
 
 /*

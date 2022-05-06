@@ -97,15 +97,6 @@
                                 href="{{ route('employee.research.video', auth()->user()->id) }}">อัพโหลดลิงค์วิดีโอ</a>
                         </li>
 
-                        @if (auth()->user()->is_admin === 1 || auth()->user()->is_admin === 2)
-                        <li>
-                            <a class="dropdown-item text-red {{ Request::is('admin/research/management') ? 'active' : '' }}"
-                                aria-current="page" href="{{ route('admin.research.index') }}">จัดการบทความ
-                                (เฉพาะแอดมิน)
-                            </a>
-                        </li>
-                        @endif
-
                     </ul>
                 </li>
                 @endguest

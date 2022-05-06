@@ -61,6 +61,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/backend/researchs/management" class="nav-link @if (Request::is('backend/researchs/management')) active @endif">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>จัดการบทความ</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/backend/statement" class="nav-link @if (Request::is('backend/statement')) active @endif">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>ประกาศผลพิจารณา</p>

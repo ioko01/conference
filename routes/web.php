@@ -6,12 +6,12 @@ use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\WordController;
-use App\Http\Controllers\ManageResearchController;
 use App\Http\Controllers\FileDownloadController;
-use App\Http\Controllers\CommentFileUploadController;
+use App\Http\Controllers\Backend\CommentFileUploadController;
 use App\Http\Controllers\Backend\ConferenceController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DownloadController;
+use App\Http\Controllers\Backend\ManageResearchController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
 use App\Http\Controllers\Backend\StatementController;
 use App\Http\Controllers\Backend\UserController;
@@ -105,8 +105,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware('is_admin')->group(function () {
 
-        Route::prefix('admin')->group(function () {
-            Route::prefix('research')->group(function () {
+        Route::prefix('backend')->group(function () {
+            Route::prefix('researchs')->group(function () {
                 Route::resource('management', ManageResearchController::class, ['names' => 'admin.research']);
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
             });

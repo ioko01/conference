@@ -137,6 +137,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
             Route::get('download', [DownloadController::class, 'index'])->name('backend.download.index');
+            Route::post('download/create', [DownloadController::class, 'store'])->name('backend.download.store');
         });
     });
 });

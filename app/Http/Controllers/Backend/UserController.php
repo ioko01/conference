@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\ExportUser;
 use App\Http\Controllers\Controller;
 use App\Models\Kota;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -31,7 +33,7 @@ class UserController extends Controller
             'fullname' => 'required',
             'sex' => 'required',
             'phone' => 'required|string|max:10',
-            'institution' => 'required',
+            'institution' => $request['position_id'] == '2' ? 'required|string' : 'string',
             'address' => 'required',
             'position_id' => 'required',
             'person_attend' => 'required',
@@ -42,14 +44,27 @@ class UserController extends Controller
     {
 
         $this->validator($request);
+
+        if ($request->position_id == '1') {
+            $institution = 'มหาวิทยาลัยราชภัฏเลย';
+        } elseif ($request->position_id == '3') {
+            if (isset($request->kota_id)) {
+                $kota = Kota::find($request->kota_id);
+                $institution = $kota->name;
+            }
+        } else {
+            $institution = $request->institution;
+        }
+
         User::where('id', $id)->update(
             [
                 'prefix' => $request->prefix,
                 'fullname' => $request->fullname,
                 'sex' => $request->sex,
                 'phone' => $request->phone,
-                'institution' => $request->institution,
+                'institution' => $institution,
                 'address' => $request->address,
+                'check_requirement' => $request->receive_check,
                 'position_id' => $request->position_id,
                 'kota_id' => isset($request->kota_id) ? $request->kota_id : null,
                 'person_attend' => $request->person_attend,
@@ -59,5 +74,10 @@ class UserController extends Controller
 
         alert('สำเร็จ', 'แก้ไขผู้ใช้งานสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'แก้ไขผู้ใช้งานสำเร็จ');
+    }
+
+    protected function export(Request $request)
+    {
+        return Excel::download(new ExportUser, 'EXPORT_USERS.xlsx');
     }
 }

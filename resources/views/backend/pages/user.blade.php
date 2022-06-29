@@ -3,8 +3,13 @@
 @section('content')
     <div class="card">
         <div class="card-content">
-            <div class="card-header">
+            <div class="card-header d-flex align-items-center justify-content-between w-100">
                 <h1>ผู้ใช้งาน</h1>
+                <div class="ms-auto">
+                    <a href="{{ route('users.export') }}" class="btn btn-info rounded-0"><i class="fas fa-file-export"></i>
+                        Export to
+                        Excel</a>
+                </div>
             </div>
             <div class="panel">
                 <div class="body">

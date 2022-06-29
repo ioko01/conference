@@ -109,6 +109,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::prefix('researchs')->group(function () {
                 Route::resource('management', ManageResearchController::class, ['names' => 'admin.research']);
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
+                Route::get('export', [BackendResearchController::class, 'export'])->name('researchs.export');
+            });
+
+            Route::prefix('users')->group(function () {
+                Route::get('export', [UserController::class, 'export'])->name('users.export');
             });
         });
     });

@@ -25,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'institution',
         'address',
         'position_id',
+        'check_requirement',
         'kota_id',
         'person_attend',
         'email',

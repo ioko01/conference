@@ -70,40 +70,13 @@
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-6">
-                                <label for="phone">เบอร์โทร</label>
-                                <input type="text" name="phone" id="phone"
+                                <label for="phone">เบอร์โทร <i class="text-red">* ใส่ตัวเลข 10 หลักโดยไม่ต้องใส่
+                                        "-"</i></label>
+                                <input type="tel" name="phone" id="phone"
                                     class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }} "
                                     autocomplete="phone">
 
                                 @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <label for="institution">สังกัด / หน่วยงาน</label>
-                                <input type="text" name="institution" id="institution"
-                                    class="form-control @error('institution') is-invalid @enderror"
-                                    value="{{ old('institution') }}" autocomplete="institution">
-
-                                @error('institution')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <label for="address">ที่อยู่ <span style="font-size: 12px;"
-                                        class="text-bluesky">(ใช้ในการส่งเอกสาร)</span></label>
-                                <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" cols="30"
-                                    rows="5">{{ old('address') }}</textarea>
-
-                                @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -122,7 +95,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="position_id"
                                             id="position_{{ $position->id }}" value="{{ $position->id }}"
-                                            onchange="toggle_kota(this)"
+                                            onchange="toggle_position(this)"
                                             @if (!old('position_id')) @if ($position->id == $positions->first()->id)
                                         checked @endif
                                         @elseif(old('position_id') == $position->id) checked @endif>
@@ -137,6 +110,23 @@
                                     หากท่านเป็นบุคลากรภายในมหาวิทยาลัยราชภัฏเลย และบทความของท่านเป็นของมหาวิทยาลัยอื่น
                                     จะต้องลงทะเบียนเป็น "บุคคลภายนอก"
                                 </p>
+
+                                <div class="row mb-4">
+                                    <div class="col-12">
+                                        <label for="institution">สังกัด / หน่วยงาน <i class="text-red">* ตัวอย่าง:
+                                                มหาวิทยาลัยราชภัฏเลย</i></label>
+                                        <input @if (old('position_id') != '2') disabled @endif type="text"
+                                            name="institution" id="institution"
+                                            class="form-control @error('institution') is-invalid @enderror"
+                                            value="{{ old('institution') }}" autocomplete="institution">
+
+                                        @error('institution')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -161,6 +151,43 @@
                                         </label>
                                     </div>
                                 @endforeach
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <label for="address">ที่อยู่ <span style="font-size: 12px;"
+                                        class="text-bluesky">(ใช้ในการออกใบเสร็จรับเงิน และส่งเอกสาร)</span></label>
+                                <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" cols="30"
+                                    rows="5">{{ old('address') }}</textarea>
+
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <label>ความต้องการใบเสร็จรับเงิน</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="after_receive_check"
+                                        name="receive_check" value="after" checked>
+
+                                    <label for="after_receive_check" class="form-check-label">
+                                        ต้องการใบเสร็จรับเงิน <span class="fw-bold">"หลัง"</span> วันจัดประชุม
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="before_receive_check"
+                                        name="receive_check" value="before">
+
+                                    <label for="before_receive_check" class="form-check-label">
+                                        ต้องการใบเสร็จรับเงิน <span class="fw-bold">"ก่อน"</span> วันจัดประชุม
+                                    </label>
+                                </div>
 
                             </div>
                         </div>
@@ -238,8 +265,8 @@
                                     "ลงทะเบียนเข้าร่วมงานทั่วไป" หากสงสัยให้ติดต่อเจ้าหน้ที่หรือผู้ดูแลระบบ</span></div>
                         </div>
                         <div class="tips-box py-5">
-                            <div class="icon"><img
-                                    src="{{ asset('images/folder.png', env('REDIRECT_HTTPS')) }}" alt="guide-send"></div>
+                            <div class="icon"><img src="{{ asset('images/folder.png', env('REDIRECT_HTTPS')) }}"
+                                    alt="guide-send"></div>
                             <div class="content"><strong>แนะนำการส่งผลงาน</strong><br /><span>
                                     เมื่อลงทะเบียนสำเร็จแล้ว ระบบจะส่งลิงก์
                                     ไปยังอีเมลของท่านเพื่อยืนยันตัวตน
@@ -266,7 +293,8 @@
                         </div>
                         <div class="tips-box py-5">
                             <div class="icon"><img
-                                    src="{{ asset('images/money-exchange.png', env('REDIRECT_HTTPS')) }}" alt=""></div>
+                                    src="{{ asset('images/money-exchange.png', env('REDIRECT_HTTPS')) }}"
+                                    alt=""></div>
                             <div class="content"><strong>การชำระเงิน</strong><br /><span>
                                     1. ผู้นำเสนอจากหน่วยงานภายนอก ที่ส่งผลงาน ค่าลงทะเบียนอัตรา 2,000 บาท ต่อ 1 ผลงาน <br />
                                     2. ผู้ร่วมงานทั่วไป/นิสิต/นักศึกษาจากหน่วยงานภายนอก ไม่เสียค่าใช้จ่าย <br />

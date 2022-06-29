@@ -21,6 +21,10 @@
         <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
+    @if (Request::is('employee/research/video/*'))
+        <script src="{{ asset('api/upload-video-poster.js', env('REDIRECT_HTTPS')) }}"></script>
+    @endif
+
     @if (Request::is('employee/research/show/*') || Request::is('list/*'))
         <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
         <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>

@@ -15,29 +15,43 @@
                         <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page"
                             href="{{ route('welcome') }}">หน้าหลัก</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" id="downloads">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             ดาวน์โหลด
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <div class="line-dropdown"></div>
-                            @if (DB::table('downloads')->get())
-                                @foreach (DB::table('downloads')->get() as $download)
+                            @if (DB::table('downloads')->select('downloads.id as id', 'downloads.name as name', 'downloads.link as link', 'downloads.name_file as name_file', 'downloads.path_file as path_file', 'downloads.ext_file as ext_file', 'downloads.conference_id as conference_id', 'downloads.created_at as created_at', 'downloads.updated_at as updated_at')->leftjoin('conferences', 'conferences.id', '=', 'downloads.conference_id')->where('conferences.status', 1)->get())
+                                @forelse (DB::table('downloads')->select('downloads.id as id', 'downloads.name as name', 'downloads.link as link', 'downloads.name_file as name_file', 'downloads.path_file as path_file', 'downloads.ext_file as ext_file', 'downloads.conference_id as conference_id', 'downloads.created_at as created_at', 'downloads.updated_at as updated_at')->leftjoin('conferences', 'conferences.id', '=', 'downloads.conference_id')->where('conferences.status', 1)->get() as $download)
                                     <li><a target="_blank" class="dropdown-item"
-                                            @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif>{{ $download->name }}</a>
+                                            @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif>{{ $download->name }}
+                                            @if (countDate($download->created_at, 10, 'days'))
+                                                <div class="box-new">
+                                                    <span>ใหม่</span>
+                                                </div>
+                                            @endif
+                                        </a>
                                     </li>
-                                @endforeach
+                                @empty
+                                    <li>
+                                        <a class="dropdown-item disabled" href="#">ไม่มีรายการดาวน์โหลด</a>
+                                    </li>
+                                @endforelse
                             @endif
+                        </ul>
+                    </li>
 
-
-                            {{-- <li><a class="dropdown-item"
-                                    href="./files/ประวัติ ดร. เธียรไชย ยักทะวงษ 2564.pdf">ประวัติวิทยากร</a></li>
-                            <li><a class="dropdown-item" href="#">แนวทางการจัดประชุมออนไลน์</a></li>
-                            <li><a class="dropdown-item" href="#">ผลพิจารณาแบบตอบรับ</a></li>
-                            <li><a class="dropdown-item" href="#">Proceeding</a></li>
-                            <li><a class="dropdown-item" href="#">คู่มือการเข้าร่วมประชุมวิชาการ</a>
-                            </li> --}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Proceedings
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('list.research.index') }}">Proceeding 2565</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('list.attend.index') }}">Proceeding 2564</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -128,7 +142,8 @@
                 @else
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button type="submit" class="btn rounded-0 btn-danger text-white mx-3"><i class="fas fa-sign-out"></i>
+                        <button type="submit" class="btn rounded-0 btn-danger text-white mx-3"><i
+                                class="fas fa-sign-out"></i>
                             ออกจากระบบ</button>
                     </form>
                 @endguest

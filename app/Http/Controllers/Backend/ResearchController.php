@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\ExportResearch;
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
 use App\Models\Degree;
@@ -9,6 +10,7 @@ use App\Models\Faculty;
 use App\Models\Present;
 use App\Models\Research;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ResearchController extends Controller
 {
@@ -74,5 +76,10 @@ class ResearchController extends Controller
 
         alert('สำเร็จ', 'แก้ไขบทความสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'แก้ไขบทความสำเร็จ');
+    }
+
+    protected function export(Request $request)
+    {
+        return Excel::download(new ExportResearch, 'EXPORT_RESEARCHS.xlsx');
     }
 }

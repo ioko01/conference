@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
             $table->enum('sex', ['male', 'female'])->comment('เพศ');
             $table->string('phone')->comment('เบอร์โทร');
             $table->text('institution')->comment('สังกัด/หน่วยงาน');
-            $table->text('address')->comment('ที่อยู่');
+            $table->text('address')->comment('ที่อยู่ (ใช้ในการออกใบเสร็จรับเงิน และส่งเอกสาร)');
+            $table->enum('check_requirement', ['before', 'after'])->comment('ความต้องการในการรับใบเสร็จรับเงิน');
             $table->integer('position_id')->comment('รหัสสถานะการเข้าร่วม');
             $table->integer('kota_id')->nullable()->comment('รหัสโควต้าเจ้าภาพร่วม');
             $table->enum('person_attend', ['send', 'attend'])->comment('รหัสบทความ');

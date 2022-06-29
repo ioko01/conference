@@ -10,7 +10,39 @@
     --bg-color-shadowcream: #ede3e1;
 }
 
-.custom-control-input:checked~.custom-control-label::before {
+#downloads .box-new {
+    position: relative;
+    display: inline-block;
+    background-color: red;
+    align-items: center;
+    color: white;
+    border-radius: 6px;
+    padding: 0 5px;
+    font-size: 10px;
+    animation: flashing 3s infinite;
+    -webkit-animation: flashing 3s infinite;
+    -moz-animation: flashing 3s infinite;
+}
+
+@keyframes flashing {
+    0% {
+        opacity: 1;
+    }
+    79%{
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+    99%{
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
     border-color: var(--color-green) !important;
     background-color: var(--color-green) !important;
 }
@@ -408,9 +440,9 @@ a {
     transition: all 0.2s ease;
 }
 
-#date-payment:hover+.date-payment-icon,
-#date-payment:focus+.date-payment-icon,
-#date-payment+.date-payment-icon:hover {
+#date-payment:hover + .date-payment-icon,
+#date-payment:focus + .date-payment-icon,
+#date-payment + .date-payment-icon:hover {
     color: var(--color-green);
 }
 

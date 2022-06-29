@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Conference;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ConferenceController extends Controller
@@ -110,6 +111,7 @@ class ConferenceController extends Controller
                 'status_poster_and_video' => 0,
                 'status_poster_and_video_two' => 0,
             ], 'is_numeric');
+            User::where('id', auth()->user()->id)->update(['conference_id' => NULL]);
         } else {
             $change_status = array_filter([
                 'status' => $request->change_status_conference,
@@ -121,9 +123,11 @@ class ConferenceController extends Controller
                 'status_poster_and_video' => $request->change_status_poster_and_video,
                 'status_poster_and_video_two' => $request->change_status_poster_and_video_two,
             ], 'is_numeric');
+            User::where('id', auth()->user()->id)->update(['conference_id' => $id]);
         }
 
         Conference::where('id', $id)->update($change_status);
+        
 
         alert('สำเร็จ', 'เปลี่ยนสถานะสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'เปลี่ยนสถานะสำเร็จ');

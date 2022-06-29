@@ -16,17 +16,26 @@ class DownloadController extends Controller
     protected function validator($request)
     {
         alert('ผิดพลาด', 'กรุณาใส่หัวข้อนี้ดาวน์โหลดไฟล์', 'error')->showConfirmButton('ปิด', '#3085d6');
-        return $request->validate(['name' => 'required']);
+        return $request->validate(
+            [
+                'name' => 'required',
+                'file_upload' => 'max:10240'
+            ]
+        );
     }
 
     protected function store(Request $request)
     {
+        if (!auth()->user()->conference_id) {
+            alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้', 'error')->showConfirmButton('ปิด', '#3085d6');
+            return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
+        }
 
         $downloads = Download::get();
         $this->validator($request);
 
         foreach ($downloads as $download) {
-            if ($download->name == $request->name) {
+            if ($download->name == $request->name && auth()->user()->conference_id == $download->conference_id) {
                 alert('ผิดพลาด', 'มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้', 'error')->showConfirmButton('ปิด', '#3085d6');
                 return back()->withErrors('มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
@@ -52,6 +61,7 @@ class DownloadController extends Controller
             'name_file' => $name,
             'path_file' => $fullpath,
             'ext_file' => $extension,
+            'conference_id' => auth()->user()->conference_id
         ]);
 
         Download::create($data);

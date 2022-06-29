@@ -17,7 +17,7 @@
                         <div class="row mb-4">
                             <div class="col-md-3">
                                 <label for="status">สถานะ</label>
-                                <select name="is_admin" id="is_admin" class="form-control">
+                                <select name="is_admin" id="is_admin" class="form-select">
                                     <option value="0"
                                         @if (old('is_admin')) @if (old('is_admin') == 0)
                                         selected @endif
@@ -103,8 +103,9 @@
                     </div>
                     <div class="row mb-4">
                         <div class="col-md-6">
-                            <label for="phone">เบอร์โทร</label>
-                            <input type="text" name="phone" id="phone"
+                            <label for="phone">เบอร์โทร <i class="text-red">* ใส่ตัวเลข 10 หลักโดยไม่ต้องใส่
+                                    "-"</i></label>
+                            <input type="tel" name="phone" id="phone"
                                 class="form-control @error('phone') is-invalid @enderror"
                                 @if (old('phone')) value="{{ old('phone') }}"
                                 @else
@@ -118,38 +119,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <label for="institution">สังกัด / หน่วยงาน</label>
-                            <input type="text" name="institution" id="institution"
-                                class="form-control @error('institution') is-invalid @enderror"
-                                @if (old('institution')) value="{{ old('institution') }}"
-                                @else 
-                                value="{{ $user->institution }}" @endif
-                                autocomplete="institution">
 
-                            @error('institution')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <label for="address">ที่อยู่ <span style="font-size: 12px;"
-                                    class="text-bluesky">(ใช้ในการส่งเอกสาร)</span></label>
-                            <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" cols="30" rows="5">
-@if (old('address')){{ old('address') }}@else{{ $user->address }}@endif
-</textarea>
-
-                            @error('address')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
                     <div class="row mb-4">
                         <div class="col-12">
                             <label>เลือกสถานะของท่าน
@@ -162,7 +132,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="position_id"
                                         id="position_{{ $position->id }}" value="{{ $position->id }}"
-                                        onchange="toggle_kota(this)"
+                                        onchange="toggle_position(this)"
                                         @if (old('position_id')) @if (old('position_id') == $position->id)
                                         checked @endif
                                     @else
@@ -181,6 +151,26 @@
                             หากท่านเป็นบุคลากรภายในมหาวิทยาลัยราชภัฏเลย และบทความของท่านเป็นของมหาวิทยาลัยอื่น
                             จะต้องลงทะเบียนเป็น "บุคคลภายนอก"
                         </p>
+
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <label for="institution">สังกัด / หน่วยงาน <i class="text-red">* ตัวอย่าง:
+                                        มหาวิทยาลัยราชภัฏเลย</i></label>
+                                <input
+                                    @if (old('position_id')) @if (old('position_id') != '2') disabled @endif
+                                @elseif ($user->position_id != '2') disabled @endif
+                                type="text" name="institution" id="institution"
+                                class="form-control @error('institution') is-invalid @enderror"
+                                @if (old('institution')) value="{{ old('institution') }}" @else value="{{ $user->institution }}" @endif
+                                autocomplete="institution">
+
+                                @error('institution')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
             </div>
             <div class="row mb-4">
@@ -209,9 +199,55 @@
                     </label>
                 </div>
                 @endforeach
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-12">
+                <label for="address">ที่อยู่ <span style="font-size: 12px;"
+                        class="text-bluesky">(ใช้ในการออกใบเสร็จรับเงิน และส่งเอกสาร)</span></label>
+                <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" cols="30"
+                    rows="5">
+@if (old('address')){{ old('address') }}@else{{ $user->address }}@endif
+</textarea>
+
+                @error('address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <label>ความต้องการใบเสร็จรับเงิน @error('receive_check')
+                        <span class="text-danger"> * กรุณาเลือกความต้องการใบเสร็จรับเงิน</span>
+                    @enderror
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="after_receive_check" name="receive_check"
+                        @if (old('receive_check')) @if (old('receive_check') === 'after')
+                    checked @endif
+                    @elseif($user->check_requirement === 'after') checked @endif value="after">
+
+                    <label for="after_receive_check" class="form-check-label">
+                        ต้องการใบเสร็จรับเงิน <span class="fw-bold">"หลัง"</span> วันจัดประชุม
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="before_receive_check" name="receive_check"
+                        @if (old('receive_check')) @if (old('receive_check') === 'before')
+                    checked @endif
+                    @elseif($user->check_requirement === 'before') checked @endif value="before">
+
+                    <label for="before_receive_check" class="form-check-label">
+                        ต้องการใบเสร็จรับเงิน <span class="fw-bold">"ก่อน"</span> วันจัดประชุม
+                    </label>
+                </div>
 
             </div>
         </div>
+
         <div class="row mb-4">
             <div class="col-12">
                 <label>ท่านลงทะเบียนส่งผลงาน หรือเข้าร่วมงานทั่วไป ? @error('person_attend')

@@ -67,7 +67,7 @@ class RegisterController extends Controller
             'fullname' => 'required|string',
             'sex' => 'required',
             'phone' => 'required|string|max:10',
-            'institution' => 'required|string',
+            'institution' => $data['position_id'] == '2' ? 'required|string' : 'string',
             'address' => 'required|string',
             'position_id' => 'required',
             'person_attend' => 'required',
@@ -85,13 +85,27 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $conference_id = Conference::where('status', 1)->first();
+
+
+        if ($data['position_id'] == '1') {
+            $institution = 'มหาวิทยาลัยราชภัฏเลย';
+        } elseif ($data['position_id'] == '3') {
+            if (isset($data['kota_id'])) {
+                $kota = Kota::find($data['kota_id']);
+                $institution = $kota->name;
+            }
+        } else {
+            $institution = $data['institution'];
+        }
+
         return User::create([
             'prefix' => $data['prefix'],
             'fullname' => $data['fullname'],
             'sex' => $data['sex'],
             'phone' => $data['phone'],
-            'institution' => $data['institution'],
+            'institution' => $institution,
             'address' => $data['address'],
+            'check_requirement' => $data['receive_check'],
             'position_id' => $data['position_id'],
             'kota_id' => isset($data['kota_id']) ? $data['kota_id'] : null,
             'person_attend' => $data['person_attend'],

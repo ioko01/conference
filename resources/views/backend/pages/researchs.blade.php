@@ -56,8 +56,8 @@
                                             class="text-green">{{ str_replace('|', ', ', $research->presenter) }}</strong>
 
                                     </td>
-                                    <td>{{ $research->year }}</td>
-                                    <td>
+                                    <td class="text-center">{{ $research->year }}</td>
+                                    <td class="text-center">
                                         <span class="text-success">
                                             @if ($research->person_attend == 'send')
                                                 ลงทะเบียนส่งผลงาน
@@ -75,7 +75,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('backend.research.edit', $research->topic_id) }}"
-                                            class=" text-warning"><i class="nav-icon fas fa-pen"></i>
+                                            class=" text-warning"><i class="nav-icon fa fa-edit"></i>
                                             แก้ไข</a>
                                     </td>
                                 </tr>

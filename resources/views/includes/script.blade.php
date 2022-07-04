@@ -21,7 +21,7 @@
         <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('employee/research/video/*'))
+    @if (Request::is('employee/research/uploadfile/*'))
         <script src="{{ asset('api/upload-video-poster.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 

@@ -87,7 +87,7 @@
                                             </button>
                                             <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            <strong class="text-red">ต้องมีสถานะรอบทความแก้ไขจากนักวิจัย</strong>
+                                            <strong class="text-red">ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว</strong>
                                         @endif
                                     @else
                                         <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
@@ -128,7 +128,7 @@
                                             </button>
                                             <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            <strong class="text-red">ต้องมีสถานะรอบทความแก้ไขจากนักวิจัย</strong>
+                                            <strong class="text-red">ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว</strong>
                                         @endif
                                     @else
                                         <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
@@ -168,7 +168,7 @@
                                             </button>
                                             <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            <strong class="text-red">ต้องมีสถานะรอบทความแก้ไขจากนักวิจัย</strong>
+                                            <strong class="text-red">ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว</strong>
                                         @endif
                                     @else
                                         <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
@@ -190,17 +190,17 @@
                                 <input type="hidden" value="{{ $value->topic_id }}">
                             </td>
                         </tr>
-                        @empty
-                            <tr class="text-center">
-                                <td colspan="8" style="vertical-align: middle;">ไม่มีบทความของท่าน</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+                    @empty
+                        <tr class="text-center">
+                            <td colspan="8" style="vertical-align: middle;">ไม่มีบทความของท่าน</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-        <!-- End Content -->
+    </div>
+    <!-- End Content -->
 
-        <div id="modal"></div>
+    <div id="modal"></div>
 
-    @endsection
+@endsection

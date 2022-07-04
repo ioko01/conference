@@ -110,9 +110,9 @@
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item {{ Request::is('employee/research/video/*') ? 'active' : '' }}"
+                                    <a class="dropdown-item {{ Request::is('employee/research/uploadfile/*') ? 'active' : '' }}"
                                         aria-current="page"
-                                        href="{{ route('employee.research.video', auth()->user()->id) }}">อัพโหลดลิงค์วิดีโอ</a>
+                                        href="{{ route('employee.research.uploadfile', auth()->user()->id) }}">อัพโหลดลิงค์วิดีโอและไฟล์โปสเตอร์</a>
                                 </li>
 
                             </ul>

@@ -15,8 +15,9 @@ class CreatePositionsTable extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('สถานะการเข้าร่วม');
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
+            $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้')->nullable();
+            $table->string('name')->comment('สถานะการเข้าร่วม');
             $table->timestamps();
         });
     }

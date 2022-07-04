@@ -22,7 +22,7 @@ class SendEditWordController extends Controller
         $upload = $request->file('word_upload');
         $extension = $upload->extension();
         $name = strval($id) . "_edit." . $extension;
-        $path = 'public/edits/words';
+        $path = 'public/edits/words/conference_id_' . auth()->user()->conference_id;
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

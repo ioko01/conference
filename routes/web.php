@@ -26,7 +26,7 @@ use App\Http\Controllers\SendEditResearchTwoController;
 use App\Http\Controllers\SendEditStatementController;
 use App\Http\Controllers\SendEditStatementTwoController;
 use App\Http\Controllers\SendEditWordTwoController;
-use App\Http\Controllers\VideoController;
+use App\Http\Controllers\UploadfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 
@@ -91,7 +91,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('research/send-edit/stm_2/{id}/update', [SendEditStatementTwoController::class, 'update'])->name('employee.research.send.two.stm.update');
 
 
-        Route::get('research/video/{id}', [VideoController::class, 'show'])->name('employee.research.video');
+        Route::get('research/uploadfile/{id}', [UploadfileController::class, 'show'])->name('employee.research.uploadfile');
+        Route::post('research/uploadfile/{id}/create', [UploadfileController::class, 'store'])->name('employee.research.uploadfile.store');
 
         Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
         Route::post('payment/{payment_upload}/create', [PaymentController::class, 'store'])->name('employee.payment.store');
@@ -143,6 +144,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::get('download', [DownloadController::class, 'index'])->name('backend.download.index');
             Route::post('download/create', [DownloadController::class, 'store'])->name('backend.download.store');
+            Route::get('download/{id}/edit', [DownloadController::class, 'edit'])->name('backend.download.edit');
+            Route::put('download/{id}/update', [DownloadController::class, 'update'])->name('backend.download.update');
         });
     });
 });

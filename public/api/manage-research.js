@@ -146,7 +146,7 @@ function send_comment_modal(topic_id, type) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <input type="file" name="file_comment[]" accept=".pdf" multiple>
+                    <input class="form-control" type="file" name="file_comment[]" accept=".pdf" multiple>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success text-white rounded-0">อัพโหลดไฟล์</button>

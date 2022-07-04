@@ -22,7 +22,7 @@ class SendEditPdfTwoController extends Controller
         $upload = $request->file('pdf_upload');
         $extension = $upload->extension();
         $name = strval($id) . "_edit_2." . $extension;
-        $path = 'public/edits_two/pdf';
+        $path = 'public/edits_two/pdf/conference_id_' . auth()->user()->conference_id;
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

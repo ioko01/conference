@@ -43,7 +43,7 @@
                                             class="text-bluesky">{{ thaiDateFormat($user->created_at, true) }}</i></td>
                                     <td>
                                         <a href="{{ route('backend.user.edit', $user->id) }}" class=" text-warning"><i
-                                                class="nav-icon fas fa-pen"></i>
+                                                class="nav-icon fa fa-edit"></i>
                                             แก้ไข</a>
                                     </td>
                                 </tr>

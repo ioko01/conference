@@ -15,11 +15,12 @@ class CreateTipsTable extends Migration
     {
         Schema::create('tips', function (Blueprint $table) {
             $table->id();
+            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
+            $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้')->nullable();
             $table->text('head')->comment('หัวข้อคำแนะนำ');
             $table->text('detail')->comment('รายละเอียดคำแนะนำ');
             $table->text('image')->comment('รูปภาพ');
             $table->integer('group')->comment('กลุ่มที่');
-            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->timestamps();
         });
     }

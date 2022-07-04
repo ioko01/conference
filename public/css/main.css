@@ -3,11 +3,58 @@
 :root {
     --color-green: #30ac33;
     --color-blue: #131f5b;
+    --color-lightblue: #253585;
     --color-yellow: #e8ee3b;
     --color-bluesky: #2cb0c0;
     --bg-color-cream: #f9ecde;
     --bg-color-lightcream: #fefdf9;
     --bg-color-shadowcream: #ede3e1;
+}
+
+.label-type-file {
+    font-size: 1rem;
+    color: #495057;
+    font-weight: lighter !important;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem 0.375rem 0;
+    width: 100%;
+    white-space: nowrap;
+    min-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.label-type-file::before {
+    content: "เลือกไฟล์";
+    background-color: #ced4da7a;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-left: none;
+    margin-right: 0.75rem;
+    white-space: nowrap;
+    transition: 0.5s;
+}
+
+.label-type-file:hover::before {
+    content: "เลือกไฟล์";
+    background-color: #ced4da;
+}
+
+.img-blur {
+    filter: blur(10px);
+}
+
+.box-countdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 5px solid var(--color-blue);
+    background: white;
+    font-size: calc(16px + 0.5vw);
+    height: 120px;
+    width: 120px;
+    margin: 0;
 }
 
 #downloads .box-new {
@@ -28,13 +75,13 @@
     0% {
         opacity: 1;
     }
-    79%{
+    79% {
         opacity: 1;
     }
     80% {
         opacity: 0;
     }
-    99%{
+    99% {
         opacity: 0;
     }
     100% {

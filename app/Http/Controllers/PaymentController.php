@@ -34,7 +34,7 @@ class PaymentController extends Controller
         $upload = $request->file('payment_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/files/slips';
+        $path = 'public/files/slips/conference_id_' . auth()->user()->conference_id;
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

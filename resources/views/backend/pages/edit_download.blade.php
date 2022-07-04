@@ -4,13 +4,14 @@
     <div class="card">
         <div class="card-content">
             <div class="card-body">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('backend.download.store') }}"
-                    class="mb-3">
+                <form method="POST" enctype="multipart/form-data"
+                    action="{{ route('backend.download.update', $download->id) }}" class="mb-3">
                     @csrf
+                    @method('PUT')
                     <div class="col-12 mb-3">
                         <label for="name">เพิ่มหัวข้อดาวน์โหลดไฟล์ <i style="font-size: 12px;" class="text-red">(เช่น
                                 ดาวน์โหลดเทมเพลตงานประชุมวิชาการ)</i></label>
-                        <input value="{{ old('name') }}" type="text" name="name" id="name"
+                        <input value="{{ $download->name }}" type="text" name="name" id="name"
                             class="form-control rounded-0 @error('name') is-invalid @enderror">
                         @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -22,35 +23,42 @@
                         <label class="d-block">ชนิดการอัพโหลด</label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="download" id="link" value="link"
-                                checked>
+                                {{ $download->link ? 'checked' : '' }}>
                             <label class="form-check-label" for="link">
                                 อัพโหลดเป็นลิงค์ <i style="font-size: 12px;" class="text-red">(เช่น
                                     https://www.youtube.com)</i>
                             </label>
                         </div>
                         <div class="mb-3">
-                            <input type="text" name="link_upload" id="link-upload" class="form-control rounded-0">
+                            <input value="{{ $download->link }}" type="text" name="link_upload" id="link-upload"
+                                class="form-control rounded-0">
+                            @error('link_upload')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="download" id="file" value="file">
+                            <input class="form-check-input" type="radio" name="download" id="file" value="file"
+                                @if (isset($download->name_file)) checked @endif>
                             <label class="form-check-label" for="file">
                                 อัพโหลดเป็นไฟล์ <i style="font-size: 12px;" class="text-red">(แนะนำเฉพาะไฟล์ที่มีขนาดเล็ก
                                     ขนาดไฟล์ใหญ่สุดคือ 10 MB)</i>
                             </label>
                         </div>
-                        <div class="mb-3">
-                            <input type="file" name="file_upload" id="file-upload" class="form-control rounded-0"
-                                disabled>
+                        <div class="mb-3" style="position: relative">
+                            <label class="label-type-file"
+                                {{ $download->name_file ? '' : 'style=background-color:#e9ecef;cursor:default' }}
+                                for="file-upload">{{ $download->name_file ? $download->name_file : 'ไม่ได้เลือกไฟล์ใด' }}</label>
+                            <input onchange="getFileName(this)" type="file"
+                                name="file_upload" id="file-upload" class="form-control d-none rounded-0"
+                                @if (isset($download->name_file)) @else disabled @endif>
                         </div>
 
-                        @error('download')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-success rounded-0"><i class="fa fa-save"></i> บันทึก</button>
+                        <button class="btn btn-warning text-white rounded-0"><i class="fa fa-edit"></i> แก้ไข</button>
                     </div>
                 </form>
             </div>
@@ -79,7 +87,10 @@
                             @forelse ($downloads as $key => $download)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $download->name }}</td>
+                                    <td>{{ $download->name }} @if ($download->id == $id)
+                                            <i class="text-warning">(กำลังแก้ไข)</i>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if ($download->link)
                                             <a target="_blank" href="{{ $download->link }}">{{ $download->link }}</a>

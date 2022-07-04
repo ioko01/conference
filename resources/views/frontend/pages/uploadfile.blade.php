@@ -44,15 +44,15 @@
                             </td>
 
                             <td>
-                                <a href="https://www.youtube.com">https://www.youtube.com</a>
-                                <button onclick="openModal('video', {{ $value->id }})"
+                                <a href="{{ $value->video_link }}">{{ $value->video_link }}</a>
+                                <button onclick="openModal('video', {{ $value->topic_id }})"
                                     class="btn btn-green px-4 mx-auto text-white rounded-0 d-block my-2"><i
                                         class="fas fa-plus"></i>
                                     เพิ่มลิงค์วิดีโอ</button>
                             </td>
                             <td>
                                 <a href="https://www.youtube.com">https://www.youtube.com</a>
-                                <button onclick="openModal('poster', {{ $value->id }})"
+                                <button onclick="openModal('poster', {{ $value->topic_id }})"
                                     class="btn btn-green px-4 mx-auto text-white rounded-0 d-block my-2"><i
                                         class="fas fa-plus"></i>
                                     เพิ่มไฟล์ Poster</button>

@@ -15,9 +15,10 @@ class CreateBranchesTable extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
+            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
+            $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้')->nullable();
             $table->string('name')->comment('ชื่อสาขา');
             $table->integer('faculty_id')->comment('รหัสกลุ่มคณะ');
-            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->timestamps();
         });
     }

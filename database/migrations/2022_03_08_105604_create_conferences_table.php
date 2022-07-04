@@ -15,6 +15,7 @@ class CreateConferencesTable extends Migration
     {
         Schema::create('conferences', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
             $table->text('name')->comment('ชื่องานประชุม');
 
             $table->tinyInteger('status')->comment('สถานะงานประชุม')->default(0);

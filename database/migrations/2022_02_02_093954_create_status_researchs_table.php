@@ -15,8 +15,9 @@ class CreateStatusResearchsTable extends Migration
     {
         Schema::create('status_researchs', function (Blueprint $table) {
             $table->id();
-            $table->text('name')->comment('สถานะบทความ');
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
+            $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้')->nullable();
+            $table->text('name')->comment('สถานะบทความ');
             $table->timestamps();
         });
     }

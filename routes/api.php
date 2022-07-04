@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Branch;
 use App\Http\Controllers\StatusUpdateController;
+use App\Http\Controllers\UploadfileController;
+use App\Http\Controllers\VideoController;
 use App\Models\Conference;
 
 /*
@@ -42,7 +44,12 @@ Route::get('research/countdown', function () {
     //     ->get();
 });
 
-Route::middleware(['auth', 'verified', 'is_admin'])->group(function () {
-    Route::put('update-status/{id}', [StatusUpdateController::class, 'update']);
-    Route::get('show-research-detail/{id}', [ManageResearchController::class, 'show']);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('get-video/{id}', [VideoController::class, 'show']);
+    // Route::get('get-poster/{id}', [UploadfileController::class, 'store']);
+
+    Route::middleware('is_admin')->group(function () {
+        Route::put('update-status/{id}', [StatusUpdateController::class, 'update']);
+        Route::get('show-research-detail/{id}', [ManageResearchController::class, 'show']);
+    });
 });

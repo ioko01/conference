@@ -9,7 +9,7 @@
 <script src="{{ asset('vendor/plugins/bootstrap/js/bootstrap.bundle.min.js', env('REDIRECT_HTTPS')) }}"></script>
 <!-- overlayScrollbars -->
 <script
-src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js', env('REDIRECT_HTTPS')) }}">
+    src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js', env('REDIRECT_HTTPS')) }}">
 </script>
 <!-- AdminLTE App -->
 <script src="{{ asset('vendor/dist/js/adminlte.js', env('REDIRECT_HTTPS')) }}"></script>
@@ -33,6 +33,14 @@ src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.
 <script src="{{ asset('vendor/dist/js/pages/dashboard2.js', env('REDIRECT_HTTPS')) }}"></script>
 
 <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
+
+@if (Request::is('backend/conference') || Request::is('backend/conference/*/edit'))
+    <script src="{{ asset('js/get-start-end-datetime-local.js', env('REDIRECT_HTTPS')) }}"></script>
+@endif
+
+@if (Request::is('backend/download/*/edit') || Request::is('backend/download'))
+    <script src="{{ asset('js/download.js', env('REDIRECT_HTTPS')) }}"></script>
+@endif
 
 @if (Request::is('backend/researchs') || Request::is('backend/users') || Request::is('backend/researchs/management'))
     <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>

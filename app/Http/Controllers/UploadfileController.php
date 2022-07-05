@@ -89,6 +89,18 @@ class UploadfileController extends Controller
         return $request->validate(['poster' => 'required|mimes:jpg,jpeg|max:10240']);
     }
 
+    protected function video_validation($request)
+    {
+        alert('ผิดพลาด', 'ไม่สามารถทำรายการได้ กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
+        return $request->validate(['video' => 'required']);
+    }
+
+    protected function poster_validation($request)
+    {
+        alert('ผิดพลาด', 'ไม่สามารถทำรายการได้ กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
+        return $request->validate(['poster' => 'required|mimes:jpg,jpeg|max:10240']);
+    }
+
     protected function file($request, $id = null)
     {
         $result = new Poster;
@@ -118,6 +130,8 @@ class UploadfileController extends Controller
     {
 
         if ($request->video) {
+            $this->video_validation($request);
+
             $data = array_filter([
                 'user_id' => auth()->user()->id,
                 'topic_id' => $id,
@@ -128,10 +142,33 @@ class UploadfileController extends Controller
             alert('สำเร็จ', 'อัพโหลด Link Video สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
             return back()->with('success', 'อัพโหลด Link Video สำเร็จ');
         } else if ($request->poster) {
+            $this->poster_validation($request);
+
             Poster::create($this->file($request, $id)->data);
             $this->file($request, $id)->upload;
             alert('สำเร็จ', 'อัพโหลด ไฟล์ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
             return back()->with('success', 'อัพโหลดไฟล์ Poster สำเร็จ');
+        }
+        return back();
+    }
+
+    protected function update(Request $request, $id)
+    {
+        
+        if ($request->video) {
+            $this->video_validation($request);
+
+            $data = array_filter(['link' => $request->video]);
+            Video::where('topic_id', $id)->update($data);
+            alert('สำเร็จ', 'แก้ไข Link Video สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+            return back()->with('success', 'แก้ไข Link Video สำเร็จ');
+        } else if ($request->poster) {
+            $this->poster_validation($request);
+
+            Poster::where('topic_id', $id)->update($this->file($request, $id)->data);
+            $this->file($request, $id)->upload;
+            alert('สำเร็จ', 'แก้ไขไฟล์ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+            return back()->with('success', 'แก้ไขไฟล์ Poster สำเร็จ');
         }
         return back();
     }

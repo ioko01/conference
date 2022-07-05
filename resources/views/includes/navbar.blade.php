@@ -62,7 +62,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('list.research.index') }}">รายชื่อบทความ</a></li>
-                            <li><a class="dropdown-item" href="{{ route('list.attend.index') }}">รายชื่อผู้ร่วมงาน</a>
+                            <li><a class="dropdown-item" href="{{ route('list.attend.index') }}">รายชื่อผู้ลงทะเบียนเข้าร่วมงาน</a>
                             </li>
                         </ul>
                     </li>

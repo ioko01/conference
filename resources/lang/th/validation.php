@@ -83,9 +83,9 @@ return [
         'array' => 'The :attribute must not have more than :value items.',
     ],
     'max' => [
-        'numeric' => 'The :attribute must not be greater than :max.',
+        'numeric' => ':attribute must not be greater than :max.',
         'file' => ':attribute ต้องมีขนาดไม่เกิน :max กิโลไบต์',
-        'string' => 'The :attribute must not be greater than :max characters.',
+        'string' => ':attribute ต้องไม่มากกว่า :max ตัวอักษร',
         'array' => 'The :attribute must not have more than :max items.',
     ],
     'mimes' => ':attribute ต้องมีนามสกุลไฟล์เป็น :values.',
@@ -187,7 +187,9 @@ return [
         'year' => 'ปี',
         'start' => 'วันที่เริ่ม',
         'end' => 'วันสิ้นสุด',
-        'name' => 'ชื่อ'
+        'name' => 'ชื่อ',
+        'file_upload' => 'ไฟล์อัพโหลด',
+        'link_upload' => 'ลิงค์อัพโหลด'
     ],
 
 ];

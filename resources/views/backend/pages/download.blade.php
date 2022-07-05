@@ -71,7 +71,7 @@
                                 <th>Link</th>
                                 <th>ไฟล์อัพโหลด</th>
                                 <th>สร้างเมื่อ</th>
-                                <th>แก้ไข</th>
+                                <th class="text-right">แก้ไข</th>
                                 <th>ลบ</th>
                             </tr>
                         </thead>
@@ -96,9 +96,11 @@
                                         @endif
                                     </td>
                                     <td><i class="text-info">{{ thaiDateFormat($download->created_at, true) }}</i></td>
-                                    <td><a href="{{ route('backend.download.edit', $download->id) }}"
-                                            class="text-warning"><i class="fa fa-edit"></i> แก้ไข</a></td>
-                                    <td><a href="#" class="text-danger"><i class="fas fa-trash-alt"></i> ลบ</a></td>
+                                    <td class="text-right"><a href="{{ route('backend.download.edit', $download->id) }}"
+                                            class="btn btn-sm text-white btn-warning"><i class="fa fa-edit"></i> แก้ไข</a>
+                                    </td>
+                                    <td><button onclick="open_modal($download->id)" class="btn btn-sm btn-danger"><i
+                                                class="fas fa-trash-alt"></i> ลบ</button></td>
                                 </tr>
                             @empty
                             @endforelse

@@ -93,6 +93,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('research/uploadfile/{id}', [UploadfileController::class, 'show'])->name('employee.research.uploadfile');
         Route::post('research/uploadfile/{id}/create', [UploadfileController::class, 'store'])->name('employee.research.uploadfile.store');
+        Route::put('research/uploadfile/{id}/update', [UploadfileController::class, 'update'])->name('employee.research.uploadfile.update');
 
         Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
         Route::post('payment/{payment_upload}/create', [PaymentController::class, 'store'])->name('employee.payment.store');

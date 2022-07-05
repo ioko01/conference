@@ -18,18 +18,31 @@ class DownloadController extends Controller
     protected function validator($request)
     {
         alert('ผิดพลาด', 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
-        return $request->download == "link" ? $request->validate(
-            [
-                'name' => 'required',
-                'link' => 'required',
-                'file_upload' => 'max:10240'
-            ]
-        ) : $request->validate(
-            [
-                'name' => 'required',
-                'file_upload' => 'required|max:10240'
-            ]
-        );
+        if ($request->download == "link") {
+            return $request->validate(
+                [
+                    'name' => 'required',
+                    'link_upload' => 'required',
+                    'file_upload' => 'max:10240'
+                ]
+            );
+        } else if ($request->download == "file") {
+            if ($request->name_file) {
+                return $request->validate(
+                    [
+                        'name' => 'required',
+                        'file_upload' => 'max:10240'
+                    ]
+                );
+            } else {
+                return $request->validate(
+                    [
+                        'name' => 'required',
+                        'file_upload' => 'required|max:10240'
+                    ]
+                );
+            }
+        }
     }
 
     protected function store(Request $request)
@@ -48,11 +61,12 @@ class DownloadController extends Controller
                 return back()->withErrors('มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
         }
-        $upload = '';
-        $extension = '';
-        $name = '';
-        $path = '';
-        $fullpath = '';
+        
+        $upload = null;
+        $extension = null;
+        $name = null;
+        $path = null;
+        $fullpath = null;
         if ($request->file('file_upload')) {
             $upload = $request->file('file_upload');
             $extension = $upload->extension();
@@ -91,6 +105,7 @@ class DownloadController extends Controller
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
         }
 
+        $download = Download::find($id);
         $downloads = Download::get();
         $this->validator($request);
 
@@ -101,13 +116,11 @@ class DownloadController extends Controller
             }
         }
 
-
-
-        $upload = '';
-        $extension = '';
-        $name = '';
-        $path = '';
-        $fullpath = '';
+        $upload = null;
+        $extension = null;
+        $name = null;
+        $path = null;
+        $fullpath = null;
         if ($request->file('file_upload')) {
             $upload = $request->file('file_upload');
             $extension = $upload->extension();
@@ -121,15 +134,27 @@ class DownloadController extends Controller
             Storage::delete($download->path_file);
         }
 
-        $data = [
-            'user_id' => auth()->user()->id,
-            'name' => $request->name,
-            'link' => $request->link_upload,
-            'name_file' => $name,
-            'path_file' => $fullpath,
-            'ext_file' => $extension,
-            'conference_id' => auth()->user()->conference_id
-        ];
+        if ($request->name_file) {
+            $data = array_filter([
+                'user_id' => auth()->user()->id,
+                'name' => $request->name,
+                'link' => $request->link_upload,
+                'name_file' => $name,
+                'path_file' => $fullpath,
+                'ext_file' => $extension,
+                'conference_id' => auth()->user()->conference_id
+            ]);
+        } else {
+            $data = [
+                'user_id' => auth()->user()->id,
+                'name' => $request->name,
+                'link' => $request->link_upload,
+                'name_file' => $name,
+                'path_file' => $fullpath,
+                'ext_file' => $extension,
+                'conference_id' => auth()->user()->conference_id
+            ];
+        }
 
         Download::where('id', $id)->update($data);
         alert('สำเร็จ', 'แก้ไขหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');

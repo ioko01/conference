@@ -31,7 +31,8 @@
                         </div>
                         <div class="mb-3">
                             <input value="{{ $download->link }}" type="text" name="link_upload" id="link-upload"
-                                class="form-control rounded-0">
+                                class="form-control rounded-0 @error('link_upload') is-invalid @enderror"
+                                @if (isset($download->name_file)) disabled @endif>
                             @error('link_upload')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -47,12 +48,19 @@
                             </label>
                         </div>
                         <div class="mb-3" style="position: relative">
-                            <label class="label-type-file"
+                            <label class="label-type-file mb-0 @error('file_upload') is-invalid @enderror"
                                 {{ $download->name_file ? '' : 'style=background-color:#e9ecef;cursor:default' }}
                                 for="file-upload">{{ $download->name_file ? $download->name_file : 'ไม่ได้เลือกไฟล์ใด' }}</label>
-                            <input onchange="getFileName(this)" type="file"
-                                name="file_upload" id="file-upload" class="form-control d-none rounded-0"
-                                @if (isset($download->name_file)) @else disabled @endif>
+                            <input type="hidden" value="{{ $download->name_file }}" name="name_file" id="name_file">
+                            <input onchange="getFileName(this)" type="file" name="file_upload" id="file-upload"
+                                class="form-control d-none rounded-0 @error('file_upload') is-invalid @enderror"
+                                @if (!isset($download->name_file)) disabled @endif>
+
+                            @error('file_upload')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
 
@@ -79,7 +87,7 @@
                                 <th>Link</th>
                                 <th>ไฟล์อัพโหลด</th>
                                 <th>สร้างเมื่อ</th>
-                                <th>แก้ไข</th>
+                                <th class="text-right">แก้ไข</th>
                                 <th>ลบ</th>
                             </tr>
                         </thead>
@@ -107,9 +115,12 @@
                                         @endif
                                     </td>
                                     <td><i class="text-info">{{ thaiDateFormat($download->created_at, true) }}</i></td>
-                                    <td><a href="{{ route('backend.download.edit', $download->id) }}"
-                                            class="text-warning"><i class="fa fa-edit"></i> แก้ไข</a></td>
-                                    <td><a href="#" class="text-danger"><i class="fas fa-trash-alt"></i> ลบ</a></td>
+                                    <td class="text-right"><a href="{{ route('backend.download.edit', $download->id) }}"
+                                            class="btn btn-sm text-white btn-warning"><i class="fa fa-edit"></i> แก้ไข</a>
+                                    </td>
+                                    <td><button onclick="open_modal($download->id)" class="btn btn-sm btn-danger"><i
+                                                class="fas fa-trash-alt"></i>
+                                            ลบ</button></td>
                                 </tr>
                             @empty
                             @endforelse
@@ -119,4 +130,5 @@
             </div>
         </div>
     </div>
+    <div id="modal"></div>
 @endsection

@@ -61,7 +61,7 @@ class DownloadController extends Controller
                 return back()->withErrors('มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
         }
-        
+
         $upload = null;
         $extension = null;
         $name = null;
@@ -159,5 +159,12 @@ class DownloadController extends Controller
         Download::where('id', $id)->update($data);
         alert('สำเร็จ', 'แก้ไขหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back();
+    }
+
+
+    public function api_show($id)
+    {
+        $download = Download::find($id);
+        return response()->json($download);
     }
 }

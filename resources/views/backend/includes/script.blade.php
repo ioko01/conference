@@ -16,7 +16,9 @@
 
 <script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
 
-<script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
+@if (Request::is('backend/researchs') || Request::is('backend/researchs/management') || Request::is('backend/researchs/*/edit'))
+    <script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
+@endif
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
@@ -40,6 +42,7 @@
 
 @if (Request::is('backend/download/*/edit') || Request::is('backend/download'))
     <script src="{{ asset('js/download.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('api/download.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('backend/researchs') || Request::is('backend/users') || Request::is('backend/researchs/management'))

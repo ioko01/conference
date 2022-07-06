@@ -5,14 +5,18 @@ window.addEventListener("load", function () {
         const linkOrFile = ["link", "file"];
         const linkOrFileUpload = ["link-upload", "file-upload"];
         linkOrFile.forEach((_, index) => {
-            toggleLinkOrFile(linkOrFile[index], linkOrFileUpload[index], false);
+            toggle_link_or_file(
+                linkOrFile[index],
+                linkOrFileUpload[index],
+                false
+            );
         });
     } catch (error) {
         throw error;
     }
 });
 
-function toggleLinkOrFile(radioId, inputId) {
+function toggle_link_or_file(radioId, inputId) {
     const el = ".label-type-file";
 
     const styled = {
@@ -24,7 +28,7 @@ function toggleLinkOrFile(radioId, inputId) {
         $("#upload-type :not(input[type='radio'])").attr("disabled", true);
 
         if (inputId != "file-upload") {
-            setStyled(el, styled);
+            set_styled(el, styled);
         } else {
             $(el).removeAttr("style");
         }
@@ -33,13 +37,13 @@ function toggleLinkOrFile(radioId, inputId) {
     });
 }
 
-function setStyled(el, styled = {}) {
+function set_styled(el, styled = {}) {
     for (const key in styled) {
         $(el).css(key, styled[key]);
     }
 }
 
-function getFileName(e) {
+function get_fileName(e) {
     try {
         $(".label-type-file").html(e.files[0].name);
         $("#name_file").val(e.files[0].name);

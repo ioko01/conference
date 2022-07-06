@@ -23,7 +23,8 @@
                         <label class="d-block">ชนิดการอัพโหลด</label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="download" id="link" value="link"
-                                {{ $download->link ? 'checked' : '' }}>
+                                @if (old('download') !== null) @if (old('download') == 'link') checked @endif
+                            @elseif(isset($download->link)) checked @endif>
                             <label class="form-check-label" for="link">
                                 อัพโหลดเป็นลิงค์ <i style="font-size: 12px;" class="text-red">(เช่น
                                     https://www.youtube.com)</i>
@@ -32,7 +33,8 @@
                         <div class="mb-3">
                             <input value="{{ $download->link }}" type="text" name="link_upload" id="link-upload"
                                 class="form-control rounded-0 @error('link_upload') is-invalid @enderror"
-                                @if (isset($download->name_file)) disabled @endif>
+                                @if (old('download') !== null) @if (old('download') == 'file') disabled @endif
+                            @elseif(isset($download->name_file)) disabled @endif>
                             @error('link_upload')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -41,7 +43,8 @@
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="download" id="file" value="file"
-                                @if (isset($download->name_file)) checked @endif>
+                                @if (old('download') !== null) @if (old('download') == 'file') checked @endif
+                            @elseif(isset($download->name_file)) checked @endif>
                             <label class="form-check-label" for="file">
                                 อัพโหลดเป็นไฟล์ <i style="font-size: 12px;" class="text-red">(แนะนำเฉพาะไฟล์ที่มีขนาดเล็ก
                                     ขนาดไฟล์ใหญ่สุดคือ 10 MB)</i>
@@ -49,12 +52,16 @@
                         </div>
                         <div class="mb-3" style="position: relative">
                             <label class="label-type-file mb-0 @error('file_upload') is-invalid @enderror"
-                                {{ $download->name_file ? '' : 'style=background-color:#e9ecef;cursor:default' }}
+                                @if (old('download') !== null) @if (old('download') == 'link') style="background-color:#e9ecef;cursor:default" @endif
+                            @elseif($download->link) style="background-color:#e9ecef;cursor:default"
+                                @endif
                                 for="file-upload">{{ $download->name_file ? $download->name_file : 'ไม่ได้เลือกไฟล์ใด' }}</label>
                             <input type="hidden" value="{{ $download->name_file }}" name="name_file" id="name_file">
-                            <input onchange="getFileName(this)" type="file" name="file_upload" id="file-upload"
+
+                            <input onchange="get_fileName(this)" type="file" name="file_upload" id="file-upload"
                                 class="form-control d-none rounded-0 @error('file_upload') is-invalid @enderror"
-                                @if (!isset($download->name_file)) disabled @endif>
+                                @if (old('download') !== null) @if (old('download') == 'link') disabled @endif
+                            @elseif(!isset($download->name_file)) disabled @endif>
 
                             @error('file_upload')
                                 <span class="invalid-feedback" role="alert">
@@ -118,7 +125,7 @@
                                     <td class="text-right"><a href="{{ route('backend.download.edit', $download->id) }}"
                                             class="btn btn-sm text-white btn-warning"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>
-                                    <td><button onclick="open_modal($download->id)" class="btn btn-sm btn-danger"><i
+                                    <td><button onclick="open_modal({{ $download->id }}, this)" class="btn btn-sm btn-danger"><i
                                                 class="fas fa-trash-alt"></i>
                                             ลบ</button></td>
                                 </tr>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\DownloadController;
 use App\Http\Controllers\Backend\ManageResearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,7 @@ Route::get('research/countdown', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('get-video/{id}', [VideoController::class, 'show']);
     // Route::get('get-poster/{id}', [UploadfileController::class, 'store']);
+    Route::get('get-download/{id}', [DownloadController::class, 'api_show']);
 
     Route::middleware('is_admin')->group(function () {
         Route::put('update-status/{id}', [StatusUpdateController::class, 'update']);

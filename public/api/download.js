@@ -1,9 +1,9 @@
 "use strict";
 
-const get_video = (id) => {
+const get_id = (id) => {
     return $.ajax({
         method: "GET",
-        url: `/api/get-${type}/${topic_id}`,
+        url: `/api/get-download/${id}`,
         success: function (res) {
             return res;
         },
@@ -24,45 +24,30 @@ const get_video = (id) => {
     });
 };
 
-const openModal = (id) => {
-    let title = "";
-    let content = "";
+const open_modal = (id, e) => {
     const _token = $('meta[name="csrf-token"]').attr("content");
-    $.when(get_video(id)).done(function (res) {
-        console.log(res);
-    });
-    if (type == "video") {
-        title = "เพิ่มลิงค์วิดีโอ";
-        content = `
-        <label for="video">ใส่ลิงค์วิดีโอ <i class="text-red">(ตัวอย่าง เช่น: https://www.youtube.com)</i></label>
-        <input id="video" type="text" name="video" class="form-control" placeholder="ใส่ลิงค์วิดีโอ">
-        `;
-    } else if (type == "poster") {
-        title = "อัพโหลดไฟล์โปสเตอร์";
-        content = `
-        <label for="poster">อัพโหลดไฟล์โปสเตอร์ <i style="font-size: 12px;" class="text-red"><br/>* นามสกุลไฟล์ต้องเป็น .jpg, .jpeg<br/>* ขนาดไฟล์ต้องไม่เกิน 10 MB</i></label>
-        <input id="poster" type="file" name="poster" class="form-control" placeholder="อัพโหลดไฟล์โปสเตอร์" accept=".jpg, .jpeg">
-        `;
-    }
-    let createModal = `
+    $.when(get_id(id, e)).done(function (res) {
+        let createModal = `
             <div class="modal fade" id="video_poster_modal" data-bs-backdrop="static"
             data-bs-keyboard="true" tabindex="-1" aria-labelledby="เพิ่มวิดีโอและโปสเตอร์" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form enctype="multipart/form-data" action="/employee/research/uploadfile/${topic_id}/create" method="POST">
+                        <form enctype="multipart/form-data" action="#" method="POST">
                             <input type="hidden" name="_token" value="${_token}" />
                             
                             <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">${title}</h5>
+                                <h5 class="modal-title" id="staticBackdropLabel">ลบไฟล์ดาวน์โหลด</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="modal-body" id="modal_body">${content}</div>
+                            <div class="modal-body" id="modal_body">
+                                <label for="poster">ต้องการลบหัวข้อ <span class="text-danger">"${res.name}"</span> หรือไม่?</label>
+                            </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-success rounded-0">
-                                    <i class="fa fa-save"></i> บันทึก
+                                <button type="submit" class="btn btn-danger rounded-0">
+                                    <i class="fa fa-trash-alt"></i> ลบ
                                 </button>
-                                <button type="button" class="btn btn-danger rounded-0"
+                                <button type="button" class="btn btn-secondary rounded-0"
                                     data-bs-dismiss="modal">ปิด</button>
                             </div>
                         </form>
@@ -70,6 +55,7 @@ const openModal = (id) => {
                 </div>
             </div>`;
 
-    $("#modal").html(createModal);
-    $("#video_poster_modal").modal("show");
+        $("#modal").html(createModal);
+        $("#video_poster_modal").modal("show");
+    });
 };

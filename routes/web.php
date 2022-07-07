@@ -147,6 +147,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('download/create', [DownloadController::class, 'store'])->name('backend.download.store');
             Route::get('download/{id}/edit', [DownloadController::class, 'edit'])->name('backend.download.edit');
             Route::put('download/{id}/update', [DownloadController::class, 'update'])->name('backend.download.update');
+            Route::delete('download/{id}/delete', [DownloadController::class, 'destroy'])->name('backend.download.delete');
         });
     });
 });

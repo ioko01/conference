@@ -123,10 +123,12 @@
                                     </td>
                                     <td><i class="text-info">{{ thaiDateFormat($download->created_at, true) }}</i></td>
                                     <td class="text-right"><a href="{{ route('backend.download.edit', $download->id) }}"
-                                            class="btn btn-sm text-white btn-warning"><i class="fa fa-edit"></i> แก้ไข</a>
+                                            class="btn btn-sm text-white btn-warning rounded-0"><i class="fa fa-edit"></i>
+                                            แก้ไข</a>
                                     </td>
-                                    <td><button onclick="open_modal({{ $download->id }}, this)" class="btn btn-sm btn-danger"><i
-                                                class="fas fa-trash-alt"></i>
+                                    <td><button
+                                            onclick="open_modal({{ $download->id }}, '{{ $download->name }}')"
+                                            class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
                                             ลบ</button></td>
                                 </tr>
                             @empty

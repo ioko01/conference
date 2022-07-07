@@ -5,11 +5,7 @@ window.addEventListener("load", function () {
         const linkOrFile = ["link", "file"];
         const linkOrFileUpload = ["link-upload", "file-upload"];
         linkOrFile.forEach((_, index) => {
-            toggle_link_or_file(
-                linkOrFile[index],
-                linkOrFileUpload[index],
-                false
-            );
+            toggle_link_or_file(linkOrFile[index], linkOrFileUpload[index]);
         });
     } catch (error) {
         throw error;
@@ -31,6 +27,8 @@ function toggle_link_or_file(radioId, inputId) {
             set_styled(el, styled);
         } else {
             $(el).removeAttr("style");
+            $(`#name_file`).removeAttr("disabled");
+            $(`label`).removeAttr("disabled");
         }
 
         $(`#${inputId}`).removeAttr("disabled");

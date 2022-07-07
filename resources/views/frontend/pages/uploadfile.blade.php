@@ -46,13 +46,15 @@
                             <td>
                                 @if ($value->video_link)
                                     <a href="{{ $value->video_link }}">{{ $value->video_link }}</a>
-                                    <button onclick="open_modal('video', {{ $value->topic_id }}, this)"
+                                    <button
+                                        onclick="open_modal('video', {{ $value->topic_id }}, '{{ $value->video_link }}')"
                                         class="btn btn-warning px-4 mx-auto text-white rounded-0 d-block my-2"><i
                                             class="fas fa-edit"></i>
                                         แก้ไขลิงค์วิดีโอ</button>
                                 @else
                                     <a href="{{ $value->video_link }}">{{ $value->video_link }}</a>
-                                    <button onclick="open_modal('video', {{ $value->topic_id }}, this)"
+                                    <button
+                                        onclick="open_modal('video', {{ $value->topic_id }}, '{{ $value->video_link }}')"
                                         class="btn btn-green px-4 mx-auto text-white rounded-0 d-block my-2"><i
                                             class="fas fa-plus"></i>
                                         เพิ่มลิงค์วิดีโอ</button>
@@ -60,7 +62,8 @@
                             </td>
                             <td>
                                 <a href="https://www.youtube.com">https://www.youtube.com</a>
-                                <button onclick="open_modal('poster', {{ $value->topic_id }}, this)"
+                                <button
+                                    onclick="open_modal('poster', {{ $value->topic_id }}, '{{ $value->video_link }}')"
                                     class="btn btn-green px-4 mx-auto text-white rounded-0 d-block my-2"><i
                                         class="fas fa-plus"></i>
                                     เพิ่มไฟล์ Poster</button>

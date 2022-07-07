@@ -70,7 +70,8 @@ class DownloadController extends Controller
         if ($request->file('file_upload')) {
             $upload = $request->file('file_upload');
             $extension = $upload->extension();
-            $name = "FILE_" . uniqid() . '.' . $extension;
+            $file_name = $request->name;
+            $name = $file_name . '.' . $extension;
             $path = 'public/assets/files/conference_id_' . auth()->user()->conference_id;
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
@@ -116,6 +117,12 @@ class DownloadController extends Controller
             }
         }
 
+        if ($download->name_file != $request->name_file) {
+            if (Storage::exists($download->path_file)) {
+                Storage::delete($download->path_file);
+            }
+        }
+
         $upload = null;
         $extension = null;
         $name = null;
@@ -124,34 +131,42 @@ class DownloadController extends Controller
         if ($request->file('file_upload')) {
             $upload = $request->file('file_upload');
             $extension = $upload->extension();
-            $name = "FILE_" . uniqid() . '.' . $extension;
+            $file_name = $request->name;
+            $name = $file_name . '.' . $extension;
             $path = 'public/assets/files/conference_id_' . auth()->user()->conference_id;
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }
 
-        if (Storage::exists($download->path_file)) {
-            Storage::delete($download->path_file);
-        }
 
-        if ($request->name_file) {
-            $data = array_filter([
-                'user_id' => auth()->user()->id,
-                'name' => $request->name,
-                'link' => $request->link_upload,
-                'name_file' => $name,
-                'path_file' => $fullpath,
-                'ext_file' => $extension,
-                'conference_id' => auth()->user()->conference_id
-            ]);
-        } else {
+        if ($request->download == "file") {
+            if ($request->name_file) {
+                if ($request->file('file_upload')) {
+                    $data = [
+                        'user_id' => auth()->user()->id,
+                        'name' => $request->name,
+                        'link' => $request->link_upload ? $request->link_upload : null,
+                        'name_file' => $name,
+                        'path_file' => $fullpath,
+                        'ext_file' => $extension,
+                        'conference_id' => auth()->user()->conference_id
+                    ];
+                } else {
+                    $data = [
+                        'user_id' => auth()->user()->id,
+                        'name' => $request->name,
+                        'conference_id' => auth()->user()->conference_id
+                    ];
+                }
+            }
+        } else if ($request->download == "link") {
             $data = [
                 'user_id' => auth()->user()->id,
                 'name' => $request->name,
                 'link' => $request->link_upload,
-                'name_file' => $name,
-                'path_file' => $fullpath,
-                'ext_file' => $extension,
+                'name_file' => null,
+                'path_file' => null,
+                'ext_file' => null,
                 'conference_id' => auth()->user()->conference_id
             ];
         }
@@ -161,10 +176,14 @@ class DownloadController extends Controller
         return back();
     }
 
-
-    public function api_show($id)
+    public function destroy($id)
     {
         $download = Download::find($id);
-        return response()->json($download);
+        if (Storage::exists($download->path_file)) {
+            Storage::delete($download->path_file);
+        }
+        Download::where('id', $id)->delete();
+        alert('สำเร็จ', 'ลบหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        return back();
     }
 }

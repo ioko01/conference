@@ -11,8 +11,75 @@
     --bg-color-shadowcream: #ede3e1;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 .spinner {
-    border:  5px solid red;
+    border: 5px solid red;
+}
+
+.fade-right {
+    opacity: 1;
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    animation: fade-right 0.8s ease-out;
+    -webkit-animation: fade-right 0.8s ease-out;
+}
+
+@keyframes fade-right {
+    0% {
+        opacity: 0;
+        transform: translateX(-3%);
+        -webkit-transform: translateX(-3%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+    }
+}
+
+.fade-left {
+    opacity: 1;
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    animation: fade-left 0.8s ease-out;
+    -webkit-animation: fade-left 0.8s ease-out;
+}
+
+@keyframes fade-left {
+    0% {
+        opacity: 0;
+        transform: translateX(3%);
+        -webkit-transform: translateX(3%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+    }
+}
+
+.fade-up {
+    opacity: 1;
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    animation: fade-up 0.8s ease-out;
+    -webkit-animation: fade-up 0.8s ease-out;
+}
+
+@keyframes fade-up {
+    0% {
+        opacity: 0;
+        transform: translateY(3%);
+        -webkit-transform: translateY(3%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+    }
 }
 
 .label-type-file {

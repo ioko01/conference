@@ -4,6 +4,7 @@
 
     <script src="{{ asset('js/app.js', env('REDIRECT_HTTPS')) }}" defer></script>
     <script src="{{ asset('js/main.js', env('REDIRECT_HTTPS')) }}" defer></script>
+    <script src="{{ asset('js/animate.js', env('REDIRECT_HTTPS')) }}" defer></script>
 
     @if (Request::is('/'))
         <script src="{{ asset('api/countdown.js', env('REDIRECT_HTTPS')) }}"></script>

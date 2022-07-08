@@ -79,7 +79,7 @@
                                     @endif
                                 @else
                                     @if ($value->status_payment)
-                                        @if (endDate('end_payment')->day >= 0 && $value->word_path)
+                                        @if (endDate('end_payment')->day >= 0 || $value->word_path)
                                             @if ($value->status_id <= 4)
                                                 <button type="button" class="btn btn-warning text-white rounded-0 w-100"
                                                     data-bs-toggle="modal" data-bs-target="#payment-modal">

@@ -532,6 +532,15 @@ a {
     color: #5b5757;
 }
 
+/* Large Screen */
+
+@media screen and (max-width: 991px) {
+    .dropdown .dropdown-menu::before {
+        content: "";
+        border-top: none;
+    }
+}
+
 /* Medium Screen */
 
 @media screen and (max-width: 767px) {

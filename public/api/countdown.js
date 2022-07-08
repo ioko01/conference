@@ -8,7 +8,6 @@ function countdown() {
             beforeSend: function () {
                 const countdownHtml = $("#countdown");
                 const h1 = document.createElement("h1");
-                h1.classList.add("text-center");
                 h1.innerHTML = `กรุณารอสักครู่`;
                 countdownHtml.html(h1);
             },

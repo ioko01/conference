@@ -68,6 +68,8 @@
                                                     data-bs-toggle="modal" data-bs-target="#payment-modal">
                                                     แก้ไขสลิปชำระเงิน
                                                 </button>
+                                            @else
+                                                <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>
                                             @endif
                                         @else
                                             <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>
@@ -77,11 +79,15 @@
                                     @endif
                                 @else
                                     @if ($value->status_payment)
-                                        @if (endDate('end_payment')->day >= 0)
-                                            <button type="button" class="btn btn-warning text-white rounded-0 w-100"
-                                                data-bs-toggle="modal" data-bs-target="#payment-modal">
-                                                ชำระเงิน
-                                            </button>
+                                        @if (endDate('end_payment')->day >= 0 && $value->word_path)
+                                            @if ($value->status_id <= 4)
+                                                <button type="button" class="btn btn-warning text-white rounded-0 w-100"
+                                                    data-bs-toggle="modal" data-bs-target="#payment-modal">
+                                                    ชำระเงิน
+                                                </button>
+                                            @else
+                                                <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>
+                                            @endif
                                         @else
                                             <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>
                                         @endif
@@ -215,17 +221,17 @@
                                 </button>
                             </td>
                         </tr>
-                        @empty
-                            <tr class="text-center">
-                                <td colspan="8">ไม่มีบทความของท่าน</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+                    @empty
+                        <tr class="text-center">
+                            <td colspan="8">ไม่มีบทความของท่าน</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-        <!-- End Content -->
+    </div>
+    <!-- End Content -->
 
-        @yield('modal')
+    @yield('modal')
 
-    @endsection
+@endsection

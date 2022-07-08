@@ -58,7 +58,7 @@
                                 for="file-upload">{{ $download->name_file ? $download->name_file : 'ไม่ได้เลือกไฟล์ใด' }}</label>
                             <input type="hidden" value="{{ $download->name_file }}" name="name_file" id="name_file">
 
-                            <input onchange="get_fileName(this)" type="file" name="file_upload" id="file-upload"
+                            <input onchange="get_file_name(this)" type="file" name="file_upload" id="file-upload"
                                 class="form-control d-none rounded-0 @error('file_upload') is-invalid @enderror"
                                 @if (old('download') !== null) @if (old('download') == 'link') disabled @endif
                             @elseif(!isset($download->name_file)) disabled @endif>

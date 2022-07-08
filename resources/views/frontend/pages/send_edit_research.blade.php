@@ -6,7 +6,7 @@
     <div class="bg-white text-blue p-5 my-5">
 
         <div class="inner-content-header">
-            <h2 class="text-center">รายชื่อรายชื่อบทความ ในงานการประชุมวิชาการ ราชภัฏเลยวิชาการ ครั้งที่ 8</h2>
+            <h2 class="text-center">ส่งบทความฉบับแก้ไข ครั้งที่ 1</h2>
             <h4 class="text-green py-3">
                 LRU Conference 2022
             </h4>
@@ -77,7 +77,7 @@
                                 @if ($value->status_research_edit == 1)
                                     @if (endDate('end_research_edit')->day >= 0)
                                         @if ($value->status_id >= 8)
-                                            <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
+                                            <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
                                                 onclick="open_modal(this, 'word'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
                                                 @if (isset($value->edit_word_path))
                                                     แก้ไขไฟล์ WORD ฉบับแก้ไข
@@ -118,7 +118,7 @@
                                 @if ($value->status_research_edit === 1)
                                     @if (endDate('end_research_edit')->day >= 0)
                                         @if ($value->status_id >= 8)
-                                            <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
+                                            <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
                                                 onclick="open_modal(this, 'pdf'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
                                                 @if (isset($value->edit_pdf_path))
                                                     แก้ไขไฟล์ PDF ฉบับแก้ไข
@@ -158,7 +158,7 @@
                                 @if ($value->status_research_edit === 1)
                                     @if (endDate('end_research_edit')->day >= 0)
                                         @if ($value->status_id >= 8)
-                                            <button type="button" class="btn btn-info text-white rounded-0 w-100 my-1"
+                                            <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
                                                 onclick="open_modal(this, 'stm'@if (isset($value->edit_stm_path)) , 'PUT' @endif)">
                                                 @if (isset($value->edit_stm_path))
                                                     แก้ไขแบบคำชี้แจง

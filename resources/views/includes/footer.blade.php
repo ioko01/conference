@@ -1,8 +1,8 @@
 
 @section('footer')
 <!-- Footer -->
-<footer>
-    <div style="word-break: break-all;" class="footer-content-1 bg-white p-5">
+<footer class="position-relative">
+    <div style="word-wrap: break-word;" class="footer-content-1 bg-white p-5">
         <strong style="color: #2cb0c0;">ติดต่อสอบถามรายละเอียดเพิ่มเติมได้ที่</strong><br />สถาบันวิจัยและพัฒนา
         มหาวิทยาลัยราชภัฏเลย อาคาร 20 ชั้น 4 เลขที่ 234 ถ.เลย-เชียงคาน อ.เมือง จ.เลย 42000<br />โทร. 0-4283-5224-8 ต่อ
         41141-2, 51143<br />โทรศัพท์มือถือ
@@ -11,7 +11,7 @@
         <br />Website: http://research.lru.ac.th<br />ผู้ประสานงาน: (คุณสุพัตรา จันทร์รอด/ คุณปริญญา จิตรโคตร/ คุณปราณี
         พลดาหาญ)
     </div>
-    <div style="word-break: break-all;" class="footer-content-2 bg-blue p-5">
+    <div style="word-wrap: break-word;" class="footer-content-2 bg-blue p-5">
         <div class="row">
             <div class="col-md-4">
                 <img style="max-width: 180px; width: 100%;" src="{{ asset('images/logo-invert.png', env('REDIRECT_HTTPS')) }}" alt="logo-footer">
@@ -22,13 +22,13 @@
                     2022 วันศุกร์ที่ 25 มีนาคม 2565 ผ่านระบบ Teleconference (Zoom meeting)
                 </p>
             </div>
-            <div class="col-md-3 offset-md-5 d-flex align-self-end">
+            <div class="col-md-3 offset-md-5 d-md-flex align-self-end">
                 <p>
                     ติดต่อเรา<br />lru.conference@gmail.com<br />สถาบันวิจัยและพัฒนา มหาวิทยาลัยราชภัฏเลย
                     <br />โทรศัพท์ 0-4283-5224-8 ต่อ 41141-2, 51143
                 </p>
             </div>
-            <div class="col-md-12 d-flex align-self-end">
+            <div class="col-md-12 d-md-flex align-self-end">
                 <p>
                     แจ้งปัญหาได้ที่<br/>Email: monday-december.1997@hotmail.com (คุณธนพงษ์ สุนทราวิรัตน์)
                 </p>

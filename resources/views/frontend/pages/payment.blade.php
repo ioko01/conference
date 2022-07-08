@@ -11,7 +11,7 @@
         </h4>
     </div>
     <div class="row">
-        <div class="col-7">
+        <div class="col-md-7">
             <h2>รูปแบบการชำระเงิน</h2>
             <p class="text-green">
                 <strong>ชำระค่าลงทะเบียนผ่านธนาคาร เข้าบัญชีออมทรัพย์ชื่อบัญชี

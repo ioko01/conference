@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Content -->
-<div class="bg-white my-5 p-5 container">
+<div class="bg-white my-5 p-5 container rounded">
     <div class="row text-center align-items-center">
         <div class="col-md-12">
             <h2>สถาบันวิจัยและพัฒนา มหาวิทยาลัยราชภัฏเลย</h2>

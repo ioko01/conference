@@ -4,14 +4,14 @@
 <!-- Form Login -->
 <div class="container-md mx-auto m-5 p-5">
     <div class="row text-center">
-        <div id="text-login" class="col-md-5 text-white bg-green rounded-start py-3 d-none d-sm-block">
+        <div id="text-login" class="col-md-5 text-white bg-green rounded-start rounded-md-start py-3">
             <div class="d-flex justify-content-center flex-column h-100">
-                <h1 style="font-size: 50px;">ยินดีต้อนรับ</h1>
-                <h4 style="font-size: 18px;">สู่การประชุมวิชาการระดับชาติ<br />ราชภัฏเลยวิชาการ ครั้งที่ 8</h4>
+                <h1 style="font-size: calc(15px + 1.8vw);">ยินดีต้อนรับ</h1>
+                <h4 style="font-size: calc(10px + .5vw);">สู่การประชุมวิชาการระดับชาติ<br />ราชภัฏเลยวิชาการ ครั้งที่ 8</h4>
                 <div style="border-bottom: 2px solid white;" class="mx-5 d-none d-md-block"></div>
             </div>
         </div>
-        <div class="col-md-7 text-dark bg-white rounded-end px-4">
+        <div class="col-md-7 text-dark bg-white rounded-end rounded-md-end px-4">
             <h1 class="py-5">เข้าใช้งานระบบ</h1>
             <form action="{{ route('login') }}" method="POST">
                 @csrf

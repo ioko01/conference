@@ -41,7 +41,7 @@ function set_styled(el, styled = {}) {
     }
 }
 
-function get_fileName(e) {
+function get_file_name(e) {
     try {
         $(".label-type-file").html(e.files[0].name);
         $("#name_file").val(e.files[0].name);

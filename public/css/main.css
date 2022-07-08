@@ -14,13 +14,17 @@
 body {
     overflow-x: hidden;
     background: #deeaf9;
-    font-size: calc(10px + .2vw);
+    font-size: calc(10px + 0.2vw);
     /* background: var(--bg-color-cream); */
 }
 
 .border-radius-md-right {
     border-top-right-radius: 2rem;
     border-bottom-right-radius: 2rem;
+}
+.form-control,
+.form-select {
+    border-radius: 0 !important;
 }
 
 .border-radius-md-left {

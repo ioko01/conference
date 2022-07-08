@@ -78,8 +78,8 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="sex" id="male"
                                     @if (old('sex') === 'male') checked
-                                   @elseif ($user->sex === 'male') checked 
-                                    value="male" @endif>
+                                   @elseif ($user->sex === 'male') checked @endif
+                                    value="male">
                                 <label class="form-check-label" for="male">
                                     ชาย
                                 </label>

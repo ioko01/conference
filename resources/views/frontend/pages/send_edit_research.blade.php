@@ -68,7 +68,7 @@
                                         alt="{{ $value->edit_word_ext }}">
                                     <p class="mb-0">{{ $value->edit_word_name }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
-                                        {{ date('d-m-Y H:i:s', strtotime($value->edit_word_update)) }}</i>
+                                        {{ thaiDateFormat($value->edit_word_update, true) }}</i>
                                     <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->edit_word_path) }}">
                                         ดูตัวอย่าง
@@ -109,7 +109,7 @@
                                         alt="{{ $value->edit_pdf_ext }}">
                                     <p class="mb-0">{{ $value->edit_pdf_name }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
-                                        {{ date('d-m-Y H:i:s', strtotime($value->edit_pdf_update)) }}</i>
+                                        {{ thaiDateFormat($value->edit_word_update, true) }}</i>
                                     <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->edit_pdf_path) }}">
                                         ดูตัวอย่าง
@@ -149,7 +149,7 @@
                                         alt="{{ $value->edit_stm_path }}">
                                     <p class="mb-0">{{ $value->edit_stm_name }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
-                                        {{ date('d-m-Y H:i:s', strtotime($value->edit_stm_update)) }}</i>
+                                        {{ thaiDateFormat($value->edit_stm_update, true) }}</i>
                                     <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->edit_stm_path) }}">
                                         ดูตัวอย่าง

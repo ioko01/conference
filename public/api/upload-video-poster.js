@@ -1,6 +1,6 @@
 "use strict";
 
-const open_modal = (type, topic_id, video_poster) => {
+const open_modal_poster_video = (type, topic_id, video_poster) => {
     get_video(type, topic_id, video_poster);
 };
 

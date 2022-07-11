@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-12 d-md-flex align-self-end">
                 <p>
-                    แจ้งปัญหาได้ที่<br/>Email: monday-december.1997@hotmail.com (คุณธนพงษ์ สุนทราวิรัตน์)
+                    แจ้งปัญหาได้ที่<br/>Email: sb5940248107@lru.ac.th (คุณธนพงษ์ สุนทราวิรัตน์)
                 </p>
             </div>
         </div>

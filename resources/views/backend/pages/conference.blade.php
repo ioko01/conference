@@ -189,9 +189,10 @@
                                     <td colspan="4" class="bg-secondary text-sm">รายละเอียดเพิ่มเติม</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-xs">วันเริ่ม - สิ้นสุดงานประชุมวิชาการ <br /><span
-                                            class="text-red">(ต้องเปิดหัวข้อนี้ก่อนถึงจะเปิดใช้งานหัวข้ออื่นได้)</span>
-                                    </th>
+                                    <td>วันเริ่ม - สิ้นสุดงานประชุมวิชาการ <br /><span
+                                            class="text-red text-xs fw-bold">คำแนะนำ:
+                                            ต้องเปิดหัวข้อนี้ก่อนถึงจะเปิดใช้งานหัวข้ออื่นได้</span>
+                                    </td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->start) }} -
                                         {{ thaiDateFormat($conference->final) }}</td>
@@ -227,7 +228,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="text-xs">วันเริ่ม - สิ้นสุดการรับบทความ</th>
+                                    <td>วันเริ่ม - สิ้นสุดการรับบทความ</td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->start_research) }}
                                         - {{ thaiDateFormat($conference->end_research) }}</td>
@@ -263,7 +264,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="text-xs">วันสิ้นสุดการชำระเงิน</th>
+                                    <td>วันสิ้นสุดการชำระเงิน</td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->end_payment) }}
                                     </td>
@@ -299,7 +300,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="text-xs">วันสิ้นสุดการลงทะเบียนเข้าร่วมงาน</th>
+                                    <td>วันสิ้นสุดการลงทะเบียนเข้าร่วมงาน</td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->end_attend) }}
                                     </td>
@@ -335,7 +336,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="text-xs">วันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</th>
+                                    <td>วันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->end_research_edit) }}
                                     </td>
@@ -372,7 +373,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="text-xs">วันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</th>
+                                    <td>วันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2 <br /><span
+                                            class="text-red text-xs fw-bold">คำแนะนำ:
+                                            ควรปิดใช้งานวันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1 ก่อน</span></td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->end_research_edit_two) }}
                                     </td>
@@ -409,7 +412,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="text-xs">วันสิ้นสุดการส่งไฟล์โปสเตอร์และวิดีโอครั้งที่ 1</th>
+                                    <td>วันสิ้นสุดการส่งไฟล์โปสเตอร์และวิดีโอครั้งที่ 1</td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->end_poster_and_video) }}
                                     </td>
@@ -446,7 +449,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="text-xs">วันสิ้นสุดการส่งไฟล์โปสเตอร์และวิดีโอครั้งที่ 2</th>
+                                    <td>วันสิ้นสุดการส่งไฟล์โปสเตอร์และวิดีโอครั้งที่ 2 <br /><span
+                                            class="text-red text-xs fw-bold">คำแนะนำ:
+                                            ควรปิดใช้งานวันสิ้นสุดการส่งไฟล์โปสเตอร์และวิดีโอครั้งที่ 1 ก่อน</span></td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->end_poster_and_video_two) }}
                                     </td>

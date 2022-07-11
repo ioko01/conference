@@ -14,8 +14,11 @@
 body {
     overflow-x: hidden;
     background: #deeaf9;
-    font-size: calc(10px + 0.2vw);
     /* background: var(--bg-color-cream); */
+}
+
+* {
+    font-size: calc(10px + 0.2vw);
 }
 
 .border-radius-md-right {
@@ -166,10 +169,13 @@ body {
     color: white;
     border-radius: 6px;
     padding: 0 5px;
-    font-size: 10px;
     animation: flashing 3s infinite;
     -webkit-animation: flashing 3s infinite;
     -moz-animation: flashing 3s infinite;
+}
+
+#downloads .box-new span {
+    font-size: calc(1px + 0.3vw);
 }
 
 @keyframes flashing {
@@ -453,6 +459,11 @@ a {
     border-bottom: 4px solid var(--color-green);
 }
 
+.dropdown .dropdown-menu .dropdown-item {
+    white-space: initial;
+    min-width: 300px;
+}
+
 .dropdown .dropdown-menu::before {
     position: absolute;
     content: "";
@@ -564,6 +575,10 @@ a {
     }
     .rounded-md-end {
         border-radius: 0 !important;
+    }
+    .dropdown .dropdown-menu .dropdown-item {
+        white-space: initial;
+        min-width: auto;
     }
 }
 

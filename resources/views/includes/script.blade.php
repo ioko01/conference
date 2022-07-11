@@ -10,7 +10,7 @@
         <script src="{{ asset('api/countdown.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('employee/research/send-edit/show/*') || Request::is('employee/research/send-edit-2/show/*'))
+    @if (Request::is('employee/research/send-edit/show/*') || Request::is('employee/research/send-edit-2/show/*') || Request::is('employee/research/uploadfile/*'))
         <script src="{{ asset('api/send-edit-upload-research.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 

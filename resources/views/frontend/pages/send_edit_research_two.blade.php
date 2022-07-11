@@ -2,188 +2,197 @@
 @include('frontend.components.modal-backdrop')
 
 @section('content')
-<!-- Content -->
-<div class="bg-white text-blue p-5 my-5">
+    <!-- Content -->
+    <div class="bg-white text-blue p-5 my-5">
 
-    <div class="inner-content-header">
-        <h2 class="text-center">ส่งบทความฉบับแก้ไข ครั้งที่ 2</h2>
-        <h4 class="text-green py-3">
-            LRU Conference 2022
-        </h4>
-    </div>
+        <div class="inner-content-header">
+            <h2 class="text-center">ส่งบทความฉบับแก้ไข ครั้งที่ 2</h2>
+            <h4 class="text-green py-3">
+                LRU Conference 2022
+            </h4>
+        </div>
 
-    <div>
-        <h1>รายชื่อรายชื่อบทความ</h1>
-    </div>
-    <div class="panel">
-        <div class="body">
-            <div class="input-group">
-                <label for="search">ค้นหาบทความ</label>
-                <input type="text" class="form-control" name="search" id="search"
-                    placeholder="ค้นหาผ่านลำดับ, รหัสบทความ, บทความ/ผู้วิจัย, สังกัด/กลุ่มคณะ, สถานะ, รูปแบบ">
+        <div>
+            <h1>รายชื่อรายชื่อบทความ</h1>
+        </div>
+        <div class="panel">
+            <div class="body">
+                <div class="input-group">
+                    <label for="search">ค้นหาบทความ</label>
+                    <input type="text" class="form-control" name="search" id="search"
+                        placeholder="ค้นหาผ่านลำดับ, รหัสบทความ, บทความ/ผู้วิจัย, สังกัด/กลุ่มคณะ, สถานะ, รูปแบบ">
+                </div>
             </div>
         </div>
+        <div class="table-responsive">
+            <table class="list table responsive hover">
+                <thead>
+                    <tr class="text-center pagination-header">
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 25%;">ชื่อบทความ/ผู้วิจัย</th>
+                        <th style="width: 15%;">ไฟล์ WORD ฉบับแก้ไขครั้งที่ 2</th>
+                        <th style="width: 15%;">ไฟล์ PDF ฉบับแก้ไขครั้งที่ 2</th>
+                        <th style="width: 15%;">แบบคำชี้แจงการปรับแก้ไขบทความครั้งที่ 2</th>
+                        <th style="width: 10%;">รายละเอียด</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($data as $key => $value)
+                        <tr class="text-center">
+                            <td>{{ $value->id }}</td>
+                            <td>{{ $value->topic_th }}
+                                <br /><span
+                                    class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
+                            </td>
+                            @if (isset($value->edit_word_path) || isset($value->edit_pdf_path) || isset($value->edit_stm_path))
+                                @if (endDate('end_research_edit_two')->day >= 0)
+                                    @if ($value->status_payment)
+                                        <td>
+                                            @if (isset($value->edit_word_path_two))
+                                                <img width="40"
+                                                    src="{{ asset("images/$value->edit_word_ext_two.png", env('REDIRECT_HTTPS')) }}"
+                                                    alt="{{ $value->edit_word_ext_two }}">
+                                                <p class="mb-0">{{ $value->edit_word_name_two }}</p>
+                                                <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
+                                                    {{ thaiDateFormat($value->edit_word_update_two, true) }}</i>
+                                                <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
+                                                    href="{{ Storage::url($value->edit_word_path_two) }}">
+                                                    ดูตัวอย่าง
+                                                </a>
+                                            @endif
+                                            @if ($value->status_research_edit_two === 1)
+                                                @if (endDate('end_research_edit_two')->day >= 0)
+                                                    <button type="button"
+                                                        class="btn btn-warning text-white rounded-0 w-100 my-1"
+                                                        onclick="open_modal(this, 'word_2'@if (isset($value->edit_word_path_two)) , 'PUT' @endif)">
+                                                        @if (isset($value->edit_word_path_two))
+                                                            แก้ไขไฟล์ WORD ฉบับแก้ไข
+                                                        @else
+                                                            อัพโหลดไฟล์ WORD ฉบับแก้ไข
+                                                        @endif
+                                                    </button>
+                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                @else
+                                                    <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                                                @endif
+                                            @else
+                                                <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่
+                                                    2</strong>
+                                            @endif
+                                            @error('word_upload')
+                                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                                            @enderror
+
+                                        </td>
+                                        <td>
+                                            @if (isset($value->edit_pdf_path_two))
+                                                <img width="40"
+                                                    src="{{ asset("images/$value->edit_pdf_ext_two.png", env('REDIRECT_HTTPS')) }}"
+                                                    alt="{{ $value->edit_pdf_ext_two }}">
+                                                <p class="mb-0">{{ $value->edit_pdf_name_two }}</p>
+                                                <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
+                                                    {{ thaiDateFormat($value->edit_pdf_update_two, true) }}</i>
+                                                <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
+                                                    href="{{ Storage::url($value->edit_pdf_path_two) }}">
+                                                    ดูตัวอย่าง
+                                                </a>
+                                            @endif
+                                            @if ($value->status_research_edit_two === 1)
+                                                @if (endDate('end_research_edit_two')->day >= 0)
+                                                    <button type="button"
+                                                        class="btn btn-warning text-white rounded-0 w-100 my-1"
+                                                        onclick="open_modal(this, 'pdf_2'@if (isset($value->edit_pdf_path_two)) , 'PUT' @endif)">
+                                                        @if (isset($value->edit_pdf_path_two))
+                                                            แก้ไขไฟล์ PDF ฉบับแก้ไข
+                                                        @else
+                                                            อัพโหลดไฟล์ PDF ฉบับแก้ไข
+                                                        @endif
+                                                    </button>
+                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                @else
+                                                    <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                                                @endif
+                                            @else
+                                                <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่
+                                                    2</strong>
+                                            @endif
+
+                                            @error('pdf_upload')
+                                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            @if (isset($value->edit_stm_path_two))
+                                                <img width="40"
+                                                    src="{{ asset("images/$value->edit_stm_ext_two.png", env('REDIRECT_HTTPS')) }}"
+                                                    alt="{{ $value->edit_stm_path_two }}">
+                                                <p class="mb-0">{{ $value->edit_stm_name_two }}</p>
+                                                <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
+                                                    {{ thaiDateFormat($value->edit_stm_update_two, true) }}</i>
+                                                <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
+                                                    href="{{ Storage::url($value->edit_stm_path_two) }}">
+                                                    ดูตัวอย่าง
+                                                </a>
+                                            @endif
+                                            @if ($value->status_research_edit_two === 1)
+                                                @if (endDate('end_research_edit_two')->day >= 0)
+                                                    <button type="button"
+                                                        class="btn btn-warning text-white rounded-0 w-100 my-1"
+                                                        onclick="open_modal(this, 'stm_2'@if (isset($value->edit_stm_path_two)) , 'PUT' @endif)">
+                                                        @if (isset($value->edit_stm_path_two))
+                                                            แก้ไขแบบคำชี้แจงการปรับแก้ไขบทความ
+                                                        @else
+                                                            อัพโหลดแบบคำชี้แจงการปรับแก้ไขบทความ
+                                                        @endif
+                                                    </button>
+                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                @else
+                                                    <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                                                @endif
+                                            @else
+                                                <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่
+                                                    2</strong>
+                                            @endif
+
+                                            @error('stm_upload')
+                                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                                            @enderror
+                                        </td>
+                                    @else
+                                        <td colspan="3">
+                                            <strong class="text-red">ยังไม่เปิดรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                                        </td>
+                                    @endif
+                                @else
+                                    <td colspan="3">
+                                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                                    </td>
+                                @endif
+                            @else
+                                <td colspan="3">
+                                    <strong class="text-red">ไม่สามารถอัพโหลดแก้ไขครั้งที่ 2 ได้</strong>
+                                </td>
+                            @endif
+                            <td style="vertical-align: middle;">
+                                <button type="button" class="btn btn-green rounded-0 text-white"
+                                    onclick="open_modal(this, 'detail')">
+                                    รายละเอียด
+                                </button>
+                                <input type="hidden" value="{{ $value->topic_id }}">
+                            </td>
+
+                        </tr>
+                    @empty
+                        <tr class="text-center">
+                            <td colspan="8">ไม่มีบทความของท่าน</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="table-responsive">
-        <table class="list table responsive hover">
-            <thead>
-                <tr class="text-center pagination-header">
-                    <th style="width: 5%;">#</th>
-                    <th style="width: 25%;">ชื่อบทความ/ผู้วิจัย</th>
-                    <th style="width: 15%;">ไฟล์ WORD ฉบับแก้ไขครั้งที่ 2</th>
-                    <th style="width: 15%;">ไฟล์ PDF ฉบับแก้ไขครั้งที่ 2</th>
-                    <th style="width: 15%;">แบบคำชี้แจงการปรับแก้ไขบทความครั้งที่ 2</th>
-                    <th style="width: 10%;">รายละเอียด</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($data as $key => $value)
-                <tr class="text-center">
-                    <td>{{ $value->id }}</td>
-                    <td>{{ $value->topic_th }}
-                        <br /><span class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
-                    </td>
-                    @if(isset($value->edit_word_path) || isset($value->edit_pdf_path) || isset($value->edit_stm_path))
-                        @if(endDate("end_research_edit_two")->day >= 0)
-                        @if($value->status_payment)
-                    <td>
-                        @if (isset($value->edit_word_path_two))
-                        <img width="40" src="{{ asset("images/$value->edit_word_ext_two.png", env('REDIRECT_HTTPS'))
-                        }}"
-                        alt="{{ $value->edit_word_ext_two }}">
-                        <p class="mb-0">{{ $value->edit_word_name_two }}</p>
-                        <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
-                            {{ date('d-m-Y H:i:s', strtotime($value->edit_word_update_two)) }}</i>
-                        <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
-                            href="{{ Storage::url($value->edit_word_path_two) }}">
-                            ดูตัวอย่าง
-                        </a>
-                        @endif
-                        @if ($value->status_research_edit_two === 1)
-                            @if (endDate('end_research_edit_two')->day >= 0)
-                        <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
-                            onclick="open_modal(this, 'word_2'@if (isset($value->edit_word_path_two)), 'PUT' @endif)">
-                            @if (isset($value->edit_word_path_two))
-                            แก้ไขไฟล์ WORD ฉบับแก้ไข
-                            @else
-                            อัพโหลดไฟล์ WORD ฉบับแก้ไข
-                            @endif
-                        </button>
-                        <input type="hidden" value="{{ $value->topic_id }}">
-                        @else
-                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
-                            @endif
-                        @else
-                            <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2</strong>
-                        @endif
-                        @error('word_upload')
-                        <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
-                        @enderror
+    <!-- End Content -->
 
-                    </td>
-                    <td>
-                        @if (isset($value->edit_pdf_path_two))
-                        <img width="40" src="{{ asset("images/$value->edit_pdf_ext_two.png", env('REDIRECT_HTTPS')) }}"
-                        alt="{{ $value->edit_pdf_ext_two }}">
-                        <p class="mb-0">{{ $value->edit_pdf_name_two }}</p>
-                        <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
-                            {{ date('d-m-Y H:i:s', strtotime($value->edit_pdf_update_two)) }}</i>
-                        <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
-                            href="{{ Storage::url($value->edit_pdf_path_two) }}">
-                            ดูตัวอย่าง
-                        </a>
-                        @endif
-                        @if ($value->status_research_edit_two === 1)
-                            @if (endDate('end_research_edit_two')->day >= 0)
-                        <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
-                            onclick="open_modal(this, 'pdf_2'@if (isset($value->edit_pdf_path_two)), 'PUT' @endif)">
-                            @if (isset($value->edit_pdf_path_two))
-                            แก้ไขไฟล์ PDF ฉบับแก้ไข
-                            @else
-                            อัพโหลดไฟล์ PDF ฉบับแก้ไข
-                            @endif
-                        </button>
-                        <input type="hidden" value="{{ $value->topic_id }}">
-                        @else
-                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
-                            @endif
-                        @else
-                            <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2</strong>
-                        @endif
-
-                        @error('pdf_upload')
-                        <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
-                        @enderror
-                    </td>
-                    <td>
-                        @if (isset($value->edit_stm_path_two))
-                        <img width="40" src="{{ asset("images/$value->edit_stm_ext_two.png", env('REDIRECT_HTTPS')) }}"
-                        alt="{{ $value->edit_stm_path_two }}">
-                        <p class="mb-0">{{ $value->edit_stm_name_two }}</p>
-                        <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
-                            {{ date('d-m-Y H:i:s', strtotime($value->edit_stm_update_two)) }}</i>
-                        <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
-                            href="{{ Storage::url($value->edit_stm_path_two) }}">
-                            ดูตัวอย่าง
-                        </a>
-                        @endif
-                        @if ($value->status_research_edit_two === 1)
-                            @if (endDate('end_research_edit_two')->day >= 0)
-                        <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
-                            onclick="open_modal(this, 'stm_2'@if (isset($value->edit_stm_path_two)), 'PUT' @endif)">
-                            @if (isset($value->edit_stm_path_two))
-                            แก้ไขแบบคำชี้แจงการปรับแก้ไขบทความ
-                            @else
-                            อัพโหลดแบบคำชี้แจงการปรับแก้ไขบทความ
-                            @endif
-                        </button>
-                        <input type="hidden" value="{{ $value->topic_id }}">
-                        @else
-                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
-                            @endif
-                        @else
-                            <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2</strong>
-                        @endif
-
-                        @error('stm_upload')
-                        <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
-                        @enderror
-                    </td>
-                    @else
-                    <td colspan="3">
-                        <strong class="text-red">ยังไม่เปิดรับบทความฉบับแก้ไขครั้งที่ 2</strong>
-                    </td>
-                    @endif
-                    @else
-                    <td colspan="3">
-                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
-                    </td>
-                    @endif
-                    @else
-                    <td colspan="3">
-                        <strong class="text-red">ไม่สามารถอัพโหลดแก้ไขครั้งที่ 2 ได้</strong>
-                    </td>
-                    @endif
-                    <td>
-                        <button type="button" class="btn btn-green rounded-0 text-white"
-                            onclick="open_modal(this, 'detail')">
-                            รายละเอียด
-                        </button>
-                        <input type="hidden" value="{{ $value->topic_id }}">
-                    </td>
-
-                </tr>
-                @empty
-                <tr class="text-center">
-                    <td colspan="8">ไม่มีบทความของท่าน</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-</div>
-<!-- End Content -->
-
-<div id="modal"></div>
+    <div id="modal"></div>
 
 @endsection

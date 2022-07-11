@@ -55,7 +55,7 @@
                                         alt="{{ $value->slip_ext }}">
                                     <p class="mb-0">{{ $value->payment }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
-                                        {{ date('d-m-Y H:i:s', strtotime($value->slip_update)) }}</i>
+                                        {{ thaiDateFormat($value->slip_update, true) }}</i>
                                     <button type="button" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         data-bs-toggle="modal" data-bs-target="#payment-modal-example">
                                         ดูตัวอย่าง
@@ -109,7 +109,7 @@
                                         alt="{{ $value->word_ext }}">
                                     <p class="mb-0">{{ $value->word }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
-                                        {{ date('d-m-Y H:i:s', strtotime($value->word_update)) }}</i>
+                                        {{ thaiDateFormat($value->word_update, true) }}</i>
                                     <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->word_path) }}">
                                         ดูตัวอย่าง
@@ -158,7 +158,7 @@
                                         alt="{{ $value->pdf_ext }}">
                                     <p class="mb-0">{{ $value->pdf }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
-                                        {{ date('d-m-Y H:i:s', strtotime($value->pdf_update)) }}</i>
+                                        {{ thaiDateFormat($value->pdf_update, true) }}</i>
                                     <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->pdf_path) }}">
                                         ดูตัวอย่าง

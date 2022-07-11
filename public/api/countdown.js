@@ -34,26 +34,26 @@ function countdown() {
                         h1.innerHTML = `
                         ปิดรับบทความในอีก<br/>
                         <hr/>
-                        <div class="d-flex flex-wrap gap-4 justify-content-center">
-                            <div class="d-flex">
+                        <div class="row">
+                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
                                 <div class="box-countdown">
                                     <div>${days}</div>
                                     <div>วัน</div> 
                                 </div>  
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
                                 <div class="box-countdown">
                                     <div>${hours}</div>
                                     <div>ชั่วโมง</div> 
                                 </div>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
                                 <div class="box-countdown">
                                     <div>${minutes}</div>
                                     <div>นาที</div> 
                                 </div>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
                                 <div class="box-countdown">
                                     <div>${seconds}</div>
                                     <div>วินาที</div> 

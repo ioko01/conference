@@ -154,15 +154,14 @@ class UploadfileController extends Controller
 
     protected function update(Request $request, $id)
     {
-        
-        if ($request->video) {
+        if ($request->submit_video) {
             $this->video_validation($request);
 
             $data = array_filter(['link' => $request->video]);
             Video::where('topic_id', $id)->update($data);
             alert('สำเร็จ', 'แก้ไข Link Video สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
             return back()->with('success', 'แก้ไข Link Video สำเร็จ');
-        } else if ($request->poster) {
+        } else if ($request->submit_poster) {
             $this->poster_validation($request);
 
             Poster::where('topic_id', $id)->update($this->file($request, $id)->data);
@@ -170,6 +169,5 @@ class UploadfileController extends Controller
             alert('สำเร็จ', 'แก้ไขไฟล์ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
             return back()->with('success', 'แก้ไขไฟล์ Poster สำเร็จ');
         }
-        return back();
     }
 }

@@ -110,6 +110,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('backend')->group(function () {
             Route::prefix('researchs')->group(function () {
                 Route::resource('management', ManageResearchController::class, ['names' => 'admin.research']);
+                Route::get('management/times/1', [ManageResearchController::class, 'index'])->name('admin.research.times.first');
+                Route::get('management/times/2', [ManageResearchController::class, 'index'])->name('admin.research.times.second');
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
                 Route::get('export', [BackendResearchController::class, 'export'])->name('researchs.export');
             });

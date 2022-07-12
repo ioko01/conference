@@ -22,8 +22,8 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <div class="line-dropdown"></div>
-                            @if (DB::table('downloads')->select('downloads.id as id', 'downloads.name as name', 'downloads.link as link', 'downloads.name_file as name_file', 'downloads.path_file as path_file', 'downloads.ext_file as ext_file', 'downloads.conference_id as conference_id', 'downloads.created_at as created_at', 'downloads.updated_at as updated_at')->leftjoin('conferences', 'conferences.id', '=', 'downloads.conference_id')->where('conferences.status', 1)->get())
-                                @forelse (DB::table('downloads')->select('downloads.id as id', 'downloads.name as name', 'downloads.link as link', 'downloads.name_file as name_file', 'downloads.path_file as path_file', 'downloads.ext_file as ext_file', 'downloads.conference_id as conference_id', 'downloads.created_at as created_at', 'downloads.updated_at as updated_at')->leftjoin('conferences', 'conferences.id', '=', 'downloads.conference_id')->where('conferences.status', 1)->get() as $download)
+                            @if ($downloads = DB::table('downloads')->select('downloads.id as id', 'downloads.name as name', 'downloads.link as link', 'downloads.name_file as name_file', 'downloads.path_file as path_file', 'downloads.ext_file as ext_file', 'downloads.conference_id as conference_id', 'downloads.created_at as created_at', 'downloads.updated_at as updated_at')->leftjoin('conferences', 'conferences.id', '=', 'downloads.conference_id')->where('conferences.status', 1)->get())
+                                @forelse ($downloads as $download)
                                     <li><a target="_blank" class="dropdown-item"
                                             @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif>{{ $download->name }}
                                             @if (countDate($download->created_at, 10, 'days'))
@@ -103,10 +103,14 @@
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item {{ Request::is('employee/research/send-edit-2/show/*') ? 'active' : '' }}"
-                                        aria-current="page"
-                                        href="{{ route('employee.research.send.two.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไขครั้งที่
-                                        2</a>
+                                    @if ($conference = DB::table('conferences')->select('id')->where('status', 1)->where('status_research_edit_two', 1)->first())
+                                        <a class="dropdown-item {{ Request::is('employee/research/send-edit-2/show/*') ? 'active' : '' }}"
+                                            aria-current="page"
+                                            href="{{ route('employee.research.send.two.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไขครั้งที่
+                                            2</a>
+                                    @endif
+
+
                                 </li>
 
                                 <li>

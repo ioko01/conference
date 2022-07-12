@@ -27,7 +27,7 @@ const get_video = (type, topic_id, video_poster) => {
             `;
         }
         input_method = `<input type="hidden" name="_method" value="PUT" />`;
-        btn_submit = `<button type="submit" class="btn btn-warning text-white rounded-0">
+        btn_submit = `<button name="submit_${type}" value="${type}" type="submit" class="btn btn-warning text-white rounded-0">
                         <i class="fa fa-edit"></i> แก้ไข
                     </button>`;
         update_ro_create = "update";
@@ -45,7 +45,7 @@ const get_video = (type, topic_id, video_poster) => {
             <input id="poster" type="file" name="poster" class="form-control" placeholder="อัพโหลดไฟล์โปสเตอร์" accept=".jpg, .jpeg">
             `;
         }
-        btn_submit = `<button type="submit" class="btn btn-success rounded-0">
+        btn_submit = `<button name="submit_${type}" value="${type}" type="submit" class="btn btn-success rounded-0">
                         <i class="fa fa-save"></i> บันทึก
                     </button>`;
         update_ro_create = "create";

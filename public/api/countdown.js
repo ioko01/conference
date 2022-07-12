@@ -8,7 +8,12 @@ function countdown() {
             beforeSend: function () {
                 const countdownHtml = $("#countdown");
                 const h1 = document.createElement("h1");
-                h1.innerHTML = `กรุณารอสักครู่`;
+                h1.innerHTML = `<div class="lds-ellipsis">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>`;
                 countdownHtml.html(h1);
             },
             success: function (res) {
@@ -32,29 +37,29 @@ function countdown() {
 
                     if (res) {
                         h1.innerHTML = `
-                        ปิดรับบทความในอีก<br/>
+                        <h1 class="fw-bold">ปิดรับบทความในอีก</h1><br/>
                         <hr/>
                         <div class="row">
                             <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
-                                <div class="box-countdown">
+                                <div class="box-countdown fw-bold">
                                     <div>${days}</div>
                                     <div>วัน</div> 
                                 </div>  
                             </div>
                             <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
-                                <div class="box-countdown">
+                                <div class="box-countdown fw-bold">
                                     <div>${hours}</div>
                                     <div>ชั่วโมง</div> 
                                 </div>
                             </div>
                             <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
-                                <div class="box-countdown">
+                                <div class="box-countdown fw-bold">
                                     <div>${minutes}</div>
                                     <div>นาที</div> 
                                 </div>
                             </div>
                             <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
-                                <div class="box-countdown">
+                                <div class="box-countdown fw-bold">
                                     <div>${seconds}</div>
                                     <div>วินาที</div> 
                                 </div>
@@ -63,12 +68,12 @@ function countdown() {
                     } else {
                         clearInterval(interval);
                         h1.classList.add("text-red");
-                        h1.innerHTML = `ยังไม่เปิดรับบทความ`;
+                        h1.innerHTML = `<h1 class="fw-bold">ยังไม่เปิดรับบทความ</h1>`;
                     }
                     if (days < 0) {
                         clearInterval(interval);
                         h1.classList.add("text-red");
-                        h1.innerHTML = `สิ้นสุดเวลาการส่งบทความ`;
+                        h1.innerHTML = `<h1 class="fw-bold">สิ้นสุดเวลาการส่งบทความ</h1>`;
                     }
                     countdownHtml.html(h1);
                 }, 1000);
@@ -78,6 +83,7 @@ function countdown() {
                 const h1 = document.createElement("h1");
 
                 h1.classList.add("text-center");
+                h1.classList.add("fw-bold");
                 //err.responseJSON.message
                 h1.classList.add("text-red");
                 h1.innerHTML = err.statusText;

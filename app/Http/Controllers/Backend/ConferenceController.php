@@ -113,21 +113,39 @@ class ConferenceController extends Controller
             ], 'is_numeric');
             User::where('id', auth()->user()->id)->update(['conference_id' => NULL]);
         } else {
+            $change_status_research_edit = $request->change_status_research_edit;
+            $change_status_poster_and_video = $request->change_status_poster_and_video;
+            $change_status_research_edit_two = $request->change_status_research_edit_two;
+            $change_status_poster_and_video_two = $request->change_status_poster_and_video_two;
+
+            if ($request->change_status_research_edit) {
+                $change_status_research_edit_two = 0;
+            }
+            if ($request->change_status_poster_and_video) {
+                $change_status_poster_and_video_two = 0;
+            }
+            if ($request->change_status_research_edit_two) {
+                $change_status_research_edit = 0;
+            }
+            if ($request->change_status_poster_and_video_two) {
+                $change_status_poster_and_video = 0;
+            }
+
             $change_status = array_filter([
                 'status' => $request->change_status_conference,
                 'status_research' => $request->change_status_research,
                 'status_payment' => $request->change_status_payment,
                 'status_attend' => $request->change_status_attend,
-                'status_research_edit' => $request->change_status_research_edit,
-                'status_research_edit_two' => $request->change_status_research_edit_two,
-                'status_poster_and_video' => $request->change_status_poster_and_video,
-                'status_poster_and_video_two' => $request->change_status_poster_and_video_two,
+                'status_research_edit' => $change_status_research_edit,
+                'status_research_edit_two' => $change_status_research_edit_two,
+                'status_poster_and_video' => $change_status_poster_and_video,
+                'status_poster_and_video_two' => $change_status_poster_and_video_two,
             ], 'is_numeric');
             User::where('id', auth()->user()->id)->update(['conference_id' => $id]);
         }
 
         Conference::where('id', $id)->update($change_status);
-        
+
 
         alert('สำเร็จ', 'เปลี่ยนสถานะสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'เปลี่ยนสถานะสำเร็จ');

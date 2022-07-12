@@ -18,7 +18,8 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
                 <li class="nav-header">แผงควบคุม</li>
@@ -35,15 +36,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/conference"
-                        class="nav-link @if (Request::is('backend/conference')) active @endif">
+                    <a href="/backend/conference" class="nav-link @if (Request::is('backend/conference')) active @endif">
                         <i class="nav-icon fas fa-th"></i>
                         <p>หัวข้อ</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/download"
-                        class="nav-link @if (Request::is('backend/download')) active @endif">
+                    <a href="/backend/download" class="nav-link @if (Request::is('backend/download')) active @endif">
                         <i class="nav-icon fas fa-download"></i>
                         <p>ดาวน์โหลด</p>
                     </a>
@@ -61,9 +60,24 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/researchs/management" class="nav-link @if (Request::is('backend/researchs/management')) active @endif">
+                    <a href="/backend/researchs/management"
+                        class="nav-link @if (Request::is('backend/researchs/management')) active @endif">
                         <i class="nav-icon fas fa-book"></i>
                         <p>จัดการบทความ</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/backend/researchs/management/times/1"
+                        class="nav-link @if (Request::is('backend/researchs/management/times/1')) active @endif">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>บทความฉบับแก้ไขครั้งที่ 1</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/backend/researchs/management/times/2"
+                        class="nav-link @if (Request::is('backend/researchs/management/times/2')) active @endif">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>บทความฉบับแก้ไขครั้งที่ 2</p>
                     </a>
                 </li>
                 <li class="nav-item">

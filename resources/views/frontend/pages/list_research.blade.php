@@ -31,6 +31,7 @@
                         <th style="width: 25%;">ชื่อบทความ/ผู้วิจัย</th>
                         <th style="width: 15%;">รูปแบบบทความ</th>
                         <th style="width: 15%;">กลุ่มคณะ</th>
+                        <th style="width: 15%;">การชำระเงิน</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +44,14 @@
                             </td>
                             <td>{{ $research->present_name }}</td>
                             <td class="text-small text-green">{{ $research->faculty_name }}</td>
+                            <td>
+                                @if ($research->topic_status_id >= 4)
+                                    <span class="text-small text-green">ชำระเงินแล้ว</span>
+                                @else
+                                    <span class="text-small text-warning">{{ $research->topic_status }}</span>
+                                @endif
+
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

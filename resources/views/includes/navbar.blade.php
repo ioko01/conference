@@ -123,6 +123,30 @@
                         </li>
                     @endguest
 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            นำเสนอ
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
+                                    aria-current="page" href="#">ลิงค์นำเสนอผลงาน Oral</a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
+                                    aria-current="page" href="#">ผลงานนำเสนอ Oral</a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
+                                    aria-current="page" href="#">ผลงานนำเสนอ Poster</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('payment') ? 'active' : '' }}" aria-current="page"
                             href="{{ route('payment') }}">วิธีชำระเงิน</a>

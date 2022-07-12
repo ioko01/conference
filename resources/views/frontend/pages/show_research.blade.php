@@ -68,8 +68,6 @@
                                                     data-bs-toggle="modal" data-bs-target="#payment-modal">
                                                     แก้ไขสลิปชำระเงิน
                                                 </button>
-                                            @else
-                                                <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>
                                             @endif
                                         @else
                                             <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>

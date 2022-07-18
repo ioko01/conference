@@ -70,7 +70,6 @@
                                                 </button>
                                             @endif
                                         @else
-                                            <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>
                                         @endif
                                     @else
                                         <strong class="text-red">ยังไม่เปิดให้ชำระเงิน</strong>

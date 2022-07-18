@@ -140,8 +140,8 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
-                                    aria-current="page" href="#">ผลงานนำเสนอ Poster</a>
+                                <a class="dropdown-item {{ Request::is('posters') ? 'active' : '' }}"
+                                    aria-current="page" href="{{ route('posters.index') }}">ผลงานนำเสนอ Poster</a>
                             </li>
 
                         </ul>

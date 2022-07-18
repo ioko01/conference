@@ -30,64 +30,70 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/dashboard" class="nav-link @if (Request::is('backend/dashboard')) active @endif">
+                    <a href="{{ route('backend.dashboard.index') }}"
+                        class="nav-link @if (Request::is('backend/dashboard')) active @endif">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>หน้าแรก</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/conference" class="nav-link @if (Request::is('backend/conference')) active @endif">
+                    <a href="{{ route('backend.conference.index') }}"
+                        class="nav-link @if (Request::is('backend/conference')) active @endif">
                         <i class="nav-icon fas fa-th"></i>
                         <p>หัวข้อ</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/download" class="nav-link @if (Request::is('backend/download')) active @endif">
+                    <a href="{{ route('backend.download.index') }}"
+                        class="nav-link @if (Request::is('backend/download')) active @endif">
                         <i class="nav-icon fas fa-download"></i>
                         <p>ดาวน์โหลด</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/users" class="nav-link @if (Request::is('backend/users')) active @endif">
+                    <a href="{{ route('backend.users.index') }}"
+                        class="nav-link @if (Request::is('backend/users')) active @endif">
                         <i class="nav-icon fas fa-user"></i>
                         <p>ผู้ใช้งาน</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/researchs" class="nav-link @if (Request::is('backend/researchs')) active @endif">
+                    <a href="{{ route('backend.researchs.index') }}"
+                        class="nav-link @if (Request::is('backend/researchs')) active @endif">
                         <i class="nav-icon fas fa-book"></i>
                         <p>บทความ</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/researchs/management"
+                    <a href="{{ route('backend.research.index') }}"
                         class="nav-link @if (Request::is('backend/researchs/management')) active @endif">
                         <i class="nav-icon fas fa-book"></i>
                         <p>จัดการบทความ</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/researchs/management/times/1"
+                    <a href="{{ route('backend.research.first.index') }}"
                         class="nav-link @if (Request::is('backend/researchs/management/times/1')) active @endif">
                         <i class="nav-icon fas fa-book"></i>
                         <p>บทความฉบับแก้ไขครั้งที่ 1</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/researchs/management/times/2"
+                    <a href="{{ route('backend.research.second.index') }}"
                         class="nav-link @if (Request::is('backend/researchs/management/times/2')) active @endif">
                         <i class="nav-icon fas fa-book"></i>
                         <p>บทความฉบับแก้ไขครั้งที่ 2</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/backend/statement" class="nav-link @if (Request::is('backend/statement')) active @endif">
+                    <a href="{{ route('backend.statement.index') }}"
+                        class="nav-link @if (Request::is('backend/statement')) active @endif">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>ประกาศผลพิจารณา</p>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item @if (Request::is('backend/posters') || Request::is('backend/orals')) menu-is-opening menu-open @endif">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-line"></i>
                         <p>
@@ -97,15 +103,17 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/forms/general.html" class="nav-link">
+                            <a href="pages/forms/general.html"
+                                class="nav-link @if (Request::is('backend/orals')) active @endif">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>จัดการ Oral</p>
+                                <p>ผลงานนำเสนอ Oral</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/forms/advanced.html" class="nav-link">
+                            <a href="{{ route('backend.posters.index') }}"
+                                class="nav-link @if (Request::is('backend/posters')) active @endif">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>จัดการ Poster</p>
+                                <p>ผลงานนำเสนอ Poster</p>
                             </a>
                         </li>
                     </ul>

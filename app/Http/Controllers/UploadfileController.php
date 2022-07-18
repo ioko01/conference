@@ -66,7 +66,9 @@ class UploadfileController extends Controller
             ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
             ->leftjoin('videos', 'researchs.topic_id', '=', 'videos.topic_id')
             ->leftjoin('posters', 'researchs.topic_id', '=', 'posters.topic_id')
+            ->leftjoin('conferences', 'researchs.conference_id', '=', 'conferences.id')
             ->where('researchs.user_id', $id)
+            ->where('conferences.status', 1)
             ->get()
             ->sortBy('id');
 

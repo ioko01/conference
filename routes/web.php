@@ -12,12 +12,14 @@ use App\Http\Controllers\Backend\ConferenceController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DownloadController;
 use App\Http\Controllers\Backend\ManageResearchController;
+use App\Http\Controllers\Backend\PosterController as BackendPosterController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
 use App\Http\Controllers\Backend\StatementController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\ListAttendController;
 use App\Http\Controllers\ListResearchController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\PosterController;
 use App\Http\Controllers\SendEditResearchController;
 use App\Http\Controllers\SendEditWordController;
 use App\Http\Controllers\SendEditPdfController;
@@ -52,6 +54,8 @@ Route::get('contract', function () {
 Route::get('payment', [PaymentController::class, 'index'])->name('payment');
 Route::get('list/research', [ListResearchController::class, 'index'])->name('list.research.index');
 Route::get('list/attend', [ListAttendController::class, 'index'])->name('list.attend.index');
+
+Route::get('posters', [PosterController::class, 'index'])->name('posters.index');
 
 // Email Verify
 Route::get('email/verify', [MailController::class, 'verify'])->name('verification.notice');
@@ -109,9 +113,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::prefix('backend')->group(function () {
             Route::prefix('researchs')->group(function () {
-                Route::resource('management', ManageResearchController::class, ['names' => 'admin.research']);
-                Route::get('management/times/1', [ManageResearchController::class, 'index'])->name('admin.research.times.first');
-                Route::get('management/times/2', [ManageResearchController::class, 'index'])->name('admin.research.times.second');
+                Route::get('management', [ManageResearchController::class, 'index'])->name('backend.research.index');
+                Route::get('management/times/1', [ManageResearchController::class, 'index'])->name('backend.research.first.index');
+                Route::get('management/times/2', [ManageResearchController::class, 'index'])->name('backend.research.second.index');
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
                 Route::get('export', [BackendResearchController::class, 'export'])->name('researchs.export');
             });
@@ -150,6 +154,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('download/{id}/edit', [DownloadController::class, 'edit'])->name('backend.download.edit');
             Route::put('download/{id}/update', [DownloadController::class, 'update'])->name('backend.download.update');
             Route::delete('download/{id}/delete', [DownloadController::class, 'destroy'])->name('backend.download.delete');
+
+            Route::get('posters', [BackendPosterController::class, 'index'])->name('backend.posters.index');
         });
     });
 });

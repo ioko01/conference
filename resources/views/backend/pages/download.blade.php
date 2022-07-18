@@ -119,6 +119,9 @@
                                             ลบ</button></td>
                                 </tr>
                             @empty
+                                <tr class="text-center">
+                                    <td colspan="7">ไม่มีหัวข้อดาวน์โหลด</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>

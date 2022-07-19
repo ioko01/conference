@@ -28,7 +28,7 @@
                 <thead>
                     <tr class="text-center pagination-header">
                         <th style="width: 5%;">#</th>
-                        <th style="width: 20%;min-width: 200px;">ชื่อบทความ/ผู้วิจัย</th>
+                        <th style="width: 20%;min-width: 200px;">รายละเอียดบทความ</th>
                         <th style="width: 15%;">ลิงค์วิดีโอ</th>
                         <th style="width: 10%;">ไฟล์ Poster</th>
                         <th style="width: 5%;">รายละเอียด</th>
@@ -38,9 +38,13 @@
                     @forelse ($data as $key => $value)
                         <tr class="text-center">
                             <td>{{ $value->id }}</td>
-                            <td>{{ $value->topic_th }}
-                                <br /><span
-                                    class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
+                            <td class="text-start" style="vertical-align: middle;">
+                                <strong style="font-size: 12px" class="text-bluesky">{{ $value->present }}</strong>
+                                <br />
+                                <strong>{{ $value->topic_th }}</strong>
+                                <br />
+                                <strong><span
+                                        class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span></strong>
                             </td>
 
                             <td>

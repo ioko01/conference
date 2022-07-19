@@ -11,6 +11,8 @@ use App\Http\Controllers\Backend\CommentFileUploadController;
 use App\Http\Controllers\Backend\ConferenceController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DownloadController;
+use App\Http\Controllers\Backend\EditResearchFirstController;
+use App\Http\Controllers\Backend\EditResearchSecondController;
 use App\Http\Controllers\Backend\ManageResearchController;
 use App\Http\Controllers\Backend\PosterController as BackendPosterController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
@@ -114,8 +116,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('backend')->group(function () {
             Route::prefix('researchs')->group(function () {
                 Route::get('management', [ManageResearchController::class, 'index'])->name('backend.research.index');
-                Route::get('management/times/1', [ManageResearchController::class, 'index'])->name('backend.research.first.index');
-                Route::get('management/times/2', [ManageResearchController::class, 'index'])->name('backend.research.second.index');
+                Route::get('management/times/1', [EditResearchFirstController::class, 'index'])->name('backend.research.first.index');
+                Route::get('management/times/2', [EditResearchSecondController::class, 'index'])->name('backend.research.second.index');
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
                 Route::get('export', [BackendResearchController::class, 'export'])->name('researchs.export');
             });

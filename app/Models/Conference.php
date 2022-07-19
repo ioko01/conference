@@ -11,6 +11,7 @@ class Conference extends Model
 
     protected $table = 'conferences';
     protected $fillable = [
+        'user_id',
         'name',
         'status',
         'year',

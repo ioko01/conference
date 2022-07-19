@@ -29,7 +29,7 @@ class ResearchController extends Controller
             'conferences.year as year'
         )
             ->leftjoin('users', 'users.id', '=', 'researchs.user_id')
-            ->leftjoin('conferences', 'conferences.id', '=', 'researchs.conference_id')
+            ->leftjoin('conferences', 'researchs.conference_id', '=', 'conferences.id')
             ->get();
         return view('backend.pages.researchs', compact('researchs'));
     }

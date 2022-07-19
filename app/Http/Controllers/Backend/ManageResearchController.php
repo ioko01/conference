@@ -44,7 +44,6 @@ class ManageResearchController extends Controller
             'pdf.path as pdf_path',
             'slips.path as payment_path',
             'researchs.topic_status as status_id',
-            'researchs.topic_status as status_id'
         )
             ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
             ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')
@@ -56,6 +55,8 @@ class ManageResearchController extends Controller
             ->leftjoin('pdf', 'researchs.topic_id', '=', 'pdf.topic_id')
             ->leftjoin('slips', 'researchs.topic_id', '=', 'slips.topic_id')
             ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
+            ->leftjoin('conferences', 'researchs.conference_id', '=', 'conferences.id')
+            ->where('conferences.status', 1)
             ->get()
             ->sortBy('id');
         $comments = Comment::select(

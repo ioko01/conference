@@ -29,7 +29,7 @@
                 <thead>
                     <tr class="text-center pagination-header">
                         <th style="width: 5%;">#</th>
-                        <th style="width: 25%;">ชื่อบทความ/ผู้วิจัย</th>
+                        <th style="width: 25%;" class="text-start">รายละเอียดบทความ</th>
                         <th style="width: 15%;">ไฟล์แก้ไขจากผู้ทรงฯ</th>
                         <th style="width: 15%;">ไฟล์ WORD ฉบับแก้ไขครั้งที่ 1</th>
                         <th style="width: 15%;">ไฟล์ PDF ฉบับแก้ไขครั้งที่ 1</th>
@@ -41,9 +41,13 @@
                     @forelse ($data as $key => $value)
                         <tr class="text-center">
                             <td>{{ $value->id }}</td>
-                            <td style="vertical-align: middle;">{{ $value->topic_th }}
-                                <br /><span
-                                    class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
+                            <td class="text-start" style="vertical-align: middle;">
+                                <strong style="font-size: 12px" class="text-bluesky">{{ $value->present }}</strong>
+                                <br />
+                                <strong>{{ $value->topic_th }}</strong>
+                                <br />
+                                <strong><span
+                                        class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span></strong>
                             </td>
                             <td style="vertical-align: middle;">
                                 @if ($value->status_id >= 8)

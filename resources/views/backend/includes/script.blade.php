@@ -16,7 +16,10 @@
 
 <script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
 
-@if (Request::is('backend/researchs') || Request::is('backend/researchs/management') || Request::is('backend/researchs/*/edit'))
+@if (Request::is('backend/researchs') ||
+    Request::is('backend/researchs/management') ||
+    Request::is('backend/researchs/*/edit') ||
+    Request::is('backend/researchs/management/times/*'))
     <script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
@@ -45,7 +48,9 @@
     <script src="{{ asset('api/download.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
-@if (Request::is('backend/researchs') || Request::is('backend/users') || Request::is('backend/researchs/management'))
+@if (Request::is('backend/researchs') ||
+    Request::is('backend/users') ||
+    Request::is('backend/researchs/management'))
     <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
     <script>

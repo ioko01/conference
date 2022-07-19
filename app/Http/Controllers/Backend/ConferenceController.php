@@ -40,6 +40,7 @@ class ConferenceController extends Controller
         $this->validator($request);
 
         Conference::create([
+            'user_id' => auth()->user()->id,
             'name' => $request->topic,
             'year' => $request->year,
             'start' => $request->start,

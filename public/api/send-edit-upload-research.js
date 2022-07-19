@@ -1,6 +1,6 @@
 "use strict";
 
-function detail_modal(topic_id) {
+function detail_modal(topic_id, type) {
     let createModal = `
             <div class="modal fade" id="research_modal" data-bs-backdrop="static"
             data-bs-keyboard="true" tabindex="-1" aria-labelledby="รายละเอียด" aria-hidden="true">
@@ -25,6 +25,11 @@ function detail_modal(topic_id) {
         success: function (res) {
             res.forEach((data) => {
                 $("#modal_body").html(`
+                <div class="text-end">
+                    <a href="/employee/research/edit/${topic_id}"
+                        class="text-warning">
+                        <i class="fas fa-edit"></i> แก้ไขรายละเอียด</a>
+                </div>
                 <div class="mb-3">
                     <strong class="text-green">รหัสบทความ: </strong><span
                         class="text-dark">${data.topic_id}</span>
@@ -110,7 +115,7 @@ function detail_modal(topic_id) {
     });
 }
 
-function send_research_modal(topic_id, type, method) {
+function send_edit_research_modal(topic_id, type, method) {
     const _token = $('meta[name="csrf-token"]').attr("content");
     const iType = ["word", "pdf", "stm", "word_2", "pdf_2", "stm_2"];
     const createModal = `
@@ -156,37 +161,196 @@ function send_research_modal(topic_id, type, method) {
     $("#research_modal").modal("show");
 }
 
-function open_modal(e, type, method = null) {
+function send_research_modal(topic_id, type, method) {
+    const _token = $('meta[name="csrf-token"]').attr("content");
+    const createModal = `
+    <form enctype="multipart/form-data" method="POST" action="/employee/${
+        type == "send_word" ? "word" : "pdf"
+    }/${topic_id}/${method ? `upload` : `create`}">
+        <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+        aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
+            <input type="hidden" name="_token" value="${_token}" />
+            ${
+                method
+                    ? `<input type="hidden" name="_method" value="PUT" />`
+                    : ""
+            }
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">อัพโหลดไฟล์</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    ${
+                        type == "send_word"
+                            ? `<input class="form-control"
+                                type="file"
+                                name="word_upload"
+                                accept=".doc, .docx"
+                            />`
+                            : type == "send_pdf"
+                            ? `<input class="form-control" type="file" name="pdf_upload" accept=".pdf" />`
+                            : `<input class="form-control" type="file" name="stm_upload" accept=".pdf" />`
+                    }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+    $("#modal").html(createModal);
+    $("#research_modal").modal("show");
+}
+
+function payment_modal(topic_id, type, path, method) {
+    const error_payment = $("#error_payment").val();
+    const error_date = $("#error_date").val();
+    const error_address = $("#error_address").val();
+
+    const _token = $('meta[name="csrf-token"]').attr("content");
+    const createModal = `
+    <form enctype="multipart/form-data" method="POST" ${
+        path
+            ? `action="/employee/payment/${topic_id}/upload"`
+            : `action="/employee/payment/${topic_id}/create"`
+    } class="modal fade"
+        id="payment_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="ชำระเงิน"
+        aria-hidden="true">
+        <input type="hidden" name="_token" value="${_token}" />
+        ${method ? `<input type="hidden" name="_method" value="PUT" />` : ""}
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">ชำระเงิน</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input type="file" class="form-control ${
+                            error_payment ? `is-invalid` : ``
+                        }"
+                            name="payment_upload" id="payment_upload" accept=".jpg, .jpeg" onchange="image(this)">
+                        ${
+                            error_payment
+                                ? `<span class="invalid-feedback" role="alert">
+                        <strong>${error_payment}</strong>
+                    </span>`
+                                : ``
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="date">วันที่ชำระเงิน</label>
+                        <input type="datetime-local" name="date" id="date" class="form-control ${
+                            error_date ? `is-invalid` : ``
+                        }">
+                        ${
+                            error_date
+                                ? `<span class="invalid-feedback" role="alert">
+                        <strong>${error_date}</strong>
+                    </span>`
+                                : ``
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address">ที่อยู่ผู้ชำระเงิน</label>
+                        <textarea class="form-control ${
+                            error_address ? `is-invalid` : ``
+                        }" name="address" id="address" cols="30" rows="10"></textarea>
+                        ${
+                            error_address
+                                ? `<span class="invalid-feedback" role="alert">
+                        <strong>${error_address}</strong>
+                    </span>`
+                                : ``
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+    $("#modal").html(createModal);
+    $("#payment_modal").modal("show");
+}
+
+function payment_modal_example(path) {
+    const createModal = `
+    <div class="modal fade" id="payment_modal_example" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+        aria-labelledby="ตัวอย่างการชำระเงิน" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">สลิปการชำระเงิน</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img width="100%" src="${path}" alt="SLIP" title="SLIP">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary rounded-0 text-white"
+                        data-bs-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+    $("#modal").html(createModal);
+    $("#payment_modal_example").modal("show");
+}
+
+function open_modal(e, type, method = null, path = null) {
     try {
         const topic_id = e.nextElementSibling.value;
-        check_type(type, topic_id, method);
+        check_type(type, topic_id, path, method);
     } catch (error) {
         throw error;
     }
 }
 
-function check_type(type, topic_id, method) {
+function check_type(type, topic_id, path, method) {
     switch (type) {
         case "detail":
             detail_modal(topic_id, type);
             break;
+        case "payment":
+            payment_modal(topic_id, type, path, method);
+            break;
+        case "payment_example":
+            payment_modal_example(path);
+            break;
         case "word":
+            send_edit_research_modal(topic_id, type, method);
+            break;
+        case "send_word":
+            send_research_modal(topic_id, type, method);
+            break;
+        case "send_pdf":
             send_research_modal(topic_id, type, method);
             break;
         case "pdf":
-            send_research_modal(topic_id, type, method);
+            send_edit_research_modal(topic_id, type, method);
             break;
         case "stm":
-            send_research_modal(topic_id, type, method);
+            send_edit_research_modal(topic_id, type, method);
             break;
         case "word_2":
-            send_research_modal(topic_id, type, method);
+            send_edit_research_modal(topic_id, type, method);
             break;
         case "pdf_2":
-            send_research_modal(topic_id, type, method);
+            send_edit_research_modal(topic_id, type, method);
             break;
         case "stm_2":
-            send_research_modal(topic_id, type, method);
+            send_edit_research_modal(topic_id, type, method);
             break;
         default:
             break;

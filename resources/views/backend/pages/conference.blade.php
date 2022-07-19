@@ -170,7 +170,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($conferences as $key => $conference)
+                            @forelse ($conferences as $key => $conference)
                                 <tr class="bg-green">
                                     <th>#</th>
                                     <th>หัวข้อ</th>
@@ -487,7 +487,11 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                            <tr class="text-center">
+                                <td colspan="4">ไม่มีหัวข้อการประชุมวิชาการ</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

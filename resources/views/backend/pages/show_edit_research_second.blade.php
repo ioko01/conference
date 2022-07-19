@@ -1,7 +1,6 @@
 @extends('backend.layouts.master_backend')
 
 @section('content')
-
     <!-- Content -->
     <div class="card">
         <div class="card-content">
@@ -29,14 +28,12 @@
                         <thead>
                             <tr class="text-center pagination-header">
                                 <th style="width: 5%;">#</th>
-                                <th style="width: 30%;" class="text-start">รายละเอียดบทความ</th>
-                                <th style="width: 10%;">สังกัด/หน่วยงาน</th>
-                                <th style="width: 5%;">Slip<br />ชำระเงิน</th>
+                                <th style="width: 50%;" class="text-start">รายละเอียดบทความ</th>
+                                <th style="width: 20%;">สังกัด/หน่วยงาน</th>
                                 <th style="width: 5%;">ไฟล์<br />WORD</th>
                                 <th style="width: 5%;">ไฟล์<br />PDF</th>
-                                <th style="width: 10%;">สถานะบทความ</th>
+                                <th style="width: 5%;">แบบคำชี้แจงการปรับแก้ไขบทความ</th>
                                 <th style="width: 10%;">รายละเอียด</th>
-                                <th style="width: 20%;">ส่งไฟล์ไปให้นักวิจัยแก้ไข</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,36 +64,25 @@
                                         {{ $value->institution }}
                                     </td>
                                     <td>
-                                        @if (empty($value->payment))
-                                            -
-                                        @else
-                                            <a target="_blank" href="{{ Storage::url($value->payment_path) }}">SLIP</a>
-                                        @endif
-                                    </td>
-                                    <td>
                                         @if (empty($value->word))
                                             -
                                         @else
-                                            <a target="_blank" href="{{ Storage::url($value->word_path) }}">WORD</a>
+                                            <a target="_blank" href="{{ Storage::url($value->word_path) }}">WORD-2</a>
                                         @endif
                                     </td>
                                     <td>
                                         @if (empty($value->pdf))
                                             -
                                         @else
-                                            <a target="_blank" href="{{ Storage::url($value->pdf_path) }}">PDF</a>
+                                            <a target="_blank" href="{{ Storage::url($value->pdf_path) }}">PDF-2</a>
                                         @endif
                                     </td>
                                     <td>
-                                        <select name="topic_status" class="form-select"
-                                            onchange="open_modal(this, 'change_status')">
-                                            @foreach ($topic_status as $status)
-                                                <option value="{{ $status->id }}"
-                                                    @if ($status->name == $value->topic_status) selected @endif>{{ $status->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <input type="hidden" value="{{ $value->topic_id }}">
+                                        @if (empty($value->statement))
+                                            -
+                                        @else
+                                            <a target="_blank" href="{{ Storage::url($value->statement_path) }}">STM-2</a>
+                                        @endif
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-success rounded-0 text-white"
@@ -104,35 +90,6 @@
                                             รายละเอียด
                                         </button>
                                         <input type="hidden" value="{{ $value->topic_id }}">
-                                    </td>
-                                    <td>
-                                        @if ($value->status_id >= 7)
-                                            <div>
-                                                @foreach ($comments as $comment)
-                                                    @if ($value->topic_id == $comment->comment_topic_id)
-                                                        @if ($comment->comment_path)
-                                                            <a target="_blank"
-                                                                href="{{ Storage::url($comment->comment_path) }}"
-                                                                title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
-                                                                <i style="font-size: 10px;"
-                                                                    class="mb-0">{{ $comment->comment_name }}</i><br />
-                                                            </a>
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                                <button type="button" class="btn btn-warning rounded-0 text-white w-100"
-                                                    onclick="open_modal(this, 'file')">
-                                                    อัพโหลดไฟล์
-                                                </button>
-                                                <input type="hidden" value="{{ $value->topic_id }}">
-                                                @error('file_comment')
-                                                    {{ $message }}
-                                                @enderror
-
-                                            </div>
-                                        @else
-                                            -
-                                        @endif
                                     </td>
                                 </tr>
                                 @empty
@@ -149,5 +106,4 @@
         <!-- End Content -->
 
         <div id="modal"></div>
-
     @endsection

@@ -1,5 +1,4 @@
 @extends('frontend.layouts.master_frontend')
-@include('frontend.components.modal-backdrop')
 
 @section('content')
     <!-- Content -->
@@ -28,7 +27,7 @@
                 <thead>
                     <tr class="text-center pagination-header">
                         <th style="width: 5%;">#</th>
-                        <th style="width: 15%;">ชื่อบทความ/ผู้วิจัย</th>
+                        <th style="width: 15%;" class="text-start">รายละเอียดบทความ</th>
                         <th style="width: 10%;">สถานะ</th>
                         <th style="width: 10%;">ชำระเงิน</th>
                         <th style="width: 10%;">ไฟล์ WORD</th>
@@ -41,9 +40,13 @@
                     @forelse ($data as $key => $value)
                         <tr class="text-center">
                             <td>{{ $value->id }}</td>
-                            <td>{{ $value->topic_th }}
-                                <br /><span
-                                    class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
+                            <td class="text-start" style="vertical-align: middle;">
+                                <strong style="font-size: 12px" class="text-bluesky">{{ $value->present }}</strong>
+                                <br />
+                                <strong>{{ $value->topic_th }}</strong>
+                                <br />
+                                <strong><span
+                                        class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span></strong>
                             </td>
                             <td>
                                 <strong class="text-red">{{ $value->topic_status }}</strong>
@@ -57,17 +60,18 @@
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
                                         {{ thaiDateFormat($value->slip_update, true) }}</i>
                                     <button type="button" class="btn btn-green text-white rounded-0 w-100 my-1"
-                                        data-bs-toggle="modal" data-bs-target="#payment-modal-example">
+                                        onclick="open_modal(this, 'payment_example', null, '{{ Storage::url($value->payment_path) }}')">
                                         ดูตัวอย่าง
                                     </button>
                                     @if ($value->status_payment)
                                         @if (endDate('end_payment')->day >= 0)
-                                            @if ($value->status_id <= 4)
+                                            @if ($value->status_id < 4)
                                                 <button type="button"
                                                     class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                                    data-bs-toggle="modal" data-bs-target="#payment-modal">
+                                                    onclick="open_modal(this, 'payment', 'PUT' @if ($value->payment_path) , '{{ $value->payment_path }}' @endif , 'PUT')">
                                                     แก้ไขสลิปชำระเงิน
                                                 </button>
+                                                <input type="hidden" value="{{ $value->topic_id }}">
                                             @endif
                                         @else
                                         @endif
@@ -79,9 +83,10 @@
                                         @if (endDate('end_payment')->day >= 0 || $value->word_path)
                                             @if ($value->status_id <= 4)
                                                 <button type="button" class="btn btn-warning text-white rounded-0 w-100"
-                                                    data-bs-toggle="modal" data-bs-target="#payment-modal">
+                                                    onclick="open_modal(this, 'payment', null @if ($value->payment_path) , '{{ $value->payment_path }}' @endif)">
                                                     ชำระเงิน
                                                 </button>
+                                                <input type="hidden" value="{{ $value->topic_id }}">
                                             @else
                                                 <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>
                                             @endif
@@ -92,6 +97,15 @@
                                         <strong class="text-red">ยังไม่เปิดให้ชำระเงิน</strong>
                                     @endif
                                 @endif
+
+                                <input id="error_payment" type="hidden" name="error_payment"
+                                    value="@error('payment_upload') {{ $message }} @enderror">
+
+                                <input id="error_date" type="hidden" name="error_date"
+                                    value="@error('date') {{ $message }} @enderror">
+
+                                <input id="error_address" type="hidden" name="error_address"
+                                    value="@error('address') {{ $message }} @enderror">
 
                                 @if (session('payment_upload') || session('date') || session('address'))
                                     <div class="alert alert-error">
@@ -116,9 +130,10 @@
                                             @if ($value->status_id <= 4)
                                                 <button type="button"
                                                     class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                                    data-bs-toggle="modal" data-bs-target="#word-modal">
+                                                    onclick="open_modal(this, 'send_word', 'PUT')">
                                                     แก้ไขไฟล์ WORD
                                                 </button>
+                                                <input type="hidden" value="{{ $value->topic_id }}">
                                             @endif
                                         @else
                                             <strong class="text-red">สิ้นสุดเวลาการส่งบทความ</strong>
@@ -130,9 +145,10 @@
                                     @if ($value->status_research)
                                         @if (endDate('end_research')->day >= 0)
                                             <button type="button" class="btn btn-primary rounded-0 w-100"
-                                                data-bs-toggle="modal" data-bs-target="#word-modal">
+                                                onclick="open_modal(this, 'send_word')">
                                                 อัพโหลดไฟล์ WORD
                                             </button>
+                                            <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
                                             <strong class="text-red">สิ้นสุดเวลาการส่งบทความ</strong>
                                         @endif
@@ -165,9 +181,10 @@
                                             @if ($value->status_id <= 4)
                                                 <button type="button"
                                                     class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                                    data-bs-toggle="modal" data-bs-target="#pdf-modal">
+                                                    onclick="open_modal(this, 'send_pdf', 'PUT')">
                                                     แก้ไขไฟล์ PDF
                                                 </button>
+                                                <input type="hidden" value="{{ $value->topic_id }}">
                                             @endif
                                         @else
                                             <strong class="text-red">สิ้นสุดเวลาการส่งบทความ</strong>
@@ -179,9 +196,10 @@
                                     @if ($value->status_research)
                                         @if (endDate('end_research')->day >= 0)
                                             <button type="button" class="btn btn-secondary rounded-0 w-100"
-                                                data-bs-toggle="modal" data-bs-target="#pdf-modal">
+                                                onclick="open_modal(this, 'send_pdf')">
                                                 อัพโหลดไฟล์ PDF
                                             </button>
+                                            <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
                                             <strong class="text-red">สิ้นสุดเวลาการส่งบทความ</strong>
                                         @endif
@@ -212,10 +230,11 @@
                                 @endif
                             </td>
                             <td>
-                                <button type="button" class="btn btn-green rounded-0 text-white" data-bs-toggle="modal"
-                                    data-bs-target="#detail">
+                                <button type="button" class="btn btn-green rounded-0 text-white"
+                                    onclick="open_modal(this, 'detail')">
                                     รายละเอียด
                                 </button>
+                                <input type="hidden" value="{{ $value->topic_id }}">
                             </td>
                         </tr>
                     @empty
@@ -229,6 +248,6 @@
     </div>
     <!-- End Content -->
 
-    @yield('modal')
+    <div id="modal"></div>
 
 @endsection

@@ -16,7 +16,7 @@
 
         <div id="poster" class="row my-5">
             <div class="col-lg-2 col-md-4 col-sm-6 my-3">
-                <div style="width: 90%;" class="card rounded-0 mx-auto">
+                <div style="width: 90%;" class="animated fade-up card rounded-0 mx-auto">
                     <div class="card-content w-100 h-100">
                         <div class="card-header text-center bg-white">
                             <h2>P-ED 01</h2>

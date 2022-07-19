@@ -6,7 +6,8 @@
             <div class="card-header d-flex align-items-center justify-content-between w-100">
                 <h1>รายการบทความ</h1>
                 <div class="ms-auto">
-                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i class="fas fa-file-export"></i>
+                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i
+                            class="fas fa-file-export"></i>
                         Export to
                         Excel</a>
                 </div>
@@ -26,7 +27,7 @@
                         <thead>
                             <tr class="text-center pagination-header">
                                 <th>#</th>
-                                <th>รายละเอียดบทความ</th>
+                                <th class="text-start">รายละเอียดบทความ</th>
                                 <th>ปีที่ส่งผลงาน</th>
                                 <th>ชนิดการเข้าร่วม</th>
                                 <th>เวลา</th>
@@ -34,9 +35,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($researchs as $key => $research)
+                            @forelse ($researchs as $key => $research)
                                 <tr>
-                                    <td>{{ ++$key }}</td>
+                                    <td class="text-center">{{ ++$key }}</td>
                                     <td>
                                         <strong style="font-size: 12px" class="text-bluesky">
                                             @if ($research->present_id == 1)
@@ -79,11 +80,15 @@
                                             แก้ไข</a>
                                     </td>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                @empty
+                                    <tr class="text-center">
+                                        <td colspan="6">ไม่มีบทความ</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Research;
 use App\Models\Comment;
+use App\Models\StatusResearch;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CommentFileUploadController extends Controller
@@ -56,6 +58,10 @@ class CommentFileUploadController extends Controller
 
                 if ($count == 0 || $comment->name != $name) {
                     Comment::create($data);
+                    $status_research = StatusResearch::select('id')->where('name', 'ส่งบทความให้นักวิจัยแก้ไขแล้ว')->first();
+                    Research::leftjoin('status_researchs', 'status_researchs.name', 'ส่งบทความให้นักวิจัยแก้ไขแล้ว')
+                        ->where('topic_id', $id)
+                        ->update(['topic_status' => $status_research->id]);
                 } else if ($comment->name == $name) {
                     Comment::where('name', $name)
                         ->where('topic_id', $id)

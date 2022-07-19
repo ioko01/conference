@@ -31,7 +31,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $key => $user)
+                            @forelse ($users as $key => $user)
                                 <tr>
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $user->fullname }}@if ($user->id == auth()->user()->id)
@@ -47,11 +47,15 @@
                                             แก้ไข</a>
                                     </td>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                @empty
+                                    <tr class="text-center">
+                                        <td colspan="5">ไม่มีผู้ใช้งาน</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

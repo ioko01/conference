@@ -29,7 +29,7 @@
                 <thead>
                     <tr class="text-center pagination-header">
                         <th style="width: 5%;">#</th>
-                        <th style="width: 25%;">ชื่อบทความ/ผู้วิจัย</th>
+                        <th style="width: 25%;" class="text-start">รายละเอียดบทความ</th>
                         <th style="width: 15%;">ไฟล์ WORD ฉบับแก้ไขครั้งที่ 2</th>
                         <th style="width: 15%;">ไฟล์ PDF ฉบับแก้ไขครั้งที่ 2</th>
                         <th style="width: 15%;">แบบคำชี้แจงการปรับแก้ไขบทความครั้งที่ 2</th>
@@ -40,9 +40,13 @@
                     @forelse ($data as $key => $value)
                         <tr class="text-center">
                             <td>{{ $value->id }}</td>
-                            <td>{{ $value->topic_th }}
-                                <br /><span
-                                    class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span>
+                            <td class="text-start" style="vertical-align: middle;">
+                                <strong style="font-size: 12px" class="text-bluesky">{{ $value->present }}</strong>
+                                <br />
+                                <strong>{{ $value->topic_th }}</strong>
+                                <br />
+                                <strong><span
+                                        class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span></strong>
                             </td>
                             @if (isset($value->edit_word_path) || isset($value->edit_pdf_path) || isset($value->edit_stm_path))
                                 @if (endDate('end_research_edit_two')->day >= 0)

@@ -22,7 +22,16 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <div class="line-dropdown"></div>
-                            @if ($downloads = DB::table('downloads')->select('downloads.id as id', 'downloads.name as name', 'downloads.link as link', 'downloads.name_file as name_file', 'downloads.path_file as path_file', 'downloads.ext_file as ext_file', 'downloads.conference_id as conference_id', 'downloads.created_at as created_at', 'downloads.updated_at as updated_at')->leftjoin('conferences', 'conferences.id', '=', 'downloads.conference_id')->where('conferences.status', 1)->get())
+                            @if ($downloads = DB::table('downloads')->select(
+                                    'downloads.id as id',
+                                    'downloads.name as name',
+                                    'downloads.link as link',
+                                    'downloads.name_file as name_file',
+                                    'downloads.path_file as path_file',
+                                    'downloads.ext_file as ext_file',
+                                    'downloads.conference_id as conference_id',
+                                    'downloads.created_at as created_at',
+                                    'downloads.updated_at as updated_at')->leftjoin('conferences', 'conferences.id', '=', 'downloads.conference_id')->where('conferences.status', 1)->get())
                                 @forelse ($downloads as $download)
                                     <li><a target="_blank" class="dropdown-item"
                                             @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif>{{ $download->name }}
@@ -156,7 +165,7 @@
                             href="{{ route('contract') }}">ติดต่อ</a>
                     </li>
                     @auth
-                        @if (auth()->user()->is_admin === 2)
+                        @if (auth()->user()->is_admin === 1 || auth()->user()->is_admin === 2)
                             <li class="nav-item">
                                 <a style="color: sandybrown!important;" class="nav-link" aria-current="page"
                                     href="{{ route('backend.dashboard.index') }}">แผงควบคุม</a>

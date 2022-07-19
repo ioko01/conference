@@ -165,7 +165,7 @@
                             href="{{ route('contract') }}">ติดต่อ</a>
                     </li>
                     @auth
-                        @if (auth()->user()->is_admin === 1 || auth()->user()->is_admin === 2)
+                        @if (auth()->user()->is_admin == 1 || auth()->user()->is_admin == 2)
                             <li class="nav-item">
                                 <a style="color: sandybrown!important;" class="nav-link" aria-current="page"
                                     href="{{ route('backend.dashboard.index') }}">แผงควบคุม</a>

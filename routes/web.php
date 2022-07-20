@@ -122,6 +122,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('export', [BackendResearchController::class, 'export'])->name('researchs.export');
             });
 
+            Route::get('dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
+            Route::get('statement', [StatementController::class, 'index'])->name('backend.statement.index');
+
+            Route::get('researchs', [BackendResearchController::class, 'index'])->name('backend.researchs.index');
+            Route::get('research/{topic_id}/edit', [BackendResearchController::class, 'edit'])->name('backend.research.edit');
+            Route::put('research/{topic_id}/update', [BackendResearchController::class, 'update'])->name('backend.research.update');
+
+            Route::get('posters', [BackendPosterController::class, 'index'])->name('backend.posters.index');
+
             Route::prefix('users')->group(function () {
                 Route::get('export', [UserController::class, 'export'])->name('users.export');
             });
@@ -133,13 +142,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('storage/open', [DashboardController::class, 'storage'])->name('backend.storage.open');
 
         Route::prefix('backend')->group(function () {
-            Route::get('dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
-            Route::get('statement', [StatementController::class, 'index'])->name('backend.statement.index');
-
-            Route::get('researchs', [BackendResearchController::class, 'index'])->name('backend.researchs.index');
-            Route::get('research/{topic_id}/edit', [BackendResearchController::class, 'edit'])->name('backend.research.edit');
-            Route::put('research/{topic_id}/update', [BackendResearchController::class, 'update'])->name('backend.research.update');
-
             Route::get('users', [UserController::class, 'index'])->name('backend.users.index');
             Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('backend.user.edit');
             Route::put('user/{id}/update', [UserController::class, 'update'])->name('backend.user.update');
@@ -150,14 +152,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::put('conference/{id}/update_status', [ConferenceController::class, 'update_status'])->name('backend.conference.update_status');
             Route::put('conference/{id}/update_topic', [ConferenceController::class, 'update_topic'])->name('backend.conference.update_topic');
 
-
             Route::get('download', [DownloadController::class, 'index'])->name('backend.download.index');
             Route::post('download/create', [DownloadController::class, 'store'])->name('backend.download.store');
             Route::get('download/{id}/edit', [DownloadController::class, 'edit'])->name('backend.download.edit');
             Route::put('download/{id}/update', [DownloadController::class, 'update'])->name('backend.download.update');
             Route::delete('download/{id}/delete', [DownloadController::class, 'destroy'])->name('backend.download.delete');
-
-            Route::get('posters', [BackendPosterController::class, 'index'])->name('backend.posters.index');
         });
     });
 });

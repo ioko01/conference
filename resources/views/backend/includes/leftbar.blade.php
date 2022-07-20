@@ -36,27 +36,32 @@
                         <p>หน้าแรก</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('backend.conference.index') }}"
-                        class="nav-link @if (Request::is('backend/conference')) active @endif">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>หัวข้อ</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('backend.download.index') }}"
-                        class="nav-link @if (Request::is('backend/download')) active @endif">
-                        <i class="nav-icon fas fa-download"></i>
-                        <p>ดาวน์โหลด</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('backend.users.index') }}"
-                        class="nav-link @if (Request::is('backend/users')) active @endif">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>ผู้ใช้งาน</p>
-                    </a>
-                </li>
+                @guest
+                    @if (auth()->users()->is_admin === 2)
+                        <li class="nav-item">
+                            <a href="{{ route('backend.conference.index') }}"
+                                class="nav-link @if (Request::is('backend/conference')) active @endif">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>หัวข้อ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.download.index') }}"
+                                class="nav-link @if (Request::is('backend/download')) active @endif">
+                                <i class="nav-icon fas fa-download"></i>
+                                <p>ดาวน์โหลด</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.users.index') }}"
+                                class="nav-link @if (Request::is('backend/users')) active @endif">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>ผู้ใช้งาน</p>
+                            </a>
+                        </li>
+                    @endif
+                @endguest
+
                 <li class="nav-item">
                     <a href="{{ route('backend.researchs.index') }}"
                         class="nav-link @if (Request::is('backend/researchs')) active @endif">

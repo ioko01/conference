@@ -16,9 +16,9 @@ class Backend
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->is_admin == 2){
+        if (auth()->user()->is_admin == 2) {
             return $next($request);
         }
-        return redirect('/')->with('error', "ต้องมีสถานะซุปเปอร์แอดมิน");
+        return abort(401);
     }
 }

@@ -17,7 +17,7 @@ class CreateDownloadsTable extends Migration
             $table->id();
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
-            $table->number('notice')->default(0)->comment('เอาลงประชาสัมพันธ์? 1=เอาลง 0=ไม่เอาลง');
+            $table->integer('notice')->default(0)->comment('เอาลงประชาสัมพันธ์? 1=เอาลง 0=ไม่เอาลง');
             $table->string('name')->comment('ชื่อหัวข้อดาวน์โหลด');
             $table->string('link')->nullable()->comment('ลิงค์ดาวน์โหลด');
             $table->string('name_file')->nullable()->comment('ชื่อไฟล์ดาวน์โหลด');

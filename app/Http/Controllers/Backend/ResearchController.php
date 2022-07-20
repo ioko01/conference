@@ -25,6 +25,7 @@ class ResearchController extends Controller
             'researchs.present_id as present_id',
             'researchs.created_at as created_at',
             'researchs.updated_at as updated_at',
+            'users.fullname as fullname',
             'users.person_attend as person_attend',
             'conferences.year as year'
         )

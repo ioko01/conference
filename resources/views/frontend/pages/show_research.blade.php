@@ -40,7 +40,7 @@
                     @forelse ($data as $key => $value)
                         <tr class="text-center">
                             <td>{{ $value->id }}</td>
-                            <td class="text-start" style="vertical-align: middle;">
+                            <td class="text-start">
                                 <strong style="font-size: 12px" class="text-bluesky">{{ $value->present }}</strong>
                                 <br />
                                 <strong>{{ $value->topic_th }}</strong>

@@ -31,11 +31,17 @@ class EditResearchFirstController extends Controller
             'users.person_attend as attend',
             'kotas.name as kota',
             'send_edit_words.name as word',
-            'send_edit_pdf.name as pdf',
             'send_edit_words.path as word_path',
+            'send_edit_words.created_at as word_created_at',
+            'send_edit_words.updated_at as word_updated_at',
+            'send_edit_pdf.name as pdf',
             'send_edit_pdf.path as pdf_path',
+            'send_edit_pdf.created_at as pdf_created_at',
+            'send_edit_pdf.updated_at as pdf_updated_at',
             'send_edit_statements.name as statement',
             'send_edit_statements.path as statement_path',
+            'send_edit_statements.created_at as statement_created_at',
+            'send_edit_statements.updated_at as statement_updated_at',
             'researchs.topic_status as status_id'
         )
             ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')

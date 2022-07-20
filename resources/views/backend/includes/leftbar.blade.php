@@ -59,6 +59,13 @@
                                 <p>ผู้ใช้งาน</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.notice.index') }}"
+                                class="nav-link @if (Request::is('backend/notice')) active @endif">
+                                <i class="nav-icon fas fa-bullhorn"></i>
+                                <p>ประชาสัมพันธ์</p>
+                            </a>
+                        </li>
                     @endif
                 @endauth
 
@@ -66,38 +73,30 @@
                     <a href="{{ route('backend.researchs.index') }}"
                         class="nav-link @if (Request::is('backend/researchs')) active @endif">
                         <i class="nav-icon fas fa-book"></i>
-                        <p>บทความ</p>
+                        <p>บทความทั้งหมด</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('backend.research.index') }}"
                         class="nav-link @if (Request::is('backend/researchs/management')) active @endif">
-                        <i class="nav-icon fas fa-book"></i>
+                        <i class="nav-icon fas fa-cogs"></i>
                         <p>จัดการบทความ</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('backend.research.first.index') }}"
                         class="nav-link @if (Request::is('backend/researchs/management/times/1')) active @endif">
-                        <i class="nav-icon fas fa-book"></i>
+                        <i class="nav-icon fas fa-book-open"></i>
                         <p>บทความฉบับแก้ไขครั้งที่ 1</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('backend.research.second.index') }}"
                         class="nav-link @if (Request::is('backend/researchs/management/times/2')) active @endif">
-                        <i class="nav-icon fas fa-book"></i>
+                        <i class="nav-icon fas fa-book-open"></i>
                         <p>บทความฉบับแก้ไขครั้งที่ 2</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('backend.statement.index') }}"
-                        class="nav-link @if (Request::is('backend/statement')) active @endif">
-                        <i class="nav-icon fas fa-bullhorn"></i>
-                        <p>ประกาศผลพิจารณา</p>
-                    </a>
-                </li>
-
                 <li class="nav-item @if (Request::is('backend/posters') || Request::is('backend/orals')) menu-is-opening menu-open @endif">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-line"></i>
@@ -133,18 +132,16 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="pages/forms/general.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>2565</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/forms/advanced.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>2564</p>
-                            </a>
-                        </li>
+                        @forelse ($conferences = DB::table('conferences')->select('year')->orderBy('year', 'desc')->get() as $conference)
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{ $conference->year }}</p>
+                                </a>
+                            </li>
+
+                        @empty
+                        @endforelse
                     </ul>
                 </li>
             </ul>

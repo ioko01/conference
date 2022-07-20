@@ -14,9 +14,9 @@ use App\Http\Controllers\Backend\DownloadController;
 use App\Http\Controllers\Backend\EditResearchFirstController;
 use App\Http\Controllers\Backend\EditResearchSecondController;
 use App\Http\Controllers\Backend\ManageResearchController;
+use App\Http\Controllers\Backend\NoticeController;
 use App\Http\Controllers\Backend\PosterController as BackendPosterController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
-use App\Http\Controllers\Backend\StatementController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\ListAttendController;
 use App\Http\Controllers\ListResearchController;
@@ -31,7 +31,6 @@ use App\Http\Controllers\SendEditStatementController;
 use App\Http\Controllers\SendEditStatementTwoController;
 use App\Http\Controllers\SendEditWordTwoController;
 use App\Http\Controllers\UploadfileController;
-use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -123,7 +122,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             });
 
             Route::get('dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
-            Route::get('statement', [StatementController::class, 'index'])->name('backend.statement.index');
+            Route::get('notice', [NoticeController::class, 'index'])->name('backend.notice.index');
 
             Route::get('researchs', [BackendResearchController::class, 'index'])->name('backend.researchs.index');
             Route::get('research/{topic_id}/edit', [BackendResearchController::class, 'edit'])->name('backend.research.edit');

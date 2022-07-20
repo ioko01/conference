@@ -43,7 +43,10 @@ function detail_modal(topic_id) {
                 </div>
                 <div class="mb-3">
                     <strong class="text-green">ชื่อผู้นำเสนอบทความ: </strong><span
-                        class="text-dark">${data.presenter.replace("|", ", ")}</span>
+                        class="text-dark">${data.presenter.replace(
+                            "|",
+                            ", "
+                        )}</span>
                 </div>
                 <div class="mb-3">
                     <strong class="text-green">กลุ่มบทความ: </strong><span
@@ -95,9 +98,13 @@ function detail_modal(topic_id) {
         },
         error: function (event, request, settings) {
             if (!navigator.onLine) {
-                $("#modal_body").html(`<div class="text-center">ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน</div>`);
+                $("#modal_body").html(
+                    `<div class="text-center">ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน</div>`
+                );
             } else if (!navigator.doNotTrack) {
-                $("#modal_body").html(`<div class="text-center">เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง</div>`);
+                $("#modal_body").html(
+                    `<div class="text-center">เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง</div>`
+                );
             }
         },
     });
@@ -132,6 +139,7 @@ function update_modal(topic_id, title, status_value, text_status) {
 
 function send_comment_modal(topic_id, type) {
     const _token = $('meta[name="csrf-token"]').attr("content");
+    const error = $("#error_file_comment").val();
 
     const createModal = `
     <form enctype="multipart/form-data" method="POST" action="/backend/researchs/comment-file-upload/${topic_id}">
@@ -146,7 +154,16 @@ function send_comment_modal(topic_id, type) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <input class="form-control" type="file" name="file_comment[]" accept=".pdf" multiple>
+                    <input class="form-control ${
+                        error ? `is-invalid` : ``
+                    }" type="file" name="file_comment[]" accept=".pdf" multiple>
+                    ${
+                        error
+                            ? `<span class="invalid-feedback" role="alert">
+                                    <strong>${error}</strong>
+                                </span>`
+                            : ``
+                    }
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success text-white rounded-0">อัพโหลดไฟล์</button>
@@ -200,18 +217,22 @@ function update_status(topic_id, status) {
                 _token,
             },
             success: function (data) {
-                data.success ?
-                    window.location.replace("/backend/researchs/management") :
-                    null;
+                data.success
+                    ? window.location.replace("/backend/researchs/management")
+                    : null;
             },
             beforeSend: function () {
                 console.log("กำลังโหลด");
             },
             error: function (error) {
                 if (!navigator.onLine) {
-                    console.log("ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน");
+                    console.log(
+                        "ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน"
+                    );
                 } else if (!navigator.doNotTrack) {
-                    console.log("เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง");
+                    console.log(
+                        "เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง"
+                    );
                 }
             },
         });

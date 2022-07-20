@@ -29,7 +29,7 @@
                                 <th>#</th>
                                 <th class="text-start">รายละเอียดบทความ</th>
                                 <th>ปีที่ส่งผลงาน</th>
-                                <th>ชนิดการเข้าร่วม</th>
+                                <th>ชื่อผู้ส่งผลงาน</th>
                                 <th>เวลา</th>
                                 <th>แก้ไข</th>
                             </tr>
@@ -59,19 +59,15 @@
                                     </td>
                                     <td class="text-center">{{ $research->year }}</td>
                                     <td class="text-center">
-                                        <span class="text-success">
-                                            @if ($research->person_attend == 'send')
-                                                ลงทะเบียนส่งผลงาน
-                                            @else
-                                                ลงทะเบียนเข้าร่วมงานทั่วไป
-                                            @endif
+                                        <span class="text-info">
+                                            {{ $research->fullname }}
                                         </span>
                                     </td>
-                                    <td>
-                                        <i style="font-size: 12px" class="text-info">อัพโหลดเมื่อ
+                                    <td class="text-center">
+                                        <i style="font-size: 10px" class="text-secondary">อัพโหลดเมื่อ
                                             {{ thaiDateFormat($research->created_at, true) }}</i>
                                         <br />
-                                        <i style="font-size: 12px" class="text-info">แก้ไขล่าสุดเมื่อ
+                                        <i style="font-size: 10px" class="text-secondary">แก้ไขล่าสุดเมื่อ
                                             {{ thaiDateFormat($research->updated_at, true) }}</i>
                                     </td>
                                     <td>

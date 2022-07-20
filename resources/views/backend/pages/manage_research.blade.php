@@ -61,7 +61,13 @@
                                         <br />
                                         <strong style="font-size: 12px"
                                             class="text-green">{{ str_replace('|', ', ', $value->presenter) }}</strong>
-
+                                        <br />
+                                        <p class="text-secondary">
+                                            <i style="font-size: 10px" class="d-block">อัพโหลด
+                                                {{ thaiDateFormat($value->created_at, true, true) }}</i>
+                                            <i style="font-size: 10px" class="d-block">แก้ไขเมื่อ
+                                                {{ thaiDateFormat($value->updated_at, true, true) }}</i>
+                                        </p>
                                     </td>
                                     <td>
                                         {{ $value->institution }}
@@ -125,10 +131,9 @@
                                                     อัพโหลดไฟล์
                                                 </button>
                                                 <input type="hidden" value="{{ $value->topic_id }}">
-                                                @error('file_comment')
-                                                    {{ $message }}
-                                                @enderror
-
+                                                <input type="hidden" name="error_file_comment" id="error_file_comment"
+                                                    @error('file_comment') value="{{ $message }}" @enderror
+                                                    @error('file_comment.*') value="{{ $message }}" @enderror>
                                             </div>
                                         @else
                                             -

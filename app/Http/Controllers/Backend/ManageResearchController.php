@@ -44,6 +44,8 @@ class ManageResearchController extends Controller
             'pdf.path as pdf_path',
             'slips.path as payment_path',
             'researchs.topic_status as status_id',
+            'researchs.created_at as created_at',
+            'researchs.updated_at as updated_at',
         )
             ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
             ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')

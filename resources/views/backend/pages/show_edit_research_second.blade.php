@@ -58,7 +58,6 @@
                                         <br />
                                         <strong style="font-size: 12px"
                                             class="text-green">{{ str_replace('|', ', ', $value->presenter) }}</strong>
-
                                     </td>
                                     <td>
                                         {{ $value->institution }}
@@ -67,21 +66,36 @@
                                         @if (empty($value->word))
                                             -
                                         @else
-                                            <a target="_blank" href="{{ Storage::url($value->word_path) }}">WORD-2</a>
+                                            <a target="_blank" href="{{ Storage::url($value->word_path) }}">WORD-2
+                                                <span style="font-size: 10px;" class="text-green d-block">อัพโหลด
+                                                    {{ thaiDateFormat($value->word_created_at, true, true) }}</span>
+                                                <span style="font-size: 10px;" class="text-green d-block">แก้ไข
+                                                    {{ thaiDateFormat($value->word_updated_at, true, true) }}</span>
+                                            </a>
                                         @endif
                                     </td>
                                     <td>
                                         @if (empty($value->pdf))
                                             -
                                         @else
-                                            <a target="_blank" href="{{ Storage::url($value->pdf_path) }}">PDF-2</a>
+                                            <a target="_blank" href="{{ Storage::url($value->pdf_path) }}">PDF-2
+                                                <span style="font-size: 10px;" class="text-green d-block">อัพโหลด
+                                                    {{ thaiDateFormat($value->pdf_created_at, true, true) }}</span>
+                                                <span style="font-size: 10px;" class="text-green d-block">แก้ไข
+                                                    {{ thaiDateFormat($value->pdf_updated_at, true, true) }}</span>
+                                            </a>
                                         @endif
                                     </td>
                                     <td>
                                         @if (empty($value->statement))
                                             -
                                         @else
-                                            <a target="_blank" href="{{ Storage::url($value->statement_path) }}">STM-2</a>
+                                            <a target="_blank" href="{{ Storage::url($value->statement_path) }}">STM-2
+                                                <span style="font-size: 10px;" class="text-green d-block">อัพโหลด
+                                                    {{ thaiDateFormat($value->statement_created_at, true, true) }}</span>
+                                                <span style="font-size: 10px;" class="text-green d-block">แก้ไข
+                                                    {{ thaiDateFormat($value->statement_updated_at, true, true) }}</span>
+                                            </a>
                                         @endif
                                     </td>
                                     <td>

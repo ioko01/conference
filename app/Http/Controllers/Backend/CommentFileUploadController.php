@@ -20,15 +20,26 @@ class CommentFileUploadController extends Controller
             Storage::deleteDirectory($path);
         }
     }
+
+    protected function validation($request)
+    {
+        alert('ผิดพลาด', 'ไม่สามารถส่งไฟล์ไปให้นักวิจัยแก้ไขได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
+        return $request->validate([
+            'file_comment' => 'required',
+            'file_comment.*' => 'mimes:pdf|max:10240'
+        ]);
+    }
+
+
     protected function update(Request $request, $id)
     {
-        $request->validate(['file_comment*' => 'mimes:pdf|max:10240']);
+        $this->validation($request);
 
         $user = Research::select('user_id')->where('topic_id', $id)->first();
-        if ($request->file('file_comment')) {
+        if ($request->hasfile('file_comment')) {
 
-            foreach ($request->file('file_comment') as $key => $value) {
-                $upload = $value;
+            foreach ($request->file('file_comment') as $key => $file) {
+                $upload = $file;
                 $extension = $upload->extension();
                 $name = $upload->getClientOriginalName();
                 $path = "public/comments/conference_id_" . auth()->user()->conference_id . "/$id";
@@ -59,8 +70,7 @@ class CommentFileUploadController extends Controller
                 if ($count == 0 || $comment->name != $name) {
                     Comment::create($data);
                     $status_research = StatusResearch::select('id')->where('name', 'ส่งบทความให้นักวิจัยแก้ไขแล้ว')->first();
-                    Research::leftjoin('status_researchs', 'status_researchs.name', 'ส่งบทความให้นักวิจัยแก้ไขแล้ว')
-                        ->where('topic_id', $id)
+                    Research::where('topic_id', $id)
                         ->update(['topic_status' => $status_research->id]);
                 } else if ($comment->name == $name) {
                     Comment::where('name', $name)
@@ -72,6 +82,7 @@ class CommentFileUploadController extends Controller
             }
         }
 
+        alert('สำเร็จ', 'ส่งไฟล์ไปให้นักวิจัยแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', true);
     }
 }

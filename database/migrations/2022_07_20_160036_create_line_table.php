@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateLineTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('line', function (Blueprint $table) {
+            $table->id();
+            $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
+            $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
+            $table->string('name')->comment('ชื่อ');
+            $table->string('link')->nullable()->comment('ลิงค์');
+            $table->string('path')->nullable()->comment('แหล่งที่อยู่ไฟล์');
+            $table->string('extension')->nullable()->comment('นามสกุลไฟล์');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('line');
+    }
+}

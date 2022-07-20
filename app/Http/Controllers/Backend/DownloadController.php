@@ -89,7 +89,7 @@ class DownloadController extends Controller
 
         Download::create($data);
         alert('สำเร็จ', 'เพิ่มหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
-        return redirect()->route('backend.download.index');
+        return redirect()->route('backend.downloads.index');
     }
 
     protected function edit($id)
@@ -193,6 +193,21 @@ class DownloadController extends Controller
         }
         Download::where('id', $id)->delete();
         alert('สำเร็จ', 'ลบหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        return back();
+    }
+
+    protected function notice(Request $request, $id)
+    {
+        $status = 0;
+        if (!$request->notice) {
+            $status = 1;
+        }
+        $data = [
+            'user_id' => auth()->user()->id,
+            'notice' => $status
+        ];
+        Download::where('id', $id)->update($data);
+        alert('สำเร็จ', 'นำขึ้นประชาสัมพันธ์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back();
     }
 }

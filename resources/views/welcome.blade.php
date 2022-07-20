@@ -33,8 +33,43 @@
         </div>
     </header>
 
-    <div class="d-flex align-items-center p-md-5 py-5 bg-white justify-content-center text-blue w-100 mb-5" id="countdown">
+    <div class="d-flex align-items-center p-md-5 py-5 bg-white justify-content-center text-blue w-100" id="countdown">
     </div>
+    @forelse ($downloads as $key =>$download)
+        @if ($loop->first)
+            <div id="notice" class="py-5 bg-white">
+                <h1 class="text-center text-blue"><strong style="font-size: calc(15px + 1vw);"><i class="fas fa-1x fa-bullhorn"></i>
+                        ประชาสัมพันธ์</strong></h1>
+                <ul style="list-style: none;" class="px-5">
+        @endif
+
+        <li>
+            <strong>
+                <a target="_blank"
+                    @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif
+                    class="d-flex justify-content-between">
+                    <span>
+                        <i class="fas fa-1x fa-bullhorn"></i>
+                        {{ $download->name }}
+                        @if (countDate($download->created_at, 10, 'days'))
+                            <div class="box-new">
+                                <span>ใหม่</span>
+                            </div>
+                        @endif
+                    </span>
+                    <span class="float-right">{{ thaiDateFormat($download->created_at, true) }}</span>
+                </a>
+
+            </strong>
+        </li>
+        @if ($loop->last)
+            </ul>
+            </div>
+        @endif
+
+    @empty
+    @endforelse
+
 
     <div class="animate fade-up">
         <div id="poster2" class="container mb-5 pt-5">

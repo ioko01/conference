@@ -81,10 +81,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th class="text-center">ประชาสัมพันธ์</th>
                                 <th>ชื่อไฟล์ดาวน์โหลด</th>
                                 <th>Link</th>
                                 <th>ไฟล์อัพโหลด</th>
-                                <th>สร้างเมื่อ</th>
                                 <th class="text-right">แก้ไข</th>
                                 <th>ลบ</th>
                             </tr>
@@ -93,6 +93,14 @@
                             @forelse ($downloads as $key => $download)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
+                                    <td class="text-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="notice_check"
+                                                @if ($download->notice) checked @endif
+                                                value={{ $download->notice }}
+                                                onclick="open_modal_notice(this, {{ $download->id }}, '{{ $download->name }}')">
+                                        </div>
+                                    </td>
                                     <td>{{ $download->name }}</td>
                                     <td>
                                         @if ($download->link)
@@ -109,7 +117,6 @@
                                             -
                                         @endif
                                     </td>
-                                    <td><i class="text-info">{{ thaiDateFormat($download->created_at, true) }}</i></td>
                                     <td class="text-right"><a href="{{ route('backend.download.edit', $download->id) }}"
                                             class="btn btn-sm text-white btn-warning rounded-0"><i class="fa fa-edit"></i>
                                             แก้ไข</a>

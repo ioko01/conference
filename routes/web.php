@@ -31,6 +31,7 @@ use App\Http\Controllers\SendEditStatementController;
 use App\Http\Controllers\SendEditStatementTwoController;
 use App\Http\Controllers\SendEditWordTwoController;
 use App\Http\Controllers\UploadfileController;
+use App\Models\Download;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -45,7 +46,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $downloads = Download::where('notice', 1)->orderBy('created_at', 'desc')->get();
+    return view('welcome', compact('downloads'));
 })->name('welcome');
 
 Route::get('contract', function () {
@@ -122,7 +124,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             });
 
             Route::get('dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
-            Route::get('notice', [NoticeController::class, 'index'])->name('backend.notice.index');
 
             Route::get('researchs', [BackendResearchController::class, 'index'])->name('backend.researchs.index');
             Route::get('research/{topic_id}/edit', [BackendResearchController::class, 'edit'])->name('backend.research.edit');
@@ -151,11 +152,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::put('conference/{id}/update_status', [ConferenceController::class, 'update_status'])->name('backend.conference.update_status');
             Route::put('conference/{id}/update_topic', [ConferenceController::class, 'update_topic'])->name('backend.conference.update_topic');
 
-            Route::get('download', [DownloadController::class, 'index'])->name('backend.download.index');
+            Route::get('downloads', [DownloadController::class, 'index'])->name('backend.downloads.index');
             Route::post('download/create', [DownloadController::class, 'store'])->name('backend.download.store');
             Route::get('download/{id}/edit', [DownloadController::class, 'edit'])->name('backend.download.edit');
             Route::put('download/{id}/update', [DownloadController::class, 'update'])->name('backend.download.update');
             Route::delete('download/{id}/delete', [DownloadController::class, 'destroy'])->name('backend.download.delete');
+            Route::put('download/notice/{id}/update', [DownloadController::class, 'notice'])->name('backend.download.notice.update');
+            
+            Route::get('download/line', [DownloadController::class, 'notice'])->name('backend.download.notice.update');
         });
     });
 });

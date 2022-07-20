@@ -43,9 +43,10 @@
     <script src="{{ asset('js/get-start-end-datetime-local.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
-@if (Request::is('backend/download/*/edit') || Request::is('backend/download'))
+@if (Request::is('backend/download/*/edit') || Request::is('backend/downloads'))
     <script src="{{ asset('js/download.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('api/download.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('api/change_notice.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('backend/researchs') ||

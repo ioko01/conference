@@ -46,8 +46,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('backend.download.index') }}"
-                                class="nav-link @if (Request::is('backend/download')) active @endif">
+                            <a href="{{ route('backend.downloads.index') }}"
+                                class="nav-link @if (Request::is('backend/downloads')) active @endif">
                                 <i class="nav-icon fas fa-download"></i>
                                 <p>ดาวน์โหลด</p>
                             </a>
@@ -60,10 +60,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('backend.notice.index') }}"
-                                class="nav-link @if (Request::is('backend/notice')) active @endif">
-                                <i class="nav-icon fas fa-bullhorn"></i>
-                                <p>ประชาสัมพันธ์</p>
+                            <a href="{{ route('backend.line.index') }}"
+                                class="nav-link @if (Request::is('backend/line')) active @endif">
+                                <i class="nav-icon fas fa-line"></i>
+                                <p>Line Openchat</p>
                             </a>
                         </li>
                     @endif

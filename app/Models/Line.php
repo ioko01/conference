@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Download extends Model
+class Line extends Model
 {
     use HasFactory;
-    protected $table = 'downloads';
+    protected $table = 'line';
     protected $fillable = [
+        'conference_id',
         'user_id',
-        'notice',
         'name',
         'link',
-        'name_file',
-        'path_file',
-        'ext_file',
-        'conference_id'
+        'path',
+        'extension'
     ];
 }

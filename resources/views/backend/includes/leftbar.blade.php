@@ -36,8 +36,8 @@
                         <p>หน้าแรก</p>
                     </a>
                 </li>
-                @guest
-                    @if (auth()->users()->is_admin === 2)
+                @auth
+                    @if (auth()->user()->is_admin === 2)
                         <li class="nav-item">
                             <a href="{{ route('backend.conference.index') }}"
                                 class="nav-link @if (Request::is('backend/conference')) active @endif">
@@ -60,7 +60,7 @@
                             </a>
                         </li>
                     @endif
-                @endguest
+                @endauth
 
                 <li class="nav-item">
                     <a href="{{ route('backend.researchs.index') }}"

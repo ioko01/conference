@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Line extends Model
 {
     use HasFactory;
-    protected $table = 'line';
+    protected $table = 'lines';
     protected $fillable = [
         'conference_id',
         'user_id',

@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DownloadController;
 use App\Http\Controllers\Backend\EditResearchFirstController;
 use App\Http\Controllers\Backend\EditResearchSecondController;
+use App\Http\Controllers\Backend\LineController;
 use App\Http\Controllers\Backend\ManageResearchController;
 use App\Http\Controllers\Backend\NoticeController;
 use App\Http\Controllers\Backend\PosterController as BackendPosterController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\SendEditStatementTwoController;
 use App\Http\Controllers\SendEditWordTwoController;
 use App\Http\Controllers\UploadfileController;
 use App\Models\Download;
+use App\Models\Line;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -46,8 +48,31 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    $downloads = Download::where('notice', 1)->orderBy('created_at', 'desc')->get();
-    return view('welcome', compact('downloads'));
+    $downloads = Download::select(
+        'downloads.notice as notice',
+        'downloads.name as name',
+        'downloads.link as link',
+        'downloads.name_file as name_file',
+        'downloads.path_file as path_file',
+        'downloads.ext_file as ext_file',
+        'downloads.created_at as created_at',
+    )
+        ->leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
+        ->where('conferences.status', 1)
+        ->where('notice', 1)
+        ->orderBy('created_at', 'desc')->get();
+    $lines = Line::select(
+        'lines.id as id',
+        'conferences.name as conference_name',
+        'lines.link as line_link',
+        'lines.name as line_name',
+        'lines.path as line_path',
+        'lines.extension as line_extension'
+    )
+        ->leftjoin('conferences', 'conferences.id', 'lines.conference_id')
+        ->where('conferences.status', 1)
+        ->get();
+    return view('welcome', compact('downloads', 'lines'));
 })->name('welcome');
 
 Route::get('contract', function () {
@@ -158,8 +183,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::put('download/{id}/update', [DownloadController::class, 'update'])->name('backend.download.update');
             Route::delete('download/{id}/delete', [DownloadController::class, 'destroy'])->name('backend.download.delete');
             Route::put('download/notice/{id}/update', [DownloadController::class, 'notice'])->name('backend.download.notice.update');
-            
-            Route::get('download/line', [DownloadController::class, 'notice'])->name('backend.download.notice.update');
+
+            Route::get('line', [LineController::class, 'index'])->name('backend.line.index');
+            Route::post('line/create', [LineController::class, 'store'])->name('backend.line.store');
+            Route::get('line/{id}/edit', [LineController::class, 'edit'])->name('backend.line.edit');
         });
     });
 });

@@ -49,7 +49,7 @@
                             <a href="{{ route('backend.downloads.index') }}"
                                 class="nav-link @if (Request::is('backend/downloads')) active @endif">
                                 <i class="nav-icon fas fa-download"></i>
-                                <p>ดาวน์โหลด</p>
+                                <p>ดาวน์โหลด & ประชาสัมพันธ์</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -62,7 +62,7 @@
                         <li class="nav-item">
                             <a href="{{ route('backend.line.index') }}"
                                 class="nav-link @if (Request::is('backend/line')) active @endif">
-                                <i class="nav-icon fas fa-line"></i>
+                                <i class="nav-icon fab fa-line"></i>
                                 <p>Line Openchat</p>
                             </a>
                         </li>

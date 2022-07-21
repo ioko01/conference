@@ -27,11 +27,8 @@ html {
     font-size: calc(10px + 0.2vw);
 }
 
-#notice ul li:not(:last-child) {
-    border-bottom: 1px solid #ccc;
-}
-
 #notice ul li {
+    border-bottom: 1px solid #ccc;
     padding: 10px 0;
 }
 

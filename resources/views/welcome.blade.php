@@ -35,40 +35,62 @@
 
     <div class="d-flex align-items-center p-md-5 py-5 bg-white justify-content-center text-blue w-100" id="countdown">
     </div>
-    @forelse ($downloads as $key =>$download)
+
+    <div class="row bg-white">
+        @forelse ($downloads as $key =>$download)
+            @if ($loop->first)
+                <div class="animate fade-right col-md-6">
+                    <div id="notice" class="py-5">
+                        <h1 class="text-center text-blue"><strong style="font-size: calc(15px + 1vw);"><i
+                                    class="fas fa-1x fa-bullhorn"></i>
+                                ประชาสัมพันธ์</strong></h1>
+                        <ul style="list-style: none;" class="px-5">
+            @endif
+
+            <li>
+                <strong>
+                    <a target="_blank"
+                        @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif
+                        class="d-flex justify-content-between">
+                        <span>
+                            <i class="fas fa-1x fa-bullhorn"></i>
+                            {{ $download->name }}
+                            @if (countDate($download->created_at, 10, 'days'))
+                                <div class="box-new">
+                                    <span>ใหม่</span>
+                                </div>
+                            @endif
+                        </span>
+                        <span class="float-right">{{ thaiDateFormat($download->created_at, true) }}</span>
+                    </a>
+
+                </strong>
+            </li>
+            @if ($loop->last)
+                </ul>
+    </div>
+    </div>
+    @endif
+@empty
+    @endforelse
+    @forelse ($lines as $key =>$line)
         @if ($loop->first)
-            <div id="notice" class="py-5 bg-white">
-                <h1 class="text-center text-blue"><strong style="font-size: calc(15px + 1vw);"><i class="fas fa-1x fa-bullhorn"></i>
-                        ประชาสัมพันธ์</strong></h1>
-                <ul style="list-style: none;" class="px-5">
+            <div class="animate fade-left col-md-6">
+                <div class="py-5 text-center">
+                    <h1 class="text-center text-blue"><strong style="font-size: calc(15px + 1vw);"><i
+                                class="fab fa-1x fa-line"></i>
+                            LINE OPEN CHAT</strong></h1>
         @endif
-
-        <li>
-            <strong>
-                <a target="_blank"
-                    @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif
-                    class="d-flex justify-content-between">
-                    <span>
-                        <i class="fas fa-1x fa-bullhorn"></i>
-                        {{ $download->name }}
-                        @if (countDate($download->created_at, 10, 'days'))
-                            <div class="box-new">
-                                <span>ใหม่</span>
-                            </div>
-                        @endif
-                    </span>
-                    <span class="float-right">{{ thaiDateFormat($download->created_at, true) }}</span>
-                </a>
-
-            </strong>
-        </li>
+        <img src="{{ Storage::url($line->line_path) }}" alt="LINE OPEN CHAT" width="150px">
+        <a target="_blank" href="{{ $line->line_link }}" class="d-block text-green fw-bold">เข้าร่วม LINE OPEN CHAT</a>
         @if ($loop->last)
-            </ul>
+            </div>
             </div>
         @endif
-
     @empty
     @endforelse
+    </div>
+
 
 
     <div class="animate fade-up">
@@ -102,7 +124,8 @@
                 <div class="col-md-10 bg-white p-5 w-100 border-radius-md-right">
                     <div class="table-responsive-sm">
                         <table class="table caption-top">
-                            <caption>กำหนดการประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ ครั้งที่ 8 ประจำปี พ.ศ. 2565</caption>
+                            <caption>กำหนดการประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ ครั้งที่ 8 ประจำปี พ.ศ. 2565
+                            </caption>
                             <thead>
                                 <tr>
                                     <th>ลำดับ</th>

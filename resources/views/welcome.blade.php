@@ -36,7 +36,7 @@
     <div class="d-flex align-items-center p-md-5 py-5 bg-white justify-content-center text-blue w-100" id="countdown">
     </div>
 
-    <div class="row bg-white">
+    <div class="row bg-white m-0">
         @forelse ($downloads as $key =>$download)
             @if ($loop->first)
                 <div class="animate fade-right col-md-6">
@@ -51,17 +51,17 @@
                 <strong>
                     <a target="_blank"
                         @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif
-                        class="d-flex justify-content-between">
-                        <span>
-                            <i class="fas fa-1x fa-bullhorn"></i>
-                            {{ $download->name }}
+                        class="position-relative">
+                        <span class="d-flex align-items-center">
+                            <i class="fas fa-1x fa-bullhorn"></i>&nbsp;
+                            <div class="text-ellipsis">{{ $download->name }}</div>
                             @if (countDate($download->created_at, 10, 'days'))
                                 <div class="box-new">
                                     <span>ใหม่</span>
                                 </div>
                             @endif
                         </span>
-                        <span class="float-right">{{ thaiDateFormat($download->created_at, true) }}</span>
+                        <span class="notice-date position-absolute top-0 end-0">{{ thaiDateFormat($download->created_at, true) }}</span>
                     </a>
 
                 </strong>
@@ -97,12 +97,10 @@
         <div id="poster2" class="container mb-5 pt-5">
             <div class="row m-0">
                 <div class="col-6">
-                    <img src="{{ asset('images/banner1-v2.1.png', env('REDIRECT_HTTPS')) }}" alt="banner"
-                        width="100%">
+                    <img src="{{ asset('images/banner1-v2.1.png', env('REDIRECT_HTTPS')) }}" alt="banner" width="100%">
                 </div>
                 <div class="col-6">
-                    <img src="{{ asset('images/Poster-eddit.png', env('REDIRECT_HTTPS')) }}" alt="banner"
-                        width="100%">
+                    <img src="{{ asset('images/Poster-eddit.png', env('REDIRECT_HTTPS')) }}" alt="banner" width="100%">
                 </div>
             </div>
         </div>

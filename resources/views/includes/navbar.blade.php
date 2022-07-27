@@ -33,8 +33,9 @@
                                     'downloads.created_at as created_at',
                                     'downloads.updated_at as updated_at')->leftjoin('conferences', 'conferences.id', '=', 'downloads.conference_id')->where('conferences.status', 1)->get())
                                 @forelse ($downloads as $download)
-                                    <li><a target="_blank" class="dropdown-item"
-                                            @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif>{{ $download->name }}
+                                    <li><a target="_blank" class="dropdown-item position-relative d-flex"
+                                            @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif>
+                                            <div class="text-ellipsis">{{ $download->name }}</div>
                                             @if (countDate($download->created_at, 10, 'days'))
                                                 <div class="box-new">
                                                     <span>ใหม่</span>
@@ -149,8 +150,8 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item {{ Request::is('posters') ? 'active' : '' }}"
-                                    aria-current="page" href="{{ route('posters.index') }}">ผลงานนำเสนอ Poster</a>
+                                <a class="dropdown-item {{ Request::is('posters') ? 'active' : '' }}" aria-current="page"
+                                    href="{{ route('posters.index') }}">ผลงานนำเสนอ Poster</a>
                             </li>
 
                         </ul>

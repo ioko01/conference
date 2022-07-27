@@ -39,7 +39,7 @@ function countdown() {
                         h1.innerHTML = `
                         <h1 class="fw-bold">ปิดรับบทความในอีก</h1><br/>
                         <hr/>
-                        <div class="row">
+                        <div class="row m-0">
                             <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
                                 <div class="box-countdown fw-bold">
                                     <div>${days}</div>
@@ -58,7 +58,7 @@ function countdown() {
                                     <div>นาที</div> 
                                 </div>
                             </div>
-                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
+                            <div class="p-0 d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center">
                                 <div class="box-countdown fw-bold">
                                     <div>${seconds}</div>
                                     <div>วินาที</div> 

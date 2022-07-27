@@ -27,6 +27,13 @@ html {
     font-size: calc(10px + 0.2vw);
 }
 
+.text-ellipsis {
+    white-space: nowrap;
+    width: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 #notice ul li {
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
@@ -518,6 +525,14 @@ a {
     border-bottom: 4px solid var(--color-green);
 }
 
+.dropdown-menu .text-ellipsis {
+    width: 100%;
+}
+
+.dropdown .dropdown-menu {
+    max-width: 280px;
+}
+
 .dropdown .dropdown-menu::before {
     position: absolute;
     content: "";
@@ -604,6 +619,10 @@ a {
         content: "";
         border-top: none;
     }
+    .dropdown-menu {
+        max-width: 100%;
+        width: calc(100vw - 3.1rem);
+    }
 }
 
 /* Medium Screen */
@@ -640,6 +659,11 @@ a {
 @media screen and (max-width: 575px) {
     #date-payment {
         width: 100%;
+    }
+
+    .notice-date {
+        position: relative !important;
+        display: block;
     }
 }
 

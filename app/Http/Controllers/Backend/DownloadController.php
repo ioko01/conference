@@ -193,7 +193,7 @@ class DownloadController extends Controller
         }
         Download::where('id', $id)->delete();
         alert('สำเร็จ', 'ลบหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
-        return back();
+        return redirect()->route('backend.downloads.index');
     }
 
     protected function notice(Request $request, $id)

@@ -184,9 +184,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::delete('download/{id}/delete', [DownloadController::class, 'destroy'])->name('backend.download.delete');
             Route::put('download/notice/{id}/update', [DownloadController::class, 'notice'])->name('backend.download.notice.update');
 
-            Route::get('line', [LineController::class, 'index'])->name('backend.line.index');
+            Route::get('lines', [LineController::class, 'index'])->name('backend.lines.index');
             Route::post('line/create', [LineController::class, 'store'])->name('backend.line.store');
             Route::get('line/{id}/edit', [LineController::class, 'edit'])->name('backend.line.edit');
+            Route::put('line/{id}/update', [LineController::class, 'update'])->name('backend.line.update');
+            Route::delete('line/{id}/delete', [LineController::class, 'destroy'])->name('backend.line.delete');
         });
     });
 });

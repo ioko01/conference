@@ -101,7 +101,7 @@
                                                 onclick="open_modal_notice(this, {{ $download->id }}, '{{ $download->name }}')">
                                         </div>
                                     </td>
-                                    <td>{{ $download->name }}</td>
+                                    <td style="max-width: 250px;">{{ $download->name }}</td>
                                     <td>
                                         @if ($download->link)
                                             <a target="_blank" href="{{ $download->link }}">{{ $download->link }}</a>

@@ -7,8 +7,7 @@
             <div class="card-header d-flex align-items-center justify-content-between w-100">
                 <h1>จัดการรายชื่อรายชื่อบทความ</h1>
                 <div class="ms-auto">
-                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i
-                            class="fas fa-file-export"></i>
+                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i class="fas fa-file-export"></i>
                         Export to
                         Excel</a>
                 </div>
@@ -28,11 +27,11 @@
                         <thead>
                             <tr class="text-center pagination-header">
                                 <th style="width: 5%;">#</th>
-                                <th style="width: 50%;" class="text-start">รายละเอียดบทความ</th>
+                                <th style="width: 35%;" class="text-start">รายละเอียดบทความ</th>
                                 <th style="width: 20%;">สังกัด/หน่วยงาน</th>
-                                <th style="width: 5%;">ไฟล์<br />WORD</th>
-                                <th style="width: 5%;">ไฟล์<br />PDF</th>
-                                <th style="width: 5%;">แบบคำชี้แจงการปรับแก้ไขบทความ</th>
+                                <th style="width: 10%;">ไฟล์<br />WORD</th>
+                                <th style="width: 10%;">ไฟล์<br />PDF</th>
+                                <th style="width: 10%;">แบบคำชี้แจงการปรับแก้ไขบทความ</th>
                                 <th style="width: 10%;">รายละเอียด</th>
                             </tr>
                         </thead>

@@ -102,7 +102,7 @@
                             @forelse ($downloads as $key => $download)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $download->name }} @if ($download->id == $id)
+                                    <td style="max-width: 250px;">{{ $download->name }} @if ($download->id == $id)
                                             <i class="text-warning">(กำลังแก้ไข)</i>
                                         @endif
                                     </td>

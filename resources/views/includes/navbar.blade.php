@@ -35,7 +35,7 @@
                                 @forelse ($downloads as $download)
                                     <li><a target="_blank" class="dropdown-item position-relative d-flex"
                                             @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif>
-                                            <div class="text-ellipsis">{{ $download->name }}</div>
+                                            <div class="text-ellipsis" title="{{ $download->name }}">{{ $download->name }}</div>
                                             @if (countDate($download->created_at, 10, 'days'))
                                                 <div class="box-new">
                                                     <span>ใหม่</span>

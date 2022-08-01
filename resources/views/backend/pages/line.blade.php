@@ -104,10 +104,14 @@
                                                 class="btn btn-sm text-white btn-warning rounded-0"><i class="fa fa-edit"></i>
                                                 แก้ไข</a>
                                         </td>
-                                        <td><button class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
+                                        <td><button onclick="open_modal({{ $line->id }}, '{{ $line->line_name }}')"
+                                                class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
                                                 ลบ</button></td>
                                     </tr>
                                 @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">ไม่มีหัวข้อ</td>
+                                </tr>
                                 @endforelse
                             </tbody>
                         </table>

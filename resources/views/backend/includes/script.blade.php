@@ -8,8 +8,7 @@
 <!-- Bootstrap -->
 <script src="{{ asset('vendor/plugins/bootstrap/js/bootstrap.bundle.min.js', env('REDIRECT_HTTPS')) }}"></script>
 <!-- overlayScrollbars -->
-<script
-    src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js', env('REDIRECT_HTTPS')) }}">
+<script src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js', env('REDIRECT_HTTPS')) }}">
 </script>
 <!-- AdminLTE App -->
 <script src="{{ asset('vendor/dist/js/adminlte.js', env('REDIRECT_HTTPS')) }}"></script>
@@ -47,6 +46,10 @@
     <script src="{{ asset('js/download.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('api/download.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('api/change_notice.js', env('REDIRECT_HTTPS')) }}"></script>
+@endif
+
+@if (Request::is('backend/line/*/edit') || Request::is('backend/lines'))
+    <script src="{{ asset('api/lineopenchat.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('backend/researchs') ||

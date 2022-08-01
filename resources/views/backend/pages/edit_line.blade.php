@@ -4,8 +4,10 @@
     <div class="card">
         <div class="card-content">
             <div class="card-body">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('backend.line.store') }}" class="mb-3">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('backend.line.update', $line->id) }}"
+                    class="mb-3">
                     @csrf
+                    @method('PUT')
                     <div class="col-md-6 mb-3">
                         <label for="conference_name">ชื่อหัวข้อ <i style="font-size: 12px;" class="text-red">(ตัวอย่าง:
                                 งานประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ มหาวิทยาลัยราชภัฏเลย ครั้งที่ 1)</i></label>
@@ -32,7 +34,7 @@
                                     ลิงค์ <i style="font-size: 12px;" class="text-red">(เช่น
                                         https://www.youtube.com)</i>
                                 </label>
-                                <input type="text" name="link" id="link"
+                                <input value="{{ $line->line_link }}" type="text" name="link" id="link"
                                     class="form-control rounded-0 @error('link') is-invalid @enderror">
                                 @error('link')
                                     <span class="invalid-feedback" role="alert">
@@ -45,14 +47,22 @@
                                     อัพโหลดไฟล์ <i style="font-size: 12px;" class="text-red">(แนะนำเฉพาะไฟล์ที่มีขนาดเล็ก
                                         ขนาดไฟล์ใหญ่สุดคือ 10 MB)</i>
                                 </label>
-                                <input type="file" name="file" id="file"
-                                    class="form-control rounded-0 @error('file') is-invalid @enderror"
-                                    accept=".jpg, .jpeg, .png">
-                                @error('file')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+
+                                <div class="mb-3" style="position: relative">
+                                    <label class="label-type-file mb-0 @error('file') is-invalid @enderror"
+                                        for="file">{{ $line->line_name ? $line->line_name : 'ไม่ได้เลือกไฟล์ใด' }}</label>
+                                    <input type="hidden" value="{{ $line->line_name }}" name="name_file" id="name_file">
+
+                                    <input onchange="get_file_name(this)" type="file" name="file" id="file"
+                                        class="form-control d-none rounded-0 @error('file') is-invalid @enderror"
+                                        accept=".jpg, .jpeg, .png">
+
+                                    @error('file')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="col-12">
@@ -104,10 +114,14 @@
                                                 class="btn btn-sm text-white btn-warning rounded-0"><i class="fa fa-edit"></i>
                                                 แก้ไข</a>
                                         </td>
-                                        <td><button class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
+                                        <td><button onclick="open_modal({{ $line->id }}, '{{ $line->line_name }}')"
+                                                class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
                                                 ลบ</button></td>
                                     </tr>
                                 @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">ไม่มีหัวข้อ</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>

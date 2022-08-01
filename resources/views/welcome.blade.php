@@ -54,7 +54,7 @@
                         class="position-relative">
                         <span class="d-flex align-items-center">
                             <i class="fas fa-1x fa-bullhorn"></i>&nbsp;
-                            <div class="text-ellipsis">{{ $download->name }}</div>
+                            <div class="text-ellipsis" title="{{ $download->name }}">{{ $download->name }}</div>
                             @if (countDate($download->created_at, 10, 'days'))
                                 <div class="box-new">
                                     <span>ใหม่</span>

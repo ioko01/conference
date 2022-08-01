@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Conference;
 use App\Models\Line;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LineController extends Controller
 {
@@ -87,6 +88,16 @@ class LineController extends Controller
     protected function edit($id)
     {
         $conferences = Conference::where('status', 1)->get();
+        $line = Line::select(
+            'lines.id as id',
+            'conferences.name as conference_name',
+            'lines.link as line_link',
+            'lines.name as line_name',
+            'lines.path as line_path',
+            'lines.extension as line_extension'
+        )
+            ->leftjoin('conferences', 'conferences.id', 'lines.conference_id')
+            ->find($id);
         $lines = Line::select(
             'lines.id as id',
             'conferences.name as conference_name',
@@ -97,6 +108,71 @@ class LineController extends Controller
         )
             ->leftjoin('conferences', 'conferences.id', 'lines.conference_id')
             ->get();
-        return view('backend.pages.edit_line', compact('conferences', 'lines'));
+        return view('backend.pages.edit_line', compact('conferences', 'lines', 'line'));
+    }
+
+    protected function update(Request $request, $id)
+    {
+        if (!auth()->user()->conference_id) {
+            alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้', 'error')->showConfirmButton('ปิด', '#3085d6');
+            return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
+        }
+
+        $line = Line::find($id);
+        $this->validator($request);
+
+
+        if ($request->name_file != $line->name) {
+            if (Storage::exists($line->path)) {
+                Storage::delete($line->path);
+            }
+        }
+
+        $upload = null;
+        $extension = null;
+        $name = null;
+        $path = null;
+        $fullpath = null;
+        if ($request->hasFile('file')) {
+            $upload = $request->file('file');
+            $extension = $upload->extension();
+            $name = "QR_OPENCHAT_" . auth()->user()->conference_id . "." . $extension;
+            $path = "public/line_openchat";
+            $fullpath = $path . "/" . $name;
+
+            $upload->storeAs($path, $name);
+        }
+
+        if ($request->hasFile('file')) {
+            $data = [
+                'user_id' => auth()->user()->id,
+                'link' => $request->link,
+                'name' => $name,
+                'path' => $fullpath,
+                'extension' => $extension,
+                'conference_id' => auth()->user()->conference_id
+            ];
+        } else {
+            $data = [
+                'user_id' => auth()->user()->id,
+                'link' => $request->link,
+                'conference_id' => auth()->user()->conference_id
+            ];
+        }
+
+        Line::where('id', $id)->update($data);
+        alert('สำเร็จ', 'แก้ไข Line Open Chat สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        return back();
+    }
+
+    public function destroy($id)
+    {
+        $line = Line::find($id);
+        if (Storage::exists($line->path)) {
+            Storage::delete($line->path);
+        }
+        Line::where('id', $id)->delete();
+        alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        return redirect()->route('backend.lines.index');
     }
 }

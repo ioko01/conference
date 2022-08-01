@@ -60,8 +60,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('backend.line.index') }}"
-                                class="nav-link @if (Request::is('backend/line')) active @endif">
+                            <a href="{{ route('backend.lines.index') }}"
+                                class="nav-link @if (Request::is('backend/lines')) active @endif">
                                 <i class="nav-icon fab fa-line"></i>
                                 <p>Line Openchat</p>
                             </a>

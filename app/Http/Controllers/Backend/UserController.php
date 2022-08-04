@@ -76,7 +76,7 @@ class UserController extends Controller
         return back()->with('success', 'แก้ไขผู้ใช้งานสำเร็จ');
     }
 
-    protected function export(Request $request)
+    protected function export()
     {
         return Excel::download(new ExportUser, 'EXPORT_USERS.xlsx');
     }

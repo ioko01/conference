@@ -18,9 +18,10 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
      */
     public function collection()
     {
+        DB::statement("SET @row_number=0");
         $researchs = Research::select(
             DB::raw(
-                '(ROW_NUMBER() OVER(ORDER BY users.id)) AS ROW_NUMBER'
+                '(@row_number:=@row_number + 1) AS rnk'
             ),
             'researchs.topic_id AS topic_id',
             DB::raw(
@@ -84,9 +85,9 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             ->leftjoin('presents', 'presents.id', '=', 'researchs.present_id')
             ->leftjoin('users', 'users.id', '=', 'researchs.user_id')
             ->leftjoin('conferences', 'conferences.id', '=', 'researchs.conference_id')
-            ->leftjoin('slips', 'slips.user_id', '=', 'researchs.id')
-            ->leftjoin('words', 'words.user_id', '=', 'researchs.id')
-            ->leftjoin('pdf', 'pdf.user_id', '=', 'researchs.id')
+            ->leftjoin('slips', 'slips.topic_id', '=', 'researchs.topic_id')
+            ->leftjoin('words', 'words.topic_id', '=', 'researchs.topic_id')
+            ->leftjoin('pdf', 'pdf.topic_id', '=', 'researchs.topic_id')
             ->leftjoin('positions', 'positions.id', '=', 'users.position_id')
             ->leftjoin('kotas', 'kotas.id', '=', 'users.kota_id')
             ->where('conferences.status', 1)

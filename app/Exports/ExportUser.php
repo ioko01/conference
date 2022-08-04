@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
@@ -18,9 +19,10 @@ class ExportUser implements FromCollection, WithHeadings, ShouldAutoSize, WithEv
      */
     public function collection()
     {
+        DB::statement("SET @row_number = 0");
         $data = User::select(
             DB::raw(
-                '(ROW_NUMBER() OVER(ORDER BY users.id)) AS ROW_NUMBER'
+                '(@row_number:=@row_number + 1) AS rnk'
             ),
             'users.prefix AS prefix',
             'users.fullname AS fullname',

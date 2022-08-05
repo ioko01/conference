@@ -16,6 +16,7 @@ class PosterController extends Controller
             'present_posters.link as link',
             'present_posters.path as path',
             'faculties.name as name',
+            'conferences.status_present_poster as status_present_poster'
         )
             ->leftjoin('faculties', 'faculties.id', 'present_posters.faculty_id')
             ->leftjoin('conferences', 'conferences.id', 'present_posters.conference_id')

@@ -16,29 +16,31 @@
 
         <div id="poster" class="row my-5">
             @forelse ($present_posters as $present_poster)
-                <div class="col-lg-2 col-md-4 col-sm-6 my-3">
-                    <div style="width: 90%;" class="animated fade-up card rounded-0 mx-auto">
-                        <div class="card-content w-100 h-100">
-                            <div class="card-header text-center bg-white">
-                                <h2>{{ $present_poster->present_poster_id }}</h2>
-                            </div>
-                            <div style="clip-path: inset(0px 0px);" class="card-body position-relative p-0">
-                                <div class="img-expand-hover">
-                                    <i class="fas fa-3x fa-search-plus text-white"> <span
-                                            class="text-xl">ดูภาพขนาดใหญ่</span></i>
+                @if ($present_poster->status_present_poster == 1)
+                    <div class="col-lg-2 col-md-4 col-sm-6 my-3">
+                        <div style="width: 90%;" class="animated fade-up card rounded-0 mx-auto">
+                            <div class="card-content w-100 h-100">
+                                <div class="card-header text-center bg-white">
+                                    <h2>{{ $present_poster->present_poster_id }}</h2>
                                 </div>
-                                <img width="100%" src="{{ Storage::url($present_poster->path) }}" alt="poster">
-                            </div>
-                            <div class="card-footer bg-white">
-                                <p>ลิงค์: <br /><a target="_blank"
-                                        href="{{ $present_poster->link }}">{{ $present_poster->link }}</a>
-                                </p>
-                                <p>ชื่อบทความ: <br />
-                                    {{ $present_poster->topic_th }}</p>
+                                <div style="clip-path: inset(0px 0px);" class="card-body position-relative p-0">
+                                    <div class="img-expand-hover">
+                                        <i class="fas fa-3x fa-search-plus text-white"> <span
+                                                class="text-xl">ดูภาพขนาดใหญ่</span></i>
+                                    </div>
+                                    <img width="100%" src="{{ Storage::url($present_poster->path) }}" alt="poster">
+                                </div>
+                                <div class="card-footer bg-white">
+                                    <p>ลิงค์: <br /><a target="_blank"
+                                            href="{{ $present_poster->link }}">{{ $present_poster->link }}</a>
+                                    </p>
+                                    <p>ชื่อบทความ: <br />
+                                        {{ $present_poster->topic_th }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             @empty
             @endforelse
 

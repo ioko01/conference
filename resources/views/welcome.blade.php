@@ -36,7 +36,7 @@
     <div class="d-flex align-items-center p-md-5 py-5 bg-white justify-content-center text-blue w-100" id="countdown">
     </div>
 
-    <div style="min-height: 400px;overflow: hidden;" class="row bg-white m-0">
+    <div style="overflow: hidden;" class="row bg-white m-0">
         @forelse ($downloads as $key =>$download)
             @if ($loop->first)
                 <div class="animate fade-right col-md-6">

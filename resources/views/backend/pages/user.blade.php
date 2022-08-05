@@ -25,6 +25,7 @@
                     <table class="list table responsive hover">
                         <th>#</th>
                         <th>ชื่อ - สกุล</th>
+                        <th>สถานะ</th>
                         <th>อีเมล</th>
                         <th>สร้างเมื่อ</th>
                         <th>แก้ไข</th>
@@ -35,7 +36,18 @@
                                 <tr>
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $user->fullname }}@if ($user->id == auth()->user()->id)
-                                            <i class="text-bluesky"> (ฉัน)</i>
+                                            <i class="text-bluesky text-sm"> (ฉัน)</i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($user->conference_id)
+                                            @if ($user->conference_id == $user->conference && $user->conference_status == 1)
+                                                <strong class="text-green">Used</strong>
+                                            @else
+                                                <strong class="text-red">Not Used</strong>
+                                            @endif
+                                        @else
+                                            <strong class="text-red">Not Used</strong>
                                         @endif
                                     </td>
                                     <td>{{ $user->email }}</td>
@@ -49,7 +61,7 @@
                                 </tr>
                                 @empty
                                     <tr class="text-center">
-                                        <td colspan="5">ไม่มีผู้ใช้งาน</td>
+                                        <td colspan="6">ไม่มีผู้ใช้งาน</td>
                                     </tr>
                                 @endforelse
                             </tbody>

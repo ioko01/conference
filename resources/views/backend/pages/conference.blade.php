@@ -92,8 +92,8 @@
                     <div class="row m-0">
                         <div class="col-lg-4 col-md-6 mb-3">
                             <label for="end_attend">วันสิ้นสุดการลงทะเบียนเข้าร่วมงาน</label>
-                            <input value="{{ old('end_attend') }}" type="datetime-local" name="end_attend"
-                                id="end_attend" class="form-control rounded-0 @error('end_attend') is-invalid @enderror">
+                            <input value="{{ old('end_attend') }}" type="datetime-local" name="end_attend" id="end_attend"
+                                class="form-control rounded-0 @error('end_attend') is-invalid @enderror">
                             @error('end_attend')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -487,10 +487,46 @@
                                         </form>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>ผลงานนำเสนอ Poster<br /><span class="text-red text-xs fw-bold">คำแนะนำ:
+                                            เปิดใช้งานเมื่อต้องการแสดงผลงานนำเสนอ Poster</span></td>
+                                    <td colspan="2" class="text-left text-xs">-</td>
+                                    <td>
+                                        <form method="POST"
+                                            action="{{ route('backend.conference.update_status', $conference->id) }}"
+                                            class="d-flex">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="custom-control custom-switch">
+                                                <input
+                                                    onchange="javascript:document.getElementById('change_present_poster{{ $key }}').click()"
+                                                    type="checkbox" class="custom-control-input"
+                                                    id="switch_present_poster{{ $key }}"
+                                                    @if ($conference->status_present_poster == 1) checked @endif>
+
+                                                @if ($conference->status_present_poster == 1)
+                                                    <label style="font-size: 10px;"
+                                                        class="custom-control-label text-success"
+                                                        for="switch_present_poster{{ $key }}">เปิดใช้งานอยู่</label>
+                                                @else
+                                                    <label style="font-size: 10px;"
+                                                        class="custom-control-label text-danger"
+                                                        for="switch_present_poster{{ $key }}">ปิดใช้งาน</label>
+                                                @endif
+                                            </div>
+                                            <input type="submit" class="d-none"
+                                                id="change_present_poster{{ $key }}"
+                                                name="change_present_poster"
+                                                @if ($conference->status_present_poster == 1) value=0
+                                    @else
+                                    value=1 @endif>
+                                        </form>
+                                    </td>
+                                </tr>
                             @empty
-                            <tr class="text-center">
-                                <td colspan="4">ไม่มีหัวข้อการประชุมวิชาการ</td>
-                            </tr>
+                                <tr class="text-center">
+                                    <td colspan="4">ไม่มีหัวข้อการประชุมวิชาการ</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>

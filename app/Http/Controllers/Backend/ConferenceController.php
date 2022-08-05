@@ -111,6 +111,7 @@ class ConferenceController extends Controller
                 'status_research_edit_two' => 0,
                 'status_poster_and_video' => 0,
                 'status_poster_and_video_two' => 0,
+                'status_present_poster' => 0,
             ], 'is_numeric');
             User::where('id', auth()->user()->id)->update(['conference_id' => NULL]);
         } else {
@@ -141,6 +142,7 @@ class ConferenceController extends Controller
                 'status_research_edit_two' => $change_status_research_edit_two,
                 'status_poster_and_video' => $change_status_poster_and_video,
                 'status_poster_and_video_two' => $change_status_poster_and_video_two,
+                'status_present_poster' => $request->change_present_poster
             ], 'is_numeric');
             User::where('id', auth()->user()->id)->update(['conference_id' => $id]);
         }

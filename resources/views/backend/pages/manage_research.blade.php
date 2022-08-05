@@ -8,8 +8,7 @@
             <div class="card-header d-flex align-items-center justify-content-between w-100">
                 <h1>จัดการรายชื่อรายชื่อบทความ</h1>
                 <div class="ms-auto">
-                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i
-                            class="fas fa-file-export"></i>
+                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i class="fas fa-file-export"></i>
                         Export to
                         Excel</a>
                 </div>
@@ -43,7 +42,7 @@
 
                             @forelse ($data as $key => $value)
                                 <tr class="text-center">
-                                    <td>{{ $value->id }}</td>
+                                    <td>{{ $key + 1 }}</td>
                                     <td class="text-start">
                                         <strong style="font-size: 12px" class="text-bluesky">
                                             @if ($value->present_id == 1)

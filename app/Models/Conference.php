@@ -31,6 +31,7 @@ class Conference extends Model
         'status_poster_and_video',
         'end_poster_and_video',
         'status_poster_and_video_two',
-        'end_poster_and_video_two'
+        'end_poster_and_video_two',
+        'status_present_poster'
     ];
 }

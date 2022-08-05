@@ -40,7 +40,7 @@
 
                             @forelse ($data as $key => $value)
                                 <tr class="text-center">
-                                    <td>{{ $value->id }}</td>
+                                    <td>{{ $key + 1 }}</td>
                                     <td class="text-start">
                                         <strong style="font-size: 12px" class="text-bluesky">
                                             @if ($value->present_id == 1)

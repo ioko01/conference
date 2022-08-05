@@ -52,6 +52,10 @@
     <script src="{{ asset('api/lineopenchat.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
+@if (Request::is('backend/posters') || Request::is('backend/poster/*/edit'))
+    <script src="{{ asset('api/get-research-with-topic-id.js', env('REDIRECT_HTTPS')) }}"></script>
+@endif
+
 @if (Request::is('backend/researchs') ||
     Request::is('backend/users') ||
     Request::is('backend/researchs/management'))

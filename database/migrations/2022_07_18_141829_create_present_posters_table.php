@@ -17,12 +17,12 @@ class CreatePresentPostersTable extends Migration
             $table->id();
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
-            $table->string('poster_id')->comment('รหัสการนำเสนอ');
-            $table->text('topic')->comment('ชื่อบทความ');
+            $table->text('topic_th')->comment('ชื่อบทความ');
+            $table->string('present_poster_id')->comment('รหัสการนำเสนอ');
+            $table->string('faculty_id')->comment('รหัสกลุ่มคณะ');
             $table->text('link')->comment('ลิงค์คลิปวิดีโอ')->nullable();
-            $table->text('name')->comment('ชื่อไฟล์')->nullable();
-            $table->text('path')->comment('ที่อยู่ไฟล์ Poster')->nullable();
-            $table->text('extension')->comment('นามสกุลไฟล์ Poster')->nullable();
+            $table->text('path')->comment('แหล่งที่อยู่ไฟล์')->nullable();
+            $table->text('extension')->comment('นามสกุลไฟล์')->nullable();
             $table->timestamps();
         });
     }

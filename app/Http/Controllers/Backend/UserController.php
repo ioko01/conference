@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Exports\ExportUser;
 use App\Http\Controllers\Controller;
+use App\Models\Conference;
 use App\Models\Kota;
 use App\Models\Position;
 use App\Models\User;
@@ -14,7 +15,27 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::get();
+        $users = User::select(
+            'users.id AS id',
+            'users.conference_id AS conference_id',
+            'users.prefix AS prefix',
+            'users.fullname AS fullname',
+            'users.sex AS sex',
+            'users.phone AS phone',
+            'users.institution AS institution',
+            'users.address AS address',
+            'users.check_requirement AS check_requirement',
+            'users.position_id AS position_id',
+            'users.kota_id AS kota_id',
+            'users.person_attend AS person_attend',
+            'users.email AS email',
+            'users.created_at AS created_at',
+            'users.updated_at AS updated_at',
+            'conferences.status AS conference_status',
+            'conferences.id AS conference'
+        )
+            ->leftjoin('conferences', 'users.conference_id', 'conferences.id')
+            ->get();
         return view('backend.pages.user', compact('users'));
     }
 

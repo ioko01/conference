@@ -15,8 +15,7 @@ use App\Http\Controllers\Backend\EditResearchFirstController;
 use App\Http\Controllers\Backend\EditResearchSecondController;
 use App\Http\Controllers\Backend\LineController;
 use App\Http\Controllers\Backend\ManageResearchController;
-use App\Http\Controllers\Backend\NoticeController;
-use App\Http\Controllers\Backend\PosterController as BackendPosterController;
+use App\Http\Controllers\Backend\PresentPosterController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\ListAttendController;
@@ -154,7 +153,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('research/{topic_id}/edit', [BackendResearchController::class, 'edit'])->name('backend.research.edit');
             Route::put('research/{topic_id}/update', [BackendResearchController::class, 'update'])->name('backend.research.update');
 
-            Route::get('posters', [BackendPosterController::class, 'index'])->name('backend.posters.index');
+            Route::get('posters', [PresentPosterController::class, 'index'])->name('backend.posters.index');
+            Route::post('poster/create', [PresentPosterController::class, 'store'])->name('backend.poster.store');
+            Route::post('poster/{id}/delete', [PresentPosterController::class, 'destroy'])->name('backend.poster.delete');
 
             Route::prefix('users')->group(function () {
                 Route::get('export', [UserController::class, 'export'])->name('users.export');

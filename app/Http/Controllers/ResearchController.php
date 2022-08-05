@@ -53,8 +53,9 @@ class ResearchController extends Controller
     {
         $this->validator($request);
         $presenters = join('|', array_filter($request->presenters));
+        $conference = Conference::where('status', 1)->first();
 
-        $topic_id = '65' . sprintf("%03d", Research::count() + 1);
+        $topic_id = (intval($conference->year) - 2500) . sprintf("%03d", Research::count() + 1);
         Research::create([
             'user_id' => auth()->user()->id,
             'topic_id' => $topic_id,

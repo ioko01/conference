@@ -5,21 +5,21 @@
     <div class="bg-white text-blue p-5 my-5">
 
         <div class="inner-content-header">
-            <h2 class="text-center">รายชื่อรายชื่อบทความ ในงานการประชุมวิชาการ ราชภัฏเลยวิชาการ ครั้งที่ 8</h2>
+            <h2 class="text-center">รายชื่อผู้ลงทะเบียน <br />{{ $conference->name }}</h2>
             <h4 class="text-green py-3">
-                LRU Conference 2022
+                {{ config('app.name') }}
             </h4>
         </div>
 
         <div>
-            <h1>รายชื่อรายชื่อบทความ</h1>
+            <h1>รายชื่อผู้ลงทะเบียน</h1>
         </div>
         <div class="panel">
             <div class="body">
                 <div class="input-group">
-                    <label for="search">ค้นหาบทความ</label>
+                    <label for="search">ค้นหารายชื่อผู้ลงทะเบียน</label>
                     <input type="text" class="form-control" name="search" id="search"
-                        placeholder="ค้นหาผ่านลำดับ, ชื่อ, สังกัด/หน่วยงาน, ชนิดการเข้าร่วม">
+                        placeholder="ค้นหารายชื่อผู้ลงทะเบียน">
                 </div>
             </div>
         </div>
@@ -41,9 +41,9 @@
                             <td>{{ $user->institution }}</td>
                             <td>
                                 @if ($user->person_attend == 'send')
-                                    ลงทะเบียนส่งผลงาน
+                                    ส่งผลงาน
                                 @elseif($user->person_attend == 'attend')
-                                    ลงทะเบียนเข้าร่วมงาน
+                                    เข้าร่วมงาน
                                 @endif
                             </td>
                         </tr>

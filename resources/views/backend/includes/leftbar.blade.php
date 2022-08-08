@@ -46,6 +46,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('backend.manuals.index') }}"
+                                class="nav-link @if (Request::is('backend/manuals')) active @endif">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>คู่มือ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('backend.downloads.index') }}"
                                 class="nav-link @if (Request::is('backend/downloads')) active @endif">
                                 <i class="nav-icon fas fa-download"></i>

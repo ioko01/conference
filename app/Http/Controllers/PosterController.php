@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conference;
 use App\Models\PresentPoster;
 use Illuminate\Http\Request;
 
@@ -9,6 +10,7 @@ class PosterController extends Controller
 {
     public function index()
     {
+        $conference = Conference::where('status', 1)->first();
         $present_posters = PresentPoster::select(
             'present_posters.id as id',
             'present_posters.topic_th as topic_th',
@@ -22,6 +24,6 @@ class PosterController extends Controller
             ->leftjoin('conferences', 'conferences.id', 'present_posters.conference_id')
             ->where('conferences.status', 1)
             ->get();
-        return view('frontend.pages.poster', compact('present_posters'));
+        return view('frontend.pages.poster', compact('present_posters', 'conference'));
     }
 }

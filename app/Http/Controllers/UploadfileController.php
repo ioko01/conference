@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Research;
 use App\Models\Comment;
+use App\Models\Conference;
 use App\Models\Poster;
 use App\Models\Video;
 
@@ -13,6 +14,7 @@ class UploadfileController extends Controller
 {
     public function show($id)
     {
+        $conference = Conference::where('status', 1)->first();
         $research = Research::select('users.id as id')
             ->rightjoin('users', 'users.id', 'researchs.user_id')
             ->where('users.id', $id)
@@ -82,7 +84,7 @@ class UploadfileController extends Controller
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->where('researchs.user_id', $id)
             ->get();
-        return view('frontend.pages.uploadfile', compact('data', 'comments'));
+        return view('frontend.pages.uploadfile', compact('data', 'comments', 'conference'));
     }
 
     protected function validation($request)

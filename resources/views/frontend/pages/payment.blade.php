@@ -7,7 +7,7 @@
     <div class="inner-content-header">
         <h4 class="text-center">รายละเอียดและวิธีการชำระเงินค่าลงทะเบียน</h4>
         <h4 class="text-green py-3">
-            LRU Conference 2022
+            {{ config('app.name') }}
         </h4>
     </div>
     <div class="row">

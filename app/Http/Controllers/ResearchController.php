@@ -75,6 +75,7 @@ class ResearchController extends Controller
 
     public function show($id)
     {
+        $conference = Conference::where('status', 1)->first();
         $research = Research::select('users.id as id')
             ->rightjoin('users', 'users.id', 'researchs.user_id')
             ->where('users.id', $id)
@@ -142,7 +143,7 @@ class ResearchController extends Controller
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->where('researchs.user_id', $id)
             ->get();
-        return view('frontend.pages.show_research', compact('data', 'comments'));
+        return view('frontend.pages.show_research', compact('data', 'comments', 'conference'));
     }
 
     public function edit($id)

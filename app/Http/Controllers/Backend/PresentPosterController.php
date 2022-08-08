@@ -63,12 +63,8 @@ class PresentPosterController extends Controller
 
     protected function destroy($id)
     {
-        $present_poster = PresentPoster::find($id);
-        if (Storage::exists($present_poster->path)) {
-            Storage::delete($present_poster->path);
-        }
         PresentPoster::where('id', $id)->delete();
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
-        return redirect()->route('backend.lines.index');
+        return redirect()->route('backend.posters.index');
     }
 }

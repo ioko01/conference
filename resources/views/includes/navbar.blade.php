@@ -15,6 +15,42 @@
                         <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page"
                             href="{{ route('welcome') }}">หน้าหลัก</a>
                     </li>
+                    <li class="nav-item dropdown" id="manuals">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            คู่มือ
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="line-dropdown"></div>
+                            @if ($manuals = DB::table('manuals')->select(
+                                    'manuals.id as id',
+                                    'manuals.name as name',
+                                    'manuals.link as link',
+                                    'manuals.name_file as name_file',
+                                    'manuals.path_file as path_file',
+                                    'manuals.ext_file as ext_file',
+                                    'manuals.conference_id as conference_id',
+                                    'manuals.created_at as created_at',
+                                    'manuals.updated_at as updated_at')->leftjoin('conferences', 'conferences.id', '=', 'manuals.conference_id')->where('conferences.status', 1)->get())
+                                @forelse ($manuals as $manual)
+                                    <li><a target="_blank" class="dropdown-item position-relative d-flex"
+                                            @if ($manual->link) href="{{ $manual->link }}" @elseif($manual->name_file) href="{{ Storage::url($manual->path_file) }}" @endif>
+                                            <div class="text-ellipsis" title="{{ $manual->name }}">{{ $manual->name }}</div>
+                                            @if (countDate($manual->created_at, 10, 'days'))
+                                                <div class="box-new">
+                                                    <span>ใหม่</span>
+                                                </div>
+                                            @endif
+                                        </a>
+                                    </li>
+                                @empty
+                                    <li>
+                                        <a class="dropdown-item disabled" href="#">ไม่มีคู่มือ</a>
+                                    </li>
+                                @endforelse
+                            @endif
+                        </ul>
+                    </li>
                     <li class="nav-item dropdown" id="downloads">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,7 +71,8 @@
                                 @forelse ($downloads as $download)
                                     <li><a target="_blank" class="dropdown-item position-relative d-flex"
                                             @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif>
-                                            <div class="text-ellipsis" title="{{ $download->name }}">{{ $download->name }}</div>
+                                            <div class="text-ellipsis" title="{{ $download->name }}">{{ $download->name }}
+                                            </div>
                                             @if (countDate($download->created_at, 10, 'days'))
                                                 <div class="box-new">
                                                     <span>ใหม่</span>

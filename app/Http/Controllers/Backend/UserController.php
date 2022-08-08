@@ -99,6 +99,7 @@ class UserController extends Controller
 
     protected function export()
     {
-        return Excel::download(new ExportUser, 'EXPORT_USERS.xlsx');
+        $date = date("d_m_Y");
+        return Excel::download(new ExportUser, "EXPORT_USERS_$date.xlsx");
     }
 }

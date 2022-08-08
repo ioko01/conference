@@ -98,7 +98,7 @@
                                             <input class="form-check-input" type="checkbox" name="notice_check"
                                                 @if ($download->notice) checked @endif
                                                 value={{ $download->notice }}
-                                                onclick="open_modal_notice(this, {{ $download->id }}, '{{ $download->name }}')">
+                                                onclick="open_modal_notice(this, '{{ $download->name }}', '{{ route('backend.download.notice.update', $download->id) }}')">
                                         </div>
                                     </td>
                                     <td style="max-width: 250px;">{{ $download->name }}</td>
@@ -121,7 +121,8 @@
                                             class="btn btn-sm text-white btn-warning rounded-0"><i class="fa fa-edit"></i>
                                             แก้ไข</a>
                                     </td>
-                                    <td><button onclick="open_modal({{ $download->id }}, '{{ $download->name }}')"
+                                    <td><button
+                                            onclick="open_modal('{{ $download->name }}', '{{ route('backend.download.delete', $download->id) }}')"
                                             class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
                                             ลบ</button></td>
                                 </tr>

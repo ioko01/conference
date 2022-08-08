@@ -42,14 +42,23 @@
     <script src="{{ asset('js/get-start-end-datetime-local.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
-@if (Request::is('backend/download/*/edit') || Request::is('backend/downloads'))
-    <script src="{{ asset('js/download.js', env('REDIRECT_HTTPS')) }}"></script>
-    <script src="{{ asset('api/download.js', env('REDIRECT_HTTPS')) }}"></script>
+@if (Request::is('backend/download/*/edit') ||
+    Request::is('backend/downloads') ||
+    Request::is('backend/manual/*/edit') ||
+    Request::is('backend/manuals'))
+    <script src="{{ asset('js/download_and_manual.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('api/change_notice.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
-@if (Request::is('backend/line/*/edit') || Request::is('backend/lines'))
-    <script src="{{ asset('api/lineopenchat.js', env('REDIRECT_HTTPS')) }}"></script>
+@if (Request::is('backend/poster/*/edit') ||
+    Request::is('backend/posters') ||
+    Request::is('backend/line/*/edit') ||
+    Request::is('backend/lines') ||
+    Request::is('backend/download/*/edit') ||
+    Request::is('backend/downloads') ||
+    Request::is('backend/manual/*/edit') ||
+    Request::is('backend/manuals'))
+    <script src="{{ asset('api/delete.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('backend/posters') || Request::is('backend/poster/*/edit'))

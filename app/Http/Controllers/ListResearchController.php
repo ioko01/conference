@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conference;
 use App\Models\Research;
 use Illuminate\Http\Request;
 
@@ -9,6 +10,7 @@ class ListResearchController extends Controller
 {
     public function index()
     {
+        $conference = Conference::where('status', 1)->first();
         $researchs = Research::select(
             'researchs.topic_id as topic_id',
             'researchs.topic_th as topic_th',
@@ -24,6 +26,6 @@ class ListResearchController extends Controller
             ->leftjoin('status_researchs', 'status_researchs.id', '=', 'researchs.topic_status')
             ->where('conferences.status', 1)
             ->get();
-        return view('frontend.pages.list_research', compact('researchs'));
+        return view('frontend.pages.list_research', compact('researchs', 'conference'));
     }
 }

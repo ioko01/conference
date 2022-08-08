@@ -79,8 +79,9 @@ class ResearchController extends Controller
         return back()->with('success', 'แก้ไขบทความสำเร็จ');
     }
 
-    protected function export(Request $request)
+    protected function export()
     {
-        return Excel::download(new ExportResearch, 'EXPORT_RESEARCHS.xlsx');
+        $date = date("d_m_Y");
+        return Excel::download(new ExportResearch, "EXPORT_RESEARCHS_$date.xlsx");
     }
 }

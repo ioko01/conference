@@ -15,7 +15,9 @@ use App\Http\Controllers\Backend\EditResearchFirstController;
 use App\Http\Controllers\Backend\EditResearchSecondController;
 use App\Http\Controllers\Backend\LineController;
 use App\Http\Controllers\Backend\ManageResearchController;
+use App\Http\Controllers\Backend\ManualController;
 use App\Http\Controllers\Backend\PresentPosterController;
+use App\Http\Controllers\Backend\ProceedingController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\ListAttendController;
@@ -33,6 +35,7 @@ use App\Http\Controllers\SendEditWordTwoController;
 use App\Http\Controllers\UploadfileController;
 use App\Models\Download;
 use App\Models\Line;
+use App\Models\Manual;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -155,7 +158,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::get('posters', [PresentPosterController::class, 'index'])->name('backend.posters.index');
             Route::post('poster/create', [PresentPosterController::class, 'store'])->name('backend.poster.store');
-            Route::post('poster/{id}/delete', [PresentPosterController::class, 'destroy'])->name('backend.poster.delete');
+            Route::delete('poster/{id}/delete', [PresentPosterController::class, 'destroy'])->name('backend.poster.delete');
+
+            Route::get('proceeding/{year}', [ProceedingController::class, 'show'])->name('backend.proceeding.index');
 
             Route::prefix('users')->group(function () {
                 Route::get('export', [UserController::class, 'export'])->name('users.export');
@@ -177,6 +182,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('conference/create', [ConferenceController::class, 'store'])->name('backend.conference.store');
             Route::put('conference/{id}/update_status', [ConferenceController::class, 'update_status'])->name('backend.conference.update_status');
             Route::put('conference/{id}/update_topic', [ConferenceController::class, 'update_topic'])->name('backend.conference.update_topic');
+
+            Route::get('manuals', [ManualController::class, 'index'])->name('backend.manuals.index');
+            Route::post('manual/create', [ManualController::class, 'store'])->name('backend.manual.store');
+            Route::get('manual/{id}/edit', [ManualController::class, 'edit'])->name('backend.manual.edit');
+            Route::put('manual/{id}/update', [ManualController::class, 'update'])->name('backend.manual.update');
+            Route::delete('manual/{id}/delete', [ManualController::class, 'destroy'])->name('backend.manual.delete');
+            Route::put('manual/notice/{id}/update', [ManualController::class, 'notice'])->name('backend.manual.notice.update');
 
             Route::get('downloads', [DownloadController::class, 'index'])->name('backend.downloads.index');
             Route::post('download/create', [DownloadController::class, 'store'])->name('backend.download.store');

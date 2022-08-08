@@ -5,21 +5,20 @@
     <div class="bg-white text-blue p-5 my-5">
 
         <div class="inner-content-header">
-            <h2 class="text-center">รายชื่อบทความ ในงานการประชุมวิชาการ ราชภัฏเลยวิชาการ ครั้งที่ 8</h2>
+            <h2 class="text-center">อัพโหลดวิดีโอ/โปสเตอร์ <br />{{ $conference->name }}</h2>
             <h4 class="text-green py-3">
-                LRU Conference 2022
+                {{ config('app.name') }}
             </h4>
         </div>
 
         <div>
-            <h1>รายชื่อรายชื่อบทความ</h1>
+            <h1>อัพโหลดวิดีโอ/โปสเตอร์</h1>
         </div>
         <div class="panel">
             <div class="body">
                 <div class="input-group">
                     <label for="search">ค้นหาบทความ</label>
-                    <input type="text" class="form-control" name="search" id="search"
-                        placeholder="ค้นหาผ่านลำดับ, รหัสบทความ, บทความ/ผู้วิจัย, สังกัด/กลุ่มคณะ, สถานะ, รูปแบบ">
+                    <input type="text" class="form-control" name="search" id="search" placeholder="ค้นหาบทความ">
                 </div>
             </div>
         </div>
@@ -37,7 +36,7 @@
                 <tbody>
                     @forelse ($data as $key => $value)
                         <tr class="text-center">
-                            <td>{{ $value->id }}</td>
+                            <td style="vertical-align: middle;">{{ $key + 1 }}</td>
                             <td class="text-start" style="vertical-align: middle;">
                                 <strong style="font-size: 12px" class="text-bluesky">{{ $value->present }}</strong>
                                 <br />

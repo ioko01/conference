@@ -4,9 +4,9 @@
     <!-- Content -->
     <div class="bg-white text-blue p-5 my-5">
         <div class="inner-content-header">
-            <h2 class="text-center">ผลงานนำเสนอ Poster ในงานการประชุมวิชาการ ราชภัฏเลยวิชาการ ครั้งที่ 8</h2>
+            <h2 class="text-center">ผลงานนำเสนอ Poster Presentation <br />{{ $conference->name }}</h2>
             <h4 class="text-green py-3">
-                LRU Conference 2022
+                {{ config('app.name') }}
             </h4>
         </div>
 
@@ -40,8 +40,11 @@
                             </div>
                         </div>
                     </div>
+                @else
+                    <div class="text-center h2 text-red">ไม่มีผลงานนำเสนอ Poster Presentation</div>
                 @endif
             @empty
+                <div class="text-center h2 text-red">ไม่มีผลงานนำเสนอ Poster Presentation</div>
             @endforelse
 
         </div>

@@ -34,7 +34,7 @@
 {{-- <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('vendor/dist/js/demo.js', env('REDIRECT_HTTPS')) }}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('vendor/dist/js/pages/dashboard2.js', env('REDIRECT_HTTPS')) }}"></script>
+{{-- <script src="{{ asset('vendor/dist/js/pages/dashboard2.js', env('REDIRECT_HTTPS')) }}"></script> --}}
 
 <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
 

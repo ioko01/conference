@@ -107,7 +107,7 @@
                                             แก้ไข</a>
                                     </td>
                                     <td><button
-                                            onclick="open_modal('{{ $present_poster->topic_th }}', '{{ route('backend.poster.delete', $present_poster->id) }}')"
+                                            onclick="open_modal('{{ $present_poster->present_poster_id }}', '{{ route('backend.poster.delete', $present_poster->id) }}')"
                                             class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
                                             ลบ</button></td>
                                 </tr>

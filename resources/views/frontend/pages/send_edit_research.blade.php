@@ -67,7 +67,7 @@
                             <td style="vertical-align: middle;">
                                 @if (isset($value->edit_word_path))
                                     <img width="40"
-                                        src="{{ asset("images/$value->edit_word_ext.png", env('REDIRECT_HTTPS')) }}"
+                                        src="{{ asset("images/$value->edit_word_ext.webp", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->edit_word_ext }}">
                                     <p class="mb-0">{{ $value->edit_word_name }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
@@ -108,7 +108,7 @@
                             <td style="vertical-align: middle;">
                                 @if (isset($value->edit_pdf_path))
                                     <img width="40"
-                                        src="{{ asset("images/$value->edit_pdf_ext.png", env('REDIRECT_HTTPS')) }}"
+                                        src="{{ asset("images/$value->edit_pdf_ext.webp", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->edit_pdf_ext }}">
                                     <p class="mb-0">{{ $value->edit_pdf_name }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
@@ -148,7 +148,7 @@
                             <td style="vertical-align: middle;">
                                 @if (isset($value->edit_stm_path))
                                     <img width="40"
-                                        src="{{ asset("images/$value->edit_stm_ext.png", env('REDIRECT_HTTPS')) }}"
+                                        src="{{ asset("images/$value->edit_stm_ext.webp", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->edit_stm_path }}">
                                     <p class="mb-0">{{ $value->edit_stm_name }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด

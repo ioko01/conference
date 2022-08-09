@@ -53,7 +53,7 @@
                             <td>
                                 @if (isset($value->payment_path))
                                     <img width="40"
-                                        src="{{ asset("images/$value->slip_ext.png", env('REDIRECT_HTTPS')) }}"
+                                        src="{{ asset("images/$value->slip_ext.webp", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->slip_ext }}">
                                     <p class="mb-0">{{ $value->payment }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
@@ -115,7 +115,7 @@
                             <td>
                                 @if (isset($value->word_path))
                                     <img width="40"
-                                        src="{{ asset("images/$value->word_ext.png", env('REDIRECT_HTTPS')) }}"
+                                        src="{{ asset("images/$value->word_ext.webp", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->word_ext }}">
                                     <p class="mb-0">{{ $value->word }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
@@ -166,7 +166,7 @@
                             <td>
                                 @if (isset($value->pdf_path))
                                     <img width="40"
-                                        src="{{ asset("images/$value->pdf_ext.png", env('REDIRECT_HTTPS')) }}"
+                                        src="{{ asset("images/$value->pdf_ext.webp", env('REDIRECT_HTTPS')) }}"
                                         alt="{{ $value->pdf_ext }}">
                                     <p class="mb-0">{{ $value->pdf }}</p>
                                     <i style="font-size: 10px;">แก้ไขครั้งล่าสุด

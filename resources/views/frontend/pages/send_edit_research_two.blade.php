@@ -53,7 +53,7 @@
                                         <td>
                                             @if (isset($value->edit_word_path_two))
                                                 <img width="40"
-                                                    src="{{ asset("images/$value->edit_word_ext_two.png", env('REDIRECT_HTTPS')) }}"
+                                                    src="{{ asset("images/$value->edit_word_ext_two.webp", env('REDIRECT_HTTPS')) }}"
                                                     alt="{{ $value->edit_word_ext_two }}">
                                                 <p class="mb-0">{{ $value->edit_word_name_two }}</p>
                                                 <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
@@ -90,7 +90,7 @@
                                         <td>
                                             @if (isset($value->edit_pdf_path_two))
                                                 <img width="40"
-                                                    src="{{ asset("images/$value->edit_pdf_ext_two.png", env('REDIRECT_HTTPS')) }}"
+                                                    src="{{ asset("images/$value->edit_pdf_ext_two.webp", env('REDIRECT_HTTPS')) }}"
                                                     alt="{{ $value->edit_pdf_ext_two }}">
                                                 <p class="mb-0">{{ $value->edit_pdf_name_two }}</p>
                                                 <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
@@ -127,7 +127,7 @@
                                         <td>
                                             @if (isset($value->edit_stm_path_two))
                                                 <img width="40"
-                                                    src="{{ asset("images/$value->edit_stm_ext_two.png", env('REDIRECT_HTTPS')) }}"
+                                                    src="{{ asset("images/$value->edit_stm_ext_two.webp", env('REDIRECT_HTTPS')) }}"
                                                     alt="{{ $value->edit_stm_path_two }}">
                                                 <p class="mb-0">{{ $value->edit_stm_name_two }}</p>
                                                 <i style="font-size: 10px;">แก้ไขครั้งล่าสุด

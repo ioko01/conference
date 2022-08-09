@@ -3,7 +3,7 @@
     <nav id="navbar-conference" class="navbar navbar-expand-lg shadow-sm bg-white">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('welcome') }}">
-                <img src="{{ asset('images/logo.png', env('REDIRECT_HTTPS')) }}" alt="logo" width="130">
+                <img src="{{ asset('images/logo.webp', env('REDIRECT_HTTPS')) }}" alt="logo" width="130">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,11 +16,11 @@
                             href="{{ route('welcome') }}">หน้าหลัก</a>
                     </li>
                     <li class="nav-item dropdown" id="manuals">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             คู่มือ
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu">
                             <div class="line-dropdown"></div>
                             @if ($manuals = DB::table('manuals')->select(
                                     'manuals.id as id',
@@ -52,11 +52,11 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown" id="downloads">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             ดาวน์โหลด
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu">
                             <div class="line-dropdown"></div>
                             @if ($downloads = DB::table('downloads')->select(
                                     'downloads.id as id',
@@ -90,11 +90,11 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Proceedings
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('list.research.index') }}">Proceeding 2565</a>
                             </li>
                             <li><a class="dropdown-item" href="{{ route('list.attend.index') }}">Proceeding 2564</a>
@@ -103,11 +103,11 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             รายชื่อ
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('list.research.index') }}">รายชื่อบทความ</a></li>
                             <li><a class="dropdown-item" href="{{ route('list.attend.index') }}">รายชื่อผู้ลงทะเบียน</a>
                             </li>
@@ -121,11 +121,11 @@
                         </li>
                     @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
                                 บทความ
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu">
                                 <li>
                                     <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
                                         aria-current="page"
@@ -171,11 +171,11 @@
                     @endguest
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             นำเสนอ
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu">
                             <li>
                                 <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
                                     aria-current="page" href="#">ลิงค์นำเสนอผลงาน Oral</a>

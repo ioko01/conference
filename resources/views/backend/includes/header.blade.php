@@ -10,7 +10,7 @@
     <title>{{ config('app.name') }} | DASHBOARD</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/main.css', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
+    <link href="{{ asset('css/main.min.css', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
     <link href="{{ asset('css/app.css', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
 
     <!-- Font Awesome Icons -->

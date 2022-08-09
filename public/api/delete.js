@@ -27,7 +27,7 @@ const delete_entry = (topic, route) => {
                             <i class="fa fa-trash-alt"></i> ลบ
                         </button>
                         <button type="button" class="btn btn-secondary rounded-0"
-                            data-bs-dismiss="modal">ปิด</button>
+                            data-bs-dismiss="modal"><i class="fas fa-times"></i> ปิด</button>
                     </div>
                 </form>
             </div>

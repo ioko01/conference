@@ -7,11 +7,16 @@
 
 <!-- Bootstrap -->
 <script src="{{ asset('vendor/plugins/bootstrap/js/bootstrap.bundle.min.js', env('REDIRECT_HTTPS')) }}"></script>
+
 <!-- overlayScrollbars -->
 <script src="{{ asset('vendor/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js', env('REDIRECT_HTTPS')) }}">
 </script>
+
+<script src="{{ asset('vendor/plugins/jquery-ui/jquery-ui.min.js', env('REDIRECT_HTTPS')) }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('vendor/dist/js/adminlte.js', env('REDIRECT_HTTPS')) }}"></script>
+<script src="{{ asset('vendor/dist/js/adminlte.min.js', env('REDIRECT_HTTPS')) }}"></script>
+<script src="{{ asset('vendor/plugins/moment/moment.min.js', env('REDIRECT_HTTPS')) }}"></script>
+<script src="{{ asset('vendor/plugins/fullcalendar/main.js', env('REDIRECT_HTTPS')) }}"></script>
 
 <script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
 
@@ -83,4 +88,9 @@
 
         paginate.init(".list", options, filterOptions);
     </script>
+@endif
+
+@if (Request::is('backend/dashboard'))
+    <script src="{{ asset('api/calendar.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('js/calendar.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif

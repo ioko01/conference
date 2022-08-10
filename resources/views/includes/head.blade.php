@@ -4,9 +4,10 @@
         <meta charset="UTF-8">
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="LRU Conference">
-        <meta name="keywords" content="conference, lru conference">
-        <meta name="author" content="thanapong soontarawirat">
+        <meta name="description"
+            content="สถาบันวิจัยและพัฒนา มหาวิทยาลัยราชภัฏเลย ได้จัดการประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการขึ้น">
+        <meta name="keywords" content="conference, lru conference, lru, conference lru">
+        <meta name="author" content="Research and Development Institute - Loei Rajabhat University">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 

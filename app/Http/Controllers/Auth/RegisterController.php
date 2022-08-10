@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Kota;
 use App\Models\Position;
+use App\Models\Tip;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -39,6 +40,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
         $this->middleware('guest');
@@ -50,8 +52,9 @@ class RegisterController extends Controller
         $kotas = Kota::get();
         $positions = Position::get();
         $conference_id = Conference::where('status_research', 1)->first();
+        $tips = Tip::where('group', '1')->get();
 
-        return view('auth.register', compact('kotas', 'positions', 'conference_id'));
+        return view('auth.register', compact('kotas', 'positions', 'conference_id', 'tips'));
     }
 
     /**

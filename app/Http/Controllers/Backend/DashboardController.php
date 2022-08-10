@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Research;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -14,9 +15,19 @@ class DashboardController extends Controller
     {
         $path = public_path('storage');
         $storage = File::exists($path);
-        $researchs = Research::get();
+        $users = User::leftjoin('conferences', 'conferences.id', 'users.conference_id')
+            ->where('conferences.status', 1)
+            ->get();
+        $researchs = Research::select(
+            '*',
+            'researchs.created_at as research_created'
+        )
+            ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
+            ->where('conferences.status', 1)
+            ->orderBy('researchs.topic_id', 'desc')
+            ->get();
 
-        return view('backend.pages.dashboard', compact('storage', 'researchs'));
+        return view('backend.pages.dashboard', compact('storage', 'researchs', 'users'));
     }
 
     protected function storage()

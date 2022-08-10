@@ -30,7 +30,7 @@
                     </p>
                 </div>
             </div>
-            <a href="https://www.facebook.com/งานประชุมวิชาการระดับชาติ-ราชภัฏเลยวิชาการ-มหาวิทยาลัยราชภัฏเลย-2132018520193740"
+            <a aria-label="facebook" href="https://www.facebook.com/งานประชุมวิชาการระดับชาติ-ราชภัฏเลยวิชาการ-มหาวิทยาลัยราชภัฏเลย-2132018520193740"
                 class="text-white"><i class="fab fa-2x fa-facebook-square mx-1"></i></a>
         </div>
     </footer>

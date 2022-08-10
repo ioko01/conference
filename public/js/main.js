@@ -9,7 +9,7 @@ window.addEventListener("load", function () {
 });
 
 function autosize() {
-    var text = $(".autosize");
+    let text = $(".autosize");
 
     text.each(function () {
         $(this).attr("rows", 1);

@@ -27,6 +27,13 @@ html {
     font-size: calc(10px + 0.2vw);
 }
 
+.single-text-ellipsis {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .text-ellipsis {
     white-space: nowrap;
     width: 40%;

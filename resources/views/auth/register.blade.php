@@ -249,63 +249,24 @@
                             </div>
                         </div>
                         <div class="d-block">
-                            <input class="btn btn-green rounded-0 text-white text-white w-100" type="submit"
-                                value="ลงทะเบียน">
+                            <input name="register" class="btn btn-green rounded-0 text-white text-white w-100"
+                                type="submit" value="ลงทะเบียน">
                         </div>
                     </form>
                 </div>
                 <div class="col-md-5 tips">
                     <div class="tips-content">
-                        <div class="tips-box py-5">
-                            <div class="icon"><img src="{{ asset('images/guide.png', env('REDIRECT_HTTPS')) }}"
-                                    alt="guide-register">
+                        @foreach ($tips as $tip)
+                            <div class="tips-box py-5">
+                                <div class="icon"><img src="{{ asset($tip->image, env('REDIRECT_HTTPS')) }}"
+                                        alt="{{ $tip->head }}">
+                                </div>
+                                <div class="content"><strong>{{ $tip->head }}</strong><br /><span>
+                                        <textarea readonly style="width: 100%;" class="txt-tips autosize">{{ $tip->detail }}</textarea>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="content"><strong>แนะนำการลงทะเบียน</strong><br /><span>
-                                    กรณีต้องการลงทะเบียนเข้าร่วมงานแต่ไม่ส่งบทความ หรือเป็นนักวิจัยร่วม ให้เลือก
-                                    "ลงทะเบียนเข้าร่วมงานทั่วไป" หากสงสัยให้ติดต่อเจ้าหน้ที่หรือผู้ดูแลระบบ</span></div>
-                        </div>
-                        <div class="tips-box py-5">
-                            <div class="icon"><img src="{{ asset('images/folder.png', env('REDIRECT_HTTPS')) }}"
-                                    alt="guide-send"></div>
-                            <div class="content"><strong>แนะนำการส่งผลงาน</strong><br /><span>
-                                    เมื่อลงทะเบียนสำเร็จแล้ว ระบบจะส่งลิงก์
-                                    ไปยังอีเมลของท่านเพื่อยืนยันตัวตน
-                                    จึงจะสามารถใช้ระบบส่งผลงานได้
-                                    (ผู้ที่ส่งผลงานจะต้องเลือก
-                                    "ลงทะเบียนส่งผลงาน" เท่านั้น !)
-                                    และจะต้องใส่ข้อมูลที่ถูกต้อง
-                                    หากเกิดข้อผิดพลาดผู้ลงทะเบียน
-                                    ใส่ข้อมูลมาผิด เจ้าหน้าที่จะไม่รับผิดชอบ</span></div>
-                        </div>
-                        <div class="tips-box py-5">
-                            <div class="icon"><img src="{{ asset('images/heart.png', env('REDIRECT_HTTPS')) }}"
-                                    alt="guide"></div>
-                            <div class="content"><strong>การพิจารณาผลงาน</strong><br /><span>
-                                    พิจารณาการเลือกกลุ่มการนำเสนอ
-                                    ผลงานและประเภทของการนำเสนอ
-                                    ผลงาน โดยผู้ทรงคุณวุฒิจากภายใน
-                                    และภายนอกมหาวิทยาลัย อย่างน้อย 2 ท่าน
-                                    และคัดเลือกผลงานที่นำเสนอในการประชุม
-                                    รวบรวมเป็นรายงานสืบเนื่องจากการประชุม
-                                    วิชาการระดับชาติ Proceedings
-                                    (ทั้งนี้บทความต้องได้รับการชำระเงินเท่านั้น..!
-                                    ที่จะได้รับสิทธิ์ให้ผู้ทรงคุณวิฒิพิจารณา)</span></div>
-                        </div>
-                        <div class="tips-box py-5">
-                            <div class="icon"><img
-                                    src="{{ asset('images/money-exchange.png', env('REDIRECT_HTTPS')) }}"
-                                    alt=""></div>
-                            <div class="content"><strong>การชำระเงิน</strong><br /><span>
-                                    1. ผู้นำเสนอจากหน่วยงานภายนอก ที่ส่งผลงาน ค่าลงทะเบียนอัตรา 2,000 บาท ต่อ 1 ผลงาน <br />
-                                    2. ผู้ร่วมงานทั่วไป/นิสิต/นักศึกษาจากหน่วยงานภายนอก ไม่เสียค่าใช้จ่าย <br />
-                                    3. บุคลากรภายในมหาวิทยาลัยราชภัฏเลย ไม่เสียค่าใช้จ่าย <br />
-                                    4.
-                                    ข้าราชการหรือบุคลากรของรัฐที่เข้าร่วมประชุมสามารถเบิกจ่ายได้จากต้นสังกัดตามระเบียบของกระทรวงการคลัง
-                                    <br />
-                                    หมายเหตุ: กรณีที่ผู้สมัครเข้าร่วมงานและไม่สามารถมานำเสนอผลงานได้ สถาบันวิจัยและพัฒนา
-                                    ขอสงวนสิทธิ์ ที่จะไม่คืนเงินค่าลงทะเบียนไม่ว่ากรณีใดๆ
-                                    เนื่องจากต้องมีค่าใช้จ่ายในระหว่างการดำเนินงาน</span></div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

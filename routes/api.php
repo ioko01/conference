@@ -46,6 +46,10 @@ Route::get('research/countdown', function () {
     //     ->get();
 });
 
+Route::get('calendar', function () {
+    return Conference::where('status', 1)->get();
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware('is_admin')->group(function () {

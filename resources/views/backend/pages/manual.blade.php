@@ -80,7 +80,6 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th class="text-center">ประชาสัมพันธ์</th>
                                 <th>ชื่อคู่มือ</th>
                                 <th>Link</th>
                                 <th>ไฟล์อัพโหลด</th>
@@ -92,14 +91,6 @@
                             @forelse ($manuals as $key => $manual)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-
-                                    <td class="text-center">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="notice_check"
-                                                @if ($manual->notice) checked @endif value={{ $manual->notice }}
-                                                onclick="open_modal_notice(this, '{{ $manual->name }}', '{{ route('backend.manual.notice.update', $manual->id) }}')">
-                                        </div>
-                                    </td>
                                     <td style="max-width: 250px;">{{ $manual->name }}</td>
                                     <td>
                                         @if ($manual->link)
@@ -127,7 +118,7 @@
                                 </tr>
                             @empty
                                 <tr class="text-center">
-                                    <td colspan="7">ไม่มีหัวข้อดาวน์โหลด</td>
+                                    <td colspan="6">ไม่มีหัวข้อดาวน์โหลด</td>
                                 </tr>
                             @endforelse
                         </tbody>

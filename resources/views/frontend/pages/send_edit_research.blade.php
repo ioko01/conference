@@ -95,6 +95,8 @@
                                     @else
                                         <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
                                     @endif
+                                @elseif($value->status_research_edit_two === 1)
+                                    <strong class="text-red">หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว</strong>
                                 @else
                                     <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
                                 @endif
@@ -136,6 +138,8 @@
                                     @else
                                         <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
                                     @endif
+                                @elseif($value->status_research_edit_two === 1)
+                                    <strong class="text-red">หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว</strong>
                                 @else
                                     <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
                                 @endif
@@ -176,6 +180,8 @@
                                     @else
                                         <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
                                     @endif
+                                @elseif($value->status_research_edit_two === 1)
+                                    <strong class="text-red">หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว</strong>
                                 @else
                                     <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
                                 @endif

@@ -54,7 +54,9 @@ class UploadfileController extends Controller
             'researchs.topic_status as status_id',
             'videos.link as video_link',
             'posters.path as poster_path',
-            'posters.name as poster_name'
+            'posters.name as poster_name',
+            'conferences.status_poster_and_video as status_poster_and_video',
+            'conferences.end_poster_and_video as end_poster_and_video'
         )
             ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
             ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')

@@ -143,10 +143,11 @@
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item {{ Request::is('employee/research/send-edit/show/*') ? 'active' : '' }}"
-                                        aria-current="page"
-                                        href="{{ route('employee.research.send.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไขครั้งที่
-                                        1</a>
+                                    @if ($conference = DB::table('conferences')->select('id')->where('status', 1)->orWhere('status_research_edit', 1)->orWhere('status_research_edit_two', 1)->first())
+                                        <a class="dropdown-item {{ Request::is('employee/research/send-edit/show/*') ? 'active' : '' }}"
+                                            aria-current="page"
+                                            href="{{ route('employee.research.send.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไข</a>
+                                    @endif
                                 </li>
 
                                 <li>

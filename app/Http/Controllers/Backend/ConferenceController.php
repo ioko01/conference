@@ -23,14 +23,15 @@ class ConferenceController extends Controller
             'year' => 'required',
             'start' => 'required|date',
             'final' => 'required|date',
-            'start_research' => 'required|date',
             'end_research' => 'required|date',
             'end_payment' => 'required|date',
             'end_attend' => 'required|date',
             'end_research_edit' => 'required|date',
-            'end_research_edit_two' => 'required|date',
             'end_poster_and_video' => 'required|date',
-            'end_poster_and_video_two' => 'required|date'
+            'consideration' => 'required|date',
+            'notice_attend' => 'required|date',
+            'present' => 'required|date',
+            'proceeding' => 'required|date'
         ]);
     }
 
@@ -45,14 +46,16 @@ class ConferenceController extends Controller
             'year' => $request->year,
             'start' => $request->start,
             'final' => $request->final,
-            'start_research' => $request->start_research,
             'end_research' => $request->end_research,
             'end_payment' => $request->end_payment,
             'end_attend' => $request->end_attend,
             'end_research_edit' => $request->end_research_edit,
             'end_research_edit_two' => $request->end_research_edit_two,
             'end_poster_and_video' => $request->end_poster_and_video,
-            'end_poster_and_video_two' => $request->end_poster_and_video_two
+            'consideration' => $request->consideration,
+            'notice_attend' => $request->notice_attend,
+            'present' => $request->present,
+            'proceeding' => $request->proceeding
         ]);
 
         alert('สำเร็จ', 'เพิ่มหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
@@ -68,14 +71,16 @@ class ConferenceController extends Controller
             'year' => $request->year,
             'start' => $request->start,
             'final' => $request->final,
-            'start_research' => $request->start_research,
             'end_research' => $request->end_research,
             'end_payment' => $request->end_payment,
             'end_attend' => $request->end_attend,
             'end_research_edit' => $request->end_research_edit,
             'end_research_edit_two' => $request->end_research_edit_two,
             'end_poster_and_video' => $request->end_poster_and_video,
-            'end_poster_and_video_two' => $request->end_poster_and_video_two
+            'consideration' => $request->consideration,
+            'notice_attend' => $request->notice_attend,
+            'present' => $request->present,
+            'proceeding' => $request->proceeding
         ]);
 
         alert('สำเร็จ', 'แก้ไขหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
@@ -100,6 +105,12 @@ class ConferenceController extends Controller
             alert('ผิดพลาด', 'ไม่สามารถเปลี่ยนสถานะได้ เนื่องจากไม่ได้เปิดใช้งานการประชุมวิชาการ', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ไม่สามารถเปลี่ยนสถานะได้ เนื่องจากไม่ได้เปิดใช้งานการประชุมวิชาการ');
         }
+        if ($request->change_status_research_edit_two) {
+            if (!$check_status->end_research_edit_two) {
+                alert('ผิดพลาด', 'ไม่สามารถเปลี่ยนสถานะได้ กรุณาระบุวันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2', 'error')->showConfirmButton('ปิด', '#3085d6');
+                return back()->withErrors('ไม่สามารถเปลี่ยนสถานะได้ กรุณาระบุวันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2');
+            }
+        }
 
         if ($request->change_status_conference == "0" && $check_status) {
             $change_status = array_filter([
@@ -110,27 +121,23 @@ class ConferenceController extends Controller
                 'status_research_edit' => 0,
                 'status_research_edit_two' => 0,
                 'status_poster_and_video' => 0,
-                'status_poster_and_video_two' => 0,
                 'status_present_poster' => 0,
+                'status_consideration' => 0,
+                'status_notice_attend' => 0,
+                'status_present' => 0,
+                'status_proceeding' => 0
             ], 'is_numeric');
             User::where('id', auth()->user()->id)->update(['conference_id' => NULL]);
         } else {
             $change_status_research_edit = $request->change_status_research_edit;
             $change_status_poster_and_video = $request->change_status_poster_and_video;
             $change_status_research_edit_two = $request->change_status_research_edit_two;
-            $change_status_poster_and_video_two = $request->change_status_poster_and_video_two;
 
             if ($request->change_status_research_edit) {
                 $change_status_research_edit_two = 0;
             }
-            if ($request->change_status_poster_and_video) {
-                $change_status_poster_and_video_two = 0;
-            }
             if ($request->change_status_research_edit_two) {
                 $change_status_research_edit = 0;
-            }
-            if ($request->change_status_poster_and_video_two) {
-                $change_status_poster_and_video = 0;
             }
 
             $change_status = array_filter([
@@ -141,8 +148,11 @@ class ConferenceController extends Controller
                 'status_research_edit' => $change_status_research_edit,
                 'status_research_edit_two' => $change_status_research_edit_two,
                 'status_poster_and_video' => $change_status_poster_and_video,
-                'status_poster_and_video_two' => $change_status_poster_and_video_two,
-                'status_present_poster' => $request->change_present_poster
+                'status_present_poster' => $request->change_status_present_poster,
+                'status_consideration' => $request->change_status_consideration,
+                'status_notice_attend' => $request->change_status_notice_attend,
+                'status_present' => $request->change_status_present,
+                'status_proceeding' => $request->change_status_proceeding
             ], 'is_numeric');
             User::where('id', auth()->user()->id)->update(['conference_id' => $id]);
         }

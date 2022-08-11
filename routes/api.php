@@ -46,7 +46,7 @@ Route::get('research/countdown', function () {
     //     ->get();
 });
 
-Route::get('calendar', function () {
+Route::get('conference/open', function () {
     return Conference::where('status', 1)->get();
 });
 

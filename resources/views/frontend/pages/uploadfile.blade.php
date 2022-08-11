@@ -49,19 +49,30 @@
                             <td>
                                 @if ($value->video_link)
                                     <a href="{{ $value->video_link }}">{{ $value->video_link }}</a>
-                                    <button
-                                        onclick="open_modal_poster_video('video', {{ $value->topic_id }}, '{{ $value->video_link }}')"
-                                        class="btn btn-warning px-4 mx-auto text-white rounded-0 d-block my-2"><i
-                                            class="fas fa-edit"></i>
-                                        แก้ไขลิงค์วิดีโอ</button>
-                                @else
-                                    <a href="{{ $value->video_link }}">{{ $value->video_link }}</a>
-                                    <button
-                                        onclick="open_modal_poster_video('video', {{ $value->topic_id }}, '{{ $value->video_link }}')"
-                                        class="btn btn-green px-4 mx-auto text-white rounded-0 d-block my-2"><i
-                                            class="fas fa-plus"></i>
-                                        เพิ่มลิงค์วิดีโอ</button>
                                 @endif
+                                @if ($value->status_poster_and_video)
+                                    @if (endDate('end_poster_and_video')->day >= 0)
+                                        @if ($value->video_link)
+                                            <button
+                                                onclick="open_modal_poster_video('video', {{ $value->topic_id }}, '{{ $value->video_link }}')"
+                                                class="btn btn-warning px-4 mx-auto text-white rounded-0 d-block my-2"><i
+                                                    class="fas fa-edit"></i>
+                                                แก้ไขลิงค์วิดีโอ</button>
+                                        @else
+                                            <a href="{{ $value->video_link }}">{{ $value->video_link }}</a>
+                                            <button
+                                                onclick="open_modal_poster_video('video', {{ $value->topic_id }}, '{{ $value->video_link }}')"
+                                                class="btn btn-green px-4 mx-auto text-white rounded-0 d-block my-2"><i
+                                                    class="fas fa-plus"></i>
+                                                เพิ่มลิงค์วิดีโอ</button>
+                                        @endif
+                                    @else
+                                        <strong class="text-red d-block">หมดเวลาส่งลิงค์วิดีโอ</strong>
+                                    @endif
+                                @else
+                                    <strong class="text-red d-block">ไม่สามารถส่งลิงค์วิดีโอได้</strong>
+                                @endif
+
                             </td>
                             <td>
                                 @if ($value->poster_name)
@@ -69,19 +80,28 @@
                                         class="btn btn-info px-4 mx-auto text-white rounded-0 my-2"
                                         href="{{ Storage::url($value->poster_path) }}"><i class="fas fa-download"></i>
                                         ดาวน์โหลดไฟล์ Poster</a>
-                                    <button
-                                        onclick="open_modal_poster_video('poster', {{ $value->topic_id }}, '{{ $value->poster_name }}')"
-                                        class="btn btn-warning px-4 mx-auto text-white rounded-0 d-block my-2"><i
-                                            class="fas fa-edit"></i>
-                                        แก้ไขไฟล์ Poster</button>
-                                @else
-                                    <button
-                                        onclick="open_modal_poster_video('poster', {{ $value->topic_id }}, '{{ $value->poster_name }}')"
-                                        class="btn btn-green px-4 mx-auto text-white rounded-0 d-block my-2"><i
-                                            class="fas fa-plus"></i>
-                                        เพิ่มไฟล์ Poster</button>
                                 @endif
-
+                                @if ($value->status_poster_and_video)
+                                    @if (endDate('end_poster_and_video')->day >= 0)
+                                        @if ($value->poster_name)
+                                            <button
+                                                onclick="open_modal_poster_video('poster', {{ $value->topic_id }}, '{{ $value->poster_name }}')"
+                                                class="btn btn-warning px-4 mx-auto text-white rounded-0 d-block my-2"><i
+                                                    class="fas fa-edit"></i>
+                                                แก้ไขไฟล์ Poster</button>
+                                        @else
+                                            <button
+                                                onclick="open_modal_poster_video('poster', {{ $value->topic_id }}, '{{ $value->poster_name }}')"
+                                                class="btn btn-green px-4 mx-auto text-white rounded-0 d-block my-2"><i
+                                                    class="fas fa-plus"></i>
+                                                เพิ่มไฟล์ Poster</button>
+                                        @endif
+                                    @else
+                                        <strong class="text-red d-block">หมดเวลาส่งลิงค์วิดีโอ</strong>
+                                    @endif
+                                @else
+                                    <strong class="text-red d-block">ไม่สามารถส่งโปสเตอร์ได้</strong>
+                                @endif
                             </td>
                             <td style="vertical-align: middle;">
                                 <button type="button" class="btn btn-green rounded-0 text-white"

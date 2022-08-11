@@ -10,7 +10,7 @@
 
                 <div class="card-body text-center">
                     <div class="col-md-3 col-6 mx-auto">
-                        <img src="{{ asset('images/mail.png', env('REDIRECT_HTTPS')) }}" alt="email" width="100%">
+                        <img src="{{ asset('images/mail.webp', env('REDIRECT_HTTPS')) }}" alt="email" width="100%">
 
                     </div>
                     <div class="col-12">

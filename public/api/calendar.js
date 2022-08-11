@@ -2,7 +2,7 @@
 function calendar(handleData) {
     $.ajax({
         method: "GET",
-        url: "/api/calendar",
+        url: "/api/conference/open",
         success: function (res) {
             handleData(res);
         },

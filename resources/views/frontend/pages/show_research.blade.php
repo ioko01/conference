@@ -87,7 +87,7 @@
                                                 </button>
                                                 <input type="hidden" value="{{ $value->topic_id }}">
                                             @else
-                                                <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>
+                                                <strong class="text-red">ไม่สามารถชำระเงินได้แล้ว</strong>
                                             @endif
                                         @else
                                             <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>

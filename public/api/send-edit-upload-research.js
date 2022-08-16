@@ -19,9 +19,24 @@ function detail_modal(topic_id, type) {
                     </div>
                 </div>
             </div>`;
+
+    const route = "/show-research-detail/" + topic_id;
+    const token = $('meta[name="csrf-token"]').attr('content');
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
+    });
     $.ajax({
-        method: "GET",
-        url: "/api/show-research-detail/" + topic_id,
+        type: "GET",
+        url: route,
+        statusCode: {
+            401: function () {
+                $("#modal_body").html(
+                    `<div class="text-center">ไม่ได้รับสิทธิ์ในการเข้าถึงหน้านี้</div>`
+                );
+            },
+        },
         success: function (res) {
             res.forEach((data) => {
                 $("#modal_body").html(`
@@ -107,9 +122,7 @@ function detail_modal(topic_id, type) {
                     `<div class="text-center">ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน</div>`
                 );
             } else if (!navigator.doNotTrack) {
-                $("#modal_body").html(
-                    `<div class="text-center">เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง</div>`
-                );
+                $("#modal_body").html(event.responseText);
             }
         },
     });

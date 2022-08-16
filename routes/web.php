@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ResearchController as ApiResearchController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ResearchController;
@@ -36,6 +37,7 @@ use App\Http\Controllers\UploadfileController;
 use App\Models\Download;
 use App\Models\Line;
 use App\Models\Manual;
+use App\Models\Research;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -96,6 +98,8 @@ Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    Route::get('show-research-detail/{id}', [ApiResearchController::class, 'show']);
+
     Route::get('download', [FileDownloadController::class, 'index'])->name('download');
 
     Route::prefix('employee')->group(function () {
@@ -140,6 +144,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::middleware('is_admin')->group(function () {
+
+        Route::put('update-status/{id}', [StatusUpdateController::class, 'update']);
+
+        Route::get('get-research/{id}', function ($id) {
+            return Research::select(
+                'researchs.conference_id as conference_id',
+                'researchs.user_id as user_id',
+                'researchs.topic_id as topic_id',
+                'researchs.topic_th as topic_th',
+                'researchs.topic_en as topic_en',
+                'researchs.topic_status as topic_status',
+                'researchs.presenter as presenter',
+                'faculties.id as faculty_id',
+                'posters.name as poster_name'
+            )
+                ->leftjoin('faculties', 'researchs.faculty_id', 'faculties.id')
+                ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
+                ->leftjoin('posters', 'posters.topic_id', 'researchs.topic_id')
+                ->where('researchs.topic_id', $id)
+                ->where('conferences.status', 1)
+                ->first();
+        });
 
         Route::prefix('backend')->group(function () {
             Route::prefix('researchs')->group(function () {

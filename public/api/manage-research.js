@@ -21,7 +21,7 @@ function detail_modal(topic_id) {
             </div>`;
     $.ajax({
         method: "GET",
-        url: "/api/show-research-detail/" + topic_id,
+        url: "/show-research-detail/" + topic_id,
         success: function (res) {
             res.forEach((data) => {
                 $("#modal_body").html(`

@@ -5,7 +5,7 @@ function set_topic_id(e) {
         const value = e.value;
         if (value) {
             $.ajax({
-                url: `/api/get-research/${value}`,
+                url: `/get-research/${value}`,
                 data: { value },
                 method: "GET",
                 success: function (res) {

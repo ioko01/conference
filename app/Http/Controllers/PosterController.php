@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conference;
 use App\Models\PresentPoster;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PosterController extends Controller
 {
@@ -24,6 +25,9 @@ class PosterController extends Controller
             ->leftjoin('conferences', 'conferences.id', 'present_posters.conference_id')
             ->where('conferences.status', 1)
             ->get();
+        foreach ($present_posters as $present_poster) {
+            $present_poster->path = Storage::url($present_poster->path);
+        }
         return view('frontend.pages.poster', compact('present_posters', 'conference'));
     }
 }

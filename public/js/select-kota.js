@@ -1,5 +1,10 @@
 "use strict";
 
+/**
+ *
+ * @param {HTMLElement} e
+ */
+
 function toggle_position(e) {
     const kota = document.getElementById("select-kota");
     const institution = document.getElementById("institution");

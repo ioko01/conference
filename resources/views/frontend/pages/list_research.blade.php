@@ -5,7 +5,11 @@
     <div class="bg-white text-blue p-5 my-5">
 
         <div class="inner-content-header">
-            <h2 class="text-center">รายชื่อบทความ <br />{{ $conference->name }}</h2>
+            <h2 class="text-center">รายชื่อบทความ <br />
+                @if ($conference)
+                    {{ $conference->name }}
+                @endif
+            </h2>
             <h4 class="text-green py-3">
                 {{ config('app.name') }}
             </h4>

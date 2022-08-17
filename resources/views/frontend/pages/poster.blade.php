@@ -4,7 +4,11 @@
     <!-- Content -->
     <div class="bg-white text-blue p-5 my-5">
         <div class="inner-content-header">
-            <h2 class="text-center">ผลงานนำเสนอ Poster Presentation <br />{{ $conference->name }}</h2>
+            <h2 class="text-center">ผลงานนำเสนอ Poster Presentation <br />
+                @if ($conference)
+                    {{ $conference->name }}
+                @endif
+            </h2>
             <h4 class="text-green py-3">
                 {{ config('app.name') }}
             </h4>
@@ -23,12 +27,14 @@
                                 <div class="card-header text-center bg-white">
                                     <h2>{{ $present_poster->present_poster_id }}</h2>
                                 </div>
-                                <div style="clip-path: inset(0px 0px);" class="card-body position-relative p-0">
+                                <div onclick="open_modal_default('#modal_poster', 'xl', 'โปสเตอร์', {{ $present_poster }})"
+                                    style="clip-path: inset(0px 0px);" class="card-body position-relative p-0">
                                     <div class="img-expand-hover">
                                         <i class="fas fa-3x fa-search-plus text-white"> <span
                                                 class="text-xl">ดูภาพขนาดใหญ่</span></i>
                                     </div>
-                                    <img width="100%" src="{{ Storage::url($present_poster->path) }}" alt="poster">
+                                    <img width="100%" src="{{ $present_poster->path }}"
+                                        alt="{{ $present_poster->topic_th }}">
                                 </div>
                                 <div class="card-footer bg-white">
                                     <p>ลิงค์: <br /><a target="_blank"

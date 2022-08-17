@@ -23,7 +23,8 @@
 @if (Request::is('backend/researchs') ||
     Request::is('backend/researchs/management') ||
     Request::is('backend/researchs/*/edit') ||
-    Request::is('backend/researchs/management/times/*'))
+    Request::is('backend/researchs/management/times/*') ||
+    Request::is('backend/dashboard'))
     <script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 

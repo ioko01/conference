@@ -29,6 +29,11 @@
         <script src="{{ asset('api/upload-video-poster.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
+    @if (Request::is('posters'))
+        <script src="{{ asset('js/poster-detail-modal.js', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/default-modal.js', env('REDIRECT_HTTPS')) }}"></script>
+    @endif
+
     @if (Request::is('employee/research/show/*') || Request::is('list/*'))
         <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
         <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>

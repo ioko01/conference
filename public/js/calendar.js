@@ -10,10 +10,10 @@ calendar(function (output) {
     const present = new Date(output[0].present); //วันสิ้นสุดการลงทะเบียนเข้าร่วมงาน
     const proceeding = new Date(output[0].proceeding); //วันสิ้นสุดการลงทะเบียนเข้าร่วมงาน
 
-    var Calendar = FullCalendar.Calendar;
-    var calendarEl = document.getElementById("calendar");
+    let Calendar = FullCalendar.Calendar;
+    let calendarEl = document.getElementById("calendar");
 
-    var calendar = new Calendar(calendarEl, {
+    let calendar = new Calendar(calendarEl, {
         headerToolbar: {
             left: "prev,next today",
             center: "title",
@@ -24,7 +24,7 @@ calendar(function (output) {
             month: "เดือน",
             week: "สัปดาห์",
             day: "วัน",
-            list: "ลิส",
+            list: "ทั้งหมด",
         },
         eventTimeFormat: {
             hour: "2-digit",

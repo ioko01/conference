@@ -143,6 +143,7 @@ class ResearchController extends Controller
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->where('researchs.user_id', $id)
             ->get();
+
         return view('frontend.pages.show_research', compact('data', 'comments', 'conference'));
     }
 

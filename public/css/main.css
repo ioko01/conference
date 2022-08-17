@@ -256,7 +256,7 @@ html {
 }
 
 .box-new span {
-    font-size: calc(1px + 0.3vw);
+    font-size: calc(5px + 0.3vw);
 }
 
 @keyframes flashing {

@@ -151,8 +151,10 @@
                                 @forelse ($researchs as $key => $research)
                                     @if ($key < 10)
                                         <tr>
-                                            <td><a
-                                                    href="{{ route('backend.research.edit', $research->topic_id) }}">{{ $research->topic_id }}</a>
+                                            <td>
+                                                <p onclick="open_modal(this, 'detail')" style="cursor: pointer;"
+                                                    class="text-primary">{{ $research->topic_id }}</p>
+                                                <input type="hidden" value="{{ $research->topic_id }}">
                                             </td>
                                             <td><strong title="{{ $research->topic_th }}" class="d-flex">
                                                     <span class="single-text-ellipsis">{{ $research->topic_th }}</span>
@@ -178,4 +180,5 @@
             </div>
         </div>
     </div>
+    <div id="modal"></div>
 @endsection

@@ -17,7 +17,7 @@ class CreateKotasTable extends Migration
             $table->id();
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้')->nullable();
-            $table->string('name')->comment('ชื่อเจ้าภาพร่วม');
+            $table->text('name')->comment('ชื่อเจ้าภาพร่วม');
             $table->timestamps();
         });
     }

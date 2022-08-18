@@ -27,6 +27,8 @@
 
     @if (Request::is('employee/research/uploadfile/*'))
         <script src="{{ asset('api/upload-video-poster.js', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/default-modal.js', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/upload-poster-detail-modal.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('posters'))

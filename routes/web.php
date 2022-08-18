@@ -157,11 +157,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 'researchs.topic_status as topic_status',
                 'researchs.presenter as presenter',
                 'faculties.id as faculty_id',
-                'posters.name as poster_name'
+                'posters.name as poster_name',
+                'videos.link as video_link'
             )
                 ->leftjoin('faculties', 'researchs.faculty_id', 'faculties.id')
                 ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
                 ->leftjoin('posters', 'posters.topic_id', 'researchs.topic_id')
+                ->leftjoin('videos', 'videos.topic_id', 'researchs.topic_id')
                 ->where('researchs.topic_id', $id)
                 ->where('conferences.status', 1)
                 ->first();
@@ -184,6 +186,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::get('posters', [PresentPosterController::class, 'index'])->name('backend.posters.index');
             Route::post('poster/create', [PresentPosterController::class, 'store'])->name('backend.poster.store');
+            Route::get('poster/{topic_id}/edit', [PresentPosterController::class, 'edit'])->name('backend.poster.edit');
+            Route::put('poster/{topic_id}/update', [PresentPosterController::class, 'update'])->name('backend.poster.update');
             Route::delete('poster/{id}/delete', [PresentPosterController::class, 'destroy'])->name('backend.poster.delete');
 
             Route::get('proceeding/{year}', [ProceedingController::class, 'show'])->name('backend.proceeding.index');

@@ -24,7 +24,7 @@ calendar(function (output) {
             month: "เดือน",
             week: "สัปดาห์",
             day: "วัน",
-            list: "ทั้งหมด",
+            list: "ปี",
         },
         eventTimeFormat: {
             hour: "2-digit",

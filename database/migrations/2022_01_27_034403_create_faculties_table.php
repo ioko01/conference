@@ -17,7 +17,7 @@ class CreateFacultiesTable extends Migration
             $table->id();
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้')->nullable();
-            $table->string('name')->comment('ชื่อกลุ่มคณะ');
+            $table->text('name')->comment('ชื่อกลุ่มคณะ');
             $table->timestamps();
         });
     }

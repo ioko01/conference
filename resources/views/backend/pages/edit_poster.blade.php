@@ -4,28 +4,19 @@
     <div class="card">
         <div class="card-content">
             <div class="card-body">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('backend.poster.store') }}" class="mb-3">
+                <form method="POST" enctype="multipart/form-data"
+                    action="{{ route('backend.poster.update', $present_poster->id) }}" class="mb-3">
                     @csrf
-                    <div class="col-md-4 mb-3">
-                        <label for="topic_id">รหัสบทความ</label>
-                        <input onkeyup="present_poster(this)" onblur="present_poster(this)" value="{{ old('topic_id') }}"
-                            type="text" name="topic_id" id="topic_id"
-                            class="form-control rounded-0 @error('topic_id') is-invalid @enderror">
-                        @error('topic_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div id="topic_content"></div>
+                    @method('PUT')
+                    <input type="hidden" name="topic_th" value="{{ $present_poster->topic_th }}">
                     <div class="col-md-12 mb-3">
                         <label>ชื่อบทความ:
-                            <span id="topic"><span class="text-red">กรุณากรอกรหัสบทความ</span></span>
+                            <span id="topic"><span class="text-success">{{ $present_poster->topic_th }}</span></span>
                         </label>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="present_poster_id">รหัสการนำเสนอ</label>
-                        <input value="{{ old('present_poster_id') }}" type="text" name="present_poster_id"
+                        <input value="{{ $present_poster->present_poster_id }}" type="text" name="present_poster_id"
                             id="present_poster_id"
                             class="form-control rounded-0 @error('present_poster_id') is-invalid @enderror">
                         @error('present_poster_id')
@@ -42,7 +33,8 @@
                                 @if ($loop->first)
                                     <option value="">-- เลือกกลุ่มบทความ --</option>
                                 @endif
-                                <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                                <option value="{{ $faculty->id }}" @if ($present_poster->present_poster_faculty_id == $faculty->id) selected @endif>
+                                    {{ $faculty->name }}</option>
                             @empty
                                 <option value="">ไม่มีกลุ่ม</option>
                             @endforelse
@@ -53,16 +45,9 @@
                             </span>
                         @enderror
                     </div>
-                    <div id="video_link_content"></div>
-                    <div class="col-md-12 mb-3">
-                        <label>ลิงค์คลิปวิดีโอ:
-                            <span id="video_link"><span class="text-red">กรุณากรอกรหัสบทความ</span></span>
-                        </label>
-                    </div>
                     <div class="col-md-6 mb-3">
-                        <label for="link">เปลี่ยนลิงค์คลิปวิดีโอ
-                            <strong class="text-red text-sm">(ใส่เมื่อต้องการแก้ไขลิงค์วิดีโอ)</strong></label>
-                        <input value="{{ old('link') }}" type="text" name="link" id="link"
+                        <label for="link">ลิงค์คลิปวิดีโอ</label>
+                        <input value="{{ $present_poster->link }}" type="text" name="link" id="link"
                             class="form-control rounded-0 @error('link') is-invalid @enderror">
                         @error('link')
                             <span class="invalid-feedback" role="alert">
@@ -71,7 +56,7 @@
                         @enderror
                     </div>
                     <div class="col-md-12">
-                        <button class="btn btn-success rounded-0"><i class="fa fa-save"></i> บันทึก</button>
+                        <button class="btn btn-warning text-white rounded-0"><i class="fa fa-save"></i> แก้ไข</button>
                     </div>
                 </form>
             </div>

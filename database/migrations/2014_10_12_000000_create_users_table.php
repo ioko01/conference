@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('prefix')->comment('คำนำหน้า');
-            $table->string('fullname')->comment('ชื่อ - สกุล');
+            $table->text('fullname')->comment('ชื่อ - สกุล');
             $table->enum('sex', ['male', 'female'])->comment('เพศ');
             $table->string('phone')->comment('เบอร์โทร');
             $table->text('institution')->comment('สังกัด/หน่วยงาน');

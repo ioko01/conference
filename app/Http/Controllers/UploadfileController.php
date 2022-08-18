@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Conference;
 use App\Models\Poster;
 use App\Models\Video;
+use Illuminate\Support\Facades\Storage;
 
 class UploadfileController extends Controller
 {
@@ -86,6 +87,10 @@ class UploadfileController extends Controller
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->where('researchs.user_id', $id)
             ->get();
+
+        foreach ($data as $present_poster) {
+            $present_poster->poster_path = Storage::url($present_poster->poster_path);
+        }
         return view('frontend.pages.uploadfile', compact('data', 'comments', 'conference'));
     }
 

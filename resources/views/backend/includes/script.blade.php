@@ -68,6 +68,7 @@
 @endif
 
 @if (Request::is('backend/posters') || Request::is('backend/poster/*/edit'))
+    <script src="{{ asset('js/present-poster.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('api/get-research-with-topic-id.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 

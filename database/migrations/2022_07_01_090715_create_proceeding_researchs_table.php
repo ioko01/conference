@@ -18,7 +18,7 @@ class CreateProceedingResearchsTable extends Migration
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
             $table->string('number')->comment('เลขหน้า');
-            $table->string('topic')->comment('ชื่อบทความ');
+            $table->text('topic')->comment('ชื่อบทความ');
             $table->string('faculty_id')->comment('ไอดีกลุ่มคณะ');
             $table->string('branch_id')->comment('ไอดีกลุ่มสาขา')->nullable();
             $table->string('degree_id')->comment('ไอดีระดับบทความ')->nullable();

@@ -30,20 +30,18 @@
             <table class="list table responsive hover">
                 <thead>
                     <tr class="text-center pagination-header">
-                        <th style="width: 5%;">#</th>
-                        <th style="width: 20%;min-width: 200px;">รายละเอียดบทความ</th>
-                        <th style="width: 15%;">ลิงค์วิดีโอ</th>
-                        <th style="width: 10%;">ไฟล์ Poster</th>
-                        <th style="width: 5%;">รายละเอียด</th>
+                        <th style="width: 10%;">#</th>
+                        <th style="width: auto;min-width: 200px;">รายละเอียดบทความ</th>
+                        <th style="width: 20%;">ลิงค์วิดีโอ</th>
+                        <th style="width: 150px;">ไฟล์ Poster</th>
+                        <th style="width: 10%;">รายละเอียด</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($data as $key => $value)
                         <tr class="text-center">
-                            <td style="vertical-align: middle;">{{ $key + 1 }}</td>
-                            <td class="text-start" style="vertical-align: middle;">
-                                <strong style="font-size: 12px" class="text-bluesky">{{ $value->present }}</strong>
-                                <br />
+                            <td>{{ $key + 1 }}</td>
+                            <td class="text-start">
                                 <strong>{{ $value->topic_th }}</strong>
                                 <br />
                                 <strong><span
@@ -59,55 +57,60 @@
                                         @if ($value->video_link)
                                             <button
                                                 onclick="open_modal_poster_video('video', {{ $value->topic_id }}, '{{ $value->video_link }}')"
-                                                class="btn btn-warning px-4 mx-auto text-white rounded-0 d-block my-2"><i
+                                                class="btn btn-link fw-bold px-4 mx-auto text-warning rounded-0 d-block my-2"><i
                                                     class="fas fa-edit"></i>
-                                                แก้ไขลิงค์วิดีโอ</button>
+                                                แก้ไขวิดีโอ</button>
                                         @else
                                             <a href="{{ $value->video_link }}">{{ $value->video_link }}</a>
                                             <button
                                                 onclick="open_modal_poster_video('video', {{ $value->topic_id }}, '{{ $value->video_link }}')"
                                                 class="btn btn-green px-4 mx-auto text-white rounded-0 d-block my-2"><i
                                                     class="fas fa-plus"></i>
-                                                เพิ่มลิงค์วิดีโอ</button>
+                                                เพิ่มวิดีโอ</button>
                                         @endif
                                     @else
-                                        <strong class="text-red d-block">หมดเวลาส่งลิงค์วิดีโอ</strong>
+                                        {{-- <strong class="text-red d-block">หมดเวลาส่งวิดีโอ</strong> --}}
                                     @endif
                                 @else
-                                    <strong class="text-red d-block">ไม่สามารถส่งลิงค์วิดีโอได้</strong>
+                                    
                                 @endif
 
                             </td>
                             <td>
                                 @if ($value->poster_name)
-                                    <a download="POSTER_{{ $value->poster_name }}" target="_blank"
-                                        class="btn btn-info px-4 mx-auto text-white rounded-0 my-2"
-                                        href="{{ Storage::url($value->poster_path) }}"><i class="fas fa-download"></i>
-                                        ดาวน์โหลดไฟล์ Poster</a>
+                                    <div onclick="open_modal_default('#modal', 'xl', 'โปสเตอร์', {{ $value }})"
+                                        style="clip-path: inset(0px 0px);" class="card-body position-relative p-0">
+                                        <div class="img-expand-hover">
+                                            <i class="fas fa-2x fa-search-plus text-white"> <span
+                                                    class="text-lg">ดูภาพขนาดใหญ่</span></i>
+                                        </div>
+                                        <img width="100%" src="{{ $value->poster_path }}" alt="{{ $value->topic_th }}">
+                                    </div>
                                 @endif
                                 @if ($value->status_poster_and_video)
                                     @if (endDate('end_poster_and_video')->day >= 0)
                                         @if ($value->poster_name)
                                             <button
                                                 onclick="open_modal_poster_video('poster', {{ $value->topic_id }}, '{{ $value->poster_name }}')"
-                                                class="btn btn-warning px-4 mx-auto text-white rounded-0 d-block my-2"><i
+                                                class="btn btn-link fw-bold px-4 mx-auto text-warning rounded-0 d-block my-2"><i
                                                     class="fas fa-edit"></i>
-                                                แก้ไขไฟล์ Poster</button>
+                                                แก้ไข Poster</button>
                                         @else
                                             <button
                                                 onclick="open_modal_poster_video('poster', {{ $value->topic_id }}, '{{ $value->poster_name }}')"
                                                 class="btn btn-green px-4 mx-auto text-white rounded-0 d-block my-2"><i
                                                     class="fas fa-plus"></i>
-                                                เพิ่มไฟล์ Poster</button>
+                                                เพิ่ม Poster</button>
                                         @endif
                                     @else
-                                        <strong class="text-red d-block">หมดเวลาส่งลิงค์วิดีโอ</strong>
+                                        {{-- <strong class="text-red d-block">หมดเวลาส่งโปสเตอร์</strong> --}}
                                     @endif
                                 @else
-                                    <strong class="text-red d-block">ไม่สามารถส่งโปสเตอร์ได้</strong>
+                                    
                                 @endif
+
                             </td>
-                            <td style="vertical-align: middle;">
+                            <td>
                                 <button type="button" class="btn btn-green rounded-0 text-white"
                                     onclick="open_modal(this, 'detail')">
                                     รายละเอียด

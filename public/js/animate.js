@@ -13,7 +13,7 @@ animate.forEach((_, index) => {
                 animate[index].classList.add(classAnimated);
                 return;
             }
-            animate[index].classList.remove(classAnimated);
+            // animate[index].classList.remove(classAnimated);
         });
     });
 

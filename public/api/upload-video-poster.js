@@ -10,7 +10,7 @@ const get_video = (type, topic_id, video_poster) => {
     let createModal = "";
     let input_method = "";
     let btn_submit = "";
-    let update_ro_create = "";
+    let update_or_create = "";
     const _token = $('meta[name="csrf-token"]').attr("content");
     if (video_poster) {
         if (type == "video") {
@@ -30,7 +30,7 @@ const get_video = (type, topic_id, video_poster) => {
         btn_submit = `<button name="submit_${type}" value="${type}" type="submit" class="btn btn-warning text-white rounded-0">
                         <i class="fa fa-edit"></i> แก้ไข
                     </button>`;
-        update_ro_create = "update";
+        update_or_create = "update";
     } else {
         if (type == "video") {
             title = "เพิ่มลิงค์วิดีโอ";
@@ -48,13 +48,13 @@ const get_video = (type, topic_id, video_poster) => {
         btn_submit = `<button name="submit_${type}" value="${type}" type="submit" class="btn btn-success rounded-0">
                         <i class="fa fa-save"></i> บันทึก
                     </button>`;
-        update_ro_create = "create";
+        update_or_create = "store";
     }
     createModal = `
         <div class="modal fade" id="video_poster_modal" data-bs-backdrop="static"
             data-bs-keyboard="true" tabindex="-1" aria-labelledby="เพิ่มวิดีโอและโปสเตอร์" aria-hidden="true">
             <div class="modal-dialog">
-                <form enctype="multipart/form-data" action="/employee/research/uploadfile/${topic_id}/${update_ro_create}" method="POST">
+                <form enctype="multipart/form-data" action="/employee/research/uploadfile/${topic_id}/${update_or_create}" method="POST">
                     <input type="hidden" name="_token" value="${_token}" />
                     ${input_method}
                     <div class="modal-content">

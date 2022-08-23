@@ -104,7 +104,7 @@
                         <p>บทความฉบับแก้ไขครั้งที่ 2</p>
                     </a>
                 </li>
-                <li class="nav-item @if (Request::is('backend/posters') || Request::is('backend/orals')) menu-is-opening menu-open @endif">
+                <li class="nav-item @if (Request::is('backend/posters') || Request::is('backend/orals') || Request::is('backend/orals/link')) menu-is-opening menu-open @endif">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-line"></i>
                         <p>
@@ -114,7 +114,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/forms/general.html"
+                            <a href="{{ route('backend.orals.link.index') }}"
+                                class="nav-link @if (Request::is('backend/orals/link')) active @endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ลิงค์นำเสนอ Oral</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.orals.index') }}"
                                 class="nav-link @if (Request::is('backend/orals')) active @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>ผลงานนำเสนอ Oral</p>

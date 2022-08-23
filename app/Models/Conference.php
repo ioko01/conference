@@ -32,6 +32,7 @@ class Conference extends Model
         'status_poster_and_video',
         'end_poster_and_video',
         'status_present_poster',
+        'status_present_oral',
         'status_notice_attend',
         'notice_attend',
         'status_present',

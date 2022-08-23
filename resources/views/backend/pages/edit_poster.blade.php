@@ -8,55 +8,62 @@
                     action="{{ route('backend.poster.update', $present_poster->id) }}" class="mb-3">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="topic_th" value="{{ $present_poster->topic_th }}">
-                    <div class="col-md-12 mb-3">
-                        <label>ชื่อบทความ:
-                            <span id="topic"><span class="text-success">{{ $present_poster->topic_th }}</span></span>
-                        </label>
+                    <div class="row">
+                        <input type="hidden" name="topic_th" value="{{ $present_poster->topic_th }}">
+                        <div class="col-md-12 mb-3">
+                            <label>ชื่อบทความ:
+                                <span id="topic"><span
+                                        class="text-success">{{ $present_poster->topic_th }}</span></span>
+                            </label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="present_poster_id">รหัสการนำเสนอ</label>
+                            <input value="{{ $present_poster->present_poster_id }}" type="text" name="present_poster_id"
+                                id="present_poster_id"
+                                class="form-control rounded-0 @error('present_poster_id') is-invalid @enderror">
+                            @error('present_poster_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="faculty_id">กลุ่มบทความ</label>
+                            <select name="faculty_id" id="faculty_id"
+                                class="form-select @error('faculty_id') is-invalid @enderror">
+                                @forelse ($faculties as $faculty)
+                                    @if ($loop->first)
+                                        <option value="">-- เลือกกลุ่มบทความ --</option>
+                                    @endif
+                                    <option value="{{ $faculty->id }}" @if ($present_poster->present_poster_faculty_id == $faculty->id) selected @endif>
+                                        {{ $faculty->name }}</option>
+                                @empty
+                                    <option value="">ไม่มีกลุ่ม</option>
+                                @endforelse
+                            </select>
+                            @error('faculty_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="present_poster_id">รหัสการนำเสนอ</label>
-                        <input value="{{ $present_poster->present_poster_id }}" type="text" name="present_poster_id"
-                            id="present_poster_id"
-                            class="form-control rounded-0 @error('present_poster_id') is-invalid @enderror">
-                        @error('present_poster_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="link">ลิงค์คลิปวิดีโอ</label>
+                            <input value="{{ $present_poster->link }}" type="text" name="link" id="link"
+                                class="form-control rounded-0 @error('link') is-invalid @enderror">
+                            @error('link')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="faculty_id">กลุ่มบทความ</label>
-                        <select name="faculty_id" id="faculty_id"
-                            class="form-select @error('faculty_id') is-invalid @enderror">
-                            @forelse ($faculties as $faculty)
-                                @if ($loop->first)
-                                    <option value="">-- เลือกกลุ่มบทความ --</option>
-                                @endif
-                                <option value="{{ $faculty->id }}" @if ($present_poster->present_poster_faculty_id == $faculty->id) selected @endif>
-                                    {{ $faculty->name }}</option>
-                            @empty
-                                <option value="">ไม่มีกลุ่ม</option>
-                            @endforelse
-                        </select>
-                        @error('faculty_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="link">ลิงค์คลิปวิดีโอ</label>
-                        <input value="{{ $present_poster->link }}" type="text" name="link" id="link"
-                            class="form-control rounded-0 @error('link') is-invalid @enderror">
-                        @error('link')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-md-12">
-                        <button class="btn btn-warning text-white rounded-0"><i class="fa fa-save"></i> แก้ไข</button>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-warning text-white rounded-0"><i class="fa fa-save"></i> แก้ไข</button>
+                        </div>
                     </div>
                 </form>
             </div>

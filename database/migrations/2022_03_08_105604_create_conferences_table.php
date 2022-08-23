@@ -44,7 +44,8 @@ class CreateConferencesTable extends Migration
             $table->tinyInteger('status_poster_and_video')->comment('สถานะการส่งไฟล์โปสเตอร์และวิดีโอ')->default(0);
             $table->datetime('end_poster_and_video')->comment('วันสิ้นสุดการส่งไฟล์โปสเตอร์และวิดีโอ');
 
-            $table->tinyInteger('status_present_poster')->comment('สถานะผลงานนำเสนอ')->default(0);
+            $table->tinyInteger('status_present_poster')->comment('สถานะผลงานนำเสนอ Poster')->default(0);
+            $table->tinyInteger('status_present_oral')->comment('สถานะผลงานนำเสนอ Oral')->default(0);
 
             $table->tinyInteger('status_notice_attend')->comment('สถานะประกาศรายชื่อผู้เข้าร่วมงานทั้งหมด')->default(0);
             $table->datetime('notice_attend')->comment('ประกาศรายชื่อผู้เข้าร่วมงานทั้งหมด');

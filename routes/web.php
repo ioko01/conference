@@ -15,15 +15,19 @@ use App\Http\Controllers\Backend\DownloadController;
 use App\Http\Controllers\Backend\EditResearchFirstController;
 use App\Http\Controllers\Backend\EditResearchSecondController;
 use App\Http\Controllers\Backend\LineController;
+use App\Http\Controllers\Backend\LinkOralController as BackendLinkOralController;
 use App\Http\Controllers\Backend\ManageResearchController;
 use App\Http\Controllers\Backend\ManualController;
+use App\Http\Controllers\Backend\PresentOralController;
 use App\Http\Controllers\Backend\PresentPosterController;
 use App\Http\Controllers\Backend\ProceedingController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\LinkOralController;
 use App\Http\Controllers\ListAttendController;
 use App\Http\Controllers\ListResearchController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\OralController;
 use App\Http\Controllers\PosterController;
 use App\Http\Controllers\SendEditResearchController;
 use App\Http\Controllers\SendEditWordController;
@@ -33,6 +37,7 @@ use App\Http\Controllers\SendEditResearchTwoController;
 use App\Http\Controllers\SendEditStatementController;
 use App\Http\Controllers\SendEditStatementTwoController;
 use App\Http\Controllers\SendEditWordTwoController;
+use App\Http\Controllers\StatusUpdateController;
 use App\Http\Controllers\UploadfileController;
 use App\Models\Download;
 use App\Models\Line;
@@ -88,6 +93,8 @@ Route::get('list/research', [ListResearchController::class, 'index'])->name('lis
 Route::get('list/attend', [ListAttendController::class, 'index'])->name('list.attend.index');
 
 Route::get('posters', [PosterController::class, 'index'])->name('posters.index');
+Route::get('orals', [OralController::class, 'index'])->name('orals.index');
+Route::get('orals/link', [LinkOralController::class, 'index'])->name('orals.link.index');
 
 // Email Verify
 Route::get('email/verify', [MailController::class, 'verify'])->name('verification.notice');
@@ -106,41 +113,41 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // ส่งบทความฉบับแก้ไข
         Route::get('research/send', [ResearchController::class, 'index'])->name('employee.research.index');
         Route::get('research/show/{topic_id}', [ResearchController::class, 'show'])->name('employee.research.show');
-        Route::post('research/send/create', [ResearchController::class, 'store'])->name('employee.research.store');
+        Route::post('research/send/store', [ResearchController::class, 'store'])->name('employee.research.store');
         Route::get('research/edit/{topic_id}', [ResearchController::class, 'edit'])->name('employee.research.edit');
         Route::put('research/edit/{topic_id}/update', [ResearchController::class, 'update'])->name('employee.research.update');
 
         // ส่งบทความฉบับแก้ไข ครั้งที่ 1
         Route::get('research/send-edit/show/{id}', [SendEditResearchController::class, 'show'])->name('employee.research.send.edit');
-        Route::post('research/send-edit/word/{id}/create', [SendEditWordController::class, 'store'])->name('employee.research.send.word.store');
+        Route::post('research/send-edit/word/{id}/store', [SendEditWordController::class, 'store'])->name('employee.research.send.word.store');
         Route::put('research/send-edit/word/{id}/update', [SendEditWordController::class, 'update'])->name('employee.research.send.word.update');
-        Route::post('research/send-edit/pdf/{id}/create', [SendEditPdfController::class, 'store'])->name('employee.research.send.pdf.store');
+        Route::post('research/send-edit/pdf/{id}/store', [SendEditPdfController::class, 'store'])->name('employee.research.send.pdf.store');
         Route::put('research/send-edit/pdf/{id}/update', [SendEditPdfController::class, 'update'])->name('employee.research.send.pdf.update');
-        Route::post('research/send-edit/stm/{id}/create', [SendEditStatementController::class, 'store'])->name('employee.research.send.stm.store');
+        Route::post('research/send-edit/stm/{id}/store', [SendEditStatementController::class, 'store'])->name('employee.research.send.stm.store');
         Route::put('research/send-edit/stm/{id}/update', [SendEditStatementController::class, 'update'])->name('employee.research.send.stm.update');
 
         // ส่งบทความฉบับแก้ไข ครั้งที่ 2
         Route::get('research/send-edit-2/show/{id}', [SendEditResearchTwoController::class, 'show'])->name('employee.research.send.two.edit');
-        Route::post('research/send-edit/word_2/{id}/create', [SendEditWordTwoController::class, 'store'])->name('employee.research.send.two.word.store');
+        Route::post('research/send-edit/word_2/{id}/store', [SendEditWordTwoController::class, 'store'])->name('employee.research.send.two.word.store');
         Route::put('research/send-edit/word_2/{id}/update', [SendEditWordTwoController::class, 'update'])->name('employee.research.send.two.word.update');
-        Route::post('research/send-edit/pdf_2/{id}/create', [SendEditPdfTwoController::class, 'store'])->name('employee.research.send.two.pdf.store');
+        Route::post('research/send-edit/pdf_2/{id}/store', [SendEditPdfTwoController::class, 'store'])->name('employee.research.send.two.pdf.store');
         Route::put('research/send-edit/pdf_2/{id}/update', [SendEditPdfTwoController::class, 'update'])->name('employee.research.send.two.pdf.update');
-        Route::post('research/send-edit/stm_2/{id}/create', [SendEditStatementTwoController::class, 'store'])->name('employee.research.send.two.stm.store');
+        Route::post('research/send-edit/stm_2/{id}/store', [SendEditStatementTwoController::class, 'store'])->name('employee.research.send.two.stm.store');
         Route::put('research/send-edit/stm_2/{id}/update', [SendEditStatementTwoController::class, 'update'])->name('employee.research.send.two.stm.update');
 
 
         Route::get('research/uploadfile/{id}', [UploadfileController::class, 'show'])->name('employee.research.uploadfile');
-        Route::post('research/uploadfile/{id}/create', [UploadfileController::class, 'store'])->name('employee.research.uploadfile.store');
+        Route::post('research/uploadfile/{id}/store', [UploadfileController::class, 'store'])->name('employee.research.uploadfile.store');
         Route::put('research/uploadfile/{id}/update', [UploadfileController::class, 'update'])->name('employee.research.uploadfile.update');
 
         Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
-        Route::post('payment/{payment_upload}/create', [PaymentController::class, 'store'])->name('employee.payment.store');
+        Route::post('payment/{payment_upload}/store', [PaymentController::class, 'store'])->name('employee.payment.store');
 
         Route::put('pdf/{pdf_upload}/upload', [PdfController::class, 'update'])->name('employee.pdf.update');
-        Route::post('pdf/{pdf_upload}/create', [PdfController::class, 'store'])->name('employee.pdf.store');
+        Route::post('pdf/{pdf_upload}/store', [PdfController::class, 'store'])->name('employee.pdf.store');
 
         Route::put('word/{word_upload}/upload', [WordController::class, 'update'])->name('employee.word.update');
-        Route::post('word/{word_upload}/create', [WordController::class, 'store'])->name('employee.word.store');
+        Route::post('word/{word_upload}/store', [WordController::class, 'store'])->name('employee.word.store');
     });
 
     Route::middleware('is_admin')->group(function () {
@@ -185,10 +192,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::put('research/{topic_id}/update', [BackendResearchController::class, 'update'])->name('backend.research.update');
 
             Route::get('posters', [PresentPosterController::class, 'index'])->name('backend.posters.index');
-            Route::post('poster/create', [PresentPosterController::class, 'store'])->name('backend.poster.store');
+            Route::post('poster/store', [PresentPosterController::class, 'store'])->name('backend.poster.store');
             Route::get('poster/{topic_id}/edit', [PresentPosterController::class, 'edit'])->name('backend.poster.edit');
             Route::put('poster/{topic_id}/update', [PresentPosterController::class, 'update'])->name('backend.poster.update');
             Route::delete('poster/{id}/delete', [PresentPosterController::class, 'destroy'])->name('backend.poster.delete');
+
+            Route::get('orals', [PresentOralController::class, 'index'])->name('backend.orals.index');
+            Route::post('oral/store', [PresentOralController::class, 'store'])->name('backend.oral.store');
+            Route::get('oral/{topic_id}/edit', [PresentOralController::class, 'edit'])->name('backend.oral.edit');
+            Route::put('oral/{topic_id}/update', [PresentOralController::class, 'update'])->name('backend.oral.update');
+            Route::delete('oral/{id}/delete', [PresentOralController::class, 'destroy'])->name('backend.oral.delete');
+
+            Route::get('orals/link', [BackendLinkOralController::class, 'index'])->name('backend.orals.link.index');
+            Route::post('orals/link/store', [BackendLinkOralController::class, 'store'])->name('backend.oral.link.store');
+            Route::post('orals/link/{id}/edit', [BackendLinkOralController::class, 'edit'])->name('backend.oral.link.edit');
+            Route::post('orals/link/{id}/update', [BackendLinkOralController::class, 'update'])->name('backend.oral.link.update');
+            Route::post('orals/link/{id}/delete', [BackendLinkOralController::class, 'destroy'])->name('backend.oral.link.delete');
 
             Route::get('proceeding/{year}', [ProceedingController::class, 'show'])->name('backend.proceeding.index');
 
@@ -209,26 +228,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::get('conference', [ConferenceController::class, 'index'])->name('backend.conference.index');
             Route::get('conference/{conference_id}/edit', [ConferenceController::class, 'edit'])->name('backend.conference.edit');
-            Route::post('conference/create', [ConferenceController::class, 'store'])->name('backend.conference.store');
+            Route::post('conference/store', [ConferenceController::class, 'store'])->name('backend.conference.store');
             Route::put('conference/{id}/update_status', [ConferenceController::class, 'update_status'])->name('backend.conference.update_status');
             Route::put('conference/{id}/update_topic', [ConferenceController::class, 'update_topic'])->name('backend.conference.update_topic');
 
             Route::get('manuals', [ManualController::class, 'index'])->name('backend.manuals.index');
-            Route::post('manual/create', [ManualController::class, 'store'])->name('backend.manual.store');
+            Route::post('manual/store', [ManualController::class, 'store'])->name('backend.manual.store');
             Route::get('manual/{id}/edit', [ManualController::class, 'edit'])->name('backend.manual.edit');
             Route::put('manual/{id}/update', [ManualController::class, 'update'])->name('backend.manual.update');
             Route::delete('manual/{id}/delete', [ManualController::class, 'destroy'])->name('backend.manual.delete');
             Route::put('manual/notice/{id}/update', [ManualController::class, 'notice'])->name('backend.manual.notice.update');
 
             Route::get('downloads', [DownloadController::class, 'index'])->name('backend.downloads.index');
-            Route::post('download/create', [DownloadController::class, 'store'])->name('backend.download.store');
+            Route::post('download/store', [DownloadController::class, 'store'])->name('backend.download.store');
             Route::get('download/{id}/edit', [DownloadController::class, 'edit'])->name('backend.download.edit');
             Route::put('download/{id}/update', [DownloadController::class, 'update'])->name('backend.download.update');
             Route::delete('download/{id}/delete', [DownloadController::class, 'destroy'])->name('backend.download.delete');
             Route::put('download/notice/{id}/update', [DownloadController::class, 'notice'])->name('backend.download.notice.update');
 
             Route::get('lines', [LineController::class, 'index'])->name('backend.lines.index');
-            Route::post('line/create', [LineController::class, 'store'])->name('backend.line.store');
+            Route::post('line/store', [LineController::class, 'store'])->name('backend.line.store');
             Route::get('line/{id}/edit', [LineController::class, 'edit'])->name('backend.line.edit');
             Route::put('line/{id}/update', [LineController::class, 'update'])->name('backend.line.update');
             Route::delete('line/{id}/delete', [LineController::class, 'destroy'])->name('backend.line.delete');

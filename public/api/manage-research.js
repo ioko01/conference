@@ -211,15 +211,15 @@ function update_status(topic_id, status) {
         const _token = $('meta[name="csrf-token"]').attr("content");
         $.ajax({
             method: "PUT",
-            url: "/api/update-status/" + topic_id,
+            url: "/update-status/" + topic_id,
             data: {
                 topic_status: status,
                 _token,
             },
             success: function (data) {
-                data.success
-                    ? window.location.replace("/backend/researchs/management")
-                    : null;
+                if (data.success) {
+                    window.location.replace("/backend/researchs/management");
+                }
             },
             beforeSend: function () {
                 console.log("กำลังโหลด");

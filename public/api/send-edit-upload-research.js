@@ -134,7 +134,7 @@ function send_edit_research_modal(topic_id, type, method) {
     const createModal = `
     <form enctype="multipart/form-data" method="POST" action="/employee/research/send-edit/${
         iType.filter((item) => item === type) ? type : ""
-    }/${topic_id}/${method ? `update` : `create`}">
+    }/${topic_id}/${method ? `update` : `store`}">
         <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
         aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
             <input type="hidden" name="_token" value="${_token}" />
@@ -179,7 +179,7 @@ function send_research_modal(topic_id, type, method) {
     const createModal = `
     <form enctype="multipart/form-data" method="POST" action="/employee/${
         type == "send_word" ? "word" : "pdf"
-    }/${topic_id}/${method ? `upload` : `create`}">
+    }/${topic_id}/${method ? `upload` : `store`}">
         <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
         aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
             <input type="hidden" name="_token" value="${_token}" />
@@ -229,7 +229,7 @@ function payment_modal(topic_id, type, path, method) {
     <form enctype="multipart/form-data" method="POST" ${
         path
             ? `action="/employee/payment/${topic_id}/upload"`
-            : `action="/employee/payment/${topic_id}/create"`
+            : `action="/employee/payment/${topic_id}/store"`
     } class="modal fade"
         id="payment_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="ชำระเงิน"
         aria-hidden="true">

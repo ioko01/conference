@@ -11,7 +11,9 @@ class DownloadController extends Controller
 {
     public function index()
     {
-        $downloads = Download::get();
+        $downloads = Download::leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
+            ->where('conferences.status', 1)
+            ->get();
         return view('backend.pages.download', compact('downloads'));
     }
 
@@ -52,7 +54,9 @@ class DownloadController extends Controller
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
         }
 
-        $downloads = Download::get();
+        $downloads = Download::leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
+            ->where('conferences.status', 1)
+            ->get();
         $this->validator($request);
 
         foreach ($downloads as $download) {
@@ -94,7 +98,9 @@ class DownloadController extends Controller
 
     protected function edit($id)
     {
-        $downloads = Download::get();
+        $downloads = Download::leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
+            ->where('conferences.status', 1)
+            ->get();
         $download = Download::find($id);
         return view('backend.pages.edit_download', compact('downloads', 'download', 'id'));
     }
@@ -107,7 +113,9 @@ class DownloadController extends Controller
         }
 
         $download = Download::find($id);
-        $downloads = Download::get();
+        $downloads = Download::leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
+            ->where('conferences.status', 1)
+            ->get();
         $this->validator($request);
 
         foreach ($downloads as $down) {

@@ -518,42 +518,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>ผลงานนำเสนอ Poster<br /><span class="text-red text-xs fw-bold">คำแนะนำ:
-                                            เปิดใช้งานเมื่อต้องการแสดงผลงานนำเสนอ Poster</span></td>
-                                    <td colspan="2" class="text-left text-xs">-</td>
-                                    <td>
-                                        <form method="POST"
-                                            action="{{ route('backend.conference.update_status', $conference->id) }}"
-                                            class="d-flex">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="custom-control custom-switch">
-                                                <input
-                                                    onchange="javascript:document.getElementById('change_present_poster{{ $key }}').click()"
-                                                    type="checkbox" class="custom-control-input"
-                                                    id="switch_present_poster{{ $key }}"
-                                                    @if ($conference->status_present_poster == 1) checked @endif>
-
-                                                @if ($conference->status_present_poster == 1)
-                                                    <label style="font-size: 10px;"
-                                                        class="custom-control-label text-success"
-                                                        for="switch_present_poster{{ $key }}">เปิดใช้งานอยู่</label>
-                                                @else
-                                                    <label style="font-size: 10px;"
-                                                        class="custom-control-label text-danger"
-                                                        for="switch_present_poster{{ $key }}">ปิดใช้งาน</label>
-                                                @endif
-                                            </div>
-                                            <input type="submit" class="d-none"
-                                                id="change_present_poster{{ $key }}"
-                                                name="change_status_present_poster"
-                                                @if ($conference->status_present_poster == 1) value=0
-                                    @else
-                                    value=1 @endif>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td>ประกาศรายชื่อผู้เข้าร่วมงานทั้งหมด</td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->notice_attend) }}
@@ -621,6 +585,78 @@
                                             <input type="submit" class="d-none" id="change_present{{ $key }}"
                                                 name="change_status_present"
                                                 @if ($conference->status_present == 1) value=0
+                                    @else
+                                    value=1 @endif>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ผลงานนำเสนอ Poster<br /><span class="text-red text-xs fw-bold">คำแนะนำ:
+                                            เปิดใช้งานเมื่อต้องการแสดงผลงานนำเสนอ Poster</span></td>
+                                    <td colspan="2" class="text-left text-xs">-</td>
+                                    <td>
+                                        <form method="POST"
+                                            action="{{ route('backend.conference.update_status', $conference->id) }}"
+                                            class="d-flex">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="custom-control custom-switch">
+                                                <input
+                                                    onchange="javascript:document.getElementById('change_present_poster{{ $key }}').click()"
+                                                    type="checkbox" class="custom-control-input"
+                                                    id="switch_present_poster{{ $key }}"
+                                                    @if ($conference->status_present_poster == 1) checked @endif>
+
+                                                @if ($conference->status_present_poster == 1)
+                                                    <label style="font-size: 10px;"
+                                                        class="custom-control-label text-success"
+                                                        for="switch_present_poster{{ $key }}">เปิดใช้งานอยู่</label>
+                                                @else
+                                                    <label style="font-size: 10px;"
+                                                        class="custom-control-label text-danger"
+                                                        for="switch_present_poster{{ $key }}">ปิดใช้งาน</label>
+                                                @endif
+                                            </div>
+                                            <input type="submit" class="d-none"
+                                                id="change_present_poster{{ $key }}"
+                                                name="change_status_present_poster"
+                                                @if ($conference->status_present_poster == 1) value=0
+                                    @else
+                                    value=1 @endif>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ผลงานนำเสนอ Oral<br /><span class="text-red text-xs fw-bold">คำแนะนำ:
+                                            เปิดใช้งานเมื่อต้องการแสดงผลงานนำเสนอ Oral</span></td>
+                                    <td colspan="2" class="text-left text-xs">-</td>
+                                    <td>
+                                        <form method="POST"
+                                            action="{{ route('backend.conference.update_status', $conference->id) }}"
+                                            class="d-flex">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="custom-control custom-switch">
+                                                <input
+                                                    onchange="javascript:document.getElementById('change_present_oral{{ $key }}').click()"
+                                                    type="checkbox" class="custom-control-input"
+                                                    id="switch_present_oral{{ $key }}"
+                                                    @if ($conference->status_present_oral == 1) checked @endif>
+
+                                                @if ($conference->status_present_oral == 1)
+                                                    <label style="font-size: 10px;"
+                                                        class="custom-control-label text-success"
+                                                        for="switch_present_oral{{ $key }}">เปิดใช้งานอยู่</label>
+                                                @else
+                                                    <label style="font-size: 10px;"
+                                                        class="custom-control-label text-danger"
+                                                        for="switch_present_oral{{ $key }}">ปิดใช้งาน</label>
+                                                @endif
+                                            </div>
+                                            <input type="submit" class="d-none"
+                                                id="change_present_oral{{ $key }}"
+                                                name="change_status_present_oral"
+                                                @if ($conference->status_present_oral == 1) value=0
                                     @else
                                     value=1 @endif>
                                         </form>

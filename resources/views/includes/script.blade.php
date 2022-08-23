@@ -53,4 +53,48 @@
             paginate.init(".list", options, filterOptions);
         </script>
     @endif
+    @if (Request::is('orals'))
+        <script src="{{ asset('vendor/plugins/datatables/datatables.min.js', env('REDIRECT_HTTPS')) }}" defer></script>
+        <script>
+            $(document).ready(function() {
+                $(`.dataTable`).DataTable({
+                    searching: true,
+                    lengthChange: false,
+                    bAutoWidth: false,
+                    aoColumns: [{
+                            sWidth: '15%'
+                        },
+                        {
+                            sWidth: '20%'
+                        },
+                        {
+                            sWidth: 'auto'
+                        }
+                    ],
+                    classes: {
+                        sFilterInput: "form-control w-100",
+                        sLengthSelect: "form-select w-100",
+                        sPageButton: "btn btn-outline-dark rounded-0 mx-1",
+                        sPageButtonActive: "btn btn-dark rounded-0 text-white ",
+                    },
+                    language: {
+                        info: "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                        infoEmpty: "",
+                        sInfoFiltered: "(คัดกรองจาก _MAX_ รายการ)",
+                        sLengthMenu: "แสดง _MENU_ รายการ",
+                        sLoadingRecords: "",
+                        sSearch: "ค้นหา: ",
+                        sZeroRecords: "ไม่มีผลงานนำเสนอ",
+                        paginate: {
+                            sNext: "ถัดไป",
+                            sPrevious: "ก่อนหน้า",
+                            first: "หน้าแรก",
+                            last: "หน้าสุดท้าย",
+                        },
+                    },
+                    dom: '<"text-center"t><"d-flex flex-wrap justify-content-between"ip><"clear">',
+                });
+            });
+        </script>
+    @endif
 @endsection

@@ -219,12 +219,15 @@
                             <td>
                                 @if ($value->status_id >= 8)
                                     @forelse ($comments as $key => $comment)
-                                        <div class="text-start">
-                                            <a target="_blank" href="{{ Storage::url($comment->comment_path) }}">
-                                                {{ ++$key }}. <i
-                                                    style="font-size: 10px;">{{ $comment->comment_name }}</i>
-                                            </a>
-                                        </div>
+                                        @if ($comment->comment_topic_id == $value->topic_id)
+                                            <div class="text-start">
+                                                <a class="text-green" target="_blank"
+                                                    href="{{ Storage::url($comment->comment_path) }}">
+                                                    <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
+                                                </a>
+                                            </div>
+                                            <hr class="my-1" />
+                                        @endif
                                     @empty
                                         <strong class="text-warning">(รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)</strong>
                                     @endforelse

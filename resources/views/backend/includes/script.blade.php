@@ -52,23 +52,32 @@
     Request::is('backend/downloads') ||
     Request::is('backend/manual/*/edit') ||
     Request::is('backend/manuals'))
-    <script src="{{ asset('js/download_and_manual.js', env('REDIRECT_HTTPS')) }}"></script>
-    <script src="{{ asset('api/change_notice.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('js/download-and-manual.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('api/change-notice.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('backend/poster/*/edit') ||
     Request::is('backend/posters') ||
+    Request::is('backend/oral/*/edit') ||
+    Request::is('backend/orals') ||
     Request::is('backend/line/*/edit') ||
     Request::is('backend/lines') ||
     Request::is('backend/download/*/edit') ||
     Request::is('backend/downloads') ||
     Request::is('backend/manual/*/edit') ||
-    Request::is('backend/manuals'))
+    Request::is('backend/manuals') ||
+    Request::is('backend/orals/link') ||
+    Request::is('backend/orals/link/*/edit'))
     <script src="{{ asset('api/delete.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('backend/posters') || Request::is('backend/poster/*/edit'))
     <script src="{{ asset('js/present-poster.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('api/get-research-with-topic-id.js', env('REDIRECT_HTTPS')) }}"></script>
+@endif
+
+@if (Request::is('backend/orals') || Request::is('backend/oral/*/edit'))
+    <script src="{{ asset('js/present-oral.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('api/get-research-with-topic-id.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 

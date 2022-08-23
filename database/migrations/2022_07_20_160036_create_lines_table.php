@@ -17,7 +17,7 @@ class CreateLinesTable extends Migration
             $table->id();
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
-            $table->string('link')->nullable()->comment('ลิงค์');
+            $table->text('link')->nullable()->comment('ลิงค์');
             $table->string('name')->nullable()->comment('ชื่อไฟล์');
             $table->string('path')->nullable()->comment('แหล่งที่อยู่ไฟล์');
             $table->string('extension')->nullable()->comment('นามสกุลไฟล์');

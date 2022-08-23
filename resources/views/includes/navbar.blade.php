@@ -108,8 +108,10 @@
                             รายชื่อ
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('list.research.index') }}">รายชื่อบทความ</a></li>
-                            <li><a class="dropdown-item" href="{{ route('list.attend.index') }}">รายชื่อผู้ลงทะเบียน</a>
+                            <li><a class="dropdown-item {{ Request::is('list/research') ? 'active' : '' }}"
+                                    href="{{ route('list.research.index') }}">รายชื่อบทความ</a></li>
+                            <li><a class="dropdown-item {{ Request::is('list/attend') ? 'active' : '' }}"
+                                    href="{{ route('list.attend.index') }}">รายชื่อผู้ลงทะเบียน</a>
                             </li>
                         </ul>
                     </li>
@@ -178,13 +180,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
-                                    aria-current="page" href="#">ลิงค์นำเสนอผลงาน Oral</a>
+                                <a class="dropdown-item {{ Request::is('orals/link') ? 'active' : '' }}"
+                                    aria-current="page" href="{{ route('orals.link.index') }}">ลิงค์นำเสนอผลงาน Oral</a>
                             </li>
 
                             <li>
-                                <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
-                                    aria-current="page" href="#">ผลงานนำเสนอ Oral</a>
+                                <a class="dropdown-item {{ Request::is('orals') ? 'active' : '' }}" aria-current="page"
+                                    href="{{ route('orals.index') }}">ผลงานนำเสนอ Oral</a>
                             </li>
 
                             <li>

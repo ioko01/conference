@@ -19,8 +19,8 @@
         </div>
 
         <div id="poster" class="row my-5">
-            @forelse ($present_posters as $present_poster)
-                @if ($present_poster->status_present_poster == 1)
+            @if ($conference->status_present_poster == 1)
+                @forelse ($present_posters as $present_poster)
                     <div class="col-lg-2 col-md-4 col-sm-6 my-3">
                         <div style="width: 90%;" class="animated fade-up card rounded-0 mx-auto">
                             <div class="card-content w-100 h-100">
@@ -46,12 +46,13 @@
                             </div>
                         </div>
                     </div>
-                @else
+                @empty
                     <div class="text-center h2 text-red">ไม่มีผลงานนำเสนอ Poster Presentation</div>
-                @endif
-            @empty
-                <div class="text-center h2 text-red">ไม่มีผลงานนำเสนอ Poster Presentation</div>
-            @endforelse
+                @endforelse
+            @else
+                <div class="text-center h2 text-red">ยังไม่เปิดใช้งาน</div>
+            @endif
+
 
         </div>
 

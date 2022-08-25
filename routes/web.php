@@ -39,6 +39,7 @@ use App\Http\Controllers\SendEditStatementTwoController;
 use App\Http\Controllers\SendEditWordTwoController;
 use App\Http\Controllers\StatusUpdateController;
 use App\Http\Controllers\UploadfileController;
+use App\Models\Conference;
 use App\Models\Download;
 use App\Models\Line;
 use App\Models\Manual;
@@ -151,6 +152,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::middleware('is_admin')->group(function () {
+
+        Route::get('conference/open', function () {
+            return Conference::where('status', 1)->get();
+        });
 
         Route::put('update-status/{id}', [StatusUpdateController::class, 'update']);
 

@@ -7,6 +7,7 @@ use App\Models\Conference;
 use App\Models\Faculty;
 use App\Models\LinkOral;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LinkOralController extends Controller
 {
@@ -35,6 +36,9 @@ class LinkOralController extends Controller
             ->leftjoin('faculties', 'faculties.id', 'link_orals.faculty_id')
             ->where('conferences.status', 1)
             ->get();
+        foreach ($link_orals as $link_oral) {
+            $link_oral->path = Storage::url($link_oral->path);
+        }
         return view('backend.pages.oral_link', compact('faculties', 'link_orals'));
     }
 

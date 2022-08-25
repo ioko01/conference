@@ -202,18 +202,18 @@
                  *
                  * Tambien se encarga de agregar el boton de "gotopage" y "pagecounter"
                  **/
-                let buttons = "<input type='button' value='← ก่อนหน้า' class='paginate_control_prev' onclick='paginate.sort(" + (currentPage - 1) + ")' " + prevDisabled + ">";
+                let buttons = "<input type='button' value='ก่อนหน้า' class='paginate_control_prev' onclick='paginate.sort(" + (currentPage - 1) + ")' " + prevDisabled + ">";
                 let buttonNumberOfPage = "<input type='button' value='" + currentPage + ' - ' + numberOfPage + "' disabled>";
 
                 for (let $i = 1; $i <= numberOfPage; $i++) {
                     if (numberOfPage > 10) {
                         buttons += paginationMoreThatTenPage($i, numberOfPage);
                     } else {
-                        buttons += "<input type='button' id='id" + $i + "'value='" + $i + "' onclick='paginate.sort(" + $i + ")'>";
+                        buttons += "<input class='btn btn-outline-success rounded-0' type='button' id='id" + $i + "'value='" + $i + "' onclick='paginate.sort(" + $i + ")'>";
                     }
                 }
 
-                let nextButton = "<input type='button' value='ถัดไป →' class='paginate_control_next' onclick='paginate.sort(" + (currentPage + 1) + ")' " + nextDisabled + ">";
+                let nextButton = "<input type='button' value='ถัดไป' class='paginate_control_next' onclick='paginate.sort(" + (currentPage + 1) + ")' " + nextDisabled + ">";
                 buttons += nextButton;
 
                 if (settings.pageCounter)

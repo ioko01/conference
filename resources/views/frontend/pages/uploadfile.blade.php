@@ -69,10 +69,12 @@
                                                 เพิ่มวิดีโอ</button>
                                         @endif
                                     @else
+                                        @if (!$value->video_link)
+                                            <strong class="text-red d-block">หมดเวลาส่งวิดีโอ</strong>
+                                        @endif
                                         {{-- <strong class="text-red d-block">หมดเวลาส่งวิดีโอ</strong> --}}
                                     @endif
                                 @else
-                                    
                                 @endif
 
                             </td>
@@ -103,10 +105,11 @@
                                                 เพิ่ม Poster</button>
                                         @endif
                                     @else
-                                        {{-- <strong class="text-red d-block">หมดเวลาส่งโปสเตอร์</strong> --}}
+                                        @if (!$value->poster_name)
+                                            <strong class="text-red d-block">หมดเวลาส่งโปสเตอร์</strong>
+                                        @endif
                                     @endif
                                 @else
-                                    
                                 @endif
 
                             </td>

@@ -97,8 +97,13 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $link_oral->room }}</td>
-                                    <td>{{ $link_oral->link }}</td>
-                                    <td><img src="{{ Storage::url($link_oral->path) }}"></td>
+                                    <td><a href="{{ $link_oral->link }}" target="_blank"
+                                            rel="noopener noreferrer">{{ $link_oral->link }}</a></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-link"
+                                            onclick="open_modal_default('#modal', 'sm', 'QR Code', {{ $link_oral }})"><i
+                                                class="fa fa-search-plus"> </i> ดูภาพ</button>
+                                    </td>
                                     <td>{{ $link_oral->faculty_name }}</td>
                                     <td class="text-right"><a href="{{ route('backend.oral.link.edit', $link_oral->id) }}"
                                             class="btn btn-sm text-white btn-warning rounded-0"><i class="fa fa-edit"></i>

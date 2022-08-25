@@ -36,46 +36,28 @@
         <script src="{{ asset('js/default-modal.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('employee/research/show/*') || Request::is('list/*'))
-        <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
-        <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
-        <script>
-            let options = {
-                numberPerPage: 10, //Cantidad de datos por pagina
-                goBar: true, //Barra donde puedes digitar el numero de la pagina al que quiere ir
-                pageCounter: true, //Contador de paginas, en cual estas, de cuantas paginas
-            };
-
-            let filterOptions = {
-                el: "#search", //Caja de texto para filtrar, puede ser una clase o un ID
-            };
-
-            paginate.init(".list", options, filterOptions);
-        </script>
+    @if (Request::is('orals/link'))
+        <script src="{{ asset('js/oral-detail-modal.js', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/default-modal.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
-    @if (Request::is('orals'))
+
+    @if (Request::is('employee/research/show/*') ||
+        Request::is('list/*') ||
+        Request::is('orals') ||
+        Request::is('orals/link'))
         <script src="{{ asset('vendor/plugins/datatables/datatables.min.js', env('REDIRECT_HTTPS')) }}" defer></script>
         <script>
             $(document).ready(function() {
                 $(`.dataTable`).DataTable({
+                    pageLength: 10,
                     searching: true,
-                    lengthChange: false,
+                    lengthChange: true,
                     bAutoWidth: false,
-                    aoColumns: [{
-                            sWidth: '15%'
-                        },
-                        {
-                            sWidth: '20%'
-                        },
-                        {
-                            sWidth: 'auto'
-                        }
-                    ],
                     classes: {
-                        sFilterInput: "form-control w-100",
+                        sFilterInput: "form-control",
                         sLengthSelect: "form-select w-100",
-                        sPageButton: "btn btn-outline-dark rounded-0 mx-1",
-                        sPageButtonActive: "btn btn-dark rounded-0 text-white ",
+                        sPageButton: "btn btn-outline-green rounded-0 mx-1",
+                        sPageButtonActive: "btn btn-green rounded-0 text-white ",
                     },
                     language: {
                         info: "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",
@@ -84,7 +66,7 @@
                         sLengthMenu: "แสดง _MENU_ รายการ",
                         sLoadingRecords: "",
                         sSearch: "ค้นหา: ",
-                        sZeroRecords: "ไม่มีผลงานนำเสนอ",
+                        sZeroRecords: "ไม่มีข้อมูลในตาราง",
                         paginate: {
                             sNext: "ถัดไป",
                             sPrevious: "ก่อนหน้า",
@@ -92,7 +74,7 @@
                             last: "หน้าสุดท้าย",
                         },
                     },
-                    dom: '<"text-center"t><"d-flex flex-wrap justify-content-between"ip><"clear">',
+                    dom: '<"top mb-3 w-100"f><"text-center"t><"d-flex flex-wrap justify-content-between"ip><"clear">',
                 });
             });
         </script>

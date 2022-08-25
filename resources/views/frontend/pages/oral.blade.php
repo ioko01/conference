@@ -20,49 +20,46 @@
         <div id="oral" class="my-5">
             <div class="row">
                 <div class="col-md-10 mx-auto">
-                    @if ($conference->status_present_oral == 1)
+                    @if (isset($conference->status_present_oral) && $conference->status_present_oral == 1)
                         @if (count($present_orals) > 0)
                             @forelse ($faculties as $key => $faculty)
-                                <div class="animate fade-up">
-                                    <div class="card p-0 rounded-0 my-5">
-                                        <div class="card-content">
-                                            <div style="border-radius: inherit;" class="card-header">
-                                                <h1>
-                                                    <strong class="text-{{ $colors[$key] }}"><i class="fas fa-book"></i>
-                                                        {{ $faculty->name }}
-                                                    </strong>
-                                                </h1>
-                                            </div>
-                                            <div class="card-body">
-                                                <table class="dataTable table w-100">
-                                                    <thead>
-                                                        <tr class="text-center">
-                                                            <th>รหัสการนำเสนอ</th>
-                                                            <th>เวลา</th>
-                                                            <th class="text-start">ชื่อบทความ</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @forelse ($present_orals as $key => $present_oral)
-                                                            @if ($faculty->name == $present_oral->name)
-                                                                <tr class="text-center">
-                                                                    <td>{{ $present_oral->present_oral_id }}</td>
-                                                                    <td>{{ substr($present_oral->time_start, 0, -3) }} -
-                                                                        {{ substr($present_oral->time_end, 0, -3) }} น.</td>
-                                                                    <td class="text-start">{{ $present_oral->topic_th }}
-                                                                    </td>
-                                                                </tr>
-                                                            @endif
-                                                        @empty
-                                                            <tr class="text-center">
-                                                                <td colspan="4">ไม่มีบทความ</td>
-                                                            </tr>
-                                                        @endforelse
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                <div class="animate fade-up my-5 border border-{{ $colors[$key] }}">
+                                    <div class="bg-{{ $colors[$key] }} p-4">
+                                        <h1>
+                                            <strong class="text-white"><i class="fas fa-book"></i>
+                                                {{ $faculty->name }}
+                                            </strong>
+                                        </h1>
                                     </div>
+                                    <div class="p-4 text-dark">
+                                        <table style="color: inherit;" class="dataTable table w-100">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th style="width: 15%;">รหัสการนำเสนอ</th>
+                                                    <th style="width: 20%;">เวลา</th>
+                                                    <th style="width: auto%;" class="text-start">ชื่อบทความ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($present_orals as $key => $present_oral)
+                                                    @if ($faculty->name == $present_oral->name)
+                                                        <tr class="text-center">
+                                                            <td>{{ $present_oral->present_oral_id }}</td>
+                                                            <td>{{ substr($present_oral->time_start, 0, -3) }} -
+                                                                {{ substr($present_oral->time_end, 0, -3) }} น.</td>
+                                                            <td class="text-start">{{ $present_oral->topic_th }}
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @empty
+                                                    <tr class="text-center">
+                                                        <td colspan="4">ไม่มีบทความ</td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
                             @empty
                             @endforelse

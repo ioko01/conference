@@ -99,7 +99,15 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <img width="100%" src="{{ Storage::url($present_poster->path) }}" alt="poster">
+                                        <div onclick="open_modal_default('#modal', 'xl', 'โปสเตอร์', {{ $present_poster }})"
+                                            style="clip-path: inset(0px 0px);" class="card-body position-relative p-0">
+                                            <div class="img-expand-hover">
+                                                <i class="fas fa-2x fa-search-plus text-white"> <span
+                                                        class="text-sm">ดูภาพขนาดใหญ่</span></i>
+                                            </div>
+                                            <img width="100%" src="{{ $present_poster->path }}"
+                                                alt="{{ $present_poster->topic_th }}">
+                                        </div>
                                     </td>
                                     <td class="text-right"><a
                                             href="{{ route('backend.poster.edit', $present_poster->id) }}"

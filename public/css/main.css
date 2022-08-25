@@ -27,6 +27,13 @@ html {
     font-size: calc(10px + 0.2vw);
 }
 
+.dataTables_filter > label {
+    display: flex !important;
+    gap: 1rem;
+    align-items: center;
+    color: inherit !important;
+}
+
 .single-text-ellipsis {
     white-space: nowrap;
     width: 100%;
@@ -384,6 +391,40 @@ input[type="number"] {
     border-color: var(--color-green);
 }
 
+.btn-outline-green {
+    color: var(--color-green);
+    border-color: var(--color-green);
+}
+
+.btn-outline-green:hover {
+    color: #fff;
+    border-color: var(--color-green);
+    background-color: var(--color-green);
+}
+
+.btn.btn-inherit {
+    border-color: inherit;
+    background-color: inherit;
+}
+
+.btn-inherit:hover {
+    opacity: 0.8;
+    background-color: inherit;
+    border-color: inherit;
+}
+
+.btn.btn-outline-inherit {
+    color: inherit;
+    border-color: inherit;
+    background-color: inherit;
+}
+
+.btn-outline-inherit:hover {
+    color: inherit;
+    border-color: inherit;
+    background-color: inherit;
+}
+
 a {
     text-decoration: none;
 }
@@ -500,6 +541,10 @@ a {
 
 .text-red {
     color: red;
+}
+
+.text-inherit {
+    color: inherit;
 }
 
 .footer-menu ul {

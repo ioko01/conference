@@ -43,7 +43,3 @@ Route::get('research/countdown', function () {
     //     ->where('conferences.status', 1)
     //     ->get();
 });
-
-Route::get('conference/open', function () {
-    return Conference::where('status', 1)->get();
-});

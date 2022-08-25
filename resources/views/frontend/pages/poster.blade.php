@@ -19,7 +19,7 @@
         </div>
 
         <div id="poster" class="row my-5">
-            @if ($conference->status_present_poster == 1)
+            @if (isset($conference->status_present_poster) && $conference->status_present_poster == 1)
                 @forelse ($present_posters as $present_poster)
                     <div class="col-lg-2 col-md-4 col-sm-6 my-3">
                         <div style="width: 90%;" class="animated fade-up card rounded-0 mx-auto">

@@ -71,6 +71,11 @@
     <script src="{{ asset('api/delete.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
+@if (Request::is('backend/lines') || Request::is('backend/line/*/edit'))
+    <script src="{{ asset('js/line-detail-modal.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('js/default-modal.js', env('REDIRECT_HTTPS')) }}"></script>
+@endif
+
 @if (Request::is('backend/orals/link') || Request::is('backend/orals/link/*/edit'))
     <script src="{{ asset('js/oral-detail-modal.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('js/default-modal.js', env('REDIRECT_HTTPS')) }}"></script>

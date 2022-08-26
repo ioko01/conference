@@ -55,10 +55,10 @@
                                             <div class="text-start">
                                                 <a class="text-green" target="_blank"
                                                     href="{{ Storage::url($comment->comment_path) }}">
-                                                    <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
+                                                    &bull; <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
                                                 </a>
                                             </div>
-                                            <hr class="my-1" />
+                                            <div style="border-bottom: 1px dotted #ccc;" class="my-2"></div>
                                         @endif
                                     @empty
                                         <strong class="text-warning">(รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)</strong>
@@ -77,7 +77,7 @@
                                         {{ thaiDateFormat($value->edit_word_update, true) }}</i>
                                     <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->edit_word_path) }}">
-                                        ดูตัวอย่าง
+                                        <i class="fas fa-search"></i> ดูตัวอย่าง
                                     </a>
                                 @endif
                                 @if ($value->status_research_edit == 1)
@@ -120,7 +120,7 @@
                                         {{ thaiDateFormat($value->edit_word_update, true) }}</i>
                                     <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->edit_pdf_path) }}">
-                                        ดูตัวอย่าง
+                                        <i class="fas fa-search"></i> ดูตัวอย่าง
                                     </a>
                                 @endif
                                 @if ($value->status_research_edit === 1)
@@ -162,7 +162,7 @@
                                         {{ thaiDateFormat($value->edit_stm_update, true) }}</i>
                                     <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->edit_stm_path) }}">
-                                        ดูตัวอย่าง
+                                        <i class="fas fa-search"></i> ดูตัวอย่าง
                                     </a>
                                 @endif
                                 @if ($value->status_research_edit === 1)

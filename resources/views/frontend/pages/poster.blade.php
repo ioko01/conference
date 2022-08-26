@@ -24,8 +24,12 @@
                     <div class="col-lg-2 col-md-4 col-sm-6 my-3">
                         <div style="width: 90%;" class="animated fade-up card rounded-0 mx-auto">
                             <div class="card-content w-100 h-100">
-                                <div class="card-header text-center bg-white">
-                                    <h2>{{ $present_poster->present_poster_id }}</h2>
+                                <div class="card-header text-center bg-green rounded-0">
+                                    <h2>
+                                        <strong style="font-size: calc(12px + .5vw);">
+                                            {{ $present_poster->present_poster_id }}
+                                        </strong>
+                                    </h2>
                                 </div>
                                 <div onclick="open_modal_default('#modal_poster', 'xl', 'โปสเตอร์', {{ $present_poster }})"
                                     style="clip-path: inset(0px 0px);" class="card-body position-relative p-0">
@@ -37,11 +41,14 @@
                                         alt="{{ $present_poster->topic_th }}">
                                 </div>
                                 <div class="card-footer bg-white">
-                                    <p>ลิงค์: <br /><a target="_blank"
-                                            href="{{ $present_poster->link }}">{{ $present_poster->link }}</a>
-                                    </p>
-                                    <p>ชื่อบทความ: <br />
-                                        {{ $present_poster->topic_th }}</p>
+                                    <strong>
+                                        <p>ลิงค์: <br /><a target="_blank"
+                                                href="{{ $present_poster->link }}">{{ $present_poster->link }}</a>
+                                        </p>
+                                        <p>ชื่อบทความ: <br />
+                                            {{ $present_poster->topic_th }}</p>
+                                    </strong>
+
                                 </div>
                             </div>
                         </div>

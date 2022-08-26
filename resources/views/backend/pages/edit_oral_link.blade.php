@@ -4,9 +4,10 @@
     <div class="card">
         <div class="card-content">
             <div class="card-body">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('backend.oral.link.store') }}"
-                    class="mb-3">
+                <form method="POST" enctype="multipart/form-data"
+                    action="{{ route('backend.oral.link.update', $link_oral->id) }}" class="mb-3">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="faculty_id">กลุ่มบทความ</label>
@@ -16,7 +17,8 @@
                                     @if ($loop->first)
                                         <option value="">-- เลือกกลุ่มบทความ --</option>
                                     @endif
-                                    <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                                    <option value="{{ $faculty->id }}" @if ($link_oral->faculty_id == $faculty->id) selected @endif>
+                                        {{ $faculty->name }}</option>
                                 @empty
                                     <option value="">ไม่มีกลุ่ม</option>
                                 @endforelse
@@ -31,7 +33,7 @@
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="room">ชื่อห้อง</label>
-                            <input value="{{ old('room') }}" type="text" name="room" id="room"
+                            <input value="{{ $link_oral->room }}" type="text" name="room" id="room"
                                 class="form-control rounded-0 @error('room') is-invalid @enderror">
                             @error('room')
                                 <span class="invalid-feedback" role="alert">
@@ -43,7 +45,7 @@
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="link">Link</label>
-                            <input value="{{ old('link') }}" type="text" name="link" id="link"
+                            <input value="{{ $link_oral->link }}" type="text" name="link" id="link"
                                 class="form-control rounded-0 @error('link') is-invalid @enderror">
                             @error('link')
                                 <span class="invalid-feedback" role="alert">
@@ -54,19 +56,33 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="file">QR Code</label>
-                            <input accept=".jpg, .jpeg, .png" type="file" name="file" id="file"
-                                class="form-control rounded-0 @error('file') is-invalid @enderror">
-                            @error('file')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="mb-3">
+                                <label class="form-check-label" for="file">
+                                    QR Code <i style="font-size: 12px;" class="text-red">(แนะนำเฉพาะไฟล์ที่มีขนาดเล็ก
+                                        ขนาดไฟล์ใหญ่สุดคือ 10 MB)</i>
+                                </label>
+
+                                <div class="mb-3" style="position: relative">
+                                    <label class="label-type-file mb-0 @error('file') is-invalid @enderror"
+                                        for="file">{{ $link_oral->name ? $link_oral->name : 'ไม่ได้เลือกไฟล์ใด' }}</label>
+                                    <input type="hidden" value="{{ $link_oral->name }}" name="name_file" id="name_file">
+
+                                    <input onchange="get_file_name(this)" type="file" name="file" id="file"
+                                        class="form-control d-none rounded-0 @error('file') is-invalid @enderror"
+                                        accept=".jpg, .jpeg, .png">
+
+                                    @error('file')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-success rounded-0"><i class="fa fa-save"></i> บันทึก</button>
+                            <button class="btn btn-warning text-white rounded-0"><i class="fa fa-edit"></i> แก้ไข</button>
                         </div>
                     </div>
                 </form>

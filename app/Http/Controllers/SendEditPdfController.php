@@ -21,8 +21,8 @@ class SendEditPdfController extends Controller
 
         $upload = $request->file('pdf_upload');
         $extension = $upload->extension();
-        $name = strval($id) . "_edit." . $extension;
-        $path = 'public/edits/pdf/conference_id_' . auth()->user()->conference_id;
+        $name = strval($id) . "_บทความแก้ไข." . $extension;
+        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความแก้ไข/pdf';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

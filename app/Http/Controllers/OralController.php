@@ -15,6 +15,7 @@ class OralController extends Controller
     public function index()
     {
         $conference = Conference::where('status', 1)->first();
+        $tips = Tip::where('group', '1')->get();
         $present_orals = PresentOral::select(
             'present_orals.id as id',
             'present_orals.topic_th as topic_th',
@@ -33,7 +34,7 @@ class OralController extends Controller
         $faculties = Faculty::get();
 
         $colors = ["primary", "info", "warning", "success", "danger"];
-        return view('frontend.pages.oral', compact('present_orals', 'conference', 'faculties', 'colors'));
+        return view('frontend.pages.oral', compact('present_orals', 'conference', 'faculties', 'colors', 'tips'));
     }
 
     

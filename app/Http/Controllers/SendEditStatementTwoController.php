@@ -21,8 +21,8 @@ class SendEditStatementTwoController extends Controller
 
         $upload = $request->file('stm_upload');
         $extension = $upload->extension();
-        $name = strval($id) . "_statement_2." . $extension;
-        $path = 'public/edits_two/statements/conference_id_' . auth()->user()->conference_id;
+        $name = strval($id) . "_แบบคำชี้แจงการปรับแก้ไขบทความครั้งที่_2." . $extension;
+        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความแก้ไขครั้งที่_2/แบบคำชี้แจงการปรับแก้ไขบทความ';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

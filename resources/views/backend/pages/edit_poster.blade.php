@@ -35,7 +35,7 @@
                                     @if ($loop->first)
                                         <option value="">-- เลือกกลุ่มบทความ --</option>
                                     @endif
-                                    <option value="{{ $faculty->id }}" @if ($present_poster->present_poster_faculty_id == $faculty->id) selected @endif>
+                                    <option value="{{ $faculty->id }}" @if ($present_poster->faculty_id == $faculty->id) selected @endif>
                                         {{ $faculty->name }}</option>
                                 @empty
                                     <option value="">ไม่มีกลุ่ม</option>
@@ -98,16 +98,10 @@
                                             <strong class="text-primary text-sm">{{ $present_poster->link }}</strong>
                                         </a>
                                     </td>
-                                    <td>
-                                        <div onclick="open_modal_default('#modal', 'xl', 'โปสเตอร์', {{ $present_poster }})"
-                                            style="clip-path: inset(0px 0px);" class="card-body position-relative p-0">
-                                            <div class="img-expand-hover">
-                                                <i class="fas fa-2x fa-search-plus text-white"> <span
-                                                        class="text-sm">ดูภาพขนาดใหญ่</span></i>
-                                            </div>
-                                            <img width="100%" src="{{ $present_poster->path }}"
-                                                alt="{{ $present_poster->topic_th }}">
-                                        </div>
+                                    <td class="text-center">
+                                        <button class="btn btn-link"
+                                            onclick="open_modal_default('#modal', 'xl', 'โปสเตอร์', {{ $present_poster }})"><i
+                                                class="fa fa-search-plus"> </i> ดูภาพ</button>
                                     </td>
                                     <td class="text-right"><a
                                             href="{{ route('backend.poster.edit', $present_poster->id) }}"

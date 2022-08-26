@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
             $table->string('topic_id')->comment('รหัสบทความ');
             $table->text('name')->nullable()->comment('ชื่อไฟล์');
-            $table->text('path')->nullable()->comment('path');
+            $table->text('path')->nullable()->comment('แหล่งที่อยู่ไฟล์');
             $table->string('extension')->nullable()->comment('นามสกุลไฟล์');
             $table->timestamps();
         });

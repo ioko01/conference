@@ -21,8 +21,8 @@ class SendEditStatementController extends Controller
 
         $upload = $request->file('stm_upload');
         $extension = $upload->extension();
-        $name = strval($id) . "_statement." . $extension;
-        $path = 'public/edits/statements/conference_id_' . auth()->user()->conference_id;
+        $name = strval($id) . "_แบบคำชี้แจงการปรับแก้ไขบทความ." . $extension;
+        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความแก้ไข/แบบคำชี้แจงการปรับแก้ไขบทความ';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

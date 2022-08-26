@@ -21,7 +21,7 @@ class WordController extends Controller
         $upload = $request->file('word_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/files/words/conference_id_' . auth()->user()->conference_id;
+        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความ/words';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

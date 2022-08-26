@@ -76,7 +76,7 @@ class DownloadController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/assets/files/conference_id_' . auth()->user()->conference_id;
+            $path = 'public/conference_id_' . auth()->user()->conference_id . '/ไฟล์/ดาวน์โหลด';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }
@@ -150,7 +150,7 @@ class DownloadController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/assets/files/conference_id_' . auth()->user()->conference_id;
+            $path = 'public/conference_id_' . auth()->user()->conference_id . '/ไฟล์/ดาวน์โหลด';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }

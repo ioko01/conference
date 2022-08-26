@@ -42,7 +42,7 @@ class CommentFileUploadController extends Controller
                 $upload = $file;
                 $extension = $upload->extension();
                 $name = $upload->getClientOriginalName();
-                $path = "public/comments/conference_id_" . auth()->user()->conference_id . "/$id";
+                $path = 'public/conference_id_' . auth()->user()->conference_id . '/ไฟล์คอมเมนต์' . '/' . $id;
                 $full_path = $path . "/" . $name;
 
                 $data = array_filter([

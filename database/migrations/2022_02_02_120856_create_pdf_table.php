@@ -19,7 +19,7 @@ class CreatePdfTable extends Migration
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
             $table->string('topic_id')->comment('รหัสบทความ');
             $table->text('name')->comment('ชื่อไฟล์');
-            $table->text('path')->comment('path ไฟล์');
+            $table->text('path')->comment('แหล่งที่อยู่ไฟล์');
             $table->string('extension')->comment('นามสกุลไฟล์');
             $table->timestamps();
         });

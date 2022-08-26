@@ -210,9 +210,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::get('orals/link', [BackendLinkOralController::class, 'index'])->name('backend.orals.link.index');
             Route::post('orals/link/store', [BackendLinkOralController::class, 'store'])->name('backend.oral.link.store');
-            Route::post('orals/link/{id}/edit', [BackendLinkOralController::class, 'edit'])->name('backend.oral.link.edit');
-            Route::post('orals/link/{id}/update', [BackendLinkOralController::class, 'update'])->name('backend.oral.link.update');
-            Route::post('orals/link/{id}/delete', [BackendLinkOralController::class, 'destroy'])->name('backend.oral.link.delete');
+            Route::get('orals/link/{id}/edit', [BackendLinkOralController::class, 'edit'])->name('backend.oral.link.edit');
+            Route::put('orals/link/{id}/update', [BackendLinkOralController::class, 'update'])->name('backend.oral.link.update');
+            Route::delete('orals/link/{id}/delete', [BackendLinkOralController::class, 'destroy'])->name('backend.oral.link.delete');
 
             Route::get('proceeding/{year}', [ProceedingController::class, 'show'])->name('backend.proceeding.index');
 

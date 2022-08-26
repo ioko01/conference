@@ -6,7 +6,6 @@
  * @returns HTML Design
  */
 function modal_detail(data) {
-    console.log(data);
     return `<div class="row">
         <div class="col-md-12 text-center">
             <h2 class="text-center fw-bold text-blue">${data.room}</h2>

@@ -16,6 +16,7 @@ class LinkOral extends Model
         'path',
         'extension',
         'faculty_id',
-        'conference_id'
+        'conference_id',
+        'name'
     ];
 }

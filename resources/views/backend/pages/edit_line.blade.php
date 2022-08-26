@@ -104,8 +104,9 @@
                                         </td>
                                         <td>
                                             @if ($line->line_name)
-                                                <a target="_blank"
-                                                    href="{{ Storage::url($line->line_path) }}">{{ $line->line_name }}</a>
+                                                <button class="btn btn-link"
+                                                    onclick="open_modal_default('#modal', 'md', 'QR Code', {{ $line }})"><i
+                                                        class="fa fa-search-plus"> </i> ดูภาพ</button>
                                             @else
                                                 -
                                             @endif

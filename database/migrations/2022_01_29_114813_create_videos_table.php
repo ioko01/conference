@@ -20,7 +20,7 @@ class CreateVideosTable extends Migration
             $table->string('topic_id')->comment('รหัสบทความ');
             $table->text('name')->nullable()->comment('ชื่อ video');
             $table->text('file')->nullable()->comment('ไฟล์ video');
-            $table->text('path')->nullable()->comment('path video');
+            $table->text('path')->nullable()->comment('แหล่งที่อยู่ไฟล์');
             $table->text('link')->nullable()->comment('ลิงค์ video');
             $table->string('extension')->nullable()->comment('นามสกุล video');
             $table->timestamps();

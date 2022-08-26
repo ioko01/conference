@@ -29,13 +29,13 @@
                             <tr class="text-center pagination-header">
                                 <th style="width: 5%;">#</th>
                                 <th style="width: 30%;" class="text-start">รายละเอียดบทความ</th>
-                                <th style="width: 10%;">สังกัด/หน่วยงาน</th>
                                 <th style="width: 5%;">Slip<br />ชำระเงิน</th>
                                 <th style="width: 5%;">ไฟล์<br />WORD</th>
                                 <th style="width: 5%;">ไฟล์<br />PDF</th>
                                 <th style="width: 10%;">สถานะบทความ</th>
                                 <th style="width: 10%;">รายละเอียด</th>
                                 <th style="width: 20%;">ส่งไฟล์ไปให้นักวิจัยแก้ไข</th>
+                                <th style="width: 10%;">แก้ไข</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,24 +52,24 @@
                                             @endif
                                         </strong>
                                         <br />
+                                        <strong style="font-size: 12px" class="text-primary">สังกัด /
+                                            หน่วยงาน : {{ $value->institution }}</strong>
+                                        <br />
                                         <strong>
                                             {{ $value->topic_th }}@if ($value->user_id == auth()->user()->id)
                                                 <i class="text-bluesky"> (ฉัน)</i>
                                             @endif
                                         </strong>
                                         <br />
-                                        <strong style="font-size: 12px"
-                                            class="text-green">{{ str_replace('|', ', ', $value->presenter) }}</strong>
+                                        <strong style="font-size: 12px" class="text-green">ผู้นำเสนอ :
+                                            {{ str_replace('|', ', ', $value->presenter) }}</strong>
                                         <br />
                                         <p class="text-secondary">
                                             <i style="font-size: 10px" class="d-block">อัพโหลด
                                                 {{ thaiDateFormat($value->created_at, true, true) }}</i>
-                                            <i style="font-size: 10px" class="d-block">แก้ไขเมื่อ
+                                            <i style="font-size: 10px" class="d-block">แก้ไข
                                                 {{ thaiDateFormat($value->updated_at, true, true) }}</i>
                                         </p>
-                                    </td>
-                                    <td>
-                                        {{ $value->institution }}
                                     </td>
                                     <td>
                                         @if (empty($value->payment))
@@ -112,22 +112,23 @@
                                     </td>
                                     <td>
                                         @if ($value->status_id >= 7)
-                                            <div>
+                                            <div class="text-start">
                                                 @foreach ($comments as $comment)
                                                     @if ($value->topic_id == $comment->comment_topic_id)
                                                         @if ($comment->comment_path)
-                                                            <a target="_blank"
+                                                            <a target="_blank" class="text-info"
                                                                 href="{{ Storage::url($comment->comment_path) }}"
                                                                 title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
-                                                                <i style="font-size: 10px;"
+                                                                &bull; <i style="font-size: 10px;"
                                                                     class="mb-0">{{ $comment->comment_name }}</i><br />
                                                             </a>
+                                                            <div style="border-bottom: 1px dotted #ccc;" class="my-2"></div>
                                                         @endif
                                                     @endif
                                                 @endforeach
-                                                <button type="button" class="btn btn-warning rounded-0 text-white w-100"
+                                                <button type="button" class="btn btn-info rounded-0 text-white w-100"
                                                     onclick="open_modal(this, 'file')">
-                                                    อัพโหลดไฟล์
+                                                    <i class="fas fa-upload"></i> อัพโหลดไฟล์
                                                 </button>
                                                 <input type="hidden" value="{{ $value->topic_id }}">
                                                 <input type="hidden" name="error_file_comment" id="error_file_comment"
@@ -137,6 +138,11 @@
                                         @else
                                             -
                                         @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('backend.research.edit', $value->topic_id) }}"
+                                            class="btn btn-warning text-white rounded-0"><i class="nav-icon fa fa-edit"></i>
+                                            แก้ไข</a>
                                     </td>
                                 </tr>
                                 @empty

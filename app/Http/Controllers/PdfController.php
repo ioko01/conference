@@ -21,7 +21,7 @@ class PdfController extends Controller
         $upload = $request->file('pdf_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/files/pdf/conference_id_' . auth()->user()->conference_id;
+        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความ/pdf';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

@@ -64,7 +64,7 @@
                                         {{ thaiDateFormat($value->slip_update, true) }}</i>
                                     <button type="button" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         onclick="open_modal(this, 'payment_example', null, '{{ Storage::url($value->payment_path) }}')">
-                                        ดูตัวอย่าง
+                                        <i class="fas fa-search"></i> ดูตัวอย่าง
                                     </button>
                                     @if ($value->status_payment)
                                         @if (endDate('end_payment')->day >= 0)
@@ -126,7 +126,7 @@
                                         {{ thaiDateFormat($value->word_update, true) }}</i>
                                     <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->word_path) }}">
-                                        ดูตัวอย่าง
+                                        <i class="fas fa-search"></i> ดูตัวอย่าง
                                     </a>
                                     @if ($value->status_research)
                                         @if (endDate('end_research')->day >= 0)
@@ -177,7 +177,7 @@
                                         {{ thaiDateFormat($value->pdf_update, true) }}</i>
                                     <a target="_blank" class="btn btn-green text-white rounded-0 w-100 my-1"
                                         href="{{ Storage::url($value->pdf_path) }}">
-                                        ดูตัวอย่าง
+                                        <i class="fas fa-search"></i> ดูตัวอย่าง
                                     </a>
                                     @if ($value->status_research)
                                         @if (endDate('end_research')->day >= 0)
@@ -223,10 +223,10 @@
                                             <div class="text-start">
                                                 <a class="text-green" target="_blank"
                                                     href="{{ Storage::url($comment->comment_path) }}">
-                                                    <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
+                                                    &bull; <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
                                                 </a>
                                             </div>
-                                            <hr class="my-1" />
+                                            <div style="border-bottom: 1px dotted #ccc;" class="my-2"></div>
                                         @endif
                                     @empty
                                         <strong class="text-warning">(รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)</strong>

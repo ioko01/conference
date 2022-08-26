@@ -72,7 +72,7 @@ class ManualController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/assets/manuals/conference_id_' . auth()->user()->conference_id;
+            $path = 'public/conference_id_' . auth()->user()->conference_id . '/ไฟล์/คู่มือ';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }
@@ -101,7 +101,7 @@ class ManualController extends Controller
 
     protected function update(Request $request, $id)
     {
-        
+
         if (!auth()->user()->conference_id) {
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้');
@@ -143,7 +143,7 @@ class ManualController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/assets/manuals/conference_id_' . auth()->user()->conference_id;
+            $path = 'public/conference_id_' . auth()->user()->conference_id . '/ไฟล์/คู่มือ';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }

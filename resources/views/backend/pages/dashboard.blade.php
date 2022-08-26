@@ -1,7 +1,7 @@
 @extends('backend.layouts.master_backend')
 
 @section('content')
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-4">
             <div class="card">
                 <div class="card-content">
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6">
@@ -166,11 +166,19 @@
                                             </td>
                                         </tr>
                                     @endif
+                                    @if ($loop->last)
+                                        <tr>
+                                            <td colspan="3" class="text-end">
+                                                <a href="{{ route('backend.research.index') }}">ดูทั้งหมด →</a>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @empty
                                     <tr>
                                         <td colspan="3" class="text-center">ไม่มีบทความ</td>
                                     </tr>
                                 @endforelse
+
                             </tbody>
                         </table>
                     </div>

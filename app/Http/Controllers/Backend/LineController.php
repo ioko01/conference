@@ -24,6 +24,10 @@ class LineController extends Controller
         )
             ->leftjoin('conferences', 'conferences.id', 'lines.conference_id')
             ->get();
+
+        foreach ($lines as $line) {
+            $line->line_path = Storage::url($line->line_path);
+        }
         return view('backend.pages.line', compact('conferences', 'lines'));
     }
 
@@ -52,7 +56,7 @@ class LineController extends Controller
                 $upload = $request->file('file');
                 $extension = $upload->extension();
                 $name = "QR_OPENCHAT_" . auth()->user()->conference_id . "." . $extension;
-                $path = "public/line_openchat";
+                $path = 'public/conference_id_' . auth()->user()->conference_id . '/line_openchat';
                 $full_path = $path . "/" . $name;
 
                 $upload->storeAs($path, $name);
@@ -88,16 +92,7 @@ class LineController extends Controller
     protected function edit($id)
     {
         $conferences = Conference::where('status', 1)->get();
-        $line = Line::select(
-            'lines.id as id',
-            'conferences.name as conference_name',
-            'lines.link as line_link',
-            'lines.name as line_name',
-            'lines.path as line_path',
-            'lines.extension as line_extension'
-        )
-            ->leftjoin('conferences', 'conferences.id', 'lines.conference_id')
-            ->find($id);
+
         $lines = Line::select(
             'lines.id as id',
             'conferences.name as conference_name',
@@ -108,6 +103,20 @@ class LineController extends Controller
         )
             ->leftjoin('conferences', 'conferences.id', 'lines.conference_id')
             ->get();
+        foreach ($lines as $line) {
+            $line->line_path = Storage::url($line->line_path);
+        }
+
+        $line = Line::select(
+            'lines.id as id',
+            'conferences.name as conference_name',
+            'lines.link as line_link',
+            'lines.name as line_name',
+            'lines.path as line_path',
+            'lines.extension as line_extension'
+        )
+            ->leftjoin('conferences', 'conferences.id', 'lines.conference_id')
+            ->find($id);
         return view('backend.pages.edit_line', compact('conferences', 'lines', 'line'));
     }
 
@@ -137,7 +146,7 @@ class LineController extends Controller
             $upload = $request->file('file');
             $extension = $upload->extension();
             $name = "QR_OPENCHAT_" . auth()->user()->conference_id . "." . $extension;
-            $path = "public/line_openchat";
+            $path = 'public/conference_id_' . auth()->user()->conference_id . '/line_openchat';
             $fullpath = $path . "/" . $name;
 
             $upload->storeAs($path, $name);

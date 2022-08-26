@@ -6,8 +6,7 @@
             <div class="card-header d-flex align-items-center justify-content-between w-100">
                 <h1>รายการบทความ</h1>
                 <div class="ms-auto">
-                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i
-                            class="fas fa-file-export"></i>
+                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i class="fas fa-file-export"></i>
                         Export to
                         Excel</a>
                 </div>
@@ -26,12 +25,11 @@
                     <table class="list table responsive hover">
                         <thead>
                             <tr class="text-center pagination-header">
-                                <th>#</th>
-                                <th class="text-start">รายละเอียดบทความ</th>
-                                <th>ปีที่ส่งผลงาน</th>
-                                <th>ชื่อผู้ส่งผลงาน</th>
-                                <th>เวลา</th>
-                                <th>แก้ไข</th>
+                                <th style="width: 5%;">#</th>
+                                <th style="width: 45%;" class="text-start">รายละเอียดบทความ</th>
+                                <th style="width: 10%;">ปีที่ส่งผลงาน</th>
+                                <th style="width: 10%;">ชื่อผู้ส่งผลงาน</th>
+                                <th style="width: 10%;">แก้ไข</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,8 +52,14 @@
                                         </strong>
                                         <br />
                                         <strong style="font-size: 12px"
-                                            class="text-green">{{ str_replace('|', ', ', $research->presenter) }}</strong>
-
+                                            class="text-green">ผู้นำเสนอ : {{ str_replace('|', ', ', $research->presenter) }}</strong>
+                                        <br />
+                                        <p class="text-secondary">
+                                            <i style="font-size: 10px" class="d-block">อัพโหลด
+                                                {{ thaiDateFormat($research->created_at, true, true) }}</i>
+                                            <i style="font-size: 10px" class="d-block">แก้ไข
+                                                {{ thaiDateFormat($research->updated_at, true, true) }}</i>
+                                        </p>
                                     </td>
                                     <td class="text-center">{{ $research->year }}</td>
                                     <td class="text-center">
@@ -64,13 +68,6 @@
                                         </span>
                                     </td>
                                     <td class="text-center">
-                                        <i style="font-size: 10px" class="text-secondary">อัพโหลดเมื่อ
-                                            {{ thaiDateFormat($research->created_at, true) }}</i>
-                                        <br />
-                                        <i style="font-size: 10px" class="text-secondary">แก้ไขล่าสุดเมื่อ
-                                            {{ thaiDateFormat($research->updated_at, true) }}</i>
-                                    </td>
-                                    <td>
                                         <a href="{{ route('backend.research.edit', $research->topic_id) }}"
                                             class=" text-warning"><i class="nav-icon fa fa-edit"></i>
                                             แก้ไข</a>

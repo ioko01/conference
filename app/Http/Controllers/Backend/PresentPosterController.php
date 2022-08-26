@@ -81,13 +81,17 @@ class PresentPosterController extends Controller
             ->where('conferences.status', 1)
             ->get();
 
+        foreach ($present_posters as $present_poster) {
+            $present_poster->path = Storage::url($present_poster->path);
+        }
+
         $present_poster = PresentPoster::select(
             'present_posters.id as id',
             'present_posters.topic_th as topic_th',
             'present_posters.present_poster_id as present_poster_id',
             'present_posters.link as link',
             'present_posters.path as path',
-            'present_posters.faculty_id as present_poster_faculty_id',
+            'present_posters.faculty_id as faculty_id',
             'faculties.name as name',
         )
             ->leftjoin('faculties', 'faculties.id', 'present_posters.faculty_id')
@@ -96,9 +100,7 @@ class PresentPosterController extends Controller
             ->where('present_posters.id', $id)
             ->first();
 
-        foreach ($present_posters as $present_poster) {
-            $present_poster->path = Storage::url($present_poster->path);
-        }
+
         return view('backend.pages.edit_poster', compact('faculties', 'present_posters', 'present_poster'));
     }
 

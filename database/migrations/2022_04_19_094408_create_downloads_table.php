@@ -20,8 +20,8 @@ class CreateDownloadsTable extends Migration
             $table->integer('notice')->default(0)->comment('เอาลงประชาสัมพันธ์? 1=เอาลง 0=ไม่เอาลง');
             $table->text('name')->comment('ชื่อหัวข้อดาวน์โหลด');
             $table->text('link')->nullable()->comment('ลิงค์ดาวน์โหลด');
-            $table->string('name_file')->nullable()->comment('ชื่อไฟล์ดาวน์โหลด');
-            $table->string('path_file')->nullable()->comment('ไฟล์ดาวน์โหลด');
+            $table->text('name_file')->nullable()->comment('ชื่อไฟล์ดาวน์โหลด');
+            $table->text('path_file')->nullable()->comment('แหล่งที่อยู่ไฟล์');
             $table->string('ext_file')->nullable()->comment('นามสกุลไฟล์ดาวน์โหลด');
             $table->timestamps();
         });

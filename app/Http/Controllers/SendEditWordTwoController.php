@@ -21,8 +21,8 @@ class SendEditWordTwoController extends Controller
 
         $upload = $request->file('word_upload');
         $extension = $upload->extension();
-        $name = strval($id) . "_edit_2." . $extension;
-        $path = 'public/edits_two/words/conference_id_' . auth()->user()->conference_id;
+        $name = strval($id) . "_บทความแก้ไขครั้งที่_2." . $extension;
+        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความแก้ไขครั้งที่_2/words';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

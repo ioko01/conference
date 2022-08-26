@@ -120,7 +120,7 @@ class UploadfileController extends Controller
         $upload = $request->file('poster');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/files/posters/conference_id_' . auth()->user()->conference_id;
+        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความ/โปสเตอร์';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

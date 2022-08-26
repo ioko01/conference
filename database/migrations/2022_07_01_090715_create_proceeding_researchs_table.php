@@ -23,8 +23,8 @@ class CreateProceedingResearchsTable extends Migration
             $table->string('branch_id')->comment('ไอดีกลุ่มสาขา')->nullable();
             $table->string('degree_id')->comment('ไอดีระดับบทความ')->nullable();
             $table->string('present_id')->comment('ไอดีชนิดการนำเสนอ');
-            $table->string('name')->comment('ชื่อไฟล์บทความ Proceeding')->nullable();
-            $table->string('path')->comment('ที่อยู่ไฟล์บทความ Proceeding')->nullable();
+            $table->text('name')->comment('ชื่อไฟล์บทความ Proceeding')->nullable();
+            $table->text('path')->comment('ที่อยู่ไฟล์บทความ Proceeding')->nullable();
             $table->string('extension')->comment('นามสกุลไฟล์บทความ Proceeding')->nullable();
             $table->timestamps();
         });

@@ -17,7 +17,8 @@ class CreateProceedingTopicsTable extends Migration
             $table->id();
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
-            $table->text('name')->comment('ชื่อหัวข้อไฟล์ Proceedings');
+            $table->text('topic')->comment('ชื่อหัวข้อไฟล์ Proceedings');
+            $table->integer('position')->comment('ตำแหน่ง');
             $table->timestamps();
         });
     }

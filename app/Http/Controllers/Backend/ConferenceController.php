@@ -39,6 +39,10 @@ class ConferenceController extends Controller
     {
 
         $this->validator($request);
+        $conference = Conference::where('year', $request->year)->get();
+        if ($conference) {
+            alert('ผิดพลาด', 'ปีที่ประชุมวิชาการ มีอยู่ในระบบแล้ว', 'error')->showConfirmButton('ปิด', '#3085d6');
+        }
 
         Conference::create([
             'user_id' => auth()->user()->id,
@@ -101,7 +105,7 @@ class ConferenceController extends Controller
             ->where('status', 1)
             ->first();
 
-        if (!$check_status && !$request->change_status_conference) {
+        if ((!$check_status && !$request->change_status_conference) && ($request->change_status_proceeding != "0" && $request->change_status_proceeding != "1")) {
             alert('ผิดพลาด', 'ไม่สามารถเปลี่ยนสถานะได้ เนื่องจากไม่ได้เปิดใช้งานการประชุมวิชาการ', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ไม่สามารถเปลี่ยนสถานะได้ เนื่องจากไม่ได้เปิดใช้งานการประชุมวิชาการ');
         }
@@ -111,7 +115,6 @@ class ConferenceController extends Controller
                 return back()->withErrors('ไม่สามารถเปลี่ยนสถานะได้ กรุณาระบุวันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2');
             }
         }
-
         if ($request->change_status_conference == "0" && $check_status) {
             $change_status = array_filter([
                 'status' => $request->change_status_conference,
@@ -125,8 +128,7 @@ class ConferenceController extends Controller
                 'status_present_oral' => 0,
                 'status_consideration' => 0,
                 'status_notice_attend' => 0,
-                'status_present' => 0,
-                'status_proceeding' => 0
+                'status_present' => 0
             ], 'is_numeric');
             User::where('id', auth()->user()->id)->update(['conference_id' => NULL]);
         } else {

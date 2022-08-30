@@ -206,7 +206,7 @@
                                     <th>แก้ไข</th>
                                 </tr>
                                 <tr class="text-xs"
-                                    style="background-color:@if ($conference->status == 1) #c3f6ce;@else #ffc2c2; @endif">
+                                    style="background-color:@if ($conference->status == 1) #c3f6ce;@elseif($conference->status_proceeding == 1)#fff7ab;@else #ffc2c2; @endif">
                                     <th>{{ ++$key }}</th>
                                     <th>{{ $conference->name }}</th>
                                     <th>{{ $conference->year }}</th>
@@ -663,7 +663,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>เผยแพร่ Proceedings</td>
+                                    <td>เผยแพร่ Proceedings<br /><span class="text-red text-xs fw-bold">คำแนะนำ:
+                                            สามารถเปิดใช้งานได้ตลอดเวลา</span></td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->proceeding) }}
                                     </td>

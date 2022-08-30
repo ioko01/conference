@@ -71,7 +71,7 @@ class DownloadController extends Controller
         $name = null;
         $path = null;
         $fullpath = null;
-        if ($request->file('file_upload')) {
+        if ($request->hasFile('file_upload')) {
             $upload = $request->file('file_upload');
             $extension = $upload->extension();
             $file_name = $request->name;

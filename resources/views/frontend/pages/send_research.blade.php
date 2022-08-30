@@ -4,7 +4,7 @@
     <!-- Content -->
     <div id="register-content" class="bg-white text-blue p-5 my-5">
         <div class="inner-content-header">
-            <h2 class="text-center">ส่งบทความ</h2>
+            <h4 class="text-center">ส่งบทความ</h4>
             <h4 class="text-green py-3">
                 {{ config('app.name') }}
             </h4>

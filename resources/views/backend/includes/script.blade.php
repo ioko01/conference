@@ -52,8 +52,12 @@
     Request::is('backend/downloads') ||
     Request::is('backend/manual/*/edit') ||
     Request::is('backend/manuals'))
-    <script src="{{ asset('js/download-and-manual.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('js/toggle-file-link.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('api/change-notice.js', env('REDIRECT_HTTPS')) }}"></script>
+@endif
+
+@if (Request::is('backend/proceeding/*/file') || Request::is('backend/proceeding/*/file/edit'))
+    <script src="{{ asset('js/toggle-file-link.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('backend/poster/*/edit') ||
@@ -67,7 +71,9 @@
     Request::is('backend/manual/*/edit') ||
     Request::is('backend/manuals') ||
     Request::is('backend/orals/link') ||
-    Request::is('backend/orals/link/*/edit'))
+    Request::is('backend/orals/link/*/edit') ||
+    Request::is('backend/proceeding/*/topic') ||
+    Request::is('backend/proceeding/*/topic/*/edit'))
     <script src="{{ asset('api/delete.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 

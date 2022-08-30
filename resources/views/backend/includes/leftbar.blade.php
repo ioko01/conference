@@ -137,7 +137,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item @if (Request::is('backend/proceeding/*/*')) menu-is-opening menu-open @endif">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
@@ -148,7 +148,8 @@
                     <ul class="nav nav-treeview">
                         @forelse ($conferences = DB::table('conferences')->select('year')->orderBy('year', 'desc')->get() as $conference)
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('backend.proceeding.topic.index', $conference->year) }}"
+                                    class='nav-link @if (Request::is("backend/proceeding/$conference->year/*")) active @endif'>
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{ $conference->year }}</p>
                                 </a>

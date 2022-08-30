@@ -27,6 +27,10 @@ html {
     font-size: calc(10px + 0.2vw);
 }
 
+.list-group .nav.nav-tabs .nav-item .nav-link.active {
+    color: var(--color-green);
+}
+
 .dataTables_filter > label {
     display: flex !important;
     gap: 1rem;

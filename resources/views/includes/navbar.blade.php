@@ -95,10 +95,14 @@
                             Proceedings
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('list.research.index') }}">Proceeding 2565</a>
-                            </li>
-                            <li><a class="dropdown-item" href="{{ route('list.attend.index') }}">Proceeding 2564</a>
-                            </li>
+                            @forelse ($conferences = DB::table('conferences')->select('year')->orderBy('year', 'desc')->get() as $conference)
+                                <li><a class='dropdown-item @if (Request::is("proceeding/$conference->year")) active @endif'
+                                        href="{{ route('proceeding.index', $conference->year) }}">Proceeding
+                                        {{ $conference->year }}</a>
+                                </li>
+
+                            @empty
+                            @endforelse
                         </ul>
                     </li>
 
@@ -132,10 +136,9 @@
                                     <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
                                         aria-current="page"
                                         href="@guest
-                                                                                {{ route('login') }}
+{{ route('login') }}
 @else
-{{ route('employee.research.index') }}
-                                                            @endguest">ส่งบทความ</a>
+{{ route('employee.research.index') }} @endguest">ส่งบทความ</a>
                                 </li>
 
                                 <li>

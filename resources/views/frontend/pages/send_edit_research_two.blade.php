@@ -6,7 +6,7 @@
     <div class="bg-white text-blue p-5 my-5">
 
         <div class="inner-content-header">
-            <h2 class="text-center">ส่งบทความฉบับแก้ไข ครั้งที่ 2</h2>
+            <h4 class="text-center">ส่งบทความฉบับแก้ไข ครั้งที่ 2</h4>
             <h4 class="text-green py-3">
                 {{ config('app.name') }}
             </h4>

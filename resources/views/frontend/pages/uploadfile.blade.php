@@ -5,11 +5,11 @@
     <div class="bg-white text-blue p-5 my-5">
 
         <div class="inner-content-header">
-            <h2 class="text-center">อัพโหลดวิดีโอ/โปสเตอร์ <br />
+            <h4 class="text-center">อัพโหลดวิดีโอ/โปสเตอร์ <br />
                 @if ($conference)
                     {{ $conference->name }}
                 @endif
-            </h2>
+            </h4>
             <h4 class="text-green py-3">
                 {{ config('app.name') }}
             </h4>

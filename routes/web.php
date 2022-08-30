@@ -20,7 +20,9 @@ use App\Http\Controllers\Backend\ManageResearchController;
 use App\Http\Controllers\Backend\ManualController;
 use App\Http\Controllers\Backend\PresentOralController;
 use App\Http\Controllers\Backend\PresentPosterController;
-use App\Http\Controllers\Backend\ProceedingController;
+use App\Http\Controllers\Backend\ProceedingFileController;
+use App\Http\Controllers\Backend\ProceedingResearchController;
+use App\Http\Controllers\Backend\ProceedingTopicController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\LinkOralController;
@@ -29,6 +31,7 @@ use App\Http\Controllers\ListResearchController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OralController;
 use App\Http\Controllers\PosterController;
+use App\Http\Controllers\ProceedingController;
 use App\Http\Controllers\SendEditResearchController;
 use App\Http\Controllers\SendEditWordController;
 use App\Http\Controllers\SendEditPdfController;
@@ -96,6 +99,8 @@ Route::get('list/attend', [ListAttendController::class, 'index'])->name('list.at
 Route::get('posters', [PosterController::class, 'index'])->name('posters.index');
 Route::get('orals', [OralController::class, 'index'])->name('orals.index');
 Route::get('orals/link', [LinkOralController::class, 'index'])->name('orals.link.index');
+
+Route::get('proceeding/{year}', [ProceedingController::class, 'index'])->name('proceeding.index');
 
 // Email Verify
 Route::get('email/verify', [MailController::class, 'verify'])->name('verification.notice');
@@ -214,7 +219,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::put('orals/link/{id}/update', [BackendLinkOralController::class, 'update'])->name('backend.oral.link.update');
             Route::delete('orals/link/{id}/delete', [BackendLinkOralController::class, 'destroy'])->name('backend.oral.link.delete');
 
-            Route::get('proceeding/{year}', [ProceedingController::class, 'show'])->name('backend.proceeding.index');
+            Route::get('proceeding/{year}/topic', [ProceedingTopicController::class, 'index'])->name('backend.proceeding.topic.index');
+            Route::post('proceeding/{year}/topic/store', [ProceedingTopicController::class, 'store'])->name('backend.proceeding.topic.store');
+            Route::get('proceeding/{year}/topic/{id}/edit', [ProceedingTopicController::class, 'edit'])->name('backend.proceeding.topic.edit');
+            Route::put('proceeding/{year}/topic/{id}/update', [ProceedingTopicController::class, 'update'])->name('backend.proceeding.topic.update');
+            Route::delete('proceeding/{year}/topic/{id}/delete', [ProceedingTopicController::class, 'destroy'])->name('backend.proceeding.topic.delete');
+
+            Route::get('proceeding/{year}/research', [ProceedingResearchController::class, 'index'])->name('backend.proceeding.research.index');
+
+            Route::get('proceeding/{year}/file', [ProceedingFileController::class, 'index'])->name('backend.proceeding.file.index');
+            Route::post('proceeding/{year}/file/store', [ProceedingFileController::class, 'store'])->name('backend.proceeding.file.store');
 
             Route::prefix('users')->group(function () {
                 Route::get('export', [UserController::class, 'export'])->name('users.export');

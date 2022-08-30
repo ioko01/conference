@@ -19,7 +19,7 @@ class CreateConferencesTable extends Migration
             $table->text('name')->comment('ชื่องานประชุม');
 
             $table->tinyInteger('status')->comment('สถานะงานประชุม')->default(0);
-            $table->string('year')->comment('ปีที่จัดงานประชุม');
+            $table->string('year')->primary()->comment('ปีที่จัดงานประชุม');
             $table->datetime('start')->comment('วันเปิดงานประชุม');
             $table->datetime('final')->comment('สิ้นสุดการจัดงานประชุม');
 

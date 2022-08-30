@@ -17,6 +17,7 @@ class CreateProceedingFilesTable extends Migration
             $table->id();
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
+            $table->string('topic_id')->comment('ไอดี Proceeding');
             $table->text('name')->comment('ชื่อหัวข้อไฟล์ Proceedings');
             $table->text('link')->nullable()->comment('ลิงค์ไฟล์ Proceedings');
             $table->text('path')->nullable()->comment('ที่อยู่ไฟล์ Proceedings');

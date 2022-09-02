@@ -50,13 +50,13 @@
                                                 @else
                                                     <strong class="d-inline mb-3">
                                                         <a target="_blank"
-                                                            href="{{ Storage::url($proceeding->path) }}">{{ $proceeding->name }}</a>
+                                                            href="{{ Storage::url($proceeding->path) }}">- {{ $proceeding->name }}</a>
                                                     </strong>
                                                 @endif
                                             @elseif($proceeding->link)
                                                 <strong class="d-inline mb-3">
                                                     <a target="_blank"
-                                                        href="{{ $proceeding->link }}">{{ $proceeding->name }}</a>
+                                                        href="{{ $proceeding->link }}">- {{ $proceeding->name }}</a>
                                                 </strong>
                                             @endif
                                         @endif

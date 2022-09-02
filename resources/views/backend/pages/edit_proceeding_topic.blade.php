@@ -32,16 +32,18 @@
                                     </ul>
                                 </div>
                             </div>
-                            <form action="{{ route('backend.proceeding.topic.store', $year) }}" method="POST"
-                                class="col-md-12">
+                            <form
+                                action="{{ route('backend.proceeding.topic.update', ['year' => $year, 'id' => $topic->id]) }}"
+                                method="POST" class="col-md-12">
                                 @csrf
+                                @method('PUT')
                                 <div class="border border-top-0 p-3">
                                     <div class="row mb-3">
                                         <div class="col-lg-4 col-md-6">
                                             <label for="topic">หัวข้อ <span class="text-red text-sm">(เช่น : หน้าปก,
                                                     ส่วนหน้า,
                                                     สารบัญ)</span></label>
-                                            <input type="text" name="topic" id="topic"
+                                            <input value="{{ $topic->topic }}" type="text" name="topic" id="topic"
                                                 class="form-control @error('topic') is-invalid @enderror"
                                                 placeholder="หัวข้อ">
 
@@ -54,12 +56,12 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-lg-2 col-md-3">
-                                            <label for="position">ลำดับ <span class="text-red text-sm">(1 -
-                                                    10) * หน้า Proceedings
-                                                    จะแสดงหัวข้อตามลำดับน้อยสุดไปมากสุด</span></label>
-                                            <input min="1" max="10" type="number" name="position"
-                                                id="position" class="form-control @error('position') is-invalid @enderror"
-                                                placeholder="ลำดับ">
+                                            <label for="position">ตำแหน่ง <span class="text-red text-sm">(1 -
+                                                    10)</span></label>
+                                            <input value="{{ $topic->position }}" min="1" max="10"
+                                                type="number" name="position" id="position"
+                                                class="form-control @error('position') is-invalid @enderror"
+                                                placeholder="ตำแหน่ง">
 
                                             @error('position')
                                                 <span class="invalid-feedback" role="alert">
@@ -70,8 +72,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button class="btn btn-success rounded-0"><i class="fas fa-save"></i>
-                                                บันทึก</button>
+                                            <button class="btn btn-warning text-white rounded-0"><i class="fas fa-edit"></i>
+                                                แก้ไข</button>
                                         </div>
                                     </div>
                                 </div>

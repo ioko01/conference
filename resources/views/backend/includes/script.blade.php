@@ -56,7 +56,7 @@
     <script src="{{ asset('api/change-notice.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
-@if (Request::is('backend/proceeding/*/file') || Request::is('backend/proceeding/*/file/edit'))
+@if (Request::is('backend/proceeding/*/file') || Request::is('backend/proceeding/*/file/*/edit'))
     <script src="{{ asset('js/toggle-file-link.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
@@ -73,7 +73,9 @@
     Request::is('backend/orals/link') ||
     Request::is('backend/orals/link/*/edit') ||
     Request::is('backend/proceeding/*/topic') ||
-    Request::is('backend/proceeding/*/topic/*/edit'))
+    Request::is('backend/proceeding/*/topic/*/edit') ||
+    Request::is('backend/proceeding/*/file') ||
+    Request::is('backend/proceeding/*/file/*/edit'))
     <script src="{{ asset('api/delete.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 

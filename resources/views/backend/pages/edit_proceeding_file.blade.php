@@ -32,9 +32,11 @@
                                     </ul>
                                 </div>
                             </div>
-                            <form action="{{ route('backend.proceeding.file.store', $year) }}" enctype="multipart/form-data"
-                                method="POST" class="col-md-12">
+                            <form
+                                action="{{ route('backend.proceeding.file.update', ['year' => $year, 'id' => $_file->id]) }}"
+                                enctype="multipart/form-data" method="POST" class="col-md-12">
                                 @csrf
+                                @method('PUT')
                                 <div class="border border-top-0 p-3">
                                     <div class="row mb-3">
                                         <div class="col-lg-4 col-md-6">
@@ -44,7 +46,9 @@
                                             <select name="topic_id" id="topic_id" class="form-select">
                                                 <option value="">-- เลือกหัวข้อ --</option>
                                                 @forelse ($topics as $topic)
-                                                    <option value="{{ $topic->id }}">{{ $topic->topic }}</option>
+                                                    <option value="{{ $topic->id }}"
+                                                        @if ($_file->topic_id == $topic->id) selected @endif>
+                                                        {{ $topic->topic }}</option>
                                                 @empty
                                                 @endforelse
                                             </select>
@@ -60,8 +64,8 @@
                                         <div class="col-lg-4 col-md-6">
                                             <label for="name">ชื่อไฟล์ <span class="text-red text-sm">(เช่น : ปกหน้า,
                                                     ปกหลัง)</span></label>
-                                            <input type="text" name="name" id="name" class="form-control"
-                                                placeholder="ชื่อไฟล์" />
+                                            <input value="{{ $_file->name }}" type="text" name="name" id="name"
+                                                class="form-control" placeholder="ชื่อไฟล์" />
 
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
@@ -70,60 +74,70 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6" id="upload-type">
-                                            <label class="d-block">ชนิดการอัพโหลด</label>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="download"
-                                                    id="link" value="link"
-                                                    @if (old('download') !== null) @if (old('download') == 'link') checked @endif
-                                                @else checked @endif>
-                                                <label class="form-check-label" for="link">
-                                                    อัพโหลดเป็นลิงค์ <i style="font-size: 12px;" class="text-red">(เช่น
-                                                        https://www.youtube.com)</i>
-                                                </label>
-                                            </div>
-                                            <div class="mb-3">
-                                                <input type="text" name="link_upload" id="link-upload"
-                                                    class="form-control rounded-0 @error('link_upload') is-invalid @enderror"
-                                                    @if (old('download') !== null) @if (old('download') == 'file') disabled @endif
-                                                    @endif>
-                                                @error('link_upload')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-
-
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="download"
-                                                    id="file" value="file"
-                                                    @if (old('download') !== null) @if (old('download') == 'file') checked @endif
-                                                    @endif>
-                                                <label class="form-check-label" for="file">
-                                                    อัพโหลดเป็นไฟล์ <i style="font-size: 12px;"
-                                                        class="text-red">(แนะนำเฉพาะไฟล์ที่มีขนาดเล็ก
-                                                        ขนาดไฟล์ใหญ่สุดคือ 10 MB)</i>
-                                                </label>
-                                            </div>
-                                            <div class="mb-3">
-                                                <input type="file" name="file_upload" id="file-upload"
-                                                    class="form-control rounded-0 @error('file_upload') is-invalid @enderror"
-                                                    @if (old('download') !== null) @if (old('download') == 'link') disabled @endif
-                                                @else disabled @endif>
-                                                @error('file_upload')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
+                                    <div class="col-md-6" id="upload-type">
+                                        <label class="d-block">ชนิดการอัพโหลด</label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="download" id="link"
+                                                value="link"
+                                                @if (old('download') !== null) @if (old('download') == 'link') checked @endif
+                                            @elseif(isset($_file->link)) checked @endif>
+                                            <label class="form-check-label" for="link">
+                                                อัพโหลดเป็นลิงค์ <i style="font-size: 12px;" class="text-red">(เช่น
+                                                    https://www.youtube.com)</i>
+                                            </label>
                                         </div>
+                                        <div class="mb-3">
+                                            <input value="{{ $_file->link }}" type="text" name="link_upload"
+                                                id="link-upload"
+                                                class="form-control rounded-0 @error('link_upload') is-invalid @enderror"
+                                                @if (old('download') !== null) @if (old('download') == 'file') disabled @endif
+                                            @elseif(isset($_file->path)) disabled @endif>
+                                            @error('link_upload')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="download" id="file"
+                                                value="file"
+                                                @if (old('download') !== null) @if (old('download') == 'file') checked @endif
+                                            @elseif(isset($_file->path)) checked @endif>
+                                            <label class="form-check-label" for="file">
+                                                อัพโหลดเป็นไฟล์ <i style="font-size: 12px;"
+                                                    class="text-red">(แนะนำเฉพาะไฟล์ที่มีขนาดเล็ก
+                                                    ขนาดไฟล์ใหญ่สุดคือ 10 MB)</i>
+                                            </label>
+                                        </div>
+                                        <div class="mb-3" style="position: relative">
+                                            <label class="label-type-file mb-0 @error('file_upload') is-invalid @enderror"
+                                                @if (old('download') !== null) @if (old('download') == 'link') style="background-color:#e9ecef;cursor:default" @endif
+                                            @elseif($_file->link)
+                                                style="background-color:#e9ecef;cursor:default" @endif
+                                                for="file-upload">{{ $_file->path ? $_file->name . '.' . $_file->extension : 'ไม่ได้เลือกไฟล์ใด' }}</label>
+                                            <input type="hidden" value="{{ $_file->name }}.{{ $_file->extension }}"
+                                                name="name_file" id="name_file">
+
+                                            <input onchange="get_file_name(this)" type="file" name="file_upload"
+                                                id="file-upload"
+                                                class="form-control d-none rounded-0 @error('file_upload') is-invalid @enderror"
+                                                @if (old('download') !== null) @if (old('download') == 'link') disabled @endif
+                                            @elseif(!isset($_file->path)) disabled @endif>
+
+                                            @error('file_upload')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+
+
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button class="btn btn-success rounded-0"><i class="fas fa-save"></i>
-                                                บันทึก</button>
+                                            <button class="btn btn-warning text-white rounded-0"><i
+                                                    class="fas fa-edit"></i>
+                                                แก้ไข</button>
                                         </div>
                                     </div>
                                 </div>
@@ -204,7 +218,7 @@
                                                 แก้ไข</a>
                                         </td>
                                         <td><button
-                                                onclick="open_modal('{{ $file->name }}', '{{ route('backend.proceeding.file.delete', ['year' => $year, 'id' => $file->id]) }}')"
+                                                onclick="open_modal('{{ $file->topic }}', '{{ route('backend.proceeding.file.delete', ['year' => $year, 'id' => $file->id]) }}')"
                                                 class="btn btn-sm btn-danger rounded-0"><i
                                                     class="fas fa-trash-alt"></i>
                                                 ลบ</button></td>

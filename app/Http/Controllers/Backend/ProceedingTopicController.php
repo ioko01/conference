@@ -63,8 +63,40 @@ class ProceedingTopicController extends Controller
         )
             ->leftjoin('conferences', 'conferences.id', 'proceeding_topics.conference_id')
             ->where('conferences.year', $year)
+            ->orderBy('proceeding_topics.position')
             ->get();
-        return view('backend.pages.proceeding_topic', compact('year', 'topics'));
+        $topic = ProceedingTopic::select(
+            'proceeding_topics.id as id',
+            'proceeding_topics.topic as topic',
+            'proceeding_topics.position as position'
+        )
+            ->leftjoin('conferences', 'conferences.id', 'proceeding_topics.conference_id')
+            ->where('conferences.year', $year)
+            ->where('proceeding_topics.id', $id)
+            ->first();
+        return view('backend.pages.edit_proceeding_topic', compact('year', 'topics', 'topic'));
+    }
+
+    protected function update(Request $request, $year, $id)
+    {
+        $this->validator($request);
+        $conference = Conference::where('year', $year)->first();
+
+        $topic = ProceedingTopic::where('topic', $request->topic)->first();
+
+        if ($topic) {
+            alert('ผิดพลาด', 'มีหัวข้อนี้ในระบบแล้ว', 'error')->showConfirmButton('ปิด', '#3085d6');
+        }
+
+        ProceedingTopic::where('id', $id)->update([
+            'conference_id' => $conference->id,
+            'user_id' => auth()->user()->id,
+            'topic' => $request->topic,
+            'position' => $request->position
+        ]);
+
+        alert('สำเร็จ', 'แก้ไขหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        return redirect()->back();
     }
 
     protected function destroy($year, $id)
@@ -73,7 +105,8 @@ class ProceedingTopicController extends Controller
             ->where('proceeding_topics.id', $id)
             ->where('conferences.year', $year)
             ->delete();
+
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
-        return redirect()->back();
+        return redirect()->route('backend.proceeding.topic.index', $year);
     }
 }

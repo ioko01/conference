@@ -7,13 +7,53 @@ use App\Models\Conference;
 use App\Models\ProceedingFile;
 use App\Models\ProceedingTopic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProceedingFileController extends Controller
 {
     public function index($year)
     {
-        $topics = ProceedingTopic::get();
-        return view('backend.pages.proceeding_file', compact('year', 'topics'));
+        $files = ProceedingFile::select(
+            'proceeding_files.id as id',
+            'proceeding_files.name as name',
+            'proceeding_files.link as link',
+            'proceeding_files.path as path',
+            'proceeding_topics.topic as topic',
+            'proceeding_topics.position as position',
+            'proceeding_files.extension as extension',
+        )
+            ->leftjoin('conferences', 'conferences.id', 'proceeding_files.conference_id')
+            ->leftjoin('proceeding_topics', 'proceeding_files.topic_id', 'proceeding_topics.id')
+            ->where('conferences.year', $year)
+            ->orderBy('proceeding_topics.position')
+            ->get();
+
+        $topics = ProceedingTopic::select(
+            'proceeding_topics.id as id',
+            'proceeding_topics.topic as topic',
+            'proceeding_topics.position as position'
+        )
+            ->leftjoin('conferences', 'conferences.id', 'proceeding_topics.conference_id')
+            ->where('conferences.year', $year)
+            ->orderBy('proceeding_topics.position')
+            ->get();
+
+        $i_topic = [];
+        $i_topic[0] = null;
+        $j = 0;
+
+        foreach ($files as $key => $file) {
+            if ($j == 0) {
+                ++$j;
+            }
+            if ($j > 0) {
+                if ($i_topic[$j - 1] != $file->topic) {
+                    $i_topic[$j] = $file->topic;
+                    $j++;
+                }
+            }
+        }
+        return view('backend.pages.proceeding_file', compact('year', 'files', 'topics', 'i_topic'));
     }
 
     protected function validator($request)
@@ -29,7 +69,7 @@ class ProceedingFileController extends Controller
     {
         $this->validator($request);
         $conference = Conference::where('year', $year)->first();
-        
+
         $upload = null;
         $extension = null;
         $name = null;
@@ -59,5 +99,162 @@ class ProceedingFileController extends Controller
 
         alert('สำเร็จ', 'สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->back();
+    }
+
+    public function edit($year, $id)
+    {
+        $files = ProceedingFile::select(
+            'proceeding_files.id as id',
+            'proceeding_files.name as name',
+            'proceeding_files.link as link',
+            'proceeding_files.path as path',
+            'proceeding_topics.topic as topic',
+            'proceeding_topics.position as position',
+            'proceeding_files.extension as extension',
+        )
+            ->leftjoin('conferences', 'conferences.id', 'proceeding_files.conference_id')
+            ->leftjoin('proceeding_topics', 'proceeding_files.topic_id', 'proceeding_topics.id')
+            ->where('conferences.year', $year)
+            ->orderBy('proceeding_topics.position')
+            ->get();
+
+        $_file = ProceedingFile::select(
+            'proceeding_files.id as id',
+            'proceeding_files.name as name',
+            'proceeding_files.link as link',
+            'proceeding_files.path as path',
+            'proceeding_files.topic_id as topic_id',
+            'proceeding_topics.topic as topic',
+            'proceeding_topics.position as position',
+            'proceeding_files.extension as extension',
+        )
+            ->leftjoin('conferences', 'conferences.id', 'proceeding_files.conference_id')
+            ->leftjoin('proceeding_topics', 'proceeding_files.topic_id', 'proceeding_topics.id')
+            ->where('conferences.year', $year)
+            ->where('proceeding_files.id', $id)
+            ->orderBy('proceeding_topics.position')
+            ->first();
+
+        $topics = ProceedingTopic::select(
+            'proceeding_topics.id as id',
+            'proceeding_topics.topic as topic',
+            'proceeding_topics.position as position'
+        )
+            ->leftjoin('conferences', 'conferences.id', 'proceeding_topics.conference_id')
+            ->where('conferences.year', $year)
+            ->orderBy('proceeding_topics.position')
+            ->get();
+
+        $i_topic = [];
+        $i_topic[0] = null;
+        $j = 0;
+
+        foreach ($files as $key => $file) {
+            if ($j == 0) {
+                ++$j;
+            }
+            if ($j > 0) {
+                if ($i_topic[$j - 1] != $file->topic) {
+                    $i_topic[$j] = $file->topic;
+                    $j++;
+                }
+            }
+        }
+
+        return view('backend.pages.edit_proceeding_file', compact('year', 'files', 'topics', 'i_topic', '_file'));
+    }
+
+    protected function update(Request $request, $year, $id)
+    {
+
+        $this->validator($request);
+        $conference = Conference::where('year', $year)->first();
+
+        $path_file = ProceedingFile::find($id);
+
+        $name_file = $path_file->name . "." . $path_file->extension;
+
+        if ($request->download == "file") {
+            if ($request->name_file != $name_file) {
+                if (Storage::exists($path_file->path)) {
+                    Storage::delete($path_file->path);
+                }
+            }
+        } else if ($request->download == "link") {
+            if (Storage::exists($path_file->path)) {
+                Storage::delete($path_file->path);
+            }
+        }
+
+        $upload = null;
+        $extension = null;
+        $name = null;
+        $path = null;
+        $fullpath = null;
+        if ($request->hasFile('file_upload')) {
+            $upload = $request->file('file_upload');
+            $extension = $upload->extension();
+            $file_name = $request->name;
+            $name = $file_name . '.' . $extension;
+            $path = 'public/conference_id_' . $conference->id . '/proceeding';
+            $fullpath = $path . "/" . $name;
+            $upload->storeAs($path, $name);
+        }
+
+
+        if ($request->download == "file") {
+            if ($request->name_file) {
+                if ($request->file('file_upload')) {
+                    $data = [
+                        'user_id' => auth()->user()->id,
+                        'topic_id' => $request->topic_id,
+                        'name' => $request->name,
+                        'link' => $request->link_upload ? $request->link_upload : null,
+                        'path' => $fullpath,
+                        'extension' => $extension,
+                        'conference_id' => auth()->user()->conference_id
+                    ];
+                } else {
+                    $data = [
+                        'user_id' => auth()->user()->id,
+                        'topic_id' => $request->topic_id,
+                        'name' => $request->name,
+                        'conference_id' => auth()->user()->conference_id
+                    ];
+                }
+            }
+        } else if ($request->download == "link") {
+            $data = [
+                'user_id' => auth()->user()->id,
+                'topic_id' => $request->topic_id,
+                'name' => $request->name,
+                'link' => $request->link_upload,
+                'path' => null,
+                'extension' => null,
+                'conference_id' => auth()->user()->conference_id
+            ];
+        }
+
+        ProceedingFile::where('id', $id)->update($data);
+        alert('สำเร็จ', 'แก้ไขหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        return back();
+    }
+
+    protected function destroy($year, $id)
+    {
+
+        $path_file = ProceedingFile::find($id);
+
+        if (Storage::exists($path_file->path)) {
+            Storage::delete($path_file->path);
+        }
+
+        ProceedingFile::leftjoin('conferences', 'conferences.id', 'proceeding_files.conference_id')
+            ->where('proceeding_files.id', $id)
+            ->where('conferences.year', $year)
+            ->delete();
+
+        alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        return redirect()->route('backend.proceeding.file.index', $year);
     }
 }

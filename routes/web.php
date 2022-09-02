@@ -229,6 +229,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::get('proceeding/{year}/file', [ProceedingFileController::class, 'index'])->name('backend.proceeding.file.index');
             Route::post('proceeding/{year}/file/store', [ProceedingFileController::class, 'store'])->name('backend.proceeding.file.store');
+            Route::get('proceeding/{year}/file/{id}/edit', [ProceedingFileController::class, 'edit'])->name('backend.proceeding.file.edit');
+            Route::put('proceeding/{year}/file/{id}/update', [ProceedingFileController::class, 'update'])->name('backend.proceeding.file.update');
+            Route::delete('proceeding/{year}/file/{id}/delete', [ProceedingFileController::class, 'destroy'])->name('backend.proceeding.file.delete');
 
             Route::prefix('users')->group(function () {
                 Route::get('export', [UserController::class, 'export'])->name('users.export');

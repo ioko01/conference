@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conference;
 use Illuminate\Http\Request;
 use App\Models\Word;
 
@@ -17,11 +18,12 @@ class WordController extends Controller
     {
         $result = new Word;
         $this->validation($request);
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = $request->file('word_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความ/words';
+        $path = 'public/ประชุมวิชาการ ' . $conference->year . '/บทความ/words';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

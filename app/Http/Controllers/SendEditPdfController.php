@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conference;
 use Illuminate\Http\Request;
 
 use App\Models\SendEditPdf;
@@ -18,11 +19,12 @@ class SendEditPdfController extends Controller
     {
         $result = new SendEditPdf;
         $this->validation($request);
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = $request->file('pdf_upload');
         $extension = $upload->extension();
         $name = strval($id) . "_บทความแก้ไข." . $extension;
-        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความแก้ไข/pdf';
+        $path = 'public/ประชุมวิชาการ ' . $conference->year . '/บทความแก้ไข/pdf';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

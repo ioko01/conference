@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Research;
 use App\Models\Comment;
+use App\Models\Conference;
 use App\Models\StatusResearch;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -36,13 +37,15 @@ class CommentFileUploadController extends Controller
         $this->validation($request);
 
         $user = Research::select('user_id')->where('topic_id', $id)->first();
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
+
         if ($request->hasfile('file_comment')) {
 
             foreach ($request->file('file_comment') as $key => $file) {
                 $upload = $file;
                 $extension = $upload->extension();
                 $name = $upload->getClientOriginalName();
-                $path = 'public/conference_id_' . auth()->user()->conference_id . '/ไฟล์คอมเมนต์' . '/' . $id;
+                $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์คอมเมนต์' . '/' . $id;
                 $full_path = $path . "/" . $name;
 
                 $data = array_filter([

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conference;
 use Illuminate\Http\Request;
 
 use App\Models\SendEditStatementTwo;
@@ -18,11 +19,12 @@ class SendEditStatementTwoController extends Controller
     {
         $result = new SendEditStatementTwo;
         $this->validation($request);
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = $request->file('stm_upload');
         $extension = $upload->extension();
         $name = strval($id) . "_แบบคำชี้แจงการปรับแก้ไขบทความครั้งที่_2." . $extension;
-        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความแก้ไขครั้งที่_2/แบบคำชี้แจงการปรับแก้ไขบทความ';
+        $path = 'public/ประชุมวิชาการ ' . $conference->year . '/บทความแก้ไขครั้งที่_2/แบบคำชี้แจงการปรับแก้ไขบทความ';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

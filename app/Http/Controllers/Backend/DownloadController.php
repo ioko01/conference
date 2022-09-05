@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Conference;
 use App\Models\Download;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -66,6 +67,8 @@ class DownloadController extends Controller
             }
         }
 
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
+
         $upload = null;
         $extension = null;
         $name = null;
@@ -76,7 +79,7 @@ class DownloadController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_id_' . auth()->user()->conference_id . '/ไฟล์/ดาวน์โหลด';
+            $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์/ดาวน์โหลด';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }
@@ -138,7 +141,7 @@ class DownloadController extends Controller
         }
 
 
-
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = null;
         $extension = null;
@@ -150,7 +153,7 @@ class DownloadController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_id_' . auth()->user()->conference_id . '/ไฟล์/ดาวน์โหลด';
+            $path = 'public/conference_id_' . $conference->year . '/ไฟล์/ดาวน์โหลด';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }

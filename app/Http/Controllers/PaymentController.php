@@ -30,11 +30,12 @@ class PaymentController extends Controller
     {
         $result = new Slip;
         $this->validation($request);
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = $request->file('payment_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความ/สลิปชำระเงิน/';
+        $path = 'public/ประชุมวิชาการ ' . $conference->year . '/บทความ/สลิปชำระเงิน/';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conference;
 use Illuminate\Http\Request;
 
 use App\Models\SendEditWordTwo;
@@ -18,11 +19,12 @@ class SendEditWordTwoController extends Controller
     {
         $result = new SendEditWordTwo;
         $this->validation($request);
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = $request->file('word_upload');
         $extension = $upload->extension();
         $name = strval($id) . "_บทความแก้ไขครั้งที่_2." . $extension;
-        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความแก้ไขครั้งที่_2/words';
+        $path = 'public/ประชุมวิชาการ ' . $conference->year . '/บทความแก้ไขครั้งที่_2/words';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

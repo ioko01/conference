@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conference;
 use Illuminate\Http\Request;
 use App\Models\Pdf;
 
@@ -16,12 +17,13 @@ class PdfController extends Controller
 
     protected function file($request, $id = null)
     {
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
         $result = new Pdf;
         $this->validation($request);
         $upload = $request->file('pdf_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/conference_id_' . auth()->user()->conference_id . '/บทความ/pdf';
+        $path = 'public/ประชุมวิชาการ ' . $conference->year . '/บทความ/pdf';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

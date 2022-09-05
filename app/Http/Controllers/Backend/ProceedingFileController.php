@@ -81,7 +81,7 @@ class ProceedingFileController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_id_' . $conference->id . '/proceeding';
+            $path = 'public/ประชุมวิชาการ ' . $year . '/proceeding (ห้ามลบ)';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }
@@ -197,7 +197,7 @@ class ProceedingFileController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_id_' . $conference->id . '/proceeding';
+            $path = 'public/ประชุมวิชาการ ' . $year . '/proceeding (ห้ามลบ)';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }

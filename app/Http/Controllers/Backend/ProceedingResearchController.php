@@ -64,7 +64,7 @@ class ProceedingResearchController extends Controller
             $extension = $upload->extension();
             $file_name = "เลขหน้า_" . $request->number;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_id_' . $conference->id . '/proceeding/เผยแพร่ proceeding';
+            $path = 'public/ประชุมวิชาการ ' . $year . '/proceeding (ห้ามลบ)/เผยแพร่ proceeding';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }
@@ -154,7 +154,7 @@ class ProceedingResearchController extends Controller
             $extension = $upload->extension();
             $file_name = "บทความไอดี_" . $id;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_id_' . $conference->id . '/proceeding/เผยแพร่ proceeding';
+            $path = 'public/ประชุมวิชาการ ' . $year . '/proceeding (ห้ามลบ)/เผยแพร่ proceeding';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }

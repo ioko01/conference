@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Conference;
 use App\Models\Manual;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -61,6 +62,7 @@ class ManualController extends Controller
                 return back()->withErrors('มีหัวข้อนี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
         }
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = null;
         $extension = null;
@@ -72,7 +74,7 @@ class ManualController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_id_' . auth()->user()->conference_id . '/ไฟล์/คู่มือ';
+            $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์/คู่มือ';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }
@@ -131,7 +133,7 @@ class ManualController extends Controller
         }
 
 
-
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = null;
         $extension = null;
@@ -143,7 +145,7 @@ class ManualController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_id_' . auth()->user()->conference_id . '/ไฟล์/คู่มือ';
+            $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์/คู่มือ';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }

@@ -55,8 +55,8 @@
                     classes: {
                         sFilterInput: "form-control",
                         sLengthSelect: "form-select w-100",
-                        sPageButton: "btn btn-outline-dark rounded-0 mx-1",
-                        sPageButtonActive: "btn btn-dark rounded-0 text-white",
+                        sPageButton: "btn btn-outline-green rounded-0 mx-1",
+                        sPageButtonActive: "btn btn-green rounded-0 text-white",
                     },
                     language: {
                         info: "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",

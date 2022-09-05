@@ -23,7 +23,7 @@ class ManualController extends Controller
                 [
                     'name' => 'required',
                     'link_upload' => 'required',
-                    'file_upload' => 'max:10240'
+                    'file_upload' => 'mimes:pdf,pptx,docx,doc,jpg,jpeg,png|max:10240'
                 ]
             );
         } else if ($request->download == "file") {

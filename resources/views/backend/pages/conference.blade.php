@@ -3,6 +3,11 @@
 @section('content')
     <div class="card">
         <div class="card-content">
+            <div class="card-header bg-green rounded-0">
+                <strong>
+                    <i class="nav-icon fas fa-th"></i> หัวข้อ
+                </strong>
+            </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('backend.conference.store') }}" class="mb-3">
                     @csrf

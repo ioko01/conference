@@ -3,8 +3,8 @@
 @section('content')
     <div class="card">
         <div class="card-content">
-            <div class="card-header">
-                <h1>รายละเอียดผู้ใช้งาน</h1>
+            <div class="card-header bg-green rounded-0">
+                <strong><i class="nav-icon fas fa-user"></i> รายละเอียดผู้ใช้งาน</strong>
             </div>
             <div class="card-body">
                 <form action="{{ route('backend.user.update', $user->id) }}" method="POST">

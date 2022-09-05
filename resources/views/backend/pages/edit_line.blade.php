@@ -3,6 +3,12 @@
 @section('content')
     <div class="card">
         <div class="card-content">
+            <div class="card-header bg-green rounded-0">
+                <strong>
+                    <i class="nav-icon fab fa-line"></i>
+                    Line Openchat
+                </strong>
+            </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data" action="{{ route('backend.line.update', $line->id) }}"
                     class="mb-3">

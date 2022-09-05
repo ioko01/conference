@@ -18,7 +18,8 @@ class LinkOralController extends Controller
         return $request->validate([
             'room' => 'required',
             'link' => 'required',
-            'faculty_id' => 'required'
+            'faculty_id' => 'required',
+            'file' => 'mimes:jpg,jpeg,png|max:10240'
         ]);
     }
 

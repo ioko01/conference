@@ -5,24 +5,26 @@
     <!-- Content -->
     <div class="card">
         <div class="card-content">
-            <div class="card-header d-flex align-items-center justify-content-between w-100">
-                <h1>จัดการรายชื่อรายชื่อบทความ</h1>
-                <div class="ms-auto">
-                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i class="fas fa-file-export"></i>
+            <div class="bg-green card-header rounded-0">
+                <strong><i class="nav-icon fas fa-cogs"></i> จัดการบทความ</strong>
+            </div>
+
+            <div class="card-body text-xs">
+                <div class="text-end">
+                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0 mb-3"><i
+                            class="fas fa-file-export"></i>
                         Export to
                         Excel</a>
                 </div>
-            </div>
-            <div class="panel">
-                <div class="body">
-                    <div class="input-group">
-                        <label for="search">ค้นหาบทความ</label>
-                        <input type="text" class="form-control" name="search" id="search"
-                            placeholder="ค้นหาผ่านลำดับ, ชื่อบทความ/ผู้นำเสนอผลงาน, สังกัด/หน่วยงาน">
+                <div class="panel">
+                    <div class="body">
+                        <div class="input-group">
+                            <label for="search">ค้นหาบทความ</label>
+                            <input type="text" class="form-control" name="search" id="search"
+                                placeholder="ค้นหาผ่านลำดับ, ชื่อบทความ/ผู้นำเสนอผลงาน, สังกัด/หน่วยงาน">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body text-xs">
                 <div class="table-responsive">
                     <table class="list table responsive hover">
                         <thead>
@@ -122,7 +124,8 @@
                                                                 &bull; <i style="font-size: 10px;"
                                                                     class="mb-0">{{ $comment->comment_name }}</i><br />
                                                             </a>
-                                                            <div style="border-bottom: 1px dotted #ccc;" class="my-2"></div>
+                                                            <div style="border-bottom: 1px dotted #ccc;" class="my-2">
+                                                            </div>
                                                         @endif
                                                     @endif
                                                 @endforeach

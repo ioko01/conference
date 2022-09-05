@@ -3,6 +3,12 @@
 @section('content')
     <div class="card">
         <div class="card-content">
+            <div class="card-header bg-green rounded-0">
+                <strong>
+                    <i class="fas fa-link"></i>
+                    ลิงค์นำเสนอ Oral
+                </strong>
+            </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data"
                     action="{{ route('backend.oral.link.update', $link_oral->id) }}" class="mb-3">

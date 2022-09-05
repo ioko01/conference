@@ -226,6 +226,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::delete('proceeding/{year}/topic/{id}/delete', [ProceedingTopicController::class, 'destroy'])->name('backend.proceeding.topic.delete');
 
             Route::get('proceeding/{year}/research', [ProceedingResearchController::class, 'index'])->name('backend.proceeding.research.index');
+            Route::post('proceeding/{year}/research/store', [ProceedingResearchController::class, 'store'])->name('backend.proceeding.research.store');
+            Route::get('proceeding/{year}/research/{id}/edit', [ProceedingResearchController::class, 'edit'])->name('backend.proceeding.research.edit');
+            Route::put('proceeding/{year}/research/{id}/update', [ProceedingResearchController::class, 'update'])->name('backend.proceeding.research.update');
+            Route::delete('proceeding/{year}/research/{id}/delete', [ProceedingResearchController::class, 'destroy'])->name('backend.proceeding.research.delete');
 
             Route::get('proceeding/{year}/file', [ProceedingFileController::class, 'index'])->name('backend.proceeding.file.index');
             Route::post('proceeding/{year}/file/store', [ProceedingFileController::class, 'store'])->name('backend.proceeding.file.store');

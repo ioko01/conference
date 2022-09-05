@@ -3,8 +3,11 @@
 @section('content')
     <div class="card">
         <div class="card-content">
-            <div class="card-header">
-                <h1>รายการบทความ</h1>
+            <div class="card-header bg-green rounded-0">
+                <strong>
+                    <i class="nav-icon fas fa-book"></i> 
+                    แก้ไขบทความ
+                </strong>
             </div>
             <div class="card-body">
                 <form action="{{ route('backend.research.update', ['topic_id' => $research->topic_id]) }}" method="POST">
@@ -77,7 +80,8 @@
                         <label for="faculty_id">บทความของท่านอยู่ในกลุ่ม</label>
                         <select name="faculty_id" id="faculty_id"
                             class="form-control @error('faculty_id') is-invalid @enderror" onchange="select_faculty(this)">
-                            <option value="" @if (!$research->faculty_id) selected @endif>---กรุณาเลือก---</option>
+                            <option value="" @if (!$research->faculty_id) selected @endif>---กรุณาเลือก---
+                            </option>
                             @foreach ($faculties as $faculty)
                                 <option value="{{ $faculty->id }}" @if ($faculty->id == $research->faculty_id) selected @endif>
                                     {{ $faculty->name }}
@@ -97,7 +101,8 @@
                         <select name="branch_id" id="branch_id"
                             class="form-control @error('branch_id') is-invalid @enderror"
                             @if (!$research->faculty_id) disabled @endif>
-                            <option value="" @if (!$research->branch_id) selected @endif>---กรุณาเลือก---</option>
+                            <option value="" @if (!$research->branch_id) selected @endif>---กรุณาเลือก---
+                            </option>
                             @foreach ($branches as $branch)
                                 @if ($branch->faculty_id == $research->faculty_id)
                                     <option value="{{ $branch->id }}"
@@ -121,7 +126,8 @@
                         <label for="degree_id">ระดับบทความ</label>
                         <select class="form-control @error('degree_id') is-invalid @enderror" name="degree_id"
                             id="degree_id">
-                            <option value="" @if (!$research->degree_id) selected @endif>---กรุณาเลือก---</option>
+                            <option value="" @if (!$research->degree_id) selected @endif>---กรุณาเลือก---
+                            </option>
                             @foreach ($degrees as $degree)
                                 <option value="{{ $degree->id }}" @if ($degree->id == $research->degree_id) selected @endif>
                                     {{ $degree->name }}</option>

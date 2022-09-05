@@ -23,13 +23,10 @@
                     @if (count($link_orals) > 0)
                         @forelse ($faculties as $key => $faculty)
                             <div class="animate fade-up my-5">
-                                <div class="px-4">
-                                    <h1>
-                                        <strong style="font-size: calc(12px + .5vw);" class="text-{{ $colors[$key] }}"><i
-                                                class="fas fa-book fa-1x"></i>
-                                            {{ $faculty->name }}
-                                        </strong>
-                                    </h1>
+                                <div class="px-4 py-2 bg-green">
+                                    <strong class="text-white">
+                                        {{ $faculty->name }}
+                                    </strong>
                                 </div>
                                 <div class="px-4 text-dark">
                                     <table data-searching="false" style="color: inherit;" class="dataTable table w-100">

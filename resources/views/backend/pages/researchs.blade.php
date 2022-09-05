@@ -3,24 +3,26 @@
 @section('content')
     <div class="card">
         <div class="card-content">
-            <div class="card-header d-flex align-items-center justify-content-between w-100">
-                <h1>รายการบทความ</h1>
-                <div class="ms-auto">
-                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i class="fas fa-file-export"></i>
+            <div class="bg-green card-header rounded-0">
+                <strong><i class="nav-icon fas fa-book"></i> รายการบทความ</strong>
+            </div>
+
+            <div class="card-body text-xs">
+                <div class="text-end">
+                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0 mb-3"><i
+                            class="fas fa-file-export"></i>
                         Export to
                         Excel</a>
                 </div>
-            </div>
-            <div class="panel">
-                <div class="body">
-                    <div class="input-group">
-                        <label for="search">ค้นหาบทความ</label>
-                        <input type="text" class="form-control" name="search" id="search"
-                            placeholder="ค้นหาผ่านลำดับ, รายละเอียด, ปีที่ส่งผลงาน, ชนิดารเข้าร่วม, เวลา">
+                <div class="panel">
+                    <div class="body">
+                        <div class="input-group">
+                            <label for="search">ค้นหาบทความ</label>
+                            <input type="text" class="form-control" name="search" id="search"
+                                placeholder="ค้นหาผ่านลำดับ, รายละเอียด, ปีที่ส่งผลงาน, ชนิดารเข้าร่วม, เวลา">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body text-xs">
                 <div class="table-responsive">
                     <table class="list table responsive hover">
                         <thead>
@@ -51,8 +53,8 @@
                                             @endif
                                         </strong>
                                         <br />
-                                        <strong style="font-size: 12px"
-                                            class="text-green">ผู้นำเสนอ : {{ str_replace('|', ', ', $research->presenter) }}</strong>
+                                        <strong style="font-size: 12px" class="text-green">ผู้นำเสนอ :
+                                            {{ str_replace('|', ', ', $research->presenter) }}</strong>
                                         <br />
                                         <p class="text-secondary">
                                             <i style="font-size: 10px" class="d-block">อัพโหลด

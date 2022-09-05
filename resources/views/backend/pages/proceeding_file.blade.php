@@ -111,7 +111,8 @@
                                                 <input type="file" name="file_upload" id="file-upload"
                                                     class="form-control rounded-0 @error('file_upload') is-invalid @enderror"
                                                     @if (old('download') !== null) @if (old('download') == 'link') disabled @endif
-                                                @else disabled @endif>
+                                                @else disabled @endif
+                                                accept=".pdf, .doc, .docx, .jpeg, .jpg, .png">
                                                 @error('file_upload')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

@@ -3,6 +3,12 @@
 @section('content')
     <div class="card">
         <div class="card-content">
+            <div class="card-header bg-green rounded-0">
+                <strong>
+                    <i class="nav-icon fas fa-book"></i> 
+                    คู่มือ
+                </strong>
+            </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data" action="{{ route('backend.manual.store') }}" class="mb-3">
                     @csrf
@@ -54,7 +60,7 @@
                             <input type="file" name="file_upload" id="file-upload"
                                 class="form-control rounded-0 @error('file_upload') is-invalid @enderror"
                             @if (old('download') !== null) @if (old('download') == 'link') disabled @endif @else
-                                disabled @endif>
+                                disabled @endif accept=".pdf, .pptx, .docx, .doc, .jpg, .jpeg, .png">
                             @error('file_upload')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

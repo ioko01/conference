@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conference;
+use App\Models\Faculty;
 use App\Models\ProceedingFile;
+use App\Models\ProceedingResearch;
 use App\Models\ProceedingTopic;
 use Illuminate\Http\Request;
 
@@ -27,6 +29,22 @@ class ProceedingController extends Controller
             ->orderBy('proceeding_topics.position')
             ->get();
 
+        $proceeding_researchs = ProceedingResearch::select(
+            'proceeding_researchs.number as number',
+            'proceeding_researchs.topic as topic',
+            'proceeding_researchs.faculty_id as faculty_id',
+            'faculties.name as faculty_name',
+            'presents.name as present_name',
+            'proceeding_researchs.name as file_name',
+            'proceeding_researchs.path as path',
+        )
+            ->leftjoin('faculties', 'faculties.id', 'proceeding_researchs.faculty_id')
+            ->leftjoin('presents', 'presents.id', 'proceeding_researchs.present_id')
+            ->where('proceeding_researchs.conference_id', $conference->id)
+            ->get();
+
+        $faculties = Faculty::get();
+
         $topics = [];
         $i = 0;
         $j = 0;
@@ -40,6 +58,6 @@ class ProceedingController extends Controller
             }
         }
 
-        return view('frontend.pages.proceeding', compact('year', 'conference', 'proceedings', 'topics'));
+        return view('frontend.pages.proceeding', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs'));
     }
 }

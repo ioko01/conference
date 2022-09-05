@@ -61,7 +61,8 @@ class ProceedingFileController extends Controller
         alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'topic_id' => 'required',
-            'name' => 'required'
+            'name' => 'required',
+            'file_upload' => 'mimes:pdf,doc,docx,jpeg,jpg,png|max:10240'
         ]);
     }
 
@@ -212,14 +213,14 @@ class ProceedingFileController extends Controller
                         'link' => $request->link_upload ? $request->link_upload : null,
                         'path' => $fullpath,
                         'extension' => $extension,
-                        'conference_id' => auth()->user()->conference_id
+                        'conference_id' => $conference->id
                     ];
                 } else {
                     $data = [
                         'user_id' => auth()->user()->id,
                         'topic_id' => $request->topic_id,
                         'name' => $request->name,
-                        'conference_id' => auth()->user()->conference_id
+                        'conference_id' => $conference->id
                     ];
                 }
             }
@@ -231,7 +232,7 @@ class ProceedingFileController extends Controller
                 'link' => $request->link_upload,
                 'path' => null,
                 'extension' => null,
-                'conference_id' => auth()->user()->conference_id
+                'conference_id' => $conference->id
             ];
         }
 

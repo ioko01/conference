@@ -3,6 +3,11 @@
 @section('content')
     <div class="card">
         <div class="card-content">
+            <div class="card-header bg-green rounded-0">
+                <strong>
+                    ผลงานนำเสนอ Oral
+                </strong>
+            </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data"
                     action="{{ route('backend.oral.update', $present_oral->id) }}" class="mb-3">

@@ -4,25 +4,23 @@
     <!-- Content -->
     <div class="card">
         <div class="card-content">
-            <div class="card-header d-flex align-items-center justify-content-between w-100">
-                <h1>จัดการรายชื่อรายชื่อบทความ</h1>
-                <div class="ms-auto">
-                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0"><i
-                            class="fas fa-file-export"></i>
-                        Export to
-                        Excel</a>
-                </div>
+            <div class="card-header bg-green rounded-0">
+                <strong>
+                    <i class="nav-icon fas fa-book-open"></i>
+                    บทความฉบับแก้ไขครั้งที่ 1
+                </strong>
             </div>
-            <div class="panel">
-                <div class="body">
-                    <div class="input-group">
-                        <label for="search">ค้นหาบทความ</label>
-                        <input type="text" class="form-control" name="search" id="search"
-                            placeholder="ค้นหาผ่านลำดับ, ชื่อบทความ/ผู้นำเสนอผลงาน, สังกัด/หน่วยงาน">
+
+            <div class="card-body text-xs">
+                <div class="panel">
+                    <div class="body">
+                        <div class="input-group">
+                            <label for="search">ค้นหาบทความ</label>
+                            <input type="text" class="form-control" name="search" id="search"
+                                placeholder="ค้นหาผ่านลำดับ, ชื่อบทความ/ผู้นำเสนอผลงาน, สังกัด/หน่วยงาน">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body text-xs">
                 <div class="table-responsive">
                     <table class="list table responsive hover">
                         <thead>
@@ -84,20 +82,19 @@
                                                     {{ thaiDateFormat($value->pdf_created_at, true, true) }}</span>
                                                 <span style="font-size: 10px;" class="text-green d-block">แก้ไข
                                                     {{ thaiDateFormat($value->pdf_updated_at, true, true) }}</span>
-                                                </a>
+                                            </a>
                                         @endif
                                     </td>
                                     <td>
                                         @if (empty($value->statement))
                                             -
                                         @else
-                                            <a target="_blank"
-                                                href="{{ Storage::url($value->statement_path) }}">STM-1
+                                            <a target="_blank" href="{{ Storage::url($value->statement_path) }}">STM-1
                                                 <span style="font-size: 10px;" class="text-green d-block">อัพโหลด
                                                     {{ thaiDateFormat($value->statement_created_at, true, true) }}</span>
                                                 <span style="font-size: 10px;" class="text-green d-block">แก้ไข
                                                     {{ thaiDateFormat($value->statement_updated_at, true, true) }}</span>
-                                                </a>
+                                            </a>
                                         @endif
                                     </td>
                                     <td>

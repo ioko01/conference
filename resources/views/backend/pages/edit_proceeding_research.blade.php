@@ -32,9 +32,11 @@
                                     </ul>
                                 </div>
                             </div>
-                            <form action="{{ route('backend.proceeding.research.store', $year) }}"
+                            <form
+                                action="{{ route('backend.proceeding.research.update', ['year' => $year, 'id' => $_research->id]) }}"
                                 enctype="multipart/form-data" method="POST" class="col-md-12">
                                 @csrf
+                                @method('PUT')
                                 <div class="border border-top-0 p-3">
                                     <div class="row mb-3">
                                         <div class="col-lg-4 col-md-6">
@@ -42,7 +44,9 @@
                                             <select name="faculty_id" id="faculty_id" class="form-select">
                                                 <option value="">-- เลือกกลุ่มบทความ --</option>
                                                 @forelse ($faculties as $faculty)
-                                                    <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                                                    <option value="{{ $faculty->id }}"
+                                                        @if ($_research->faculty_id == $faculty->id) selected @endif>
+                                                        {{ $faculty->name }}</option>
                                                 @empty
                                                 @endforelse
                                             </select>
@@ -59,7 +63,9 @@
                                             <select name="present_id" id="present_id" class="form-select">
                                                 <option value="">-- เลือกรูปแบบบทความ --</option>
                                                 @forelse ($presents as $present)
-                                                    <option value="{{ $present->id }}">{{ $present->name }}</option>
+                                                    <option value="{{ $present->id }}"
+                                                        @if ($_research->present_id == $present->id) selected @endif>
+                                                        {{ $present->name }}</option>
                                                 @empty
                                                 @endforelse
                                             </select>
@@ -74,8 +80,8 @@
                                     <div class="row mb-3">
                                         <div class="col-lg-3 col-md-6">
                                             <label for="name">เลขหน้า</span></label>
-                                            <input type="text" name="number" id="number" class="form-control"
-                                                placeholder="เลขหน้า" />
+                                            <input value="{{ $_research->number }}" type="text" name="number"
+                                                id="number" class="form-control" placeholder="เลขหน้า" />
 
                                             @error('number')
                                                 <span class="invalid-feedback" role="alert">
@@ -88,8 +94,8 @@
                                         <div class="col-md-8">
                                             <label for="topic">ชื่อบทความ <span class="text-red text-sm">(เช่น :
                                                     การสร้างวัฒนธรรมการกินพาสาเกตแก่เด็กปฐมวัยในจังหวัดร้อยเอ็ดด้วยกระบวนการวิจัยเชิงปฏิบัติการแบบมีส่วนร่วม)</span></label>
-                                            <input type="text" name="topic" id="topic" class="form-control"
-                                                placeholder="ชื่อบทความ" />
+                                            <input value="{{ $_research->topic }}" type="text" name="topic"
+                                                id="topic" class="form-control" placeholder="ชื่อบทความ" />
 
                                             @error('topic')
                                                 <span class="invalid-feedback" role="alert">
@@ -108,8 +114,14 @@
                                                 </label>
                                             </div>
                                             <div class="mb-3">
-                                                <input type="file" name="file" id="file"
-                                                    class="form-control rounded-0 @error('file') is-invalid @enderror"
+                                                <label class="label-type-file mb-0 @error('file') is-invalid @enderror"
+                                                    for="file">{{ $_research->name ? $_research->name : 'ไม่ได้เลือกไฟล์ใด' }}</label>
+                                                <input type="hidden" value="{{ $_research->name }}" name="name_file"
+                                                    id="name_file">
+
+                                                <input onchange="get_file_name(this)" type="file" name="file"
+                                                    id="file"
+                                                    class="form-control d-none rounded-0 @error('file') is-invalid @enderror"
                                                     accept=".pdf, .doc, .docx">
                                                 @error('file')
                                                     <span class="invalid-feedback" role="alert">
@@ -121,8 +133,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button class="btn btn-success rounded-0"><i class="fas fa-save"></i>
-                                                บันทึก</button>
+                                            <button class="btn btn-warning text-white rounded-0"><i class="fas fa-edit"></i>
+                                                แก้ไข</button>
                                         </div>
                                     </div>
                                 </div>

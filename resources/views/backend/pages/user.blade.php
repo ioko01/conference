@@ -3,24 +3,26 @@
 @section('content')
     <div class="card">
         <div class="card-content">
-            <div class="card-header d-flex align-items-center justify-content-between w-100">
-                <h1>ผู้ใช้งาน</h1>
-                <div class="ms-auto">
-                    <a href="{{ route('users.export') }}" class="btn btn-info rounded-0"><i class="fas fa-file-export"></i>
+            <div class="bg-green card-header rounded-0">
+                <strong><i class="nav-icon fas fa-user"></i> ผู้ใช้งาน</strong>
+            </div>
+
+            <div class="card-body text-xs">
+                <div class="text-end">
+                    <a href="{{ route('users.export') }}" class="btn btn-info rounded-0 mb-3"><i
+                            class="fas fa-file-export"></i>
                         Export to
                         Excel</a>
                 </div>
-            </div>
-            <div class="panel">
-                <div class="body">
-                    <div class="input-group">
-                        <label for="search">ค้นหาผู้ใช้งาน</label>
-                        <input type="text" class="form-control" name="search" id="search"
-                            placeholder="ค้นหาผ่านลำดับ, ชื่อ - สกุล, อีเมลล์, สร้างเมื่อ">
+                <div class="panel">
+                    <div class="body">
+                        <div class="input-group">
+                            <label for="search">ค้นหาผู้ใช้งาน</label>
+                            <input type="text" class="form-control" name="search" id="search"
+                                placeholder="ค้นหาผ่านลำดับ, ชื่อ - สกุล, อีเมลล์, สร้างเมื่อ">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body text-xs">
                 <div class="table-responsive">
                     <table class="list table responsive hover">
                         <th>#</th>

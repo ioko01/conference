@@ -75,7 +75,9 @@
     Request::is('backend/proceeding/*/topic') ||
     Request::is('backend/proceeding/*/topic/*/edit') ||
     Request::is('backend/proceeding/*/file') ||
-    Request::is('backend/proceeding/*/file/*/edit'))
+    Request::is('backend/proceeding/*/file/*/edit') ||
+    Request::is('backend/proceeding/*/research') ||
+    Request::is('backend/proceeding/*/research/*/edit'))
     <script src="{{ asset('api/delete.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 

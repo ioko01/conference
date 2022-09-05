@@ -3,6 +3,11 @@
 @section('content')
     <div class="card">
         <div class="card-content">
+            <div class="card-header bg-green rounded-0">
+                <strong>
+                    ผลงานนำเสนอ Oral
+                </strong>
+            </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data" action="{{ route('backend.oral.store') }}" class="mb-3">
                     @csrf
@@ -114,7 +119,8 @@
                                     <td><strong class="text-green">{{ $present_oral->topic_th }}</strong><br />
                                         <strong class="text-warning text-sm">{{ $present_oral->name }}</strong><br />
                                     </td>
-                                    <td class="text-center"><strong class="text-green">{{ substr($present_oral->time_start, 0, -3) }} -
+                                    <td class="text-center"><strong
+                                            class="text-green">{{ substr($present_oral->time_start, 0, -3) }} -
                                             {{ substr($present_oral->time_end, 0, -3) }} น.</strong>
                                     </td>
                                     <td class="text-right"><a href="{{ route('backend.oral.edit', $present_oral->id) }}"

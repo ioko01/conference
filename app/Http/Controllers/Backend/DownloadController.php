@@ -50,7 +50,8 @@ class DownloadController extends Controller
 
     protected function store(Request $request)
     {
-        if (!auth()->user()->conference_id) {
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
+        if (!isset($conference->id)) {
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
         }
@@ -67,8 +68,6 @@ class DownloadController extends Controller
             }
         }
 
-        $conference = Conference::where('id', auth()->user()->conference_id)->first();
-
         $upload = null;
         $extension = null;
         $name = null;
@@ -79,7 +78,7 @@ class DownloadController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์/ดาวน์โหลด';
+            $path = 'public/conference_' . auth()->user()->conference_id . '/ไฟล์/ดาวน์โหลด';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }
@@ -110,7 +109,8 @@ class DownloadController extends Controller
 
     protected function update(Request $request, $id)
     {
-        if (!auth()->user()->conference_id) {
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
+        if (!isset($conference->id)) {
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
         }
@@ -140,9 +140,6 @@ class DownloadController extends Controller
             }
         }
 
-
-        $conference = Conference::where('id', auth()->user()->conference_id)->first();
-
         $upload = null;
         $extension = null;
         $name = null;
@@ -153,7 +150,7 @@ class DownloadController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_id_' . $conference->year . '/ไฟล์/ดาวน์โหลด';
+            $path = 'public/conference_' . auth()->user()->conference_id . '/ไฟล์/ดาวน์โหลด';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }

@@ -37,9 +37,28 @@
     </div> --}}
 
     <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header rounded-0 border border-primary">
+                    <h3 class="card-title">งานประชุมวิชาการที่เปิดใช้งาน : @if (isset($conference->name))
+                            <span class="text-green">{{ $conference->name }}</span>
+                        @else
+                            <span class="text-red">ไม่มีงานประชุมวิชาการที่เปิดใช้งาน</span>
+                        @endif
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-success">
-                <div class="card-header">
+                <div class="card-header rounded-0">
                     <h3 class="card-title"><i class="fas fa-user"></i> ผู้ใช้งาน</h3>
 
                     <div class="card-tools">
@@ -69,7 +88,7 @@
 
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-danger">
-                <div class="card-header">
+                <div class="card-header rounded-0">
                     <h3 class="card-title"><i class="fas fa-book"></i> บทความ</h3>
 
                     <div class="card-tools">
@@ -101,7 +120,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card card-primary">
-                <div class="card-header">
+                <div class="card-header rounded-0">
                     <h3 class="card-title"><i class="fas fa-calendar-alt"></i> ปฏิทิน</h3>
 
                     <div class="card-tools">
@@ -124,7 +143,7 @@
 
         <div class="col-md-6">
             <div class="card card-warning">
-                <div class="card-header">
+                <div class="card-header rounded-0">
                     <h3 class="card-title text-white"><i class="fas fa-book"></i> บทความล่าสุด</h3>
 
                     <div class="card-tools">

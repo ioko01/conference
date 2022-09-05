@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Conference;
 use App\Models\Research;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class DashboardController extends Controller
             ->orderBy('researchs.topic_id', 'desc')
             ->get();
 
-        return view('backend.pages.dashboard', compact('storage', 'researchs', 'users'));
+        $conference = Conference::where('status', 1)->first();
+        return view('backend.pages.dashboard', compact('storage', 'researchs', 'users', 'conference'));
     }
 
     protected function storage()

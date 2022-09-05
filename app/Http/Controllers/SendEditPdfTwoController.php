@@ -19,12 +19,11 @@ class SendEditPdfTwoController extends Controller
     {
         $result = new SendEditPdfTwo;
         $this->validation($request);
-        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = $request->file('pdf_upload');
         $extension = $upload->extension();
         $name = strval($id) . "_บทความแก้ไขครั้งที่_2." . $extension;
-        $path = 'public/ประชุมวิชาการ ' . $conference->year . '/บทความแก้ไขครั้งที่_2/pdf';
+        $path = 'public/conference_' . auth()->user()->conference_id . '/บทความแก้ไขครั้งที่_2/pdf';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

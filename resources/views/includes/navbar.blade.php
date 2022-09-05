@@ -102,6 +102,8 @@
                                 </li>
 
                             @empty
+                                <li><a class='dropdown-item disabled' href="#">ไม่มีรายการ</a>
+                                </li>
                             @endforelse
                         </ul>
                     </li>

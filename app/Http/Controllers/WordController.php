@@ -18,12 +18,11 @@ class WordController extends Controller
     {
         $result = new Word;
         $this->validation($request);
-        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = $request->file('word_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/ประชุมวิชาการ ' . $conference->year . '/บทความ/words';
+        $path = 'public/conference_' . auth()->user()->conference_id . '/บทความ/words';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

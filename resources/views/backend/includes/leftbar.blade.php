@@ -1,17 +1,22 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/" class="brand-link">
-        <img src="{{ asset('images/logo.webp', env('REDIRECT_HTTPS')) }}" alt="AdminLTE Logo" class="brand-image">
-        <span>ราชภัฏเลยวิชาการ</span>
-    </a>
+    <p class="brand-link text-green text-center">
+        <strong class="d-block">{{ config('app.name') }} </strong>
+        <span class="d-block text-warning text-sm">แผงควบคุม</span>
+    </p>
 
     <!-- Sidebar -->
     <div class="sidebar" id="navbar-conference-backend">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel mt-3 py-3 text-center">
             <div class="info">
-                <a href="#" class="d-block">ADMIN</a>
+                <p class="d-block m-0">สถานะ: @if (auth()->user()->is_admin == 1)
+                        ADMIN
+                    @elseif(auth()->user()->is_admin == 2)
+                        SUPER ADMIN
+                    @endif
+                </p>
             </div>
         </div>
 
@@ -156,6 +161,9 @@
                             </li>
 
                         @empty
+                            <li class="nav-item">
+                                <p class='nav-link disabled'>ไม่มีรายการให้เลือก</p>
+                            </li>
                         @endforelse
                     </ul>
                 </li>

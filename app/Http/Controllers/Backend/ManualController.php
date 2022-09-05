@@ -48,7 +48,8 @@ class ManualController extends Controller
 
     protected function store(Request $request)
     {
-        if (!auth()->user()->conference_id) {
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
+        if (!isset($conference->id)) {
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้');
         }
@@ -62,7 +63,6 @@ class ManualController extends Controller
                 return back()->withErrors('มีหัวข้อนี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
         }
-        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = null;
         $extension = null;
@@ -74,7 +74,7 @@ class ManualController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์/คู่มือ';
+            $path = 'public/conference_' . auth()->user()->conference_id . '/ไฟล์/คู่มือ';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }
@@ -103,8 +103,8 @@ class ManualController extends Controller
 
     protected function update(Request $request, $id)
     {
-
-        if (!auth()->user()->conference_id) {
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
+        if (!isset($conference->id)) {
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้');
         }
@@ -132,9 +132,6 @@ class ManualController extends Controller
             }
         }
 
-
-        $conference = Conference::where('id', auth()->user()->conference_id)->first();
-
         $upload = null;
         $extension = null;
         $name = null;
@@ -145,7 +142,7 @@ class ManualController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์/คู่มือ';
+            $path = 'public/conference_' . auth()->user()->conference_id . '/ไฟล์/คู่มือ';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }

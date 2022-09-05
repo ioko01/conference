@@ -19,12 +19,11 @@ class SendEditStatementController extends Controller
     {
         $result = new SendEditStatement;
         $this->validation($request);
-        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = $request->file('stm_upload');
         $extension = $upload->extension();
         $name = strval($id) . "_แบบคำชี้แจงการปรับแก้ไขบทความ." . $extension;
-        $path = 'public/ประชุมวิชาการ ' . $conference->year . '/บทความแก้ไข/แบบคำชี้แจงการปรับแก้ไขบทความ';
+        $path = 'public/conference_' . auth()->user()->conference_id . '/บทความแก้ไข/แบบคำชี้แจงการปรับแก้ไขบทความ';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

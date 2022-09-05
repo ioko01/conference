@@ -19,12 +19,11 @@ class SendEditWordController extends Controller
     {
         $result = new SendEditWord;
         $this->validation($request);
-        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         $upload = $request->file('word_upload');
         $extension = $upload->extension();
         $name = strval($id) . "_บทความแก้ไข." . $extension;
-        $path = 'public/ประชุมวิชาการ ' . $conference->year . '/บทความแก้ไข/words';
+        $path = 'public/conference_' . auth()->user()->conference_id . '/บทความแก้ไข/words';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

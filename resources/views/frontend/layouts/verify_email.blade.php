@@ -1,5 +1,6 @@
 @include('includes.loading')
 @include('includes.head')
+@include('includes.script')
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -15,7 +16,7 @@
         </div>
 
     </div>
-
+    @yield('script')
 </body>
 
 </html>

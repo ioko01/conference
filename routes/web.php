@@ -48,6 +48,7 @@ use App\Models\Line;
 use App\Models\Manual;
 use App\Models\Research;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------

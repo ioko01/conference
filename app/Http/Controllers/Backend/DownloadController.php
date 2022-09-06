@@ -12,7 +12,17 @@ class DownloadController extends Controller
 {
     public function index()
     {
-        $downloads = Download::leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
+        $downloads = Download::select(
+            'downloads.id as id',
+            'downloads.conference_id as conference_id',
+            'downloads.notice as notice',
+            'downloads.name as name',
+            'downloads.link as link',
+            'downloads.name_file as name_file',
+            'downloads.path_file as path_file',
+            'downloads.ext_file as ext_file',
+        )
+            ->leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
             ->where('conferences.status', 1)
             ->get();
         return view('backend.pages.download', compact('downloads'));
@@ -56,7 +66,17 @@ class DownloadController extends Controller
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
         }
 
-        $downloads = Download::leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
+        $downloads = Download::select(
+            'downloads.id as id',
+            'downloads.conference_id as conference_id',
+            'downloads.notice as notice',
+            'downloads.name as name',
+            'downloads.link as link',
+            'downloads.name_file as name_file',
+            'downloads.path_file as path_file',
+            'downloads.ext_file as ext_file',
+        )
+            ->leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
             ->where('conferences.status', 1)
             ->get();
         $this->validator($request);
@@ -100,11 +120,21 @@ class DownloadController extends Controller
 
     protected function edit($id)
     {
-        $downloads = Download::leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
+        $downloads = Download::select(
+            'downloads.id as id',
+            'downloads.conference_id as conference_id',
+            'downloads.notice as notice',
+            'downloads.name as name',
+            'downloads.link as link',
+            'downloads.name_file as name_file',
+            'downloads.path_file as path_file',
+            'downloads.ext_file as ext_file',
+        )
+            ->leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
             ->where('conferences.status', 1)
             ->get();
-        $download = Download::find($id);
-        return view('backend.pages.edit_download', compact('downloads', 'download', 'id'));
+        $_download = Download::find($id);
+        return view('backend.pages.edit_download', compact('downloads', '_download', 'id'));
     }
 
     protected function update(Request $request, $id)
@@ -115,28 +145,38 @@ class DownloadController extends Controller
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
         }
 
-        $download = Download::find($id);
-        $downloads = Download::leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
+        $_download = Download::find($id);
+        $downloads = Download::select(
+            'downloads.id as id',
+            'downloads.conference_id as conference_id',
+            'downloads.notice as notice',
+            'downloads.name as name',
+            'downloads.link as link',
+            'downloads.name_file as name_file',
+            'downloads.path_file as path_file',
+            'downloads.ext_file as ext_file',
+        )
+            ->leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
             ->where('conferences.status', 1)
             ->get();
         $this->validator($request);
 
-        foreach ($downloads as $down) {
-            if ($down->name == $request->name && auth()->user()->conference_id == $down->conference_id && $down->user_id != auth()->user()->id) {
+        foreach ($downloads as $download) {
+            if ($download->name == $request->name && auth()->user()->conference_id == $download->conference_id && $download->user_id != auth()->user()->id) {
                 alert('ผิดพลาด', 'มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้', 'error')->showConfirmButton('ปิด', '#3085d6');
                 return back()->withErrors('มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
         }
 
         if ($request->download == "file") {
-            if ($request->name_file != $download->name_file) {
-                if (Storage::exists($download->path_file)) {
-                    Storage::delete($download->path_file);
+            if ($request->name_file != $_download->name_file) {
+                if (Storage::exists($_download->path_file)) {
+                    Storage::delete($_download->path_file);
                 }
             }
         } else if ($request->download == "link") {
-            if (Storage::exists($download->path_file)) {
-                Storage::delete($download->path_file);
+            if (Storage::exists($_download->path_file)) {
+                Storage::delete($_download->path_file);
             }
         }
 
@@ -195,9 +235,9 @@ class DownloadController extends Controller
 
     public function destroy($id)
     {
-        $download = Download::find($id);
-        if (Storage::exists($download->path_file)) {
-            Storage::delete($download->path_file);
+        $_download = Download::find($id);
+        if (Storage::exists($_download->path_file)) {
+            Storage::delete($_download->path_file);
         }
         Download::where('id', $id)->delete();
         alert('สำเร็จ', 'ลบหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');

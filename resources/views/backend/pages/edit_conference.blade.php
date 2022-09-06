@@ -190,7 +190,7 @@
                     </div>
 
                     <div class="col-12">
-                        <button class="btn btn-warning rounded-0 text-white" name="edit_conference"
+                        <button onclick="thisDisabled(this)" class="btn btn-warning rounded-0 text-white" name="edit_conference"
                             value="edit">แก้ไขหัวข้อ</button>
                     </div>
                 </form>

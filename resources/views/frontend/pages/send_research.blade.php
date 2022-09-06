@@ -169,7 +169,7 @@
                                 <p class="text-red text-center">
                                     * กรุณาตรวจสอบความถูกต้องก่อนกดส่งบทความของท่าน
                                 </p>
-                                <button class="btn btn-green text-white w-100 rounded-0" name="send_research"
+                                <button onclick="thisDisabled(this)" class="btn btn-green text-white w-100 rounded-0" name="send_research"
                                     type="submit">ส่งบทความ</button>
                             </form>
                         </div>

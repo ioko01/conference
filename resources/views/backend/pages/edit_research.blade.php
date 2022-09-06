@@ -155,7 +155,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <button class="btn btn-warning text-white w-100 rounded-0" name="send_research"
+                    <button onclick="thisDisabled(this)" class="btn btn-warning text-white w-100 rounded-0" name="send_research"
                         type="submit">แก้ไขบทความ</button>
                 </form>
             </div>

@@ -183,7 +183,7 @@
                     </div>
 
                     <div class="col-12">
-                        <button class="btn btn-success rounded-0">เพิ่มหัวข้อ</button>
+                        <button onclick="thisDisabled(this)" class="btn btn-success rounded-0">เพิ่มหัวข้อ</button>
                     </div>
                 </form>
             </div>

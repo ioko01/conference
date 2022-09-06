@@ -249,8 +249,9 @@
                             </div>
                         </div>
                         <div class="d-block">
-                            <input name="register" class="btn btn-green rounded-0 text-white text-white w-100"
-                                type="submit" value="ลงทะเบียน">
+                            <input onclick="thisDisabled(this)" name="register"
+                                class="btn btn-green rounded-0 text-white text-white w-100" type="submit"
+                                value="ลงทะเบียน">
                         </div>
                     </form>
                 </div>

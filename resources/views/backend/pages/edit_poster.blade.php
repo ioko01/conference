@@ -67,7 +67,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-warning text-white rounded-0"><i class="fa fa-save"></i> แก้ไข</button>
+                            <button onclick="thisDisabled(this)" class="btn btn-warning text-white rounded-0"><i class="fa fa-save"></i> แก้ไข</button>
                         </div>
                     </div>
                 </form>

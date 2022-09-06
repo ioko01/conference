@@ -35,3 +35,9 @@ function get_file_name(e) {
         $("#name_file").val(null);
     }
 }
+
+function thisDisabled(e) {
+    setTimeout(() => {
+        $(e).attr("disabled", true);
+    }, 10);
+}

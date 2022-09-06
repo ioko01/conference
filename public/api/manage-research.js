@@ -125,7 +125,7 @@ function update_modal(topic_id, title, status_value, text_status) {
                     ต้องการเปลี่ยนสถานะเป็น <strong id="text_status" class="text-red">${text_status}</strong> ใช่หรือไม่ ?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success rounded-0 text-white" onclick="update_status(${topic_id}, ${status_value})">ตกลง</button>
+                    <button onclick="thisDisabled(this)" type="button" class="btn btn-success rounded-0 text-white" onclick="update_status(${topic_id}, ${status_value})">ตกลง</button>
                     <button type="button" class="btn btn-danger rounded-0 text-white"
                         data-bs-dismiss="modal">ยกเลิก</button>
                 </div>
@@ -166,7 +166,7 @@ function send_comment_modal(topic_id, type) {
                     }
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success text-white rounded-0">อัพโหลดไฟล์</button>
+                        <button onclick="thisDisabled(this)" type="submit" class="btn btn-success text-white rounded-0">อัพโหลดไฟล์</button>
                     </div>
                 </div>
             </div>

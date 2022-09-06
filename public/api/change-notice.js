@@ -27,7 +27,7 @@ const change_notice = (value, topic, route) => {
                     <input type="hidden" name="notice" value=${value}>
                         </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success rounded-0">
+                        <button onclick="thisDisabled(this)" type="submit" class="btn btn-success rounded-0">
                             <i class="fa fa-save"></i> บันทึก
                         </button>
                         <button type="button" class="btn btn-secondary rounded-0"

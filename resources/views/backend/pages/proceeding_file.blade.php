@@ -123,7 +123,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button class="btn btn-success rounded-0"><i class="fas fa-save"></i>
+                                            <button onclick="thisDisabled(this)" class="btn btn-success rounded-0"><i class="fas fa-save"></i>
                                                 บันทึก</button>
                                         </div>
                                     </div>

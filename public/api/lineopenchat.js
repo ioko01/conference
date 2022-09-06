@@ -23,7 +23,7 @@ const delete_line_openchat = (id, topic) => {
                         <label style="word-break: break-word;" for="poster">ต้องการลบหัวข้อ <span class="text-danger">"${topic}"</span> หรือไม่?</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger rounded-0">
+                        <button onclick="thisDisabled(this)" type="submit" class="btn btn-danger rounded-0">
                             <i class="fa fa-trash-alt"></i> ลบ
                         </button>
                         <button type="button" class="btn btn-secondary rounded-0"

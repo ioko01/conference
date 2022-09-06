@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-success rounded-0"><i class="fa fa-save"></i> บันทึก</button>
+                        <button onclick="thisDisabled(this)" class="btn btn-success rounded-0"><i class="fa fa-save"></i> บันทึก</button>
                     </div>
                 </form>
             </div>

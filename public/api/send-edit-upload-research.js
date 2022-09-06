@@ -163,7 +163,7 @@ function send_edit_research_modal(topic_id, type, method) {
                     }
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์</button>
+                        <button onclick="thisDisabled(this)" type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์</button>
                     </div>
                 </div>
             </div>
@@ -208,7 +208,7 @@ function send_research_modal(topic_id, type, method) {
                     }
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์</button>
+                        <button onclick="thisDisabled(this)" type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์</button>
                     </div>
                 </div>
             </div>
@@ -319,7 +319,7 @@ function payment_modal(topic_id, type, path, method) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>
+                    <button onclick="thisDisabled(this)" type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>
                 </div>
             </div>
         </div>

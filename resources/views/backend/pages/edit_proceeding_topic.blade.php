@@ -29,6 +29,11 @@
                                                 href="{{ route('backend.proceeding.research.index', $year) }}">
                                                 <span><i class="fas fa-book"></i></span> อัพโหลดบทความ Proceeding</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-primary"
+                                                href="{{ route('backend.proceeding.preview.index', $year) }}">
+                                                <span><i class="fas fa-eye"></i></span> แสดงตัวอย่าง</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -72,7 +77,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button onclick="thisDisabled(this)" class="btn btn-warning text-white rounded-0"><i class="fas fa-edit"></i>
+                                            <button onclick="thisDisabled(this)"
+                                                class="btn btn-warning text-white rounded-0"><i class="fas fa-edit"></i>
                                                 แก้ไข</button>
                                         </div>
                                     </div>

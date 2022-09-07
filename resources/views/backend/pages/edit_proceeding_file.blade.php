@@ -29,6 +29,11 @@
                                                 href="{{ route('backend.proceeding.research.index', $year) }}">
                                                 <span><i class="fas fa-book"></i></span> อัพโหลดบทความ Proceeding</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-primary"
+                                                href="{{ route('backend.proceeding.preview.index', $year) }}">
+                                                <span><i class="fas fa-eye"></i></span> แสดงตัวอย่าง</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -43,7 +48,8 @@
                                             <label for="topic_id">หัวข้อ <span class="text-red text-sm">(เช่น : หน้าปก,
                                                     ส่วนหน้า,
                                                     สารบัญ)</span></label>
-                                            <select name="topic_id" id="topic_id" class="form-select">
+                                            <select name="topic_id" id="topic_id"
+                                                class="form-select @error('topic_id') is-invalid @enderror">
                                                 <option value="">-- เลือกหัวข้อ --</option>
                                                 @forelse ($topics as $topic)
                                                     <option value="{{ $topic->id }}"
@@ -53,7 +59,7 @@
                                                 @endforelse
                                             </select>
 
-                                            @error('topic')
+                                            @error('topic_id')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -65,7 +71,8 @@
                                             <label for="name">ชื่อไฟล์ <span class="text-red text-sm">(เช่น : ปกหน้า,
                                                     ปกหลัง)</span></label>
                                             <input value="{{ $_file->name }}" type="text" name="name" id="name"
-                                                class="form-control" placeholder="ชื่อไฟล์" />
+                                                class="form-control @error('name') is-invalid @enderror"
+                                                placeholder="ชื่อไฟล์" />
 
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
@@ -135,8 +142,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button onclick="thisDisabled(this)" class="btn btn-warning text-white rounded-0"><i
-                                                    class="fas fa-edit"></i>
+                                            <button onclick="thisDisabled(this)"
+                                                class="btn btn-warning text-white rounded-0"><i class="fas fa-edit"></i>
                                                 แก้ไข</button>
                                         </div>
                                     </div>

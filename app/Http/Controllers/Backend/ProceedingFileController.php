@@ -59,11 +59,28 @@ class ProceedingFileController extends Controller
     protected function validator($request)
     {
         alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
-        return $request->validate([
-            'topic_id' => 'required',
-            'name' => 'required',
-            'file_upload' => 'mimes:pdf,doc,docx,jpeg,jpg,png|max:10240'
-        ]);
+
+        if ($request->download == "link") {
+            return $request->validate([
+                'topic_id' => 'required',
+                'name' => 'required',
+                'link_upload' => 'required'
+            ]);
+        } else if ($request->download == "file") {
+            if ($request->name_file) {
+                return $request->validate([
+                    'topic_id' => 'required',
+                    'name' => 'required',
+                    'file_upload' => 'mimes:pdf,doc,docx,jpeg,jpg,png|max:10240'
+                ]);
+            } else {
+                return $request->validate([
+                    'topic_id' => 'required',
+                    'name' => 'required',
+                    'file_upload' => 'required|mimes:pdf,doc,docx,jpeg,jpg,png|max:10240'
+                ]);
+            }
+        }
     }
 
     protected function store(Request $request, $year)

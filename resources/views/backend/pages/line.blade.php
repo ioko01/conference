@@ -5,7 +5,7 @@
         <div class="card-content">
             <div class="card-header bg-green rounded-0">
                 <strong>
-                    <i class="nav-icon fab fa-line"></i> 
+                    <i class="nav-icon fab fa-line"></i>
                     Line Openchat
                 </strong>
             </div>
@@ -35,8 +35,8 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-check-label" for="link">
-                                    ลิงค์ <i style="font-size: 12px;" class="text-red">(เช่น
-                                        https://www.youtube.com)</i>
+                                    ลิงค์ไลน์โอเพนแชท <i style="font-size: 12px;" class="text-red">(เช่น
+                                        https://line.me)</i>
                                 </label>
                                 <input type="text" name="link" id="link"
                                     class="form-control rounded-0 @error('link') is-invalid @enderror">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-check-label" for="file">
-                                    อัพโหลดไฟล์ <i style="font-size: 12px;" class="text-red">(แนะนำเฉพาะไฟล์ที่มีขนาดเล็ก
+                                    QR Code ไลน์โอเพ้นแชท <i style="font-size: 12px;" class="text-red">(แนะนำเฉพาะไฟล์ที่มีขนาดเล็ก
                                         ขนาดไฟล์ใหญ่สุดคือ 10 MB)</i>
                                 </label>
                                 <input type="file" name="file" id="file"
@@ -62,7 +62,8 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <button onclick="thisDisabled(this)" class="btn btn-success rounded-0"><i class="fa fa-save"></i> บันทึก</button>
+                            <button onclick="thisDisabled(this)" class="btn btn-success rounded-0"><i class="fa fa-save"></i>
+                                บันทึก</button>
                         </div>
                     </form>
                 </div>

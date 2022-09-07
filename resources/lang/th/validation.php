@@ -209,6 +209,7 @@ return [
         'present_oral_id' => 'รหัสการนำเสนอ',
         'present_poster_id' => 'รหัสการนำเสนอ',
         'position' => 'ลำดับ',
+        'topic_id' => 'หัวข้อ',
     ],
 
 ];

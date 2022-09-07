@@ -4,7 +4,7 @@
     <!-- Content -->
     <div id="proceeding" class="bg-white text-blue p-5 my-5">
         <h2>
-            <a href="javascript: history.back()" class="text-primary">← ย้อนกลับ</a>
+            <a href="javascript: window.location = document.referrer" class="text-primary">← ย้อนกลับ</a>
         </h2>
         <div class="inner-content-header">
             <h4 class="text-center"><i class="fas fa-eye"></i> แสดงตัวอย่าง
@@ -27,9 +27,11 @@
                                         @if ($proceeding->path)
                                             @if (in_array($proceeding->extension, ['jpg', 'jpeg', 'png', 'giff', 'webp']))
                                                 <div class="col-lg-4 col-md-5 col-sm-6 col-12">
-                                                    <div class="card">
+                                                    <div style="box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%) !important;"
+                                                        class="card">
                                                         <div class="card-content">
-                                                            <div class="card-header">
+                                                            <div style="background-color: rgba(0,0,0,.03) !important;"
+                                                                class="card-header">
                                                                 <strong>
                                                                     {{ $proceeding->name }}
                                                                 </strong>
@@ -39,7 +41,7 @@
                                                                     src="{{ Storage::url($proceeding->path) }}"
                                                                     alt="{{ $proceeding->name }}">
                                                                 <a target="_blank"
-                                                                    class="btn btn-green mt-3 text-white rounded-0"
+                                                                    class="btn btn-success mt-3 text-white rounded-0"
                                                                     href="{{ Storage::url($proceeding->path) }}"
                                                                     download="{{ $proceeding->name }}">ดาวน์โหลด</a>
                                                             </div>

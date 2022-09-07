@@ -29,6 +29,11 @@
                                                 href="{{ route('backend.proceeding.research.index', $year) }}">
                                                 <span><i class="fas fa-book"></i></span> อัพโหลดบทความ Proceeding</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-primary"
+                                                href="{{ route('backend.proceeding.preview.index', $year) }}">
+                                                <span><i class="fas fa-eye"></i></span> แสดงตัวอย่าง</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -41,7 +46,8 @@
                                     <div class="row mb-3">
                                         <div class="col-lg-4 col-md-6">
                                             <label for="faculty_id">กลุ่มบทความ</label>
-                                            <select name="faculty_id" id="faculty_id" class="form-select">
+                                            <select name="faculty_id" id="faculty_id"
+                                                class="form-select @error('faculty_id') is-invalid @enderror">
                                                 <option value="">-- เลือกกลุ่มบทความ --</option>
                                                 @forelse ($faculties as $faculty)
                                                     <option value="{{ $faculty->id }}"
@@ -50,7 +56,7 @@
                                                 @empty
                                                 @endforelse
                                             </select>
-                                            @error('topic')
+                                            @error('faculty_id')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -60,7 +66,8 @@
                                     <div class="row mb-3">
                                         <div class="col-lg-4 col-md-6">
                                             <label for="present_id">รูปแบบบทความ</label>
-                                            <select name="present_id" id="present_id" class="form-select">
+                                            <select name="present_id" id="present_id"
+                                                class="form-select @error('present_id') is-invalid @enderror">
                                                 <option value="">-- เลือกรูปแบบบทความ --</option>
                                                 @forelse ($presents as $present)
                                                     <option value="{{ $present->id }}"
@@ -70,7 +77,7 @@
                                                 @endforelse
                                             </select>
 
-                                            @error('topic')
+                                            @error('present_id')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -81,7 +88,8 @@
                                         <div class="col-lg-3 col-md-6">
                                             <label for="name">เลขหน้า</span></label>
                                             <input value="{{ $_research->number }}" type="text" name="number"
-                                                id="number" class="form-control" placeholder="เลขหน้า" />
+                                                id="number" class="form-control @error('number') is-invalid @enderror"
+                                                placeholder="เลขหน้า" />
 
                                             @error('number')
                                                 <span class="invalid-feedback" role="alert">
@@ -95,7 +103,8 @@
                                             <label for="topic">ชื่อบทความ <span class="text-red text-sm">(เช่น :
                                                     การสร้างวัฒนธรรมการกินพาสาเกตแก่เด็กปฐมวัยในจังหวัดร้อยเอ็ดด้วยกระบวนการวิจัยเชิงปฏิบัติการแบบมีส่วนร่วม)</span></label>
                                             <input value="{{ $_research->topic }}" type="text" name="topic"
-                                                id="topic" class="form-control" placeholder="ชื่อบทความ" />
+                                                id="topic" class="form-control @error('topic') is-invalid @enderror"
+                                                placeholder="ชื่อบทความ" />
 
                                             @error('topic')
                                                 <span class="invalid-feedback" role="alert">
@@ -133,7 +142,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button onclick="thisDisabled(this)" class="btn btn-warning text-white rounded-0"><i class="fas fa-edit"></i>
+                                            <button onclick="thisDisabled(this)"
+                                                class="btn btn-warning text-white rounded-0"><i class="fas fa-edit"></i>
                                                 แก้ไข</button>
                                         </div>
                                     </div>

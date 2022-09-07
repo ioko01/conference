@@ -46,7 +46,8 @@
                                             <label for="topic_id">หัวข้อ <span class="text-red text-sm">(เช่น : หน้าปก,
                                                     ส่วนหน้า,
                                                     สารบัญ)</span></label>
-                                            <select name="topic_id" id="topic_id" class="form-select">
+                                            <select name="topic_id" id="topic_id"
+                                                class="form-select @error('topic_id') is-invalid @enderror">
                                                 <option value="">-- เลือกหัวข้อ --</option>
                                                 @forelse ($topics as $topic)
                                                     <option value="{{ $topic->id }}">{{ $topic->topic }}</option>
@@ -54,7 +55,7 @@
                                                 @endforelse
                                             </select>
 
-                                            @error('topic')
+                                            @error('topic_id')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -65,7 +66,8 @@
                                         <div class="col-lg-4 col-md-6">
                                             <label for="name">ชื่อไฟล์ <span class="text-red text-sm">(เช่น : ปกหน้า,
                                                     ปกหลัง)</span></label>
-                                            <input type="text" name="name" id="name" class="form-control"
+                                            <input type="text" name="name" id="name"
+                                                class="form-control @error('name') is-invalid @enderror"
                                                 placeholder="ชื่อไฟล์" />
 
                                             @error('name')

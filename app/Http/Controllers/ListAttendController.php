@@ -14,6 +14,7 @@ class ListAttendController extends Controller
         $users = User::select('*')
             ->leftjoin('conferences', 'users.conference_id', 'conferences.id')
             ->where('conferences.status', 1)
+            ->where('is_admin', 0)
             ->get();
 
         return view('frontend.pages.list_attend', compact('users', 'conference'));

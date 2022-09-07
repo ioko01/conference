@@ -9,6 +9,7 @@ use App\Models\Kota;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
@@ -101,5 +102,36 @@ class UserController extends Controller
     {
         $date = date("d_m_Y");
         return Excel::download(new ExportUser, "EXPORT_USERS_$date.xlsx");
+    }
+
+    public function change_password($id)
+    {
+        $user = User::where('id', $id)->first();
+        return view('backend.pages.change_password', compact('id', 'user'));
+    }
+
+    protected function update_password(Request $request, $id)
+    {
+        # Validation
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+
+        $user = User::where('id', $id)->first();
+
+        #Match The Old Password
+        if (!Hash::check($request->old_password, $user->password)) {
+            return back()->with("error", "Old Password Doesn't match!");
+        }
+
+
+        #Update the new Password
+        User::where('id', $id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        alert('สำเร็จ', 'เปลี่ยนรหัสผ่านสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        return back()->with("status", "เปลี่ยนรหัสผ่านสำเร็จ");
     }
 }

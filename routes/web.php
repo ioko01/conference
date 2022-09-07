@@ -253,6 +253,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('backend.user.edit');
             Route::put('user/{id}/update', [UserController::class, 'update'])->name('backend.user.update');
 
+            Route::get('user/{id}/change-password', [UserController::class, 'change_password'])->name('backend.user.change_password');
+            Route::put('user/{id}/update-password', [UserController::class, 'update_password'])->name('backend.user.update_password');
+
             Route::get('conference', [ConferenceController::class, 'index'])->name('backend.conference.index');
             Route::get('conference/{conference_id}/edit', [ConferenceController::class, 'edit'])->name('backend.conference.edit');
             Route::post('conference/store', [ConferenceController::class, 'store'])->name('backend.conference.store');

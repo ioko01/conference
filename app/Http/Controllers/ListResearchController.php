@@ -24,7 +24,9 @@ class ListResearchController extends Controller
             ->leftjoin('conferences', 'conferences.id', '=', 'researchs.conference_id')
             ->leftjoin('faculties', 'faculties.id', '=', 'researchs.faculty_id')
             ->leftjoin('status_researchs', 'status_researchs.id', '=', 'researchs.topic_status')
+            ->leftjoin('users', 'users.id', 'researchs.user_id')
             ->where('conferences.status', 1)
+            ->where('is_admin', 0)
             ->get();
         return view('frontend.pages.list_research', compact('researchs', 'conference'));
     }

@@ -31,6 +31,7 @@
                         <th>อีเมล</th>
                         <th>สร้างเมื่อ</th>
                         <th>แก้ไข</th>
+                        <th class="text-center">#</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -59,6 +60,11 @@
                                         <a href="{{ route('backend.user.edit', $user->id) }}" class=" text-warning"><i
                                                 class="nav-icon fa fa-edit"></i>
                                             แก้ไข</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{ route('backend.user.change_password', $user->id) }}"><i
+                                                class="nav-icon fa fa-pen"></i>
+                                            เปลี่ยนรหัสผ่าน</a>
                                     </td>
                                 </tr>
                                 @empty

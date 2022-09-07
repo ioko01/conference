@@ -197,20 +197,26 @@
                                         <span class="text-danger"> * กรุณาเลือกวิธีลงทะเบียน</span>
                                     @enderror
                                 </label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="person_attend" id="send"
-                                        @if (old('person_attend') === 'send' || empty(old('person_attend'))) checked @endif value="send">
-                                    <label class="form-check-label" for="send">
-                                        ลงทะเบียนส่งผลงาน
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="person_attend" id="attend"
-                                        @if (old('person_attend') === 'attend') checked @endif value="attend">
-                                    <label class="form-check-label" for="attend">
-                                        ลงทะเบียนเข้าร่วมงานทั่วไป
-                                    </label>
-                                </div>
+                                @if (endDate('end_research')->day >= 0)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="person_attend"
+                                            id="send" @if (old('person_attend') === 'send' || empty(old('person_attend'))) checked @endif
+                                            value="send">
+                                        <label class="form-check-label" for="send">
+                                            ลงทะเบียนส่งผลงาน
+                                        </label>
+                                    </div>
+                                @endif
+                                @if (endDate('end_attend')->day >= 0)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="person_attend"
+                                            id="attend" @if (endDate('end_research')->day < 0 || old('person_attend') === 'attend') checked @endif
+                                            value="attend">
+                                        <label class="form-check-label" for="attend">
+                                            ลงทะเบียนเข้าร่วมงานทั่วไป
+                                        </label>
+                                    </div>
+                                @endif
                                 <p style="color: red;">* บุคคลภายนอกจะต้องชำระค่าลงทะเบียน 2,000 บาท ต่อ 1 ผลงาน
                                 </p>
                             </div>

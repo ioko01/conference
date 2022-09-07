@@ -17,12 +17,13 @@ class PdfController extends Controller
 
     protected function file($request, $id = null)
     {
+        $conference_year = Conference::where('id', auth()->user()->conference_id)->first();
         $result = new Pdf;
         $this->validation($request);
         $upload = $request->file('pdf_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/conference_' . auth()->user()->conference_id . '/บทความ/pdf';
+        $path = 'public/ประชุมวิชาการ ' . $conference_year->year . '/บทความ/pdf';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

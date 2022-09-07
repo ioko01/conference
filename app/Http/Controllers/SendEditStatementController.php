@@ -17,13 +17,14 @@ class SendEditStatementController extends Controller
 
     protected function file($request, $id = null)
     {
+        $conference_year = Conference::where('id', auth()->user()->conference_id)->first();
         $result = new SendEditStatement;
         $this->validation($request);
 
         $upload = $request->file('stm_upload');
         $extension = $upload->extension();
         $name = strval($id) . "_แบบคำชี้แจงการปรับแก้ไขบทความ." . $extension;
-        $path = 'public/conference_' . auth()->user()->conference_id . '/บทความแก้ไข/แบบคำชี้แจงการปรับแก้ไขบทความ';
+        $path = 'public/ประชุมวิชาการ ' . $conference_year->year . '/บทความแก้ไข/แบบคำชี้แจงการปรับแก้ไขบทความ';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

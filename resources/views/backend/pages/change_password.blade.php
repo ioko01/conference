@@ -16,7 +16,8 @@
                             @method('PUT')
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <strong class="text-green">อีเมล: {{ $user->email }}</strong>
+                                    <strong class="text-green">ชื่อ-สกุล: {{ $user->fullname }}</strong><br />
+                                    <strong class="text-green">อีเมล: {{ $user->email }}</strong><br />
                                 </div>
 
                                 <div class="mb-3">
@@ -45,8 +46,10 @@
 
                             </div>
 
-                            <div class="card-footer">
+                            <div class="card-footer bg-white">
                                 <button class="btn btn-success rounded-0"><i class="fas fa-save"></i> บันทึก</button>
+                                <a style="color: #fff!important;" href="javascript: window.location = document.referrer"
+                                    class="btn btn-secondary rounded-0"><i class="fas fa-times"></i> ยกเลิก</a>
                             </div>
 
                         </form>

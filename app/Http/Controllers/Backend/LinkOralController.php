@@ -143,6 +143,8 @@ class LinkOralController extends Controller
             }
         }
 
+        $conference_year = Conference::where('id', auth()->user()->conference_id)->first();
+
         $upload = null;
         $extension = null;
         $name = null;
@@ -152,7 +154,7 @@ class LinkOralController extends Controller
             $upload = $request->file('file');
             $extension = $upload->extension();
             $name = "QR_" . $request->room . "." . $extension;
-            $path = 'public/conference_' . auth()->user()->conference_id . '/ไฟล์/qr_code_oral/qr_code_' . auth()->user()->conference_id;
+            $path = 'public/ประชุมวิชาการ ' . $conference_year->year . '/ไฟล์/qr_code_oral/qr_code_' . auth()->user()->conference_id;
             $fullpath = $path . "/" . $name;
 
             $upload->storeAs($path, $name);

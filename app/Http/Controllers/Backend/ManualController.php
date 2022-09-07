@@ -64,6 +64,8 @@ class ManualController extends Controller
             }
         }
 
+
+
         $upload = null;
         $extension = null;
         $name = null;
@@ -74,7 +76,7 @@ class ManualController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_' . auth()->user()->conference_id . '/ไฟล์/คู่มือ';
+            $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์/คู่มือ';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }
@@ -142,7 +144,7 @@ class ManualController extends Controller
             $extension = $upload->extension();
             $file_name = $request->name;
             $name = $file_name . '.' . $extension;
-            $path = 'public/conference_' . auth()->user()->conference_id . '/ไฟล์/คู่มือ';
+            $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์/คู่มือ';
             $fullpath = $path . "/" . $name;
             $upload->storeAs($path, $name);
         }

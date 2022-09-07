@@ -62,9 +62,12 @@
                                             แก้ไข</a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('backend.user.change_password', $user->id) }}"><i
-                                                class="nav-icon fa fa-pen"></i>
-                                            เปลี่ยนรหัสผ่าน</a>
+                                        @if (auth()->user()->id == $user->id)
+                                            <a href="{{ route('backend.user.change_password', $user->id) }}"><i
+                                                    class="nav-icon fa fa-pen"></i>
+                                                เปลี่ยนรหัสผ่าน</a>
+                                        @else
+                                        @endif
                                     </td>
                                 </tr>
                                 @empty

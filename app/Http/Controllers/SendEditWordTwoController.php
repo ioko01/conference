@@ -17,13 +17,14 @@ class SendEditWordTwoController extends Controller
 
     protected function file($request, $id = null)
     {
+        $conference_year = Conference::where('id', auth()->user()->conference_id)->first();
         $result = new SendEditWordTwo;
         $this->validation($request);
 
         $upload = $request->file('word_upload');
         $extension = $upload->extension();
         $name = strval($id) . "_บทความแก้ไขครั้งที่_2." . $extension;
-        $path = 'public/conference_' . auth()->user()->conference_id . '/บทความแก้ไขครั้งที่_2/words';
+        $path = 'public/ประชุมวิชาการ ' . $conference_year->year . '/บทความแก้ไขครั้งที่_2/words';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

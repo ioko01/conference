@@ -16,13 +16,14 @@ class WordController extends Controller
 
     protected function file($request, $id = null)
     {
+        $conference_year = Conference::where('id', auth()->user()->conference_id)->first();
         $result = new Word;
         $this->validation($request);
 
         $upload = $request->file('word_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/conference_' . auth()->user()->conference_id . '/บทความ/words';
+        $path = 'public/ประชุมวิชาการ ' . $conference_year->year . '/บทความ/words';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

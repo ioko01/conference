@@ -37,6 +37,7 @@ class CommentFileUploadController extends Controller
         $this->validation($request);
 
         $user = Research::select('user_id')->where('topic_id', $id)->first();
+        $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         if ($request->hasfile('file_comment')) {
 
@@ -44,7 +45,7 @@ class CommentFileUploadController extends Controller
                 $upload = $file;
                 $extension = $upload->extension();
                 $name = $upload->getClientOriginalName();
-                $path = 'public/conference_' . auth()->user()->conference_id . '/ไฟล์คอมเมนต์' . '/' . $id;
+                $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์คอมเมนต์' . '/' . $id;
                 $full_path = $path . "/" . $name;
 
                 $data = array_filter([

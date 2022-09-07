@@ -28,13 +28,14 @@ class PaymentController extends Controller
 
     protected function file($request, $id)
     {
+        $conference_year = Conference::where('id', auth()->user()->conference_id)->first();
         $result = new Slip;
         $this->validation($request);
 
         $upload = $request->file('payment_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/conference_' . auth()->user()->conference_id . '/บทความ/สลิปชำระเงิน/';
+        $path = 'public/ประชุมวิชาการ ' . $conference_year->year . '/บทความ/สลิปชำระเงิน/';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

@@ -114,13 +114,14 @@ class UploadfileController extends Controller
 
     protected function file($request, $id = null)
     {
+        $conference_year = Conference::where('id', auth()->user()->conference_id)->first();
         $result = new Poster;
         $this->validation($request);
 
         $upload = $request->file('poster');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/conference_' . auth()->user()->conference_id . '/บทความ/โปสเตอร์';
+        $path = 'public/ประชุมวิชาการ ' . $conference_year->year . '/บทความ/โปสเตอร์';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

@@ -138,6 +138,8 @@ class LineController extends Controller
             }
         }
 
+        $conference_year = Conference::where('id', auth()->user()->conference_id)->first();
+
         $upload = null;
         $extension = null;
         $name = null;
@@ -147,7 +149,7 @@ class LineController extends Controller
             $upload = $request->file('file');
             $extension = $upload->extension();
             $name = "QR_OPENCHAT_" . auth()->user()->conference_id . "." . $extension;
-            $path = 'public/conference_' . auth()->user()->conference_id . '/line_openchat';
+            $path = 'public/ประชุมวิชาการ ' . $conference_year->year . '/line_openchat';
             $fullpath = $path . "/" . $name;
 
             $upload->storeAs($path, $name);

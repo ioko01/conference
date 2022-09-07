@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\ManualController;
 use App\Http\Controllers\Backend\PresentOralController;
 use App\Http\Controllers\Backend\PresentPosterController;
 use App\Http\Controllers\Backend\ProceedingFileController;
+use App\Http\Controllers\Backend\ProceedingPreviewController;
 use App\Http\Controllers\Backend\ProceedingResearchController;
 use App\Http\Controllers\Backend\ProceedingTopicController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
@@ -237,6 +238,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('proceeding/{year}/file/{id}/edit', [ProceedingFileController::class, 'edit'])->name('backend.proceeding.file.edit');
             Route::put('proceeding/{year}/file/{id}/update', [ProceedingFileController::class, 'update'])->name('backend.proceeding.file.update');
             Route::delete('proceeding/{year}/file/{id}/delete', [ProceedingFileController::class, 'destroy'])->name('backend.proceeding.file.delete');
+
+            Route::get('proceeding/{year}/preview', [ProceedingPreviewController::class, 'index'])->name('backend.proceeding.preview.index');
 
             Route::prefix('users')->group(function () {
                 Route::get('export', [UserController::class, 'export'])->name('users.export');

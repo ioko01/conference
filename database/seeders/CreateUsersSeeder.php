@@ -29,62 +29,6 @@ class CreateUsersSeeder extends Seeder
                 "is_admin" => "2",
                 "password" => bcrypt("1234")
             ],
-            [
-                "prefix" => "Mr.",
-                "fullname" => "Thanapong Soontarawirat",
-                "sex" => "male",
-                "phone" => "0997711531",
-                "institution" => "มหาวิทยาลัยราชภัฏเลย",
-                "address" => "อาคาร 20 ชั้น 4 234 ถนน เลย-เชียงคาน ตำบลเมือง อำเภอเมืองเลย เลย 42000",
-                "check_requirement" => "before",
-                "position_id" => "1",
-                "person_attend" => "attend",
-                "email" => "ioko.peezaza@gmail.com",
-                "is_admin" => "0",
-                "password" => bcrypt("1234")
-            ],
-            [
-                "prefix" => "นาย",
-                "fullname" => "ทดสอบ1",
-                "sex" => "male",
-                "phone" => "0123456789",
-                "institution" => "ทดสอบ1",
-                "address" => "ทดสอบ1",
-                "check_requirement" => "before",
-                "position_id" => "1",
-                "person_attend" => "attend",
-                "email" => "test1@test.com",
-                "is_admin" => "0",
-                "password" => bcrypt("1234")
-            ],
-            [
-                "prefix" => "นาย",
-                "fullname" => "ทดสอบ2",
-                "sex" => "female",
-                "phone" => "0123456789",
-                "institution" => "ทดสอบ2",
-                "address" => "ทดสอบ2",
-                "check_requirement" => "before",
-                "position_id" => "1",
-                "person_attend" => "attend",
-                "email" => "test2@test.com",
-                "is_admin" => "0",
-                "password" => bcrypt("1234")
-            ],
-            [
-                "prefix" => "นาย",
-                "fullname" => "ทดสอบ3",
-                "sex" => "female",
-                "phone" => "0123456789",
-                "institution" => "ทดสอบ3",
-                "address" => "ทดสอบ3",
-                "check_requirement" => "after",
-                "position_id" => "1",
-                "person_attend" => "attend",
-                "email" => "test3@test.com",
-                "is_admin" => "0",
-                "password" => bcrypt("1234")
-            ],
         ];
 
         foreach ($users as $key => $value) {

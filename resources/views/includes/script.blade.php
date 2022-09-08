@@ -23,6 +23,7 @@
 
     @if (Request::is('register'))
         <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/select-attend.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('employee/research/uploadfile/*'))

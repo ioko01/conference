@@ -65,18 +65,33 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'prefix' => 'required|string',
-            'fullname' => 'required|string',
-            'sex' => 'required',
-            'phone' => 'required|string|max:10',
-            'institution' => $data['position_id'] == '2' ? 'required|string' : 'string',
-            'address' => 'required|string',
-            'position_id' => 'required',
-            'person_attend' => 'required',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        if ($data["person_attend"] == "attend") {
+            return Validator::make($data, [
+                'prefix' => 'required|string',
+                'fullname' => 'required|string',
+                'sex' => 'required',
+                'phone' => 'required|string|max:10',
+                'institution' => $data['position_id'] == '2' ? 'required|string' : 'string',
+                'position_id' => 'required',
+                'person_attend' => 'required',
+                'email' => 'required|string|email|unique:users',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
+        } else if ($data["person_attend"] == "send") {
+            return Validator::make($data, [
+                'prefix' => 'required|string',
+                'fullname' => 'required|string',
+                'sex' => 'required',
+                'phone' => 'required|string|max:10',
+                'institution' => $data['position_id'] == '2' ? 'required|string' : 'string',
+                'address' => 'required|string',
+                'position_id' => 'required',
+                'person_attend' => 'required',
+                'email' => 'required|string|email|unique:users',
+                'password' => 'required|string|min:8|confirmed',
+                'receive_check' => 'required'
+            ]);
+        }
     }
 
     /**

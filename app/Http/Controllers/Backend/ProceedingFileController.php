@@ -53,7 +53,9 @@ class ProceedingFileController extends Controller
                 }
             }
         }
-        return view('backend.pages.proceeding_file', compact('year', 'files', 'topics', 'i_topic'));
+
+        $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+        return view('backend.pages.proceeding_file', compact('year', 'files', 'topics', 'i_topic', 'conference'));
     }
 
     protected function validator($request)
@@ -179,7 +181,8 @@ class ProceedingFileController extends Controller
             }
         }
 
-        return view('backend.pages.edit_proceeding_file', compact('year', 'files', 'topics', 'i_topic', '_file'));
+        $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+        return view('backend.pages.edit_proceeding_file', compact('year', 'files', 'topics', 'i_topic', '_file', 'conference'));
     }
 
     protected function update(Request $request, $year, $id)

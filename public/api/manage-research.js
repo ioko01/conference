@@ -184,6 +184,14 @@ function open_modal(e, type) {
         const status_value = e.value;
         const text_status =
             type == "change_status" ? e[e.selectedIndex].text : null;
+        $("#modal").on("hidden.bs.modal", function () {
+            for (let i = 0; i < e.length; i++) {
+                if (e[i].getAttribute("selected")) {
+                    e.value = e[i].value;
+                    break;
+                }
+            }
+        });
         check_type(type, topic_id, title, status_value, text_status);
     } catch (error) {
         throw error;

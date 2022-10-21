@@ -210,6 +210,8 @@ return [
         'present_poster_id' => 'รหัสการนำเสนอ',
         'position' => 'ลำดับ',
         'topic_id' => 'หัวข้อ',
+        'present_id' => 'รูปแบบบทความ',
+        'number' => 'เลขหน้า'
     ],
 
 ];

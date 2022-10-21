@@ -35,7 +35,7 @@ class PaymentController extends Controller
         $upload = $request->file('payment_upload');
         $extension = $upload->extension();
         $name = strval($id) . "." . $extension;
-        $path = 'public/ประชุมวิชาการ ' . $conference_year->year . '/บทความ/สลิปชำระเงิน/';
+        $path = 'public/ประชุมวิชาการ ' . $conference_year->year . '/บทความ/สลิปชำระเงิน';
 
         $data = array_filter([
             'user_id' => auth()->user()->id,

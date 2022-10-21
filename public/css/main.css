@@ -128,10 +128,10 @@ html {
 
 .fade-right {
     opacity: 1;
-    transform: translateX(0);
-    -webkit-transform: translateX(0);
-    animation: fade-right 0.8s ease-in-out;
-    -webkit-animation: fade-right 0.8s ease-in-out;
+    transform: translateX(-5%);
+    -webkit-transform: translateX(-5%);
+    animation: fade-right 0.8s ease-in-out forwards;
+    -webkit-animation: fade-right 0.8s ease-in-out forwards;
 }
 
 @keyframes fade-right {
@@ -147,12 +147,33 @@ html {
     }
 }
 
+.delay-fade-right {
+    opacity: 0;
+    transform: translateX(-5%);
+    -webkit-transform: translateX(-5%);
+    animation: delay-fade-right 0.8s 0.5s ease-in-out forwards;
+    -webkit-animation: delay-fade-right 0.8s 0.5s ease-in-out forwards;
+}
+
+@keyframes delay-fade-right {
+    0% {
+        opacity: 0;
+        transform: translateX(-5%);
+        -webkit-transform: translateX(-5%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+    }
+}
+
 .fade-left {
     opacity: 1;
-    transform: translateX(0);
-    -webkit-transform: translateX(0);
-    animation: fade-left 0.8s ease-in-out;
-    -webkit-animation: fade-left 0.8s ease-in-out;
+    transform: translateX(5%);
+    -webkit-transform: translateX(5%);
+    animation: fade-left 0.8s ease-in-out forwards;
+    -webkit-animation: fade-left 0.8s ease-in-out forwards;
 }
 
 @keyframes fade-left {
@@ -170,10 +191,10 @@ html {
 
 .fade-up {
     opacity: 1;
-    transform: translateX(0);
-    -webkit-transform: translateX(0);
-    animation: fade-up 0.8s ease-in-out;
-    -webkit-animation: fade-up 0.8s ease-in-out;
+    transform: translateY(5%);
+    -webkit-transform: translateY(5%);
+    animation: fade-up 0.8s ease-in-out forwards;
+    -webkit-animation: fade-up 0.8s ease-in-out forwards;
 }
 
 @keyframes fade-up {
@@ -513,6 +534,16 @@ a {
     opacity: 1;
 }
 
+.box-blank {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(50% + 15px);
+    height: 2.25rem;
+    z-index: 1;
+    background: #f8f9fa !important;
+}
+
 .bg-blue {
     background-color: var(--color-blue);
     color: white;
@@ -599,11 +630,21 @@ a {
     border-top: 4px solid var(--color-green);
 }
 
-.dropdown-item:focus,
+/* .dropdown-item:focus,
 .dropdown-item:hover {
     color: white;
     background-color: var(--color-green);
     opacity: 0.8;
+} */
+
+.dropdown-item:focus {
+    color: #000;
+    background-color: #e9ecef;
+}
+
+form.dropdown-item:focus,
+form.dropdown-item:hover {
+    background-color: transparent !important;
 }
 
 .dropdown-item.active {
@@ -684,6 +725,10 @@ a {
 /* Medium Screen */
 
 @media screen and (max-width: 767px) {
+    .box-blank {
+        width: 15px;
+        display: block;
+    }
     .tips {
         display: none;
     }

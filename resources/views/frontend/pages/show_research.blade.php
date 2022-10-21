@@ -4,7 +4,7 @@
     <!-- Content -->
     <div class="bg-white text-blue p-5 my-5">
         <div class="inner-content-header">
-            <h4 class="text-center">รายชื่อบทความ <br />
+            <h4 class="text-center fw-bold"><i class="nav-icon fas fa-1x fa-book"></i> รายชื่อบทความ <br />
                 @if ($conference)
                     {{ $conference->name }}
                 @endif
@@ -14,9 +14,6 @@
             </h4>
         </div>
 
-        <div>
-            <h1>รายชื่อบทความ</h1>
-        </div>
         <div class="panel">
             <div class="body">
                 <div class="input-group">

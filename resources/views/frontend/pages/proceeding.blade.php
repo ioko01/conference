@@ -3,17 +3,17 @@
 @section('content')
     <!-- Content -->
     <div id="proceeding" class="bg-white text-blue p-5 my-5">
-        <div class="inner-content-header">
-            <h4 class="text-center">PROCEEDING <br />
-                @if ($conference)
-                    {{ $conference->name }}
-                @endif
-            </h4>
-            <h4 class="text-green py-3">
-                {{ config('app.name') }}
-            </h4>
-        </div>
         @if ($conference->status_proceeding == 1)
+            <div class="inner-content-header">
+                <h4 class="text-center fw-bold">PROCEEDING <br />
+                    @if ($conference)
+                        {{ $conference->name }}
+                    @endif
+                </h4>
+                <h4 class="text-green py-3">
+                    {{ config('app.name') }}
+                </h4>
+            </div>
             @forelse ($topics as $topic)
                 @if ($topic)
                     <div class="animate fade-up row">
@@ -42,7 +42,7 @@
                                                                     <a target="_blank"
                                                                         class="btn btn-green mt-3 text-white rounded-0"
                                                                         href="{{ Storage::url($proceeding->path) }}"
-                                                                        download="{{ $proceeding->name }}">ดาวน์โหลด</a>
+                                                                        download="{{ $proceeding->name }}.{{ $proceeding->extension }}">ดาวน์โหลด</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -80,12 +80,12 @@
                                 </strong>
                             </div>
                             <div class="p-4 text-dark">
-                                <table data-searching="false" style="color: inherit;" class="dataTable table w-100">
+                                <table style="color: inherit;" class="dataTable table w-100">
                                     <thead>
                                         <tr class="text-center">
                                             <th style="width: 10%;">เลขหน้า</th>
                                             <th style="width: 70%;" class="text-start">รายละเอียดบทความ</th>
-                                            <th style="width: auto%;">ดาวน์โหลด</th>
+                                            <th style="width: auto%;"><i class="fas fa-download"></i></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,7 +93,7 @@
                                             @if ($proceeding_research->faculty_id == $faculty->id)
                                                 <tr>
                                                     <td class="text-center fw-bold">{{ $proceeding_research->number }}</td>
-                                                    <td>
+                                                    <td class="text-start">
                                                         <strong
                                                             class="text-info">{{ $proceeding_research->present_name }}</strong><br />
                                                         <strong>{{ $proceeding_research->topic }}</strong><br />
@@ -102,18 +102,13 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <a target="_blank" class="fw-bold"
-                                                            href="{{ Storage::url($proceeding_research->path) }}">ดาวน์โหลด</a>
+                                                            href="{{ Storage::url($proceeding_research->path) }}"
+                                                            download="{{ $proceeding_research->number }} LRU_CONFERENCE.{{ $proceeding_research->extension }}"><i
+                                                                class="fas fa-download"></i><br /> ดาวน์โหลด</a>
                                                     </td>
-                                                </tr>
-                                            @else
-                                                <tr>
-                                                    <td colspan="3" class="text-center">ไม่มีบทความ Proceedings</td>
                                                 </tr>
                                             @endif
                                         @empty
-                                            <tr>
-                                                <td colspan="3" class="text-center">ไม่มีบทความ Proceedings</td>
-                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
@@ -125,7 +120,12 @@
                 </div>
             </div>
         @else
-            <h1 class="text-danger text-center">ยังไม่เปิดเผยแพร่ Proceedings</h1>
+            <h1 class="text-danger text-center">
+                <i class="fas fa-2x fa-times"></i><br />
+                <strong style="font-size: calc(.5vw + 10px);">
+                    ยังไม่เปิดเผยแพร่ Proceedings
+                </strong>
+            </h1>
         @endif
 
 

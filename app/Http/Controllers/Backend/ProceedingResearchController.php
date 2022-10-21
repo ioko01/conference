@@ -8,6 +8,7 @@ use App\Models\Faculty;
 use App\Models\Present;
 use App\Models\ProceedingResearch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class ProceedingResearchController extends Controller
@@ -33,8 +34,8 @@ class ProceedingResearchController extends Controller
 
         $faculties = Faculty::get();
         $presents = Present::get();
-
-        return view('backend.pages.proceeding_research', compact('year', 'researchs', 'faculties', 'presents'));
+        $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+        return view('backend.pages.proceeding_research', compact('year', 'researchs', 'faculties', 'presents', 'conference'));
     }
 
     protected function validator($request)
@@ -62,7 +63,7 @@ class ProceedingResearchController extends Controller
         if ($request->hasFile('file')) {
             $upload = $request->file('file');
             $extension = $upload->extension();
-            $file_name = "เลขหน้า_" . $request->number;
+            $file_name = "เลขหน้า-" . $request->number . "(" . uniqid() . ")";
             $name = $file_name . '.' . $extension;
             $path = 'public/ประชุมวิชาการ ' . $year . '/proceeding (ห้ามลบ)/เผยแพร่ proceeding';
             $fullpath = $path . "/" . $name;
@@ -124,8 +125,8 @@ class ProceedingResearchController extends Controller
 
         $faculties = Faculty::get();
         $presents = Present::get();
-
-        return view('backend.pages.edit_proceeding_research', compact('year', 'researchs', 'faculties', 'presents', '_research'));
+        $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+        return view('backend.pages.edit_proceeding_research', compact('year', 'researchs', 'faculties', 'presents', '_research', 'conference'));
     }
 
     protected function update(Request $request, $year, $id)
@@ -152,7 +153,7 @@ class ProceedingResearchController extends Controller
         if ($request->hasFile('file')) {
             $upload = $request->file('file');
             $extension = $upload->extension();
-            $file_name = "บทความไอดี_" . $id;
+            $file_name = "เลขหน้า-" . $request->number . "(" . uniqid() . ")";
             $name = $file_name . '.' . $extension;
             $path = 'public/ประชุมวิชาการ ' . $year . '/proceeding (ห้ามลบ)/เผยแพร่ proceeding';
             $fullpath = $path . "/" . $name;
@@ -160,25 +161,30 @@ class ProceedingResearchController extends Controller
         }
 
 
-        if ($request->file('file')) {
+        if ($request->hasFile('file')) {
             $data = [
                 'user_id' => auth()->user()->id,
                 'faculty_id' => $request->faculty_id,
                 'present_id' => $request->present_id,
                 'number' => $request->number,
                 'topic' => $request->topic,
-                'name' => "เลขหน้า_" . $request->number . "." . $extension,
+                'name' => $name,
                 'path' => $fullpath,
                 'extension' => $extension,
                 'conference_id' => $conference->id
             ];
         } else {
+
+            $path = 'public/ประชุมวิชาการ ' . $year . '/proceeding (ห้ามลบ)/เผยแพร่ proceeding/';
+            $rename = "เลขหน้า-" . $request->number . "(" . uniqid() . ")" . "." . $path_file->extension;
+            Storage::move($path . $name_file, $path . $rename);
             $data = [
                 'user_id' => auth()->user()->id,
                 'faculty_id' => $request->faculty_id,
                 'present_id' => $request->present_id,
                 'number' => $request->number,
-                'name' => "เลขหน้า_" . $request->number . "." . $path_file->extension,
+                'name' => $rename,
+                'path' => $path . $rename,
                 'topic' => $request->topic,
                 'conference_id' => $conference->id
             ];

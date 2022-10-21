@@ -113,7 +113,8 @@
                             @enderror
                         </div>
                         <div class="col-lg-4 col-md-6 mb-3">
-                            <label for="end_research_edit_two">วันสิ้นสุดการรับบทความฉบับแก้ไข ครั้งที่ 2</label>
+                            <label for="end_research_edit_two">วันสิ้นสุดการรับบทความฉบับแก้ไข ครั้งที่ 2 <span
+                                    class="text-red">(อาจได้ใช้)</span></label>
                             <input
                                 @if ($conference->end_research_edit_two) value="{{ date('Y-m-d\TH:i', strtotime($conference->end_research_edit_two)) }}" @endif
                                 type="datetime-local" name="end_research_edit_two" id="end_research_edit_two"
@@ -190,8 +191,8 @@
                     </div>
 
                     <div class="col-12">
-                        <button onclick="thisDisabled(this)" class="btn btn-warning rounded-0 text-white" name="edit_conference"
-                            value="edit">แก้ไขหัวข้อ</button>
+                        <button onclick="thisDisabled(this)" class="btn btn-warning rounded-0 text-white"
+                            name="edit_conference" value="edit">แก้ไขหัวข้อ</button>
                     </div>
                 </form>
             </div>
@@ -219,7 +220,7 @@
                                     <th>แก้ไข</th>
                                 </tr>
                                 <tr class="text-xs"
-                                    style="background-color:@if ($conference->status == 1) #c3f6ce;@else #ffc2c2; @endif">
+                                    style="background-color:@if ($conference->status == 1) #c3f6ce;@elseif($conference->status_proceeding == 1)#fff7ab;@else #ffc2c2; @endif">
                                     <th>{{ ++$key }}</th>
                                     <th>{{ $conference->name }}</th>
                                     <th>{{ $conference->year }}</th>

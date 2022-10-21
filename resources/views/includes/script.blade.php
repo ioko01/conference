@@ -21,7 +21,7 @@
         <script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('register'))
+    @if (Request::is('register') || Request::is('register/attend'))
         <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
         <script src="{{ asset('js/select-attend.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
@@ -45,7 +45,8 @@
     @if (Request::is('employee/research/show/*') ||
         Request::is('list/*') ||
         Request::is('orals') ||
-        Request::is('orals/link'))
+        Request::is('orals/link') ||
+        Request::is('proceeding/*'))
         <script src="{{ asset('vendor/plugins/datatables/datatables.min.js', env('REDIRECT_HTTPS')) }}" defer></script>
         <script>
             $(document).ready(function() {

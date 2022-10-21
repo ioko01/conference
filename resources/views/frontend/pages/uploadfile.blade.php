@@ -5,7 +5,7 @@
     <div class="bg-white text-blue p-5 my-5">
 
         <div class="inner-content-header">
-            <h4 class="text-center">อัพโหลดวิดีโอ/โปสเตอร์ <br />
+            <h4 class="text-center fw-bold"><i class="nav-icon fas fa-1x fa-upload"></i> อัพโหลดวิดีโอ/โปสเตอร์ <br />
                 @if ($conference)
                     {{ $conference->name }}
                 @endif
@@ -15,9 +15,6 @@
             </h4>
         </div>
 
-        <div>
-            <h1>อัพโหลดวิดีโอ/โปสเตอร์</h1>
-        </div>
         <div class="panel">
             <div class="body">
                 <div class="input-group">
@@ -75,6 +72,7 @@
                                         {{-- <strong class="text-red d-block">หมดเวลาส่งวิดีโอ</strong> --}}
                                     @endif
                                 @else
+                                -
                                 @endif
 
                             </td>
@@ -110,6 +108,7 @@
                                         @endif
                                     @endif
                                 @else
+                                    -
                                 @endif
 
                             </td>

@@ -126,7 +126,7 @@ class RegisterController extends Controller
             'check_requirement' => $data['receive_check'],
             'position_id' => $data['position_id'],
             'kota_id' => isset($data['kota_id']) ? $data['kota_id'] : null,
-            'person_attend' => $data['person_attend'],
+            'person_attend' => "send",
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'conference_id' => isset($conference_id->id) ? $conference_id->id : null

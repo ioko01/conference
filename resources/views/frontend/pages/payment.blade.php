@@ -5,7 +5,7 @@
 <!-- Content -->
 <div id="payment-content" class="bg-white text-blue p-5 my-5">
     <div class="inner-content-header">
-        <h4 class="text-center">รายละเอียดและวิธีการชำระเงินค่าลงทะเบียน</h4>
+        <h4 class="text-center fw-bold"><i class="nav-icon fas fa-1x fa-money"></i> รายละเอียดและวิธีการชำระเงินค่าลงทะเบียน</h4>
         <h4 class="text-green py-3">
             {{ config('app.name') }}
         </h4>

@@ -9,7 +9,7 @@
             <br />โทรสาร 0-4281-3061, 0-4281-1143<br />e-mail: research_lru@hotmail.com
             <br />Website: https://research.lru.ac.th<br />ผู้ประสานงาน: (คุณสุพัตรา จันทร์รอด/ คุณปริญญา จิตรโคตร/ คุณปราณี
             พลดาหาญ)<br />
-            ผู้พัฒนาระบบ: sb5940248107@lru.ac.th (ธนพงษ์ สุนทราวิรัตน์)
+            ผู้พัฒนาระบบ: Thanapong Soontarawirat
         </div>
         <div style="word-wrap: break-word;" class="footer-content-2 bg-blue p-5">
             <div class="row">

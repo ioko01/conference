@@ -34,6 +34,35 @@
                                                 href="{{ route('backend.proceeding.preview.index', $year) }}">
                                                 <span><i class="fas fa-eye"></i></span> แสดงตัวอย่าง</a>
                                         </li>
+                                        <li class="ml-auto align-self-center">
+                                            <form method="POST"
+                                                action="{{ route('backend.conference.update_status', $conference->id) }}"
+                                                class="d-flex">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="custom-control custom-switch">
+                                                    <input
+                                                        onchange="javascript:document.getElementById('change_proceeding1').click()"
+                                                        type="checkbox" class="custom-control-input" id="switch_proceeding1"
+                                                        @if ($conference->status_proceeding == 1) checked @endif>
+
+                                                    @if ($conference->status_proceeding == 1)
+                                                        <label style="font-size: 10px;"
+                                                            class="custom-control-label text-success"
+                                                            for="switch_proceeding1">เผยแพร่ Proceedings แล้ว</label>
+                                                    @else
+                                                        <label style="font-size: 10px;"
+                                                            class="custom-control-label text-danger"
+                                                            for="switch_proceeding1">ยังไม่ได้เผยแพร่ Proceedings</label>
+                                                    @endif
+                                                </div>
+                                                <input type="submit" class="d-none" id="change_proceeding1"
+                                                    name="change_status_proceeding"
+                                                    @if ($conference->status_proceeding == 1) value=0
+                                    @else
+                                    value=1 @endif>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -61,8 +90,9 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-lg-2 col-md-3">
-                                            <label for="position">ตำแหน่ง <span class="text-red text-sm">(1 -
-                                                    10)</span></label>
+                                            <label for="position">ลำดับ <span class="text-red text-sm">(1 -
+                                                    10) * หน้า Proceedings
+                                                    จะแสดงหัวข้อตามลำดับน้อยสุดไปมากสุด</span></label>
                                             <input value="{{ $topic->position }}" min="1" max="10"
                                                 type="number" name="position" id="position"
                                                 class="form-control @error('position') is-invalid @enderror"

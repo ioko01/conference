@@ -6,15 +6,12 @@
     <div class="bg-white text-blue p-5 my-5">
 
         <div class="inner-content-header">
-            <h4 class="text-center">ส่งบทความฉบับแก้ไข ครั้งที่ 1</h4>
+            <h4 class="text-center fw-bold"><i class="nav-icon fas fa-1x fa-book"></i> ส่งบทความฉบับแก้ไข ครั้งที่ 1</h4>
             <h4 class="text-green py-3">
                 {{ config('app.name') }}
             </h4>
         </div>
 
-        <div>
-            <h1>ส่งบทความฉบับแก้ไข ครั้งที่ 1</h1>
-        </div>
         <div class="panel">
             <div class="body">
                 <div class="input-group">

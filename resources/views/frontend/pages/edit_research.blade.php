@@ -4,7 +4,12 @@
     <!-- Content -->
     <div id="register-content" class="bg-white text-blue p-5 my-5">
         <div class="inner-content-header">
-            <h4 class="text-center">ส่งบทความ</h4>
+            <h4 class="text-center fw-bold"><i class="nav-icon fas fa-1x fa-edit"></i> แก้ไขบทความ
+                <br />
+                @if ($conference_id)
+                    {{ $conference_id->name }}
+                @endif
+            </h4>
             <h4 class="text-green py-3">
                 {{ config('app.name') }}
             </h4>
@@ -165,8 +170,8 @@
                         <p class="text-red text-center">
                             * กรุณาตรวจสอบความถูกต้องก่อนกดส่งบทความของท่าน
                         </p>
-                        <button onclick="thisDisabled(this)" class="btn btn-warning text-white w-100 rounded-0" name="send_research"
-                            type="submit">แก้ไขบทความ</button>
+                        <button onclick="thisDisabled(this)" class="btn btn-warning text-white w-100 rounded-0"
+                            name="send_research" type="submit">แก้ไขบทความ</button>
                     </form>
                 @endforeach
             </div>

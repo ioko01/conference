@@ -43,7 +43,7 @@
                                                                 <a target="_blank"
                                                                     class="btn btn-success mt-3 text-white rounded-0"
                                                                     href="{{ Storage::url($proceeding->path) }}"
-                                                                    download="{{ $proceeding->name }}">ดาวน์โหลด</a>
+                                                                    download="{{ $proceeding->name }}.{{ $proceeding->extension }}">ดาวน์โหลด</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -86,7 +86,7 @@
                                     <tr class="text-center">
                                         <th style="width: 10%;">เลขหน้า</th>
                                         <th style="width: 70%;" class="text-start">รายละเอียดบทความ</th>
-                                        <th style="width: auto%;">ดาวน์โหลด</th>
+                                        <th style="width: auto%;"><i class="fas fa-download"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,27 +94,22 @@
                                         @if ($proceeding_research->faculty_id == $faculty->id)
                                             <tr>
                                                 <td class="text-center fw-bold">{{ $proceeding_research->number }}</td>
-                                                <td>
+                                                <td class="text-start">
                                                     <strong
-                                                        class="text-info">{{ $proceeding_research->present_name }}</strong><br />
+                                                        class="text-bluesky">{{ $proceeding_research->present_name }}</strong><br />
                                                     <strong>{{ $proceeding_research->topic }}</strong><br />
                                                     <strong
                                                         class="text-green">{{ $proceeding_research->faculty_name }}</strong>
                                                 </td>
                                                 <td class="text-center">
                                                     <a target="_blank" class="fw-bold"
-                                                        href="{{ Storage::url($proceeding_research->path) }}">ดาวน์โหลด</a>
+                                                        href="{{ Storage::url($proceeding_research->path) }}"
+                                                        download="{{ $proceeding_research->number }} LRU_CONFERENCE.{{ $proceeding_research->extension }}"><i
+                                                            class="fas fa-download"></i><br />ดาวน์โหลด</a>
                                                 </td>
-                                            </tr>
-                                        @else
-                                            <tr>
-                                                <td colspan="3" class="text-center">ไม่มีบทความ Proceedings</td>
                                             </tr>
                                         @endif
                                     @empty
-                                        <tr>
-                                            <td colspan="3" class="text-center">ไม่มีบทความ Proceedings</td>
-                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>

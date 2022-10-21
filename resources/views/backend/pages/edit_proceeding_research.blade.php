@@ -34,6 +34,35 @@
                                                 href="{{ route('backend.proceeding.preview.index', $year) }}">
                                                 <span><i class="fas fa-eye"></i></span> แสดงตัวอย่าง</a>
                                         </li>
+                                        <li class="ml-auto align-self-center">
+                                            <form method="POST"
+                                                action="{{ route('backend.conference.update_status', $conference->id) }}"
+                                                class="d-flex">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="custom-control custom-switch">
+                                                    <input
+                                                        onchange="javascript:document.getElementById('change_proceeding1').click()"
+                                                        type="checkbox" class="custom-control-input" id="switch_proceeding1"
+                                                        @if ($conference->status_proceeding == 1) checked @endif>
+
+                                                    @if ($conference->status_proceeding == 1)
+                                                        <label style="font-size: 10px;"
+                                                            class="custom-control-label text-success"
+                                                            for="switch_proceeding1">เผยแพร่ Proceedings แล้ว</label>
+                                                    @else
+                                                        <label style="font-size: 10px;"
+                                                            class="custom-control-label text-danger"
+                                                            for="switch_proceeding1">ยังไม่ได้เผยแพร่ Proceedings</label>
+                                                    @endif
+                                                </div>
+                                                <input type="submit" class="d-none" id="change_proceeding1"
+                                                    name="change_status_proceeding"
+                                                    @if ($conference->status_proceeding == 1) value=0
+                                    @else
+                                    value=1 @endif>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -164,13 +193,13 @@
             </div>
             <div class="card-body text-xs">
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="dataTable table table-striped w-100">
                         <thead>
                             <tr>
                                 <th class="text-center">เลขหน้า</th>
-                                <th style="width: 70%;">รายละเอียดบทความ</th>
-                                <th style="width: 10%;" class="text-right">แก้ไข</th>
-                                <th style="width: 10%;">ลบ</th>
+                                <th style="width: 85%;">รายละเอียดบทความ</th>
+                                <th style="width: auto;" class="text-right">แก้ไข</th>
+                                <th style="width: auto;">ลบ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -179,11 +208,7 @@
                                     <td class="text-center">{{ $research->number }}</td>
                                     <td class="text-start">
                                         <strong style="font-size: 12px" class="text-bluesky">
-                                            @if ($research->present_id == 1)
-                                                Oral
-                                            @else
-                                                Poster
-                                            @endif
+                                            {{ $research->present_name }}
                                         </strong>
                                         <br />
                                         <strong>{{ $research->topic }}</strong>

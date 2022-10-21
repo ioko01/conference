@@ -11,7 +11,6 @@
 
 <body>
     @yield('loading')
-
     <div id="page" class="hidden">
         @yield('navbar-topbar')
 
@@ -22,7 +21,6 @@
         @yield('footer')
         @yield('btn-to-top')
     </div>
-
     @yield('script')
     @include('sweetalert::alert')
 </body>

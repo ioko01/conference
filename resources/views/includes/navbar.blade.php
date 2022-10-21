@@ -124,8 +124,10 @@
 
                     @guest
                         <li class="nav-item">
-                        <li><a class="nav-link {{ Request::is('register') ? 'active' : '' }}" aria-current="page"
-                                href="{{ route('register') }}">ลงทะเบียน</a></li>
+                            <a class="nav-link {{ Request::is('register') ? 'active' : '' }}" href="{{ route('register') }}"
+                                aria-expanded="false">
+                                ลงทะเบียน
+                            </a>
                         </li>
                     @else
                         <li class="nav-item dropdown">
@@ -218,18 +220,39 @@
                             </li>
                         @endif
                     @endauth
-                </ul>
-                @guest
+                    @guest
+                    </ul>
                     <a href="{{ route('login') }}" class="btn rounded-0 btn-green text-white mx-3"><i
                             class="fas fa-sign-in"></i> เข้าสู่ระบบ</a>
                 @else
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        <button type="submit" class="btn rounded-0 btn-danger text-white mx-3"><i
-                                class="fas fa-sign-out"></i>
-                            ออกจากระบบ</button>
-                    </form>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fas fa-1x fa-cog"></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('account.index') }}"><i
+                                        class="fas fa-user-alt"></i> บัญชีผู้ใช้</a>
+                            </li>
+
+                            <li>
+                                <form class="dropdown-item" action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="p-0 text-start logout btn btn-link text-danger w-100"><i
+                                            class="fas fa-sign-out"></i>
+                                        ออกจากระบบ</button>
+                                </form>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    </ul>
                 @endguest
+
+
             </div>
         </div>
     </nav>

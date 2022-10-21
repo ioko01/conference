@@ -123,6 +123,43 @@
     </script>
 @endif
 
+@if (Request::is('backend/proceeding/*/preview') ||
+    Request::is('backend/proceeding/*/research') ||
+    Request::is('backend/proceeding/*/research/*/edit'))
+    <script src="{{ asset('vendor/plugins/datatables/datatables.min.js', env('REDIRECT_HTTPS')) }}" defer></script>
+    <script>
+        $(document).ready(function() {
+            $(`.dataTable`).DataTable({
+                pageLength: 10,
+                lengthChange: true,
+                bAutoWidth: false,
+                classes: {
+                    sFilterInput: "form-control",
+                    sLengthSelect: "form-select w-100",
+                    sPageButton: "btn btn-outline-success rounded-0 mx-1",
+                    sPageButtonActive: "btn btn-success rounded-0 text-white",
+                },
+                language: {
+                    info: "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                    infoEmpty: "",
+                    sInfoFiltered: "(คัดกรองจาก _MAX_ รายการ)",
+                    sLengthMenu: "แสดง _MENU_ รายการ",
+                    sLoadingRecords: "",
+                    sSearch: "ค้นหา: ",
+                    sZeroRecords: "ไม่มีข้อมูลในตาราง",
+                    paginate: {
+                        sNext: "ถัดไป",
+                        sPrevious: "ก่อนหน้า",
+                        first: "หน้าแรก",
+                        last: "หน้าสุดท้าย",
+                    },
+                },
+                dom: '<"top mb-3 w-100"f><"text-center"t><"d-flex flex-wrap justify-content-between"ip><"clear">',
+            });
+        });
+    </script>
+@endif
+
 @if (Request::is('backend/dashboard'))
     <script src="{{ asset('api/calendar.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('js/calendar.js', env('REDIRECT_HTTPS')) }}"></script>

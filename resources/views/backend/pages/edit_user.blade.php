@@ -156,8 +156,7 @@
                             <div class="col-12">
                                 <label for="institution">สังกัด / หน่วยงาน <i class="text-red">* ตัวอย่าง:
                                         มหาวิทยาลัยราชภัฏเลย</i></label>
-                                <input
-                                    @if (old('position_id')) @if (old('position_id') != '2') disabled @endif
+                                <input @if (old('position_id')) @if (old('position_id') != '2') disabled @endif
                                 @elseif ($user->position_id != '2') disabled @endif
                                 type="text" name="institution" id="institution"
                                 class="form-control @error('institution') is-invalid @enderror"
@@ -261,7 +260,11 @@
                     @elseif($user->person_attend === 'send') checked @endif
                     value="send">
                     <label class="form-check-label" for="send">
-                        ลงทะเบียนส่งผลงาน
+                        ลงทะเบียนส่งผลงาน <strong class="text-red text-sm">* บุคคลภายนอกจะต้องชำระค่าลงทะเบียน 2,000 บาท
+                            ต่อ 1 ผลงาน /
+                            ลงทะเบียนเข้าร่วมงานทั่วไป 1,000 ต่อ 1 ท่าน * กรณีที่ท่านเป็นผู้ร่วมวิจัยฯ
+                            ให้หัวหน้าโครงการลงทะเบียนส่งผลงาน และท่านลงทะเบียนเข้าร่วมงานทั่วไป
+                        </strong>
                     </label>
                 </div>
                 <div class="form-check">
@@ -274,15 +277,13 @@
                         ลงทะเบียนเข้าร่วมงานทั่วไป
                     </label>
                 </div>
-                <p style="color: red;">* บุคคลภายนอกจะต้องชำระค่าลงทะเบียน 2,000 บาท ต่อ 1 ผลงาน /
-                    ลงทะเบียนเข้าร่วมงานทั่วไป 1,000 ต่อ 1 ท่าน * กรณีที่ท่านเป็นผู้ร่วมวิจัยฯ
-                    ให้หัวหน้าโครงการลงทะเบียนส่งผลงาน และท่านลงทะเบียนเข้าร่วมงานทั่วไป
-                </p>
+
             </div>
         </div>
 
         <div class="d-block">
-            <input class="btn btn-warning rounded-0 text-white text-white w-100" type="submit" value="แก้ไขผู้ใช้งาน">
+            <input onclick="thisDisabled(this)" class="btn btn-warning rounded-0 text-white text-white w-100"
+                type="submit" value="แก้ไขผู้ใช้งาน">
         </div>
         </form>
     </div>

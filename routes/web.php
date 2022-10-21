@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Api\ResearchController as ApiResearchController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,7 @@ use App\Http\Controllers\ListAttendController;
 use App\Http\Controllers\ListResearchController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OralController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PosterController;
 use App\Http\Controllers\ProceedingController;
 use App\Http\Controllers\SendEditResearchController;
@@ -46,10 +48,8 @@ use App\Http\Controllers\UploadfileController;
 use App\Models\Conference;
 use App\Models\Download;
 use App\Models\Line;
-use App\Models\Manual;
 use App\Models\Research;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,6 +118,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('download', [FileDownloadController::class, 'index'])->name('download');
 
     Route::prefix('employee')->group(function () {
+        Route::get('account', [AccountController::class, 'index'])->name('account.index');
+        Route::get('change-password', [PasswordController::class, 'change_password'])->name('user.change_password');
+        Route::put('update-password', [PasswordController::class, 'update_password'])->name('user.update_password');
+
         // ส่งบทความฉบับแก้ไข
         Route::get('research/send', [ResearchController::class, 'index'])->name('employee.research.index');
         Route::get('research/show/{topic_id}', [ResearchController::class, 'show'])->name('employee.research.show');

@@ -20,7 +20,8 @@ class ProceedingTopicController extends Controller
             ->where('conferences.year', $year)
             ->orderBy('proceeding_topics.position')
             ->get();
-        return view('backend.pages.proceeding_topic', compact('year', 'topics'));
+        $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+        return view('backend.pages.proceeding_topic', compact('year', 'topics', 'conference'));
     }
 
     protected function validator($request)
@@ -74,7 +75,8 @@ class ProceedingTopicController extends Controller
             ->where('conferences.year', $year)
             ->where('proceeding_topics.id', $id)
             ->first();
-        return view('backend.pages.edit_proceeding_topic', compact('year', 'topics', 'topic'));
+        $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+        return view('backend.pages.edit_proceeding_topic', compact('year', 'topics', 'topic', 'conference'));
     }
 
     protected function update(Request $request, $year, $id)

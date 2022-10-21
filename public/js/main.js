@@ -38,6 +38,16 @@ function get_file_name(e) {
 
 function thisDisabled(e) {
     setTimeout(() => {
+        const date = document.querySelectorAll(
+            "input[type='datetime-local']:not(#start):not(#final)"
+        );
+
         $(e).attr("disabled", true);
+        for (let i = 0; i < date.length; i++) {
+            if (date[i].value > document.getElementById("final").value) {
+                $(e).removeAttr("disabled");
+                break;
+            }
+        }
     }, 10);
 }

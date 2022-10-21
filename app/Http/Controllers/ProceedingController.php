@@ -37,6 +37,7 @@ class ProceedingController extends Controller
             'presents.name as present_name',
             'proceeding_researchs.name as file_name',
             'proceeding_researchs.path as path',
+            'proceeding_researchs.extension as extension'
         )
             ->leftjoin('faculties', 'faculties.id', 'proceeding_researchs.faculty_id')
             ->leftjoin('presents', 'presents.id', 'proceeding_researchs.present_id')

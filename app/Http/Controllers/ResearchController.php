@@ -155,12 +155,12 @@ class ResearchController extends Controller
         $presents = Present::get();
         $tips = Tip::where('group', '1')->get();
         $researchs = Research::where('topic_id', $id)->get();
-
+        $conference_id = Conference::where('status_research', 1)->first();
         $this->authorize(
             'update',
             Research::select('user_id as id')->where('topic_id', $id)->first()
         );
-        return view('frontend.pages.edit_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips', 'researchs'));
+        return view('frontend.pages.edit_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips', 'researchs', 'conference_id'));
     }
 
 

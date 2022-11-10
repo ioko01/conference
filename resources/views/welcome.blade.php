@@ -123,8 +123,8 @@
                     <div
                         style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid #30ac33;">
                     </div>
-                    <div class="row justify-content-center m-0">
-                        <div class="col-md-10 p-5 w-100 rounded-0">
+                    <div class="row justify-content-center m-0 p-5">
+                        <div class="col-md-10 w-100 rounded-0 px-3">
                             <div class="table-responsive-sm">
                                 <table class="table caption-top">
                                     <caption>กำหนดการประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ
@@ -206,15 +206,15 @@
             <div class="animate fade-left">
                 <div class="box-blank"></div>
                 <div class="position-relative w-50 w-md-100 ms-auto">
-                    <div style="position: absolute; top:0; left: 0; border-left: 15px solid #ccc;height: 40px;z-index:2;">
+                    <div class="d-md-block d-none" style="position: absolute; top:0; left: 0; border-left: 15px solid #ccc;height: 40px;z-index:2;">
                     </div>
-                    <div style="position: absolute; top:45px; left: 0; border-left: 5px double #ccc;height: 100%;"></div>
-                    <div
+                    <div class="d-md-block d-none" style="position: absolute; top:45px; left: 0; border-left: 5px double #ccc;height: 100%;"></div>
+                    {{-- <div
                         style="position: absolute; top: inherit; right: 0; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid #30ac33;">
                     </div>
                     <div
                         style="position: absolute; top: inherit; right: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid #30ac33;">
-                    </div>
+                    </div> --}}
 
                     <div class="row justify-content-center m-0 px-3">
                         {{-- @for ($i = 0; $i <= 20; $i++)
@@ -287,8 +287,8 @@
                     <div
                         style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid #30ac33;">
                     </div>
-                    <div class="row justify-content-center m-0">
-                        <div style="word-wrap: break-word;" class="col-md-10 p-5 w-100 rounded-0">
+                    <div class="row justify-content-center m-0 p-5">
+                        <div style="word-wrap: break-word;" class="col-md-10 w-100 rounded-0 px-3">
                             <h1 style="color: #2cb0c0;">วัตถุประสงค์ของโครงการ</h1>
                             <p style="line-height: 25px;">1. เพื่อเป็นเวทีในการเผยแพร่ผลงานทางวิชาการของอาจารย์ นักวิจัย
                                 นิสิต
@@ -333,15 +333,15 @@
             <div class="animate fade-left">
                 <div class="box-blank"></div>
                 <div class="position-relative w-50 w-md-100 ms-auto">
-                    <div style="position: absolute; top:0; left: 0; border-left: 15px solid #ccc;height: 40px; z-index:2;">
+                    <div class="d-md-block d-none" style="position: absolute; top:0; left: 0; border-left: 15px solid #ccc;height: 40px; z-index:2;">
                     </div>
-                    <div style="position: absolute; top:45px; left: 0; border-left: 5px double #ccc;height: 100%;"></div>
-                    <div
+                    <div class="d-md-block d-none" style="position: absolute; top:45px; left: 0; border-left: 5px double #ccc;height: 100%;"></div>
+                    {{-- <div
                         style="position: absolute; top: inherit; right: 0; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid #30ac33;">
                     </div>
                     <div
                         style="position: absolute; top: inherit; right: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid #30ac33;">
-                    </div>
+                    </div> --}}
                     <div class="row justify-content-center m-0 px-3">
                         {{-- @for ($i = 0; $i <= 20; $i++)
                             <div class="position-absolute bg-white d-md-block d-none p-0"
@@ -420,8 +420,8 @@
                     <div
                         style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid #30ac33;">
                     </div>
-                    <div class="row justify-content-center m-0">
-                        <div style="word-wrap: break-word;" class="col-md-10 p-5 w-100 rounded-0">
+                    <div class="row justify-content-center m-0 p-5">
+                        <div style="word-wrap: break-word;" class="col-md-10 w-100 rounded-0 px-3">
                             <h1 style="color: #2cb0c0;">ผลที่คาดว่าจะได้รับ</h1>
                             <p style="line-height: 25px;">1. มีการเผยแพร่ผลงานทางวิชาการของอาจารย์ นักวิจัย นิสิต
                                 นักศึกษาในระดับอุดมศึกษาจากภายในและภายนอกมหาวิทยาลัย และบุคลากรจากหน่วยงานต่างๆ<br /> 2.

@@ -12,6 +12,7 @@
 <body>
     @yield('loading')
     <div id="page" class="hidden">
+        
         @yield('navbar-topbar')
 
         <div id="content">
@@ -23,6 +24,8 @@
     </div>
     @yield('script')
     @include('sweetalert::alert')
+    @include('cookieConsent::index')
+
 </body>
 
 </html>

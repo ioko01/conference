@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Models\Research;
 use App\Policies\ResearchPolicy;
@@ -31,9 +32,21 @@ class AuthServiceProvider extends ServiceProvider
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
             return (new MailMessage)
                 ->greeting('สวัสดีคุณ ' . $notifiable->fullname)
-                ->subject('ยืนยันอีเมล')
+                ->subject('Confirm Password Notification')
                 ->line('คลิกที่ปุ่มเพื่อยืนยันอีเมล')
                 ->action('ยืนยันอีเมล', $url);
+        });
+
+        ResetPassword::toMailUsing(function ($notifiable, $token) {
+            $url = url(route('password.reset', [
+                'token' => $token,
+                'email' => $notifiable->email,
+            ]));
+            return (new MailMessage)
+                ->greeting('สวัสดีคุณ ' . $notifiable->fullname)
+                ->subject('Reset Password Notification')
+                ->line('คลิกที่ปุ่มเพื่อรีเซ็ตรหัสผ่าน')
+                ->action('รีเซ็ตรหัสผ่าน', $url);
         });
     }
 }

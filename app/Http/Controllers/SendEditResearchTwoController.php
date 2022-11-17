@@ -89,6 +89,7 @@ class SendEditResearchTwoController extends Controller
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->where('researchs.user_id', $id)
             ->get();
+            
         return view('frontend.pages.send_edit_research_two', compact('data', 'comments'));
     }
 }

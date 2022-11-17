@@ -18,6 +18,7 @@ class ManualController extends Controller
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         if ($request->download == "link") {
             return $request->validate(
@@ -50,6 +51,7 @@ class ManualController extends Controller
     {
         $conference = Conference::where('id', auth()->user()->conference_id)->first();
         if (!isset($conference->id)) {
+            write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้');
         }
@@ -59,6 +61,7 @@ class ManualController extends Controller
 
         foreach ($manuals as $manual) {
             if ($manual->name == $request->name && auth()->user()->conference_id == $manual->conference_id) {
+                write_logs(__FUNCTION__, "error");
                 alert('ผิดพลาด', 'มีหัวข้อนี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้', 'error')->showConfirmButton('ปิด', '#3085d6');
                 return back()->withErrors('มีหัวข้อนี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
@@ -92,6 +95,7 @@ class ManualController extends Controller
         ]);
 
         Manual::create($data);
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.manuals.index');
     }
@@ -100,6 +104,7 @@ class ManualController extends Controller
     {
         $manuals = Manual::get();
         $manual = Manual::find($id);
+        write_logs(__FUNCTION__, "info");
         return view('backend.pages.edit_manual', compact('manuals', 'manual', 'id'));
     }
 
@@ -107,6 +112,7 @@ class ManualController extends Controller
     {
         $conference = Conference::where('id', auth()->user()->conference_id)->first();
         if (!isset($conference->id)) {
+            write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้');
         }
@@ -117,6 +123,7 @@ class ManualController extends Controller
 
         foreach ($manuals as $man) {
             if ($man->name == $request->name && auth()->user()->conference_id == $man->conference_id && $man->user_id != auth()->user()->id) {
+                write_logs(__FUNCTION__, "error");
                 alert('ผิดพลาด', 'มีหัวข้อนี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้', 'error')->showConfirmButton('ปิด', '#3085d6');
                 return back()->withErrors('มีหัวข้อนี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
@@ -125,15 +132,17 @@ class ManualController extends Controller
         if ($request->download == "file") {
             if ($request->name_file != $manual->name_file) {
                 if (Storage::exists($manual->path_file)) {
+                    write_logs(__FUNCTION__, "warning");
                     Storage::delete($manual->path_file);
                 }
             }
         } else if ($request->download == "link") {
             if (Storage::exists($manual->path_file)) {
+                write_logs(__FUNCTION__, "warning");
                 Storage::delete($manual->path_file);
             }
         }
-
+        
         $upload = null;
         $extension = null;
         $name = null;
@@ -183,6 +192,7 @@ class ManualController extends Controller
         }
 
         Manual::where('id', $id)->update($data);
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back();
     }
@@ -194,6 +204,7 @@ class ManualController extends Controller
             Storage::delete($manual->path_file);
         }
         Manual::where('id', $id)->delete();
+        write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.manuals.index');
     }
@@ -209,6 +220,7 @@ class ManualController extends Controller
             'notice' => $status
         ];
         Manual::where('id', $id)->update($data);
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'นำขึ้นประชาสัมพันธ์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back();
     }

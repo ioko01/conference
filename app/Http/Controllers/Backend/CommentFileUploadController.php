@@ -17,6 +17,7 @@ class CommentFileUploadController extends Controller
     //Deleted All Files
     protected function destroyFile($path)
     {
+        write_logs(__FUNCTION__, "warning");
         if (Storage::exists($path)) {
             Storage::deleteDirectory($path);
         }
@@ -24,6 +25,7 @@ class CommentFileUploadController extends Controller
 
     protected function validation($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถส่งไฟล์ไปให้นักวิจัยแก้ไขได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'file_comment' => 'required',
@@ -85,6 +87,7 @@ class CommentFileUploadController extends Controller
             }
         }
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'ส่งไฟล์ไปให้นักวิจัยแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', true);
     }

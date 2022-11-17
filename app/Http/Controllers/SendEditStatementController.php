@@ -11,6 +11,7 @@ class SendEditStatementController extends Controller
 {
     protected function validation($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถอัพโหลด แบบคำชี้แจงได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate(['stm_upload' => 'required|mimes:pdf|max:10240']);
     }
@@ -38,6 +39,7 @@ class SendEditStatementController extends Controller
         $result->data = $data;
         $result->upload = $upload->storeAs($path, $name);
 
+        write_logs(__FUNCTION__, "info");
         return $result;
     }
 
@@ -50,6 +52,7 @@ class SendEditStatementController extends Controller
         SendEditStatement::create($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลดบทความแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'อัพโหลดบทความแก้ไขสำเร็จ');
     }
@@ -59,6 +62,7 @@ class SendEditStatementController extends Controller
         SendEditStatement::where('topic_id', $id)->update($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขบทความแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'แก้ไขบทความแก้ไขสำเร็จ');
     }

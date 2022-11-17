@@ -14,6 +14,7 @@ class LinkOralController extends Controller
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'room' => 'required',
@@ -41,6 +42,7 @@ class LinkOralController extends Controller
         foreach ($link_orals as $link_oral) {
             $link_oral->path = Storage::url($link_oral->path);
         }
+        
         return view('backend.pages.oral_link', compact('faculties', 'link_orals'));
     }
 
@@ -81,9 +83,11 @@ class LinkOralController extends Controller
 
             LinkOral::create($data);
 
+            write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'เพิ่มลิงค์นำเสนอ Oral สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
             return back()->with('success', true);
         } else {
+            write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ไม่มีการประชุมที่เปิดใช้งาน', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ไม่มีการประชุมที่เปิดใช้งาน');
         }
@@ -123,12 +127,14 @@ class LinkOralController extends Controller
             $link_oral->path = Storage::url($link_oral->path);
         }
 
+        write_logs(__FUNCTION__, "info");
         return view('backend.pages.edit_oral_link', compact('faculties', 'link_orals', 'link_oral'));
     }
 
     protected function update(Request $request, $id)
     {
         if (!auth()->user()->conference_id) {
+            write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
         }
@@ -139,6 +145,7 @@ class LinkOralController extends Controller
 
         if ($request->name_file != $link_oral->name) {
             if (Storage::exists($link_oral->path)) {
+                write_logs(__FUNCTION__, "warning");
                 Storage::delete($link_oral->path);
             }
         }
@@ -183,6 +190,7 @@ class LinkOralController extends Controller
         }
 
         LinkOral::where('id', $id)->update($data);
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไข ลิงค์นำเสนอ Oral สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back();
     }
@@ -194,6 +202,7 @@ class LinkOralController extends Controller
             Storage::delete($link_oral->path);
         }
         LinkOral::where('id', $id)->delete();
+        write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.orals.link.index');
     }

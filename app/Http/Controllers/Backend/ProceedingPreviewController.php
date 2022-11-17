@@ -57,7 +57,6 @@ class ProceedingPreviewController extends Controller
                 $j++;
             }
         }
-
         return view('backend.pages.proceeding_preview', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs'));
     }
 }

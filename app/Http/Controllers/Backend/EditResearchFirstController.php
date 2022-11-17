@@ -59,6 +59,7 @@ class EditResearchFirstController extends Controller
             ->get()
             ->sortBy('id');
 
+            
         return view('backend.pages.show_edit_research_first', compact('data', 'topic_status'));
     }
 }

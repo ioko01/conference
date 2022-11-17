@@ -7,9 +7,8 @@
             41141-2, 51143<br />โทรศัพท์มือถือ
             08-6643-7010
             <br />โทรสาร 0-4281-3061, 0-4281-1143<br />e-mail: research_lru@hotmail.com
-            <br />Website: https://research.lru.ac.th<br />ผู้ประสานงาน: (คุณสุพัตรา จันทร์รอด/ คุณปริญญา จิตรโคตร/ คุณปราณี
-            พลดาหาญ)<br />
-            ผู้พัฒนาระบบ: Thanapong Soontarawirat
+            <br />Website: https://research.lru.ac.th<br />ผู้ประสานงาน: (คุณสุพัตรา จันทร์รอด/ คุณปริญญา จิตรโคตร/
+            คุณปรัตถกร พลดาหาญ)
         </div>
         <div style="word-wrap: break-word;" class="footer-content-2 bg-blue p-5">
             <div class="row">
@@ -17,10 +16,11 @@
                     <img style="max-width: 180px; width: 100%;"
                         src="{{ asset('images/revert-logo.png', env('REDIRECT_HTTPS')) }}" alt="logo-footer">
                     <p>
-                        การประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ ครั้งที่ 8 ประจำปี 2565 “การวิจัยเพื่อ
-                        พัฒนาท้องถิ่นด้วยโมเดล เศรษฐกิจใหม่สู่เป้าหมายการ พัฒนาที่ยั่งยืน” (Research for Community
-                        Development through BCG Model for Sustainable Development Goal (SDG) Conference
-                        2022 วันศุกร์ที่ 25 มีนาคม 2565 ผ่านระบบ Teleconference (Zoom meeting)
+                        การประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ ครั้งที่ 9 ประจำปี 2566
+                        “งานวิจัยเชิงพื้นที่เพื่อยกระดับเศรษฐกิจมูลค่าสูงของชุมชน”
+                        Area-based Research to Strengthen the Community’s High Value Economy
+                        วันพุธที่ 22 มีนาคม พ.ศ. 2566
+                        ผ่านระบบ Teleconference
                     </p>
                 </div>
                 <div class="col-md-3 offset-md-5 d-md-flex align-self-end">
@@ -30,7 +30,8 @@
                     </p>
                 </div>
             </div>
-            <a aria-label="facebook" href="https://www.facebook.com/งานประชุมวิชาการระดับชาติ-ราชภัฏเลยวิชาการ-มหาวิทยาลัยราชภัฏเลย-2132018520193740"
+            <a aria-label="facebook"
+                href="https://www.facebook.com/งานประชุมวิชาการระดับชาติ-ราชภัฏเลยวิชาการ-มหาวิทยาลัยราชภัฏเลย-2132018520193740"
                 class="text-white"><i class="fab fa-2x fa-facebook-square mx-1"></i></a>
         </div>
     </footer>

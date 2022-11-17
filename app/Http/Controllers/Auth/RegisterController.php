@@ -10,6 +10,7 @@ use App\Models\Kota;
 use App\Models\Position;
 use App\Models\Tip;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -104,7 +105,6 @@ class RegisterController extends Controller
     {
         $conference_id = Conference::where('status', 1)->first();
 
-
         if ($data['position_id'] == '1') {
             $institution = 'มหาวิทยาลัยราชภัฏเลย';
         } elseif ($data['position_id'] == '3') {
@@ -116,6 +116,7 @@ class RegisterController extends Controller
             $institution = $data['institution'];
         }
 
+        write_logs(__FUNCTION__, "info");
         return User::create([
             'prefix' => $data['prefix'],
             'fullname' => $data['fullname'],
@@ -126,8 +127,9 @@ class RegisterController extends Controller
             'check_requirement' => $data['receive_check'],
             'position_id' => $data['position_id'],
             'kota_id' => isset($data['kota_id']) ? $data['kota_id'] : null,
-            'person_attend' => "send",
+            'person_attend' => $data['person_attend'],
             'email' => $data['email'],
+            'email_verified_at' => $data['person_attend'] == 'attend' ? date("Y/m/d") : null,
             'password' => Hash::make($data['password']),
             'conference_id' => isset($conference_id->id) ? $conference_id->id : null
         ]);

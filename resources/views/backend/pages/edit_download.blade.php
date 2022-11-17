@@ -79,7 +79,8 @@
 
                     </div>
                     <div class="col-12">
-                        <button onclick="thisDisabled(this)" class="btn btn-warning text-white rounded-0"><i class="fa fa-edit"></i> แก้ไข</button>
+                        <button onclick="thisDisabled(this)" class="btn btn-warning text-white rounded-0"><i
+                                class="fa fa-edit"></i> แก้ไข</button>
                     </div>
                 </form>
             </div>
@@ -96,10 +97,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th class="text-center">ประชาสัมพันธ์</th>
                                 <th>ชื่อไฟล์ดาวน์โหลด</th>
                                 <th>Link</th>
                                 <th>ไฟล์อัพโหลด</th>
-                                <th>สร้างเมื่อ</th>
                                 <th class="text-right">แก้ไข</th>
                                 <th>ลบ</th>
                             </tr>
@@ -108,6 +109,14 @@
                             @forelse ($downloads as $key => $download)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
+                                    <td class="text-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="notice_check"
+                                                @if ($download->notice) checked @endif
+                                                value={{ $download->notice }}
+                                                onclick="open_modal_notice(this, '{{ $download->name }}', '{{ route('backend.download.notice.update', $download->id) }}')">
+                                        </div>
+                                    </td>
                                     <td style="max-width: 250px;">{{ $download->name }} @if ($download->id == $id)
                                             <i class="text-warning">(กำลังแก้ไข)</i>
                                         @endif
@@ -127,7 +136,6 @@
                                             -
                                         @endif
                                     </td>
-                                    <td><i class="text-info">{{ thaiDateFormat($download->created_at, true) }}</i></td>
                                     <td class="text-right"><a href="{{ route('backend.download.edit', $download->id) }}"
                                             class="btn btn-sm text-white btn-warning rounded-0"><i class="fa fa-edit"></i>
                                             แก้ไข</a>

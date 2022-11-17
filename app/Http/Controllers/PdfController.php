@@ -12,6 +12,7 @@ class PdfController extends Controller
     protected function validation($request)
     {
         alert('ผิดพลาด', 'ไม่สามารถอัพโหลด PDF ได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
+        write_logs(__FUNCTION__, "error");
         return $request->validate(['pdf_upload' => 'required|mimes:pdf|max:10240']);
     }
 
@@ -38,7 +39,7 @@ class PdfController extends Controller
 
         $result->data = $data;
         $result->upload = $upload->storeAs($path, $name);
-
+        write_logs(__FUNCTION__, "info");
         return $result;
     }
 
@@ -51,6 +52,7 @@ class PdfController extends Controller
         Pdf::create($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลด PDF สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'อัพโหลด PDF สำเร็จ');
     }
@@ -60,6 +62,7 @@ class PdfController extends Controller
         Pdf::where('topic_id', $id)->update($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไข PDF สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'แก้ไข PDF สำเร็จ');
     }

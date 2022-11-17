@@ -70,6 +70,8 @@ class ManageResearchController extends Controller
         )
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->get();
+            
+            
         return view('backend.pages.manage_research', compact('data', 'topic_status', 'comments'));
     }
 

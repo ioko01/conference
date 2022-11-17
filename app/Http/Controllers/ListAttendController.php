@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Conference;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class ListAttendController extends Controller
 {

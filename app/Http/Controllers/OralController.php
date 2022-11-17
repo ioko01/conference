@@ -6,9 +6,7 @@ use App\Models\Conference;
 use App\Models\Faculty;
 use App\Models\PresentOral;
 use App\Models\Tip;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class OralController extends Controller
 {
@@ -34,8 +32,7 @@ class OralController extends Controller
         $faculties = Faculty::get();
 
         $colors = ["primary", "info", "warning", "success", "danger"];
+        
         return view('frontend.pages.oral', compact('present_orals', 'conference', 'faculties', 'colors', 'tips'));
     }
-
-    
 }

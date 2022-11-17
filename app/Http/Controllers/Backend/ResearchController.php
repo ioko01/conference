@@ -42,12 +42,13 @@ class ResearchController extends Controller
         $branches = Branch::get();
         $presents = Present::get();
         $research = Research::where('topic_id', $id)->first();
-
+        write_logs(__FUNCTION__, "info");
         return view('backend.pages.edit_research', compact('faculties', 'degrees', 'branches', 'presents', 'research'));
     }
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         return $request->validate([
             'topic_th' => 'required',
             'topic_en' => 'required',
@@ -74,13 +75,14 @@ class ResearchController extends Controller
             'degree_id' => $request->degree_id,
             'present_id' => $request->present_id,
         ]);
-
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขบทความสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'แก้ไขบทความสำเร็จ');
     }
 
     protected function export()
     {
+        write_logs(__FUNCTION__, "info");
         $date = date("d_m_Y");
         return Excel::download(new ExportResearch, "EXPORT_RESEARCHS_$date.xlsx");
     }

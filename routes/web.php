@@ -288,6 +288,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('line/{id}/edit', [LineController::class, 'edit'])->name('backend.line.edit');
             Route::put('line/{id}/update', [LineController::class, 'update'])->name('backend.line.update');
             Route::delete('line/{id}/delete', [LineController::class, 'destroy'])->name('backend.line.delete');
+
+            Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('backend.logs');
         });
     });
 });

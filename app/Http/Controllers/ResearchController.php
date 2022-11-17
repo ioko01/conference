@@ -33,6 +33,7 @@ class ResearchController extends Controller
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'topic_th' => 'required',
@@ -68,7 +69,8 @@ class ResearchController extends Controller
             'present_id' => $request->present_id,
             'conference_id' => auth()->user()->conference_id
         ]);
-
+        
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มบทความเรียบร้อย', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
     }
@@ -144,6 +146,7 @@ class ResearchController extends Controller
             ->where('researchs.user_id', $id)
             ->get();
 
+        write_logs(__FUNCTION__, "info");
         return view('frontend.pages.show_research', compact('data', 'comments', 'conference'));
     }
 
@@ -160,6 +163,8 @@ class ResearchController extends Controller
             'update',
             Research::select('user_id as id')->where('topic_id', $id)->first()
         );
+
+        write_logs(__FUNCTION__, "info");
         return view('frontend.pages.edit_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips', 'researchs', 'conference_id'));
     }
 
@@ -179,6 +184,7 @@ class ResearchController extends Controller
             'present_id' => $request->present_id,
         ]);
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขบทความสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
     }

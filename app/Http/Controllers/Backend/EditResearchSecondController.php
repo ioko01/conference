@@ -58,7 +58,8 @@ class EditResearchSecondController extends Controller
             ->where('conferences.status', 1)
             ->get()
             ->sortBy('id');
-
+            
+            
         return view('backend.pages.show_edit_research_second', compact('data', 'topic_status'));
     }
 }

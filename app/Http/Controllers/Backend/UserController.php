@@ -45,11 +45,13 @@ class UserController extends Controller
         $user = User::find($id);
         $positions = Position::get();
         $kotas = Kota::get();
+        write_logs(__FUNCTION__, "info");
         return view('backend.pages.edit_user', compact('user', 'positions', 'kotas'));
     }
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         return $request->validate([
             'prefix' => 'required',
             'fullname' => 'required',
@@ -93,19 +95,21 @@ class UserController extends Controller
                 'is_admin' => isset($request->is_admin)  ? $request->is_admin : auth()->user()->is_admin
             ]
         );
-
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขผู้ใช้งานสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'แก้ไขผู้ใช้งานสำเร็จ');
     }
 
     protected function export()
     {
+        write_logs(__FUNCTION__, "info");
         $date = date("d_m_Y");
         return Excel::download(new ExportUser, "EXPORT_USERS_$date.xlsx");
     }
 
     public function change_password($id)
     {
+        write_logs(__FUNCTION__, "info");
         $user = User::where('id', $id)->first();
         return view('backend.pages.change_password', compact('id', 'user'));
     }
@@ -122,6 +126,7 @@ class UserController extends Controller
 
         #Match The Old Password
         if (!Hash::check($request->old_password, $user->password)) {
+            write_logs(__FUNCTION__, "error");
             return back()->with("error", "Old Password Doesn't match!");
         }
 
@@ -130,7 +135,7 @@ class UserController extends Controller
         User::where('id', $id)->update([
             'password' => Hash::make($request->new_password)
         ]);
-
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เปลี่ยนรหัสผ่านสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with("status", "เปลี่ยนรหัสผ่านสำเร็จ");
     }

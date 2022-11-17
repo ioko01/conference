@@ -40,6 +40,7 @@ class ProceedingResearchController extends Controller
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'faculty_id' => 'required',
@@ -83,7 +84,7 @@ class ProceedingResearchController extends Controller
         ]);
 
         ProceedingResearch::create($data);
-
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->back();
     }
@@ -126,6 +127,7 @@ class ProceedingResearchController extends Controller
         $faculties = Faculty::get();
         $presents = Present::get();
         $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+        write_logs(__FUNCTION__, "info");
         return view('backend.pages.edit_proceeding_research', compact('year', 'researchs', 'faculties', 'presents', '_research', 'conference'));
     }
 
@@ -191,6 +193,7 @@ class ProceedingResearchController extends Controller
         }
 
         ProceedingResearch::where('id', $id)->update($data);
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back();
     }
@@ -208,7 +211,7 @@ class ProceedingResearchController extends Controller
             ->where('proceeding_researchs.id', $id)
             ->where('conferences.year', $year)
             ->delete();
-
+        write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.proceeding.research.index', $year);
     }

@@ -14,6 +14,7 @@ class PresentPosterController extends Controller
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'topic_th' => 'required',
@@ -60,7 +61,7 @@ class PresentPosterController extends Controller
             'extension' => $poster->extension
         ]);
         PresentPoster::create($data);
-
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มผลงานนำเสนอ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'เพิ่มผลงานนำเสนอ Poster สำเร็จ');
     }
@@ -100,7 +101,7 @@ class PresentPosterController extends Controller
             ->where('present_posters.id', $id)
             ->first();
 
-
+        write_logs(__FUNCTION__, "info");
         return view('backend.pages.edit_poster', compact('faculties', 'present_posters', 'present_poster'));
     }
 
@@ -117,6 +118,7 @@ class PresentPosterController extends Controller
         ]);
         PresentPoster::where('id', $id)->update($data);
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขผลงานนำเสนอ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'แก้ไขผลงานนำเสนอ Poster สำเร็จ');
     }
@@ -124,6 +126,7 @@ class PresentPosterController extends Controller
     protected function destroy($id)
     {
         PresentPoster::where('id', $id)->delete();
+        write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.posters.index');
     }

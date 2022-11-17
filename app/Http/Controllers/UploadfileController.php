@@ -91,23 +91,27 @@ class UploadfileController extends Controller
         foreach ($data as $present_poster) {
             $present_poster->poster_path = Storage::url($present_poster->poster_path);
         }
+
         return view('frontend.pages.uploadfile', compact('data', 'comments', 'conference'));
     }
 
     protected function validation($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถอัพโหลดไฟล์ Poster ได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate(['poster' => 'required|mimes:jpg,jpeg|max:10240']);
     }
 
     protected function video_validation($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถทำรายการได้ กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate(['video' => 'required']);
     }
 
     protected function poster_validation($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถทำรายการได้ กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate(['poster' => 'required|mimes:jpg,jpeg|max:10240']);
     }
@@ -135,6 +139,7 @@ class UploadfileController extends Controller
         $result->data = $data;
         $result->upload = $upload->storeAs($path, $name);
 
+        write_logs(__FUNCTION__, "info");
         return $result;
     }
 
@@ -151,6 +156,7 @@ class UploadfileController extends Controller
                 'conference_id' => auth()->user()->conference_id
             ]);
             Video::create($data);
+            write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'อัพโหลด Link Video สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
             return back()->with('success', 'อัพโหลด Link Video สำเร็จ');
         } else if ($request->poster) {
@@ -158,9 +164,11 @@ class UploadfileController extends Controller
 
             Poster::create($this->file($request, $id)->data);
             $this->file($request, $id)->upload;
+            write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'อัพโหลด ไฟล์ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
             return back()->with('success', 'อัพโหลดไฟล์ Poster สำเร็จ');
         }
+        write_logs(__FUNCTION__, "info");
         return back();
     }
 
@@ -171,6 +179,7 @@ class UploadfileController extends Controller
 
             $data = array_filter(['link' => $request->video]);
             Video::where('topic_id', $id)->update($data);
+            write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'แก้ไข Link Video สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
             return back()->with('success', 'แก้ไข Link Video สำเร็จ');
         } else if ($request->submit_poster) {
@@ -178,6 +187,7 @@ class UploadfileController extends Controller
 
             Poster::where('topic_id', $id)->update($this->file($request, $id)->data);
             $this->file($request, $id)->upload;
+            write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'แก้ไขไฟล์ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
             return back()->with('success', 'แก้ไขไฟล์ Poster สำเร็จ');
         }

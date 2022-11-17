@@ -28,11 +28,13 @@ class LineController extends Controller
         foreach ($lines as $line) {
             $line->line_path = Storage::url($line->line_path);
         }
+        
         return view('backend.pages.line', compact('conferences', 'lines'));
     }
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถเพิ่ม Line Openchat ได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'conference_name' => 'required',
@@ -75,16 +77,18 @@ class LineController extends Controller
             $conference = Line::select('conference_id')->where('conference_id', auth()->user()->conference_id)->first();
             if (isset($conference->conference_id)) {
                 if ($conference->conference_id == auth()->user()->conference_id) {
+                    write_logs(__FUNCTION__, "info");
                     alert('ผิดพลาด', 'ไม่สามารถเพิ่ม Line Openchat ในการประชุมครั้งนี้ได้อีก', 'error')->showConfirmButton('ปิด', '#3085d6');
                     return back()->withErrors('ไม่สามารถเพิ่ม Line Openchat ในการประชุมครั้งนี้ได้อีก');
                 }
             }
 
             Line::create($data);
-
+            write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'เพิ่ม Line Openchat สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
             return back()->with('success', true);
         } else {
+            write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ไม่มีการประชุมที่เปิดใช้งาน', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ไม่มีการประชุมที่เปิดใช้งาน');
         }
@@ -118,12 +122,15 @@ class LineController extends Controller
         )
             ->leftjoin('conferences', 'conferences.id', 'lines.conference_id')
             ->find($id);
+
+        write_logs(__FUNCTION__, "info");
         return view('backend.pages.edit_line', compact('conferences', 'lines', 'line'));
     }
 
     protected function update(Request $request, $id)
     {
         if (!auth()->user()->conference_id) {
+            write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
         }
@@ -134,6 +141,7 @@ class LineController extends Controller
 
         if ($request->name_file != $line->name) {
             if (Storage::exists($line->path)) {
+                write_logs(__FUNCTION__, "warning");
                 Storage::delete($line->path);
             }
         }
@@ -173,6 +181,7 @@ class LineController extends Controller
         }
 
         Line::where('id', $id)->update($data);
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไข Line Open Chat สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back();
     }
@@ -184,6 +193,7 @@ class LineController extends Controller
             Storage::delete($line->path);
         }
         Line::where('id', $id)->delete();
+        write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.lines.index');
     }

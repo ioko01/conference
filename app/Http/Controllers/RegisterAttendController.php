@@ -13,6 +13,7 @@ class RegisterAttendController extends Controller
 {
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถลงทะเบียนเข้าร่วมงานได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'prefix' => 'required|string',
@@ -65,6 +66,7 @@ class RegisterAttendController extends Controller
             'person_attend' => "attend"
         ]);
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'ลงทะเบียนเข้าร่วมงานสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('welcome');
     }

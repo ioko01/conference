@@ -19,7 +19,7 @@
                         <div class="input-group">
                             <label for="search">ค้นหาผู้ใช้งาน</label>
                             <input type="text" class="form-control" name="search" id="search"
-                                placeholder="ค้นหาผ่านลำดับ, ชื่อ - สกุล, อีเมลล์, สร้างเมื่อ">
+                                placeholder="">
                         </div>
                     </div>
                 </div>

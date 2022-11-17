@@ -167,6 +167,16 @@
                         @endforelse
                     </ul>
                 </li>
+                @auth
+                    @if (auth()->user()->is_admin === 2)
+                        <li class="nav-item">
+                            <a href="{{ route('backend.logs') }}" class="nav-link">
+                                <i class="nav-icon fas fa-sticky-note"></i>
+                                <p>Logs</p>
+                            </a>
+                        </li>
+                    @endif
+                @endauth
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

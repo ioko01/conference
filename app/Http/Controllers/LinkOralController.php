@@ -6,7 +6,6 @@ use App\Models\Conference;
 use App\Models\Faculty;
 use App\Models\LinkOral;
 use App\Models\Tip;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class LinkOralController extends Controller

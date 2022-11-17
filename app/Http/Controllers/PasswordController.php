@@ -12,6 +12,7 @@ class PasswordController extends Controller
     public function change_password()
     {
         $user = User::where('id', auth()->user()->id)->first();
+        write_logs(__FUNCTION__, "info");
         return view('frontend.pages.change_password', compact('user'));
     }
 
@@ -27,6 +28,7 @@ class PasswordController extends Controller
 
         #Match The Old Password
         if (!Hash::check($request->old_password, $user->password)) {
+            write_logs(__FUNCTION__, "error");
             return back()->with("error", "รหัสผ่านไม่ตรงกัน");
         }
 
@@ -36,6 +38,7 @@ class PasswordController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เปลี่ยนรหัสผ่านสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with("status", "เปลี่ยนรหัสผ่านสำเร็จ");
     }

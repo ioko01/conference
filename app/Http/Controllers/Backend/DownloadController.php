@@ -25,11 +25,13 @@ class DownloadController extends Controller
             ->leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
             ->where('conferences.status', 1)
             ->get();
+
         return view('backend.pages.download', compact('downloads'));
     }
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         if ($request->download == "link") {
             return $request->validate(
@@ -62,6 +64,7 @@ class DownloadController extends Controller
     {
         $conference = Conference::where('id', auth()->user()->conference_id)->first();
         if (!isset($conference->id)) {
+            write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
         }
@@ -83,6 +86,7 @@ class DownloadController extends Controller
 
         foreach ($downloads as $download) {
             if ($download->name == $request->name && auth()->user()->conference_id == $download->conference_id) {
+                write_logs(__FUNCTION__, "error");
                 alert('ผิดพลาด', 'มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้', 'error')->showConfirmButton('ปิด', '#3085d6');
                 return back()->withErrors('มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
@@ -114,6 +118,7 @@ class DownloadController extends Controller
         ]);
 
         Download::create($data);
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.downloads.index');
     }
@@ -134,6 +139,7 @@ class DownloadController extends Controller
             ->where('conferences.status', 1)
             ->get();
         $_download = Download::find($id);
+        write_logs(__FUNCTION__, "info");
         return view('backend.pages.edit_download', compact('downloads', '_download', 'id'));
     }
 
@@ -141,6 +147,7 @@ class DownloadController extends Controller
     {
         $conference = Conference::where('id', auth()->user()->conference_id)->first();
         if (!isset($conference->id)) {
+            write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้', 'error')->showConfirmButton('ปิด', '#3085d6');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อดาวน์โหลดได้');
         }
@@ -158,11 +165,13 @@ class DownloadController extends Controller
         )
             ->leftjoin('conferences', 'conferences.id', 'downloads.conference_id')
             ->where('conferences.status', 1)
+            ->where('downloads.id', '!=', $id)
             ->get();
         $this->validator($request);
 
         foreach ($downloads as $download) {
             if ($download->name == $request->name && auth()->user()->conference_id == $download->conference_id && $download->user_id != auth()->user()->id) {
+                write_logs(__FUNCTION__, "error");
                 alert('ผิดพลาด', 'มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้', 'error')->showConfirmButton('ปิด', '#3085d6');
                 return back()->withErrors('มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
@@ -229,6 +238,7 @@ class DownloadController extends Controller
         }
 
         Download::where('id', $id)->update($data);
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back();
     }
@@ -240,6 +250,7 @@ class DownloadController extends Controller
             Storage::delete($_download->path_file);
         }
         Download::where('id', $id)->delete();
+        write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.downloads.index');
     }
@@ -255,6 +266,7 @@ class DownloadController extends Controller
             'notice' => $status
         ];
         Download::where('id', $id)->update($data);
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'นำขึ้นประชาสัมพันธ์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back();
     }

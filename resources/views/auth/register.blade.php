@@ -32,8 +32,7 @@
                                 @csrf
                                 <div class="row mb-4">
                                     <div class="col-md-6">
-                                        <label for="prefix">คำนำหน้า <span style="font-size: 12px;"
-                                                class="text-bluesky">(ใช้ลงในเกียรติบัตร)</span></label>
+                                        <label for="prefix">คำนำหน้า</label>
                                         <input type="text" name="prefix" id="prefix"
                                             class="form-control @error('prefix') is-invalid @enderror"
                                             value="{{ old('prefix') }}" autocomplete="prefix" autofocus>
@@ -146,30 +145,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
-                                    <div class="col-12" id="select-kota">
-                                        <label>โควต้าเจ้าภาพร่วม
-                                            @error('position_id')
-                                                <span class="text-danger"> *กรุณาเลือกสถานะของท่าน</span>
-                                            @enderror
-                                        </label>
+                                @if (count($kotas) > 0)
+                                    <div class="row mb-4">
+                                        <div class="col-12" id="select-kota">
+                                            <label>โควต้าเจ้าภาพร่วม
+                                                @error('position_id')
+                                                    <span class="text-danger"> *กรุณาเลือกสถานะของท่าน</span>
+                                                @enderror
+                                            </label>
 
-                                        @foreach ($kotas as $kota)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="kota_id"
-                                                    id="kota_{{ $kota->id }}" value="{{ $kota->id }}"
-                                                    @if (old('position_id') != '3') disabled @endif
-                                                    @if (!old('kota_id')) @if ($kota->id == $kotas->first()->id)
+                                            @foreach ($kotas as $kota)
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="kota_id"
+                                                        id="kota_{{ $kota->id }}" value="{{ $kota->id }}"
+                                                        @if (old('position_id') != '3') disabled @endif
+                                                        @if (!old('kota_id')) @if ($kota->id == $kotas->first()->id)
                                     checked @endif
-                                                @elseif (old('kota_id') == $kota->id) checked @endif>
+                                                    @elseif (old('kota_id') == $kota->id) checked @endif>
 
-                                                <label class="form-check-label" for="kota_{{ $kota->id }}">
-                                                    {{ $kota->name }}
-                                                </label>
-                                            </div>
-                                        @endforeach
+                                                    <label class="form-check-label" for="kota_{{ $kota->id }}">
+                                                        {{ $kota->name }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
+
 
                                 <div class="row mb-4">
                                     <div class="col-12" id="select-attend">
@@ -183,10 +185,10 @@
                                                     type="radio" name="person_attend" id="send"
                                                     @if (old('person_attend') === 'send' || empty(old('person_attend'))) checked @endif value="send">
                                                 <label class="form-check-label" for="send">
-                                                    ลงทะเบียนส่งผลงาน <strong
+                                                    ลงทะเบียนส่งผลงาน <span
                                                         class="text-red text-sm">(บุคคลภายนอกจะต้องชำระค่าลงทะเบียน 2,000
                                                         บาท
-                                                        ต่อ 1 ผลงาน)</strong>
+                                                        ต่อ 1 ผลงาน)</span>
                                                 </label>
                                             </div>
                                         @endif
@@ -206,7 +208,7 @@
                                 <div class="row mb-4">
                                     <div class="col-12 @if (old('person_attend') == 'attend') d-none @endif"
                                         id="form_address">
-                                        <label for="address">ที่อยู่ <span style="font-size: 12px;"
+                                        <label for="address">ชื่อ - สกุล ที่อยู่ <span style="font-size: 12px;"
                                                 class="text-bluesky">(ใช้ในการออกใบเสร็จรับเงิน
                                                 และส่งเอกสาร)</span></label>
                                         <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" cols="30"
@@ -293,8 +295,9 @@
                                         <div class="icon"><img src="{{ asset($tip->image, env('REDIRECT_HTTPS')) }}"
                                                 alt="{{ $tip->head }}">
                                         </div>
-                                        <div class="content"><strong>{{ $tip->head }}</strong><br /><span>
-                                                <textarea readonly style="width: 100%;" class="txt-tips autosize">{{ $tip->detail }}</textarea>
+                                        <div class="content"><strong
+                                                style="font-size: 18px">{{ $tip->head }}</strong><br /><span>
+                                                <textarea readonly style="width: 100%;font-size: 14px;" class="txt-tips autosize">{{ $tip->detail }}</textarea>
                                             </span>
                                         </div>
                                     </div>

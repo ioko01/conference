@@ -6,6 +6,10 @@
     <script src="{{ asset('js/main.js', env('REDIRECT_HTTPS')) }}" defer></script>
     <script src="{{ asset('js/animate.js', env('REDIRECT_HTTPS')) }}" defer></script>
 
+    @if (Request::is('employee/research/show/*'))
+        <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
+    @endif
+
     @if (Request::is('/'))
         <script src="{{ asset('api/countdown.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
@@ -40,6 +44,24 @@
     @if (Request::is('orals/link'))
         <script src="{{ asset('js/oral-detail-modal.js', env('REDIRECT_HTTPS')) }}"></script>
         <script src="{{ asset('js/default-modal.js', env('REDIRECT_HTTPS')) }}"></script>
+    @endif
+
+    @if (Request::is('employee/research/*') || Request::is('list/*'))
+        @if (!Request::is('employee/research/send'))
+            <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
+            <script>
+                let options = {
+                    numberPerPage: 10,
+                    pageCounter: true,
+                };
+
+                let filterOptions = {
+                    el: "#search",
+                };
+
+                paginate.init(".list", options, filterOptions);
+            </script>
+        @endif
     @endif
 
     @if (Request::is('employee/research/show/*') ||

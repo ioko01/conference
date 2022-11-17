@@ -10,6 +10,7 @@ class WordController extends Controller
 {
     protected function validation($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถอัพโหลด WORD ได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate(['word_upload' => 'required|mimes:doc,docx|max:10240']);
     }
@@ -39,6 +40,7 @@ class WordController extends Controller
         $result->data = $data;
         $result->upload = $upload->storeAs($path, $name);
 
+        write_logs(__FUNCTION__, "info");
         return $result;
     }
 
@@ -49,6 +51,7 @@ class WordController extends Controller
         Word::create($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลด WORD สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'อัพโหลด WORD สำเร็จ');
     }
@@ -58,6 +61,7 @@ class WordController extends Controller
         Word::where('topic_id', $id)->update($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลด WORD สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'แก้ไข WORD สำเร็จ');
     }

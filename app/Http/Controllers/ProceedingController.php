@@ -8,6 +8,7 @@ use App\Models\ProceedingFile;
 use App\Models\ProceedingResearch;
 use App\Models\ProceedingTopic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProceedingController extends Controller
 {
@@ -58,7 +59,7 @@ class ProceedingController extends Controller
                 $j++;
             }
         }
-
+        
         return view('frontend.pages.proceeding', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs'));
     }
 }

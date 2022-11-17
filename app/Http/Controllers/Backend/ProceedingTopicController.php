@@ -26,6 +26,7 @@ class ProceedingTopicController extends Controller
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'topic' => 'required',
@@ -50,7 +51,7 @@ class ProceedingTopicController extends Controller
             'topic' => $request->topic,
             'position' => $request->position
         ]);
-
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->back();
     }
@@ -75,6 +76,7 @@ class ProceedingTopicController extends Controller
             ->where('conferences.year', $year)
             ->where('proceeding_topics.id', $id)
             ->first();
+        write_logs(__FUNCTION__, "info");
         $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
         return view('backend.pages.edit_proceeding_topic', compact('year', 'topics', 'topic', 'conference'));
     }
@@ -96,7 +98,7 @@ class ProceedingTopicController extends Controller
             'topic' => $request->topic,
             'position' => $request->position
         ]);
-
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->back();
     }
@@ -107,7 +109,7 @@ class ProceedingTopicController extends Controller
             ->where('proceeding_topics.id', $id)
             ->where('conferences.year', $year)
             ->delete();
-
+        write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.proceeding.topic.index', $year);
     }

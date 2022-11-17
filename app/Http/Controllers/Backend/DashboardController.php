@@ -38,10 +38,12 @@ class DashboardController extends Controller
         $storage = File::exists($path);
         if (!$storage) {
             \Illuminate\Support\Facades\Artisan::call('storage:link');
+            write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'เปิดใช้งาน Storage link สำเร็จ', 'success');
             return back()->with('success', true);
         }
-
+        
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถปิดใช้งาน Storage Link ได้', 'error');
         return back()->with('success', true);
     }

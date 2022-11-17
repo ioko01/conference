@@ -29,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'kota_id',
         'person_attend',
         'email',
+        'email_verified_at',
         'password',
         'is_admin',
         'conference_id'

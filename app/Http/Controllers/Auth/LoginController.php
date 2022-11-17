@@ -53,7 +53,6 @@ class LoginController extends Controller
             $this->hasTooManyLoginAttempts($request)
         ) {
             $this->fireLockoutEvent($request);
-
             return $this->sendLockoutResponse($request);
         }
 
@@ -63,13 +62,13 @@ class LoginController extends Controller
             }
 
             $conference_id = Conference::select('id')->where('status', 1)->first();
-            if($conference_id){
+            if ($conference_id) {
                 User::where('email', $request->email)
-                ->update([
-                    'conference_id' => $conference_id->id
-                ]);
+                    ->update([
+                        'conference_id' => $conference_id->id
+                    ]);
             }
-
+            write_logs(__FUNCTION__, "info");
             return $this->sendLoginResponse($request);
         }
 
@@ -77,7 +76,7 @@ class LoginController extends Controller
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
-
+        write_logs(__FUNCTION__, "error");
         return $this->sendFailedLoginResponse($request);
     }
 

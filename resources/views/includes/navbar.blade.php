@@ -11,6 +11,17 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
+                    @auth
+                        <li class="nav-item">
+                            @if (auth()->user()->person_attend == 'send')
+                                <p style="color: #fff!important;background:  sandybrown!important;border-radius: 0.5em;"
+                                    class="nav-link px-2">ท่านลงทะเบียนส่งผลงาน</p>
+                            @else
+                                <p style="color: #fff!important;background:  sandybrown!important;border-radius: 0.5em;"
+                                    class="nav-link px-2">ท่านลงทะเบียนเข้าร่วมงาน</p>
+                            @endif
+                        </li>
+                    @endauth
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page"
                             href="{{ route('welcome') }}">หน้าหลัก</a>
@@ -131,9 +142,9 @@
                         </li>
                     @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                บทความ
+                            <a style="color: sandybrown!important;" class="nav-link dropdown-toggle" href="#"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                ส่งบทความ
                             </a>
                             <ul class="dropdown-menu">
                                 <li>

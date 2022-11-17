@@ -180,10 +180,12 @@
                     @foreach ($tips as $tip)
                         <div class="tips-box py-5">
                             <div class="icon"><img src="{{ asset($tip->image, env('REDIRECT_HTTPS')) }}"
-                                    alt="{{ $tip->head }}"></div>
-                            <div class="content"><strong>{{ $tip->head }}</strong><br /><span>
-                                    <textarea readonly style="width: 100%;" class="txt-tips autosize">{{ $tip->detail }}</textarea>
-                                </span></div>
+                                    alt="{{ $tip->head }}">
+                            </div>
+                            <div class="content"><strong style="font-size: 18px">{{ $tip->head }}</strong><br /><span>
+                                    <textarea readonly style="width: 100%;font-size: 14px;" class="txt-tips autosize">{{ $tip->detail }}</textarea>
+                                </span>
+                            </div>
                         </div>
                     @endforeach
                 </div>

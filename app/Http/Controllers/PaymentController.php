@@ -6,7 +6,6 @@ use App\Models\Conference;
 use Illuminate\Http\Request;
 use App\Models\Tip;
 use App\Models\Slip;
-use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
@@ -18,6 +17,7 @@ class PaymentController extends Controller
 
     protected function validation($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถอัพโหลด SLIP ได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'payment_upload' => 'required|mimes:jpg,jpeg|max:10240',
@@ -51,6 +51,7 @@ class PaymentController extends Controller
         $result->data = $data;
         $result->upload = $upload->storeAs($path, $name);
 
+        write_logs(__FUNCTION__, "info");
         return $result;
     }
 
@@ -61,6 +62,7 @@ class PaymentController extends Controller
         Slip::create($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลด SLIP สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'อัพโหลด SLIP สำเร็จ');
     }
@@ -70,6 +72,7 @@ class PaymentController extends Controller
         Slip::where('topic_id', $id)->update($this->file($request, $id)->data);
         $this->file($request, $id)->upload;
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไข SLIP สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'แก้ไข SLIP สำเร็จ');
     }

@@ -17,7 +17,7 @@
                         <div class="input-group">
                             <label for="search">ค้นหาบทความ</label>
                             <input type="text" class="form-control" name="search" id="search"
-                                placeholder="ค้นหาผ่านลำดับ, ชื่อบทความ/ผู้นำเสนอผลงาน, สังกัด/หน่วยงาน">
+                                placeholder="">
                         </div>
                     </div>
                 </div>

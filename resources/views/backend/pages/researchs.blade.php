@@ -19,7 +19,7 @@
                         <div class="input-group">
                             <label for="search">ค้นหาบทความ</label>
                             <input type="text" class="form-control" name="search" id="search"
-                                placeholder="ค้นหาผ่านลำดับ, รายละเอียด, ปีที่ส่งผลงาน, ชนิดารเข้าร่วม, เวลา">
+                                placeholder="">
                         </div>
                     </div>
                 </div>

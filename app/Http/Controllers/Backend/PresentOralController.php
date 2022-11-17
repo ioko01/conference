@@ -12,6 +12,7 @@ class PresentOralController extends Controller
 {
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
             'topic_th' => 'required',
@@ -52,7 +53,7 @@ class PresentOralController extends Controller
             'time_end' => $request->time_end
         ]);
         PresentOral::create($data);
-
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มผลงานนำเสนอ Oral สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'เพิ่มผลงานนำเสนอ Oral สำเร็จ');
     }
@@ -88,6 +89,7 @@ class PresentOralController extends Controller
             ->where('conferences.status', 1)
             ->where('present_orals.id', $id)
             ->first();
+        write_logs(__FUNCTION__, "info");
         return view('backend.pages.edit_oral', compact('faculties', 'present_orals', 'present_oral'));
     }
 
@@ -105,6 +107,7 @@ class PresentOralController extends Controller
         ]);
         PresentOral::where('id', $id)->update($data);
 
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขผลงานนำเสนอ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back()->with('success', 'แก้ไขผลงานนำเสนอ Poster สำเร็จ');
     }
@@ -112,6 +115,7 @@ class PresentOralController extends Controller
     protected function destroy($id)
     {
         PresentOral::where('id', $id)->delete();
+        write_logs(__FUNCTION__, "error");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.orals.index');
     }

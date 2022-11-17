@@ -15,14 +15,12 @@ class MailController extends Controller
     public function verify_id(EmailVerificationRequest $request)
     {
         $request->fulfill();
-
         return redirect('/');
     }
 
     public function verify_notification(Request $request)
     {
         $request->user()->sendEmailVerificationNotification();
-
         return back()->with('message', 'Verification link sent!');
     }
 }

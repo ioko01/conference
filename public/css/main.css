@@ -210,6 +210,25 @@ html {
     }
 }
 
+.grow {
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    animation: grow 0.8s 0.3s both;
+    -webkit-animation: grow 0.8s 0.3s both;
+}
+
+@keyframes grow {
+    0% {
+        left: 50%;
+        width: 0;
+    }
+    100% {
+        left: 0;
+        width: 100%;
+    }
+}
+
 .label-type-file {
     font-size: 1rem;
     color: #495057;
@@ -261,7 +280,7 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 5px solid var(--color-blue);
+    border: 5px solid var(--color-green);
     background: white;
     font-size: calc(16px + 0.5vw);
     height: 120px;
@@ -487,6 +506,11 @@ a {
 #navbar-conference .nav-link:not(.active):hover {
     color: inherit;
     opacity: 0.8;
+}
+
+#navbar-conference .nav-link:first-child:hover {
+    color: inherit;
+    opacity: 1 !important;
 }
 
 .navbar {
@@ -849,7 +873,7 @@ form.dropdown-item:hover {
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: var(--color-lightblue);
+    background: var(--color-green);
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {

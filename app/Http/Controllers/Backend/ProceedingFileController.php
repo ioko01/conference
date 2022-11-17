@@ -60,6 +60,7 @@ class ProceedingFileController extends Controller
 
     protected function validator($request)
     {
+        write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่อีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
 
         if ($request->download == "link") {
@@ -116,7 +117,7 @@ class ProceedingFileController extends Controller
         ]);
 
         ProceedingFile::create($data);
-
+        write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->back();
     }
@@ -180,7 +181,7 @@ class ProceedingFileController extends Controller
                 }
             }
         }
-
+        write_logs(__FUNCTION__, "info");
         $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
         return view('backend.pages.edit_proceeding_file', compact('year', 'files', 'topics', 'i_topic', '_file', 'conference'));
     }
@@ -255,7 +256,7 @@ class ProceedingFileController extends Controller
                 'conference_id' => $conference->id
             ];
         }
-
+        write_logs(__FUNCTION__, "info");
         ProceedingFile::where('id', $id)->update($data);
         alert('สำเร็จ', 'แก้ไขหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return back();
@@ -274,7 +275,7 @@ class ProceedingFileController extends Controller
             ->where('proceeding_files.id', $id)
             ->where('conferences.year', $year)
             ->delete();
-
+        write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         return redirect()->route('backend.proceeding.file.index', $year);
     }

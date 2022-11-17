@@ -21,7 +21,7 @@ function detail_modal(topic_id, type) {
             </div>`;
 
     const route = "/show-research-detail/" + topic_id;
-    const token = $('meta[name="csrf-token"]').attr('content');
+    const token = $('meta[name="csrf-token"]').attr("content");
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": token,
@@ -292,7 +292,7 @@ function payment_modal(topic_id, type, path, method) {
 
                     <div class="mb-3">
                         <label for="date">วันที่ชำระเงิน</label>
-                        <input type="datetime-local" name="date" id="date" class="form-control ${
+                        <input type="date" name="date" id="date" class="form-control ${
                             error_date ? `is-invalid` : ``
                         }">
                         ${
@@ -319,7 +319,7 @@ function payment_modal(topic_id, type, path, method) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button onclick="thisDisabled(this)" type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>
+                    <button onclick="thisDisabled(this)" formnovalidate="formnovalidate" type="submit" class="btn btn-green rounded-0 text-white">อัพโหลด</button>
                 </div>
             </div>
         </div>

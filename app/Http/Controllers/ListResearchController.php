@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Conference;
 use App\Models\Research;
-use Illuminate\Http\Request;
 
 class ListResearchController extends Controller
 {
@@ -28,6 +27,7 @@ class ListResearchController extends Controller
             ->where('conferences.status', 1)
             ->where('is_admin', 0)
             ->get();
+
         return view('frontend.pages.list_research', compact('researchs', 'conference'));
     }
 }

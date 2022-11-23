@@ -35,6 +35,9 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                     END
                 ) AS sex'
             ),
+            DB::raw(
+                '"" AS note'
+            ),
             'researchs.topic_th AS topic_th',
             'researchs.topic_en AS topic_en',
             'status_researchs.name AS topic_status',
@@ -72,6 +75,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                     END
                 ) AS person_attend'
             ),
+            'users.address AS address',
             'users.phone AS phone',
             'users.institution AS institution',
             'positions.name AS position_name',
@@ -105,6 +109,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'รหัสบทความ',
             'ชื่อผู้ส่งบทความ',
             'เพศ',
+            'หมายเหตุ',
             'ชื่อบทความ (ภาษาไทย)',
             'ชื่อบทความ (ภาษาอังกฤษ)',
             'สถานะบทความ',
@@ -126,6 +131,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'ไฟล์ PDF',
             'วันที่อัพโหลดไฟล์ PDF',
             'สถานะการลงทะเบียน',
+            'ชื่อ/ที่อยู่ (ใช้ในการออกใบเสร็จรับเงิน และส่งเอกสาร)',
             'เบอร์โทร',
             'สังกัด/หน่วยงาน',
             'สถานะบุคลากร',
@@ -163,7 +169,14 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                         $active_sheet->getStyle($allCol)->getFill()
                             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                             ->getStartColor()
-                            ->setARGB('FFFF00');
+                            ->setARGB('1F497D');
+                        $active_sheet->getStyle($allCol)->applyFromArray([
+                            'font' => [
+                                'color' => [
+                                    'rgb' => 'ffffff'
+                                ]
+                            ]
+                        ]);
                         $active_sheet->getStyle($allCell)->getFont()->setSize(14);
                         $active_sheet->getStyle($allCell)->getFont()->setName('TH SarabunPSK');
                         $active_sheet->getStyle($allCell)->getFont()->setName('TH SarabunPSK');
@@ -175,6 +188,47 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                                 ],
                             ]
                         ]);
+                    }
+
+                    $get_values[$row - 1] = $active_sheet->getCell('F' . $row)->getValue();
+                    $get_ids[$row - 1] = $active_sheet->getCell('B' . $row)->getValue();
+                    $name_duplicated = [];
+                    $get_first_name = [];
+                    $ids = [];
+                    foreach ($get_values as $key => $get_value) {
+                        if (!array_search($get_value, $get_first_name)) {
+                            array_push($get_first_name, $get_value);
+                            array_push($ids, $get_ids[$key]);
+                        } else {
+                            array_push($name_duplicated, $get_value);
+                        }
+                    }
+                }
+
+                for ($row = 1; $row <= $highestRow; $row++) {
+                    foreach ($name_duplicated as $key => $name_duplicate) {
+                        if ($active_sheet->getCell('F' . $row)->getValue() == $name_duplicate) {
+                            if ($id = array_search($name_duplicate, $get_first_name, true)) {
+                                if ($ids[$id] != $active_sheet->getCell('B' . $row)->getValue()) {
+                                    $active_sheet->getCell('F' . $row)->setValue($name_duplicate);
+                                    $active_sheet->getCell('E' . $row)->setValue("บทความนี้ชื่อบทความซ้ำกับบทความที่ " . $ids[$id]);
+                                    $active_sheet->getStyle('E' . $row)->applyFromArray([
+                                        'font' => [
+                                            'color' => [
+                                                'rgb' => 'FF0000'
+                                            ],
+                                            'bold' => true
+                                        ]
+                                    ]);
+                                    for ($column = 'A'; $column !== $columnLoopLimiter; ++$column) {
+                                        $active_sheet->getStyle('A' . $active_sheet->getCell('F' . $row)->getRow() . ':' . $column . $active_sheet->getCell('F' . $row)->getRow())->getFill()
+                                            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                                            ->getStartColor()
+                                            ->setARGB('FFFF66');
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },

@@ -158,7 +158,7 @@
                             <div class="col-md-12">
                                 <p>
                                     <strong>
-                                        ที่อยู่
+                                        ชื่อ ที่อยู่ (ใช้ในการออกใบเสร็จรับเงิน และส่งเอกสาร)
                                         @if ($user->address)
                                             <span class="text-green">
                                                 {{ $user->address }}

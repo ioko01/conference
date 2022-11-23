@@ -265,15 +265,21 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-md-6">
-                                        <label for="password">รหัสผ่าน</label>
+                                        <div class="d-flex justify-content-between">
+                                            <label for="password">รหัสผ่าน</label>
+                                            <div class="toggle-password">
+                                                
+                                            </div>
+                                        </div>
                                         <input type="password" name="password" id="password"
-                                            class="form-control @error('password') is-invalid @enderror">
+                                            class="form-control eye-icon @error('password') is-invalid @enderror">
 
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+
                                     </div>
                                     <div class="col-md-6">
                                         <label for="password_confirmation">ยืนยันรหัสผ่าน</label>

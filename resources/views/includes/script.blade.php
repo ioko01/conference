@@ -6,6 +6,10 @@
     <script src="{{ asset('js/main.js', env('REDIRECT_HTTPS')) }}" defer></script>
     <script src="{{ asset('js/animate.js', env('REDIRECT_HTTPS')) }}" defer></script>
 
+    @if (Request::is('register'))
+        <script src="{{ asset('js/show-hide-password.js', env('REDIRECT_HTTPS')) }}"></script>
+    @endif
+
     @if (Request::is('employee/research/show/*'))
         <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif

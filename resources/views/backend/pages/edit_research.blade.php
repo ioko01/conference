@@ -79,7 +79,7 @@
                     <div class="mb-4">
                         <label for="faculty_id">บทความของท่านอยู่ในกลุ่ม</label>
                         <select name="faculty_id" id="faculty_id"
-                            class="form-control @error('faculty_id') is-invalid @enderror" onchange="select_faculty(this)">
+                            class="form-select @error('faculty_id') is-invalid @enderror" onchange="select_faculty(this)">
                             <option value="" @if (!$research->faculty_id) selected @endif>---กรุณาเลือก---
                             </option>
                             @foreach ($faculties as $faculty)
@@ -99,7 +99,7 @@
                     <div class="mb-4">
                         <label for="branch_id">สาขาย่อย</label>
                         <select name="branch_id" id="branch_id"
-                            class="form-control @error('branch_id') is-invalid @enderror"
+                            class="form-select @error('branch_id') is-invalid @enderror"
                             @if (!$research->faculty_id) disabled @endif>
                             <option value="" @if (!$research->branch_id) selected @endif>---กรุณาเลือก---
                             </option>
@@ -124,7 +124,7 @@
                     <div class="mb-4" id="select-research-branch"></div>
                     <div class="mb-4">
                         <label for="degree_id">ระดับบทความ</label>
-                        <select class="form-control @error('degree_id') is-invalid @enderror" name="degree_id"
+                        <select class="form-select @error('degree_id') is-invalid @enderror" name="degree_id"
                             id="degree_id">
                             <option value="" @if (!$research->degree_id) selected @endif>---กรุณาเลือก---
                             </option>

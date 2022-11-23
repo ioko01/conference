@@ -494,6 +494,12 @@ a {
     color: #fff;
 }
 
+.toggle-password {
+    cursor: pointer;
+    color: var(--color-green);
+    padding-right: calc(0.75rem);
+}
+
 #navbar-conference .nav-link {
     color: #343a40 !important;
 }

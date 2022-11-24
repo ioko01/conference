@@ -42,7 +42,14 @@ class EditResearchFirstController extends Controller
             'send_edit_statements.path as statement_path',
             'send_edit_statements.created_at as statement_created_at',
             'send_edit_statements.updated_at as statement_updated_at',
-            'researchs.topic_status as status_id'
+            'researchs.topic_status as status_id',
+            'videos.link as video',
+            'videos.created_at as video_created_at',
+            'videos.updated_at as video_updated_at',
+            'posters.name as poster',
+            'posters.path as poster_path',
+            'posters.created_at as posters_created_at',
+            'posters.updated_at as posters_updated_at'
         )
             ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
             ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')
@@ -53,13 +60,15 @@ class EditResearchFirstController extends Controller
             ->leftjoin('send_edit_words', 'researchs.topic_id', '=', 'send_edit_words.topic_id')
             ->leftjoin('send_edit_pdf', 'researchs.topic_id', '=', 'send_edit_pdf.topic_id')
             ->leftjoin('send_edit_statements', 'researchs.topic_id', '=', 'send_edit_statements.topic_id')
+            ->leftjoin('videos', 'researchs.topic_id', '=', 'videos.topic_id')
+            ->leftjoin('posters', 'researchs.topic_id', '=', 'posters.topic_id')
             ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
             ->leftjoin('conferences', 'researchs.conference_id', '=', 'conferences.id')
             ->where('conferences.status', 1)
-            ->get()
-            ->sortBy('id');
+            ->orderBy('id', 'ASC')
+            ->get();
 
-            
+
         return view('backend.pages.show_edit_research_first', compact('data', 'topic_status'));
     }
 }

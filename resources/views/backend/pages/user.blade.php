@@ -14,25 +14,18 @@
                         Export to
                         Excel</a>
                 </div>
-                <div class="panel">
-                    <div class="body">
-                        <div class="input-group">
-                            <label for="search">ค้นหาผู้ใช้งาน</label>
-                            <input type="text" class="form-control" name="search" id="search"
-                                placeholder="">
-                        </div>
-                    </div>
-                </div>
                 <div class="table-responsive">
-                    <table class="list table responsive hover">
-                        <th>#</th>
-                        <th>ชื่อ - สกุล</th>
-                        <th>สถานะ</th>
-                        <th>อีเมล</th>
-                        <th>สร้างเมื่อ</th>
-                        <th>แก้ไข</th>
-                        <th class="text-center">#</th>
-                        </tr>
+                    <table style="color: inherit;" class="dataTable table w-100">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>ชื่อ - สกุล</th>
+                                <th>สถานะ</th>
+                                <th>อีเมล</th>
+                                <th>สร้างเมื่อ</th>
+                                <th>แก้ไข</th>
+                                <th class="text-center">#</th>
+                            </tr>
                         </thead>
                         <tbody>
                             @forelse ($users as $key => $user)

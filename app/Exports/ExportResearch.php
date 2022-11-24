@@ -196,18 +196,18 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                     $get_first_name = [];
                     $ids = [];
                     foreach ($get_values as $key => $get_value) {
-                        if (!array_search($get_value, $get_first_name)) {
-                            array_push($get_first_name, $get_value);
+                        if (!array_search(trim($get_value), $get_first_name)) {
+                            array_push($get_first_name, trim($get_value));
                             array_push($ids, $get_ids[$key]);
                         } else {
-                            array_push($name_duplicated, $get_value);
+                            array_push($name_duplicated, trim($get_value));
                         }
                     }
                 }
 
                 for ($row = 1; $row <= $highestRow; $row++) {
                     foreach ($name_duplicated as $key => $name_duplicate) {
-                        if ($active_sheet->getCell('F' . $row)->getValue() == $name_duplicate) {
+                        if (trim($active_sheet->getCell('F' . $row)->getValue()) == $name_duplicate) {
                             if ($id = array_search($name_duplicate, $get_first_name, true)) {
                                 if ($ids[$id] != $active_sheet->getCell('B' . $row)->getValue()) {
                                     $active_sheet->getCell('F' . $row)->setValue($name_duplicate);

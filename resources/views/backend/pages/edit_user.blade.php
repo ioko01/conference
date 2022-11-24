@@ -202,8 +202,9 @@
         </div>
         <div class="row mb-4">
             <div class="col-12">
-                <label for="address">ที่อยู่ <span style="font-size: 12px;"
-                        class="text-bluesky">(ใช้ในการออกใบเสร็จรับเงิน และส่งเอกสาร)</span></label>
+                <label for="address">ชื่อ - สกุล ที่อยู่ <span style="font-size: 12px;"
+                        class="text-bluesky">(ใช้ในการออกใบเสร็จรับเงิน
+                        และส่งเอกสาร)</span></label>
                 <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" cols="30"
                     rows="5">
 @if (old('address')){{ old('address') }}@else{{ $user->address }}@endif

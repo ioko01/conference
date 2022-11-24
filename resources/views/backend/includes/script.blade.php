@@ -103,29 +103,14 @@
     <script src="{{ asset('api/get-research-with-topic-id.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
-@if (Request::is('backend/researchs') ||
-    Request::is('backend/users') ||
-    Request::is('backend/researchs/management'))
-    <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
-    <script src="{{ asset('js/paginate.js', env('REDIRECT_HTTPS')) }}"></script>
-    <script>
-        let options = {
-            numberPerPage: 10, //Cantidad de datos por pagina
-            goBar: true, //Barra donde puedes digitar el numero de la pagina al que quiere ir
-            pageCounter: true, //Contador de paginas, en cual estas, de cuantas paginas
-        };
-
-        let filterOptions = {
-            el: "#search", //Caja de texto para filtrar, puede ser una clase o un ID
-        };
-
-        paginate.init(".list", options, filterOptions);
-    </script>
-@endif
-
 @if (Request::is('backend/proceeding/*/preview') ||
     Request::is('backend/proceeding/*/research') ||
-    Request::is('backend/proceeding/*/research/*/edit'))
+    Request::is('backend/proceeding/*/research/*/edit') ||
+    Request::is('backend/researchs/management') ||
+    Request::is('backend/researchs') ||
+    Request::is('backend/users') ||
+    Request::is('backend/researchs/management/times/1') ||
+    Request::is('backend/researchs/management/times/2'))
     <script src="{{ asset('vendor/plugins/datatables/datatables.min.js', env('REDIRECT_HTTPS')) }}" defer></script>
     <script>
         $(document).ready(function() {

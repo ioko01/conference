@@ -22,14 +22,16 @@ class ResearchController extends Controller
             'researchs.topic_th as topic_th',
             'researchs.topic_en as topic_en',
             'researchs.presenter as presenter',
-            'researchs.present_id as present_id',
+            'users.institution as institution',
             'researchs.created_at as created_at',
             'researchs.updated_at as updated_at',
             'users.fullname as fullname',
             'users.person_attend as person_attend',
+            'presents.name as present',
             'conferences.year as year'
         )
             ->leftjoin('users', 'users.id', '=', 'researchs.user_id')
+            ->leftjoin('presents', 'researchs.present_id', '=', 'presents.id')
             ->leftjoin('conferences', 'researchs.conference_id', '=', 'conferences.id')
             ->get();
         return view('backend.pages.researchs', compact('researchs'));

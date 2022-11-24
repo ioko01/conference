@@ -42,11 +42,11 @@
                             <td>{{ $key + 1 }}</td>
                             <td class="text-start">
                                 <strong style="font-size: 12px" class="text-warning">
-                                    รหัสบทความ: {{ $value->topic_id }}
+                                    รหัสบทความ : {{ $value->topic_id }}
                                 </strong>
                                 <br />
                                 <strong style="font-size: 12px" class="text-bluesky">
-                                    รูปแบบ: {{ $value->present }}
+                                    รูปแบบ : {{ $value->present }}
                                 </strong>
                                 <br />
                                 <strong>{{ $value->topic_th }}</strong>

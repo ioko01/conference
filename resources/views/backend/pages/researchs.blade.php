@@ -31,11 +31,11 @@
                                     <td class="text-center">{{ ++$key }}</td>
                                     <td class="text-start">
                                         <strong style="font-size: 12px" class="text-warning">
-                                            รหัสบทความ: {{ $research->topic_id }}
+                                            รหัสบทความ : {{ $research->topic_id }}
                                         </strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-bluesky">
-                                            รูปแบบ: {{ $research->present }}
+                                            รูปแบบ : {{ $research->present }}
                                         </strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-primary">สังกัด /

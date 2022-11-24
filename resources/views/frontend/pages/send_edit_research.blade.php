@@ -37,13 +37,19 @@
                     @forelse ($data as $key => $value)
                         <tr class="text-center">
                             <td>{{ $key + 1 }}</td>
-                            <td class="text-start" style="vertical-align: middle;">
-                                <strong style="font-size: 12px" class="text-bluesky">{{ $value->present }}</strong>
+                            <td class="text-start">
+                                <strong style="font-size: 12px" class="text-warning">
+                                    รหัสบทความ: {{ $value->topic_id }}
+                                </strong>
+                                <br />
+                                <strong style="font-size: 12px" class="text-bluesky">
+                                    รูปแบบ: {{ $value->present }}
+                                </strong>
                                 <br />
                                 <strong>{{ $value->topic_th }}</strong>
                                 <br />
-                                <strong><span
-                                        class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span></strong>
+                                <strong><span class="name-research text-small text-green">ผู้นำเสนอ :
+                                        {{ str_replace('|', ', ', $value->presenter) }}</span></strong>
                             </td>
                             <td style="vertical-align: middle;">
                                 @if ($value->status_id >= 8)
@@ -58,7 +64,11 @@
                                             <div style="border-bottom: 1px dotted #ccc;" class="my-2"></div>
                                         @endif
                                     @empty
-                                        <strong class="text-warning">(รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)</strong>
+                                        <h1 class="text-warning text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                (รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)
+                                            </strong>
+                                        </h1>
                                     @endforelse
                                 @else
                                     -
@@ -90,20 +100,40 @@
                                             </button>
                                             <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            <strong class="text-red">ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว</strong>
+                                            <h1 class="text-danger text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว
+                                                </strong>
+                                            </h1>
                                         @endif
                                     @else
-                                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1
+                                            </strong>
+                                        </h1>
                                     @endif
                                 @elseif($value->status_research_edit_two === 1)
-                                    <strong class="text-red">หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว</strong>
+                                    <h1 class="text-danger text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว
+                                        </strong>
+                                    </h1>
                                 @else
-                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
+                                    <h1 class="text-danger text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1
+                                        </strong>
+                                    </h1>
                                 @endif
                             </td>
 
                             @error('word_upload')
-                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                                <h1 class="text-danger text-center">
+                                    <strong style="font-size: calc(.1vw + 10px);">
+                                        ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง
+                                    </strong>
+                                </h1>
                             @enderror
 
 
@@ -133,20 +163,40 @@
                                             </button>
                                             <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            <strong class="text-red">ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว</strong>
+                                            <h1 class="text-danger text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว
+                                                </strong>
+                                            </h1>
                                         @endif
                                     @else
-                                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1
+                                            </strong>
+                                        </h1>
                                     @endif
                                 @elseif($value->status_research_edit_two === 1)
-                                    <strong class="text-red">หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว</strong>
+                                    <h1 class="text-danger text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว
+                                        </strong>
+                                    </h1>
                                 @else
-                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
+                                    <h1 class="text-danger text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1
+                                        </strong>
+                                    </h1>
                                 @endif
                             </td>
 
                             @error('pdf_upload')
-                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                                <h1 class="text-danger text-center">
+                                    <strong style="font-size: calc(.1vw + 10px);">
+                                        ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง
+                                    </strong>
+                                </h1>
                             @enderror
 
                             <td style="vertical-align: middle;">
@@ -175,20 +225,40 @@
                                             </button>
                                             <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            <strong class="text-red">ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว</strong>
+                                            <h1 class="text-danger text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว
+                                                </strong>
+                                            </h1>
                                         @endif
                                     @else
-                                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1
+                                            </strong>
+                                        </h1>
                                     @endif
                                 @elseif($value->status_research_edit_two === 1)
-                                    <strong class="text-red">หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว</strong>
+                                    <h1 class="text-danger text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว
+                                        </strong>
+                                    </h1>
                                 @else
-                                    <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1</strong>
+                                    <h1 class="text-danger text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1
+                                        </strong>
+                                    </h1>
                                 @endif
 
                             </td>
                             @error('stm_upload')
-                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                                <h1 class="text-danger text-center">
+                                    <strong style="font-size: calc(.1vw + 10px);">
+                                        ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง
+                                    </strong>
+                                </h1>
                             @enderror
 
                             <td style="vertical-align: middle;">

@@ -41,15 +41,25 @@
                         <tr class="text-center">
                             <td>{{ $key + 1 }}</td>
                             <td class="text-start">
-                                <strong style="font-size: 12px" class="text-bluesky">{{ $value->present }}</strong>
+                                <strong style="font-size: 12px" class="text-warning">
+                                    รหัสบทความ: {{ $value->topic_id }}
+                                </strong>
+                                <br />
+                                <strong style="font-size: 12px" class="text-bluesky">
+                                    รูปแบบ: {{ $value->present }}
+                                </strong>
                                 <br />
                                 <strong>{{ $value->topic_th }}</strong>
                                 <br />
-                                <strong><span
-                                        class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span></strong>
+                                <strong><span class="name-research text-small text-green">ผู้นำเสนอ :
+                                        {{ str_replace('|', ', ', $value->presenter) }}</span></strong>
                             </td>
                             <td>
-                                <strong class="text-red">{{ $value->topic_status }}</strong>
+                                <h1 class="text-danger text-center">
+                                    <strong style="font-size: calc(.1vw + 10px);">
+                                        {{ $value->topic_status }}
+                                    </strong>
+                                </h1>
                             </td>
                             <td>
                                 @if (isset($value->payment_path))
@@ -76,7 +86,11 @@
                                         @else
                                         @endif
                                     @else
-                                        <strong class="text-red">ยังไม่เปิดให้ชำระเงิน</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                ยังไม่เปิดให้ชำระเงิน
+                                            </strong>
+                                        </h1>
                                     @endif
                                 @else
                                     @if ($value->status_payment)
@@ -88,13 +102,25 @@
                                                 </button>
                                                 <input type="hidden" value="{{ $value->topic_id }}">
                                             @else
-                                                <strong class="text-red">ไม่สามารถชำระเงินได้แล้ว</strong>
+                                                <h1 class="text-danger text-center">
+                                                    <strong style="font-size: calc(.1vw + 10px);">
+                                                        ไม่สามารถชำระเงินได้แล้ว
+                                                    </strong>
+                                                </h1>
                                             @endif
                                         @else
-                                            <strong class="text-red">สิ้นสุดเวลาการชำระเงิน</strong>
+                                            <h1 class="text-danger text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    สิ้นสุดเวลาการชำระเงิน
+                                                </strong>
+                                            </h1>
                                         @endif
                                     @else
-                                        <strong class="text-red">ยังไม่เปิดให้ชำระเงิน</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                ยังไม่เปิดให้ชำระเงิน
+                                            </strong>
+                                        </h1>
                                     @endif
                                 @endif
 
@@ -109,7 +135,12 @@
 
                                 @if (session('payment_upload') || session('date') || session('address'))
                                     <div class="alert alert-error">
-                                        <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง
+                                            </strong>
+                                        </h1>
+
                                     </div>
                                 @endif
                             </td>
@@ -136,10 +167,18 @@
                                                 <input type="hidden" value="{{ $value->topic_id }}">
                                             @endif
                                         @else
-                                            <strong class="text-red">สิ้นสุดเวลาการส่งบทความ</strong>
+                                            <h1 class="text-danger text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    สิ้นสุดเวลาการส่งบทความ
+                                                </strong>
+                                            </h1>
                                         @endif
                                     @else
-                                        <strong class="text-red">ยังไม่เปิดให้ส่งบทความ</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                ยังไม่เปิดให้ส่งบทความ
+                                            </strong>
+                                        </h1>
                                     @endif
                                 @else
                                     @if ($value->status_research)
@@ -150,10 +189,18 @@
                                             </button>
                                             <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            <strong class="text-red">สิ้นสุดเวลาการส่งบทความ</strong>
+                                            <h1 class="text-danger text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    สิ้นสุดเวลาการส่งบทความ
+                                                </strong>
+                                            </h1>
                                         @endif
                                     @else
-                                        <strong class="text-red">ยังไม่เปิดให้ส่งบทความ</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                ยังไม่เปิดให้ส่งบทความ
+                                            </strong>
+                                        </h1>
                                     @endif
                                 @endif
 
@@ -187,10 +234,18 @@
                                                 <input type="hidden" value="{{ $value->topic_id }}">
                                             @endif
                                         @else
-                                            <strong class="text-red">สิ้นสุดเวลาการส่งบทความ</strong>
+                                            <h1 class="text-danger text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    สิ้นสุดเวลาการส่งบทความ
+                                                </strong>
+                                            </h1>
                                         @endif
                                     @else
-                                        <strong class="text-red">ยังไม่เปิดให้ส่งบทความ</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                ยังไม่เปิดให้ส่งบทความ
+                                            </strong>
+                                        </h1>
                                     @endif
                                 @else
                                     @if ($value->status_research)
@@ -201,10 +256,18 @@
                                             </button>
                                             <input type="hidden" value="{{ $value->topic_id }}">
                                         @else
-                                            <strong class="text-red">สิ้นสุดเวลาการส่งบทความ</strong>
+                                            <h1 class="text-danger text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    สิ้นสุดเวลาการส่งบทความ
+                                                </strong>
+                                            </h1>
                                         @endif
                                     @else
-                                        <strong class="text-red">ยังไม่เปิดให้ส่งบทความ</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                ยังไม่เปิดให้ส่งบทความ
+                                            </strong>
+                                        </h1>
                                     @endif
                                 @endif
 
@@ -226,7 +289,11 @@
                                             <div style="border-bottom: 1px dotted #ccc;" class="my-2"></div>
                                         @endif
                                     @empty
-                                        <strong class="text-warning">(รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)</strong>
+                                        <h1 class="text-warning text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                (รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)
+                                            </strong>
+                                        </h1>
                                     @endforelse
                                 @else
                                     -

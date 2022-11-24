@@ -32,6 +32,10 @@
                                 <tr class="text-center">
                                     <td>{{ $key + 1 }}</td>
                                     <td class="text-start">
+                                        <strong style="font-size: 12px" class="text-warning">
+                                            รหัสบทความ: {{ $value->topic_id }}
+                                        </strong>
+                                        <br />
                                         <strong style="font-size: 12px" class="text-bluesky">
                                             รูปแบบ: {{ $value->present }}
                                         </strong>

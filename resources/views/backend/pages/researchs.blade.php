@@ -30,6 +30,10 @@
                                 <tr>
                                     <td class="text-center">{{ ++$key }}</td>
                                     <td class="text-start">
+                                        <strong style="font-size: 12px" class="text-warning">
+                                            รหัสบทความ: {{ $research->topic_id }}
+                                        </strong>
+                                        <br />
                                         <strong style="font-size: 12px" class="text-bluesky">
                                             รูปแบบ: {{ $research->present }}
                                         </strong>
@@ -43,7 +47,6 @@
                                         <br />
                                         <strong style="font-size: 12px" class="text-green">ผู้นำเสนอ :
                                             {{ str_replace('|', ', ', $research->presenter) }}</strong>
-                                    </td>
                                     </td>
                                     <td class="text-center">{{ $research->year }}</td>
                                     <td class="text-center">

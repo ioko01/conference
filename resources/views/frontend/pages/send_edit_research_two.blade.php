@@ -36,13 +36,19 @@
                     @forelse ($data as $key => $value)
                         <tr class="text-center">
                             <td>{{ $key + 1 }}</td>
-                            <td class="text-start" style="vertical-align: middle;">
-                                <strong style="font-size: 12px" class="text-bluesky">{{ $value->present }}</strong>
+                            <td class="text-start">
+                                <strong style="font-size: 12px" class="text-warning">
+                                    รหัสบทความ: {{ $value->topic_id }}
+                                </strong>
+                                <br />
+                                <strong style="font-size: 12px" class="text-bluesky">
+                                    รูปแบบ: {{ $value->present }}
+                                </strong>
                                 <br />
                                 <strong>{{ $value->topic_th }}</strong>
                                 <br />
-                                <strong><span
-                                        class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span></strong>
+                                <strong><span class="name-research text-small text-green">ผู้นำเสนอ :
+                                        {{ str_replace('|', ', ', $value->presenter) }}</span></strong>
                             </td>
                             @if (isset($value->edit_word_path) || isset($value->edit_pdf_path) || isset($value->edit_stm_path))
                                 @if (endDate('end_research_edit_two')->day >= 0)
@@ -73,14 +79,24 @@
                                                     </button>
                                                     <input type="hidden" value="{{ $value->topic_id }}">
                                                 @else
-                                                    <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                                                    <h1 class="text-danger text-center">
+                                                        <strong style="font-size: calc(.1vw + 10px);">
+                                                            สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2
+                                                        </strong>
+                                                    </h1>
                                                 @endif
                                             @else
-                                                <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่
-                                                    2</strong>
+                                                <h1 class="text-danger text-center">
+                                                    <strong style="font-size: calc(.1vw + 10px);">
+                                                        ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2</strong>
+                                                </h1>
                                             @endif
                                             @error('word_upload')
-                                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                                                <h1 class="text-danger text-center">
+                                                    <strong style="font-size: calc(.1vw + 10px);">
+                                                        ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง
+                                                    </strong>
+                                                </h1>
                                             @enderror
 
                                         </td>
@@ -110,15 +126,26 @@
                                                     </button>
                                                     <input type="hidden" value="{{ $value->topic_id }}">
                                                 @else
-                                                    <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                                                    <h1 class="text-danger text-center">
+                                                        <strong style="font-size: calc(.1vw + 10px);">
+                                                            สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2
+                                                        </strong>
+                                                    </h1>
                                                 @endif
                                             @else
-                                                <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่
-                                                    2</strong>
+                                                <h1 class="text-danger text-center">
+                                                    <strong style="font-size: calc(.1vw + 10px);">
+                                                        ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2
+                                                    </strong>
+                                                </h1>
                                             @endif
 
                                             @error('pdf_upload')
-                                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                                                <h1 class="text-danger text-center">
+                                                    <strong style="font-size: calc(.1vw + 10px);">
+                                                        ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง
+                                                    </strong>
+                                                </h1>
                                             @enderror
                                         </td>
                                         <td>
@@ -147,30 +174,56 @@
                                                     </button>
                                                     <input type="hidden" value="{{ $value->topic_id }}">
                                                 @else
-                                                    <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                                                    <h1 class="text-danger text-center">
+                                                        <strong style="font-size: calc(.1vw + 10px);">
+                                                            สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2
+                                                        </strong>
+                                                    </h1>
                                                 @endif
                                             @else
-                                                <strong class="text-red">ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่
-                                                    2</strong>
+                                                <h1 class="text-danger text-center">
+                                                    <strong style="font-size: calc(.1vw + 10px);">
+                                                        ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2
+                                                    </strong>
+                                                </h1>
                                             @endif
 
                                             @error('stm_upload')
-                                                <strong class="text-red">ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง</strong>
+                                                <h1 class="text-danger text-center">
+                                                    <strong style="font-size: calc(.1vw + 10px);">
+                                                        ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง
+                                                    </strong>
+                                                </h1>
                                             @enderror
                                         </td>
                                     @else
                                         <td colspan="3">
-                                            <strong class="text-red">ยังไม่เปิดรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                                            <h1 class="text-danger text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    ยังไม่เปิดรับบทความฉบับแก้ไขครั้งที่ 2
+                                                </strong>
+                                            </h1>
+
                                         </td>
                                     @endif
                                 @else
                                     <td colspan="3">
-                                        <strong class="text-red">สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2</strong>
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2
+                                            </strong>
+                                        </h1>
+
                                     </td>
                                 @endif
                             @else
                                 <td colspan="3">
-                                    <strong class="text-red">ไม่สามารถอัพโหลดแก้ไขครั้งที่ 2 ได้</strong>
+                                    <h1 class="text-danger text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            ไม่สามารถอัพโหลดแก้ไขครั้งที่ 2 ได้
+                                        </strong>
+                                    </h1>
+
                                 </td>
                             @endif
                             <td style="vertical-align: middle;">

@@ -39,10 +39,18 @@
                         <tr class="text-center">
                             <td>{{ $key + 1 }}</td>
                             <td class="text-start">
+                                <strong style="font-size: 12px" class="text-warning">
+                                    รหัสบทความ: {{ $value->topic_id }}
+                                </strong>
+                                <br />
+                                <strong style="font-size: 12px" class="text-bluesky">
+                                    รูปแบบ: {{ $value->present }}
+                                </strong>
+                                <br />
                                 <strong>{{ $value->topic_th }}</strong>
                                 <br />
-                                <strong><span
-                                        class="name-research text-small text-green">{{ str_replace('|', ', ', $value->presenter) }}</span></strong>
+                                <strong><span class="name-research text-small text-green">ผู้นำเสนอ :
+                                        {{ str_replace('|', ', ', $value->presenter) }}</span></strong>
                             </td>
 
                             <td>

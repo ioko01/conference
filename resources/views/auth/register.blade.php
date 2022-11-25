@@ -206,7 +206,7 @@
                                 </div>
 
                                 <div class="row mb-4">
-                                    <div class="col-12 @if (old('person_attend') == 'attend') d-none @endif"
+                                    <div class="col-12 d-none @if (old('person_attend') == 'attend' || old('position_id') == '1' || old('position_id') == '3') d-none @endif"
                                         id="form_address">
                                         <label for="address">ชื่อ - สกุล ที่อยู่ <span style="font-size: 12px;"
                                                 class="text-bluesky">(ใช้ในการออกใบเสร็จรับเงิน
@@ -223,7 +223,7 @@
                                 </div>
 
                                 <div class="row mb-4">
-                                    <div class="col-12 @if (old('person_attend') == 'attend') d-none @endif"
+                                    <div class="col-12 d-none @if (old('person_attend') == 'attend' || old('position_id') == '1' || old('position_id') == '3') d-none @endif"
                                         id="form_receive">
                                         <label>ความต้องการใบเสร็จรับเงิน</label>
                                         <div class="form-check">
@@ -268,7 +268,7 @@
                                         <div class="d-flex justify-content-between">
                                             <label for="password">รหัสผ่าน</label>
                                             <div class="toggle-password">
-                                                
+
                                             </div>
                                         </div>
                                         <input type="password" name="password" id="password"

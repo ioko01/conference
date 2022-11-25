@@ -75,7 +75,6 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                     END
                 ) AS person_attend'
             ),
-            'users.address AS address',
             'users.phone AS phone',
             'users.institution AS institution',
             'positions.name AS position_name',
@@ -123,7 +122,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'แก้ไขบทความล่าสุดเมื่อ',
             'สลิปชำระเงิน',
             'ที่อยู่ผู้ชำระเงิน',
-            'ที่อยู่ (ใช้ในการออกใบเสร็จรับเงิน และส่งเอกสาร)',
+            'ชื่อ/ที่อยู่ (ใช้ในการออกใบเสร็จรับเงิน และส่งเอกสาร)',
             'วันที่ชำระเงิน',
             'ความต้องการใบเสร็จรับเงิน',
             'ไฟล์ WORD',
@@ -131,7 +130,6 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'ไฟล์ PDF',
             'วันที่อัพโหลดไฟล์ PDF',
             'สถานะการลงทะเบียน',
-            'ชื่อ/ที่อยู่ (ใช้ในการออกใบเสร็จรับเงิน และส่งเอกสาร)',
             'เบอร์โทร',
             'สังกัด/หน่วยงาน',
             'สถานะบุคลากร',
@@ -164,7 +162,22 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                         $allRow = 'A1:' . 'A' . $row;
                         $allCell = 'A1:' . $column . $row;
 
+
                         $active_sheet = $event->sheet->getDelegate();
+                        $slip = $active_sheet->getCell('Q' . $row)->getValue();
+                        if ($row != 1) {
+                            if (isset($slip)) {
+                                $active_sheet->getCell('Q' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/สลิปชำระเงิน/' . $slip);
+                                $active_sheet->getStyle('Q' . $row)->applyFromArray([
+                                    'font' => [
+                                        'color' => [
+                                            'rgb' => '0000ff'
+                                        ]
+                                    ]
+                                ]);
+                            }
+                        }
+
                         $active_sheet->getStyle($allCol)->getFont()->setBold(true);
                         $active_sheet->getStyle($allCol)->getFill()
                             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)

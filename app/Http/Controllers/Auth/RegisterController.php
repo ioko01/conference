@@ -79,19 +79,33 @@ class RegisterController extends Controller
                 'password' => 'required|string|min:8|confirmed',
             ]);
         } else if ($data["person_attend"] == "send") {
-            return Validator::make($data, [
-                'prefix' => 'required|string',
-                'fullname' => 'required|string',
-                'sex' => 'required',
-                'phone' => 'required|string|max:10',
-                'institution' => $data['position_id'] == '2' ? 'required|string' : 'string',
-                'address' => 'required|string',
-                'position_id' => 'required',
-                'person_attend' => 'required',
-                'email' => 'required|string|email|unique:users',
-                'password' => 'required|string|min:8|confirmed',
-                'receive_check' => 'required'
-            ]);
+            if ($data['position_id'] == '2') {
+                return Validator::make($data, [
+                    'prefix' => 'required|string',
+                    'fullname' => 'required|string',
+                    'sex' => 'required',
+                    'phone' => 'required|string|max:10',
+                    'institution' => $data['position_id'] == '2' ? 'required|string' : 'string',
+                    'address' => 'required|string',
+                    'position_id' => 'required',
+                    'person_attend' => 'required',
+                    'email' => 'required|string|email|unique:users',
+                    'password' => 'required|string|min:8|confirmed',
+                    'receive_check' => 'required'
+                ]);
+            } else {
+                return Validator::make($data, [
+                    'prefix' => 'required|string',
+                    'fullname' => 'required|string',
+                    'sex' => 'required',
+                    'phone' => 'required|string|max:10',
+                    'institution' => $data['position_id'] == '2' ? 'required|string' : 'string',
+                    'position_id' => 'required',
+                    'person_attend' => 'required',
+                    'email' => 'required|string|email|unique:users',
+                    'password' => 'required|string|min:8|confirmed',
+                ]);
+            }
         }
     }
 
@@ -107,13 +121,22 @@ class RegisterController extends Controller
 
         if ($data['position_id'] == '1') {
             $institution = 'มหาวิทยาลัยราชภัฏเลย';
+            $check_requirement = null;
+            $address = null;
         } elseif ($data['position_id'] == '3') {
             if (isset($data['kota_id'])) {
                 $kota = Kota::find($data['kota_id']);
                 $institution = $kota->name;
             }
+            $check_requirement = null;
+            $address = null;
         } else {
             $institution = $data['institution'];
+            $check_requirement = $data['receive_check'];
+            $address = $data['address'];
+        }
+        if ($data["person_attend"] == "attend") {
+            $check_requirement = null;
         }
 
         write_logs(__FUNCTION__, "info");
@@ -123,8 +146,8 @@ class RegisterController extends Controller
             'sex' => $data['sex'],
             'phone' => $data['phone'],
             'institution' => $institution,
-            'address' => $data['address'],
-            'check_requirement' => $data['receive_check'],
+            'address' => $address,
+            'check_requirement' => $check_requirement,
             'position_id' => $data['position_id'],
             'kota_id' => isset($data['kota_id']) ? $data['kota_id'] : null,
             'person_attend' => $data['person_attend'],

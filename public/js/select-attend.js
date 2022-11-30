@@ -9,7 +9,7 @@ function toggle_attend(e) {
     const form_address = document.getElementById("form_address");
     const form_receive = document.getElementById("form_receive");
     const position_2 = document.getElementById("position_2");
-    console.log("object");
+    
     if (e.value === "attend") {
         form_address.classList.remove("d-block");
         form_address.classList.add("d-none");

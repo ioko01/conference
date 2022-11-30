@@ -200,8 +200,43 @@
                 @endforeach
             </div>
         </div>
+
         <div class="row mb-4">
             <div class="col-12">
+                <label>ท่านลงทะเบียนส่งผลงาน หรือเข้าร่วมงานทั่วไป ? @error('person_attend')
+                        <span class="text-danger"> * กรุณาเลือกวิธีลงทะเบียน</span>
+                    @enderror
+                </label>
+                <div class="form-check">
+                    <input onchange="toggle_attend(this)" class="form-check-input" type="radio" name="person_attend"
+                        id="send"
+                        @if (old('person_attend')) @if (old('person_attend') === 'send')
+                             checked @endif
+                    @elseif($user->person_attend === 'send') checked @endif
+                    value="send">
+                    <label class="form-check-label" for="send">
+                        ลงทะเบียนส่งผลงาน <strong class="text-red text-sm">* บุคคลภายนอกจะต้องชำระค่าลงทะเบียน 2,000 บาท
+                            ต่อ 1 ผลงาน
+                        </strong>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input onchange="toggle_attend(this)" class="form-check-input" type="radio" name="person_attend"
+                        id="attend"
+                        @if (old('person_attend')) @if (old('person_attend') === 'attend')
+                             checked @endif
+                    @elseif($user->person_attend === 'attend') checked @endif
+                    value="attend">
+                    <label class="form-check-label" for="attend">
+                        ลงทะเบียนเข้าร่วมงานทั่วไป
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12 d-none" id="form_address">
                 <label for="address">ชื่อ - สกุล ที่อยู่ <span style="font-size: 12px;"
                         class="text-bluesky">(ใช้ในการออกใบเสร็จรับเงิน
                         และส่งเอกสาร)</span></label>
@@ -219,7 +254,7 @@
         </div>
 
         <div class="row mb-4">
-            <div class="col-12">
+            <div class="col-12 d-none" id="form_receive">
                 <label>ความต้องการใบเสร็จรับเงิน @error('receive_check')
                         <span class="text-danger"> * กรุณาเลือกความต้องการใบเสร็จรับเงิน</span>
                     @enderror
@@ -242,40 +277,6 @@
 
                     <label for="before_receive_check" class="form-check-label">
                         ต้องการใบเสร็จรับเงิน <span class="fw-bold">"ก่อน"</span> วันจัดประชุม
-                    </label>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-12">
-                <label>ท่านลงทะเบียนส่งผลงาน หรือเข้าร่วมงานทั่วไป ? @error('person_attend')
-                        <span class="text-danger"> * กรุณาเลือกวิธีลงทะเบียน</span>
-                    @enderror
-                </label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="person_attend" id="send"
-                        @if (old('person_attend')) @if (old('person_attend') === 'send')
-                             checked @endif
-                    @elseif($user->person_attend === 'send') checked @endif
-                    value="send">
-                    <label class="form-check-label" for="send">
-                        ลงทะเบียนส่งผลงาน <strong class="text-red text-sm">* บุคคลภายนอกจะต้องชำระค่าลงทะเบียน 2,000 บาท
-                            ต่อ 1 ผลงาน /
-                            ลงทะเบียนเข้าร่วมงานทั่วไป 1,000 ต่อ 1 ท่าน * กรณีที่ท่านเป็นผู้ร่วมวิจัยฯ
-                            ให้หัวหน้าโครงการลงทะเบียนส่งผลงาน และท่านลงทะเบียนเข้าร่วมงานทั่วไป
-                        </strong>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="person_attend" id="attend"
-                        @if (old('person_attend')) @if (old('person_attend') === 'attend')
-                             checked @endif
-                    @elseif($user->person_attend === 'attend') checked @endif
-                    value="attend">
-                    <label class="form-check-label" for="attend">
-                        ลงทะเบียนเข้าร่วมงานทั่วไป
                     </label>
                 </div>
 

@@ -42,7 +42,10 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{-- <script src="{{ asset('vendor/dist/js/pages/dashboard2.js', env('REDIRECT_HTTPS')) }}"></script> --}}
 
-<script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
+@if (Request::is('backend/user/*/edit'))
+    <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('js/select-attend.js', env('REDIRECT_HTTPS')) }}"></script>
+@endif
 
 @if (Request::is('backend/conference') || Request::is('backend/conference/*/edit'))
     <script src="{{ asset('js/get-start-end-datetime-local.js', env('REDIRECT_HTTPS')) }}"></script>

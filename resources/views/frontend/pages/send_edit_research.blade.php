@@ -12,18 +12,11 @@
             </h4>
         </div>
 
-        <div class="panel">
-            <div class="body">
-                <div class="input-group">
-                    <label for="search">ค้นหาบทความ</label>
-                    <input type="text" class="form-control" name="search" id="search" placeholder="ค้นหาบทความ">
-                </div>
-            </div>
-        </div>
-        <div class="table-responsive">
-            <table class="list table responsive hover">
+
+        <div class="col-md-12 mx-auto table-responsive">
+            <table class="dataTable table w-100">
                 <thead>
-                    <tr class="text-center pagination-header">
+                    <tr class="text-center">
                         <th style="width: 5%;">#</th>
                         <th style="width: 25%;" class="text-start">รายละเอียดบทความ</th>
                         <th style="width: 15%;">ไฟล์แก้ไขจากผู้ทรงฯ</th>

@@ -118,7 +118,7 @@
     <script>
         $(document).ready(function() {
             $(`.dataTable`).DataTable({
-                pageLength: 10,
+                pageLength: 20,
                 lengthChange: true,
                 bAutoWidth: false,
                 classes: {

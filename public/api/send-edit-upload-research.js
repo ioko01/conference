@@ -63,7 +63,7 @@ function detail_modal(topic_id, type) {
                 </div>
                 <div class="mb-3">
                     <strong class="text-green">ชื่อผู้นำเสนอบทความ: </strong><span
-                        class="text-dark">${data.presenter.replace(
+                        class="text-dark">${data.presenter.replaceAll(
                             "|",
                             ", "
                         )}</span>
@@ -97,8 +97,10 @@ function detail_modal(topic_id, type) {
                         class="text-dark">${data.institution}</span>
                 </div>
                 <div class="mb-3">
-                    <strong class="text-green">ที่อยู่: </strong><span
-                        class="text-dark">${data.address}</span>
+                    <strong class="text-green">ที่อยู่ในการออกใบเสร็จรับเงิน: </strong><span
+                        class="text-dark">${
+                            data.address ? data.address : "-"
+                        }</span>
                 </div>
                 <div class="mb-3">
                     <strong class="text-green">โควต้าเจ้าภาพร่วม: </strong><span

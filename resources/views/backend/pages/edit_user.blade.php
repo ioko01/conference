@@ -43,8 +43,7 @@
 
                     <div class="row mb-4">
                         <div class="col-md-6">
-                            <label for="prefix">คำนำหน้า <span style="font-size: 12px;"
-                                    class="text-bluesky">(ใช้ลงในเกียรติบัตร)</span></label>
+                            <label for="prefix">คำนำหน้า</label>
                             <input type="text" name="prefix" id="prefix"
                                 class="form-control @error('prefix') is-invalid @enderror"
                                 @if (old('prefix')) value="{{ old('prefix') }}" @else value="{{ $user->prefix }}" @endif

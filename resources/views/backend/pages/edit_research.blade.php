@@ -5,7 +5,7 @@
         <div class="card-content">
             <div class="card-header bg-green rounded-0">
                 <strong>
-                    <i class="nav-icon fas fa-book"></i> 
+                    <i class="nav-icon fas fa-book"></i>
                     แก้ไขบทความ
                 </strong>
             </div>
@@ -36,7 +36,8 @@
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <label>ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย)</label>
+                        <label>ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย) <strong
+                                class="text-red">(ใส่คำนำหน้าด้วย)</strong></label>
                         <div class="mb-4">
                             <span>1.&nbsp;</span>
                             <input type="text" id="presenters[]" name="presenters[]"
@@ -155,8 +156,8 @@
                             </div>
                         @endforeach
                     </div>
-                    <button onclick="thisDisabled(this)" class="btn btn-warning text-white w-100 rounded-0" name="send_research"
-                        type="submit">แก้ไขบทความ</button>
+                    <button onclick="thisDisabled(this)" class="btn btn-warning text-white w-100 rounded-0"
+                        name="send_research" type="submit">แก้ไขบทความ</button>
                 </form>
             </div>
         </div>

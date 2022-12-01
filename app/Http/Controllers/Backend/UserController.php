@@ -30,6 +30,7 @@ class UserController extends Controller
             'users.kota_id AS kota_id',
             'users.person_attend AS person_attend',
             'users.email AS email',
+            'users.email_verified_at AS email_verified',
             'users.created_at AS created_at',
             'users.updated_at AS updated_at',
             'conferences.status AS conference_status',

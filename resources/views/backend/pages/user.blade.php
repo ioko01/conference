@@ -19,9 +19,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>ชื่อ - สกุล</th>
+                                <th class="text-start">ชื่อ - สกุล</th>
                                 <th>สถานะ</th>
-                                <th>อีเมล</th>
+                                <th class="text-start">อีเมล</th>
                                 <th>สร้างเมื่อ</th>
                                 <th>แก้ไข</th>
                                 <th class="text-center">#</th>
@@ -31,8 +31,8 @@
                             @forelse ($users as $key => $user)
                                 <tr>
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $user->fullname }}@if ($user->id == auth()->user()->id)
-                                            <i class="text-bluesky text-sm"> (ฉัน)</i>
+                                    <td class="text-start">{{ $user->fullname }}@if ($user->id == auth()->user()->id)
+                                            <strong class="text-blue text-sm"> (ฉัน)</strong>
                                         @endif
                                     </td>
                                     <td>
@@ -46,7 +46,14 @@
                                             <strong class="text-red">Not Used</strong>
                                         @endif
                                     </td>
-                                    <td>{{ $user->email }}</td>
+                                    <td class="text-start">
+                                        {{ $user->email }}
+                                        @if ($user->email_verified)
+                                            <strong class='text-green text-sm'>(ยันยืนอีเมลแล้ว)</strong>
+                                        @else
+                                            <strong class='text-danger text-sm'>(ยังไม่ยืนยันอีเมล)</strong>
+                                        @endif
+                                    </td>
                                     <td><i style="font-size: 12px;"
                                             class="text-bluesky">{{ thaiDateFormat($user->created_at, true) }}</i></td>
                                     <td>

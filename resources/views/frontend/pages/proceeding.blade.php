@@ -79,7 +79,7 @@
                                     {{ $faculty->name }}
                                 </strong>
                             </div>
-                            <div class="p-4 text-dark">
+                            <div class="p-4 text-dark table-responsive">
                                 <table style="color: inherit;" class="dataTable table w-100">
                                     <thead>
                                         <tr class="text-center">

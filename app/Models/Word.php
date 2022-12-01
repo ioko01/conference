@@ -15,5 +15,6 @@ class Word extends Model
         'name',
         'path',
         'extension',
+        'conference_id'
     ];
 }

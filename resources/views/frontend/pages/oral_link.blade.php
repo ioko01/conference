@@ -26,7 +26,7 @@
                                 {{ $faculty->name }}
                             </strong>
                         </div>
-                        <div class="px-4 text-dark">
+                        <div class="px-4 text-dark table-responsive">
                             <table data-searching="false" style="color: inherit;" class="dataTable table w-100">
                                 <thead>
                                     <tr class="text-start">

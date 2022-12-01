@@ -15,7 +15,7 @@
             </h4>
         </div>
 
-        <div class="col-md-10 mx-auto">
+        <div class="col-md-12 mx-auto table-responsive">
             <table class="dataTable table w-100">
                 <thead>
                     <tr class="text-center">

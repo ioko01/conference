@@ -18,6 +18,7 @@ class DashboardController extends Controller
         $storage = File::exists($path);
         $users = User::leftjoin('conferences', 'conferences.id', 'users.conference_id')
             ->where('conferences.status', 1)
+            ->where('users.is_admin', 0)
             ->get();
         $researchs = Research::select(
             '*',

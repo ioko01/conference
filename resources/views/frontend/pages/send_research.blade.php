@@ -48,7 +48,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-4">
-                                        <label>ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย)</label>
+                                        <label>ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย) <strong
+                                                class="text-red">(ใส่คำนำหน้าด้วย)</strong></label>
                                         <div class="mb-4">
                                             <span>1.&nbsp;</span>
                                             <input type="text" id="presenters[]" name="presenters[]"

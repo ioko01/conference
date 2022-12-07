@@ -22,9 +22,11 @@
                                 <th class="text-start">ชื่อ - สกุล</th>
                                 <th>สถานะ</th>
                                 <th class="text-start">อีเมล</th>
-                                <th>สร้างเมื่อ</th>
-                                <th>แก้ไข</th>
-                                <th class="text-center">#</th>
+                                <th class="text-start">สร้างเมื่อ</th>
+                                @if (auth()->user()->is_admin === 2)
+                                    <th>แก้ไข</th>
+                                    <th class="text-center">#</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -54,21 +56,23 @@
                                             <strong class='text-danger text-sm'>(ยังไม่ยืนยันอีเมล)</strong>
                                         @endif
                                     </td>
-                                    <td><i style="font-size: 12px;"
+                                    <td class="text-start"><i style="font-size: 12px;"
                                             class="text-bluesky">{{ thaiDateFormat($user->created_at, true) }}</i></td>
-                                    <td>
-                                        <a href="{{ route('backend.user.edit', $user->id) }}" class=" text-warning"><i
-                                                class="nav-icon fa fa-edit"></i>
-                                            แก้ไข</a>
-                                    </td>
-                                    <td class="text-center">
-                                        @if (auth()->user()->id == $user->id)
-                                            <a href="{{ route('backend.user.change_password', $user->id) }}"><i
-                                                    class="nav-icon fa fa-pen"></i>
-                                                เปลี่ยนรหัสผ่าน</a>
-                                        @else
-                                        @endif
-                                    </td>
+                                    @if (auth()->user()->is_admin === 2)
+                                        <td>
+                                            <a href="{{ route('backend.user.edit', $user->id) }}" class=" text-warning"><i
+                                                    class="nav-icon fa fa-edit"></i>
+                                                แก้ไข</a>
+                                        </td>
+                                        <td class="text-center">
+                                            @if (auth()->user()->id == $user->id)
+                                                <a href="{{ route('backend.user.change_password', $user->id) }}"><i
+                                                        class="nav-icon fa fa-pen"></i>
+                                                    เปลี่ยนรหัสผ่าน</a>
+                                            @else
+                                            @endif
+                                        </td>
+                                    @endif
                                 </tr>
                                 @empty
                                     <tr class="text-center">

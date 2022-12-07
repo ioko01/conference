@@ -17,6 +17,17 @@ body {
     /* background: var(--bg-color-cream); */
 }
 
+.form-check-input:checked {
+    background-color: var(--color-green) !important;
+    border-color: var(--color-green) !important;
+}
+
+.form-check-input:focus {
+    border-color: #30ac3283 !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(149 241 96 / 25%) !important;
+}
+
 *,
 html {
     margin: 0;

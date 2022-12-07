@@ -24,7 +24,8 @@
     Request::is('backend/researchs/management') ||
     Request::is('backend/researchs/*/edit') ||
     Request::is('backend/researchs/management/times/*') ||
-    Request::is('backend/dashboard'))
+    Request::is('backend/dashboard') ||
+    Request::is('backend/researchs/passed'))
     <script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
@@ -113,7 +114,8 @@
     Request::is('backend/researchs') ||
     Request::is('backend/users') ||
     Request::is('backend/researchs/management/times/1') ||
-    Request::is('backend/researchs/management/times/2'))
+    Request::is('backend/researchs/management/times/2') ||
+    Request::is('backend/researchs/passed'))
     <script src="{{ asset('vendor/plugins/datatables/datatables.min.js', env('REDIRECT_HTTPS')) }}" defer></script>
     <script>
         $(document).ready(function() {

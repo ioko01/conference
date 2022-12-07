@@ -6,10 +6,6 @@
     <script src="{{ asset('js/main.js', env('REDIRECT_HTTPS')) }}" defer></script>
     <script src="{{ asset('js/animate.js', env('REDIRECT_HTTPS')) }}" defer></script>
 
-    @if (Request::is('register'))
-        <script src="{{ asset('js/show-hide-password.js', env('REDIRECT_HTTPS')) }}"></script>
-    @endif
-
     @if (Request::is('employee/research/show/*'))
         <script src="{{ asset('js/preview-image-payment.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
@@ -30,6 +26,7 @@
     @endif
 
     @if (Request::is('register'))
+        <script src="{{ asset('js/show-hide-password.js', env('REDIRECT_HTTPS')) }}"></script>
         <script src="{{ asset('js/select-kota.js', env('REDIRECT_HTTPS')) }}"></script>
         <script src="{{ asset('js/select-attend.js', env('REDIRECT_HTTPS')) }}"></script>
     @endif
@@ -87,10 +84,7 @@
         @endif
     @endif
 
-    @if (Request::is('list/*') ||
-        Request::is('orals') ||
-        Request::is('orals/link') ||
-        Request::is('proceeding/*'))
+    @if (Request::is('list/*') || Request::is('orals') || Request::is('orals/link') || Request::is('proceeding/*'))
         <script src="{{ asset('vendor/plugins/datatables/datatables.min.js', env('REDIRECT_HTTPS')) }}" defer></script>
         <script>
             $(document).ready(function() {

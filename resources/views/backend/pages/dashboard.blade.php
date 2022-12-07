@@ -56,10 +56,11 @@
         </div>
     </div>
     <div class="row">
+
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-success">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title"><i class="fas fa-user"></i> ผู้ใช้งาน (ไม่รวมแอดมิน)</h3>
+                    <h3 class="card-title"><i class="fas fa-user-check"></i> ผู้ใช้งาน (ยืนยันอีเมลแล้ว)</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -89,6 +90,66 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-danger">
                 <div class="card-header rounded-0">
+                    <h3 class="card-title text-white"><i class="fas fa-user-times"></i> ผู้ใช้งาน (ไม่ยืนยันอีเมล)</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool text-white" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool text-white" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-around">
+                        <strong class="text-danger mr-auto">
+                            <span class="d-none d-md-block">
+                                ทั้งหมด
+                            </span>
+                        </strong>
+                        <strong style="font-size: calc(5vw + 30px);"
+                            class="text-danger h1 mx-auto">{{ count($users_not_verify_email) }}</strong>
+                        <strong class="text-danger ms-auto mt-auto">ไอดี</strong>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card card-primary">
+                <div class="card-header rounded-0">
+                    <h3 class="card-title"><i class="fas fa-user-cog"></i> ผู้ใช้งาน (แอดมิน)</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-around">
+                        <strong class="text-primary mr-auto">
+                            <span class="d-none d-md-block">
+                                ทั้งหมด
+                            </span>
+                        </strong>
+                        <strong style="font-size: calc(5vw + 30px);"
+                            class="text-primary h1 mx-auto">{{ count($admin) }}</strong>
+                        <strong class="text-primary ms-auto mt-auto">ไอดี</strong>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card card-info">
+                <div class="card-header rounded-0">
                     <h3 class="card-title"><i class="fas fa-book"></i> บทความ</h3>
 
                     <div class="card-tools">
@@ -102,14 +163,14 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-around">
-                        <strong class="text-danger mr-auto">
+                        <strong class="text-info mr-auto">
                             <span class="d-none d-md-block">
                                 ทั้งหมด
                             </span>
                         </strong>
                         <strong style="font-size: calc(5vw + 30px);"
-                            class="text-danger h1 mx-auto">{{ count($researchs) }}</strong>
-                        <strong class="text-danger ms-auto mt-auto">บทความ</strong>
+                            class="text-info h1 mx-auto">{{ count($researchs) }}</strong>
+                        <strong class="text-info ms-auto mt-auto">บทความ</strong>
                     </div>
                 </div>
                 <!-- /.card-body -->

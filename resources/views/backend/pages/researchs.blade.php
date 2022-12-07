@@ -34,19 +34,19 @@
                                             รหัสบทความ : {{ $research->topic_id }}
                                         </strong>
                                         <br />
-                                        <strong style="font-size: 12px" class="text-bluesky">
-                                            รูปแบบ : {{ $research->present }}
+                                        <strong>
+                                            {{ $research->topic_th }}
                                         </strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-primary">สังกัด /
                                             หน่วยงาน : {{ $research->institution }}</strong>
                                         <br />
-                                        <strong>
-                                            {{ $research->topic_th }}
-                                        </strong>
-                                        <br />
                                         <strong style="font-size: 12px" class="text-green">ผู้นำเสนอ :
                                             {{ str_replace('|', ', ', $research->presenter) }}</strong>
+                                        <br />
+                                        <strong style="font-size: 12px" class="text-bluesky">
+                                            รูปแบบบทความ : {{ $research->present }}
+                                        </strong>
                                     </td>
                                     <td class="text-center">{{ $research->year }}</td>
                                     <td class="text-center">

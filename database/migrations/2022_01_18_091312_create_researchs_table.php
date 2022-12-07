@@ -26,6 +26,7 @@ class CreateResearchsTable extends Migration
             $table->string('branch_id')->comment('ไอดีสาขา');
             $table->integer('degree_id')->comment('รหัสระดับบทความ');
             $table->integer('present_id')->comment('รหัสชนิดการนำเสนอ');
+            $table->tinyInteger('research_passed')->default(0)->comment('บทความที่ผ่านการพิจารณา 0=ตรวจสอบ 1=ผ่าน 2=ไม่ผ่าน');
             $table->timestamps();
         });
     }

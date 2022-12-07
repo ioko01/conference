@@ -16,9 +16,17 @@ class DashboardController extends Controller
     {
         $path = public_path('storage');
         $storage = File::exists($path);
+
+        $admin = User::leftjoin('conferences', 'conferences.id', 'users.conference_id')
+            ->where('conferences.status', 1)
+            ->where('users.is_admin', '>', 0)
+            ->where('users.email_verified_at', '!=', null)
+            ->get();
+
         $users = User::leftjoin('conferences', 'conferences.id', 'users.conference_id')
             ->where('conferences.status', 1)
             ->where('users.is_admin', 0)
+            ->where('users.email_verified_at', '!=', null)
             ->get();
         $researchs = Research::select(
             '*',
@@ -29,8 +37,14 @@ class DashboardController extends Controller
             ->orderBy('researchs.topic_id', 'desc')
             ->get();
 
+        $users_not_verify_email = User::leftjoin('conferences', 'conferences.id', 'users.conference_id')
+            ->where('conferences.status', 1)
+            ->where('users.is_admin', 0)
+            ->where('users.email_verified_at', null)
+            ->get();
+
         $conference = Conference::where('status', 1)->first();
-        return view('backend.pages.dashboard', compact('storage', 'researchs', 'users', 'conference'));
+        return view('backend.pages.dashboard', compact('storage', 'researchs', 'users', 'conference', 'users_not_verify_email', 'admin'));
     }
 
     protected function storage()
@@ -43,7 +57,7 @@ class DashboardController extends Controller
             alert('สำเร็จ', 'เปิดใช้งาน Storage link สำเร็จ', 'success');
             return back()->with('success', true);
         }
-        
+
         write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถปิดใช้งาน Storage Link ได้', 'error');
         return back()->with('success', true);

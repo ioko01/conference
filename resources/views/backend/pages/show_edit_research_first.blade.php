@@ -36,19 +36,19 @@
                                             รหัสบทความ : {{ $value->topic_id }}
                                         </strong>
                                         <br />
-                                        <strong style="font-size: 12px" class="text-bluesky">
-                                            รูปแบบ : {{ $value->present }}
+                                        <strong>
+                                            {{ $value->topic_th }}
                                         </strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-primary">สังกัด /
                                             หน่วยงาน : {{ $value->institution }}</strong>
                                         <br />
-                                        <strong>
-                                            {{ $value->topic_th }}
-                                        </strong>
-                                        <br />
                                         <strong style="font-size: 12px" class="text-green">ผู้นำเสนอ :
                                             {{ str_replace('|', ', ', $value->presenter) }}</strong>
+                                        <br />
+                                        <strong style="font-size: 12px" class="text-bluesky">
+                                            รูปแบบบทความ : {{ $value->present }}
+                                        </strong>
                                     </td>
                                     <td>
                                         @if (empty($value->word))
@@ -121,7 +121,7 @@
                                 </tr>
                             @empty
                                 <tr class="text-center">
-                                    <td colspan="9">ไม่มีบทความ</td>
+                                    <td colspan="8">ไม่มีบทความ</td>
                                 </tr>
                             @endforelse
                         </tbody>

@@ -20,9 +20,8 @@
                 <thead>
                     <tr class="text-center">
                         <th style="width: 5%;">รหัสบทความ</th>
-                        <th style="width: 25%;">ชื่อบทความ/ผู้วิจัย</th>
-                        <th style="width: 15%;">รูปแบบบทความ</th>
-                        <th style="width: 15%;">กลุ่มคณะ</th>
+                        <th style="width: 40%;">รายละเอียดบทความ</th>
+                        <th style="width: 15%;" class="text-start">กลุ่มคณะ</th>
                         <th style="width: 15%;">การชำระเงิน</th>
                     </tr>
                 </thead>
@@ -32,19 +31,37 @@
                             <td><strong>{{ $research->topic_id }}</strong></td>
                             <td class="text-start"><strong>
                                     {{ $research->topic_th }}
-                                    <br /><span
-                                        class="name-research text-small text-green">{{ str_replace('|', ', ', $research->presenter) }}</span>
+                                    <br />
+                                    <span class="name-research text-small text-primary">สังกัด / หน่วยงาน :
+                                        {{ $research->institution }}</span>
+                                    <br />
+                                    <span class="name-research text-small text-bluesky">รูปแบบบทความ :
+                                        {{ $research->present_name }}</span>
                                 </strong>
                             </td>
-                            <td>{{ $research->present_name }}</td>
-                            <td class="text-small text-green">{{ $research->faculty_name }}</td>
+                            <td class="text-green text-start">
+                                <strong class="text-small">{{ $research->faculty_name }}</strong>
+                            </td>
                             <td>
-                                @if ($research->topic_status_id >= 4)
-                                    <span class="text-small text-green">ชำระเงินแล้ว</span>
-                                @else
-                                    <span class="text-small text-warning">{{ $research->topic_status }}</span>
-                                @endif
-
+                                <strong>
+                                    @if ($research->topic_status_id >= 4)
+                                        <span class="text-small text-green">ชำระเงินแล้ว</span>
+                                    @else
+                                        @if (countDate($research->created_at, 3, 'days'))
+                                            <span class="text-small text-warning">{{ $research->topic_status }}</span>
+                                        @else
+                                            @if ($research->position_id === 1)
+                                                <span class="text-small text-green">บุคลากรภายในมหาวิทยาลัยราชภัฏเลย
+                                                    <br />ไม่ต้องชำระเงิน</span>
+                                            @elseif($research->position_id === 3)
+                                                <span class="text-small text-green">โควต้าเจ้าภาพร่วม
+                                                    <br />ไม่ต้องชำระเงิน</span>
+                                            @else
+                                                <span class="text-small text-danger">ค้างชำระเงิน</span>
+                                            @endif
+                                        @endif
+                                    @endif
+                                </strong>
                             </td>
                         </tr>
                     @endforeach

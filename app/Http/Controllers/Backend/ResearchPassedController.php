@@ -7,15 +7,19 @@ use App\Models\Research;
 use App\Models\StatusResearch;
 use Illuminate\Http\Request;
 
-class EditResearchSecondController extends Controller
+class ResearchPassedController extends Controller
 {
-    //
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $topic_status = StatusResearch::get();
         $data = Research::select(
             'researchs.id as id',
             'researchs.topic_id as topic_id',
+            'researchs.research_passed as research_passed',
             'status_researchs.name as topic_status',
             'topic_th',
             'topic_en',
@@ -30,19 +34,17 @@ class EditResearchSecondController extends Controller
             'users.email as email',
             'users.person_attend as attend',
             'kotas.name as kota',
-            'send_edit_words_two.name as word',
-            'send_edit_words_two.path as word_path',
-            'send_edit_words_two.created_at as word_created_at',
-            'send_edit_words_two.updated_at as word_updated_at',
-            'send_edit_pdf_two.name as pdf',
-            'send_edit_pdf_two.path as pdf_path',
-            'send_edit_pdf_two.created_at as pdf_created_at',
-            'send_edit_pdf_two.updated_at as pdf_updated_at',
-            'send_edit_statements_two.name as statement',
-            'send_edit_statements_two.path as statement_path',
-            'send_edit_statements_two.created_at as statement_created_at',
-            'send_edit_statements_two.updated_at as statement_updated_at',
-            'researchs.topic_status as status_id'
+            'words.name as word',
+            'pdf.name as pdf',
+            'slips.name as payment',
+            'slips.address as address_payment',
+            'slips.date as date_payment',
+            'words.path as word_path',
+            'pdf.path as pdf_path',
+            'slips.path as payment_path',
+            'researchs.topic_status as status_id',
+            'researchs.created_at as created_at',
+            'researchs.updated_at as updated_at',
         )
             ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
             ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')
@@ -50,17 +52,31 @@ class EditResearchSecondController extends Controller
             ->leftjoin('presents', 'researchs.present_id', '=', 'presents.id')
             ->leftjoin('users', 'researchs.user_id', '=', 'users.id')
             ->leftjoin('kotas', 'users.kota_id', '=', 'kotas.id')
-            ->leftjoin('send_edit_words_two', 'researchs.topic_id', '=', 'send_edit_words_two.topic_id')
-            ->leftjoin('send_edit_pdf_two', 'researchs.topic_id', '=', 'send_edit_pdf_two.topic_id')
-            ->leftjoin('send_edit_statements_two', 'researchs.topic_id', '=', 'send_edit_statements_two.topic_id')
+            ->leftjoin('words', 'researchs.topic_id', '=', 'words.topic_id')
+            ->leftjoin('pdf', 'researchs.topic_id', '=', 'pdf.topic_id')
+            ->leftjoin('slips', 'researchs.topic_id', '=', 'slips.topic_id')
             ->leftjoin('status_researchs', 'researchs.topic_status', '=', 'status_researchs.id')
             ->leftjoin('conferences', 'researchs.conference_id', '=', 'conferences.id')
             ->where('conferences.status', 1)
-            ->where('researchs.research_passed', 1)
-            ->orderBy('id', 'ASC')
+            ->orderBy('id')
             ->get();
 
 
-        return view('backend.pages.show_edit_research_second', compact('data', 'topic_status'));
+
+        return view('backend.pages.researchs_passed', compact('data'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    protected function update(Request $request, $id)
+    {
+        Research::where('topic_id', $id)->update(['research_passed' => $request->research_passed]);
+        write_logs(__FUNCTION__, "info");
+        return response()->json(['success' => true]);
     }
 }

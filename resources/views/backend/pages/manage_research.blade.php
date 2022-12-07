@@ -39,25 +39,23 @@
                                             รหัสบทความ : {{ $value->topic_id }}
                                         </strong>
                                         <br />
-                                        <strong style="font-size: 12px" class="text-bluesky">
-                                            รูปแบบ : {{ $value->present }}
+                                        <strong>
+                                            {{ $value->topic_th }}
                                         </strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-primary">สังกัด /
                                             หน่วยงาน : {{ $value->institution }}</strong>
                                         <br />
-                                        <strong>
-                                            {{ $value->topic_th }}
-                                        </strong>
-                                        <br />
                                         <strong style="font-size: 12px" class="text-green">ผู้นำเสนอ :
                                             {{ str_replace('|', ', ', $value->presenter) }}</strong>
+                                        <br />
+                                        <strong style="font-size: 12px" class="text-bluesky">
+                                            รูปแบบบทความ : {{ $value->present }}
+                                        </strong>
                                         <br />
                                         <p class="text-secondary">
                                             <i style="font-size: 10px" class="d-block">อัพโหลด
                                                 {{ thaiDateFormat($value->created_at, true, true) }}</i>
-                                            <i style="font-size: 10px" class="d-block">แก้ไข
-                                                {{ thaiDateFormat($value->updated_at, true, true) }}</i>
                                         </p>
                                     </td>
                                     <td>

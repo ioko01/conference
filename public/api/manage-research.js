@@ -139,6 +139,33 @@ function update_modal(topic_id, title, status_value, text_status) {
     $("#research_modal").modal("show");
 }
 
+function update_modal_passed(topic_id, title, status_value, text_status) {
+    const createModal = `
+    <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+    aria-labelledby="เปลี่ยนสถานะ" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">${title}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="status_value" id="status_value" value="${status_value}">
+                    ต้องการเปลี่ยนสถานะเป็น <strong id="text_status" class="text-red">${text_status}</strong> ใช่หรือไม่ ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success rounded-0 text-white" onclick="update_status_passed(${topic_id}, ${status_value});thisDisabled(this);">ตกลง</button>
+                    <button type="button" class="btn btn-danger rounded-0 text-white"
+                        data-bs-dismiss="modal">ยกเลิก</button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+
+    $("#modal").html(createModal);
+    $("#research_modal").modal("show");
+}
+
 function send_comment_modal(topic_id, type) {
     const _token = $('meta[name="csrf-token"]').attr("content");
     const error = $("#error_file_comment").val();
@@ -185,7 +212,9 @@ function open_modal(e, type) {
         const title = "เปลี่ยนสถานะ";
         const status_value = e.value;
         const text_status =
-            type == "change_status" ? e[e.selectedIndex].text : null;
+            type == "change_status" || type == "change_research_passed"
+                ? e[e.selectedIndex].text
+                : null;
         $("#modal").on("hidden.bs.modal", function () {
             for (let i = 0; i < e.length; i++) {
                 if (e[i].getAttribute("selected")) {
@@ -211,6 +240,9 @@ function check_type(type, topic_id, title, status_value, text_status) {
         case "file":
             send_comment_modal(topic_id, type);
             break;
+        case "change_research_passed":
+            update_modal_passed(topic_id, title, status_value, text_status);
+            break;
         default:
             break;
     }
@@ -235,6 +267,42 @@ function update_status(topic_id, status) {
                 console.log("กำลังโหลด");
             },
             error: function (error) {
+                if (!navigator.onLine) {
+                    console.log(
+                        "ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน"
+                    );
+                } else if (!navigator.doNotTrack) {
+                    console.log(
+                        "เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง"
+                    );
+                }
+            },
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
+function update_status_passed(topic_id, status) {
+    try {
+        const _token = $('meta[name="csrf-token"]').attr("content");
+        $.ajax({
+            method: "PUT",
+            url: "/backend/research/passed/update-status/" + topic_id,
+            data: {
+                research_passed: status,
+                _token,
+            },
+            success: function (data) {
+                if (data.success) {
+                    window.location.replace("/backend/researchs/passed");
+                }
+            },
+            beforeSend: function () {
+                console.log("กำลังโหลด");
+            },
+            error: function (error) {
+                console.log(error);
                 if (!navigator.onLine) {
                     console.log(
                         "ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน"

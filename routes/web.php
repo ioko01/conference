@@ -26,6 +26,7 @@ use App\Http\Controllers\Backend\ProceedingPreviewController;
 use App\Http\Controllers\Backend\ProceedingResearchController;
 use App\Http\Controllers\Backend\ProceedingTopicController;
 use App\Http\Controllers\Backend\ResearchController as BackendResearchController;
+use App\Http\Controllers\Backend\ResearchPassedController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\LinkOralController;
 use App\Http\Controllers\ListAttendController;
@@ -248,6 +249,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::prefix('users')->group(function () {
                 Route::get('export', [UserController::class, 'export'])->name('users.export');
             });
+            Route::get('users', [UserController::class, 'index'])->name('backend.users.index');
         });
     });
 
@@ -255,8 +257,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('storage/open', [DashboardController::class, 'storage'])->name('backend.storage.open');
 
+
+
         Route::prefix('backend')->group(function () {
-            Route::get('users', [UserController::class, 'index'])->name('backend.users.index');
+
+            Route::get('researchs/passed', [ResearchPassedController::class, 'index'])->name('backend.researchs.passed.index');
+            Route::get('researchs/passed', [ResearchPassedController::class, 'index'])->name('backend.researchs.passed.index');
+            Route::put('research/passed/update-status/{id}', [ResearchPassedController::class, 'update']);
+
             Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('backend.user.edit');
             Route::put('user/{id}/update', [UserController::class, 'update'])->name('backend.user.update');
 

@@ -65,13 +65,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('backend.users.index') }}"
-                                class="nav-link @if (Request::is('backend/users')) active @endif">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>ผู้ใช้งาน</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('backend.lines.index') }}"
                                 class="nav-link @if (Request::is('backend/lines')) active @endif">
                                 <i class="nav-icon fab fa-line"></i>
@@ -80,6 +73,14 @@
                         </li>
                     @endif
                 @endauth
+
+                <li class="nav-item">
+                    <a href="{{ route('backend.users.index') }}"
+                        class="nav-link @if (Request::is('backend/users')) active @endif">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>ผู้ใช้งาน</p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('backend.researchs.index') }}"
@@ -95,6 +96,19 @@
                         <p>จัดการบทความ</p>
                     </a>
                 </li>
+
+                @auth
+                    @if (auth()->user()->is_admin === 2)
+                        <li class="nav-item">
+                            <a href="{{ route('backend.researchs.passed.index') }}"
+                                class="nav-link @if (Request::is('backend/researchs/passed')) active @endif">
+                                <i class="nav-icon fas fa-check"></i>
+                                <p>พิจารณาบทความ</p>
+                            </a>
+                        </li>
+                    @endif
+                @endauth
+
                 <li class="nav-item">
                     <a href="{{ route('backend.research.first.index') }}"
                         class="nav-link @if (Request::is('backend/researchs/management/times/1')) active @endif">

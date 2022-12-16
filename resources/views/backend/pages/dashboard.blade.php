@@ -146,9 +146,9 @@
                 <!-- /.card-body -->
             </div>
         </div>
-        
+
         <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="card card-info">
+            <div class="card card-dark">
                 <div class="card-header rounded-0">
                     <h3 class="card-title"><i class="fas fa-book"></i> บทความ</h3>
 
@@ -163,14 +163,51 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-around">
-                        <strong class="text-info mr-auto">
+                        <strong class="text-dark mr-auto">
                             <span class="d-none d-md-block">
                                 ทั้งหมด
                             </span>
                         </strong>
                         <strong style="font-size: calc(5vw + 30px);"
-                            class="text-info h1 mx-auto">{{ count($researchs) }}</strong>
-                        <strong class="text-info ms-auto mt-auto">บทความ</strong>
+                            class="text-dark h1 mx-auto">{{ count($researchs) }}</strong>
+                        <strong class="text-dark ms-auto mt-auto">บทความ</strong>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card card-dark">
+                <div class="card-header rounded-0">
+                    <h3 class="card-title text-white"><i class="fas fa-chart-area"></i> กราฟบทความ</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool text-white" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool text-white" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {!! $chart->container() !!}
+                    <div>
+                        <span class="text-small">บุคลากรภายใน <span class="text-small">จำนวน
+                                {{ count($researchs_in) }} บทความ
+                                <span
+                                    class="text-small text-success">({{ number_format((count($researchs_in) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></span><br>
+                        <span class="text-small">บุคลากรภายนอก <span class="text-small">จำนวน
+                                {{ count($researchs_out) }} บทความ
+                                <span
+                                    class="text-small text-success">({{ number_format((count($researchs_out) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></span><br>
+                        <span class="text-small">เจ้าภาพร่วม <span class="text-small">จำนวน
+                                {{ count($researchs_kota) }} บทความ
+                                <span
+                                    class="text-small text-success">({{ number_format((count($researchs_kota) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></span>
                     </div>
                 </div>
                 <!-- /.card-body -->

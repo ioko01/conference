@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use App\Charts\UserChart;
 
 class DashboardController extends Controller
 {
@@ -44,7 +45,41 @@ class DashboardController extends Controller
             ->get();
 
         $conference = Conference::where('status', 1)->first();
-        return view('backend.pages.dashboard', compact('storage', 'researchs', 'users', 'conference', 'users_not_verify_email', 'admin'));
+
+        $researchs_in = Research::select('*')
+            ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
+            ->leftjoin('users', 'users.id', 'researchs.user_id')
+            ->where('conferences.status', 1)
+            ->where('users.position_id', 1)
+            ->get();
+
+        $researchs_out = Research::select('*')
+            ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
+            ->leftjoin('users', 'users.id', 'researchs.user_id')
+            ->where('conferences.status', 1)
+            ->where('users.position_id', 2)
+            ->get();
+
+        $researchs_kota = Research::select('*')
+            ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
+            ->leftjoin('users', 'users.id', 'researchs.user_id')
+            ->where('conferences.status', 1)
+            ->where('users.position_id', 3)
+            ->get();
+
+        $chart = new UserChart;
+        $chart->options([
+            "yAxis" => [
+                "title" => [
+                    "text" => "จำนวนบทความ"
+                ]
+            ],
+        ]);
+        $chart->labels(['บุคลากรภายใน', 'บุคลากรภายนอก', 'เจ้าภาพร่วม']);
+        $chart->displayLegend(false);
+        $chart->dataset('บทความ', 'column', [count($researchs_in), count($researchs_out), count($researchs_kota)])->color("#343a40");
+
+        return view('backend.pages.dashboard', compact('storage', 'researchs', 'users', 'conference', 'users_not_verify_email', 'admin', 'chart', 'researchs_in', 'researchs_out', 'researchs_kota'));
     }
 
     protected function storage()

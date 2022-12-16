@@ -153,4 +153,6 @@
 @if (Request::is('backend/dashboard'))
     <script src="{{ asset('api/calendar.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('js/calendar.js', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('js/highcharts.js', env('REDIRECT_HTTPS')) }}" charset="utf-8"></script>
+    {!! $chart->script() !!}
 @endif

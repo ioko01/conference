@@ -196,18 +196,18 @@
                 <div class="card-body">
                     {!! $chart->container() !!}
                     <div>
-                        <span class="text-small">บุคลากรภายใน <span class="text-small">จำนวน
+                        <strong class="text-small">&bullet; บุคลากรภายใน <span class="text-small">จำนวน
                                 {{ count($researchs_in) }} บทความ
                                 <span
-                                    class="text-small text-success">({{ number_format((count($researchs_in) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></span><br>
-                        <span class="text-small">บุคลากรภายนอก <span class="text-small">จำนวน
+                                    class="text-small text-success">({{ number_format((count($researchs_in) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></strong><br>
+                        <strong class="text-small">&bullet; บุคลากรภายนอก <span class="text-small">จำนวน
                                 {{ count($researchs_out) }} บทความ
                                 <span
-                                    class="text-small text-success">({{ number_format((count($researchs_out) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></span><br>
-                        <span class="text-small">เจ้าภาพร่วม <span class="text-small">จำนวน
+                                    class="text-small text-success">({{ number_format((count($researchs_out) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></strong><br>
+                        <strong class="text-small">&bullet; เจ้าภาพร่วม <span class="text-small">จำนวน
                                 {{ count($researchs_kota) }} บทความ
                                 <span
-                                    class="text-small text-success">({{ number_format((count($researchs_kota) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></span>
+                                    class="text-small text-success">({{ number_format((count($researchs_kota) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></strong>
                     </div>
                 </div>
                 <!-- /.card-body -->

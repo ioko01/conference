@@ -155,4 +155,5 @@
     <script src="{{ asset('js/calendar.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('js/highcharts.js', env('REDIRECT_HTTPS')) }}" charset="utf-8"></script>
     {!! $chart->script() !!}
+    {!! $chart_distinct->script() !!}
 @endif

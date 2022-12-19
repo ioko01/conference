@@ -147,10 +147,14 @@
             </div>
         </div>
 
+
+    </div>
+
+    <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-dark">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title"><i class="fas fa-book"></i> บทความ</h3>
+                    <h3 class="card-title"><i class="fas fa-book"></i> บทความ (ทั้งหมด)</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -176,13 +180,44 @@
                 <!-- /.card-body -->
             </div>
         </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card">
+                <div class="card-header rounded-0">
+                    <h3 class="card-title"><i class="fas fa-book"></i> บทความ (ไม่ซ้ำกัน)</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-around">
+                        <strong class="text-dark mr-auto">
+                            <span class="d-none d-md-block">
+                                ทั้งหมด
+                            </span>
+                        </strong>
+                        <strong style="font-size: calc(5vw + 30px);"
+                            class="text-dark h1 mx-auto">{{ $researchs_distinct->topic_th }}</strong>
+                        <strong class="text-dark ms-auto mt-auto">บทความ</strong>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
     </div>
 
     <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="col-lg-6">
             <div class="card card-dark">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title text-white"><i class="fas fa-chart-area"></i> กราฟบทความ</h3>
+                    <h3 class="card-title text-white"><i class="fas fa-chart-area"></i> กราฟบทความ
+                        (ทั้งหมด)</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool text-white" data-card-widget="collapse">
@@ -197,17 +232,53 @@
                     {!! $chart->container() !!}
                     <div>
                         <strong class="text-small">&bullet; บุคลากรภายใน <span class="text-small">จำนวน
-                                {{ count($researchs_in) }} บทความ
+                                {{ $researchs_in }} บทความ
                                 <span
-                                    class="text-small text-success">({{ number_format((count($researchs_in) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></strong><br>
+                                    class="text-small text-success">({{ number_format(($researchs_in / ($researchs_in + $researchs_out + $researchs_kota)) * 100, 2, '.', '') }}%)</span></span></strong><br>
                         <strong class="text-small">&bullet; บุคลากรภายนอก <span class="text-small">จำนวน
-                                {{ count($researchs_out) }} บทความ
+                                {{ $researchs_out }} บทความ
                                 <span
-                                    class="text-small text-success">({{ number_format((count($researchs_out) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></strong><br>
+                                    class="text-small text-success">({{ number_format(($researchs_out / ($researchs_in + $researchs_out + $researchs_kota)) * 100, 2, '.', '') }}%)</span></span></strong><br>
                         <strong class="text-small">&bullet; เจ้าภาพร่วม <span class="text-small">จำนวน
-                                {{ count($researchs_kota) }} บทความ
+                                {{ $researchs_kota }} บทความ
                                 <span
-                                    class="text-small text-success">({{ number_format((count($researchs_kota) / (count($researchs_in) + count($researchs_out) + count($researchs_kota))) * 100, 2, '.', '') }}%)</span></span></strong>
+                                    class="text-small text-success">({{ number_format(($researchs_kota / ($researchs_in + $researchs_out + $researchs_kota)) * 100, 2, '.', '') }}%)</span></span></strong>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header rounded-0">
+                    <h3 class="card-title"><i class="fas fa-chart-area"></i> กราฟบทความ
+                        (ไม่ซ้ำกัน)</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {!! $chart_distinct->container() !!}
+                    <div>
+                        <strong class="text-small">&bullet; บุคลากรภายใน <span class="text-small">จำนวน
+                                {{ $researchs_in_distinct }} บทความ
+                                <span
+                                    class="text-small text-success">({{ number_format(($researchs_in_distinct / ($researchs_in_distinct + $researchs_out_distinct + $researchs_kota_distinct)) * 100, 2, '.', '') }}%)</span></span></strong><br>
+                        <strong class="text-small">&bullet; บุคลากรภายนอก <span class="text-small">จำนวน
+                                {{ $researchs_out_distinct }} บทความ
+                                <span
+                                    class="text-small text-success">({{ number_format(($researchs_out_distinct / ($researchs_in_distinct + $researchs_out_distinct + $researchs_kota_distinct)) * 100, 2, '.', '') }}%)</span></span></strong><br>
+                        <strong class="text-small">&bullet; เจ้าภาพร่วม <span class="text-small">จำนวน
+                                {{ $researchs_kota_distinct }} บทความ
+                                <span
+                                    class="text-small text-success">({{ number_format(($researchs_kota_distinct / ($researchs_in_distinct + $researchs_out_distinct + $researchs_kota_distinct)) * 100, 2, '.', '') }}%)</span></span></strong>
                     </div>
                 </div>
                 <!-- /.card-body -->

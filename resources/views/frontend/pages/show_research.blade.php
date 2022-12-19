@@ -51,7 +51,7 @@
                                     @if ($value->status_id >= 4)
                                         <strong class="text-small text-warning">{{ $value->topic_status }}</strong>
                                     @else
-                                        @if (countDate($value->created_at, 3, 'days'))
+                                        @if (countDate($value->created_at, 1, 'days'))
                                             <strong class="text-small text-warning">{{ $value->topic_status }}</strong>
                                         @else
                                             @if ($value->position_id === 1)

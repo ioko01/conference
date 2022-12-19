@@ -47,7 +47,7 @@
                                     @if ($research->topic_status_id >= 4)
                                         <span class="text-small text-green">ชำระเงินแล้ว</span>
                                     @else
-                                        @if (countDate($research->created_at, 3, 'days'))
+                                        @if (countDate($research->created_at, 1, 'days'))
                                             <span class="text-small text-warning">{{ $research->topic_status }}</span>
                                         @else
                                             @if ($research->position_id === 1)

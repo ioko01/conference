@@ -18,11 +18,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
      */
     public function collection()
     {
-        DB::statement("SET @row_number=0");
         $researchs = Research::select(
-            DB::raw(
-                '(@row_number:=@row_number + 1) AS rnk'
-            ),
             'researchs.topic_id AS topic_id',
             DB::raw(
                 'CONCAT(users.prefix, users.fullname) AS user'
@@ -104,7 +100,6 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
     public function headings(): array
     {
         return [
-            'ลำดับที่',
             'รหัสบทความ',
             'ชื่อผู้ส่งบทความ',
             'เพศ',
@@ -164,11 +159,11 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
 
 
                         $active_sheet = $event->sheet->getDelegate();
-                        $slip = $active_sheet->getCell('Q' . $row)->getValue();
+                        $slip = $active_sheet->getCell('P' . $row)->getValue();
                         if ($row != 1) {
                             if (isset($slip)) {
-                                $active_sheet->getCell('Q' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/สลิปชำระเงิน/' . $slip);
-                                $active_sheet->getStyle('Q' . $row)->applyFromArray([
+                                $active_sheet->getCell('P' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/สลิปชำระเงิน/' . $slip);
+                                $active_sheet->getStyle('P' . $row)->applyFromArray([
                                     'font' => [
                                         'color' => [
                                             'rgb' => '0000ff'
@@ -203,8 +198,8 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                         ]);
                     }
 
-                    $get_values[$row - 1] = $active_sheet->getCell('F' . $row)->getValue();
-                    $get_ids[$row - 1] = $active_sheet->getCell('B' . $row)->getValue();
+                    $get_values[$row - 1] = $active_sheet->getCell('E' . $row)->getValue();
+                    $get_ids[$row - 1] = $active_sheet->getCell('A' . $row)->getValue();
                     $name_duplicated = [];
                     $get_first_name = [];
                     $ids = [];
@@ -220,12 +215,12 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
 
                 for ($row = 1; $row <= $highestRow; $row++) {
                     foreach ($name_duplicated as $key => $name_duplicate) {
-                        if (trim($active_sheet->getCell('F' . $row)->getValue()) == $name_duplicate) {
+                        if (trim($active_sheet->getCell('E' . $row)->getValue()) == $name_duplicate) {
                             if ($id = array_search($name_duplicate, $get_first_name, true)) {
-                                if ($ids[$id] != $active_sheet->getCell('B' . $row)->getValue()) {
-                                    $active_sheet->getCell('F' . $row)->setValue($name_duplicate);
-                                    $active_sheet->getCell('E' . $row)->setValue("บทความนี้ชื่อบทความซ้ำกับบทความที่ " . $ids[$id]);
-                                    $active_sheet->getStyle('E' . $row)->applyFromArray([
+                                if ($ids[$id] != $active_sheet->getCell('A' . $row)->getValue()) {
+                                    $active_sheet->getCell('E' . $row)->setValue($name_duplicate);
+                                    $active_sheet->getCell('D' . $row)->setValue("บทความนี้ชื่อบทความซ้ำกับบทความที่ " . $ids[$id]);
+                                    $active_sheet->getStyle('D' . $row)->applyFromArray([
                                         'font' => [
                                             'color' => [
                                                 'rgb' => 'FF0000'
@@ -234,7 +229,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                                         ]
                                     ]);
                                     for ($column = 'A'; $column !== $columnLoopLimiter; ++$column) {
-                                        $active_sheet->getStyle('A' . $active_sheet->getCell('F' . $row)->getRow() . ':' . $column . $active_sheet->getCell('F' . $row)->getRow())->getFill()
+                                        $active_sheet->getStyle('A' . $active_sheet->getCell('E' . $row)->getRow() . ':' . $column . $active_sheet->getCell('E' . $row)->getRow())->getFill()
                                             ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                                             ->getStartColor()
                                             ->setARGB('FFFF66');

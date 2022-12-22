@@ -20,13 +20,15 @@ class ListResearchController extends Controller
             'researchs.topic_status as topic_status_id',
             'users.institution as institution',
             'users.position_id as position_id',
-            'researchs.created_at as created_at'
+            'researchs.created_at as created_at',
+            'slips.name as payment'
         )
             ->leftjoin('presents', 'presents.id', '=', 'researchs.present_id')
             ->leftjoin('conferences', 'conferences.id', '=', 'researchs.conference_id')
             ->leftjoin('faculties', 'faculties.id', '=', 'researchs.faculty_id')
             ->leftjoin('status_researchs', 'status_researchs.id', '=', 'researchs.topic_status')
             ->leftjoin('users', 'users.id', 'researchs.user_id')
+            ->leftjoin('slips', 'slips.topic_id', 'researchs.topic_id')
             ->where('conferences.status', 1)
             ->where('is_admin', 0)
             ->get();

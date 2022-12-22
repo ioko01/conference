@@ -61,7 +61,11 @@
                                                 <strong class="text-small text-green">โควต้าเจ้าภาพร่วม
                                                     <br />ไม่ต้องชำระเงิน</strong>
                                             @else
-                                                <strong class="text-small text-danger">ค้างชำระเงิน</strong>
+                                                @if ($research->payment)
+                                                    <span class="text-small text-green">ชำระเงินแล้ว</span>
+                                                @else
+                                                    <span class="text-small text-danger">ค้างชำระเงิน</span>
+                                                @endif
                                             @endif
                                         @endif
                                     @endif

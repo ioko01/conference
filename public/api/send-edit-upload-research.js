@@ -152,6 +152,7 @@ function send_edit_research_modal(topic_id, type, method) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                    <p class="text-red text-small">*ขนาดไฟล์ใหญ่สุดคือ 10 MB</p>
                     ${
                         type == "word" || type == "word_2"
                             ? `<input class="form-control"
@@ -197,6 +198,7 @@ function send_research_modal(topic_id, type, method) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                    <p class="text-red text-small">*ขนาดไฟล์ใหญ่สุดคือ 10 MB</p>
                     ${
                         type == "send_word"
                             ? `<input class="form-control"
@@ -278,7 +280,7 @@ function payment_modal(topic_id, type, path, method) {
                     </div>
                     <hr/>
                     <div class="mb-3">
-                    <label for="payment_upload">อัพโหลดสลิปชำระเงิน</label>
+                    <label for="payment_upload">อัพโหลดสลิปชำระเงิน <span class="text-red text-small">*ขนาดไฟล์ใหญ่สุดคือ 10 MB</span></label>
                         <input type="file" class="form-control ${
                             error_payment ? `is-invalid` : ``
                         }"

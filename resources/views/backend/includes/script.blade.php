@@ -157,3 +157,46 @@
     {!! $chart->script() !!}
     {!! $chart_distinct->script() !!}
 @endif
+
+@if (Request::is('backend/researchs/management'))
+    <script>
+        function loading_export() {
+            document.getElementById("load_research").disabled = true
+            document.getElementById("load_research").innerHTML = `Loading`
+
+            const xhr = new XMLHttpRequest()
+            const url = "{{ route('researchs.export') }}"
+            let percent_complete = 0
+
+            xhr.responseType = "blob"
+            xhr.open("GET", url, true)
+            xhr.send()
+
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this)
+                    const fileURL = window.URL.createObjectURL(this.response)
+
+                    const anchor = document.createElement("a")
+                    anchor.href = fileURL
+
+                    const date = `${new Date().getDate()}_${new Date().getMonth()+1}_${new Date().getFullYear()}`
+                    anchor.download =
+                        `EXPORT_RESEARCHS_${date}.xlsx`
+                    document.body.appendChild(anchor)
+                    anchor.click()
+                    document.getElementById("load_research").disabled = false
+                    document.getElementById("load_research").innerHTML =
+                        `<i class="fas fa-file-export"></i> Export to Excel`
+                }
+            }
+
+            xhr.onprogress = function(e) {
+                percent_complete = Math.floor((e.loaded / e.total) * 100)
+                document.getElementById("load_research").disabled = true
+                document.getElementById("load_research").innerHTML = `Loading ${percent_complete}%`
+                console.log(`${percent_complete}%`)
+            }
+        }
+    </script>
+@endif

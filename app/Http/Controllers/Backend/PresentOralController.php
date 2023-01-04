@@ -37,6 +37,9 @@ class PresentOralController extends Controller
             ->where('conferences.status', 1)
             ->orderBy(DB::raw('REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(present_oral_id , "0", ""),"1",""),"2",""),"3",""),"4",""),"5",""),"6",""),"7",""),"8",""),"9",""), LENGTH(present_oral_id)'))
             ->get();
+
+        DB::disconnect('faculties');
+        DB::disconnect('present_orals');
         return view('backend.pages.oral', compact('faculties', 'present_orals'));
     }
 
@@ -55,6 +58,8 @@ class PresentOralController extends Controller
         PresentOral::create($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มผลงานนำเสนอ Oral สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('present_orals');
         return back()->with('success', 'เพิ่มผลงานนำเสนอ Oral สำเร็จ');
     }
 
@@ -90,6 +95,9 @@ class PresentOralController extends Controller
             ->where('present_orals.id', $id)
             ->first();
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('faculties');
+        DB::disconnect('present_orals');
         return view('backend.pages.edit_oral', compact('faculties', 'present_orals', 'present_oral'));
     }
 
@@ -109,6 +117,8 @@ class PresentOralController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขผลงานนำเสนอ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('present_orals');
         return back()->with('success', 'แก้ไขผลงานนำเสนอ Poster สำเร็จ');
     }
 
@@ -117,6 +127,8 @@ class PresentOralController extends Controller
         PresentOral::where('id', $id)->delete();
         write_logs(__FUNCTION__, "error");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('present_orals');
         return redirect()->route('backend.orals.index');
     }
 }

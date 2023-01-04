@@ -11,6 +11,7 @@ use App\Models\Position;
 use App\Models\Tip;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -55,6 +56,10 @@ class RegisterController extends Controller
         $conference_id = Conference::where('status_research', 1)->first();
         $tips = Tip::where('group', '1')->get();
 
+        DB::disconnect('kotas');
+        DB::disconnect('positions');
+        DB::disconnect('conferences');
+        DB::disconnect('tips');
         return view('auth.register', compact('kotas', 'positions', 'conference_id', 'tips'));
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Conference;
 use App\Models\Manual;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ManualController extends Controller
@@ -13,6 +14,8 @@ class ManualController extends Controller
     public function index()
     {
         $manuals = Manual::get();
+
+        DB::disconnect('manuals');
         return view('backend.pages.manual', compact('manuals'));
     }
 
@@ -53,6 +56,8 @@ class ManualController extends Controller
         if (!isset($conference->id)) {
             write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('conferences');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้');
         }
 
@@ -63,6 +68,8 @@ class ManualController extends Controller
             if ($manual->name == $request->name && auth()->user()->conference_id == $manual->conference_id) {
                 write_logs(__FUNCTION__, "error");
                 alert('ผิดพลาด', 'มีหัวข้อนี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+                DB::disconnect('manuals');
                 return back()->withErrors('มีหัวข้อนี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
         }
@@ -97,6 +104,8 @@ class ManualController extends Controller
         Manual::create($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('manuals');
         return redirect()->route('backend.manuals.index');
     }
 
@@ -105,6 +114,8 @@ class ManualController extends Controller
         $manuals = Manual::get();
         $manual = Manual::find($id);
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('manuals');
         return view('backend.pages.edit_manual', compact('manuals', 'manual', 'id'));
     }
 
@@ -114,6 +125,8 @@ class ManualController extends Controller
         if (!isset($conference->id)) {
             write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('conferences');
             return back()->withErrors('ต้องเปิดใช้งานหัวข้อการประชุมก่อนถึงจะเพิ่มหัวข้อได้');
         }
 
@@ -125,6 +138,8 @@ class ManualController extends Controller
             if ($man->name == $request->name && auth()->user()->conference_id == $man->conference_id && $man->user_id != auth()->user()->id) {
                 write_logs(__FUNCTION__, "error");
                 alert('ผิดพลาด', 'มีหัวข้อนี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+                DB::disconnect('manuals');
                 return back()->withErrors('มีหัวข้อนี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
         }
@@ -142,7 +157,7 @@ class ManualController extends Controller
                 Storage::delete($manual->path_file);
             }
         }
-        
+
         $upload = null;
         $extension = null;
         $name = null;
@@ -194,6 +209,9 @@ class ManualController extends Controller
         Manual::where('id', $id)->update($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('manuals');
         return back();
     }
 
@@ -206,6 +224,8 @@ class ManualController extends Controller
         Manual::where('id', $id)->delete();
         write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('manuals');
         return redirect()->route('backend.manuals.index');
     }
 
@@ -222,6 +242,8 @@ class ManualController extends Controller
         Manual::where('id', $id)->update($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'นำขึ้นประชาสัมพันธ์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        
+        DB::disconnect('manuals');
         return back();
     }
 }

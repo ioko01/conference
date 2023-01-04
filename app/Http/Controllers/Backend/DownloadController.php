@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Conference;
 use App\Models\Download;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class DownloadController extends Controller
@@ -26,6 +27,7 @@ class DownloadController extends Controller
             ->where('conferences.status', 1)
             ->get();
 
+        DB::disconnect('downloads');
         return view('backend.pages.download', compact('downloads'));
     }
 
@@ -120,6 +122,9 @@ class DownloadController extends Controller
         Download::create($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('downloads');
         return redirect()->route('backend.downloads.index');
     }
 
@@ -140,6 +145,8 @@ class DownloadController extends Controller
             ->get();
         $_download = Download::find($id);
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('downloads');
         return view('backend.pages.edit_download', compact('downloads', '_download', 'id'));
     }
 
@@ -173,6 +180,9 @@ class DownloadController extends Controller
             if ($download->name == $request->name && auth()->user()->conference_id == $download->conference_id && $download->user_id != auth()->user()->id) {
                 write_logs(__FUNCTION__, "error");
                 alert('ผิดพลาด', 'มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+                DB::disconnect('conferences');
+                DB::disconnect('downloads');
                 return back()->withErrors('มีหัวข้อนี้ดาวน์โหลดไฟล์นี้แล้ว ไม่สามารถเพิ่มหัวข้อที่มีชื่อเดียวกันได้');
             }
         }
@@ -240,6 +250,9 @@ class DownloadController extends Controller
         Download::where('id', $id)->update($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('downloads');
         return back();
     }
 
@@ -252,6 +265,8 @@ class DownloadController extends Controller
         Download::where('id', $id)->delete();
         write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('downloads');
         return redirect()->route('backend.downloads.index');
     }
 
@@ -268,6 +283,8 @@ class DownloadController extends Controller
         Download::where('id', $id)->update($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'นำขึ้นประชาสัมพันธ์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('downloads');
         return back();
     }
 }

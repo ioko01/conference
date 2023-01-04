@@ -7,6 +7,7 @@ use App\Models\Conference;
 use App\Models\Faculty;
 use App\Models\LinkOral;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class LinkOralController extends Controller
@@ -42,7 +43,9 @@ class LinkOralController extends Controller
         foreach ($link_orals as $link_oral) {
             $link_oral->path = Storage::url($link_oral->path);
         }
-        
+
+        DB::disconnect('faculties');
+        DB::disconnect('link_orals');
         return view('backend.pages.oral_link', compact('faculties', 'link_orals'));
     }
 
@@ -85,10 +88,15 @@ class LinkOralController extends Controller
 
             write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'เพิ่มลิงค์นำเสนอ Oral สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('conferences');
+            DB::disconnect('link_orals');
             return back()->with('success', true);
         } else {
             write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ไม่มีการประชุมที่เปิดใช้งาน', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('conferences');
             return back()->withErrors('ไม่มีการประชุมที่เปิดใช้งาน');
         }
     }
@@ -128,6 +136,9 @@ class LinkOralController extends Controller
         }
 
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('faculties');
+        DB::disconnect('link_orals');
         return view('backend.pages.edit_oral_link', compact('faculties', 'link_orals', 'link_oral'));
     }
 
@@ -192,6 +203,9 @@ class LinkOralController extends Controller
         LinkOral::where('id', $id)->update($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไข ลิงค์นำเสนอ Oral สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('link_orals');
         return back();
     }
 
@@ -204,6 +218,8 @@ class LinkOralController extends Controller
         LinkOral::where('id', $id)->delete();
         write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('link_orals');
         return redirect()->route('backend.orals.link.index');
     }
 }

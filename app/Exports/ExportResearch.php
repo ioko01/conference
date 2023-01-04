@@ -160,10 +160,32 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
 
                         $active_sheet = $event->sheet->getDelegate();
                         $slip = $active_sheet->getCell('P' . $row)->getValue();
+                        $word = $active_sheet->getCell('U' . $row)->getValue();
+                        $pdf = $active_sheet->getCell('W' . $row)->getValue();
                         if ($row != 1) {
                             if (isset($slip)) {
                                 $active_sheet->getCell('P' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/สลิปชำระเงิน/' . $slip);
                                 $active_sheet->getStyle('P' . $row)->applyFromArray([
+                                    'font' => [
+                                        'color' => [
+                                            'rgb' => '0000ff'
+                                        ]
+                                    ]
+                                ]);
+                            }
+                            if (isset($word)) {
+                                $active_sheet->getCell('U' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/words/' . $word);
+                                $active_sheet->getStyle('U' . $row)->applyFromArray([
+                                    'font' => [
+                                        'color' => [
+                                            'rgb' => '0000ff'
+                                        ]
+                                    ]
+                                ]);
+                            }
+                            if (isset($pdf)) {
+                                $active_sheet->getCell('W' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/pdf/' . $pdf);
+                                $active_sheet->getStyle('W' . $row)->applyFromArray([
                                     'font' => [
                                         'color' => [
                                             'rgb' => '0000ff'

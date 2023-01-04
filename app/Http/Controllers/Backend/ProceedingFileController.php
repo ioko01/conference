@@ -7,6 +7,7 @@ use App\Models\Conference;
 use App\Models\ProceedingFile;
 use App\Models\ProceedingTopic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProceedingFileController extends Controller
@@ -55,6 +56,10 @@ class ProceedingFileController extends Controller
         }
 
         $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+        
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_files');
+        DB::disconnect('proceeding_topics');
         return view('backend.pages.proceeding_file', compact('year', 'files', 'topics', 'i_topic', 'conference'));
     }
 
@@ -119,6 +124,9 @@ class ProceedingFileController extends Controller
         ProceedingFile::create($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_files');
         return redirect()->back();
     }
 
@@ -183,6 +191,10 @@ class ProceedingFileController extends Controller
         }
         write_logs(__FUNCTION__, "info");
         $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_files');
+        DB::disconnect('proceeding_topics');
         return view('backend.pages.edit_proceeding_file', compact('year', 'files', 'topics', 'i_topic', '_file', 'conference'));
     }
 
@@ -259,6 +271,9 @@ class ProceedingFileController extends Controller
         write_logs(__FUNCTION__, "info");
         ProceedingFile::where('id', $id)->update($data);
         alert('สำเร็จ', 'แก้ไขหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_files');
         return back();
     }
 
@@ -277,6 +292,8 @@ class ProceedingFileController extends Controller
             ->delete();
         write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('proceeding_files');
         return redirect()->route('backend.proceeding.file.index', $year);
     }
 }

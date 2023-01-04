@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Conference;
 use App\Models\PresentPoster;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PosterController extends Controller
@@ -28,6 +29,8 @@ class PosterController extends Controller
             $present_poster->path = Storage::url($present_poster->path);
         }
 
+        DB::disconnect('conferences');
+        DB::disconnect('present_posters');
         return view('frontend.pages.poster', compact('present_posters', 'conference'));
     }
 }

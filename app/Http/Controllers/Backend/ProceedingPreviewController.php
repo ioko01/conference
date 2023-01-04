@@ -8,6 +8,7 @@ use App\Models\Faculty;
 use App\Models\ProceedingFile;
 use App\Models\ProceedingResearch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProceedingPreviewController extends Controller
 {
@@ -57,6 +58,11 @@ class ProceedingPreviewController extends Controller
                 $j++;
             }
         }
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_files');
+        DB::disconnect('proceeding_researchs');
+        DB::disconnect('faculties');
         return view('backend.pages.proceeding_preview', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs'));
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Kota;
 use App\Models\Position;
 use App\Models\Tip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RegisterAttendController extends Controller
 {
@@ -33,6 +34,11 @@ class RegisterAttendController extends Controller
         $conference_id = Conference::where('status_research', 1)->first();
         $tips = Tip::where('group', '1')->get();
 
+
+        DB::disconnect('kotas');
+        DB::disconnect('positions');
+        DB::disconnect('conferences');
+        DB::disconnect('tips');
         return view('frontend.pages.register_attend', compact('kotas', 'positions', 'conference_id', 'tips'));
     }
 
@@ -68,6 +74,9 @@ class RegisterAttendController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'ลงทะเบียนเข้าร่วมงานสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('kotas');
         return redirect()->route('welcome');
     }
 }

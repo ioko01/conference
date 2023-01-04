@@ -6,6 +6,7 @@ use App\Models\Conference;
 use Illuminate\Http\Request;
 
 use App\Models\SendEditStatement;
+use Illuminate\Support\Facades\DB;
 
 class SendEditStatementController extends Controller
 {
@@ -40,6 +41,8 @@ class SendEditStatementController extends Controller
         $result->upload = $upload->storeAs($path, $name);
 
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('conferences');
         return $result;
     }
 
@@ -54,6 +57,8 @@ class SendEditStatementController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลดบทความแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('send_edit_statements');
         return back()->with('success', 'อัพโหลดบทความแก้ไขสำเร็จ');
     }
 
@@ -64,6 +69,7 @@ class SendEditStatementController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขบทความแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        DB::disconnect('send_edit_statements');
         return back()->with('success', 'แก้ไขบทความแก้ไขสำเร็จ');
     }
 }

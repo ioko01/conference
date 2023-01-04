@@ -11,8 +11,8 @@
 
             <div class="card-body text-xs">
                 <div class="text-end">
-                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0 mb-3"><i
-                            class="fas fa-file-export"></i> Export to Excel</a>
+                    <button id="load_research" onclick="loading_export()" class="btn btn-info rounded-0 mb-3"><i
+                            class="fas fa-file-export"></i> Export to Excel</button>
                 </div>
 
                 <div class="table-responsive">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class PasswordController extends Controller
@@ -13,6 +14,8 @@ class PasswordController extends Controller
     {
         $user = User::where('id', auth()->user()->id)->first();
         write_logs(__FUNCTION__, "info");
+        DB::disconnect('users');
+
         return view('frontend.pages.change_password', compact('user'));
     }
 
@@ -40,6 +43,7 @@ class PasswordController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เปลี่ยนรหัสผ่านสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        DB::disconnect('users');
         return back()->with("status", "เปลี่ยนรหัสผ่านสำเร็จ");
     }
 }

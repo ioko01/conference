@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Conference;
 use App\Models\Poster;
 use App\Models\Video;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class UploadfileController extends Controller
@@ -92,6 +93,9 @@ class UploadfileController extends Controller
             $present_poster->poster_path = Storage::url($present_poster->poster_path);
         }
 
+        DB::disconnect('conferences');
+        DB::disconnect('researchs');
+        DB::disconnect('comments');
         return view('frontend.pages.uploadfile', compact('data', 'comments', 'conference'));
     }
 
@@ -140,6 +144,8 @@ class UploadfileController extends Controller
         $result->upload = $upload->storeAs($path, $name);
 
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('conferences');
         return $result;
     }
 
@@ -158,6 +164,8 @@ class UploadfileController extends Controller
             Video::create($data);
             write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'อัพโหลด Link Video สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('videos');
             return back()->with('success', 'อัพโหลด Link Video สำเร็จ');
         } else if ($request->poster) {
             $this->poster_validation($request);
@@ -166,6 +174,8 @@ class UploadfileController extends Controller
             $this->file($request, $id)->upload;
             write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'อัพโหลด ไฟล์ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('posters');
             return back()->with('success', 'อัพโหลดไฟล์ Poster สำเร็จ');
         }
         write_logs(__FUNCTION__, "info");
@@ -181,6 +191,8 @@ class UploadfileController extends Controller
             Video::where('topic_id', $id)->update($data);
             write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'แก้ไข Link Video สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('videos');
             return back()->with('success', 'แก้ไข Link Video สำเร็จ');
         } else if ($request->submit_poster) {
             $this->poster_validation($request);
@@ -189,6 +201,8 @@ class UploadfileController extends Controller
             $this->file($request, $id)->upload;
             write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'แก้ไขไฟล์ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('posters');
             return back()->with('success', 'แก้ไขไฟล์ Poster สำเร็จ');
         }
     }

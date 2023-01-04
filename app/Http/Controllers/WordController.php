@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conference;
 use Illuminate\Http\Request;
 use App\Models\Word;
+use Illuminate\Support\Facades\DB;
 
 class WordController extends Controller
 {
@@ -41,6 +42,8 @@ class WordController extends Controller
         $result->upload = $upload->storeAs($path, $name);
 
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('conferences');
         return $result;
     }
 
@@ -53,6 +56,8 @@ class WordController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลด WORD สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('words');
         return back()->with('success', 'อัพโหลด WORD สำเร็จ');
     }
 
@@ -63,6 +68,8 @@ class WordController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลด WORD สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('words');
         return back()->with('success', 'แก้ไข WORD สำเร็จ');
     }
 }

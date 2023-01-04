@@ -130,6 +130,9 @@ class DashboardController extends Controller
         $chart_distinct->displayLegend(false);
         $chart_distinct->dataset('บทความ', 'column', [$researchs_in_distinct, $researchs_out_distinct, $researchs_kota_distinct])->color("#343a40");
 
+        DB::disconnect('conferences');
+        DB::disconnect('researchs');
+        DB::disconnect('users');
         return view('backend.pages.dashboard', compact('researchs_kota_distinct', 'researchs_out_distinct', 'researchs_in_distinct', 'chart_distinct', 'researchs', 'users', 'conference', 'users_not_verify_email', 'admin', 'chart', 'researchs_in', 'researchs_out', 'researchs_kota', 'researchs_distinct'));
     }
 

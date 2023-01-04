@@ -6,6 +6,7 @@ use App\Models\Conference;
 use App\Models\Faculty;
 use App\Models\LinkOral;
 use App\Models\Tip;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class LinkOralController extends Controller
@@ -33,6 +34,11 @@ class LinkOralController extends Controller
         }
 
         $colors = ["primary", "info", "warning", "success", "danger"];
+
+        DB::disconnect('conferences');
+        DB::disconnect('faculties');
+        DB::disconnect('tips');
+        DB::disconnect('link_orals');
         return view('frontend.pages.oral_link', compact('conference', 'link_orals', 'faculties', 'colors', 'tips'));
     }
 }

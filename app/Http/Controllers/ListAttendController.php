@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Conference;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ListAttendController extends Controller
 {
@@ -16,6 +17,8 @@ class ListAttendController extends Controller
             ->where('is_admin', 0)
             ->get();
 
+        DB::disconnect('conferences');
+        DB::disconnect('users');
         return view('frontend.pages.list_attend', compact('users', 'conference'));
     }
 }

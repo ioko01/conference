@@ -7,6 +7,7 @@ use App\Models\Faculty;
 use App\Models\Poster;
 use App\Models\PresentPoster;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PresentPosterController extends Controller
@@ -43,6 +44,9 @@ class PresentPosterController extends Controller
         foreach ($present_posters as $present_poster) {
             $present_poster->path = Storage::url($present_poster->path);
         }
+
+        DB::disconnect('faculties');
+        DB::disconnect('present_posters');
         return view('backend.pages.poster', compact('faculties', 'present_posters'));
     }
 
@@ -63,6 +67,9 @@ class PresentPosterController extends Controller
         PresentPoster::create($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มผลงานนำเสนอ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('posters');
+        DB::disconnect('present_posters');
         return back()->with('success', 'เพิ่มผลงานนำเสนอ Poster สำเร็จ');
     }
 
@@ -102,6 +109,9 @@ class PresentPosterController extends Controller
             ->first();
 
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('faculties');
+        DB::disconnect('present_posters');
         return view('backend.pages.edit_poster', compact('faculties', 'present_posters', 'present_poster'));
     }
 
@@ -120,6 +130,8 @@ class PresentPosterController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขผลงานนำเสนอ Poster สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('present_posters');
         return back()->with('success', 'แก้ไขผลงานนำเสนอ Poster สำเร็จ');
     }
 
@@ -128,6 +140,8 @@ class PresentPosterController extends Controller
         PresentPoster::where('id', $id)->delete();
         write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('present_posters');
         return redirect()->route('backend.posters.index');
     }
 }

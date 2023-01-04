@@ -10,6 +10,7 @@ use App\Models\Faculty;
 use App\Models\Present;
 use App\Models\Research;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ResearchController extends Controller
@@ -34,6 +35,8 @@ class ResearchController extends Controller
             ->leftjoin('presents', 'researchs.present_id', '=', 'presents.id')
             ->leftjoin('conferences', 'researchs.conference_id', '=', 'conferences.id')
             ->get();
+
+        DB::disconnect('researchs');
         return view('backend.pages.researchs', compact('researchs'));
     }
 
@@ -45,6 +48,12 @@ class ResearchController extends Controller
         $presents = Present::get();
         $research = Research::where('topic_id', $id)->first();
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('faculties');
+        DB::disconnect('degrees');
+        DB::disconnect('branches');
+        DB::disconnect('presents');
+        DB::disconnect('researchs');
         return view('backend.pages.edit_research', compact('faculties', 'degrees', 'branches', 'presents', 'research'));
     }
 
@@ -79,6 +88,8 @@ class ResearchController extends Controller
         ]);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขบทความสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('researchs');
         return back()->with('success', 'แก้ไขบทความสำเร็จ');
     }
 

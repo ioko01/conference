@@ -9,6 +9,7 @@ use App\Models\Kota;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -38,6 +39,8 @@ class UserController extends Controller
         )
             ->leftjoin('conferences', 'users.conference_id', 'conferences.id')
             ->get();
+
+        DB::disconnect('users');
         return view('backend.pages.user', compact('users'));
     }
 
@@ -47,39 +50,78 @@ class UserController extends Controller
         $positions = Position::get();
         $kotas = Kota::get();
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('users');
+        DB::disconnect('positions');
+        DB::disconnect('kotas');
         return view('backend.pages.edit_user', compact('user', 'positions', 'kotas'));
     }
 
     protected function validator($request)
     {
         write_logs(__FUNCTION__, "error");
-        return $request->validate([
-            'prefix' => 'required',
-            'fullname' => 'required',
-            'sex' => 'required',
-            'phone' => 'required|string|max:10',
-            'institution' => $request['position_id'] == '2' ? 'required|string' : 'string',
-            'address' => 'required',
-            'position_id' => 'required',
-            'person_attend' => 'required',
-        ]);
+        if ($request->person_attend == "attend") {
+            return $request->validate([
+                'prefix' => 'required|string',
+                'fullname' => 'required|string',
+                'sex' => 'required',
+                'phone' => 'required|string|max:10',
+                'institution' => $request->position_id == '2' ? 'required|string' : 'string',
+                'position_id' => 'required',
+                'person_attend' => 'required',
+            ]);
+        } else if ($request->person_attend == "send") {
+            if ($request->position_id == '2') {
+                return $request->validate([
+                    'prefix' => 'required|string',
+                    'fullname' => 'required|string',
+                    'sex' => 'required',
+                    'phone' => 'required|string|max:10',
+                    'institution' => $request->position_id == '2' ? 'required|string' : 'string',
+                    'address' => 'required|string',
+                    'position_id' => 'required',
+                    'person_attend' => 'required',
+                    'receive_check' => 'required'
+                ]);
+            } else {
+                return $request->validate([
+                    'prefix' => 'required|string',
+                    'fullname' => 'required|string',
+                    'sex' => 'required',
+                    'phone' => 'required|string|max:10',
+                    'institution' => $request->position_id == '2' ? 'required|string' : 'string',
+                    'position_id' => 'required',
+                    'person_attend' => 'required'
+                ]);
+            }
+        }
     }
 
     protected function update(Request $request, $id)
     {
-
         $this->validator($request);
 
         if ($request->position_id == '1') {
             $institution = 'มหาวิทยาลัยราชภัฏเลย';
-        } elseif ($request->position_id == '3') {
+            $check_requirement = null;
+            $address = null;
+        } else if ($request->position_id == '3') {
             if (isset($request->kota_id)) {
                 $kota = Kota::find($request->kota_id);
                 $institution = $kota->name;
             }
+            $check_requirement = null;
+            $address = null;
         } else {
             $institution = $request->institution;
+            $check_requirement = $request->receive_check;
+            $address = $request->address;
         }
+
+        if ($request->person_attend == "attend") {
+            $check_requirement = null;
+        }
+
 
         User::where('id', $id)->update(
             [
@@ -88,8 +130,8 @@ class UserController extends Controller
                 'sex' => $request->sex,
                 'phone' => $request->phone,
                 'institution' => $institution,
-                'address' => $request->address,
-                'check_requirement' => $request->receive_check,
+                'address' => $address,
+                'check_requirement' => $check_requirement,
                 'position_id' => $request->position_id,
                 'kota_id' => isset($request->kota_id) ? $request->kota_id : null,
                 'person_attend' => $request->person_attend,
@@ -98,6 +140,9 @@ class UserController extends Controller
         );
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขผู้ใช้งานสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('kotas');
+        DB::disconnect('users');
         return back()->with('success', 'แก้ไขผู้ใช้งานสำเร็จ');
     }
 
@@ -112,6 +157,8 @@ class UserController extends Controller
     {
         write_logs(__FUNCTION__, "info");
         $user = User::where('id', $id)->first();
+
+        DB::disconnect('users');
         return view('backend.pages.change_password', compact('id', 'user'));
     }
 
@@ -138,6 +185,8 @@ class UserController extends Controller
         ]);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เปลี่ยนรหัสผ่านสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('users');
         return back()->with("status", "เปลี่ยนรหัสผ่านสำเร็จ");
     }
 }

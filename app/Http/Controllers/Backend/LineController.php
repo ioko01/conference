@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Conference;
 use App\Models\Line;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class LineController extends Controller
@@ -28,7 +29,9 @@ class LineController extends Controller
         foreach ($lines as $line) {
             $line->line_path = Storage::url($line->line_path);
         }
-        
+
+        DB::disconnect('conferences');
+        DB::disconnect('lines');
         return view('backend.pages.line', compact('conferences', 'lines'));
     }
 
@@ -79,6 +82,9 @@ class LineController extends Controller
                 if ($conference->conference_id == auth()->user()->conference_id) {
                     write_logs(__FUNCTION__, "info");
                     alert('ผิดพลาด', 'ไม่สามารถเพิ่ม Line Openchat ในการประชุมครั้งนี้ได้อีก', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+                    DB::disconnect('conferences');
+                    DB::disconnect('lines');
                     return back()->withErrors('ไม่สามารถเพิ่ม Line Openchat ในการประชุมครั้งนี้ได้อีก');
                 }
             }
@@ -86,10 +92,15 @@ class LineController extends Controller
             Line::create($data);
             write_logs(__FUNCTION__, "info");
             alert('สำเร็จ', 'เพิ่ม Line Openchat สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('conferences');
+            DB::disconnect('lines');
             return back()->with('success', true);
         } else {
             write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ไม่มีการประชุมที่เปิดใช้งาน', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('conferences');
             return back()->withErrors('ไม่มีการประชุมที่เปิดใช้งาน');
         }
     }
@@ -124,6 +135,9 @@ class LineController extends Controller
             ->find($id);
 
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('conferences');
+        DB::disconnect('lines');
         return view('backend.pages.edit_line', compact('conferences', 'lines', 'line'));
     }
 
@@ -183,6 +197,9 @@ class LineController extends Controller
         Line::where('id', $id)->update($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไข Line Open Chat สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        
+        DB::disconnect('conferences');
+        DB::disconnect('lines');
         return back();
     }
 
@@ -195,6 +212,8 @@ class LineController extends Controller
         Line::where('id', $id)->delete();
         write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        
+        DB::disconnect('lines');
         return redirect()->route('backend.lines.index');
     }
 }

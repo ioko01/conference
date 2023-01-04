@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Research;
 use App\Models\Comment;
 use App\Models\Conference;
+use Illuminate\Support\Facades\DB;
 
 class SendEditResearchController extends Controller
 {
@@ -84,6 +85,9 @@ class SendEditResearchController extends Controller
             ->where('conferences.status', 1)
             ->first();
 
+        DB::disconnect('conferences');
+        DB::disconnect('researchs');
+        DB::disconnect('comments');
         return view('frontend.pages.send_edit_research', compact('data', 'comments', 'conference'));
     }
 }

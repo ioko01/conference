@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Research;
 use App\Models\StatusResearch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ResearchPassedController extends Controller
 {
@@ -61,22 +62,16 @@ class ResearchPassedController extends Controller
             ->orderBy('id')
             ->get();
 
-
-
+        DB::disconnect('researchs');
         return view('backend.pages.researchs_passed', compact('data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     protected function update(Request $request, $id)
     {
         Research::where('topic_id', $id)->update(['research_passed' => $request->research_passed]);
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('researchs');
         return response()->json(['success' => true]);
     }
 }

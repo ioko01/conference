@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Conference;
 use App\Models\ProceedingTopic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProceedingTopicController extends Controller
 {
@@ -21,6 +22,9 @@ class ProceedingTopicController extends Controller
             ->orderBy('proceeding_topics.position')
             ->get();
         $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_topics');
         return view('backend.pages.proceeding_topic', compact('year', 'topics', 'conference'));
     }
 
@@ -53,6 +57,9 @@ class ProceedingTopicController extends Controller
         ]);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_topics');
         return redirect()->back();
     }
 
@@ -78,6 +85,9 @@ class ProceedingTopicController extends Controller
             ->first();
         write_logs(__FUNCTION__, "info");
         $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_topics');
         return view('backend.pages.edit_proceeding_topic', compact('year', 'topics', 'topic', 'conference'));
     }
 
@@ -100,6 +110,9 @@ class ProceedingTopicController extends Controller
         ]);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_topics');
         return redirect()->back();
     }
 
@@ -111,6 +124,8 @@ class ProceedingTopicController extends Controller
             ->delete();
         write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('proceeding_topics');
         return redirect()->route('backend.proceeding.topic.index', $year);
     }
 }

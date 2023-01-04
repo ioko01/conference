@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Research;
 use App\Models\StatusResearch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EditResearchFirstController extends Controller
 {
@@ -69,7 +70,8 @@ class EditResearchFirstController extends Controller
             ->orderBy('id', 'ASC')
             ->get();
 
-
+        DB::disconnect('researchs');
+        DB::disconnect('status_researchs');
         return view('backend.pages.show_edit_research_first', compact('data', 'topic_status'));
     }
 }

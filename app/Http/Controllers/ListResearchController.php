@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Conference;
 use App\Models\Research;
+use Illuminate\Support\Facades\DB;
 
 class ListResearchController extends Controller
 {
@@ -33,6 +34,8 @@ class ListResearchController extends Controller
             ->where('is_admin', 0)
             ->get();
 
+        DB::disconnect('conferences');
+        DB::disconnect('researchs');
         return view('frontend.pages.list_research', compact('researchs', 'conference'));
     }
 }

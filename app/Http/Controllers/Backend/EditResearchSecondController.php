@@ -60,7 +60,8 @@ class EditResearchSecondController extends Controller
             ->orderBy('id', 'ASC')
             ->get();
 
-
+        DB::disconnect('researchs');
+        DB::disconnect('status_researchs');
         return view('backend.pages.show_edit_research_second', compact('data', 'topic_status'));
     }
 }

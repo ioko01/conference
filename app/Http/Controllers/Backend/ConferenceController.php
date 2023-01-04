@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Conference;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ConferenceController extends Controller
 {
@@ -13,6 +14,7 @@ class ConferenceController extends Controller
     public function index()
     {
         $conferences = Conference::orderBy('id', 'DESC')->get();
+        DB::disconnect('conferences');
         return view('backend.pages.conference', compact('conferences'));
     }
 
@@ -66,6 +68,8 @@ class ConferenceController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
         return back()->with('success', 'เพิ่มหัวข้อสำเร็จ');
     }
 
@@ -92,6 +96,8 @@ class ConferenceController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
         return back()->with('success', 'แก้ไขหัวข้อสำเร็จ');
     }
 
@@ -102,6 +108,8 @@ class ConferenceController extends Controller
             if ($check_status) {
                 write_logs(__FUNCTION__, "error");
                 alert('ผิดพลาด', 'ไม่สามารถเปลี่ยนสถานะได้ เนื่องจากมีสถานะที่เปิดใช้งานอยู่แล้ว', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+                DB::disconnect('conferences');
                 return back()->withErrors('ไม่สามารถเปลี่ยนสถานะได้ เนื่องจากมีสถานะที่เปิดใช้งานอยู่แล้ว');
             }
         }
@@ -113,12 +121,16 @@ class ConferenceController extends Controller
         if ((!$check_status && !$request->change_status_conference) && ($request->change_status_proceeding != "0" && $request->change_status_proceeding != "1")) {
             write_logs(__FUNCTION__, "error");
             alert('ผิดพลาด', 'ไม่สามารถเปลี่ยนสถานะได้ เนื่องจากไม่ได้เปิดใช้งานการประชุมวิชาการ', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('conferences');
             return back()->withErrors('ไม่สามารถเปลี่ยนสถานะได้ เนื่องจากไม่ได้เปิดใช้งานการประชุมวิชาการ');
         }
         if ($request->change_status_research_edit_two) {
             if (!$check_status->end_research_edit_two) {
                 write_logs(__FUNCTION__, "error");
                 alert('ผิดพลาด', 'ไม่สามารถเปลี่ยนสถานะได้ กรุณาระบุวันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+                DB::disconnect('conferences');
                 return back()->withErrors('ไม่สามารถเปลี่ยนสถานะได้ กรุณาระบุวันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2');
             }
         }
@@ -172,6 +184,9 @@ class ConferenceController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เปลี่ยนสถานะสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('users');
         return back()->with('success', 'เปลี่ยนสถานะสำเร็จ');
     }
 
@@ -180,6 +195,8 @@ class ConferenceController extends Controller
         $conferences = Conference::orderBy('id', 'DESC')->get();
         $conference = Conference::find($id);
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('conferences');
         return view('backend.pages.edit_conference', compact('conferences', 'conference'));
     }
 

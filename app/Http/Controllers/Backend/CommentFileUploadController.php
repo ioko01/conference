@@ -89,6 +89,10 @@ class CommentFileUploadController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'ส่งไฟล์ไปให้นักวิจัยแก้ไขสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('researchs');
+        DB::disconnect('comments');
         return back()->with('success', true);
     }
 }

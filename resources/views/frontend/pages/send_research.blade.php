@@ -86,6 +86,36 @@
                                                 class="form-control w-100" value="{{ old('presenters.4') }}"
                                                 autocomplete="presenters[4]">
                                         </div>
+                                        <div class="mb-4">
+                                            <span>6.&nbsp;</span>
+                                            <input type="text" id="presenters[]" name="presenters[]"
+                                                class="form-control w-100" value="{{ old('presenters.5') }}"
+                                                autocomplete="presenters[5]">
+                                        </div>
+                                        <div class="mb-4">
+                                            <span>7.&nbsp;</span>
+                                            <input type="text" id="presenters[]" name="presenters[]"
+                                                class="form-control w-100" value="{{ old('presenters.6') }}"
+                                                autocomplete="presenters[6]">
+                                        </div>
+                                        <div class="mb-4">
+                                            <span>8.&nbsp;</span>
+                                            <input type="text" id="presenters[]" name="presenters[]"
+                                                class="form-control w-100" value="{{ old('presenters.7') }}"
+                                                autocomplete="presenters[7]">
+                                        </div>
+                                        <div class="mb-4">
+                                            <span>9.&nbsp;</span>
+                                            <input type="text" id="presenters[]" name="presenters[]"
+                                                class="form-control w-100" value="{{ old('presenters.8') }}"
+                                                autocomplete="presenters[8]">
+                                        </div>
+                                        <div class="mb-4">
+                                            <span>10.&nbsp;</span>
+                                            <input type="text" id="presenters[]" name="presenters[]"
+                                                class="form-control w-100" value="{{ old('presenters.9') }}"
+                                                autocomplete="presenters[9]">
+                                        </div>
 
                                     </div>
                                     <div class="mb-4">

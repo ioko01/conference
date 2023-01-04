@@ -83,6 +83,37 @@
                                     @if (isset(explode('|', $research->presenter)[4])) value="{{ explode('|', $research->presenter)[4] }}" @endif
                                     autocomplete="presenters[4]">
                             </div>
+                            <div class="mb-4">
+                                <span>6.&nbsp;</span>
+                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                    @if (isset(explode('|', $research->presenter)[5])) value="{{ explode('|', $research->presenter)[5] }}" @endif
+                                    autocomplete="presenters[5]">
+                            </div>
+                            <div class="mb-4">
+                                <span>7.&nbsp;</span>
+                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                    @if (isset(explode('|', $research->presenter)[6])) value="{{ explode('|', $research->presenter)[6] }}" @endif
+                                    autocomplete="presenters[6]">
+                            </div>
+                            <div class="mb-4">
+                                <span>8.&nbsp;</span>
+                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                    @if (isset(explode('|', $research->presenter)[7])) value="{{ explode('|', $research->presenter)[7] }}" @endif
+                                    autocomplete="presenters[7]">
+                            </div>
+                            <div class="mb-4">
+                                <span>9.&nbsp;</span>
+                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                    @if (isset(explode('|', $research->presenter)[8])) value="{{ explode('|', $research->presenter)[8] }}" @endif
+                                    autocomplete="presenters[8]">
+                            </div>
+                            <div class="mb-4">
+                                <span>10.&nbsp;</span>
+                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                    @if (isset(explode('|', $research->presenter)[9])) value="{{ explode('|', $research->presenter)[9] }}" @endif
+                                    autocomplete="presenters[9]">
+                            </div>
+
 
                         </div>
                         <div class="mb-4">
@@ -93,7 +124,8 @@
                                 <option value="" @if (!$research->faculty_id) selected @endif>---กรุณาเลือก---
                                 </option>
                                 @foreach ($faculties as $faculty)
-                                    <option value="{{ $faculty->id }}" @if ($faculty->id == $research->faculty_id) selected @endif>
+                                    <option value="{{ $faculty->id }}"
+                                        @if ($faculty->id == $research->faculty_id) selected @endif>
                                         {{ $faculty->name }}
                                     </option>
                                 @endforeach

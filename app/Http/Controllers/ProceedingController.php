@@ -8,6 +8,7 @@ use App\Models\ProceedingFile;
 use App\Models\ProceedingResearch;
 use App\Models\ProceedingTopic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ProceedingController extends Controller
@@ -59,7 +60,12 @@ class ProceedingController extends Controller
                 $j++;
             }
         }
-        
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_files');
+        DB::disconnect('proceeding_researchs');
+        DB::disconnect('faculties');
+
         return view('frontend.pages.proceeding', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs'));
     }
 }

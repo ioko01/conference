@@ -6,12 +6,14 @@ use App\Models\Conference;
 use Illuminate\Http\Request;
 use App\Models\Tip;
 use App\Models\Slip;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
     public function index()
     {
         $tips = Tip::where('group', '2')->get();
+        DB::disconnect('tips');
         return view('frontend.pages.payment', compact('tips'));
     }
 
@@ -52,6 +54,7 @@ class PaymentController extends Controller
         $result->upload = $upload->storeAs($path, $name);
 
         write_logs(__FUNCTION__, "info");
+        DB::disconnect('conferences');
         return $result;
     }
 
@@ -64,6 +67,8 @@ class PaymentController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลด SLIP สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('slips');
         return back()->with('success', 'อัพโหลด SLIP สำเร็จ');
     }
 
@@ -74,6 +79,8 @@ class PaymentController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไข SLIP สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('slips');
         return back()->with('success', 'แก้ไข SLIP สำเร็จ');
     }
 }

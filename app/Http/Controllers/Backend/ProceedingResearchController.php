@@ -8,6 +8,7 @@ use App\Models\Faculty;
 use App\Models\Present;
 use App\Models\ProceedingResearch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,6 +36,11 @@ class ProceedingResearchController extends Controller
         $faculties = Faculty::get();
         $presents = Present::get();
         $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_researchs');
+        DB::disconnect('faculties');
+        DB::disconnect('presents');
         return view('backend.pages.proceeding_research', compact('year', 'researchs', 'faculties', 'presents', 'conference'));
     }
 
@@ -86,6 +92,9 @@ class ProceedingResearchController extends Controller
         ProceedingResearch::create($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_researchs');
         return redirect()->back();
     }
 
@@ -128,6 +137,11 @@ class ProceedingResearchController extends Controller
         $presents = Present::get();
         $conference = Conference::where('year', $year)->orderBy('id', 'DESC')->first();
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_researchs');
+        DB::disconnect('faculties');
+        DB::disconnect('presents');
         return view('backend.pages.edit_proceeding_research', compact('year', 'researchs', 'faculties', 'presents', '_research', 'conference'));
     }
 
@@ -195,6 +209,9 @@ class ProceedingResearchController extends Controller
         ProceedingResearch::where('id', $id)->update($data);
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขหัวข้อดาวน์โหลดไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('proceeding_researchs');
         return back();
     }
 
@@ -213,6 +230,8 @@ class ProceedingResearchController extends Controller
             ->delete();
         write_logs(__FUNCTION__, "warning");
         alert('สำเร็จ', 'ลบหัวข้อสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('proceeding_researchs');
         return redirect()->route('backend.proceeding.research.index', $year);
     }
 }

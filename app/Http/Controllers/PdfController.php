@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conference;
 use Illuminate\Http\Request;
 use App\Models\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class PdfController extends Controller
 {
@@ -40,6 +41,8 @@ class PdfController extends Controller
         $result->data = $data;
         $result->upload = $upload->storeAs($path, $name);
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('conferences');
         return $result;
     }
 
@@ -54,6 +57,8 @@ class PdfController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลด PDF สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('pdf');
         return back()->with('success', 'อัพโหลด PDF สำเร็จ');
     }
 
@@ -64,6 +69,8 @@ class PdfController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไข PDF สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('pdf');
         return back()->with('success', 'แก้ไข PDF สำเร็จ');
     }
 }

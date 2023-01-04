@@ -11,6 +11,7 @@ use App\Models\Present;
 use App\Models\Tip;
 use App\Models\Comment;
 use App\Models\Conference;
+use Illuminate\Support\Facades\DB;
 
 class ResearchController extends Controller
 {
@@ -28,6 +29,12 @@ class ResearchController extends Controller
         $tips = Tip::where('group', '1')->get();
         $conference_id = Conference::where('status_research', 1)->first();
 
+        DB::disconnect('faculties');
+        DB::disconnect('degrees');
+        DB::disconnect('branches');
+        DB::disconnect('presents');
+        DB::disconnect('tips');
+        DB::disconnect('conferences');
         return view('frontend.pages.send_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips', 'conference_id'));
     }
 
@@ -69,9 +76,12 @@ class ResearchController extends Controller
             'present_id' => $request->present_id,
             'conference_id' => auth()->user()->conference_id
         ]);
-        
+
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'เพิ่มบทความเรียบร้อย', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('researchs');
         return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
     }
 
@@ -149,6 +159,10 @@ class ResearchController extends Controller
             ->get();
 
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('conferences');
+        DB::disconnect('researchs');
+        DB::disconnect('comments');
         return view('frontend.pages.show_research', compact('data', 'comments', 'conference'));
     }
 
@@ -167,6 +181,14 @@ class ResearchController extends Controller
         );
 
         write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('faculties');
+        DB::disconnect('degrees');
+        DB::disconnect('branches');
+        DB::disconnect('presents');
+        DB::disconnect('tips');
+        DB::disconnect('researchs');
+        DB::disconnect('conferences');
         return view('frontend.pages.edit_research', compact('faculties', 'degrees', 'branches', 'presents', 'tips', 'researchs', 'conference_id'));
     }
 
@@ -188,17 +210,8 @@ class ResearchController extends Controller
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'แก้ไขบทความสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
-        return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        DB::disconnect('researchs');
+        return redirect()->route('employee.research.show', auth()->user()->id)->with('success', true);
     }
 }

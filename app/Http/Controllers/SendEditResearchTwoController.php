@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Research;
 use App\Models\Comment;
+use Illuminate\Support\Facades\DB;
 
 class SendEditResearchTwoController extends Controller
 {
@@ -91,6 +92,8 @@ class SendEditResearchTwoController extends Controller
             ->where('researchs.user_id', $id)
             ->get();
             
+            DB::disconnect('researchs');
+            DB::disconnect('comments');
         return view('frontend.pages.send_edit_research_two', compact('data', 'comments'));
     }
 }

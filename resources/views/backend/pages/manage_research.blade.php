@@ -11,7 +11,7 @@
 
             <div class="card-body text-xs">
                 <div class="text-end">
-                    <button id="load_research" onclick="loading_export()" class="btn btn-info rounded-0 mb-3"><i
+                    <button id="export" onclick="loading_export('researchs')" class="btn btn-info rounded-0 mb-3"><i
                             class="fas fa-file-export"></i> Export to Excel</button>
                 </div>
 

@@ -158,23 +158,31 @@
     {!! $chart_distinct->script() !!}
 @endif
 
-@if (Request::is('backend/researchs/management'))
+@if (Request::is('backend/researchs/management') || Request::is('backend/users'))
     <script>
-        function loading_export() {
-            document.getElementById("load_research").disabled = true
-            document.getElementById("load_research").innerHTML = `Loading`
+        function loading_export(name) {
+            document.getElementById("export").disabled = true
+            document.getElementById("export").innerHTML = `<span class="loader"></span> Waiting...`
 
             const xhr = new XMLHttpRequest()
-            const url = "{{ route('researchs.export') }}"
+            let url = ""
+            let filename = ""
+            if (name == "researchs") {
+                url = "{{ route('researchs.export') }}"
+                filename = "EXPORT_RESEARCHS"
+            } else {
+                url = "{{ route('users.export') }}"
+                filename = "EXPORT_USERS"
+            }
             let percent_complete = 0
 
             xhr.responseType = "blob"
             xhr.open("GET", url, true)
+            xhr.timeout = 60000; // time in milliseconds
             xhr.send()
 
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log(this)
                     const fileURL = window.URL.createObjectURL(this.response)
 
                     const anchor = document.createElement("a")
@@ -182,20 +190,21 @@
 
                     const date = `${new Date().getDate()}_${new Date().getMonth()+1}_${new Date().getFullYear()}`
                     anchor.download =
-                        `EXPORT_RESEARCHS_${date}.xlsx`
+                        `${filename}_${date}.xlsx`
                     document.body.appendChild(anchor)
                     anchor.click()
-                    document.getElementById("load_research").disabled = false
-                    document.getElementById("load_research").innerHTML =
-                        `<i class="fas fa-file-export"></i> Export to Excel`
                 }
+
+                document.getElementById("export").disabled = false
+                document.getElementById("export").innerHTML =
+                    `<i class="fas fa-file-export"></i> Export to Excel`
             }
 
             xhr.onprogress = function(e) {
                 percent_complete = Math.floor((e.loaded / e.total) * 100)
-                document.getElementById("load_research").disabled = true
-                document.getElementById("load_research").innerHTML = `Loading ${percent_complete}%`
-                console.log(`${percent_complete}%`)
+                document.getElementById("export").disabled = true
+                document.getElementById("export").innerHTML =
+                    `<span class="loader"></span> Loading ${percent_complete}%`
             }
         }
     </script>

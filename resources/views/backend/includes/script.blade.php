@@ -180,7 +180,7 @@
             xhr.open("GET", url, true)
             xhr.timeout = 60000; // time in milliseconds
             xhr.send()
-
+            
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     const fileURL = window.URL.createObjectURL(this.response)

@@ -13,7 +13,9 @@ use Maatwebsite\Excel\Events\AfterSheet;
 
 class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents, WithTitle
 {
-
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         $researchs = Research::select(
@@ -35,6 +37,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'researchs.topic_th AS topic_th',
             'researchs.topic_en AS topic_en',
             'status_researchs.name AS topic_status',
+            'conferences.year AS year',
             DB::raw(
                 'REPLACE(researchs.presenter , "|", ", ") AS presenter'
             ),
@@ -43,6 +46,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'degrees.name AS degree',
             'presents.name AS present',
             'researchs.created_at AS created_at_research',
+            'researchs.updated_at AS updated_at_research',
             'slips.name AS slip',
             'slips.address AS slip_address',
             'users.address AS user_address',
@@ -59,6 +63,14 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'words.created_at AS word_date',
             'pdf.name AS pdf',
             'pdf.created_at AS pdf_date',
+            DB::raw(
+                '(
+                    CASE
+                        WHEN users.person_attend = "send" THEN "ลงทะเบียนส่งผลงาน"
+                        WHEN users.person_attend = "attend" THEN "ลงทะเบียนเข้าร่วมงานทั่วไป"
+                    END
+                ) AS person_attend'
+            ),
             'users.phone AS phone',
             'users.institution AS institution',
             'positions.name AS position_name',
@@ -95,12 +107,14 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'ชื่อบทความ (ภาษาไทย)',
             'ชื่อบทความ (ภาษาอังกฤษ)',
             'สถานะบทความ',
+            'ปีที่ส่งผลงาน (พ.ศ.)',
             'ชื่อผู้นำเสนอ',
             'บทความนี้อยู่ในคณะ',
             'บทความนี้อยู่ในสาขา',
             'ประเภทบทความ',
             'ชนิดการนำเสนอ',
             'วันที่ส่งบทความ',
+            'แก้ไขบทความล่าสุดเมื่อ',
             'สลิปชำระเงิน',
             'ที่อยู่ผู้ชำระเงิน',
             'ชื่อ/ที่อยู่ (ใช้ในการออกใบเสร็จรับเงิน และส่งเอกสาร)',
@@ -110,6 +124,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'วันที่อัพโหลดไฟล์ WORD',
             'ไฟล์ PDF',
             'วันที่อัพโหลดไฟล์ PDF',
+            'สถานะการลงทะเบียน',
             'เบอร์โทร',
             'สังกัด/หน่วยงาน',
             'สถานะบุคลากร',
@@ -139,24 +154,46 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                 for ($row = 1; $row <= $highestRow; $row++) {
                     for ($column = 'A'; $column !== $columnLoopLimiter; ++$column) {
                         $allCol = 'A1:' . $column . '1';
-                        // $allRow = 'A1:' . 'A' . $row;
+                        $allRow = 'A1:' . 'A' . $row;
                         $allCell = 'A1:' . $column . $row;
 
 
                         $active_sheet = $event->sheet->getDelegate();
-                        // $slip = $active_sheet->getCell('N' . $row)->getValue();
-                        // if ($row != 1) {
-                        //     if (isset($slip)) {
-                        //         $active_sheet->getCell('N' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/สลิปชำระเงิน/' . $slip);
-                        //         $active_sheet->getStyle('N' . $row)->applyFromArray([
-                        //             'font' => [
-                        //                 'color' => [
-                        //                     'rgb' => '0000ff'
-                        //                 ]
-                        //             ]
-                        //         ]);
-                        //     }
-                        // }
+                        $slip = $active_sheet->getCell('P' . $row)->getValue();
+                        $word = $active_sheet->getCell('U' . $row)->getValue();
+                        $pdf = $active_sheet->getCell('W' . $row)->getValue();
+                        if ($row != 1) {
+                            if (isset($slip)) {
+                                $active_sheet->getCell('P' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/สลิปชำระเงิน/' . $slip);
+                                $active_sheet->getStyle('P' . $row)->applyFromArray([
+                                    'font' => [
+                                        'color' => [
+                                            'rgb' => '0000ff'
+                                        ]
+                                    ]
+                                ]);
+                            }
+                            if (isset($word)) {
+                                $active_sheet->getCell('U' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/words/' . $word);
+                                $active_sheet->getStyle('U' . $row)->applyFromArray([
+                                    'font' => [
+                                        'color' => [
+                                            'rgb' => '0000ff'
+                                        ]
+                                    ]
+                                ]);
+                            }
+                            if (isset($pdf)) {
+                                $active_sheet->getCell('W' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/pdf/' . $pdf);
+                                $active_sheet->getStyle('W' . $row)->applyFromArray([
+                                    'font' => [
+                                        'color' => [
+                                            'rgb' => '0000ff'
+                                        ]
+                                    ]
+                                ]);
+                            }
+                        }
 
                         $active_sheet->getStyle($allCol)->getFont()->setBold(true);
                         $active_sheet->getStyle($allCol)->getFill()
@@ -171,6 +208,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                             ]
                         ]);
                         $active_sheet->getStyle($allCell)->getFont()->setSize(14);
+                        $active_sheet->getStyle($allCell)->getFont()->setName('TH SarabunPSK');
                         $active_sheet->getStyle($allCell)->getFont()->setName('TH SarabunPSK');
                         $active_sheet->getStyle($allCell)->applyFromArray([
                             'borders' => [

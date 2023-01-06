@@ -178,7 +178,7 @@
 
             xhr.responseType = "blob"
             xhr.open("GET", url, true)
-            xhr.timeout = 60000; // time in milliseconds
+            xhr.timeout = 300000; // time in milliseconds
             xhr.send()
             
             xhr.onreadystatechange = function() {

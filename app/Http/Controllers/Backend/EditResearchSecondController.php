@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Research;
 use App\Models\StatusResearch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EditResearchSecondController extends Controller
 {

@@ -13,6 +13,7 @@
                 <div class="text-end">
                     <button id="export" onclick="loading_export('researchs')" class="btn btn-info rounded-0 mb-3"><i
                             class="fas fa-file-export"></i> Export to Excel</button>
+                            <strong class="text-red d-block mb-2">อาจใช้เวลาในการเขียนไฟล์หลายนาที</strong>
                 </div>
 
                 <div class="table-responsive">
@@ -80,17 +81,22 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <select name="topic_status" class="form-select"
-                                            onchange="open_modal(this, 'change_status')">
+                                        @if (auth()->user()->is_admin == 3 || auth()->user()->is_admin == 2)
+                                            <select name="topic_status" class="form-select"
+                                                onchange="open_modal(this, 'change_status')">
 
-                                            @foreach ($topic_status as $status)
-                                                <option value="{{ $status->id }}"
-                                                    @if ($status->name == $value->topic_status) selected="selected" @endif>
-                                                    {{ $status->name }}
+                                                @foreach ($topic_status as $status)
+                                                    <option value="{{ $status->id }}"
+                                                        @if ($status->name == $value->topic_status) selected="selected" @endif>
+                                                        {{ $status->name }}
 
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            -
+                                        @endif
+
                                         <input type="hidden" value="{{ $value->topic_id }}">
                                     </td>
                                     <td>
@@ -137,9 +143,13 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('backend.research.edit', $value->topic_id) }}"
-                                            class="btn btn-warning text-white rounded-0"><i
-                                                class="nav-icon fa fa-edit"></i>แก้ไข</a>
+                                        @if (auth()->user()->is_admin == 3 || auth()->user()->is_admin == 2)
+                                            <a href="{{ route('backend.research.edit', $value->topic_id) }}"
+                                                class="btn btn-warning text-white rounded-0"><i
+                                                    class="nav-icon fa fa-edit"></i>แก้ไข</a>
+                                        @else
+                                            -
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

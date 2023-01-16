@@ -11,9 +11,9 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 py-3 text-center">
             <div class="info">
-                <p class="d-block m-0">สถานะ: @if (auth()->user()->is_admin == 1)
+                <p class="d-block m-0">สถานะ: @if (auth()->user()->is_admin == 1 || auth()->user()->is_admin == 2)
                         ADMIN
-                    @elseif(auth()->user()->is_admin == 2)
+                    @elseif(auth()->user()->is_admin == 3)
                         SUPER ADMIN
                     @endif
                 </p>
@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 @auth
-                    @if (auth()->user()->is_admin === 2)
+                    @if (auth()->user()->is_admin === 3)
                         <li class="nav-item">
                             <a href="{{ route('backend.conference.index') }}"
                                 class="nav-link @if (Request::is('backend/conference')) active @endif">
@@ -81,14 +81,18 @@
                         <p>ผู้ใช้งาน</p>
                     </a>
                 </li>
+                @auth
+                    @if (auth()->user()->is_admin === 3 || auth()->user()->is_admin === 2)
+                        <li class="nav-item">
+                            <a href="{{ route('backend.researchs.index') }}"
+                                class="nav-link @if (Request::is('backend/researchs')) active @endif">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>บทความทั้งหมด</p>
+                            </a>
+                        </li>
+                    @endif
+                @endauth
 
-                <li class="nav-item">
-                    <a href="{{ route('backend.researchs.index') }}"
-                        class="nav-link @if (Request::is('backend/researchs')) active @endif">
-                        <i class="nav-icon fas fa-book"></i>
-                        <p>บทความทั้งหมด</p>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a href="{{ route('backend.research.index') }}"
                         class="nav-link @if (Request::is('backend/researchs/management')) active @endif">
@@ -98,7 +102,7 @@
                 </li>
 
                 @auth
-                    @if (auth()->user()->is_admin === 2)
+                    @if (auth()->user()->is_admin === 3)
                         <li class="nav-item">
                             <a href="{{ route('backend.researchs.passed.index') }}"
                                 class="nav-link @if (Request::is('backend/researchs/passed')) active @endif">
@@ -108,81 +112,86 @@
                         </li>
                     @endif
                 @endauth
-
-                <li class="nav-item">
-                    <a href="{{ route('backend.research.first.index') }}"
-                        class="nav-link @if (Request::is('backend/researchs/management/times/1')) active @endif">
-                        <i class="nav-icon fas fa-book-open"></i>
-                        <p>บทความฉบับแก้ไขครั้งที่ 1</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('backend.research.second.index') }}"
-                        class="nav-link @if (Request::is('backend/researchs/management/times/2')) active @endif">
-                        <i class="nav-icon fas fa-book-open"></i>
-                        <p>บทความฉบับแก้ไขครั้งที่ 2</p>
-                    </a>
-                </li>
-                <li class="nav-item @if (Request::is('backend/posters') || Request::is('backend/orals') || Request::is('backend/orals/link')) menu-is-opening menu-open @endif">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-line"></i>
-                        <p>
-                            จัดการผลงานนำเสนอ
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('backend.orals.link.index') }}"
-                                class="nav-link @if (Request::is('backend/orals/link')) active @endif">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>ลิงค์นำเสนอ Oral</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('backend.orals.index') }}"
-                                class="nav-link @if (Request::is('backend/orals')) active @endif">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>ผลงานนำเสนอ Oral</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('backend.posters.index') }}"
-                                class="nav-link @if (Request::is('backend/posters')) active @endif">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>ผลงานนำเสนอ Poster</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item @if (Request::is('backend/proceeding/*/*')) menu-is-opening menu-open @endif">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p>
-                            Proceedings
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        @forelse ($conferences = DB::table('conferences')->select('year')->orderBy('year', 'desc')->get() as $conference)
-                            <li class="nav-item">
-                                <a href="{{ route('backend.proceeding.topic.index', $conference->year) }}"
-                                    class='nav-link @if (Request::is("backend/proceeding/$conference->year/*")) active @endif'>
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>{{ $conference->year }}</p>
-                                </a>
-                            </li>
-
-                        @empty
-                            <li class="nav-item">
-                                <p class='nav-link disabled'>ไม่มีรายการให้เลือก</p>
-                            </li>
-                        @endforelse
-                    </ul>
-                </li>
                 @auth
-                    @if (auth()->user()->is_admin === 2)
+                    @if (auth()->user()->is_admin === 3 || auth()->user()->is_admin === 2)
+                        <li class="nav-item">
+                            <a href="{{ route('backend.research.first.index') }}"
+                                class="nav-link @if (Request::is('backend/researchs/management/times/1')) active @endif">
+                                <i class="nav-icon fas fa-book-open"></i>
+                                <p>บทความฉบับแก้ไขครั้งที่ 1</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.research.second.index') }}"
+                                class="nav-link @if (Request::is('backend/researchs/management/times/2')) active @endif">
+                                <i class="nav-icon fas fa-book-open"></i>
+                                <p>บทความฉบับแก้ไขครั้งที่ 2</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item @if (Request::is('backend/posters') || Request::is('backend/orals') || Request::is('backend/orals/link')) menu-is-opening menu-open @endif">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-chart-line"></i>
+                                <p>
+                                    จัดการผลงานนำเสนอ
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('backend.orals.link.index') }}"
+                                        class="nav-link @if (Request::is('backend/orals/link')) active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>ลิงค์นำเสนอ Oral</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('backend.orals.index') }}"
+                                        class="nav-link @if (Request::is('backend/orals')) active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>ผลงานนำเสนอ Oral</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('backend.posters.index') }}"
+                                        class="nav-link @if (Request::is('backend/posters')) active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>ผลงานนำเสนอ Poster</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item @if (Request::is('backend/proceeding/*/*')) menu-is-opening menu-open @endif">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Proceedings
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                @forelse ($conferences = DB::table('conferences')->select('year')->orderBy('year', 'desc')->get() as $conference)
+                                    <li class="nav-item">
+                                        <a href="{{ route('backend.proceeding.topic.index', $conference->year) }}"
+                                            class='nav-link @if (Request::is("backend/proceeding/$conference->year/*")) active @endif'>
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>{{ $conference->year }}</p>
+                                        </a>
+                                    </li>
+
+                                @empty
+                                    <li class="nav-item">
+                                        <p class='nav-link disabled'>ไม่มีรายการให้เลือก</p>
+                                    </li>
+                                @endforelse
+                            </ul>
+                        </li>
+                    @endif
+                @endauth
+
+                @auth
+                    @if (auth()->user()->is_admin === 3)
                         <li class="nav-item">
                             <a href="{{ route('backend.logs') }}" class="nav-link">
                                 <i class="nav-icon fas fa-sticky-note"></i>

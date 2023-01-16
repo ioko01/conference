@@ -11,6 +11,7 @@
                 <div class="text-end">
                     <button id="export" onclick="loading_export('users')" class="btn btn-info rounded-0 mb-3"><i
                             class="fas fa-file-export"></i> Export to Excel</button>
+                    <strong class="text-red d-block mb-2">อาจใช้เวลาในการเขียนไฟล์หลายนาที</strong>
                 </div>
                 <div class="table-responsive">
                     <table style="color: inherit;" class="dataTable table w-100">

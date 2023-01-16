@@ -162,7 +162,7 @@
     <script>
         function loading_export(name) {
             document.getElementById("export").disabled = true
-            document.getElementById("export").innerHTML = `<span class="loader"></span> Waiting...`
+            document.getElementById("export").innerHTML = `<span class="loader"></span> กำลังเขียนไฟล์...`
 
             const xhr = new XMLHttpRequest()
             let url = ""
@@ -204,7 +204,7 @@
                 percent_complete = Math.floor((e.loaded / e.total) * 100)
                 document.getElementById("export").disabled = true
                 document.getElementById("export").innerHTML =
-                    `<span class="loader"></span> Loading ${percent_complete}%`
+                    `<span class="loader"></span> กำลังโหลด ${percent_complete}%`
             }
         }
     </script>

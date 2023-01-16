@@ -65,6 +65,8 @@ function countdown() {
                                 </div>
                             </div>
                         </div>`;
+                        // h1.classList.add("text-red");
+                        // h1.innerHTML = `<h1 class="fw-bold">สิ้นสุดเวลาการส่งบทความ</h1>`;
                     } else {
                         clearInterval(interval);
                         h1.classList.add("text-red");

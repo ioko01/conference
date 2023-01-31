@@ -13,7 +13,7 @@
                 <div class="text-end">
                     <button id="export" onclick="loading_export('researchs')" class="btn btn-info rounded-0 mb-3"><i
                             class="fas fa-file-export"></i> Export to Excel</button>
-                            <strong class="text-red d-block mb-2">อาจใช้เวลาในการเขียนไฟล์หลายนาที</strong>
+                    <strong class="text-red d-block mb-2">อาจใช้เวลาในการเขียนไฟล์หลายนาที</strong>
                 </div>
 
                 <div class="table-responsive">
@@ -114,8 +114,14 @@
                                                                 href="{{ Storage::url($comment->comment_path) }}"
                                                                 title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
 
-                                                                &bull; <i style="font-size: 10px;"
-                                                                    class="mb-0">{{ $comment->comment_name }}</i><br />
+                                                                &bull; <i style="font-size: 10px;" class="fst-normal"
+                                                                    class="mb-0">{{ $comment->comment_name }}
+                                                                    @if ($comment->comment_status == 'pass')
+                                                                        &nbsp;<i class="fas fa-check text-green"></i>
+                                                                    @elseif($comment->comment_status == 'notpass')
+                                                                        &nbsp;<i class="fas fa-times text-red"></i>
+                                                                    @endif
+                                                                </i><br />
 
                                                             </a>
 
@@ -128,7 +134,7 @@
                                                 <button type="button" class="btn btn-info rounded-0 text-white w-100"
                                                     onclick="open_modal(this, 'file')">
 
-                                                    <i class="fas fa-upload"></i> อัพโหลดไฟล์
+                                                    <i class="fas fa-upload"></i> อัพโหลด / ลบไฟล์
 
                                                 </button>
 

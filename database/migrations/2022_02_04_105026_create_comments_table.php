@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
             $table->string('topic_id')->comment('รหัสบทความ');
+            $table->enum('status', ['pass', 'notpass'])->comment('สถานะ ผ่าน/ไม่ผ่านการประเมินบทความ');
             $table->text('name')->nullable()->comment('ชื่อไฟล์');
             $table->text('path')->nullable()->comment('แหล่งที่อยู่ไฟล์');
             $table->string('extension')->nullable()->comment('นามสกุลไฟล์');

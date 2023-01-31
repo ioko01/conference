@@ -57,12 +57,14 @@ class ManageResearchController extends Controller
             ->where('conferences.status', 1)
             ->orderBy('id')
             ->get();
+
         $comments = Comment::select(
             'comments.topic_id as comment_topic_id',
             'comments.name as comment_name',
             'comments.path as comment_path',
             'comments.extension as comment_ext',
-            'comments.created_at as comment_update'
+            'comments.created_at as comment_update',
+            'comments.status as comment_status',
         )
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->get();

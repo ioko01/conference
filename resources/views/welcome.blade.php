@@ -12,7 +12,7 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset('images/banner-01.webp', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
+                    <img src="{{ asset('images/banner-02.jpg', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
                         alt="banner">
                 </div>
                 <div class="carousel-item">
@@ -37,6 +37,29 @@
     </div>
 
     <div style="overflow: hidden;" class="row bg-white m-0">
+        <div class="row">
+            @forelse ($downloads as $key =>$download)
+                @if ($download->ext_file == 'jpg' || $download->ext_file == 'png' || $download->ext_file == 'jpeg')
+                    <div class="animate fade-up col-md-3 mx-auto">
+                        <h3 class="text-center text-blue fw-bold">{{ $download->name }}</h3>
+                        <div class="card-body position-relative p-0">
+                            <div style="z-index: 9999;" class="position-absolute end-0">
+                                @if (countDate($download->created_at, 10, 'days'))
+                                    <div class="box-new">
+                                        <span style="font-size: calc(15px + .3vw);">ใหม่</span>
+                                    </div>
+                                @endif
+                            </div>
+                            <img width="100%" src="{{ Storage::url($download->path_file) }}" alt="#">
+                        </div>
+                    </div>
+                @endif
+            @empty
+            @endforelse
+        </div>
+
+
+
         @forelse ($downloads as $key =>$download)
             @if ($loop->first)
                 <div class="animate fade-right col-md-6">
@@ -46,7 +69,6 @@
                                 ประชาสัมพันธ์</strong></h1>
                         <ul style="list-style: none;" class="px-5">
             @endif
-
             <li>
                 <strong>
                     <a target="_blank"
@@ -67,6 +89,7 @@
 
                 </strong>
             </li>
+
             @if ($loop->last)
                 </ul>
     </div>
@@ -159,7 +182,7 @@
                                             <td>3</td>
                                             <td>ประกาศผลพิจารณา</td>
                                             <td>31 มกราคม 2566</td>
-                                            <td></td>
+                                            <td><strong class="text-danger">เลื่อนเป็น 7 กุมภาพันธ์ 2566</strong></td>
                                         </tr>
                                         <tr>
                                             <td>4</td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Research;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ResearchController extends Controller
 {
@@ -75,6 +76,7 @@ class ResearchController extends Controller
             ->where('researchs.topic_id', $id)
             ->get();
 
+        DB::disconnect('researchs');
         return response()->json($data);
     }
 

@@ -21,13 +21,15 @@
 <script src="{{ asset('api/select-faculty.js', env('REDIRECT_HTTPS')) }}"></script>
 
 @if (Request::is('backend/researchs') ||
-    Request::is('backend/researchs/management') ||
-    Request::is('backend/researchs/*/edit') ||
-    Request::is('backend/researchs/management/times/*') ||
-    Request::is('backend/dashboard') ||
-    Request::is('backend/researchs/passed'))
+        Request::is('backend/researchs/management') ||
+        Request::is('backend/researchs/*/edit') ||
+        Request::is('backend/researchs/management/times/*') ||
+        Request::is('backend/dashboard') ||
+        Request::is('backend/researchs/passed') ||
+        Request::is('backend/researchs/get-comment-file/*'))
     <script src="{{ asset('api/manage-research.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
+
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
@@ -53,9 +55,9 @@
 @endif
 
 @if (Request::is('backend/download/*/edit') ||
-    Request::is('backend/downloads') ||
-    Request::is('backend/manual/*/edit') ||
-    Request::is('backend/manuals'))
+        Request::is('backend/downloads') ||
+        Request::is('backend/manual/*/edit') ||
+        Request::is('backend/manuals'))
     <script src="{{ asset('js/toggle-file-link.js', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('api/change-notice.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
@@ -65,23 +67,23 @@
 @endif
 
 @if (Request::is('backend/poster/*/edit') ||
-    Request::is('backend/posters') ||
-    Request::is('backend/oral/*/edit') ||
-    Request::is('backend/orals') ||
-    Request::is('backend/line/*/edit') ||
-    Request::is('backend/lines') ||
-    Request::is('backend/download/*/edit') ||
-    Request::is('backend/downloads') ||
-    Request::is('backend/manual/*/edit') ||
-    Request::is('backend/manuals') ||
-    Request::is('backend/orals/link') ||
-    Request::is('backend/orals/link/*/edit') ||
-    Request::is('backend/proceeding/*/topic') ||
-    Request::is('backend/proceeding/*/topic/*/edit') ||
-    Request::is('backend/proceeding/*/file') ||
-    Request::is('backend/proceeding/*/file/*/edit') ||
-    Request::is('backend/proceeding/*/research') ||
-    Request::is('backend/proceeding/*/research/*/edit'))
+        Request::is('backend/posters') ||
+        Request::is('backend/oral/*/edit') ||
+        Request::is('backend/orals') ||
+        Request::is('backend/line/*/edit') ||
+        Request::is('backend/lines') ||
+        Request::is('backend/download/*/edit') ||
+        Request::is('backend/downloads') ||
+        Request::is('backend/manual/*/edit') ||
+        Request::is('backend/manuals') ||
+        Request::is('backend/orals/link') ||
+        Request::is('backend/orals/link/*/edit') ||
+        Request::is('backend/proceeding/*/topic') ||
+        Request::is('backend/proceeding/*/topic/*/edit') ||
+        Request::is('backend/proceeding/*/file') ||
+        Request::is('backend/proceeding/*/file/*/edit') ||
+        Request::is('backend/proceeding/*/research') ||
+        Request::is('backend/proceeding/*/research/*/edit'))
     <script src="{{ asset('api/delete.js', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
@@ -108,14 +110,14 @@
 @endif
 
 @if (Request::is('backend/proceeding/*/preview') ||
-    Request::is('backend/proceeding/*/research') ||
-    Request::is('backend/proceeding/*/research/*/edit') ||
-    Request::is('backend/researchs/management') ||
-    Request::is('backend/researchs') ||
-    Request::is('backend/users') ||
-    Request::is('backend/researchs/management/times/1') ||
-    Request::is('backend/researchs/management/times/2') ||
-    Request::is('backend/researchs/passed'))
+        Request::is('backend/proceeding/*/research') ||
+        Request::is('backend/proceeding/*/research/*/edit') ||
+        Request::is('backend/researchs/management') ||
+        Request::is('backend/researchs') ||
+        Request::is('backend/users') ||
+        Request::is('backend/researchs/management/times/1') ||
+        Request::is('backend/researchs/management/times/2') ||
+        Request::is('backend/researchs/passed'))
     <script src="{{ asset('vendor/plugins/datatables/datatables.min.js', env('REDIRECT_HTTPS')) }}" defer></script>
     <script>
         $(document).ready(function() {
@@ -180,7 +182,7 @@
             xhr.open("GET", url, true)
             xhr.timeout = 300000; // time in milliseconds
             xhr.send()
-            
+
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     const fileURL = window.URL.createObjectURL(this.response)

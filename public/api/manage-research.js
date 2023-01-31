@@ -166,26 +166,121 @@ function update_modal_passed(topic_id, title, status_value, text_status) {
     $("#research_modal").modal("show");
 }
 
-function send_comment_modal(topic_id, type) {
+function default_comment_form(topic_id) {
     const _token = $('meta[name="csrf-token"]').attr("content");
-    const error = $("#error_file_comment").val();
+    $("#form_modal_confirm").html(`
+        <form enctype="multipart/form-data" method="POST" action="/backend/researchs/comment-file-upload/${topic_id}">
+            <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+            aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
+                <input type="hidden" name="_token" value="${_token}" />
+                <input type="hidden" name="_method" value="PUT" />
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">อัพโหลดไฟล์</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div id="modal_body" class="modal-body"></div>
+                        <div id="modal_footer" class="modal-footer">
+                            <button onclick="thisDisabled(this)" type="submit" class="btn btn-success text-white rounded-0">อัพโหลดไฟล์</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    `);
+    $("#research_modal").modal("show");
+}
 
-    const createModal = `
-    <form enctype="multipart/form-data" method="POST" action="/backend/researchs/comment-file-upload/${topic_id}">
+function confirm_delete(topic_id, filename, file_id) {
+    const _token = $('meta[name="csrf-token"]').attr("content");
+    $("#form_modal_confirm").html(`
+    <form enctype="multipart/form-data" method="POST" action="/backend/researchs/comment-file-delete/${file_id}">
         <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
-        aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
+            aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
             <input type="hidden" name="_token" value="${_token}" />
-            <input type="hidden" name="_method" value="PUT" />
+            <input type="hidden" name="_method" value="DELETE" />
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">อัพโหลดไฟล์</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div id="modal_body" class="modal-body">
+                        ต้องการลบไฟล์ <strong class="text-red">"${filename}"</strong> หรือไม่ ?
+                    </div>
+                    <div id="modal_footer" class="modal-footer">
+                        <button onclick="thisDisabled(this)" type="submit" class="btn btn-success text-white rounded-0">ตกลง</button>
+                        <button onclick="send_comment_modal('${topic_id}')" data-bs-dismiss="modal" type="button" class="btn btn-secondary text-white rounded-0">ย้อนกลับ</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+    `);
+    $("#research_modal").modal("show");
+}
+
+function send_comment_modal(topic_id) {
+    try {
+        const _token = $('meta[name="csrf-token"]').attr("content");
+        const error = $("#error_file_comment").val();
+        let fileList = "";
+        let createModal = `
+                <div id="form_modal_confirm">
+                    <form enctype="multipart/form-data" method="POST" action="/backend/researchs/comment-file-upload/${topic_id}">
+                        <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+                        aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
+                            <input type="hidden" name="_token" value="${_token}" />
+                            <input type="hidden" name="_method" value="PUT" />
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">อัพโหลดไฟล์</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div id="modal_body" class="modal-body"></div>
+                                    <div id="modal_footer" class="modal-footer">
+                                        <button onclick="thisDisabled(this)" type="submit" class="btn btn-success text-white rounded-0">อัพโหลดไฟล์</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                    `;
+
+        $.ajax({
+            method: "GET",
+            url: "/backend/researchs/get-comment-file/" + topic_id,
+            success: function (data) {
+                data.map((res) => {
+                    fileList += `<li class="d-flex justify-content-between mt-1">
+                                    <div>
+                                        <strong class="mr-2"> - ${
+                                            res.comment_name
+                                        } ${
+                        res.comment_status == "pass"
+                            ? `<i class="fas fa-check text-green"></i>`
+                            : res.comment_status == "notpass" &&
+                              `<i class="fas fa-times text-red"></i>`
+                    }</strong> 
+                                    </div>
+                                    <div>
+                                    <button data-bs-dismiss="modal" onclick="confirm_delete('${topic_id}','${
+                        res.comment_name
+                    }', ${
+                        res.comment_id
+                    })" class="btn btn-sm rounded-0 btn-danger text-white">
+                                        ลบไฟล์
+                                    </button>
+                                 </li>`;
+                });
+                $("#modal_body").html(`
                     <input class="form-control ${
                         error ? `is-invalid` : ``
-                    }" type="file" name="file_comment[]" accept=".pdf" multiple>
+                    }" type="file" name="file_comment" accept=".pdf">
                     ${
                         error
                             ? `<span class="invalid-feedback" role="alert">
@@ -193,17 +288,81 @@ function send_comment_modal(topic_id, type) {
                                 </span>`
                             : ``
                     }
+                    <div class="mt-2">
+                        <div class="form-check">
+                            <input class="form-check-input" id="inp_file_comment_pass" type="radio" name="inp_file_comment" value="pass" checked>
+                            <label class="form-check-label" for="inp_file_comment_pass">
+                                ผ่านการประเมิน
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" id="inp_file_comment_notpass" type="radio" name="inp_file_comment" value="notpass">
+                            <label class="form-check-label" for="inp_file_comment_notpass">
+                                ไม่ผ่านการประเมิน
+                            </label>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button onclick="thisDisabled(this)" type="submit" class="btn btn-success text-white rounded-0">อัพโหลดไฟล์</button>
+                    <br/>
+                    <strong>รายการไฟล์ที่อัพโหลด</strong>
+                    <br/>
+                    <i class="fas fa-check text-green"></i> ผ่านการประเมิน
+                    <br/>
+                    <i class="fas fa-times text-red"></i> ไม่ผ่านการประเมิน
+                    ${fileList}
                     </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    `;
-    $("#modal").html(createModal);
-    $("#research_modal").modal("show");
+                `);
+            },
+            beforeSend: function () {
+                $("#modal").html(createModal);
+                $("#modal_body").html(
+                    `<div class="text-center">กำลังโหลดข้อมูล กรุณารอสักครู่</div>`
+                );
+                $("#research_modal").modal("hide");
+                $("#research_modal").modal("show");
+            },
+            error: function (error) {
+                if (!navigator.onLine) {
+                    $("#modal_body").html(
+                        `<div class="text-center">ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน</div>`
+                    );
+                } else if (!navigator.doNotTrack) {
+                    $("#modal_body").html(
+                        `<div class="text-center">เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง</div>`
+                    );
+                }
+            },
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
+function pass_notpass_file_comment(topic_id, handleData) {
+    try {
+        $.ajax({
+            method: "GET",
+            url: "/backend/researchs/get-comment-file/" + topic_id,
+            success: function (data) {
+                handleData(data);
+            },
+            beforeSend: function () {
+                console.log("กำลังโหลด");
+            },
+            error: function (error) {
+                if (!navigator.onLine) {
+                    console.log(
+                        "ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน"
+                    );
+                } else if (!navigator.doNotTrack) {
+                    console.log(
+                        "เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง"
+                    );
+                }
+            },
+        });
+    } catch (error) {
+        throw error;
+    }
 }
 
 function open_modal(e, type) {

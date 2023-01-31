@@ -42,49 +42,49 @@ class CommentFileUploadController extends Controller
         $conference = Conference::where('id', auth()->user()->conference_id)->first();
 
         if ($request->hasfile('file_comment')) {
+            $upload = $request->file('file_comment');
+            $extension = $upload->extension();
+            $name = $upload->getClientOriginalName();
+            $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์คอมเมนต์' . '/' . $id;
+            $full_path = $path . "/" . $name;
 
-            foreach ($request->file('file_comment') as $key => $file) {
-                $upload = $file;
-                $extension = $upload->extension();
-                $name = $upload->getClientOriginalName();
-                $path = 'public/ประชุมวิชาการ ' . $conference->year . '/ไฟล์คอมเมนต์' . '/' . $id;
-                $full_path = $path . "/" . $name;
+            $data = array_filter([
+                'user_id' => $user->user_id,
+                'topic_id' => $id,
+                'name' => $name,
+                'path' => $full_path,
+                'extension' => $extension,
+                'conference_id' => auth()->user()->conference_id,
+                'status' => $request->inp_file_comment
+            ]);
 
-                $data = array_filter([
-                    'user_id' => $user->user_id,
-                    'topic_id' => $id,
-                    'name' => $name,
-                    'path' => $full_path,
-                    'extension' => $extension,
-                    'conference_id' => auth()->user()->conference_id
-                ]);
+            // if ($key == 0) {
+            //     Comment::where('name', '!=', $name)
+            //         ->where('topic_id', $id)
+            //         ->delete($data);
+            // }
 
-                if ($key == 0) {
-                    Comment::where('name', '!=', $name)
-                        ->where('topic_id', $id)
-                        ->delete($data);
-                }
+            $comment = Comment::select('name')
+                ->where('topic_id', $id)
+                ->where('name', $name)
+                ->count();
 
-                $comment = Comment::select('name')->where('topic_id', $id)->first();
-                $count = Comment::select('name')->where('topic_id', $id)->count();
-
-                if ($key == 0) {
-                    $this->destroyFile($path);
-                }
-
-                if ($count == 0 || $comment->name != $name) {
-                    Comment::create($data);
-                    $status_research = StatusResearch::select('id')->where('name', 'ส่งบทความให้นักวิจัยแก้ไขแล้ว')->first();
-                    Research::where('topic_id', $id)
-                        ->update(['topic_status' => $status_research->id]);
-                } else if ($comment->name == $name) {
-                    Comment::where('name', $name)
-                        ->where('topic_id', $id)
-                        ->update($data);
-                }
-
-                $upload->storeAs($path, $name);
+            // if ($key == 0) {
+            //     $this->destroyFile($path);
+            // }
+            if ($comment == 0) {
+                Comment::create($data);
+                $status_research = StatusResearch::select('id')->where('name', 'ส่งบทความให้นักวิจัยแก้ไขแล้ว')->first();
+                Research::where('topic_id', $id)
+                    ->update(['topic_status' => $status_research->id]);
+            } else {
+                Comment::where('name', $name)
+                    ->where('topic_id', $id)
+                    ->update($data);
             }
+
+
+            $upload->storeAs($path, $name);
         }
 
         write_logs(__FUNCTION__, "info");
@@ -94,5 +94,38 @@ class CommentFileUploadController extends Controller
         DB::disconnect('researchs');
         DB::disconnect('comments');
         return back()->with('success', true);
+    }
+
+    public function get_comment_file($id)
+    {
+        $comments = Comment::select(
+            'comments.id as comment_id',
+            'comments.topic_id as comment_topic_id',
+            'comments.name as comment_name',
+            'comments.path as comment_path',
+            'comments.extension as comment_ext',
+            'comments.created_at as comment_update',
+            'comments.status as comment_status'
+        )
+            ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
+            ->where('comments.topic_id', '=', $id)
+            ->get();
+
+        DB::disconnect('comments');
+        return response()->json($comments);
+    }
+
+    public function destroy($id)
+    {
+        $_comment = Comment::find($id);
+        if (Storage::exists($_comment->path)) {
+            Storage::delete($_comment->path);
+        }
+        Comment::where('id', $id)->delete();
+        write_logs(__FUNCTION__, "warning");
+        alert('สำเร็จ', 'ลบไฟล์สำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('comments');
+        return redirect()->route('backend.research.index');
     }
 }

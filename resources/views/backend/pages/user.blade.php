@@ -22,7 +22,7 @@
                                 <th>สถานะ</th>
                                 <th class="text-start">อีเมล</th>
                                 <th class="text-start">สร้างเมื่อ</th>
-                                @if (auth()->user()->is_admin === 2)
+                                @if (auth()->user()->is_admin === 2 || auth()->user()->is_admin === 3)
                                     <th>แก้ไข</th>
                                     <th class="text-center">#</th>
                                 @endif
@@ -57,7 +57,7 @@
                                     </td>
                                     <td class="text-start"><i style="font-size: 12px;"
                                             class="text-bluesky">{{ thaiDateFormat($user->created_at, true) }}</i></td>
-                                    @if (auth()->user()->is_admin === 2)
+                                    @if (auth()->user()->is_admin === 2 || auth()->user()->is_admin === 3)
                                         <td>
                                             <a href="{{ route('backend.user.edit', $user->id) }}" class=" text-warning"><i
                                                     class="nav-icon fa fa-edit"></i>

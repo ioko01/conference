@@ -45,7 +45,19 @@
                             <td>
                                 <strong>
                                     @if ($research->topic_status_id >= 4)
-                                        <span class="text-small text-green">ชำระเงินแล้ว</span>
+                                        @if ($research->position_id === 1)
+                                            <span class="text-small text-green">บุคลากรภายในมหาวิทยาลัยราชภัฏเลย
+                                                <br />ไม่ต้องชำระเงิน</span>
+                                        @elseif($research->position_id === 3)
+                                            <span class="text-small text-green">โควต้าเจ้าภาพร่วม
+                                                <br />ไม่ต้องชำระเงิน</span>
+                                        @else
+                                            @if ($research->payment)
+                                                <span class="text-small text-green">ชำระเงินแล้ว</span>
+                                            @else
+                                                <span class="text-small text-danger">ค้างชำระเงิน</span>
+                                            @endif
+                                        @endif
                                     @else
                                         @if (countDate($research->created_at, 1, 'days'))
                                             <span class="text-small text-warning">{{ $research->topic_status }}</span>

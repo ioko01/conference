@@ -16,6 +16,7 @@ class Comment extends Model
         'name',
         'path',
         'extension',
-        'conference_id'
+        'conference_id',
+        'status'
     ];
 }

@@ -199,6 +199,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('management/times/1', [EditResearchFirstController::class, 'index'])->name('backend.research.first.index');
                 Route::get('management/times/2', [EditResearchSecondController::class, 'index'])->name('backend.research.second.index');
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);
+                Route::delete('comment-file-delete/{topic_id}', [CommentFileUploadController::class, 'destroy']);
+                Route::get('get-comment-file/{topic_id}', [CommentFileUploadController::class, 'get_comment_file']);
                 Route::get('export', [BackendResearchController::class, 'export'])->name('researchs.export');
             });
 

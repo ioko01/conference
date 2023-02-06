@@ -65,7 +65,6 @@ class CommentFileUploadController extends Controller
             // }
 
             $comment = Comment::select('name')
-                ->where('topic_id', $id)
                 ->where('name', $name)
                 ->count();
 
@@ -74,13 +73,15 @@ class CommentFileUploadController extends Controller
             // }
             if ($comment == 0) {
                 Comment::create($data);
-                $status_research = StatusResearch::select('id')->where('name', 'ส่งบทความให้นักวิจัยแก้ไขแล้ว')->first();
-                Research::where('topic_id', $id)
-                    ->update(['topic_status' => $status_research->id]);
+                // $status_research = StatusResearch::select('id')->where('name', 'ส่งบทความให้นักวิจัยแก้ไขแล้ว')->first();
+                // Research::where('topic_id', $id)
+                //     ->update(['topic_status' => $status_research->id]);
             } else {
-                Comment::where('name', $name)
-                    ->where('topic_id', $id)
-                    ->update($data);
+                alert('ผิดพลาด', 'มีชื่อไฟล์นี้อยู่แล้ว ไม่สามารถอัพโหลดไฟล์ได้', 'error')->showConfirmButton('ปิด', '#3085d6');
+                return back()->withErrors('มีชื่อไฟล์นี้อยู่แล้ว ไม่สามารถอัพโหลดไฟล์ได้');
+                // Comment::where('name', $name)
+                //     ->where('topic_id', $id)
+                //     ->update($data);
             }
 
 

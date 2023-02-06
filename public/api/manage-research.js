@@ -280,7 +280,7 @@ function send_comment_modal(topic_id) {
                 $("#modal_body").html(`
                     <input class="form-control ${
                         error ? `is-invalid` : ``
-                    }" type="file" name="file_comment" accept=".pdf">
+                    }" type="file" name="file_comment" accept=".pdf,.doc,.docx">
                     ${
                         error
                             ? `<span class="invalid-feedback" role="alert">

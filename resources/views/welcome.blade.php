@@ -196,7 +196,7 @@
                                             <td>4</td>
                                             <td>ปิดรับผลงานฉบับแก้ไข</td>
                                             <td>15 กุมภาพันธ์ 2566</td>
-                                            <td></td>
+                                            <td><strong class="text-danger">เลื่อนเป็น 28 กุมภาพันธ์ 2566</strong></td>
                                         </tr>
                                         <tr>
                                             <td>5</td>

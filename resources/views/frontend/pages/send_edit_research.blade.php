@@ -46,7 +46,7 @@
                             </td>
                             @if ($value->research_passed == 1)
                                 <td style="vertical-align: middle;">
-                                    @if ($value->status_id >= 8)
+                                    @if ($value->status_id >= 7)
                                         @forelse ($comments as $key => $comment)
                                             @if ($comment->comment_topic_id == $value->topic_id)
                                                 <div class="text-start">
@@ -83,7 +83,7 @@
                                     @endif
                                     @if ($value->status_research_edit == 1)
                                         @if (endDate('end_research_edit')->day >= 0)
-                                            @if ($value->status_id >= 8)
+                                            @if ($value->status_id >= 7)
                                                 <button type="button"
                                                     class="btn btn-warning text-white rounded-0 w-100 my-1"
                                                     onclick="open_modal(this, 'word'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
@@ -147,7 +147,7 @@
                                     @endif
                                     @if ($value->status_research_edit === 1)
                                         @if (endDate('end_research_edit')->day >= 0)
-                                            @if ($value->status_id >= 8)
+                                            @if ($value->status_id >= 7)
                                                 <button type="button"
                                                     class="btn btn-warning text-white rounded-0 w-100 my-1"
                                                     onclick="open_modal(this, 'pdf'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
@@ -210,7 +210,7 @@
                                     @endif
                                     @if ($value->status_research_edit === 1)
                                         @if (endDate('end_research_edit')->day >= 0)
-                                            @if ($value->status_id >= 8)
+                                            @if ($value->status_id >= 7)
                                                 <button type="button"
                                                     class="btn btn-warning text-white rounded-0 w-100 my-1"
                                                     onclick="open_modal(this, 'stm'@if (isset($value->edit_stm_path)) , 'PUT' @endif)">

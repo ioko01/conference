@@ -287,7 +287,7 @@
 
                             </td>
                             <td>
-                                @if ($value->status_id >= 8)
+                                @if ($value->status_id >= 7)
                                     @forelse ($comments as $key => $comment)
                                         @if ($comment->comment_topic_id == $value->topic_id)
                                             <div class="text-start">

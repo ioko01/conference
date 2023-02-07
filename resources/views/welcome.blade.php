@@ -9,15 +9,23 @@
                     aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
                     aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
+                    <img style="cursor: pointer"
+                        title="https://drive.google.com/file/d/1RTJERejDQBTjeGRdxfasEpbDRwGF3uDQ/view?usp=share_link" onclick="window.open('https\:\/\/drive.google.com/file/d/1RTJERejDQBTjeGRdxfasEpbDRwGF3uDQ/view?usp=share_link')"
+                        src="{{ asset('images/banner-03.jpg', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
+                        alt="banner3">
+                </div>
+                <div class="carousel-item">
                     <img src="{{ asset('images/banner-02.jpg', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
-                        alt="banner">
+                        alt="banner2">
                 </div>
                 <div class="carousel-item">
                     <img src="{{ asset('images/banner-01.webp', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
-                        alt="banner">
+                        alt="banner1">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"

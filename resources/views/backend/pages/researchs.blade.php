@@ -35,7 +35,7 @@
                                         </strong>
                                         <br />
                                         <strong>
-                                            {{ $research->topic_th }}
+                                            {!! $research->topic_th !!}
                                         </strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-primary">สังกัด /

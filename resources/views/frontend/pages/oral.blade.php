@@ -42,7 +42,7 @@
                                                 <td>{{ $present_oral->present_oral_id }}</td>
                                                 <td>{{ substr($present_oral->time_start, 0, -3) }} -
                                                     {{ substr($present_oral->time_end, 0, -3) }} น.</td>
-                                                <td class="text-start">{{ $present_oral->topic_th }}
+                                                <td class="text-start">{!! $present_oral->topic_th !!}
                                                 </td>
                                             </tr>
                                         @endif

@@ -203,7 +203,7 @@
                             </span>
                         </strong>
                         <strong style="font-size: calc(5vw + 30px);"
-                            class="text-dark h1 mx-auto">{{ $researchs_distinct->topic_th }}</strong>
+                            class="text-dark h1 mx-auto">{!! $researchs_distinct->topic_th !!}</strong>
                         <strong class="text-dark ms-auto mt-auto">บทความ</strong>
                     </div>
                 </div>
@@ -344,8 +344,8 @@
                                                     class="text-primary">{{ $research->topic_id }}</p>
                                                 <input type="hidden" value="{{ $research->topic_id }}">
                                             </td>
-                                            <td><strong title="{{ $research->topic_th }}" class="d-flex">
-                                                    <span class="single-text-ellipsis">{{ $research->topic_th }}</span>
+                                            <td><strong title="{!! $research->topic_th !!}" class="d-flex">
+                                                    <span class="single-text-ellipsis">{!! $research->topic_th !!}</span>
                                                 </strong></td>
                                             <td>
                                                 <span class="badge badge-warning text-white">

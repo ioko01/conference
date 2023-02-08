@@ -14,11 +14,11 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <input type="hidden" name="topic_th" value="{{ $present_poster->topic_th }}">
+                        <input type="hidden" name="topic_th" value="{!! $present_poster->topic_th !!}">
                         <div class="col-md-12 mb-3">
                             <label>ชื่อบทความ:
                                 <span id="topic"><span
-                                        class="text-success">{{ $present_poster->topic_th }}</span></span>
+                                        class="text-success">{!! $present_poster->topic_th !!}</span></span>
                             </label>
                         </div>
                         <div class="col-md-4 mb-3">
@@ -97,7 +97,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td><strong>{{ $present_poster->present_poster_id }}</strong></td>
-                                    <td><strong class="text-green">{{ $present_poster->topic_th }}</strong><br />
+                                    <td><strong class="text-green">{!! $present_poster->topic_th !!}</strong><br />
                                         <strong class="text-warning text-sm">{{ $present_poster->name }}</strong><br />
                                         <a target="_blank" href="{{ $present_poster->link }}">
                                             <strong class="text-primary text-sm">{{ $present_poster->link }}</strong>

@@ -35,7 +35,7 @@
                                     รหัสบทความ : {{ $value->topic_id }}
                                 </strong>
                                 <br />
-                                <strong>{{ $value->topic_th }}</strong>
+                                <strong>{!! $value->topic_th !!}</strong>
                                 <br />
                                 <strong><span class="name-research text-small text-green">ผู้นำเสนอ :
                                         {{ str_replace('|', ', ', $value->presenter) }}</span></strong>

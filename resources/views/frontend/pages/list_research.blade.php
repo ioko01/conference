@@ -30,7 +30,7 @@
                         <tr class="text-center">
                             <td><strong>{{ $research->topic_id }}</strong></td>
                             <td class="text-start"><strong>
-                                    {{ $research->topic_th }}
+                                    {!! $research->topic_th !!}
                                     <br />
                                     <span class="name-research text-small text-primary">สังกัด / หน่วยงาน :
                                         {{ $research->institution }}</span>

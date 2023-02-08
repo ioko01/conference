@@ -116,7 +116,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td><strong>{{ $present_oral->present_oral_id }}</strong></td>
-                                    <td><strong class="text-green">{{ $present_oral->topic_th }}</strong><br />
+                                    <td><strong class="text-green">{!! $present_oral->topic_th !!}</strong><br />
                                         <strong class="text-warning text-sm">{{ $present_oral->name }}</strong><br />
                                     </td>
                                     <td class="text-center"><strong

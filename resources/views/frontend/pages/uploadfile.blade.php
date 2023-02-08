@@ -35,7 +35,7 @@
                                     รหัสบทความ : {{ $value->topic_id }}
                                 </strong>
                                 <br />
-                                <strong>{{ $value->topic_th }}</strong>
+                                <strong>{!! $value->topic_th !!}</strong>
                                 <br />
                                 <strong><span class="name-research text-small text-green">ผู้นำเสนอ :
                                         {{ str_replace('|', ', ', $value->presenter) }}</span></strong>
@@ -96,7 +96,7 @@
                                                         class="text-lg">ดูภาพขนาดใหญ่</span></i>
                                             </div>
                                             <img width="100%" src="{{ $value->poster_path }}"
-                                                alt="{{ $value->topic_th }}">
+                                                alt="{!! $value->topic_th !!}">
                                         </div>
                                     @endif
                                     @if ($value->status_poster_and_video)

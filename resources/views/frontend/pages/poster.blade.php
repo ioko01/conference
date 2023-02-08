@@ -43,7 +43,7 @@
                                             href="{{ $present_poster->link }}">{{ $present_poster->link }}</a>
                                     </p>
                                     <p>ชื่อบทความ: <br />
-                                        {{ $present_poster->topic_th }}</p>
+                                        {!! $present_poster->topic_th !!}</p>
                                 </strong>
 
                             </div>

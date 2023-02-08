@@ -41,7 +41,7 @@
                                         </strong>
                                         <br />
                                         <strong>
-                                            {{ $value->topic_th }}
+                                            {!! $value->topic_th !!}
                                         </strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-primary">สังกัด /

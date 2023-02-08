@@ -111,7 +111,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td><strong>{{ $present_poster->present_poster_id }}</strong></td>
-                                    <td><strong class="text-green">{{ $present_poster->topic_th }}</strong><br />
+                                    <td><strong class="text-green">{!! $present_poster->topic_th !!}</strong><br />
                                         <strong class="text-warning text-sm">{{ $present_poster->name }}</strong><br />
                                         <a target="_blank" href="{{ $present_poster->link }}">
                                             <strong class="text-primary text-sm">{{ $present_poster->link }}</strong>

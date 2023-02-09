@@ -12,7 +12,7 @@
                     </strong>
                 </h1>
             @else
-                @if (endDate('end_research')->day < 0)
+                @if (endDate('end_research')->day < 0 && endDate('end_attend')->day < 0)
                     <h1 class="text-danger text-center">
                         <i class="fas fa-2x fa-clock"></i><br />
                         <strong style="font-size: calc(.5vw + 10px);">
@@ -85,7 +85,8 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-md-6">
-                                        <label for="phone">เบอร์โทร <i class="text-red">* ใส่ตัวเลข 10 หลักโดยไม่ต้องใส่
+                                        <label for="phone">เบอร์โทร <i class="text-red text-small">* ใส่ตัวเลข 10
+                                                หลักโดยไม่ต้องใส่
                                                 "-"</i></label>
                                         <input type="tel" name="phone" id="phone"
                                             class="form-control @error('phone') is-invalid @enderror"
@@ -121,7 +122,7 @@
                                             </div>
                                         @endforeach
 
-                                        <p style="color:red">* โควต้าเจ้าภาพร่วมกรุณาติดต่อต้นสังกัด
+                                        <p style="color:red" class="text-small">* โควต้าเจ้าภาพร่วมกรุณาติดต่อต้นสังกัด
                                             หากท่านเป็นบุคลากรภายในมหาวิทยาลัยราชภัฏเลย
                                             และบทความของท่านเป็นของมหาวิทยาลัยอื่น
                                             จะต้องลงทะเบียนเป็น "บุคคลภายนอก"
@@ -129,7 +130,8 @@
 
                                         <div class="row mb-4">
                                             <div class="col-12">
-                                                <label for="institution">สังกัด / หน่วยงาน <i class="text-red">* ตัวอย่าง:
+                                                <label for="institution">สังกัด / หน่วยงาน <i class="text-red text-small">*
+                                                        ตัวอย่าง:
                                                         มหาวิทยาลัยราชภัฏเลย</i></label>
                                                 <input @if (old('position_id') != '2') disabled @endif type="text"
                                                     name="institution" id="institution"
@@ -186,7 +188,8 @@
                                                     @if (old('person_attend') === 'send' || empty(old('person_attend'))) checked @endif value="send">
                                                 <label class="form-check-label" for="send">
                                                     ลงทะเบียนส่งผลงาน <span
-                                                        class="text-red text-sm">(บุคคลภายนอกจะต้องชำระค่าลงทะเบียน 2,000
+                                                        class="text-red text-small">(บุคคลภายนอกจะต้องชำระค่าลงทะเบียน
+                                                        2,000
                                                         บาท
                                                         ต่อ 1 ผลงาน)</span>
                                                 </label>
@@ -200,6 +203,12 @@
                                                 <label class="form-check-label" for="attend">
                                                     ลงทะเบียนเข้าร่วมงานทั่วไป
                                                 </label>
+                                                <br />
+                                                @if (endDate('end_research')->day < 0)
+                                                    <span class="text-red text-small">*
+                                                        หมดเวลาการลงทะเบียนส่งผลงานแล้ว
+                                                        สามารถลงทะเบียนเข้าร่วมงานได้เท่านั้น</span>
+                                                @endif
                                             </div>
                                         @endif
                                     </div>
@@ -250,8 +259,8 @@
 
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <label for="email">อีเมล <span style="font-size: 12px;"
-                                                class="text-bluesky">(จำเป็นต้องยืนยันตัวตนในอีเมล)</span></label>
+                                        <label for="email">อีเมล <span class="text-red text-small">*
+                                                หากลงทะเบียนส่งผลงานจำเป็นต้องยืนยันตัวตนในอีเมล</span></label>
                                         <input type="text" name="email" id="email"
                                             class="form-control @error('email') is-invalid @enderror"
                                             value="{{ old('email') }}">

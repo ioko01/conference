@@ -181,6 +181,7 @@ return [
         'degree_id' => 'ระดับบทความ',
         'word_upload' => 'ไฟล์ WORD',
         'pdf_upload' => 'ไฟล์ PDF',
+        'stm_upload' => 'ไฟล์แบบคำชี้แจงการปรับแก้ไข',
         'payment_upload' => 'สลิปการชำระเงิน',
         'date' => 'วันที่',
         'topic' => 'หัวข้อ',

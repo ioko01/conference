@@ -68,6 +68,215 @@
                                         -
                                     @endif
                                 </td>
+
+                                <input type="hidden" id="err_word"
+                                    @error('word_upload')
+                                value="{!! $message !!}"
+                            @enderror>
+
+                                <input type="hidden" id="err_pdf"
+                                    @error('pdf_upload')
+                                value="{!! $message !!}"
+                            @enderror>
+
+                                <input type="hidden" id="err_stm"
+                                    @error('stm_upload')
+                                value="{!! $message !!}"
+                            @enderror>
+
+                                @if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path))
+                                    <td colspan="3">
+                                        <table class="w-100">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="border-0" style="vertical-align: middle;">
+                                                        <img width="40"
+                                                            src="{{ asset("images/$value->edit_word_ext.webp", env('REDIRECT_HTTPS')) }}"
+                                                            alt="{{ $value->edit_word_ext }}">
+                                                        <p class="mb-0">{{ $value->edit_word_name }}</p>
+                                                        <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
+                                                            {{ thaiDateFormat($value->edit_word_update, true) }}</i>
+                                                        <a target="_blank"
+                                                            class="btn btn-green text-white rounded-0 w-100 my-1"
+                                                            href="{{ Storage::url($value->edit_word_path) }}">
+                                                            <i class="fas fa-search"></i> ดูตัวอย่าง
+                                                        </a>
+                                                    </td>
+                                                    <td class="border-0" style="vertical-align: middle;">
+                                                        <img width="40"
+                                                            src="{{ asset("images/$value->edit_pdf_ext.webp", env('REDIRECT_HTTPS')) }}"
+                                                            alt="{{ $value->edit_pdf_ext }}">
+                                                        <p class="mb-0">{{ $value->edit_pdf_name }}</p>
+                                                        <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
+                                                            {{ thaiDateFormat($value->edit_pdf_update, true) }}</i>
+                                                        <a target="_blank"
+                                                            class="btn btn-green text-white rounded-0 w-100 my-1"
+                                                            href="{{ Storage::url($value->edit_pdf_path) }}">
+                                                            <i class="fas fa-search"></i> ดูตัวอย่าง
+                                                        </a>
+                                                    </td>
+                                                    <td class="border-0" style="vertical-align: middle;">
+                                                        <img width="40"
+                                                            src="{{ asset("images/$value->edit_stm_ext.webp", env('REDIRECT_HTTPS')) }}"
+                                                            alt="{{ $value->edit_stm_ext }}">
+                                                        <p class="mb-0">{{ $value->edit_stm_name }}</p>
+                                                        <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
+                                                            {{ thaiDateFormat($value->edit_stm_update, true) }}</i>
+                                                        <a target="_blank"
+                                                            class="btn btn-green text-white rounded-0 w-100 my-1"
+                                                            href="{{ Storage::url($value->edit_stm_path) }}">
+                                                            <i class="fas fa-search"></i> ดูตัวอย่าง
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="border-0" colspan="3">
+                                                        @if ($value->status_research_edit == 1)
+                                                            @if (endDate('end_research_edit')->day >= 0)
+                                                                @if ($value->status_id >= 7)
+                                                                    <button type="button"
+                                                                        class="btn btn-warning text-white rounded-0 w-100 my-1"
+                                                                        onclick="open_modal(this, 'edit_research_first'@if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path)) , 'PUT' @endif)">
+                                                                        @if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path))
+                                                                            <i class="nav-icon fas fa-upload"></i>
+                                                                            แก้ไขไฟล์ฉบับแก้ไข
+                                                                        @else
+                                                                            <i class="nav-icon fas fa-upload"></i>
+                                                                            อัพโหลดไฟล์ฉบับแก้ไข
+                                                                        @endif
+                                                                    </button>
+                                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                                @else
+                                                                    <h1 class="text-danger text-center">
+                                                                        <strong style="font-size: calc(.1vw + 10px);">
+                                                                            ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว
+                                                                        </strong>
+                                                                    </h1>
+                                                                @endif
+                                                            @else
+                                                                <h1 class="text-danger text-center">
+                                                                    <strong style="font-size: calc(.1vw + 10px);">
+                                                                        สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1
+                                                                    </strong>
+                                                                </h1>
+                                                            @endif
+                                                        @elseif($value->status_research_edit_two === 1)
+                                                            <h1 class="text-danger text-center">
+                                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                                    หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว
+                                                                </strong>
+                                                            </h1>
+                                                        @else
+                                                            <h1 class="text-danger text-center">
+                                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                                    ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1
+                                                                </strong>
+                                                            </h1>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                @else
+                                    <td colspan="3" style="vertical-align: middle;">
+                                        <table class="w-100">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="border-0" colspan="3">
+                                                        @if ($value->status_research_edit == 1)
+                                                            @if (endDate('end_research_edit')->day >= 0)
+                                                                @if ($value->status_id >= 7)
+                                                                    <button type="button"
+                                                                        class="btn btn-green text-white rounded-0 w-100 my-1"
+                                                                        onclick="open_modal(this, 'edit_research_first')">
+                                                                        <i class="nav-icon fas fa-upload"></i>
+                                                                        อัพโหลดไฟล์ฉบับแก้ไข
+                                                                    </button>
+                                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                                @else
+                                                                    <h1 class="text-danger text-center">
+                                                                        <strong style="font-size: calc(.1vw + 10px);">
+                                                                            ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว
+                                                                        </strong>
+                                                                    </h1>
+                                                                @endif
+                                                            @else
+                                                                <h1 class="text-danger text-center">
+                                                                    <strong style="font-size: calc(.1vw + 10px);">
+                                                                        สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1
+                                                                    </strong>
+                                                                </h1>
+                                                            @endif
+                                                        @elseif($value->status_research_edit_two === 1)
+                                                            <h1 class="text-danger text-center">
+                                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                                    หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว
+                                                                </strong>
+                                                            </h1>
+                                                        @else
+                                                            <h1 class="text-danger text-center">
+                                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                                    ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1
+                                                                </strong>
+                                                            </h1>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                @endif
+
+
+
+
+
+                                {{-- @if ($value->status_research_edit == 1)
+                                    @if (endDate('end_research_edit')->day >= 0)
+                                        @if ($value->status_id >= 7)
+                                            <button type="button" class="btn btn-warning text-white rounded-0 w-100 my-1"
+                                                onclick="open_modal(this, 'word'@if (isset($value->edit_pdf_path)) , 'PUT' @endif)">
+                                                @if (isset($value->edit_word_path))
+                                                    แก้ไขไฟล์ WORD ฉบับแก้ไข
+                                                @else
+                                                    อัพโหลดไฟล์ WORD ฉบับแก้ไข
+                                                @endif
+                                            </button>
+                                            <input type="hidden" value="{{ $value->topic_id }}">
+                                        @else
+                                            <h1 class="text-danger text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว
+                                                </strong>
+                                            </h1>
+                                        @endif
+                                    @else
+                                        <h1 class="text-danger text-center">
+                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1
+                                            </strong>
+                                        </h1>
+                                    @endif
+                                @elseif($value->status_research_edit_two === 1)
+                                    <h1 class="text-danger text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            หมดเวลาอัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1 แล้ว
+                                        </strong>
+                                    </h1>
+                                @else
+                                    <h1 class="text-danger text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 1
+                                        </strong>
+                                    </h1>
+                                @endif
+
+
+
+
+
+
                                 <td style="vertical-align: middle;">
                                     @if (isset($value->edit_word_path))
                                         <img width="40"
@@ -249,14 +458,7 @@
                                         </h1>
                                     @endif
 
-                                </td>
-                                @error('stm_upload')
-                                    <h1 class="text-danger text-center">
-                                        <strong style="font-size: calc(.1vw + 10px);">
-                                            ไม่สามารถอัพโหลดไฟล์ได้ กรุณาลองใหม่อีกครั้ง
-                                        </strong>
-                                    </h1>
-                                @enderror
+                                </td> --}}
                             @elseif($value->research_passed == 0)
                                 <td colspan="4">
                                     <h1 class="text-warning text-center">

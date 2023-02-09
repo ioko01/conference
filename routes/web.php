@@ -36,6 +36,8 @@ use App\Http\Controllers\OralController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PosterController;
 use App\Http\Controllers\ProceedingController;
+use App\Http\Controllers\SendEditAllController;
+use App\Http\Controllers\SendEditAllTwoController;
 use App\Http\Controllers\SendEditResearchController;
 use App\Http\Controllers\SendEditWordController;
 use App\Http\Controllers\SendEditPdfController;
@@ -139,7 +141,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('research/send-edit/stm/{id}/store', [SendEditStatementController::class, 'store'])->name('employee.research.send.stm.store');
         Route::put('research/send-edit/stm/{id}/update', [SendEditStatementController::class, 'update'])->name('employee.research.send.stm.update');
 
+
+        Route::post('research/send-edit/all/1/{id}/store', [SendEditAllController::class, 'store'])->name('employee.research.send.all.store');
+        Route::put('research/send-edit/all/1/{id}/update', [SendEditAllController::class, 'update'])->name('employee.research.send.all.update');
+
+
         // ส่งบทความฉบับแก้ไข ครั้งที่ 2
+        Route::post('research/send-edit/all/2/{id}/store', [SendEditAllTwoController::class, 'store'])->name('employee.research.send.all.two.store');
+        Route::put('research/send-edit/all/2/{id}/update', [SendEditAllTwoController::class, 'update'])->name('employee.research.send.all.two.update');
+
+
         Route::get('research/send-edit-2/show/{id}', [SendEditResearchTwoController::class, 'show'])->name('employee.research.send.two.edit');
         Route::post('research/send-edit/word_2/{id}/store', [SendEditWordTwoController::class, 'store'])->name('employee.research.send.two.word.store');
         Route::put('research/send-edit/word_2/{id}/update', [SendEditWordTwoController::class, 'update'])->name('employee.research.send.two.word.update');

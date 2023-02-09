@@ -177,6 +177,72 @@ function send_edit_research_modal(topic_id, type, method) {
     $("#research_modal").modal("show");
 }
 
+function send_edit_research_modal_all(topic_id, type, method) {
+    const _token = $('meta[name="csrf-token"]').attr("content");
+    const err_word = $("#err_word").val();
+    const err_pdf = $("#err_pdf").val();
+    const err_stm = $("#err_stm").val();
+    const createModal = `
+    <form enctype="multipart/form-data" method="POST" action="/employee/research/send-edit/all/${type}/${topic_id}/${
+        method ? `update` : `store`
+    }">
+        <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+        aria-labelledby="อัพโหลดไฟล์" aria-hidden="true">
+            <input type="hidden" name="_token" value="${_token}" />
+            ${
+                method
+                    ? `<input type="hidden" name="_method" value="PUT" />`
+                    : ""
+            }
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">อัพโหลดไฟล์</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="edit_word_first"><span class="fw-bold">อัพโหลดไฟล์ WORD </span><span class="text-red text-small">*ขนาดไฟล์ใหญ่สุดคือ 10 MB</span></label>
+                            <input id="edit_word_first" class="form-control ${
+                                err_word && "is-invalid"
+                            }" type="file" name="word_upload" accept=".doc, .docx" />
+                            <span class="invalid-feedback" role="alert">
+                                <strong style="font-size: calc(.1vw + 10px);">${err_word}</strong>
+                            </span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="edit_pdf_first"><span class="fw-bold">อัพโหลดไฟล์ PDF </span><span class="text-red text-small">*ขนาดไฟล์ใหญ่สุดคือ 10 MB</span></label>
+                            <input id="edit_pdf_first" class="form-control ${
+                                err_pdf && "is-invalid"
+                            }" type="file" name="pdf_upload" accept=".pdf" />
+                            <span class="invalid-feedback" role="alert">
+                                <strong style="font-size: calc(.1vw + 10px);">${err_pdf}</strong>
+                            </span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="edit_stm_first"><span class="fw-bold">อัพโหลดไฟล์แบบคำชี้แจงการปรับแก้ไข </span><span class="text-red text-small">*ขนาดไฟล์ใหญ่สุดคือ 10 MB</span></label>
+                            <input id="edit_stm_first" class="form-control ${
+                                err_stm && "is-invalid"
+                            }" type="file" name="stm_upload" accept=".doc, .docx, .pdf" />
+                            <span class="invalid-feedback" role="alert">
+                                <strong style="font-size: calc(.1vw + 10px);">${err_stm}</strong>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="thisDisabled(this)" type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+    $("#modal").html(createModal);
+    $("#research_modal").modal("show");
+}
+
 function send_research_modal(topic_id, type, method) {
     const _token = $('meta[name="csrf-token"]').attr("content");
     const createModal = `
@@ -377,6 +443,12 @@ function check_type(type, topic_id, path, method) {
             break;
         case "payment_example":
             payment_modal_example(path);
+            break;
+        case "edit_research_first":
+            send_edit_research_modal_all(topic_id, 1, method);
+            break;
+        case "edit_research_second":
+            send_edit_research_modal_all(topic_id, 2, method);
             break;
         case "word":
             send_edit_research_modal(topic_id, type, method);

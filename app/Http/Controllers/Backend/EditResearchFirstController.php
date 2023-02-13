@@ -18,6 +18,8 @@ class EditResearchFirstController extends Controller
             'researchs.id as id',
             'researchs.topic_id as topic_id',
             'status_researchs.name as topic_status',
+            'researchs.research_passed_1 as research_passed_1',
+            'researchs.research_suggestion as research_suggestion',
             'topic_th',
             'topic_en',
             'presenter',

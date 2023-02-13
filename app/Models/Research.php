@@ -21,6 +21,9 @@ class Research extends Model
         'branch_id',
         'degree_id',
         'present_id',
-        'conference_id'
+        'conference_id',
+        'research_passed',
+        'research_passed_1',
+        'research_suggestion',
     ];
 }

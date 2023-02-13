@@ -205,6 +205,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         Route::prefix('backend')->group(function () {
+            //ผลการพิจารณาแก้ไขครั้งที่ 1
+            Route::put('research/passed/1/update-status/{id}', [ResearchPassedController::class, 'update_passed']);
+            
+            //ข้อเสนอแนะ กรณีไม่ผ่านการพิจารณาครั้งที่ 1
+            Route::put('research/suggestion/update/{id}', [ResearchPassedController::class, 'update_suggestion']);
+            Route::get('researchs/get-suggestion/{id}', [ResearchPassedController::class, 'get_suggestion']);
+            
             Route::prefix('researchs')->group(function () {
                 Route::get('management', [ManageResearchController::class, 'index'])->name('backend.research.index');
                 Route::get('management/times/1', [EditResearchFirstController::class, 'index'])->name('backend.research.first.index');
@@ -274,7 +281,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::prefix('backend')->group(function () {
 
-            Route::get('researchs/passed', [ResearchPassedController::class, 'index'])->name('backend.researchs.passed.index');
             Route::get('researchs/passed', [ResearchPassedController::class, 'index'])->name('backend.researchs.passed.index');
             Route::put('research/passed/update-status/{id}', [ResearchPassedController::class, 'update']);
 

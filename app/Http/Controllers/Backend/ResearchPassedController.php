@@ -74,4 +74,35 @@ class ResearchPassedController extends Controller
         DB::disconnect('researchs');
         return response()->json(['success' => true]);
     }
+
+    protected function update_passed(Request $request, $id)
+    {
+        if ($request->research_passed != "2") {
+            Research::where('topic_id', $id)->update(['research_suggestion' => ""]);
+            write_logs(__FUNCTION__, "info");
+        }
+        Research::where('topic_id', $id)->update(['research_passed_1' => $request->research_passed]);
+        write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('researchs');
+        return response()->json(['success' => true]);
+    }
+
+    protected function update_suggestion(Request $request, $id)
+    {
+        Research::where('topic_id', $id)->update(['research_suggestion' => $request->research_suggestion]);
+        write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('researchs');
+        return response()->json(['success' => true]);
+    }
+
+    public function get_suggestion($id)
+    {
+        $data = Research::select('research_suggestion')->where('topic_id', $id)->first();
+        write_logs(__FUNCTION__, "info");
+
+        DB::disconnect('researchs');
+        return response()->json($data);
+    }
 }

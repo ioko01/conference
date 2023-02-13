@@ -10,23 +10,27 @@
     <title>{{ config('app.name') }} | ADMIN</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/main.min.css', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
-    <link href="{{ asset('css/app.css', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
+    <link href="{{ asset('css/main.min.css?v=2', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
+    <link href="{{ asset('css/app.css?v=2', env('REDIRECT_HTTPS')) }}" rel="stylesheet" defer>
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{ asset('vendor/plugins/fontawesome-free/css/all.min.css', env('REDIRECT_HTTPS')) }}">
+    <link rel="stylesheet" href="{{ asset('vendor/plugins/fontawesome-free/css/all.min.css?v=2', env('REDIRECT_HTTPS')) }}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet"
-        href="{{ asset('vendor/plugins/overlayScrollbars/css/OverlayScrollbars.min.css', env('REDIRECT_HTTPS')) }}">
+        href="{{ asset('vendor/plugins/overlayScrollbars/css/OverlayScrollbars.min.css?v=2', env('REDIRECT_HTTPS')) }}">
 
     @if (Request::is('backend/dashboard'))
-        <link rel="stylesheet" href="{{ asset('vendor/plugins/fullcalendar/main.css', env('REDIRECT_HTTPS')) }}">
+        <link rel="stylesheet" href="{{ asset('vendor/plugins/fullcalendar/main.css?v=2', env('REDIRECT_HTTPS')) }}">
+    @endif
+
+    @if (Request::is('backend/researchs/management/times/1') || Request::is('backend/researchs/management/times/2'))
+        <link rel="stylesheet" href="{{ asset('vendor/plugins/quill/quill.snow.css?v=2', env('REDIRECT_HTTPS')) }}">
     @endif
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('vendor/dist/css/adminlte.min.css', env('REDIRECT_HTTPS')) }}">
+    <link rel="stylesheet" href="{{ asset('vendor/dist/css/adminlte.min.css?v=2', env('REDIRECT_HTTPS')) }}">
 
-    <link rel="stylesheet" href="{{ asset('css/paginate.css', env('REDIRECT_HTTPS')) }}" defer>
-    <link rel="stylesheet" href="{{ asset('css/ligne.css', env('REDIRECT_HTTPS')) }}" defer>
+    <link rel="stylesheet" href="{{ asset('css/paginate.css?v=2', env('REDIRECT_HTTPS')) }}" defer>
+    <link rel="stylesheet" href="{{ asset('css/ligne.css?v=2', env('REDIRECT_HTTPS')) }}" defer>
 
 </head>

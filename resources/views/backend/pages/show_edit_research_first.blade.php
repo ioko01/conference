@@ -23,7 +23,7 @@
                                 <th style="width: 10%;">แบบคำชี้แจงการปรับแก้ไขบทความ</th>
                                 <th style="width: 10%;">VIDEO</th>
                                 <th style="width: 10%;">POSTER</th>
-                                <th style="width: 10%;">รายละเอียด</th>
+                                <th style="width: 10%;">ผลการพิจารณาแก้ไขครั้งที่ 1</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,11 +112,44 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-success rounded-0 text-white"
-                                            onclick="open_modal(this, 'detail')">
-                                            รายละเอียด
-                                        </button>
+                                        <select name="research_passed" class="form-select"
+                                            onchange="open_modal(this, 'change_research_passed_1')">
+
+                                            @for ($i = 0; $i < 3; $i++)
+                                                <option value="{{ $i }}"
+                                                    @if ($value->research_passed_1 == $i) selected="selected" @endif>
+                                                    @if ($i == 0)
+                                                        รอการตรวจสอบ
+                                                    @elseif ($i == 1)
+                                                        ผ่านการพิจารณาครั้งที่ 1
+                                                    @elseif ($i == 2)
+                                                        ไม่ผ่านการพิจารณาครั้งที่ 1
+                                                    @endif
+                                                </option>
+                                            @endfor
+
+                                        </select>
                                         <input type="hidden" value="{{ $value->topic_id }}">
+                                        @if ($value->research_passed_1 == 2)
+                                            <div id="btn_suggestion_{{ $value->topic_id }}">
+                                                <button class="btn btn-info rounded-0 mt-3 text-sm"
+                                                    onclick="open_modal(this, 'add_suggestion')">
+                                                    + เพิ่ม/แก้ไข ข้อเสนอแนะ
+                                                </button>
+                                                <input type="hidden" value="{{ $value->topic_id }}">
+                                            </div>
+                                            <div id="suggestion_{{ $value->topic_id }}">
+                                                @if (trim($value->research_suggestion))
+                                                    <span class="text-green text-sm">
+                                                        <i class="fas fa-check text-green"></i>&nbsp;มีข้อเสนอแนะแล้ว
+                                                    </span>
+                                                @else
+                                                    <span class="text-red text-sm">
+                                                        <i class="fas fa-times text-red"></i>&nbsp;ไม่มีข้อเสนอแนะ
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty
@@ -131,6 +164,5 @@
         </div>
     </div>
     <!-- End Content -->
-
     <div id="modal"></div>
 @endsection

@@ -139,7 +139,7 @@ function update_modal(topic_id, title, status_value, text_status) {
     $("#research_modal").modal("show");
 }
 
-function update_modal_passed(topic_id, title, status_value, text_status) {
+function update_modal_passed(topic_id, title, status_value, text_status, type) {
     const createModal = `
     <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
     aria-labelledby="เปลี่ยนสถานะ" aria-hidden="true">
@@ -154,7 +154,7 @@ function update_modal_passed(topic_id, title, status_value, text_status) {
                     ต้องการเปลี่ยนสถานะเป็น <strong id="text_status" class="text-red">${text_status}</strong> ใช่หรือไม่ ?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success rounded-0 text-white" onclick="update_status_passed(${topic_id}, ${status_value});thisDisabled(this);">ตกลง</button>
+                    <button type="button" class="btn btn-success rounded-0 text-white" onclick="update_status_passed(${topic_id}, ${status_value}, '${type}');thisDisabled(this);">ตกลง</button>
                     <button type="button" class="btn btn-danger rounded-0 text-white"
                         data-bs-dismiss="modal">ยกเลิก</button>
                 </div>
@@ -337,6 +337,77 @@ function send_comment_modal(topic_id) {
     }
 }
 
+function add_suggestion_modal(topic_id) {
+    const createModal = `
+    <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+    aria-labelledby="เพิ่มข้อเสนอแนะ" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">เพิ่มข้อเสนอแนะ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="editor_${topic_id}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success rounded-0 text-white" onclick="update_suggestion(${topic_id})">เพิ่ม/แก้ไข ข้อเสนอแนะ</button>
+                    <button type="button" class="btn btn-danger rounded-0 text-white"
+                        data-bs-dismiss="modal">ยกเลิก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+
+    $.ajax({
+        method: "GET",
+        url: "/backend/researchs/get-suggestion/" + topic_id,
+        success: function (data) {
+            $(`#editor_${topic_id}`).html(data.research_suggestion);
+
+            const toolbarOptions = [
+                [
+                    "bold",
+                    "italic",
+                    "underline",
+                    { align: "" },
+                    { align: "center" },
+                    { align: "right" },
+                    { align: "justify" },
+                    { list: "ordered" },
+                    { list: "bullet" },
+                ],
+                [{ indent: "-1" }, { indent: "+1" }],
+                [{ script: "sub" }, { script: "super" }],
+                ["link", "image"],
+                [{ size: ["small", false, "large", "huge"] }],
+                [{ color: [] }, { background: [] }],
+            ];
+
+            new Quill(`#editor_${topic_id}`, {
+                theme: "snow",
+                modules: {
+                    toolbar: toolbarOptions,
+                },
+            });
+        },
+        beforeSend: function () {
+            console.log("กำลังโหลด");
+            let op_modal = false;
+            $("#modal").on("show.bs.modal", function () {
+                if (!op_modal) {
+                    op_modal = true;
+                    $(`#editor_${topic_id}`).html("กำลังโหลด");
+                }
+            });
+            $("#modal").html(createModal);
+            $("#research_modal").modal("show");
+        },
+    });
+}
+
 function pass_notpass_file_comment(topic_id, handleData) {
     try {
         $.ajax({
@@ -371,7 +442,9 @@ function open_modal(e, type) {
         const title = "เปลี่ยนสถานะ";
         const status_value = e.value;
         const text_status =
-            type == "change_status" || type == "change_research_passed"
+            type == "change_status" ||
+            type == "change_research_passed" ||
+            type == "change_research_passed_1"
                 ? e[e.selectedIndex].text
                 : null;
         $("#modal").on("hidden.bs.modal", function () {
@@ -400,8 +473,28 @@ function check_type(type, topic_id, title, status_value, text_status) {
             send_comment_modal(topic_id, type);
             break;
         case "change_research_passed":
-            update_modal_passed(topic_id, title, status_value, text_status);
+            update_modal_passed(
+                topic_id,
+                title,
+                status_value,
+                text_status,
+                type
+            );
             break;
+        case "change_research_passed_1":
+            update_modal_passed(
+                topic_id,
+                title,
+                status_value,
+                text_status,
+                type
+            );
+            break;
+
+        case "add_suggestion":
+            add_suggestion_modal(topic_id);
+            break;
+
         default:
             break;
     }
@@ -442,19 +535,32 @@ function update_status(topic_id, status) {
     }
 }
 
-function update_status_passed(topic_id, status) {
+function update_status_passed(topic_id, status, type) {
     try {
+        let url = "";
+        if (type == "change_research_passed_1") {
+            url = "/backend/research/passed/1/update-status/" + topic_id;
+        } else if (type == "change_research_passed") {
+            url = "/backend/research/passed/update-status/" + topic_id;
+        }
+
         const _token = $('meta[name="csrf-token"]').attr("content");
         $.ajax({
             method: "PUT",
-            url: "/backend/research/passed/update-status/" + topic_id,
+            url: url,
             data: {
                 research_passed: status,
                 _token,
             },
             success: function (data) {
                 if (data.success) {
-                    window.location.replace("/backend/researchs/passed");
+                    if (type == "change_research_passed_1") {
+                        window.location.replace(
+                            "/backend/researchs/management/times/1"
+                        );
+                    } else if (type == "change_research_passed") {
+                        window.location.replace("/backend/researchs/passed");
+                    }
                 }
             },
             beforeSend: function () {
@@ -467,6 +573,96 @@ function update_status_passed(topic_id, status) {
                         "ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน"
                     );
                 } else if (!navigator.doNotTrack) {
+                    console.log(
+                        "เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง"
+                    );
+                }
+            },
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
+//เพิ่มข้อเสนอแนะ
+function update_suggestion(topic_id) {
+    try {
+        const _token = $('meta[name="csrf-token"]').attr("content");
+
+        let delta = $(`#editor_${topic_id} .ql-editor`).html();
+        if (delta) {
+            const regex = /(<([^>]+)>)/gi;
+            const hasText = delta.replaceAll(regex, "").trim().length;
+            if (hasText == 0) {
+                delta = "";
+            }
+        }
+
+        $.ajax({
+            method: "PUT",
+            url: "/backend/research/suggestion/update/" + topic_id,
+            data: {
+                research_suggestion: delta,
+                _token,
+            },
+            success: function (data) {
+                if (data.success) {
+                    Swal.fire({
+                        title: "สำเร็จ",
+                        html: `เพิ่มข้อเสนอแนะสำเร็จ`,
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
+                    });
+                    $("#research_modal").modal("hide");
+                } else {
+                    $("#editor .ql-editor").html("");
+                    Swal.fire({
+                        title: "ผิดพลาด",
+                        html: `ไม่สามารถเพิ่มข้อเสนอแนะได้`,
+                        icon: "error",
+                        confirmButtonColor: "#3085d6",
+                    });
+                }
+                if (delta != "") {
+                    $(`#suggestion_${topic_id}`).html(
+                        `<span class="text-green text-sm">
+                            <i class="fas fa-check text-green"></i>&nbsp;มีข้อเสนอแนะแล้ว
+                        </span>`
+                    );
+                } else {
+                    $(`#suggestion_${topic_id}`).html(
+                        `<span class="text-red text-sm">
+                           <i class="fas fa-times text-red"></i>&nbsp;ไม่มีข้อเสนอแนะ
+                        </span>`
+                    );
+                }
+            },
+            beforeSend: function () {
+                Swal.fire({
+                    title: "",
+                    html: `<div class="lds-ring my-3"><div></div><div></div><div></div><div></div></div>`,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            },
+            error: function (error) {
+                $("#editor .ql-editor").html("");
+                console.log(error);
+                if (!navigator.onLine) {
+                    Swal.fire(
+                        "ผิดพลาด",
+                        "ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน",
+                        "error"
+                    );
+                    console.log(
+                        "ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน"
+                    );
+                } else if (!navigator.doNotTrack) {
+                    Swal.fire(
+                        "ผิดพลาด",
+                        "เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง",
+                        "error"
+                    );
                     console.log(
                         "เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้งในภายหลัง"
                     );

@@ -22,6 +22,8 @@ class SendEditResearchController extends Controller
             'researchs.id as id',
             'researchs.topic_id as topic_id',
             'researchs.research_passed as research_passed',
+            'researchs.research_passed_1 as research_passed_1',
+            'researchs.research_suggestion as research_suggestion',
             'status_researchs.name as topic_status',
             'topic_th',
             'topic_en',

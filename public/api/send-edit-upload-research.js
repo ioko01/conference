@@ -130,6 +130,72 @@ function detail_modal(topic_id, type) {
     });
 }
 
+
+function suggestion_modal(topic_id, type) {
+    let createModal = `
+            <div class="modal fade" id="research_modal" data-bs-backdrop="static"
+            data-bs-keyboard="true" tabindex="-1" aria-labelledby="รายละเอียด" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">ข้อเสนอแนะ</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal_body"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary rounded-0"
+                                data-bs-dismiss="modal">ปิด</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+    const route = "/show-research-detail/" + topic_id;
+    const token = $('meta[name="csrf-token"]').attr("content");
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
+    });
+    $.ajax({
+        type: "GET",
+        url: route,
+        statusCode: {
+            401: function () {
+                $("#modal_body").html(
+                    `<div class="text-center">ไม่ได้รับสิทธิ์ในการเข้าถึงหน้านี้</div>`
+                );
+            },
+        },
+        success: function (res) {
+            res.forEach((data) => {
+                if(data.research_suggestion){
+                    $("#modal_body").html(data.research_suggestion);
+                }else{
+                    $("#modal_body").html("<p class='text-center'>ยังไม่มีข้อเสนอแนะ</p>");
+                }
+            });
+        },
+        beforeSend: function () {
+            $("#modal").html(createModal);
+            $("#modal_body").html(
+                `<div class="text-center">กำลังโหลดข้อมูล กรุณารอสักครู่</div>`
+            );
+            $("#research_modal").modal("show");
+        },
+        error: function (event, request, settings) {
+            if (!navigator.onLine) {
+                $("#modal_body").html(
+                    `<div class="text-center">ไม่มีการเชื่อมต่ออินเตอร์เน็ต กรุณาตรวจสอบเครือข่ายของท่าน</div>`
+                );
+            } else if (!navigator.doNotTrack) {
+                $("#modal_body").html(event.responseText);
+            }
+        },
+    });
+}
+
 function send_edit_research_modal(topic_id, type, method) {
     const _token = $('meta[name="csrf-token"]').attr("content");
     const iType = ["word", "pdf", "stm", "word_2", "pdf_2", "stm_2"];
@@ -473,6 +539,9 @@ function check_type(type, topic_id, path, method) {
             break;
         case "stm_2":
             send_edit_research_modal(topic_id, type, method);
+            break;
+        case "suggestion":
+            suggestion_modal(topic_id);
             break;
         default:
             break;

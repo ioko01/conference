@@ -12,6 +12,20 @@
             </h4>
         </div>
 
+        <input type="hidden" id="err_word"
+            @error('word_upload')
+                                value="{!! $message !!}"
+                            @enderror>
+
+        <input type="hidden" id="err_pdf"
+            @error('pdf_upload')
+                                value="{!! $message !!}"
+                            @enderror>
+
+        <input type="hidden" id="err_stm"
+            @error('stm_upload')
+                                value="{!! $message !!}"
+                            @enderror>
 
         <div class="col-md-12 mx-auto table-responsive">
             <table class="dataTable table w-100">
@@ -23,7 +37,7 @@
                         <th style="width: 15%;">ไฟล์ WORD ฉบับแก้ไขครั้งที่ 1</th>
                         <th style="width: 15%;">ไฟล์ PDF ฉบับแก้ไขครั้งที่ 1</th>
                         <th style="width: 15%;">แบบคำชี้แจงการปรับแก้ไขบทความครั้งที่ 1</th>
-                        <th style="width: 10%;">รายละเอียด</th>
+                        <th style="width: 10%;">ผลการพิจารณาแก้ไขครั้งที่ 1</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,20 +83,7 @@
                                     @endif
                                 </td>
 
-                                <input type="hidden" id="err_word"
-                                    @error('word_upload')
-                                value="{!! $message !!}"
-                            @enderror>
 
-                                <input type="hidden" id="err_pdf"
-                                    @error('pdf_upload')
-                                value="{!! $message !!}"
-                            @enderror>
-
-                                <input type="hidden" id="err_stm"
-                                    @error('stm_upload')
-                                value="{!! $message !!}"
-                            @enderror>
 
                                 @if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path))
                                     <td colspan="3">
@@ -178,6 +179,8 @@
                                             </tbody>
                                         </table>
                                     </td>
+                                    <td style="display: none;"></td>
+                                    <td style="display: none;"></td>
                                 @else
                                     <td colspan="3" style="vertical-align: middle;">
                                         <table class="w-100">
@@ -226,6 +229,8 @@
                                             </tbody>
                                         </table>
                                     </td>
+                                    <td style="display: none;"></td>
+                                    <td style="display: none;"></td>
                                 @endif
 
 
@@ -477,11 +482,40 @@
                                 </td>
                             @endif
                             <td style="vertical-align: middle;">
-                                <button type="button" class="btn btn-green rounded-0 text-white"
+                                @if ($value->research_passed_1 == 0)
+                                    <h1 class="text-warning text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            รอตรวจสอบ
+                                        </strong>
+                                    </h1>
+                                @elseif ($value->research_passed_1 == 1)
+                                    <h1 class="text-green text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            ผ่านการพิจารณาแก้ไขครั้งที่ 1
+                                        </strong>
+                                    </h1>
+                                @elseif($value->research_passed_1 == 2)
+                                    <h1 class="text-red text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            ไม่ผ่านการพิจารณาแก้ไขครั้งที่ 1
+                                        </strong>
+                                    </h1>
+                                    @if ($value->research_suggestion)
+                                        <button type="button" class="btn btn-info rounded-0 text-white"
+                                            onclick="open_modal(this, 'suggestion')">
+                                            ดูข้อเสนอแนะ
+                                        </button>
+                                    @else
+                                        <p class="text-info">ยังไม่มีข้อเสนอแนะในตอนนี้</p>
+                                    @endif
+
+                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                @endif
+                                {{-- <button type="button" class="btn btn-green rounded-0 text-white"
                                     onclick="open_modal(this, 'detail')">
                                     รายละเอียด
                                 </button>
-                                <input type="hidden" value="{{ $value->topic_id }}">
+                                <input type="hidden" value="{{ $value->topic_id }}"> --}}
                             </td>
                         </tr>
                     @empty

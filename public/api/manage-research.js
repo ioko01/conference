@@ -494,7 +494,6 @@ function check_type(type, topic_id, title, status_value, text_status) {
         case "add_suggestion":
             add_suggestion_modal(topic_id);
             break;
-
         default:
             break;
     }

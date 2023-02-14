@@ -142,7 +142,7 @@ function suggestion_modal(topic_id, type) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <div class="modal-body" id="modal_body"></div>
+                        <div class="modal-body ql-editor" id="modal_body"></div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary rounded-0"
                                 data-bs-dismiss="modal">ปิด</button>

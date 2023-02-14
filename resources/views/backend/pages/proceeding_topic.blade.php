@@ -36,7 +36,7 @@
                                         </li>
                                         <li class="ml-auto align-self-center">
                                             <form method="POST"
-                                                action="{{ route('backend.conference.update_status', $conference->id) }}"
+                                                action="{{ route('backend.conference.update_status_proceedings', $conference->id) }}"
                                                 class="d-flex">
                                                 @csrf
                                                 @method('PUT')

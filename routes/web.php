@@ -207,7 +207,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('backend')->group(function () {
             //ผลการพิจารณาแก้ไขครั้งที่ 1
             Route::put('research/passed/1/update-status/{id}', [ResearchPassedController::class, 'update_passed']);
-            Route::put('conference/{id}/update_status', [ConferenceController::class, 'update_status'])->name('backend.conference.update_status');
+            Route::put('conference/{id}/update_status_proceedings', [ConferenceController::class, 'update_status_proceedings'])->name('backend.conference.update_status_proceedings');
             
             //ข้อเสนอแนะ กรณีไม่ผ่านการพิจารณาครั้งที่ 1
             Route::put('research/suggestion/update/{id}', [ResearchPassedController::class, 'update_suggestion']);
@@ -294,7 +294,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('conference', [ConferenceController::class, 'index'])->name('backend.conference.index');
             Route::get('conference/{conference_id}/edit', [ConferenceController::class, 'edit'])->name('backend.conference.edit');
             Route::post('conference/store', [ConferenceController::class, 'store'])->name('backend.conference.store');
-            // Route::put('conference/{id}/update_status', [ConferenceController::class, 'update_status'])->name('backend.conference.update_status');
+            Route::put('conference/{id}/update_status', [ConferenceController::class, 'update_status'])->name('backend.conference.update_status');
             Route::put('conference/{id}/update_topic', [ConferenceController::class, 'update_topic'])->name('backend.conference.update_topic');
 
             Route::get('manuals', [ManualController::class, 'index'])->name('backend.manuals.index');

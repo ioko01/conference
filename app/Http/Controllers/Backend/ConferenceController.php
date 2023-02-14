@@ -190,6 +190,35 @@ class ConferenceController extends Controller
         return back()->with('success', 'เปลี่ยนสถานะสำเร็จ');
     }
 
+
+    protected function update_status_proceedings(Request $request, $id)
+    {
+        $check_status = Conference::where('id', $id)
+            ->where('status', 1)
+            ->first();
+
+        if ((!$check_status) && ($request->change_status_proceeding != "0" && $request->change_status_proceeding != "1")) {
+            write_logs(__FUNCTION__, "error");
+            alert('ผิดพลาด', 'ไม่สามารถเปลี่ยนสถานะได้ เนื่องจากไม่ได้เปิดใช้งานการประชุมวิชาการ', 'error')->showConfirmButton('ปิด', '#3085d6');
+
+            DB::disconnect('conferences');
+            return back()->withErrors('ไม่สามารถเปลี่ยนสถานะได้ เนื่องจากไม่ได้เปิดใช้งานการประชุมวิชาการ');
+        }
+
+        $change_status = array_filter([
+            'status_proceeding' => $request->change_status_proceeding
+        ], 'is_numeric');
+
+        Conference::where('id', $id)->update($change_status);
+
+        write_logs(__FUNCTION__, "info");
+        alert('สำเร็จ', 'เปลี่ยนสถานะสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('conferences');
+        DB::disconnect('users');
+        return back()->with('success', 'เปลี่ยนสถานะสำเร็จ');
+    }
+
     public function edit($id)
     {
         $conferences = Conference::orderBy('id', 'DESC')->get();

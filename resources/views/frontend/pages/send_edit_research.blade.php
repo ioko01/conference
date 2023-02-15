@@ -491,13 +491,13 @@
                                 @elseif ($value->research_passed_1 == 1)
                                     <h1 class="text-green text-center">
                                         <strong style="font-size: calc(.1vw + 10px);">
-                                            ผ่านการพิจารณาแก้ไขครั้งที่ 1
+                                            ไม่มีให้ปรับแก้ไขบทความ
                                         </strong>
                                     </h1>
                                 @elseif($value->research_passed_1 == 2)
                                     <h1 class="text-red text-center">
                                         <strong style="font-size: calc(.1vw + 10px);">
-                                            ไม่ผ่านการพิจารณาแก้ไขครั้งที่ 1
+                                            ต้องปรับแก้ไขบทความ
                                         </strong>
                                     </h1>
                                     @if ($value->research_suggestion)

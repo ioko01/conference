@@ -96,7 +96,7 @@
                                                         class="text-lg">ดูภาพขนาดใหญ่</span></i>
                                             </div>
                                             <img width="100%" src="{{ $value->poster_path }}"
-                                                alt="{!! $value->topic_th !!}">
+                                                alt="{{ $value->topic_id }}">
                                         </div>
                                     @endif
                                     @if ($value->status_poster_and_video)

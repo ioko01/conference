@@ -11,11 +11,21 @@
                     aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img style="cursor: pointer"
-                        title="https://drive.google.com/file/d/1RTJERejDQBTjeGRdxfasEpbDRwGF3uDQ/view?usp=share_link" onclick="window.open('https\:\/\/drive.google.com/file/d/1RTJERejDQBTjeGRdxfasEpbDRwGF3uDQ/view?usp=share_link')"
+                        title="https://drive.google.com/file/d/1A0Wpi7UcyshwqQ7Xuz31cF2WqKgIuFIo/view?usp=share_link"
+                        onclick="window.open('https\:\/\/drive.google.com/file/d/1A0Wpi7UcyshwqQ7Xuz31cF2WqKgIuFIo/view?usp=share_link')"
+                        src="{{ asset('images/banner-04.jpg', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
+                        alt="banner4">
+                </div>
+                <div class="carousel-item">
+                    <img style="cursor: pointer"
+                        title="https://drive.google.com/file/d/1RTJERejDQBTjeGRdxfasEpbDRwGF3uDQ/view?usp=share_link"
+                        onclick="window.open('https\:\/\/drive.google.com/file/d/1RTJERejDQBTjeGRdxfasEpbDRwGF3uDQ/view?usp=share_link')"
                         src="{{ asset('images/banner-03.jpg', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
                         alt="banner3">
                 </div>

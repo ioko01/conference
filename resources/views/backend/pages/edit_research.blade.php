@@ -15,7 +15,7 @@
                     @method('PUT')
                     <div class="mb-4">
                         <label for="topic_th">ชื่อบทความ (ภาษาไทย)</label>
-                        <input type="text" id="topic_th" name="topic_th" value="{!! $research->topic_th !!}"
+                        <input type="text" id="topic_th" name="topic_th" value="{{ $research->topic_th }}"
                             class="form-control @error('topic_th') is-invalid @enderror" autocomplete="topic_th" autofocus>
 
                         @error('topic_th')

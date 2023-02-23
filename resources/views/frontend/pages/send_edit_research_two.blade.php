@@ -64,7 +64,7 @@
 
 
 
-                            @if ($value->research_passed == 1)
+                            @if ($value->research_passed_1 == 2)
                                 @if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path))
                                     @if ($value->status_payment)
                                         @if (isset($value->edit_word_path_two) && isset($value->edit_pdf_path_two) && isset($value->edit_stm_path_two))
@@ -205,19 +205,19 @@
 
                                     </td>
                                 @endif
-                            @elseif($value->research_passed == 0)
+                            @elseif($value->research_passed_1 == 0)
                                 <td colspan="3">
                                     <h1 class="text-warning text-center">
                                         <strong style="font-size: calc(.1vw + 10px);">
-                                            บทความนี้อยู่ระหว่างการพิจารณาบทความ
+                                            บทความนี้อยู่ระหว่างการพิจารณาบทความครั้งที่ 1
                                         </strong>
                                     </h1>
                                 </td>
-                            @else
+                            @elseif($value->research_passed_1 == 1)
                                 <td colspan="3">
-                                    <h1 class="text-danger text-center">
+                                    <h1 class="text-green text-center">
                                         <strong style="font-size: calc(.1vw + 10px);">
-                                            บทความนี้ไม่ผ่านการพิจารณาบทความ
+                                            ผ่านการพิจารณาการปรับแก้ไขแล้ว
                                         </strong>
                                     </h1>
                                 </td>

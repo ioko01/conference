@@ -20,7 +20,7 @@ function modal_detail(data) {
             }">${data.video_link}</a></p>
             <hr />
             <img src="${data.poster_path}" class="img-fluid" alt="${
-        data.topic_th
+        data.topic_id
     }">
         </div>
     </div>`;

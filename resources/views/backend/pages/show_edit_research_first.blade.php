@@ -105,9 +105,9 @@
                                         @else
                                             <a target="_blank" href="{{ Storage::url($value->poster_path) }}">POSTER
                                                 <span style="font-size: 10px;" class="text-green d-block">อัพโหลด
-                                                    {{ thaiDateFormat($value->video_created_at, true, true) }}</span>
+                                                    {{ thaiDateFormat($value->posters_created_at, true, true) }}</span>
                                                 <span style="font-size: 10px;" class="text-green d-block">แก้ไข
-                                                    {{ thaiDateFormat($value->video_updated_at, true, true) }}</span>
+                                                    {{ thaiDateFormat($value->posters_updated_at, true, true) }}</span>
                                             </a>
                                         @endif
                                     </td>

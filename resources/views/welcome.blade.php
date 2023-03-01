@@ -87,27 +87,27 @@
                                 ประชาสัมพันธ์</strong></h1>
                         <ul style="list-style: none;" class="px-5">
             @endif
-            <li>
-                <strong>
-                    <a target="_blank"
-                        @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif
-                        class="position-relative">
-                        <span class="d-flex align-items-center">
-                            <i class="fas fa-1x fa-bullhorn"></i>&nbsp;
-                            <div class="text-ellipsis" title="{{ $download->name }}">{{ $download->name }}</div>
-                            @if (countDate($download->created_at, 10, 'days'))
-                                <div class="box-new">
-                                    <span>ใหม่</span>
-                                </div>
-                            @endif
-                        </span>
-                        <span
-                            class="notice-date position-absolute top-0 end-0">{{ thaiDateFormat($download->created_at, true) }}</span>
-                    </a>
-
-                </strong>
-            </li>
-
+            @if (!in_array($download->ext_file, ['jpg', 'jpeg', 'png', 'webp']))
+                <li>
+                    <strong>
+                        <a target="_blank"
+                            @if ($download->link) href="{{ $download->link }}" @elseif($download->name_file) href="{{ Storage::url($download->path_file) }}" @endif
+                            class="position-relative">
+                            <span class="d-flex align-items-center">
+                                <i class="fas fa-1x fa-bullhorn"></i>&nbsp;
+                                <div class="text-ellipsis" title="{{ $download->name }}">{{ $download->name }}</div>
+                                @if (countDate($download->created_at, 10, 'days'))
+                                    <div class="box-new">
+                                        <span>ใหม่</span>
+                                    </div>
+                                @endif
+                            </span>
+                            <span
+                                class="notice-date position-absolute top-0 end-0">{{ thaiDateFormat($download->created_at, true) }}</span>
+                        </a>
+                    </strong>
+                </li>
+            @endif
             @if ($loop->last)
                 </ul>
     </div>

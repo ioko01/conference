@@ -369,7 +369,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>วันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1</td>
+                                    <td>วันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1<br /><span
+                                        class="text-red text-xs fw-bold">คำแนะนำ:
+                                        บทความที่ผ่านการพิจารณารอบที่ 1 จะปิดรับบทความตามวันที่กำหนด ส่วนรอบที่ 2 ต้องมากดปิดใช้งานเอง</span></td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->end_research_edit) }}
                                     </td>

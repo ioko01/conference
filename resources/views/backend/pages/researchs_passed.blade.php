@@ -52,15 +52,17 @@
                                         <select name="research_passed" class="form-select"
                                             onchange="open_modal(this, 'change_research_passed')">
 
-                                            @for ($i = 0; $i < 3; $i++)
+                                            @for ($i = 0; $i < 4; $i++)
                                                 <option value="{{ $i }}"
                                                     @if ($value->research_passed == $i) selected="selected" @endif>
                                                     @if ($i == 0)
                                                         รอการตรวจสอบ
                                                     @elseif ($i == 1)
-                                                        ผ่านการพิจารณา
+                                                        ผ่านรอบที่ 1
                                                     @elseif ($i == 2)
-                                                        ไม่ผ่านการพิจารณา
+                                                        ผ่านรอบที่ 2
+                                                    @elseif ($i == 3)
+                                                        ไม่ผ่าน
                                                     @endif
                                                 </option>
                                             @endfor

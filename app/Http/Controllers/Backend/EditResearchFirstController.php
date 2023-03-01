@@ -69,6 +69,7 @@ class EditResearchFirstController extends Controller
             ->leftjoin('conferences', 'researchs.conference_id', '=', 'conferences.id')
             ->where('conferences.status', 1)
             ->where('researchs.research_passed', 1)
+            ->orWhere('researchs.research_passed', 2)
             ->orderBy('id', 'ASC')
             ->get();
 

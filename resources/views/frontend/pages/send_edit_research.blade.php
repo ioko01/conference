@@ -58,7 +58,7 @@
                                     รูปแบบบทความ : {{ $value->present }}
                                 </strong>
                             </td>
-                            @if ($value->research_passed == 1)
+                            @if ($value->research_passed == 1 || $value->research_passed == 2)
                                 <td style="vertical-align: middle;">
                                     @if ($value->status_id >= 7)
                                         @forelse ($comments as $key => $comment)
@@ -133,7 +133,28 @@
                                                 <tr>
                                                     <td class="border-0" colspan="3">
                                                         @if ($value->status_research_edit == 1)
-                                                            @if (endDate('end_research_edit')->day >= 0)
+                                                            @if (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1)
+                                                                @if ($value->status_id >= 7)
+                                                                    <button type="button"
+                                                                        class="btn btn-warning text-white rounded-0 w-100 my-1"
+                                                                        onclick="open_modal(this, 'edit_research_first'@if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path)) , 'PUT' @endif)">
+                                                                        @if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path))
+                                                                            <i class="nav-icon fas fa-upload"></i>
+                                                                            แก้ไขไฟล์ฉบับแก้ไข
+                                                                        @else
+                                                                            <i class="nav-icon fas fa-upload"></i>
+                                                                            อัพโหลดไฟล์ฉบับแก้ไข
+                                                                        @endif
+                                                                    </button>
+                                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                                @else
+                                                                    <h1 class="text-danger text-center">
+                                                                        <strong style="font-size: calc(.1vw + 10px);">
+                                                                            ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว
+                                                                        </strong>
+                                                                    </h1>
+                                                                @endif
+                                                            @elseif($value->research_passed == 2)
                                                                 @if ($value->status_id >= 7)
                                                                     <button type="button"
                                                                         class="btn btn-warning text-white rounded-0 w-100 my-1"
@@ -188,7 +209,23 @@
                                                 <tr>
                                                     <td class="border-0" colspan="3">
                                                         @if ($value->status_research_edit == 1)
-                                                            @if (endDate('end_research_edit')->day >= 0)
+                                                            @if (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1)
+                                                                @if ($value->status_id >= 7)
+                                                                    <button type="button"
+                                                                        class="btn btn-green text-white rounded-0 w-100 my-1"
+                                                                        onclick="open_modal(this, 'edit_research_first')">
+                                                                        <i class="nav-icon fas fa-upload"></i>
+                                                                        อัพโหลดไฟล์ฉบับแก้ไข
+                                                                    </button>
+                                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                                @else
+                                                                    <h1 class="text-danger text-center">
+                                                                        <strong style="font-size: calc(.1vw + 10px);">
+                                                                            ต้องมีสถานะส่งบทความให้นักวิจัยแก้ไขแล้ว
+                                                                        </strong>
+                                                                    </h1>
+                                                                @endif
+                                                            @elseif($value->research_passed == 2)
                                                                 @if ($value->status_id >= 7)
                                                                     <button type="button"
                                                                         class="btn btn-green text-white rounded-0 w-100 my-1"

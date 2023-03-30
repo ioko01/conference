@@ -132,8 +132,8 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="border-0" colspan="3">
-                                                        @if ($value->status_research_edit == 1)
-                                                            @if (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1)
+                                                        @if (in_array($value->topic_id, [""]) || $value->status_research_edit == 1)
+                                                            @if (in_array($value->topic_id, [""]) || endDate('end_research_edit')->day >= 0 && $value->research_passed == 1)
                                                                 @if ($value->status_id >= 7)
                                                                     <button type="button"
                                                                         class="btn btn-warning text-white rounded-0 w-100 my-1"
@@ -154,7 +154,7 @@
                                                                         </strong>
                                                                     </h1>
                                                                 @endif
-                                                            @elseif($value->research_passed == 2)
+                                                            @elseif(in_array($value->topic_id, [""]) || $value->research_passed == 2)
                                                                 @if ($value->status_id >= 7)
                                                                     <button type="button"
                                                                         class="btn btn-warning text-white rounded-0 w-100 my-1"
@@ -208,7 +208,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="border-0" colspan="3">
-                                                        @if ($value->status_research_edit == 1)
+                                                        @if (in_array($value->topic_id, [""]) || $value->status_research_edit == 1)
                                                             @if (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1)
                                                                 @if ($value->status_id >= 7)
                                                                     <button type="button"
@@ -225,7 +225,7 @@
                                                                         </strong>
                                                                     </h1>
                                                                 @endif
-                                                            @elseif($value->research_passed == 2)
+                                                            @elseif(in_array($value->topic_id, [""]) || $value->research_passed == 2)
                                                                 @if ($value->status_id >= 7)
                                                                     <button type="button"
                                                                         class="btn btn-green text-white rounded-0 w-100 my-1"
@@ -522,7 +522,7 @@
                                 @if ($value->research_passed_1 == 0)
                                     <h1 class="text-warning text-center">
                                         <strong style="font-size: calc(.1vw + 10px);">
-                                            รอตรวจสอบ
+                                            -
                                         </strong>
                                     </h1>
                                 @elseif ($value->research_passed_1 == 1)
@@ -542,8 +542,6 @@
                                             onclick="open_modal(this, 'suggestion')">
                                             ดูข้อเสนอแนะ
                                         </button>
-                                    @else
-                                        <p class="text-info">ยังไม่มีข้อเสนอแนะในตอนนี้</p>
                                     @endif
 
                                     <input type="hidden" value="{{ $value->topic_id }}">

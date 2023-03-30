@@ -30,6 +30,7 @@
                             <table data-searching="false" style="color: inherit;" class="dataTable table w-100">
                                 <thead>
                                     <tr class="text-center">
+                                        <th style="display: none;">#</th>
                                         <th style="width: 15%;">รหัสการนำเสนอ</th>
                                         <th style="width: 20%;">เวลา</th>
                                         <th style="width: auto%;" class="text-start">ชื่อบทความ</th>
@@ -39,6 +40,7 @@
                                     @forelse ($present_orals as $key => $present_oral)
                                         @if ($faculty->name == $present_oral->name)
                                             <tr class="text-center">
+                                                <td style="display: none;">{{ $key + 1 }}</td>
                                                 <td>{{ $present_oral->present_oral_id }}</td>
                                                 <td>{{ substr($present_oral->time_start, 0, -3) }} -
                                                     {{ substr($present_oral->time_end, 0, -3) }} น.</td>

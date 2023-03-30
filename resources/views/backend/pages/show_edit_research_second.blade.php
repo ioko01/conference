@@ -20,7 +20,6 @@
                                 <th style="width: 35%;" class="text-start">รายละเอียดบทความ</th>
                                 <th style="width: 10%;">WORD</th>
                                 <th style="width: 10%;">PDF</th>
-                                <th style="width: 10%;">แบบคำชี้แจงการปรับแก้ไขบทความ</th>
                                 <th style="width: 10%;">รายละเอียด</th>
                             </tr>
                         </thead>
@@ -69,18 +68,6 @@
                                                     {{ thaiDateFormat($value->pdf_created_at, true, true) }}</span>
                                                 <span style="font-size: 10px;" class="text-green d-block">แก้ไข
                                                     {{ thaiDateFormat($value->pdf_updated_at, true, true) }}</span>
-                                            </a>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if (empty($value->statement))
-                                            -
-                                        @else
-                                            <a target="_blank" href="{{ Storage::url($value->statement_path) }}">STM-2
-                                                <span style="font-size: 10px;" class="text-green d-block">อัพโหลด
-                                                    {{ thaiDateFormat($value->statement_created_at, true, true) }}</span>
-                                                <span style="font-size: 10px;" class="text-green d-block">แก้ไข
-                                                    {{ thaiDateFormat($value->statement_updated_at, true, true) }}</span>
                                             </a>
                                         @endif
                                     </td>

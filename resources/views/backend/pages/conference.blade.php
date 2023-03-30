@@ -109,7 +109,7 @@
                             @enderror
                         </div>
                         <div class="col-lg-4 col-md-6 mb-3">
-                            <label for="end_research_edit_two">วันสิ้นสุดการรับบทความฉบับแก้ไข ครั้งที่ 2 <span
+                            <label for="end_research_edit_two">วันสิ้นสุดการรับบทความฉบับหลังนำเสนอ <span
                                     class="text-red">(อาจได้ใช้)</span></label>
                             <input value="{{ old('end_research_edit_two') }}" type="datetime-local"
                                 name="end_research_edit_two" id="end_research_edit_two"
@@ -408,7 +408,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>วันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2 <br /><span
+                                    <td>วันสิ้นสุดการรับบทความแก้ไขหลังนำเสนอ <br /><span
                                             class="text-red text-xs fw-bold">คำแนะนำ:
                                             ควรปิดใช้งานวันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1 ก่อน</span></td>
                                     <td colspan="2" class="text-left text-xs">

@@ -130,7 +130,6 @@ function detail_modal(topic_id, type) {
     });
 }
 
-
 function suggestion_modal(topic_id, type) {
     let createModal = `
             <div class="modal fade" id="research_modal" data-bs-backdrop="static"
@@ -170,10 +169,12 @@ function suggestion_modal(topic_id, type) {
         },
         success: function (res) {
             res.forEach((data) => {
-                if(data.research_suggestion){
+                if (data.research_suggestion) {
                     $("#modal_body").html(data.research_suggestion);
-                }else{
-                    $("#modal_body").html("<p class='text-center'>ยังไม่มีข้อเสนอแนะ</p>");
+                } else {
+                    $("#modal_body").html(
+                        "<p class='text-center'>ยังไม่มีข้อเสนอแนะ</p>"
+                    );
                 }
             });
         },
@@ -286,8 +287,9 @@ function send_edit_research_modal_all(topic_id, type, method) {
                                 <strong style="font-size: calc(.1vw + 10px);">${err_pdf}</strong>
                             </span>
                         </div>
-
-                        <div class="mb-3">
+${
+    type == 1
+        ? `<div class="mb-3">
                             <label for="edit_stm_first"><span class="fw-bold">อัพโหลดไฟล์แบบคำชี้แจงการปรับแก้ไข </span><span class="text-red text-small">*ขนาดไฟล์ใหญ่สุดคือ 10 MB</span></label>
                             <input id="edit_stm_first" class="form-control ${
                                 err_stm && "is-invalid"
@@ -295,7 +297,10 @@ function send_edit_research_modal_all(topic_id, type, method) {
                             <span class="invalid-feedback" role="alert">
                                 <strong style="font-size: calc(.1vw + 10px);">${err_stm}</strong>
                             </span>
-                        </div>
+                        </div>`
+        : ""
+}
+                        
                     </div>
                     <div class="modal-footer">
                         <button onclick="thisDisabled(this)" type="submit" class="btn btn-green text-white rounded-0">อัพโหลดไฟล์</button>

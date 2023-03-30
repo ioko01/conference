@@ -6,7 +6,7 @@
     <div class="bg-white text-blue p-5 my-5">
 
         <div class="inner-content-header">
-            <h4 class="text-center fw-bold"><i class="nav-icon fas fa-1x fa-book"></i> ส่งบทความฉบับแก้ไข ครั้งที่ 2</h4>
+            <h4 class="text-center fw-bold"><i class="nav-icon fas fa-1x fa-book"></i> ส่งบทความแก้ไขหลังนำเสนอ</h4>
             <h4 class="text-green py-3">
                 {{ config('app.name') }}
             </h4>
@@ -18,9 +18,8 @@
                     <tr class="text-center">
                         <th style="width: 5%;">#</th>
                         <th style="width: 25%;" class="text-start">รายละเอียดบทความ</th>
-                        <th style="width: 15%;">ไฟล์ WORD ฉบับแก้ไขครั้งที่ 2</th>
-                        <th style="width: 15%;">ไฟล์ PDF ฉบับแก้ไขครั้งที่ 2</th>
-                        <th style="width: 15%;">แบบคำชี้แจงการปรับแก้ไขบทความครั้งที่ 2</th>
+                        <th style="width: 15%;">ไฟล์ WORD แก้ไขหลังนำเสนอ</th>
+                        <th style="width: 15%;">ไฟล์ PDF แก้ไขหลังนำเสนอ</th>
                         <th style="width: 10%;">รายละเอียด</th>
                     </tr>
                 </thead>
@@ -57,18 +56,12 @@
                                 value="{!! $message !!}"
                             @enderror>
 
-                            <input type="hidden" id="err_stm"
-                                @error('stm_upload')
-                                value="{!! $message !!}"
-                            @enderror>
-
-
 
                             @if ($value->research_passed_1 == 2)
                                 @if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path))
                                     @if ($value->status_payment)
-                                        @if (isset($value->edit_word_path_two) && isset($value->edit_pdf_path_two) && isset($value->edit_stm_path_two))
-                                            <td colspan="3">
+                                        @if (isset($value->edit_word_path_two) && isset($value->edit_pdf_path_two))
+                                            <td colspan="2">
                                                 <table class="w-100">
                                                     <tbody>
                                                         <tr>
@@ -98,22 +91,9 @@
                                                                     ดูตัวอย่าง
                                                                 </a>
                                                             </td>
-                                                            <td class="border-0" style="vertical-align: middle;">
-                                                                <img width="40"
-                                                                    src="{{ asset("images/$value->edit_stm_ext_two.webp", env('REDIRECT_HTTPS')) }}"
-                                                                    alt="{{ $value->edit_stm_path_two }}">
-                                                                <p class="mb-0">{{ $value->edit_stm_name_two }}</p>
-                                                                <i style="font-size: 10px;">แก้ไขครั้งล่าสุด
-                                                                    {{ thaiDateFormat($value->edit_stm_update_two, true) }}</i>
-                                                                <a target="_blank"
-                                                                    class="btn btn-green text-white rounded-0 w-100 my-1"
-                                                                    href="{{ Storage::url($value->edit_stm_path_two) }}">
-                                                                    ดูตัวอย่าง
-                                                                </a>
-                                                            </td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="border-0" colspan="3">
+                                                            <td class="border-0" colspan="2">
                                                                 @if ($value->status_research_edit_two === 1)
                                                                     @if (endDate('end_research_edit_two')->day >= 0)
                                                                         <button type="button"
@@ -121,10 +101,10 @@
                                                                             onclick="open_modal(this, 'edit_research_second'@if (isset($value->edit_word_path_two) && isset($value->edit_pdf_path_two) && isset($value->edit_stm_path_two)) , 'PUT' @endif)">
                                                                             @if (isset($value->edit_word_path_two) && isset($value->edit_pdf_path_two) && isset($value->edit_stm_path_two))
                                                                                 <i class="nav-icon fas fa-upload"></i>
-                                                                                แก้ไขไฟล์ฉบับแก้ไขครั้งที่ 2
+                                                                                แก้ไขไฟล์แก้ไขหลังนำเสนอ
                                                                             @else
                                                                                 <i class="nav-icon fas fa-upload"></i>
-                                                                                อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2
+                                                                                อัพโหลดไฟล์แก้ไขหลังนำเสนอ
                                                                             @endif
                                                                         </button>
                                                                         <input type="hidden"
@@ -132,15 +112,14 @@
                                                                     @else
                                                                         <h1 class="text-danger text-center">
                                                                             <strong style="font-size: calc(.1vw + 10px);">
-                                                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2
+                                                                                สิ้นสุดการรับบทความแก้ไขหลังนำเสนอ
                                                                             </strong>
                                                                         </h1>
                                                                     @endif
                                                                 @else
                                                                     <h1 class="text-danger text-center">
                                                                         <strong style="font-size: calc(.1vw + 10px);">
-                                                                            ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่
-                                                                            2</strong>
+                                                                            ยังไม่เปิดให้อัพโหลดไฟล์แก้ไขหลังนำเสนอ</strong>
                                                                     </h1>
                                                                 @endif
                                                             </td>
@@ -150,33 +129,32 @@
 
                                             </td>
                                         @else
-                                            <td colspan="3" style="vertical-align: middle;">
+                                            <td colspan="2" style="vertical-align: middle;">
                                                 <table class="w-100">
                                                     <tbody>
                                                         <tr>
-                                                            <td class="border-0" colspan="3">
+                                                            <td class="border-0" colspan="2">
                                                                 @if ($value->status_research_edit_two === 1)
                                                                     @if (endDate('end_research_edit_two')->day >= 0)
                                                                         <button type="button"
                                                                             class="btn btn-green text-white rounded-0 w-100 my-1"
                                                                             onclick="open_modal(this, 'edit_research_second')">
                                                                             <i class="nav-icon fas fa-upload"></i>
-                                                                            อัพโหลดไฟล์ฉบับแก้ไขครั้งที่ 2
+                                                                            อัพโหลดไฟล์แก้ไขหลังนำเสนอ
                                                                         </button>
                                                                         <input type="hidden"
                                                                             value="{{ $value->topic_id }}">
                                                                     @else
                                                                         <h1 class="text-danger text-center">
                                                                             <strong style="font-size: calc(.1vw + 10px);">
-                                                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 2
+                                                                                สิ้นสุดการรับบทความแก้ไขหลังนำเสนอ
                                                                             </strong>
                                                                         </h1>
                                                                     @endif
                                                                 @else
                                                                     <h1 class="text-danger text-center">
                                                                         <strong style="font-size: calc(.1vw + 10px);">
-                                                                            ยังไม่เปิดให้อัพโหลดไฟล์ฉบับแก้ไขครั้งที่
-                                                                            2</strong>
+                                                                            ยังไม่เปิดให้อัพโหลดไฟล์แก้ไขหลังนำเสนอ</strong>
                                                                     </h1>
                                                                 @endif
                                                             </td>
@@ -186,27 +164,27 @@
                                             </td>
                                         @endif
                                     @else
-                                        <td colspan="3">
+                                        <td colspan="2">
                                             <h1 class="text-danger text-center">
                                                 <strong style="font-size: calc(.1vw + 10px);">
-                                                    ยังไม่เปิดรับบทความฉบับแก้ไขครั้งที่ 2
+                                                    ยังไม่เปิดรับบทความแก้ไขหลังนำเสนอ
                                                 </strong>
                                             </h1>
 
                                         </td>
                                     @endif
                                 @else
-                                    <td colspan="3">
+                                    <td colspan="2">
                                         <h1 class="text-danger text-center">
                                             <strong style="font-size: calc(.1vw + 10px);">
-                                                ไม่สามารถอัพโหลดแก้ไขครั้งที่ 2 ได้
+                                                ไม่สามารถอัพโหลดแก้ไขหลังนำเสนอ ได้
                                             </strong>
                                         </h1>
 
                                     </td>
                                 @endif
                             @elseif($value->research_passed_1 == 0)
-                                <td colspan="3">
+                                <td colspan="2">
                                     <h1 class="text-warning text-center">
                                         <strong style="font-size: calc(.1vw + 10px);">
                                             บทความนี้อยู่ระหว่างการพิจารณาบทความครั้งที่ 1
@@ -214,7 +192,7 @@
                                     </h1>
                                 </td>
                             @elseif($value->research_passed_1 == 1)
-                                <td colspan="3">
+                                <td colspan="2">
                                     <h1 class="text-green text-center">
                                         <strong style="font-size: calc(.1vw + 10px);">
                                             ผ่านการพิจารณาการปรับแก้ไขแล้ว
@@ -234,7 +212,7 @@
                         </tr>
                     @empty
                         <tr class="text-center">
-                            <td colspan="8">ไม่มีบทความของท่าน</td>
+                            <td colspan="5">ไม่มีบทความของท่าน</td>
                         </tr>
                     @endforelse
                 </tbody>

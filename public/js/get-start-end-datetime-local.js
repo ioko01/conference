@@ -9,7 +9,7 @@ function setAttributes(el, attrs = [], targets = []) {
 window.addEventListener("load", function () {
     const attrs = ["min", "max"];
     const targets = [$("#start").val(), $("#final").val()];
-    const el = "input[type='datetime-local']:not(#start):not(#final)";
+    const el = "input[type='datetime-local']:not(#start):not(#final):not(#end_research_edit_two)";
 
     setAttributes(el, attrs, targets);
 });

@@ -125,7 +125,7 @@
                             <a href="{{ route('backend.research.second.index') }}"
                                 class="nav-link @if (Request::is('backend/researchs/management/times/2')) active @endif">
                                 <i class="nav-icon fas fa-book-open"></i>
-                                <p>บทความฉบับแก้ไขครั้งที่ 2</p>
+                                <p>บทความแก้ไขหลังนำเสนอ</p>
                             </a>
                         </li>
 

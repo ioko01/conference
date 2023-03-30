@@ -180,8 +180,7 @@
                                     @if ($conference = DB::table('conferences')->select('id')->where('status', 1)->where('status_research_edit_two', 1)->first())
                                         <a class="dropdown-item {{ Request::is('employee/research/send-edit-2/show/*') ? 'active' : '' }}"
                                             aria-current="page"
-                                            href="{{ route('employee.research.send.two.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไขครั้งที่
-                                            2</a>
+                                            href="{{ route('employee.research.send.two.edit', auth()->user()->id) }}">ส่งบทความแก้ไขหลังนำเสนอ</a>
                                     @endif
 
 

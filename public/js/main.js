@@ -39,7 +39,7 @@ function get_file_name(e) {
 function thisDisabled(e) {
     setTimeout(() => {
         const date = document.querySelectorAll(
-            "input[type='datetime-local']:not(#start):not(#final)"
+            "input[type='datetime-local']:not(#start):not(#final):not(#end_research_edit_two)"
         );
 
         $(e).attr("disabled", true);

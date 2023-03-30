@@ -98,8 +98,8 @@
                                                                     @if (endDate('end_research_edit_two')->day >= 0)
                                                                         <button type="button"
                                                                             class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                                                            onclick="open_modal(this, 'edit_research_second'@if (isset($value->edit_word_path_two) && isset($value->edit_pdf_path_two) && isset($value->edit_stm_path_two)) , 'PUT' @endif)">
-                                                                            @if (isset($value->edit_word_path_two) && isset($value->edit_pdf_path_two) && isset($value->edit_stm_path_two))
+                                                                            onclick="open_modal(this, 'edit_research_second'@if (isset($value->edit_word_path_two) && isset($value->edit_pdf_path_two)) , 'PUT' @endif)">
+                                                                            @if (isset($value->edit_word_path_two) && isset($value->edit_pdf_path_two))
                                                                                 <i class="nav-icon fas fa-upload"></i>
                                                                                 แก้ไขไฟล์แก้ไขหลังนำเสนอ
                                                                             @else

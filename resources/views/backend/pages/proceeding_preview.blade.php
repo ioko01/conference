@@ -84,6 +84,7 @@
                             <table data-searching="false" style="color: inherit;" class="dataTable table w-100">
                                 <thead>
                                     <tr class="text-center">
+                                        <th style="width: 10%;" class="d-none">#</th>
                                         <th style="width: 10%;">เลขหน้า</th>
                                         <th style="width: 70%;" class="text-start">รายละเอียดบทความ</th>
                                         <th style="width: auto%;"><i class="fas fa-download"></i></th>
@@ -93,6 +94,8 @@
                                     @forelse ($proceeding_researchs as $proceeding_research)
                                         @if ($proceeding_research->faculty_id == $faculty->id)
                                             <tr>
+                                                <td class="text-center fw-bold d-none">
+                                                    {{ explode('-', $proceeding_research->number)[0] }}</td>
                                                 <td class="text-center fw-bold">{{ $proceeding_research->number }}</td>
                                                 <td class="text-start">
                                                     <strong

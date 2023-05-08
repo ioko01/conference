@@ -142,7 +142,7 @@
                                                 <label for="file">
                                                     อัพโหลดเป็นไฟล์ <span style="font-size: 12px;"
                                                         class="text-red">(แนะนำเฉพาะไฟล์ที่มีขนาดเล็ก
-                                                        ขนาดไฟล์ใหญ่สุดคือ 10 MB)</span>
+                                                        ขนาดไฟล์ใหญ่สุดคือ 25 MB)</span>
                                                 </label>
                                             </div>
                                             <div class="mb-3">

@@ -79,13 +79,13 @@ class ProceedingFileController extends Controller
                 return $request->validate([
                     'topic_id' => 'required',
                     'name' => 'required',
-                    'file_upload' => 'mimes:pdf,doc,docx,jpeg,jpg,png|max:10240'
+                    'file_upload' => 'mimes:pdf,doc,docx,jpeg,jpg,png|max:25600'
                 ]);
             } else {
                 return $request->validate([
                     'topic_id' => 'required',
                     'name' => 'required',
-                    'file_upload' => 'required|mimes:pdf,doc,docx,jpeg,jpg,png|max:10240'
+                    'file_upload' => 'required|mimes:pdf,doc,docx,jpeg,jpg,png|max:25600'
                 ]);
             }
         }

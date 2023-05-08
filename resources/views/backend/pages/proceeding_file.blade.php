@@ -140,7 +140,7 @@
                                                 <label class="form-check-label" for="file">
                                                     อัพโหลดเป็นไฟล์ <i style="font-size: 12px;"
                                                         class="text-red">(แนะนำเฉพาะไฟล์ที่มีขนาดเล็ก
-                                                        ขนาดไฟล์ใหญ่สุดคือ 10 MB)</i>
+                                                        ขนาดไฟล์ใหญ่สุดคือ 25 MB)</i>
                                                 </label>
                                             </div>
                                             <div class="mb-3">

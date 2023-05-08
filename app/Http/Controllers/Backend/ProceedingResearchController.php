@@ -53,7 +53,7 @@ class ProceedingResearchController extends Controller
             'present_id' => 'required',
             'number' => 'required',
             'topic' => 'required',
-            'file' => 'mimes:pdf,doc,docx|max:10240'
+            'file' => 'mimes:pdf,doc,docx|max:25600'
         ]);
     }
 

@@ -5,7 +5,7 @@
     <div id="proceeding" class="bg-white text-blue p-5 my-5">
         @if ($conference->status_proceeding == 1)
             <div class="inner-content-header">
-                <h4 class="text-center fw-bold">PROCEEDING <br />
+                <h4 class="text-center fw-bold">PROCEEDINGS <br />
                     @if ($conference)
                         {{ $conference->name }}
                     @endif

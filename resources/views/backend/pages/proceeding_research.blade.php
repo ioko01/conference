@@ -184,6 +184,7 @@
                     <table class="dataTable table table-striped w-100">
                         <thead>
                             <tr>
+                                <th class="text-center d-none">#</th>
                                 <th class="text-center">เลขหน้า</th>
                                 <th style="width: 85%;">รายละเอียดบทความ</th>
                                 <th style="width: auto;" class="text-right">แก้ไข</th>
@@ -193,6 +194,7 @@
                         <tbody>
                             @forelse ($researchs as $research)
                                 <tr>
+                                    <td class="text-center d-none">{{ explode('-', $research->number)[0] }}</td>
                                     <td class="text-center">{{ $research->number }}</td>
                                     <td class="text-start">
                                         <strong style="font-size: 12px" class="text-bluesky">

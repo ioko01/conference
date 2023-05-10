@@ -114,7 +114,7 @@
                         <ul class="dropdown-menu">
                             @forelse ($conferences = DB::table('conferences')->select('year')->orderBy('year', 'desc')->get() as $conference)
                                 <li><a class='dropdown-item @if (Request::is("proceeding/$conference->year")) active @endif'
-                                        href="{{ route('proceeding.index', $conference->year) }}">Proceeding
+                                        href="{{ route('proceeding.index', $conference->year) }}">Proceedings
                                         {{ $conference->year }}</a>
                                 </li>
 

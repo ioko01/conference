@@ -166,9 +166,10 @@
                                                     <strong
                                                         class="text-info">{{ $proceeding_research->present_name }}</strong><br />
                                                     <strong>{{ $proceeding_research->topic }}</strong><br />
-                                                    <div class="bg-{{ $colors[$proceeding_research->faculty_id] }} px-3">
+                                                    <div style="background-color: {{ $colors[$proceeding_research->faculty_id] }}"
+                                                        class="px-3">
                                                         <strong
-                                                            class="text-white">{{ $proceeding_research->faculty_name }}</strong>
+                                                            class="text-{{ $textColors[$proceeding_research->faculty_id] }}">{{ $proceeding_research->faculty_name }}</strong>
                                                     </div>
 
                                                 </td>
@@ -192,14 +193,14 @@
                                 <div class="d-flex position-relative">
 
 
-                                    <div style="transform:translateY(-50%);background-color: var(--color-green);height:40px;
+                                    <div style="transform:translateY(-50%);background-color: {{ $colors[$faculty->id] }};height:40px;
                                 @if ($key % 2 == 0) left:-1px;
                                 @else right:-1px; @endif"
                                         class="px-5 position-absolute">
 
 
                                         @if ($key % 2 == 0)
-                                            <div style="border: 20px solid var(--color-green);
+                                            <div style="border: 20px solid {{ $colors[$faculty->id] }};
                                                 border-top:20px solid transparent;
                                                 border-right:20px solid transparent;
                                                 border-bottom:20px solid transparent;
@@ -207,7 +208,7 @@
                                                 right:-40px;"
                                                 class="position-absolute"></div>
                                         @else
-                                            <div style="border: 20px solid var(--color-green);
+                                            <div style="border: 20px solid {{ $colors[$faculty->id] }};
                                                 border-top:20px solid transparent;
                                                 border-left:20px solid transparent;
                                                 border-bottom:20px solid transparent;
@@ -216,7 +217,7 @@
                                                 class="position-absolute"></div>
                                         @endif
 
-                                        <strong style="line-height: 40px;" class="text-white">
+                                        <strong style="line-height: 40px;" class="text-{{ $textColors[$faculty->id] }}">
                                             {{ $faculty->name }}
                                         </strong>
                                     </div>
@@ -245,8 +246,11 @@
                                                             <strong
                                                                 class="text-info">{{ $proceeding_research->present_name }}</strong><br />
                                                             <strong>{{ $proceeding_research->topic }}</strong><br />
-                                                            <strong
-                                                                class="text-green">{{ $proceeding_research->faculty_name }}</strong>
+                                                            <div style="background-color: {{ $colors[$proceeding_research->faculty_id] }}"
+                                                                class="px-3">
+                                                                <strong
+                                                                    class="text-{{ $textColors[$proceeding_research->faculty_id] }}">{{ $proceeding_research->faculty_name }}</strong>
+                                                            </div>
                                                         </td>
                                                         <td class="text-center">
                                                             <a target="_blank" class="fw-bold"

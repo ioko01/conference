@@ -62,13 +62,14 @@ class ProceedingController extends Controller
             }
         }
 
-        $colors = ['green', 'danger', 'warning', 'primary', 'info', 'dark', 'secondary'];
+        $colors = ['', 'blue', 'violet', 'yellow', 'orange', 'green'];
+        $textColors = ['', 'white', 'white', 'dark', 'white', 'white'];
 
         DB::disconnect('conferences');
         DB::disconnect('proceeding_files');
         DB::disconnect('proceeding_researchs');
         DB::disconnect('faculties');
 
-        return view('frontend.pages.proceeding', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs', 'colors'));
+        return view('frontend.pages.proceeding', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs', 'colors', 'textColors'));
     }
 }

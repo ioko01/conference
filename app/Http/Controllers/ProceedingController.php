@@ -15,7 +15,7 @@ class ProceedingController extends Controller
 {
     //
 
-    public function index($year)
+    public function index(Request $request, $year)
     {
         $conference = Conference::where('year', $year)->first();
         $proceedings = ProceedingFile::select(
@@ -43,6 +43,7 @@ class ProceedingController extends Controller
         )
             ->leftjoin('faculties', 'faculties.id', 'proceeding_researchs.faculty_id')
             ->leftjoin('presents', 'presents.id', 'proceeding_researchs.present_id')
+            ->where('proceeding_researchs.topic', 'LIKE', "%" . $request->search_proceedings . "%")
             ->where('proceeding_researchs.conference_id', $conference->id)
             ->get();
 
@@ -61,11 +62,13 @@ class ProceedingController extends Controller
             }
         }
 
+        $colors = ['green', 'danger', 'warning', 'primary', 'info', 'dark', 'secondary'];
+
         DB::disconnect('conferences');
         DB::disconnect('proceeding_files');
         DB::disconnect('proceeding_researchs');
         DB::disconnect('faculties');
 
-        return view('frontend.pages.proceeding', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs'));
+        return view('frontend.pages.proceeding', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs', 'colors'));
     }
 }

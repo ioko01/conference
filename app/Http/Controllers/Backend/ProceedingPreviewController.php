@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\DB;
 class ProceedingPreviewController extends Controller
 {
     //
-    public function index($year)
+    public function index(Request $request, $year)
     {
+
         $conference = Conference::where('year', $year)->first();
         $proceedings = ProceedingFile::select(
             'proceeding_topics.topic as topic',
@@ -29,6 +30,7 @@ class ProceedingPreviewController extends Controller
             ->orderBy('proceeding_topics.position')
             ->get();
 
+
         $proceeding_researchs = ProceedingResearch::select(
             'proceeding_researchs.number as number',
             'proceeding_researchs.topic as topic',
@@ -41,6 +43,7 @@ class ProceedingPreviewController extends Controller
         )
             ->leftjoin('faculties', 'faculties.id', 'proceeding_researchs.faculty_id')
             ->leftjoin('presents', 'presents.id', 'proceeding_researchs.present_id')
+            ->where('proceeding_researchs.topic', 'LIKE', "%" . $request->search_proceedings . "%")
             ->where('proceeding_researchs.conference_id', $conference->id)
             ->get();
 
@@ -59,10 +62,12 @@ class ProceedingPreviewController extends Controller
             }
         }
 
+        $colors = ['green', 'danger', 'warning', 'primary', 'info', 'dark', 'secondary'];
+
         DB::disconnect('conferences');
         DB::disconnect('proceeding_files');
         DB::disconnect('proceeding_researchs');
         DB::disconnect('faculties');
-        return view('backend.pages.proceeding_preview', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs'));
+        return view('backend.pages.proceeding_preview', compact('year', 'conference', 'proceedings', 'topics', 'faculties', 'proceeding_researchs', 'colors'));
     }
 }

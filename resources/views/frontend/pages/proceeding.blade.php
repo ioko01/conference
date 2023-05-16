@@ -18,10 +18,32 @@
                 @if ($topic)
                     <div class="animate fade-up row">
                         <div class="col-md-6 mb-3">
-                            <div class="border">
-                                <div class="bg-green text-white p-3">
-                                    <strong>{{ $topic }}</strong>
+
+                            <div class="bg-green text-white position-relative">
+                                <div style="border: 10px solid white;
+                                            border-top:10px solid transparent;
+                                            border-bottom:10px solid transparent;
+                                            border-left:10px solid transparent;
+                                            right:0;
+                                            top:0;"
+                                    class="position-absolute">
+
                                 </div>
+                                <div style="border: 10px solid white;
+                                            border-top:10px solid transparent;
+                                            border-bottom:10px solid transparent;
+                                            border-left:10px solid transparent;
+                                            right:0;
+                                            bottom:0;"
+                                    class="position-absolute">
+
+                                </div>
+                                <div style="height: 40px;" class="px-3">
+                                    <strong style="line-height: 40px;">{{ $topic }}</strong>
+                                </div>
+                            </div>
+
+                            <div class="border border-success">
                                 <div class="p-3 row">
                                     @forelse ($proceedings as $proceeding)
                                         @if ($proceeding->topic == $topic)
@@ -64,20 +86,64 @@
                                     @endforelse
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                 @endif
             @empty
             @endforelse
 
+            <div id="search_box" class="row my-5">
+                <div class="col-md-8">
+                    <div class="animate fade-up mt-5">
+                        <form action="{{ route('proceeding.index', ['year' => $year]) }}" method="GET">
+                            <div class="d-flex w-100 position-relative">
+                                <input type="text" name="search_proceedings" id="search_proceedings"
+                                    @if (isset($_GET['search_proceedings'])) value="{{ $_GET['search_proceedings'] }}" @endif
+                                    class="form-control w-100 p-4" placeholder="ค้นหาบทความ">
+                                <button style="min-width: 80px;border: none;background-color: var(--color-green);"
+                                    type="submit" class="w-25 rounded-0 text-nowrap position-relative">
+                                    <div style="border: 10px solid var(--color-green);
+                                                border-top:10px solid transparent;
+                                                border-left:10px solid transparent;
+                                                border-bottom:10px solid transparent;
+                                                top:50%;
+                                                left:-20px;
+                                                transform:translateY(-50%)"
+                                        class="position-absolute"></div>
+                                    <strong class="text-white">
+                                        <i class="fas fa-search"></i> ค้นหาบทความ {{ old('search_proceedings') }}
+                                    </strong>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <div id="proceeding" class="row my-5">
                 <div class="col-md-8">
-                    @forelse ($faculties as $key => $faculty)
+                    @if (isset($_GET['search_proceedings']) && $_GET['search_proceedings'] != '')
                         <div class="animate fade-up my-5 border">
-                            <div class="px-4 py-2 bg-green">
-                                <strong class="text-white">
-                                    {{ $faculty->name }}
-                                </strong>
+                            <div class="d-flex position-relative">
+
+                                <div style="transform:translateY(-50%);background-color: var(--color-green);height:40px;left:-1px;"
+                                    class="px-5 position-absolute">
+
+                                    <div style="border: 20px solid var(--color-green);
+                                border-top:20px solid transparent;
+                                border-right:20px solid transparent;
+                                border-bottom:20px solid transparent;
+                                top:0;
+                                right:-40px;"
+                                        class="position-absolute"></div>
+
+                                    <strong style="line-height: 40px;" class="text-white">
+                                        รายการบทความ
+                                    </strong>
+                                </div>
+
                             </div>
                             <div class="p-4 text-dark table-responsive">
                                 <table style="color: inherit;" class="dataTable table w-100">
@@ -91,25 +157,28 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($proceeding_researchs as $proceeding_research)
-                                            @if ($proceeding_research->faculty_id == $faculty->id)
-                                                <tr>
-                                                    <td class="text-center fw-bold d-none">{{ explode('-', $proceeding_research->number)[0] }}</td>
-                                                    <td class="text-center fw-bold">{{ $proceeding_research->number }}</td>
-                                                    <td class="text-start">
+                                            <tr>
+                                                <td class="text-center fw-bold d-none">
+                                                    {{ explode('-', $proceeding_research->number)[0] }}</td>
+                                                <td class="text-center fw-bold">{{ $proceeding_research->number }}
+                                                </td>
+                                                <td class="text-start">
+                                                    <strong
+                                                        class="text-info">{{ $proceeding_research->present_name }}</strong><br />
+                                                    <strong>{{ $proceeding_research->topic }}</strong><br />
+                                                    <div class="bg-{{ $colors[$proceeding_research->faculty_id] }} px-3">
                                                         <strong
-                                                            class="text-info">{{ $proceeding_research->present_name }}</strong><br />
-                                                        <strong>{{ $proceeding_research->topic }}</strong><br />
-                                                        <strong
-                                                            class="text-green">{{ $proceeding_research->faculty_name }}</strong>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a target="_blank" class="fw-bold"
-                                                            href="{{ Storage::url($proceeding_research->path) }}"
-                                                            download="{{ $proceeding_research->number }} LRU_CONFERENCE.{{ $proceeding_research->extension }}"><i
-                                                                class="fas fa-download"></i><br /> ดาวน์โหลด</a>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                                            class="text-white">{{ $proceeding_research->faculty_name }}</strong>
+                                                    </div>
+
+                                                </td>
+                                                <td class="text-center">
+                                                    <a target="_blank" class="fw-bold"
+                                                        href="{{ Storage::url($proceeding_research->path) }}"
+                                                        download="{{ $proceeding_research->number }} LRU_CONFERENCE.{{ $proceeding_research->extension }}"><i
+                                                            class="fas fa-download"></i><br /> ดาวน์โหลด</a>
+                                                </td>
+                                            </tr>
                                         @empty
                                         @endforelse
                                     </tbody>
@@ -117,8 +186,87 @@
                             </div>
 
                         </div>
-                    @empty
-                    @endforelse
+                    @else
+                        @forelse ($faculties as $key => $faculty)
+                            <div class="animate fade-up my-5 border">
+                                <div class="d-flex position-relative">
+
+
+                                    <div style="transform:translateY(-50%);background-color: var(--color-green);height:40px;
+                                @if ($key % 2 == 0) left:-1px;
+                                @else right:-1px; @endif"
+                                        class="px-5 position-absolute">
+
+
+                                        @if ($key % 2 == 0)
+                                            <div style="border: 20px solid var(--color-green);
+                                                border-top:20px solid transparent;
+                                                border-right:20px solid transparent;
+                                                border-bottom:20px solid transparent;
+                                                top:0;
+                                                right:-40px;"
+                                                class="position-absolute"></div>
+                                        @else
+                                            <div style="border: 20px solid var(--color-green);
+                                                border-top:20px solid transparent;
+                                                border-left:20px solid transparent;
+                                                border-bottom:20px solid transparent;
+                                                top:0;
+                                                left:-40px;"
+                                                class="position-absolute"></div>
+                                        @endif
+
+                                        <strong style="line-height: 40px;" class="text-white">
+                                            {{ $faculty->name }}
+                                        </strong>
+                                    </div>
+
+                                </div>
+                                <div class="p-4 text-dark table-responsive">
+                                    <table style="color: inherit;" class="dataTable table w-100">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th style="width: 10%;" class="d-none">#</th>
+                                                <th style="width: 10%;">เลขหน้า</th>
+                                                <th style="width: 70%;" class="text-start">รายละเอียดบทความ</th>
+                                                <th style="width: auto%;"><i class="fas fa-download"></i></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($proceeding_researchs as $proceeding_research)
+                                                @if ($proceeding_research->faculty_id == $faculty->id)
+                                                    <tr>
+                                                        <td class="text-center fw-bold d-none">
+                                                            {{ explode('-', $proceeding_research->number)[0] }}</td>
+                                                        <td class="text-center fw-bold">
+                                                            {{ $proceeding_research->number }}
+                                                        </td>
+                                                        <td class="text-start">
+                                                            <strong
+                                                                class="text-info">{{ $proceeding_research->present_name }}</strong><br />
+                                                            <strong>{{ $proceeding_research->topic }}</strong><br />
+                                                            <strong
+                                                                class="text-green">{{ $proceeding_research->faculty_name }}</strong>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a target="_blank" class="fw-bold"
+                                                                href="{{ Storage::url($proceeding_research->path) }}"
+                                                                download="{{ $proceeding_research->number }} LRU_CONFERENCE.{{ $proceeding_research->extension }}"><i
+                                                                    class="fas fa-download"></i><br /> ดาวน์โหลด</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @empty
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        @empty
+                        @endforelse
+                    @endif
+
                 </div>
             </div>
         @else

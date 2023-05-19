@@ -165,7 +165,11 @@
                                                 <td class="text-start">
                                                     <strong
                                                         class="text-info">{{ $proceeding_research->present_name }}</strong><br />
-                                                    <strong>{{ $proceeding_research->topic }}</strong><br />
+                                                    <strong>{!! preg_replace(
+                                                        '/' . $_GET['search_proceedings'] . '/i',
+                                                        '<span style="background-color:yellow;">' . $_GET['search_proceedings'] . '</span>',
+                                                        $proceeding_research->topic,
+                                                    ) !!}</strong><br />
                                                     <div style="background-color: {{ $colors[$proceeding_research->faculty_id] }}"
                                                         class="px-3">
                                                         <strong

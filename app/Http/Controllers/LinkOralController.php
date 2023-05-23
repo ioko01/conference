@@ -33,12 +33,13 @@ class LinkOralController extends Controller
             $link_oral->path = Storage::url($link_oral->path);
         }
 
-        $colors = ["primary", "info", "warning", "success", "danger"];
+        $colors = ['', 'darkblue', 'purple', 'yellow', 'orange', 'green'];
+        $textColors = ['', 'white', 'white', 'dark', 'white', 'white'];
 
         DB::disconnect('conferences');
         DB::disconnect('faculties');
         DB::disconnect('tips');
         DB::disconnect('link_orals');
-        return view('frontend.pages.oral_link', compact('conference', 'link_orals', 'faculties', 'colors', 'tips'));
+        return view('frontend.pages.oral_link', compact('conference', 'link_orals', 'faculties', 'colors', 'tips', 'textColors'));
     }
 }

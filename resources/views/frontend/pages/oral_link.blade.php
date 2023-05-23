@@ -21,8 +21,8 @@
                 </div>
                 @forelse ($faculties as $key => $faculty)
                     <div class="animate fade-up my-5">
-                        <div class="px-4 py-2 bg-green">
-                            <strong class="text-white">
+                        <div style="background-color: {{ $colors[$faculty->id] }};color:{{ $textColors[$faculty->id] }};" class="px-4 py-2">
+                            <strong>
                                 {{ $faculty->name }}
                             </strong>
                         </div>
@@ -39,7 +39,9 @@
                                         @if ($faculty->name == $link_oral->name)
                                             <tr class="text-start">
                                                 <td>
-                                                    <strong class="text-{{ $colors[$key] }}">ห้อง :
+                                                    <strong class="px-2"
+                                                        style="background-color: {{ $colors[$faculty->id] }};color:{{ $textColors[$faculty->id] }};">ห้อง
+                                                        :
                                                         {{ $link_oral->room }}</strong><br />
                                                     <strong>
                                                         ลิงค์นำเสนอ : <a

@@ -31,13 +31,14 @@ class OralController extends Controller
 
         $faculties = Faculty::get();
 
-        $colors = ["primary", "info", "warning", "success", "danger"];
+        $colors = ['', 'darkblue', 'purple', 'yellow', 'orange', 'green'];
+        $textColors = ['', 'white', 'white', 'dark', 'white', 'white'];
 
         DB::disconnect('conferences');
         DB::disconnect('tips');
         DB::disconnect('present_orals');
         DB::disconnect('faculties');
 
-        return view('frontend.pages.oral', compact('present_orals', 'conference', 'faculties', 'colors', 'tips'));
+        return view('frontend.pages.oral', compact('present_orals', 'conference', 'faculties', 'colors', 'tips', 'textColors'));
     }
 }

@@ -21,8 +21,8 @@
                 </div>
                 @forelse ($faculties as $key => $faculty)
                     <div class="animate fade-up my-5">
-                        <div class="px-4 py-2 bg-green">
-                            <strong class="text-white">
+                        <div style="background-color: {{ $colors[$faculty->id] }};color:{{ $textColors[$faculty->id] }};" class="px-4 py-2">
+                            <strong>
                                 {{ $faculty->name }}
                             </strong>
                         </div>

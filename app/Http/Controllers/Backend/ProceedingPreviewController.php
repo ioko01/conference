@@ -62,7 +62,7 @@ class ProceedingPreviewController extends Controller
             }
         }
 
-        $colors = ['', 'blue', 'violet', 'yellow', 'orange', 'green'];
+        $colors = ['', 'darkblue', 'purple', 'yellow', 'orange', 'green'];
         $textColors = ['', 'white', 'white', 'dark', 'white', 'white'];
 
         DB::disconnect('conferences');

@@ -77,6 +77,6 @@ class RegisterAttendController extends Controller
 
         DB::disconnect('conferences');
         DB::disconnect('kotas');
-        return redirect()->route('welcome');
+        return redirect()->route('register');
     }
 }

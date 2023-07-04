@@ -28,7 +28,7 @@
                     </div>
                     <div class="row w-100">
                         <div class="col-md-7">
-                            <form action="{{ route('register') }}" method="POST">
+                            <form id="form_register" @if (old('person_attend') == 'send') action="{{ route('register') }}" @elseif(old('person_attend') == 'attend') action="{{ route('attend.store') }}" @elseif(endDate('end_research')->day >= 0) action="{{ route('register') }}" @else action="{{ route('attend.store') }}" @endif method="POST">
                                 @csrf
                                 <div class="row mb-4">
                                     <div class="col-md-6">
@@ -183,7 +183,7 @@
                                         </label>
                                         @if (endDate('end_research')->day >= 0)
                                             <div class="form-check">
-                                                <input onchange="toggle_attend(this)" class="form-check-input"
+                                                <input onchange="toggle_attend(this, '{{route('register')}}')" class="form-check-input"
                                                     type="radio" name="person_attend" id="send"
                                                     @if (old('person_attend') === 'send' || empty(old('person_attend'))) checked @endif value="send">
                                                 <label class="form-check-label" for="send">
@@ -197,7 +197,7 @@
                                         @endif
                                         @if (endDate('end_attend')->day >= 0)
                                             <div class="form-check">
-                                                <input onchange="toggle_attend(this)" class="form-check-input"
+                                                <input onchange="toggle_attend(this, '{{route('attend.store')}}')" class="form-check-input"
                                                     type="radio" name="person_attend" id="attend"
                                                     @if (endDate('end_research')->day < 0 || old('person_attend') === 'attend') checked @endif value="attend">
                                                 <label class="form-check-label" for="attend">
@@ -272,30 +272,38 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <div class="d-flex justify-content-between">
-                                            <label for="password">รหัสผ่าน</label>
-                                            <div class="toggle-password">
 
+
+
+                                <div id="form_password" class="row mb-4 @if (old('person_attend') == 'attend') d-none @endif">
+                                    @if (endDate('end_research')->day >= 0)
+                                        <div class="col-md-6">
+                                            <div class="d-flex justify-content-between">
+                                                <label for="password">รหัสผ่าน</label>
+                                                <div class="toggle-password">
+
+                                                </div>
                                             </div>
+                                            <input type="password" name="password" id="password"
+                                                class="form-control eye-icon @error('password') is-invalid @enderror">
+
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
                                         </div>
-                                        <input type="password" name="password" id="password"
-                                            class="form-control eye-icon @error('password') is-invalid @enderror">
-
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="password_confirmation">ยืนยันรหัสผ่าน</label>
-                                        <input type="password" name="password_confirmation" id="password_confirmation"
-                                            class="form-control @error('password_confirmation') is-invalid @enderror">
-                                    </div>
+                                        <div class="col-md-6">
+                                            <label for="password_confirmation">ยืนยันรหัสผ่าน</label>
+                                            <input type="password" name="password_confirmation"
+                                                id="password_confirmation"
+                                                class="form-control @error('password_confirmation') is-invalid @enderror">
+                                        </div>
+                                    @endif
                                 </div>
+
+
                                 <div class="d-block">
                                     <input onclick="thisDisabled(this)" name="register"
                                         class="btn btn-green rounded-0 text-white text-white w-100" type="submit"

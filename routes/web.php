@@ -36,6 +36,7 @@ use App\Http\Controllers\OralController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PosterController;
 use App\Http\Controllers\ProceedingController;
+use App\Http\Controllers\RegisterAttendController;
 use App\Http\Controllers\SendEditAllController;
 use App\Http\Controllers\SendEditAllTwoController;
 use App\Http\Controllers\SendEditResearchController;
@@ -97,6 +98,7 @@ Route::get('contract', function () {
     return view('frontend.pages.contract');
 })->name('contract');
 
+Route::post('attend', [RegisterAttendController::class, 'store'])->name('attend.store');
 Route::get('payment', [PaymentController::class, 'index'])->name('payment');
 Route::get('list/research', [ListResearchController::class, 'index'])->name('list.research.index');
 Route::get('list/attend', [ListAttendController::class, 'index'])->name('list.attend.index');

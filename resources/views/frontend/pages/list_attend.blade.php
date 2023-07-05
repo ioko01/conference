@@ -31,7 +31,7 @@
                             @if ($user->email_verified_at)
                                 <tr class="text-center">
                                     <td>{{ $i++ }}</td>
-                                    <td class="text-start">{{ $user->prefix }}{{ $user->fullname }}</td>
+                                    <td class="text-start">{{ $user->prefix }} {{ $user->fullname }}</td>
                                     <td>{{ $user->institution }}</td>
                                     <td>
                                         @if ($user->person_attend == 'send')

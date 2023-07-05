@@ -218,7 +218,7 @@ class ResearchController extends Controller
             if ($presenter) {
                 if ($request->prefixs[$key]) {
                     array_push($prefix_presenter, $request->prefixs[$key] . "!!" . $presenter);
-                } else {
+                } elseif (!$request->prefixs[$key] && $presenter) {
                     array_push($prefix_presenter, "!!" . $presenter);
                 }
             }
@@ -514,7 +514,7 @@ class ResearchController extends Controller
         foreach ($request->presenters as $key => $presenter) {
             if ($request->prefixs[$key]) {
                 array_push($prefix_presenter, $request->prefixs[$key] . "!!" . $presenter);
-            } else {
+            } elseif (!$request->prefixs[$key] && $presenter) {
                 array_push($prefix_presenter, "!!" . $presenter);
             }
         }

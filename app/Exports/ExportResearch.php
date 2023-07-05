@@ -39,7 +39,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             'status_researchs.name AS topic_status',
             'conferences.year AS year',
             DB::raw(
-                'REPLACE(researchs.presenter , "|", ", ") AS presenter'
+                'REPLACE(REPLACE(researchs.presenter , "!!", " "), "|", ", ") AS presenter'
             ),
             'faculties.name AS faculty',
             'branches.name AS branch',

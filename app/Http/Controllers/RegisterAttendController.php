@@ -76,6 +76,7 @@ class RegisterAttendController extends Controller
         alert('สำเร็จ', 'ลงทะเบียนเข้าร่วมงานสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
 
         DB::disconnect('conferences');
+        DB::disconnect('attends');
         DB::disconnect('kotas');
         return redirect()->route('register');
     }

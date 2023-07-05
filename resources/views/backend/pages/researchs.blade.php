@@ -26,36 +26,36 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($researchs as $key => $research)
+                            @forelse ($researchs as $key => $value)
                                 <tr>
                                     <td class="text-center">{{ ++$key }}</td>
                                     <td class="text-start">
                                         <strong style="font-size: 12px" class="text-warning">
-                                            รหัสบทความ : {{ $research->topic_id }}
+                                            รหัสบทความ : {{ $value->topic_id }}
                                         </strong>
                                         <br />
                                         <strong>
-                                            {!! $research->topic_th !!}
+                                            {!! $value->topic_th !!}
                                         </strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-primary">สังกัด /
-                                            หน่วยงาน : {{ $research->institution }}</strong>
+                                            หน่วยงาน : {{ $value->institution }}</strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-green">ผู้นำเสนอ :
-                                            {{ str_replace('|', ', ', $research->presenter) }}</strong>
+                                            {{ str_replace('!!', ' ', str_replace('|', ', ', $value->presenter)) }}</strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-bluesky">
-                                            รูปแบบบทความ : {{ $research->present }}
+                                            รูปแบบบทความ : {{ $value->present }}
                                         </strong>
                                     </td>
-                                    <td class="text-center">{{ $research->year }}</td>
+                                    <td class="text-center">{{ $value->year }}</td>
                                     <td class="text-center">
                                         <span class="text-info">
-                                            {{ $research->fullname }}
+                                            {{ $value->fullname }}
                                         </span>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('backend.research.edit', $research->topic_id) }}"
+                                        <a href="{{ route('backend.research.edit', $value->topic_id) }}"
                                             class=" text-warning"><i class="nav-icon fa fa-edit"></i>
                                             แก้ไข</a>
                                     </td>

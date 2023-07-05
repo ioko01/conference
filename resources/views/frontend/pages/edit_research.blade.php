@@ -45,74 +45,348 @@
                             @enderror
                         </div>
                         <div class="mb-4">
-                            <label>ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย) <strong
-                                    class="text-red">(ใส่คำนำหน้าด้วย)</strong></label>
-                            <div class="mb-4">
+                            <label>ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย)</label>
+                            <div class="row mb-4">
                                 <span>1.&nbsp;</span>
-                                <input type="text" id="presenters[]" name="presenters[]"
-                                    class="form-control w-100 @error('presenters.0') is-invalid @enderror"
-                                    @if (isset(explode('|', $research->presenter)[0])) value="{{ explode('|', $research->presenter)[0] }}" @endif
-                                    autocomplete="presenters[0]">
-
-                                @error('presenters.0')
-                                    <span class="invalid-feedback d-block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <div class="col-sm-3 mb-2">
+                                    <select id="prefixs[]" name="prefixs[]"
+                                        class="form-select @error('prefixs.0') is-invalid @enderror" autocomplete="prefixs"
+                                        autofocus>
+                                        <option value="" @if (!old('prefixs.0')) selected @endif>
+                                            --ตัวเลือกคำนำหน้า--</option>
+                                        @forelse ($prefixs as $prefix)
+                                            <option
+                                                @if (old('prefixs.0') == $prefix) selected 
+                                            @else 
+                                                @isset(explode('|', $research->presenter)[0])
+                                                @if (explode('!!', explode('|', $research->presenter)[0])[0] == $prefix) selected @endif
+                                                @endisset @endif
+                                                value="{{ $prefix }}">{{ $prefix }}
+                                            </option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    @error('prefixs.0')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-2">
+                                    <input type="text" id="presenters[]" name="presenters[]"
+                                        class="form-control w-100 @error('presenters.0') is-invalid @enderror"
+                                        @isset(explode('|', $research->presenter)[0])
+                                            value="{{ explode('!!', explode('|', $research->presenter)[0])[1] }}"
+                                        @endisset>
+                                    @error('presenters.0')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="row mb-4">
                                 <span>2.&nbsp;</span>
-                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode('|', $research->presenter)[1])) value="{{ explode('|', $research->presenter)[1] }}" @endif
-                                    autocomplete="presenters[1]">
+                                <div class="col-sm-3 mb-2">
+                                    <select id="prefixs[]" name="prefixs[]"
+                                        class="form-select @error('prefixs.1') is-invalid @enderror" autocomplete="prefixs"
+                                        autofocus>
+                                        <option value="" @if (!old('prefixs.1')) selected @endif>
+                                            --ตัวเลือกคำนำหน้า--</option>
+                                        @forelse ($prefixs as $prefix)
+                                            <option
+                                                @if (old('prefixs.1') == $prefix) selected 
+                                                @else 
+                                                    @isset(explode('|', $research->presenter)[1])
+                                                    @if (explode('!!', explode('|', $research->presenter)[1])[0] == $prefix) selected @endif
+                                                @endisset @endif
+                                                value="{{ $prefix }}">{{ $prefix }}
+                                            </option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    @error('prefixs.1')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-2">
+                                    <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                        @isset(explode('|', $research->presenter)[1])
+                                    value="{{ explode('!!', explode('|', $research->presenter)[1])[1] }}"
+                                @endisset>
+                                </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="row mb-4">
                                 <span>3.&nbsp;</span>
-                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode('|', $research->presenter)[2])) value="{{ explode('|', $research->presenter)[2] }}" @endif
-                                    autocomplete="presenters[2]">
+                                <div class="col-sm-3 mb-2">
+                                    <select id="prefixs[]" name="prefixs[]"
+                                        class="form-select @error('prefixs.2') is-invalid @enderror" autocomplete="prefixs"
+                                        autofocus>
+                                        <option value="" @if (!old('prefixs.2')) selected @endif>
+                                            --ตัวเลือกคำนำหน้า--</option>
+                                        @forelse ($prefixs as $prefix)
+                                            <option
+                                                @if (old('prefixs.2') == $prefix) selected 
+                                                @else 
+                                                    @isset(explode('|', $research->presenter)[2])
+                                                    @if (explode('!!', explode('|', $research->presenter)[2])[0] == $prefix) selected @endif
+                                                @endisset @endif
+                                                value="{{ $prefix }}">{{ $prefix }}
+                                            </option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    @error('prefixs.2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-2">
+                                    <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                        @isset(explode('|', $research->presenter)[2])
+                                    value="{{ explode('!!', explode('|', $research->presenter)[2])[1] }}"
+                                @endisset>
+                                </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="row mb-4">
                                 <span>4.&nbsp;</span>
-                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode('|', $research->presenter)[3])) value="{{ explode('|', $research->presenter)[3] }}" @endif
-                                    autocomplete="presenters[3]">
+                                <div class="col-sm-3 mb-2">
+                                    <select id="prefixs[]" name="prefixs[]"
+                                        class="form-select @error('prefixs.3') is-invalid @enderror" autocomplete="prefixs"
+                                        autofocus>
+                                        <option value="" @if (!old('prefixs.3')) selected @endif>
+                                            --ตัวเลือกคำนำหน้า--</option>
+                                        @forelse ($prefixs as $prefix)
+                                            <option
+                                                @if (old('prefixs.3') == $prefix) selected 
+                                                @else 
+                                                    @isset(explode('|', $research->presenter)[3])
+                                                    @if (explode('!!', explode('|', $research->presenter)[3])[0] == $prefix) selected @endif
+                                                @endisset @endif
+                                                value="{{ $prefix }}">{{ $prefix }}
+                                            </option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    @error('prefixs.3')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-2">
+                                    <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
+                                        @isset(explode('|', $research->presenter)[3])
+                                    value="{{ explode('!!', explode('|', $research->presenter)[3])[1] }}"
+                                @endisset>
+                                </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="row mb-4">
                                 <span>5.&nbsp;</span>
-                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode('|', $research->presenter)[4])) value="{{ explode('|', $research->presenter)[4] }}" @endif
-                                    autocomplete="presenters[4]">
+                                <div class="col-sm-3 mb-2">
+                                    <select id="prefixs[]" name="prefixs[]"
+                                        class="form-select @error('prefixs.4') is-invalid @enderror" autocomplete="prefixs"
+                                        autofocus>
+                                        <option value="" @if (!old('prefixs.4')) selected @endif>
+                                            --ตัวเลือกคำนำหน้า--</option>
+                                        @forelse ($prefixs as $prefix)
+                                            <option
+                                                @if (old('prefixs.4') == $prefix) selected 
+                                                @else 
+                                                    @isset(explode('|', $research->presenter)[4])
+                                                    @if (explode('!!', explode('|', $research->presenter)[4])[0] == $prefix) selected @endif
+                                                @endisset @endif
+                                                value="{{ $prefix }}">{{ $prefix }}
+                                            </option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    @error('prefixs.4')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-2">
+                                    <input type="text" id="presenters[]" name="presenters[]"
+                                        class="form-control w-100"
+                                        @isset(explode('|', $research->presenter)[4])
+                                    value="{{ explode('!!', explode('|', $research->presenter)[4])[1] }}"
+                                @endisset>
+                                </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="row mb-4">
                                 <span>6.&nbsp;</span>
-                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode('|', $research->presenter)[5])) value="{{ explode('|', $research->presenter)[5] }}" @endif
-                                    autocomplete="presenters[5]">
+                                <div class="col-sm-3 mb-2">
+                                    <select id="prefixs[]" name="prefixs[]"
+                                        class="form-select @error('prefixs.5') is-invalid @enderror"
+                                        autocomplete="prefixs" autofocus>
+                                        <option value="" @if (!old('prefixs.5')) selected @endif>
+                                            --ตัวเลือกคำนำหน้า--</option>
+                                        @forelse ($prefixs as $prefix)
+                                            <option
+                                                @if (old('prefixs.5') == $prefix) selected 
+                                                @else 
+                                                    @isset(explode('|', $research->presenter)[5])
+                                                    @if (explode('!!', explode('|', $research->presenter)[5])[0] == $prefix) selected @endif
+                                                @endisset @endif
+                                                value="{{ $prefix }}">{{ $prefix }}
+                                            </option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    @error('prefixs.5')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-2">
+                                    <input type="text" id="presenters[]" name="presenters[]"
+                                        class="form-control w-100"
+                                        @isset(explode('|', $research->presenter)[5])
+                                    value="{{ explode('!!', explode('|', $research->presenter)[5])[1] }}"
+                                @endisset>
+                                </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="row mb-4">
                                 <span>7.&nbsp;</span>
-                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode('|', $research->presenter)[6])) value="{{ explode('|', $research->presenter)[6] }}" @endif
-                                    autocomplete="presenters[6]">
+                                <div class="col-sm-3 mb-2">
+                                    <select id="prefixs[]" name="prefixs[]"
+                                        class="form-select @error('prefixs.6') is-invalid @enderror"
+                                        autocomplete="prefixs" autofocus>
+                                        <option value="" @if (!old('prefixs.6')) selected @endif>
+                                            --ตัวเลือกคำนำหน้า--</option>
+                                        @forelse ($prefixs as $prefix)
+                                            <option
+                                                @if (old('prefixs.6') == $prefix) selected 
+                                                @else 
+                                                    @isset(explode('|', $research->presenter)[6])
+                                                    @if (explode('!!', explode('|', $research->presenter)[6])[0] == $prefix) selected @endif
+                                                @endisset @endif
+                                                value="{{ $prefix }}">{{ $prefix }}
+                                            </option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    @error('prefixs.6')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-2">
+                                    <input type="text" id="presenters[]" name="presenters[]"
+                                        class="form-control w-100"
+                                        @isset(explode('|', $research->presenter)[6])
+                                    value="{{ explode('!!', explode('|', $research->presenter)[6])[1] }}"
+                                @endisset>
+                                </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="row mb-4">
                                 <span>8.&nbsp;</span>
-                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode('|', $research->presenter)[7])) value="{{ explode('|', $research->presenter)[7] }}" @endif
-                                    autocomplete="presenters[7]">
+                                <div class="col-sm-3 mb-2">
+                                    <select id="prefixs[]" name="prefixs[]"
+                                        class="form-select @error('prefixs.7') is-invalid @enderror"
+                                        autocomplete="prefixs" autofocus>
+                                        <option value="" @if (!old('prefixs.7')) selected @endif>
+                                            --ตัวเลือกคำนำหน้า--</option>
+                                        @forelse ($prefixs as $prefix)
+                                            <option
+                                                @if (old('prefixs.7') == $prefix) selected 
+                                                @else 
+                                                    @isset(explode('|', $research->presenter)[7])
+                                                    @if (explode('!!', explode('|', $research->presenter)[7])[0] == $prefix) selected @endif
+                                                @endisset @endif
+                                                value="{{ $prefix }}">{{ $prefix }}
+                                            </option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    @error('prefixs.7')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-2">
+                                    <input type="text" id="presenters[]" name="presenters[]"
+                                        class="form-control w-100"
+                                        @isset(explode('|', $research->presenter)[7])
+                                    value="{{ explode('!!', explode('|', $research->presenter)[7])[1] }}"
+                                @endisset>
+                                </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="row mb-4">
                                 <span>9.&nbsp;</span>
-                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode('|', $research->presenter)[8])) value="{{ explode('|', $research->presenter)[8] }}" @endif
-                                    autocomplete="presenters[8]">
+                                <div class="col-sm-3 mb-2">
+                                    <select id="prefixs[]" name="prefixs[]"
+                                        class="form-select @error('prefixs.8') is-invalid @enderror"
+                                        autocomplete="prefixs" autofocus>
+                                        <option value="" @if (!old('prefixs.8')) selected @endif>
+                                            --ตัวเลือกคำนำหน้า--</option>
+                                        @forelse ($prefixs as $prefix)
+                                            <option
+                                                @if (old('prefixs.8') == $prefix) selected 
+                                                @else 
+                                                    @isset(explode('|', $research->presenter)[8])
+                                                    @if (explode('!!', explode('|', $research->presenter)[8])[0] == $prefix) selected @endif
+                                                @endisset @endif
+                                                value="{{ $prefix }}">{{ $prefix }}
+                                            </option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    @error('prefixs.8')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-2">
+                                    <input type="text" id="presenters[]" name="presenters[]"
+                                        class="form-control w-100"
+                                        @isset(explode('|', $research->presenter)[8])
+                                    value="{{ explode('!!', explode('|', $research->presenter)[8])[1] }}"
+                                @endisset>
+                                </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="row mb-4">
                                 <span>10.&nbsp;</span>
-                                <input type="text" id="presenters[]" name="presenters[]" class="form-control w-100"
-                                    @if (isset(explode('|', $research->presenter)[9])) value="{{ explode('|', $research->presenter)[9] }}" @endif
-                                    autocomplete="presenters[9]">
+                                <div class="col-sm-3 mb-2">
+                                    <select id="prefixs[]" name="prefixs[]"
+                                        class="form-select @error('prefixs.9') is-invalid @enderror"
+                                        autocomplete="prefixs" autofocus>
+                                        <option value="" @if (!old('prefixs.9')) selected @endif>
+                                            --ตัวเลือกคำนำหน้า--</option>
+                                        @forelse ($prefixs as $prefix)
+                                            <option
+                                                @if (old('prefixs.9') == $prefix) selected 
+                                                @else 
+                                                    @isset(explode('|', $research->presenter)[9])
+                                                    @if (explode('!!', explode('|', $research->presenter)[9])[0] == $prefix) selected @endif
+                                                @endisset @endif
+                                                value="{{ $prefix }}">{{ $prefix }}
+                                            </option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    @error('prefixs.9')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-sm-9 mb-2">
+                                    <input type="text" id="presenters[]" name="presenters[]"
+                                        class="form-control w-100"
+                                        @isset(explode('|', $research->presenter)[9])
+                                    value="{{ explode('!!', explode('|', $research->presenter)[9])[1] }}"
+                                @endisset>
+                                </div>
                             </div>
 
 

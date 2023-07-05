@@ -41,7 +41,7 @@
                                             หน่วยงาน : {{ $value->institution }}</strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-green">ผู้นำเสนอ :
-                                            {{ str_replace('|', ', ', $value->presenter) }}</strong>
+                                            {{ str_replace('!!', ' ', str_replace('|', ', ', $value->presenter)) }}</strong>
                                         <br />
                                         <strong style="font-size: 12px" class="text-bluesky">
                                             รูปแบบบทความ : {{ $value->present }}

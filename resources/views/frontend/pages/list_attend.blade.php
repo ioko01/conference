@@ -26,10 +26,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($i = 1)
-                    @endif
-                    @forelse ($users as $key => $user)
-                        @if ($user->email_verified_at)
+                    @forelse ($data as $key => $user)
+                        @if ($user->person_attend == 'send')
+                            @if ($user->email_verified_at)
+                                <tr class="text-center">
+                                    <td>{{ $i++ }}</td>
+                                    <td class="text-start">{{ $user->prefix }}{{ $user->fullname }}</td>
+                                    <td>{{ $user->institution }}</td>
+                                    <td>
+                                        @if ($user->person_attend == 'send')
+                                            ส่งผลงาน
+                                        @elseif($user->person_attend == 'attend')
+                                            เข้าร่วมงาน
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endif
+                        @elseif($user->person_attend == 'attend')
                             <tr class="text-center">
                                 <td>{{ $i++ }}</td>
                                 <td class="text-start">{{ $user->prefix }}{{ $user->fullname }}</td>
@@ -43,6 +56,8 @@
                                 </td>
                             </tr>
                         @endif
+
+
                     @empty
                         <tr class="text-center">
                             <td colspan="4">ไม่มีรายชื่อผู้ลงทะเบียน</td>

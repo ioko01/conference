@@ -27,7 +27,7 @@
                                         <label for="topic_th">ชื่อบทความ (ภาษาไทย)</label>
                                         <input type="text" id="topic_th" name="topic_th" value="{{ old('topic_th') }}"
                                             class="form-control @error('topic_th') is-invalid @enderror"
-                                            autocomplete="topic_th" autofocus>
+                                            autocomplete="topic_th" placeholder="ชื่อบทความ (ภาษาไทย)" autofocus>
 
                                         @error('topic_th')
                                             <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                                         <label for="topic_en">ชื่อบทความ (ภาษาอังกฤษ)</label>
                                         <input type="text" id="topic_en" name="topic_en" value="{{ old('topic_en') }}"
                                             class="form-control @error('topic_en') is-invalid @enderror"
-                                            autocomplete="topic_en">
+                                            autocomplete="topic_en" placeholder="ชื่อบทความ (ภาษาอังกฤษ)">
 
                                         @error('topic_en')
                                             <span class="invalid-feedback" role="alert">
@@ -48,73 +48,336 @@
                                         @enderror
                                     </div>
                                     <div class="mb-4">
-                                        <label>ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย) <strong
-                                                class="text-red">(ใส่คำนำหน้าด้วย)</strong></label>
-                                        <div class="mb-4">
+                                        <label>ชื่อนักวิจัย (รวมถึงชื่อผู้ร่วมวิจัย)</label>
+                                        <div class="row mb-4">
                                             <span>1.&nbsp;</span>
-                                            <input type="text" id="presenters[]" name="presenters[]"
-                                                class="form-control w-100 @error('presenters.0') is-invalid @enderror"
-                                                value="{{ old('presenters.0') }}" autocomplete="presenters[0]">
-
-                                            @error('presenters.0')
-                                                <span class="invalid-feedback d-block" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                            <div class="col-sm-3 mb-2">
+                                                <select id="prefixs[]" name="prefixs[]"
+                                                    class="form-select @error('prefixs.0') is-invalid @enderror"
+                                                    autocomplete="prefixs" autofocus>
+                                                    <option value=""
+                                                        @if (!old('prefixs.0')) selected @endif>
+                                                        --ตัวเลือกคำนำหน้า--</option>
+                                                    @forelse ($prefixs as $prefix)
+                                                        <option @if (old('prefixs.0') == $prefix) selected @endif
+                                                            value="{{ $prefix }}">{{ $prefix }}
+                                                        </option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('prefixs.0')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-9 mb-2">
+                                                <input type="text" id="presenters[]" name="presenters[]"
+                                                    class="form-control w-100 @error('presenters.0') is-invalid @enderror"
+                                                    value="{{ old('presenters.0') }}" placeholder="ชื่อ - นามสกุล">
+                                                @error('presenters.0')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="row mb-4">
                                             <span>2.&nbsp;</span>
-                                            <input type="text" id="presenters[]" name="presenters[]"
-                                                class="form-control w-100" value="{{ old('presenters.1') }}"
-                                                autocomplete="presenters[1]">
+                                            <div class="col-sm-3 mb-2">
+                                                <select id="prefixs[]" name="prefixs[]"
+                                                    class="form-select @error('prefixs.1') is-invalid @enderror"
+                                                    autocomplete="prefixs" autofocus>
+                                                    <option value=""
+                                                        @if (!old('prefixs.1')) selected @endif>
+                                                        --ตัวเลือกคำนำหน้า--</option>
+                                                    @forelse ($prefixs as $prefix)
+                                                        <option @if (old('prefixs.1') == $prefix) selected @endif
+                                                            value="{{ $prefix }}">{{ $prefix }}
+                                                        </option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('prefixs.1')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-9 mb-2">
+                                                <input type="text" id="presenters[]" name="presenters[]"
+                                                    class="form-control w-100 @error('presenters.1') is-invalid @enderror"
+                                                    value="{{ old('presenters.1') }}" placeholder="ชื่อ - นามสกุล">
+                                                @error('presenters.1')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="row mb-4">
                                             <span>3.&nbsp;</span>
-                                            <input type="text" id="presenters[]" name="presenters[]"
-                                                class="form-control w-100" value="{{ old('presenters.2') }}"
-                                                autocomplete="presenters[2]">
+                                            <div class="col-sm-3 mb-2">
+                                                <select id="prefixs[]" name="prefixs[]"
+                                                    class="form-select @error('prefixs.2') is-invalid @enderror"
+                                                    autocomplete="prefixs" autofocus>
+                                                    <option value=""
+                                                        @if (!old('prefixs.2')) selected @endif>
+                                                        --ตัวเลือกคำนำหน้า--</option>
+                                                    @forelse ($prefixs as $prefix)
+                                                        <option @if (old('prefixs.2') == $prefix) selected @endif
+                                                            value="{{ $prefix }}">{{ $prefix }}
+                                                        </option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('prefixs.2')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-9 mb-2">
+                                                <input type="text" id="presenters[]" name="presenters[]"
+                                                    class="form-control w-100 @error('presenters.2') is-invalid @enderror"
+                                                    value="{{ old('presenters.2') }}" placeholder="ชื่อ - นามสกุล">
+                                                @error('presenters.2')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="row mb-4">
                                             <span>4.&nbsp;</span>
-                                            <input type="text" id="presenters[]" name="presenters[]"
-                                                class="form-control w-100" value="{{ old('presenters.3') }}"
-                                                autocomplete="presenters[3]">
+                                            <div class="col-sm-3 mb-2">
+                                                <select id="prefixs[]" name="prefixs[]"
+                                                    class="form-select @error('prefixs.3') is-invalid @enderror"
+                                                    autocomplete="prefixs" autofocus>
+                                                    <option value=""
+                                                        @if (!old('prefixs.3')) selected @endif>
+                                                        --ตัวเลือกคำนำหน้า--</option>
+                                                    @forelse ($prefixs as $prefix)
+                                                        <option @if (old('prefixs.3') == $prefix) selected @endif
+                                                            value="{{ $prefix }}">{{ $prefix }}
+                                                        </option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('prefixs.3')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-9 mb-2">
+                                                <input type="text" id="presenters[]" name="presenters[]"
+                                                    class="form-control w-100 @error('presenters.3') is-invalid @enderror"
+                                                    value="{{ old('presenters.3') }}" placeholder="ชื่อ - นามสกุล">
+                                                @error('presenters.3')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="row mb-4">
                                             <span>5.&nbsp;</span>
-                                            <input type="text" id="presenters[]" name="presenters[]"
-                                                class="form-control w-100" value="{{ old('presenters.4') }}"
-                                                autocomplete="presenters[4]">
+                                            <div class="col-sm-3 mb-2">
+                                                <select id="prefixs[]" name="prefixs[]"
+                                                    class="form-select @error('prefixs.4') is-invalid @enderror"
+                                                    autocomplete="prefixs" autofocus>
+                                                    <option value=""
+                                                        @if (!old('prefixs.4')) selected @endif>
+                                                        --ตัวเลือกคำนำหน้า--</option>
+                                                    @forelse ($prefixs as $prefix)
+                                                        <option @if (old('prefixs.4') == $prefix) selected @endif
+                                                            value="{{ $prefix }}">{{ $prefix }}
+                                                        </option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('prefixs.4')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-9 mb-2">
+                                                <input type="text" id="presenters[]" name="presenters[]"
+                                                    class="form-control w-100 @error('presenters.4') is-invalid @enderror"
+                                                    value="{{ old('presenters.4') }}" placeholder="ชื่อ - นามสกุล">
+                                                @error('presenters.4')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="row mb-4">
                                             <span>6.&nbsp;</span>
-                                            <input type="text" id="presenters[]" name="presenters[]"
-                                                class="form-control w-100" value="{{ old('presenters.5') }}"
-                                                autocomplete="presenters[5]">
+                                            <div class="col-sm-3 mb-2">
+                                                <select id="prefixs[]" name="prefixs[]"
+                                                    class="form-select @error('prefixs.5') is-invalid @enderror"
+                                                    autocomplete="prefixs" autofocus>
+                                                    <option value=""
+                                                        @if (!old('prefixs.5')) selected @endif>
+                                                        --ตัวเลือกคำนำหน้า--</option>
+                                                    @forelse ($prefixs as $prefix)
+                                                        <option @if (old('prefixs.5') == $prefix) selected @endif
+                                                            value="{{ $prefix }}">{{ $prefix }}
+                                                        </option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('prefixs.5')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-9 mb-2">
+                                                <input type="text" id="presenters[]" name="presenters[]"
+                                                    class="form-control w-100 @error('presenters.5') is-invalid @enderror"
+                                                    value="{{ old('presenters.5') }}" placeholder="ชื่อ - นามสกุล">
+                                                @error('presenters.5')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="row mb-4">
                                             <span>7.&nbsp;</span>
-                                            <input type="text" id="presenters[]" name="presenters[]"
-                                                class="form-control w-100" value="{{ old('presenters.6') }}"
-                                                autocomplete="presenters[6]">
+                                            <div class="col-sm-3 mb-2">
+                                                <select id="prefixs[]" name="prefixs[]"
+                                                    class="form-select @error('prefixs.6') is-invalid @enderror"
+                                                    autocomplete="prefixs" autofocus>
+                                                    <option value=""
+                                                        @if (!old('prefixs.6')) selected @endif>
+                                                        --ตัวเลือกคำนำหน้า--</option>
+                                                    @forelse ($prefixs as $prefix)
+                                                        <option @if (old('prefixs.6') == $prefix) selected @endif
+                                                            value="{{ $prefix }}">{{ $prefix }}
+                                                        </option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('prefixs.6')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-9 mb-2">
+                                                <input type="text" id="presenters[]" name="presenters[]"
+                                                    class="form-control w-100 @error('presenters.6') is-invalid @enderror"
+                                                    value="{{ old('presenters.6') }}" placeholder="ชื่อ - นามสกุล">
+                                                @error('presenters.6')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="row mb-4">
                                             <span>8.&nbsp;</span>
-                                            <input type="text" id="presenters[]" name="presenters[]"
-                                                class="form-control w-100" value="{{ old('presenters.7') }}"
-                                                autocomplete="presenters[7]">
+                                            <div class="col-sm-3 mb-2">
+                                                <select id="prefixs[]" name="prefixs[]"
+                                                    class="form-select @error('prefixs.7') is-invalid @enderror"
+                                                    autocomplete="prefixs" autofocus>
+                                                    <option value=""
+                                                        @if (!old('prefixs.7')) selected @endif>
+                                                        --ตัวเลือกคำนำหน้า--</option>
+                                                    @forelse ($prefixs as $prefix)
+                                                        <option @if (old('prefixs.7') == $prefix) selected @endif
+                                                            value="{{ $prefix }}">{{ $prefix }}
+                                                        </option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('prefixs.7')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-9 mb-2">
+                                                <input type="text" id="presenters[]" name="presenters[]"
+                                                    class="form-control w-100 @error('presenters.7') is-invalid @enderror"
+                                                    value="{{ old('presenters.7') }}" placeholder="ชื่อ - นามสกุล">
+                                                @error('presenters.7')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="row mb-4">
                                             <span>9.&nbsp;</span>
-                                            <input type="text" id="presenters[]" name="presenters[]"
-                                                class="form-control w-100" value="{{ old('presenters.8') }}"
-                                                autocomplete="presenters[8]">
+                                            <div class="col-sm-3 mb-2">
+                                                <select id="prefixs[]" name="prefixs[]"
+                                                    class="form-select @error('prefixs.8') is-invalid @enderror"
+                                                    autocomplete="prefixs" autofocus>
+                                                    <option value=""
+                                                        @if (!old('prefixs.8')) selected @endif>
+                                                        --ตัวเลือกคำนำหน้า--</option>
+                                                    @forelse ($prefixs as $prefix)
+                                                        <option @if (old('prefixs.8') == $prefix) selected @endif
+                                                            value="{{ $prefix }}">{{ $prefix }}
+                                                        </option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('prefixs.8')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-9 mb-2">
+                                                <input type="text" id="presenters[]" name="presenters[]"
+                                                    class="form-control w-100 @error('presenters.8') is-invalid @enderror"
+                                                    value="{{ old('presenters.8') }}" placeholder="ชื่อ - นามสกุล">
+                                                @error('presenters.8')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="row mb-4">
                                             <span>10.&nbsp;</span>
-                                            <input type="text" id="presenters[]" name="presenters[]"
-                                                class="form-control w-100" value="{{ old('presenters.9') }}"
-                                                autocomplete="presenters[9]">
+                                            <div class="col-sm-3 mb-2">
+                                                <select id="prefixs[]" name="prefixs[]"
+                                                    class="form-select @error('prefixs.9') is-invalid @enderror"
+                                                    autocomplete="prefixs" autofocus>
+                                                    <option value=""
+                                                        @if (!old('prefixs.9')) selected @endif>
+                                                        --ตัวเลือกคำนำหน้า--</option>
+                                                    @forelse ($prefixs as $prefix)
+                                                        <option @if (old('prefixs.9') == $prefix) selected @endif
+                                                            value="{{ $prefix }}">{{ $prefix }}
+                                                        </option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                                @error('prefixs.9')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-9 mb-2">
+                                                <input type="text" id="presenters[]" name="presenters[]"
+                                                    class="form-control w-100 @error('presenters.9') is-invalid @enderror"
+                                                    value="{{ old('presenters.9') }}" placeholder="ชื่อ - นามสกุล">
+                                                @error('presenters.9')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
 
                                     </div>

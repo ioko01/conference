@@ -28,15 +28,24 @@
                     </div>
                     <div class="row w-100">
                         <div class="col-md-7">
-                            <form id="form_register" @if (old('person_attend') == 'send') action="{{ route('register') }}" @elseif(old('person_attend') == 'attend') action="{{ route('attend.store') }}" @elseif(endDate('end_research')->day >= 0) action="{{ route('register') }}" @else action="{{ route('attend.store') }}" @endif method="POST">
+                            <form id="form_register"
+                                @if (old('person_attend') == 'send') action="{{ route('register') }}" @elseif(old('person_attend') == 'attend') action="{{ route('attend.store') }}" @elseif(endDate('end_research')->day >= 0) action="{{ route('register') }}" @else action="{{ route('attend.store') }}" @endif
+                                method="POST">
                                 @csrf
                                 <div class="row mb-4">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="prefix">คำนำหน้า</label>
-                                        <input type="text" name="prefix" id="prefix"
-                                            class="form-control @error('prefix') is-invalid @enderror"
-                                            value="{{ old('prefix') }}" autocomplete="prefix" autofocus>
-
+                                        <select id="prefix" name="prefix"
+                                            class="form-select @error('prefix') is-invalid @enderror" autocomplete="prefix"
+                                            autofocus>
+                                            @forelse ($prefixs as $prefix)
+                                                <option
+                                                    @if ($loop->first && !old('prefix')) selected @elseif (old('prefix') == $prefix) selected @endif
+                                                    value="{{ $prefix }}">{{ $prefix }}
+                                                </option>
+                                            @empty
+                                            @endforelse
+                                        </select>
                                         @error('prefix')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -44,7 +53,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <label for="fullname">ชื่อ - สกุล</label>
                                         <input type="text" name="fullname" id="fullname"
                                             class="form-control @error('fullname') is-invalid @enderror"
@@ -183,9 +192,10 @@
                                         </label>
                                         @if (endDate('end_research')->day >= 0)
                                             <div class="form-check">
-                                                <input onchange="toggle_attend(this, '{{route('register')}}')" class="form-check-input"
-                                                    type="radio" name="person_attend" id="send"
-                                                    @if (old('person_attend') === 'send' || empty(old('person_attend'))) checked @endif value="send">
+                                                <input onchange="toggle_attend(this, '{{ route('register') }}')"
+                                                    class="form-check-input" type="radio" name="person_attend"
+                                                    id="send" @if (old('person_attend') === 'send' || empty(old('person_attend'))) checked @endif
+                                                    value="send">
                                                 <label class="form-check-label" for="send">
                                                     ลงทะเบียนส่งผลงาน <span
                                                         class="text-red text-small">(บุคคลภายนอกจะต้องชำระค่าลงทะเบียน
@@ -197,9 +207,10 @@
                                         @endif
                                         @if (endDate('end_attend')->day >= 0)
                                             <div class="form-check">
-                                                <input onchange="toggle_attend(this, '{{route('attend.store')}}')" class="form-check-input"
-                                                    type="radio" name="person_attend" id="attend"
-                                                    @if (endDate('end_research')->day < 0 || old('person_attend') === 'attend') checked @endif value="attend">
+                                                <input onchange="toggle_attend(this, '{{ route('attend.store') }}')"
+                                                    class="form-check-input" type="radio" name="person_attend"
+                                                    id="attend" @if (endDate('end_research')->day < 0 || old('person_attend') === 'attend') checked @endif
+                                                    value="attend">
                                                 <label class="form-check-label" for="attend">
                                                     ลงทะเบียนเข้าร่วมงานทั่วไป
                                                 </label>
@@ -275,7 +286,8 @@
 
 
 
-                                <div id="form_password" class="row mb-4 @if (old('person_attend') == 'attend') d-none @endif">
+                                <div id="form_password"
+                                    class="row mb-4 @if (old('person_attend') == 'attend') d-none @endif">
                                     @if (endDate('end_research')->day >= 0)
                                         <div class="col-md-6">
                                             <div class="d-flex justify-content-between">

@@ -216,7 +216,11 @@ class ResearchController extends Controller
         $prefix_presenter = [];
         foreach ($request->presenters as $key => $presenter) {
             if ($presenter) {
-                array_push($prefix_presenter, $request->prefixs[$key] . "!!" . $presenter);
+                if ($request->prefixs[$key]) {
+                    array_push($prefix_presenter, $request->prefixs[$key] . "!!" . $presenter);
+                } else {
+                    array_push($prefix_presenter, "!!" . $presenter);
+                }
             }
         }
         $presenters = join('|', array_filter($prefix_presenter));
@@ -508,8 +512,10 @@ class ResearchController extends Controller
         $this->validator($request);
         $prefix_presenter = [];
         foreach ($request->presenters as $key => $presenter) {
-            if ($presenter) {
+            if ($request->prefixs[$key]) {
                 array_push($prefix_presenter, $request->prefixs[$key] . "!!" . $presenter);
+            } else {
+                array_push($prefix_presenter, "!!" . $presenter);
             }
         }
         $presenters = join('|', array_filter($prefix_presenter));

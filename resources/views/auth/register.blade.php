@@ -315,7 +315,6 @@
                                     @endif
                                 </div>
 
-
                                 <div class="d-block">
                                     <input onclick="thisDisabled(this)" name="register"
                                         class="btn btn-green rounded-0 text-white text-white w-100" type="submit"

@@ -467,8 +467,11 @@
                                         @endforeach
                                     </div>
 
-                                    <p class="text-red text-center">
-                                        * กรุณาตรวจสอบความถูกต้องก่อนกดส่งบทความของท่าน
+                                    <p class="text-danger text-center">
+                                        *** หมายเหตุ บทความที่ส่งมาต้องเป็นบทความที่ไม่อยู่ในระหว่างการเผยแพร่จากแหล่งอื่น ***
+                                        <br />
+                                        กรุณาตรวจสอบความถูกต้องก่อนกดส่งบทความของท่าน
+
                                     </p>
                                     <button onclick="thisDisabled(this)" class="btn btn-green text-white w-100 rounded-0"
                                         name="send_research" type="submit">ส่งบทความ</button>

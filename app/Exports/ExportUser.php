@@ -103,32 +103,33 @@ class ExportUser implements FromCollection, WithHeadings, ShouldAutoSize, WithEv
 
                 $columnLoopLimiter = $highestColumn;
                 ++$columnLoopLimiter;
+                $allCol = '';
+                $allCell = '';
 
+                $active_sheet = $event->sheet->getDelegate();
                 for ($row = 1; $row <= $highestRow; $row++) {
                     for ($column = 'A'; $column !== $columnLoopLimiter; ++$column) {
                         $allCol = 'A1:' . $column . '1';
                         $allRow = 'A1:' . 'A' . $row;
                         $allCell = 'A1:' . $column . $row;
-
-                        $active_sheet = $event->sheet->getDelegate();
-                        $active_sheet->getStyle($allCol)->getFont()->setBold(true);
-                        $active_sheet->getStyle($allCol)->getFill()
-                            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-                            ->getStartColor()
-                            ->setARGB('FFFF00');
-                        $active_sheet->getStyle($allCell)->getFont()->setSize(14);
-                        $active_sheet->getStyle($allCell)->getFont()->setName('TH SarabunPSK');
-                        $active_sheet->getStyle($allCell)->getFont()->setName('TH SarabunPSK');
-                        $active_sheet->getStyle($allCell)->applyFromArray([
-                            'borders' => [
-                                'outline' => [
-                                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                                    'color' => ['argb' => '000000'],
-                                ],
-                            ]
-                        ]);
                     }
                 }
+
+                $active_sheet->getStyle($allCol)->getFont()->setBold(true);
+                $active_sheet->getStyle($allCol)->getFill()
+                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('FFFF00');
+                $active_sheet->getStyle($allCell)->getFont()->setSize(14);
+                $active_sheet->getStyle($allCell)->getFont()->setName('TH SarabunPSK');
+                $active_sheet->getStyle($allCell)->applyFromArray([
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                        ],
+                    ]
+                ]);
             },
         ];
     }

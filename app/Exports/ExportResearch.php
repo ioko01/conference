@@ -160,8 +160,8 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                         $allRow = 'A1:' . 'A' . $row;
                         $allCell = 'A1:' . $column . $row;
 
-                        
-                        
+
+
                         $slip = $active_sheet->getCell('P' . $row)->getValue();
                         $word = $active_sheet->getCell('U' . $row)->getValue();
                         $pdf = $active_sheet->getCell('W' . $row)->getValue();
@@ -226,7 +226,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                         ]
                     ]
                 ]);
-                
+
                 $active_sheet->getStyle($allCell)->getFont()->setSize(14);
                 $active_sheet->getStyle($allCell)->getFont()->setName('TH SarabunPSK');
                 $active_sheet->getStyle($allCell)->applyFromArray([
@@ -245,6 +245,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                                 if ($ids[$id] != $active_sheet->getCell('A' . $row)->getValue()) {
                                     $active_sheet->getCell('E' . $row)->setValue($name_duplicate);
                                     $active_sheet->getCell('D' . $row)->setValue("บทความนี้ชื่อบทความซ้ำกับบทความที่ " . $ids[$id]);
+
                                     $active_sheet->getStyle('D' . $row)->applyFromArray([
                                         'font' => [
                                             'color' => [

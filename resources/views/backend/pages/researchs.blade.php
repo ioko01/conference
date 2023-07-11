@@ -8,12 +8,6 @@
             </div>
 
             <div class="card-body text-xs">
-                <div class="text-end">
-                    <a href="{{ route('researchs.export') }}" class="btn btn-info rounded-0 mb-3"><i
-                            class="fas fa-file-export"></i>
-                        Export to
-                        Excel</a>
-                </div>
                 <div class="table-responsive">
                     <table style="color: inherit;" class="dataTable table w-100">
                         <thead>

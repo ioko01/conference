@@ -20,7 +20,7 @@
             </div>
             @forelse ($present_posters as $present_poster)
                 <div class="col-lg-2 col-md-4 col-sm-6 my-3">
-                    <div style="width: 90%;" class="animated fade-up card rounded-0 mx-auto">
+                    <div style="width: 90%; height:100%;" class="animated fade-up card rounded-0 mx-auto">
                         <div class="card-content w-100 h-100">
                             <div class="card-header text-center bg-green rounded-0">
                                 <h2>
@@ -35,7 +35,7 @@
                                     <i class="fas fa-3x fa-search-plus text-white"> <span
                                             class="text-xl">ดูภาพขนาดใหญ่</span></i>
                                 </div>
-                                <img width="100%" src="{{ $present_poster->path }}" alt="{{ $present_poster->topic_th }}">
+                                <img class="loading-lazy-img" width="100%" onload="" src="{{ $present_poster->path }}" alt="{{ $present_poster->topic_th }}" loading="lazy">
                             </div>
                             <div class="card-footer bg-white">
                                 <strong>

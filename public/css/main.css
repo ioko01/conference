@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Orbitron:wght@500&display=swap");
 
+
+.loading-lazy-img{
+    
+}
+
 .lds-ring {
     display: inline-block;
     position: relative;

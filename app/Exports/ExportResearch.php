@@ -253,6 +253,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                     }
                 }
 
+                $get_row_research_file = ["row" => [], "id" => []];
                 for ($row = 1; $row <= $highestRow; $row++) {
                     foreach ($get_research_duplicate["prev"] as $key => $name_duplicate) {
                         if ($get_research_duplicate["prev"][$key] == $active_sheet->getCell('A' . $row)->getValue()) {
@@ -274,6 +275,9 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                                         ->getStartColor()
                                         ->setARGB('FFFF66');
                                 }
+                            } else {
+                                array_push($get_row_research_file["row"], $row);
+                                array_push($get_row_research_file["id"], $get_research_duplicate["prev"][$key]);
                             }
                         } else if ($get_research_duplicate["curr"][$key] == $active_sheet->getCell('A' . $row)->getValue()) {
                             if (!$active_sheet->getCell('U' . $row)->getValue() && !$active_sheet->getCell('W' . $row)->getValue()) {
@@ -293,6 +297,27 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                                         ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                                         ->getStartColor()
                                         ->setARGB('FFFF66');
+                                }
+                            } else {
+
+                                for ($i = 0; $i < count($get_row_research_file["row"]); $i++) {
+                                    $active_sheet->getCell('D' . $row)->setValue("บทความนี้ชื่อบทความซ้ำกับบทความที่ " . $get_row_research_file["id"][$i] . " และไม่ส่งไฟล์ WORD และไฟล์ PDF");
+
+                                    $active_sheet->getStyle('D' . $row)->applyFromArray([
+                                        'font' => [
+                                            'color' => [
+                                                'rgb' => 'FF0000'
+                                            ],
+                                            'bold' => true
+                                        ]
+                                    ]);
+
+                                    for ($column = 'A'; $column !== $columnLoopLimiter; ++$column) {
+                                        $active_sheet->getStyle('A' . $active_sheet->getCell('E' . $row)->getRow() . ':' . $column . $active_sheet->getCell('E' . $row)->getRow())->getFill()
+                                            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                                            ->getStartColor()
+                                            ->setARGB('FFFF66');
+                                    }
                                 }
                             }
                         }

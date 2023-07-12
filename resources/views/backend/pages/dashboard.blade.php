@@ -60,7 +60,9 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-success">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title"><i class="fas fa-user-check"></i> ผู้ใช้งาน (ยืนยันอีเมลแล้ว)</h3>
+                    <h3 class="card-title"><i class="fas fa-user-check"></i> ผู้ใช้งาน<br /><span
+                            class="text-sm">(ยืนยันอีเมลแล้ว)</span>
+                    </h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -90,7 +92,8 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-danger">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title text-white"><i class="fas fa-user-times"></i> ผู้ใช้งาน (ไม่ยืนยันอีเมล)</h3>
+                    <h3 class="card-title text-white"><i class="fas fa-user-times"></i>
+                        ผู้ใช้งาน<br /><span class="text-sm">(ไม่ยืนยันอีเมล)</span></h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool text-white" data-card-widget="collapse">
@@ -120,7 +123,8 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-primary">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title"><i class="fas fa-user-cog"></i> ผู้ใช้งาน (แอดมิน)</h3>
+                    <h3 class="card-title"><i class="fas fa-user-cog"></i> ผู้ใช้งาน<br /><span
+                            class="text-sm">(แอดมิน)</span></h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -154,7 +158,8 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-dark">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title"><i class="fas fa-book"></i> บทความ (ทั้งหมด)</h3>
+                    <h3 class="card-title"><i class="fas fa-book"></i> บทความ<br /><span class="text-sm">(ทั้งหมด)</span>
+                    </h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -184,7 +189,8 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-warning">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title text-white"><i class="fas fa-book"></i> บทความ (ไม่ซ้ำกัน)</h3>
+                    <h3 class="card-title text-white"><i class="fas fa-book"></i> บทความ<br /><span
+                            class="text-sm">(ไม่ซ้ำกัน)</span></h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool text-white" data-card-widget="collapse">
@@ -214,7 +220,9 @@
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card card-success">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title"><i class="fas fa-book"></i> บทความ (ไม่ซ้ำกัน และส่งไฟล์ WORD กับไฟล์ PDF)</h3>
+                    <h3 class="card-title"><i class="fas fa-book"></i> บทความ<br /><span class="text-sm">(ไม่ซ้ำกัน (มี
+                            WORD
+                            และ PDF))</span></h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -246,8 +254,8 @@
         <div class="col-lg-4">
             <div class="card card-dark">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title text-white"><i class="fas fa-chart-area"></i> กราฟบทความ
-                        (ทั้งหมด)</h3>
+                    <h3 class="card-title text-white"><i class="fas fa-chart-area"></i> กราฟบทความ<br /><span
+                            class="text-sm">(ทั้งหมด)</span></h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool text-white" data-card-widget="collapse">
@@ -282,8 +290,8 @@
         <div class="col-lg-4">
             <div class="card card-warning">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title text-white"><i class="fas fa-chart-area"></i> กราฟบทความ
-                        (ไม่ซ้ำกัน)</h3>
+                    <h3 class="card-title text-white"><i class="fas fa-chart-area"></i> กราฟบทความ<br /><span
+                            class="text-sm">(ไม่ซ้ำกัน)</span></h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool text-white" data-card-widget="collapse">
@@ -318,8 +326,9 @@
         <div class="col-lg-4">
             <div class="card card-success">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title"><i class="fas fa-chart-area"></i> กราฟบทความ
-                        (ไม่ซ้ำกัน และส่งไฟล์ WORD กับไฟล์ PDF)</h3>
+                    <h3 class="card-title"><i class="fas fa-chart-area"></i> กราฟบทความ<br /><span
+                            class="text-sm">(ไม่ซ้ำกัน (มี WORD และ PDF))</span>
+                    </h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">

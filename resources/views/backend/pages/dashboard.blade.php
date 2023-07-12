@@ -182,29 +182,29 @@
         </div>
 
         <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="card">
+            <div class="card card-warning">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title"><i class="fas fa-book"></i> บทความ (ไม่ซ้ำกัน)</h3>
+                    <h3 class="card-title text-white"><i class="fas fa-book"></i> บทความ (ไม่ซ้ำกัน)</h3>
 
                     <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <button type="button" class="btn btn-tool text-white" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
                         </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <button type="button" class="btn btn-tool text-white" data-card-widget="remove">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-around">
-                        <strong class="text-dark mr-auto">
+                        <strong class="text-warning mr-auto">
                             <span class="d-none d-md-block">
                                 ทั้งหมด
                             </span>
                         </strong>
                         <strong style="font-size: calc(5vw + 30px);"
-                            class="text-dark h1 mx-auto">{!! $researchs_distinct->topic_th !!}</strong>
-                        <strong class="text-dark ms-auto mt-auto">บทความ</strong>
+                            class="text-warning h1 mx-auto">{!! $researchs_distinct->topic_th !!}</strong>
+                        <strong class="text-warning ms-auto mt-auto">บทความ</strong>
                     </div>
                 </div>
                 <!-- /.card-body -->

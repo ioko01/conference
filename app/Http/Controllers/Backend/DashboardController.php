@@ -47,6 +47,16 @@ class DashboardController extends Controller
             ->where('conferences.status', 1)
             ->first();
 
+        $researchs_not_sendfile = Research::select(
+            DB::raw('COUNT(DISTINCT TRIM(researchs.topic_th)) AS topic_th')
+        )
+            ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
+            ->leftjoin('pdf', 'pdf.topic_id', 'researchs.topic_id')
+            ->leftjoin('words', 'words.topic_id', 'researchs.topic_id')
+            ->where('conferences.status', 1)
+            ->where([['words.name', NULL], ['pdf.name', NULL]])
+            ->first();
+
         $users_not_verify_email = User::leftjoin('conferences', 'conferences.id', 'users.conference_id')
             ->where('conferences.status', 1)
             ->where('users.is_admin', 0)
@@ -125,15 +135,57 @@ class DashboardController extends Controller
                 $researchs_kota_distinct = $value->count_research_distinct;
             }
         }
-
+        
         $chart_distinct->labels(['บุคลากรภายใน', 'บุคลากรภายนอก', 'เจ้าภาพร่วม']);
         $chart_distinct->displayLegend(false);
-        $chart_distinct->dataset('บทความ', 'column', [$researchs_in_distinct, $researchs_out_distinct, $researchs_kota_distinct])->color("#343a40");
+        $chart_distinct->dataset('บทความ', 'column', [$researchs_in_distinct, $researchs_out_distinct, $researchs_kota_distinct])->color("#ffc107");
+
+
+        $count_sendfile_distinct = Research::select(
+            DB::raw('COUNT(DISTINCT TRIM(researchs.topic_th)) AS count_research_not_sendfile_distinct'),
+            DB::raw('users.position_id AS position_id')
+        )
+            ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
+            ->leftjoin('users', 'users.id', 'researchs.user_id')
+            ->leftjoin('words', 'words.topic_id', 'researchs.topic_id')
+            ->leftjoin('pdf', 'pdf.topic_id', 'researchs.topic_id')
+            ->where('conferences.status', 1)
+            ->where([['words.name', NULL], ['pdf.name', NULL]])
+            ->groupBy('users.position_id')
+            ->get();
+
+
+
+        $chart_sendfile_distinct = new UserChart;
+        $chart_sendfile_distinct->options([
+            "yAxis" => [
+                "title" => [
+                    "text" => "จำนวนบทความ"
+                ]
+            ],
+        ]);
+
+        $researchs_in_sendfile_distinct = 0;
+        $researchs_out_sendfile_distinct = 0;
+        $researchs_kota_sendfile_distinct = 0;
+        foreach ($count_sendfile_distinct as $value) {
+            if ($value->position_id == 1) {
+                $researchs_in_sendfile_distinct = intval($researchs_in - $value->count_research_not_sendfile_distinct);
+            } else if ($value->position_id == 2) {
+                $researchs_out_sendfile_distinct = intval($researchs_out - $value->count_research_not_sendfile_distinct);
+            } else if ($value->position_id == 3) {
+                $researchs_kota_sendfile_distinct = intval($researchs_kota - $value->count_research_not_sendfile_distinct);
+            }
+        }
+
+        $chart_sendfile_distinct->labels(['บุคลากรภายใน', 'บุคลากรภายนอก', 'เจ้าภาพร่วม']);
+        $chart_sendfile_distinct->displayLegend(false);
+        $chart_sendfile_distinct->dataset('บทความ', 'column', [$researchs_in_sendfile_distinct, $researchs_out_sendfile_distinct, $researchs_kota_sendfile_distinct])->color("#28a745");
 
         DB::disconnect('conferences');
         DB::disconnect('researchs');
         DB::disconnect('users');
-        return view('backend.pages.dashboard', compact('researchs_kota_distinct', 'researchs_out_distinct', 'researchs_in_distinct', 'chart_distinct', 'researchs', 'users', 'conference', 'users_not_verify_email', 'admin', 'chart', 'researchs_in', 'researchs_out', 'researchs_kota', 'researchs_distinct'));
+        return view('backend.pages.dashboard', compact('researchs_kota_distinct', 'researchs_out_distinct', 'researchs_in_distinct', 'chart_distinct', 'researchs', 'users', 'conference', 'users_not_verify_email', 'admin', 'chart', 'researchs_in', 'researchs_out', 'researchs_kota', 'researchs_distinct', 'researchs_not_sendfile', 'researchs_in_sendfile_distinct', 'researchs_out_sendfile_distinct', 'researchs_kota_sendfile_distinct', 'chart_sendfile_distinct'));
     }
 
     // protected function storage()

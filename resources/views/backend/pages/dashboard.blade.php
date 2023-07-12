@@ -210,10 +210,40 @@
                 <!-- /.card-body -->
             </div>
         </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card card-success">
+                <div class="card-header rounded-0">
+                    <h3 class="card-title"><i class="fas fa-book"></i> บทความ (ไม่ซ้ำกัน และส่งไฟล์ WORD กับไฟล์ PDF)</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-around">
+                        <strong class="text-success mr-auto">
+                            <span class="d-none d-md-block">
+                                ทั้งหมด
+                            </span>
+                        </strong>
+                        <strong style="font-size: calc(5vw + 30px);"
+                            class="text-success h1 mx-auto">{!! count($researchs) - $researchs_not_sendfile->topic_th !!}</strong>
+                        <strong class="text-success ms-auto mt-auto">บทความ</strong>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="card card-dark">
                 <div class="card-header rounded-0">
                     <h3 class="card-title text-white"><i class="fas fa-chart-area"></i> กราฟบทความ
@@ -249,17 +279,17 @@
             </div>
         </div>
 
-        <div class="col-lg-6">
-            <div class="card">
+        <div class="col-lg-4">
+            <div class="card card-warning">
                 <div class="card-header rounded-0">
-                    <h3 class="card-title"><i class="fas fa-chart-area"></i> กราฟบทความ
+                    <h3 class="card-title text-white"><i class="fas fa-chart-area"></i> กราฟบทความ
                         (ไม่ซ้ำกัน)</h3>
 
                     <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <button type="button" class="btn btn-tool text-white" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
                         </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <button type="button" class="btn btn-tool text-white" data-card-widget="remove">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -284,6 +314,43 @@
                 <!-- /.card-body -->
             </div>
         </div>
+
+        <div class="col-lg-4">
+            <div class="card card-success">
+                <div class="card-header rounded-0">
+                    <h3 class="card-title"><i class="fas fa-chart-area"></i> กราฟบทความ
+                        (ไม่ซ้ำกัน และส่งไฟล์ WORD กับไฟล์ PDF)</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {!! $chart_sendfile_distinct->container() !!}
+                    <div>
+                        <strong class="text-small">&bullet; บุคลากรภายใน <span class="text-small">จำนวน
+                                {{ $researchs_in_sendfile_distinct }} บทความ
+                                <span
+                                    class="text-small text-success">({{ number_format(($researchs_in_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') }}%)</span></span></strong><br>
+                        <strong class="text-small">&bullet; บุคลากรภายนอก <span class="text-small">จำนวน
+                                {{ $researchs_out_sendfile_distinct }} บทความ
+                                <span
+                                    class="text-small text-success">({{ number_format(($researchs_out_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') }}%)</span></span></strong><br>
+                        <strong class="text-small">&bullet; เจ้าภาพร่วม <span class="text-small">จำนวน
+                                {{ $researchs_kota_sendfile_distinct }} บทความ
+                                <span
+                                    class="text-small text-success">({{ number_format(($researchs_kota_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') }}%)</span></span></strong>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+
     </div>
 
     <div class="row">

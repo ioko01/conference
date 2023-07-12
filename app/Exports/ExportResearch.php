@@ -238,29 +238,84 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                     ]
                 ]);
 
+                $get_research_duplicate = ["prev" => [], "curr" => []];
                 for ($row = 1; $row <= $highestRow; $row++) {
                     foreach ($name_duplicated as $key => $name_duplicate) {
                         if (trim($active_sheet->getCell('E' . $row)->getValue()) == $name_duplicate) {
                             if ($id = array_search($name_duplicate, $get_first_name, true)) {
                                 if ($ids[$id] != $active_sheet->getCell('A' . $row)->getValue()) {
                                     $active_sheet->getCell('E' . $row)->setValue($name_duplicate);
-                                    $active_sheet->getCell('D' . $row)->setValue("บทความนี้ชื่อบทความซ้ำกับบทความที่ " . $ids[$id]);
-
-                                    $active_sheet->getStyle('D' . $row)->applyFromArray([
-                                        'font' => [
-                                            'color' => [
-                                                'rgb' => 'FF0000'
-                                            ],
-                                            'bold' => true
-                                        ]
-                                    ]);
-                                    for ($column = 'A'; $column !== $columnLoopLimiter; ++$column) {
-                                        $active_sheet->getStyle('A' . $active_sheet->getCell('E' . $row)->getRow() . ':' . $column . $active_sheet->getCell('E' . $row)->getRow())->getFill()
-                                            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-                                            ->getStartColor()
-                                            ->setARGB('FFFF66');
-                                    }
+                                    array_push($get_research_duplicate["prev"], $ids[$id]);
+                                    array_push($get_research_duplicate["curr"], $active_sheet->getCell('A' . $row)->getValue());
                                 }
+                            }
+                        }
+                    }
+                }
+
+                for ($row = 1; $row <= $highestRow; $row++) {
+                    foreach ($get_research_duplicate["prev"] as $key => $name_duplicate) {
+                        if ($get_research_duplicate["prev"][$key] == $active_sheet->getCell('A' . $row)->getValue()) {
+                            if (!$active_sheet->getCell('U' . $row)->getValue() && !$active_sheet->getCell('W' . $row)->getValue()) {
+                                $active_sheet->getCell('D' . $row)->setValue("บทความนี้ชื่อบทความซ้ำกับบทความที่ " . $get_research_duplicate["curr"][$key] . " และไม่ส่งไฟล์ WORD และไฟล์ PDF");
+
+                                $active_sheet->getStyle('D' . $row)->applyFromArray([
+                                    'font' => [
+                                        'color' => [
+                                            'rgb' => 'FF0000'
+                                        ],
+                                        'bold' => true
+                                    ]
+                                ]);
+
+                                for ($column = 'A'; $column !== $columnLoopLimiter; ++$column) {
+                                    $active_sheet->getStyle('A' . $active_sheet->getCell('E' . $row)->getRow() . ':' . $column . $active_sheet->getCell('E' . $row)->getRow())->getFill()
+                                        ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                                        ->getStartColor()
+                                        ->setARGB('FFFF66');
+                                }
+                            }
+                        } else if ($get_research_duplicate["curr"][$key] == $active_sheet->getCell('A' . $row)->getValue()) {
+                            if (!$active_sheet->getCell('U' . $row)->getValue() && !$active_sheet->getCell('W' . $row)->getValue()) {
+                                $active_sheet->getCell('D' . $row)->setValue("บทความนี้ชื่อบทความซ้ำกับบทความที่ " . $get_research_duplicate["prev"][$key] . " และไม่ส่งไฟล์ WORD และไฟล์ PDF");
+
+                                $active_sheet->getStyle('D' . $row)->applyFromArray([
+                                    'font' => [
+                                        'color' => [
+                                            'rgb' => 'FF0000'
+                                        ],
+                                        'bold' => true
+                                    ]
+                                ]);
+
+                                for ($column = 'A'; $column !== $columnLoopLimiter; ++$column) {
+                                    $active_sheet->getStyle('A' . $active_sheet->getCell('E' . $row)->getRow() . ':' . $column . $active_sheet->getCell('E' . $row)->getRow())->getFill()
+                                        ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                                        ->getStartColor()
+                                        ->setARGB('FFFF66');
+                                }
+                            }
+                        }
+                    }
+
+                    if (!$active_sheet->getCell('U' . $row)->getValue() && !$active_sheet->getCell('W' . $row)->getValue()) {
+                        if (!in_array($active_sheet->getCell('A' . $row)->getValue(), $get_research_duplicate["prev"]) && !in_array($active_sheet->getCell('A' . $row)->getValue(), $get_research_duplicate["curr"])) {
+                            for ($column = 'A'; $column !== $columnLoopLimiter; ++$column) {
+                                $active_sheet->getCell('D' . $row)->setValue("บทความนี้ไม่ส่งไฟล์ WORD และไฟล์ PDF");
+
+                                $active_sheet->getStyle('D' . $row)->applyFromArray([
+                                    'font' => [
+                                        'color' => [
+                                            'rgb' => 'FF0000'
+                                        ],
+                                        'bold' => true
+                                    ]
+                                ]);
+
+                                $active_sheet->getStyle('A' . $active_sheet->getCell('E' . $row)->getRow() . ':' . $column . $active_sheet->getCell('E' . $row)->getRow())->getFill()
+                                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                                    ->getStartColor()
+                                    ->setARGB('FFB366');
                             }
                         }
                     }

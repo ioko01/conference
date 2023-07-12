@@ -193,6 +193,7 @@
     <script src="{{ asset('js/highcharts.js?v=3', env('REDIRECT_HTTPS')) }}" charset="utf-8"></script>
     {!! $chart->script() !!}
     {!! $chart_distinct->script() !!}
+    {!! $chart_sendfile_distinct->script() !!}
 @endif
 
 @if (Request::is('backend/researchs/management') || Request::is('backend/users'))

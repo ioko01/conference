@@ -52,7 +52,7 @@
                                 <strong>{!! $value->topic_th !!}</strong>
                                 <br />
                                 <strong><span class="name-research text-small text-green">ผู้นำเสนอ :
-                                        {{ str_replace('!!', ' ', str_replace('|', ', ', $value->presenter)) }}</span></strong>
+                                        {{ str_replace('!!', '', str_replace('ดร.', ' ดร.', str_replace('|', ', ', $value->presenter))) }}</span></strong>
                                 <br />
                                 <strong style="font-size: 12px" class="text-bluesky">
                                     รูปแบบบทความ : {{ $value->present }}

@@ -408,6 +408,78 @@ function add_suggestion_modal(topic_id) {
     });
 }
 
+//เปลี่ยนสถานะบทความ
+function update_status_research(topic_id) {
+    const createModal = `
+    <div class="modal fade" id="research_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+    aria-labelledby="เพิ่มข้อเสนอแนะ" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">เพิ่มข้อเสนอแนะ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="editor_${topic_id}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success rounded-0 text-white" onclick="update_suggestion(${topic_id})">เพิ่ม/แก้ไข ข้อเสนอแนะ</button>
+                    <button type="button" class="btn btn-danger rounded-0 text-white"
+                        data-bs-dismiss="modal">ยกเลิก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+
+    $.ajax({
+        method: "GET",
+        url: "/backend/researchs/get-suggestion/" + topic_id,
+        success: function (data) {
+            $(`#editor_${topic_id}`).html(data.research_suggestion);
+
+            const toolbarOptions = [
+                [
+                    "bold",
+                    "italic",
+                    "underline",
+                    { align: "" },
+                    { align: "center" },
+                    { align: "right" },
+                    { align: "justify" },
+                    { list: "ordered" },
+                    { list: "bullet" },
+                ],
+                [{ indent: "-1" }, { indent: "+1" }],
+                [{ script: "sub" }, { script: "super" }],
+                ["link", "image"],
+                [{ size: ["small", false, "large", "huge"] }],
+                [{ color: [] }, { background: [] }],
+            ];
+
+            new Quill(`#editor_${topic_id}`, {
+                theme: "snow",
+                modules: {
+                    toolbar: toolbarOptions,
+                },
+            });
+        },
+        beforeSend: function () {
+            console.log("กำลังโหลด");
+            let op_modal = false;
+            $("#modal").on("show.bs.modal", function () {
+                if (!op_modal) {
+                    op_modal = true;
+                    $(`#editor_${topic_id}`).html("กำลังโหลด");
+                }
+            });
+            $("#modal").html(createModal);
+            $("#research_modal").modal("show");
+        },
+    });
+}
+
 function pass_notpass_file_comment(topic_id, handleData) {
     try {
         $.ajax({
@@ -511,7 +583,21 @@ function update_status(topic_id, status) {
             },
             success: function (data) {
                 if (data.success) {
-                    window.location.replace("/backend/researchs/management");
+                    Swal.fire({
+                        title: "สำเร็จ",
+                        html: `เปลี่ยนสถานะบทความสำเร็จ`,
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
+                    });
+                    $("#research_modal").modal("dispose");
+                    $("#research_modal").remove();
+                } else {
+                    Swal.fire({
+                        title: "ผิดพลาด",
+                        html: `ไม่สามารถเปลี่ยนสถานะบทความได้`,
+                        icon: "error",
+                        confirmButtonColor: "#3085d6",
+                    });
                 }
             },
             beforeSend: function () {
@@ -543,6 +629,15 @@ function update_status_passed(topic_id, status, type) {
             url = "/backend/research/passed/update-status/" + topic_id;
         }
 
+        let delta = $(`#editor_${topic_id} .ql-editor`).html();
+        if (delta) {
+            const regex = /(<([^>]+)>)/gi;
+            const hasText = delta.replaceAll(regex, "").trim().length;
+            if (hasText == 0) {
+                delta = "";
+            }
+        }
+
         const _token = $('meta[name="csrf-token"]').attr("content");
         $.ajax({
             method: "PUT",
@@ -553,13 +648,53 @@ function update_status_passed(topic_id, status, type) {
             },
             success: function (data) {
                 if (data.success) {
-                    if (type == "change_research_passed_1") {
-                        window.location.replace(
-                            "/backend/researchs/management/times/1"
+                    Swal.fire({
+                        title: "สำเร็จ",
+                        html: `เปลี่ยนสถานะข้อเสนอแนะสำเร็จ`,
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
+                    });
+                    $("#research_modal").modal("dispose");
+                    $("#research_modal").remove();
+
+                    if (status == 2) {
+                        $(`#suggestion_container_${topic_id}`).html(
+                            `<div id="btn_suggestion_${topic_id}">
+                            <button class="btn btn-info rounded-0 mt-3 text-sm"
+                                onclick="open_modal(this, 'add_suggestion')">
+                                + เพิ่ม/แก้ไข ข้อเสนอแนะ
+                            </button>
+                            <input type="hidden" value="${topic_id}">
+                        </div>`
                         );
-                    } else if (type == "change_research_passed") {
-                        window.location.replace("/backend/researchs/passed");
+
+                        if (delta) {
+                            $(`#suggestion_container_${topic_id}`).append(
+                                `<div id="suggestion_${topic_id}">
+                                <span class="text-green text-sm">
+                                    <i class="fas fa-check text-green"></i>&nbsp;มีข้อเสนอแนะแล้ว
+                                </span>
+                            </div>`
+                            );
+                        } else {
+                            $(`#suggestion_container_${topic_id}`).append(
+                                `<div id="suggestion_${topic_id}">
+                                <span class="text-red text-sm">
+                                    <i class="fas fa-times text-red"></i>&nbsp;ไม่มีข้อเสนอแนะ
+                                </span>
+                            </div>`
+                            );
+                        }
+                    } else {
+                        $(`#suggestion_container_${topic_id}`).html(``);
                     }
+                } else {
+                    Swal.fire({
+                        title: "ผิดพลาด",
+                        html: `ไม่สามารถเปลี่ยนสถานะข้อเสนอแนะได้`,
+                        icon: "error",
+                        confirmButtonColor: "#3085d6",
+                    });
                 }
             },
             beforeSend: function () {
@@ -622,6 +757,7 @@ function update_suggestion(topic_id) {
                         confirmButtonColor: "#3085d6",
                     });
                 }
+
                 if (delta != "") {
                     $(`#suggestion_${topic_id}`).html(
                         `<span class="text-green text-sm">

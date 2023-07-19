@@ -130,26 +130,28 @@
 
                                         </select>
                                         <input type="hidden" value="{{ $value->topic_id }}">
-                                        @if ($value->research_passed_1 == 2)
-                                            <div id="btn_suggestion_{{ $value->topic_id }}">
-                                                <button class="btn btn-info rounded-0 mt-3 text-sm"
-                                                    onclick="open_modal(this, 'add_suggestion')">
-                                                    + เพิ่ม/แก้ไข ข้อเสนอแนะ
-                                                </button>
-                                                <input type="hidden" value="{{ $value->topic_id }}">
-                                            </div>
-                                            <div id="suggestion_{{ $value->topic_id }}">
-                                                @if (trim($value->research_suggestion))
-                                                    <span class="text-green text-sm">
-                                                        <i class="fas fa-check text-green"></i>&nbsp;มีข้อเสนอแนะแล้ว
-                                                    </span>
-                                                @else
-                                                    <span class="text-red text-sm">
-                                                        <i class="fas fa-times text-red"></i>&nbsp;ไม่มีข้อเสนอแนะ
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        @endif
+                                        <div id="suggestion_container_{{ $value->topic_id }}">
+                                            @if ($value->research_passed_1 == 2)
+                                                <div id="btn_suggestion_{{ $value->topic_id }}">
+                                                    <button class="btn btn-info rounded-0 mt-3 text-sm"
+                                                        onclick="open_modal(this, 'add_suggestion')">
+                                                        + เพิ่ม/แก้ไข ข้อเสนอแนะ
+                                                    </button>
+                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                </div>
+                                                <div id="suggestion_{{ $value->topic_id }}">
+                                                    @if (trim($value->research_suggestion))
+                                                        <span class="text-green text-sm">
+                                                            <i class="fas fa-check text-green"></i>&nbsp;มีข้อเสนอแนะแล้ว
+                                                        </span>
+                                                    @else
+                                                        <span class="text-red text-sm">
+                                                            <i class="fas fa-times text-red"></i>&nbsp;ไม่มีข้อเสนอแนะ
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            @endif
+                                        </div>
                                     </td>
                                 </tr>
                             @empty

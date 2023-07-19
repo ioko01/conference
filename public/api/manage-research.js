@@ -305,10 +305,11 @@ function send_comment_modal(topic_id) {
                     <br/>
                     <strong>รายการไฟล์ที่อัพโหลด</strong>
                     <br/>
-                    <i class="fas fa-check text-green"></i> ผ่านการประเมิน
-                    <br/>
+                    <i class="fas fa-check text-green"></i> ผ่านการประเมิน &emsp;
                     <i class="fas fa-times text-red"></i> ไม่ผ่านการประเมิน
-                    ${fileList}
+                    <div class="p-3 mt-3 border">
+                        ${fileList}
+                    </div>
                     </div>
                 `);
             },

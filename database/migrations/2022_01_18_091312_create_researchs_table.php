@@ -18,6 +18,7 @@ class CreateResearchsTable extends Migration
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
             $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
             $table->string('topic_id')->comment('รหัสบทความ');
+            $table->string('suggestion_id')->comment('รหัสลิงค์ไปยังหน้าส่งข้อเสนอแนะ (สำหรับผู้ทรง)');
             $table->text('topic_th')->comment('ชื่อบทความภาษาไทย');
             $table->text('topic_en')->comment('ชื่อบทความภาษาอังกฤษ');
             $table->string('topic_status')->default(1)->comment('สถานะของบทความ');

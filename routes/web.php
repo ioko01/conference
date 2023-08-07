@@ -48,6 +48,7 @@ use App\Http\Controllers\SendEditStatementController;
 use App\Http\Controllers\SendEditStatementTwoController;
 use App\Http\Controllers\SendEditWordTwoController;
 use App\Http\Controllers\StatusUpdateController;
+use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\UploadfileController;
 use App\Models\Conference;
 use App\Models\Download;
@@ -97,6 +98,10 @@ Route::get('/', function () {
 Route::get('contract', function () {
     return view('frontend.pages.contract');
 })->name('contract');
+
+Route::get('suggestion/{link}', [SuggestionController::class, 'index'])->name('suggestion.index');
+Route::post('suggestion/{link}/store', [SuggestionController::class, 'store'])->name('suggestion.store');
+Route::delete('suggestion/{link}/{id}/delete', [SuggestionController::class, 'destroy'])->name('suggestion.delete');
 
 Route::post('attend', [RegisterAttendController::class, 'store'])->name('attend.store');
 Route::get('payment', [PaymentController::class, 'index'])->name('payment');
@@ -210,11 +215,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             //ผลการพิจารณาแก้ไขครั้งที่ 1
             Route::put('research/passed/1/update-status/{id}', [ResearchPassedController::class, 'update_passed']);
             Route::put('conference/{id}/update_status_proceedings', [ConferenceController::class, 'update_status_proceedings'])->name('backend.conference.update_status_proceedings');
-            
+
             //ข้อเสนอแนะ กรณีไม่ผ่านการพิจารณาครั้งที่ 1
             Route::put('research/suggestion/update/{id}', [ResearchPassedController::class, 'update_suggestion']);
             Route::get('researchs/get-suggestion/{id}', [ResearchPassedController::class, 'get_suggestion']);
-            
+
             Route::prefix('researchs')->group(function () {
                 Route::get('management', [ManageResearchController::class, 'index'])->name('backend.research.index');
                 Route::get('management/times/1', [EditResearchFirstController::class, 'index'])->name('backend.research.first.index');

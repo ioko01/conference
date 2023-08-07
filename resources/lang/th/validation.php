@@ -227,7 +227,8 @@ return [
         'position' => 'ลำดับ',
         'topic_id' => 'หัวข้อ',
         'present_id' => 'รูปแบบบทความ',
-        'number' => 'เลขหน้า'
+        'number' => 'เลขหน้า',
+        'suggestion_upload' => 'ไฟล์ข้อเสนอแนะ'
     ],
 
 ];

@@ -11,6 +11,7 @@ use App\Models\Present;
 use App\Models\Tip;
 use App\Models\Comment;
 use App\Models\Conference;
+use App\Models\SendSuggestionResearch;
 use Illuminate\Support\Facades\DB;
 
 class ResearchController extends Controller
@@ -230,6 +231,7 @@ class ResearchController extends Controller
         Research::create([
             'user_id' => auth()->user()->id,
             'topic_id' => $topic_id,
+            'suggestion_id' => uniqid($topic_id, true),
             'topic_th' => $request->topic_th,
             'topic_en' => $request->topic_en,
             'presenter' => $presenters,

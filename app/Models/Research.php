@@ -13,6 +13,7 @@ class Research extends Model
     protected $fillable = [
         'user_id',
         'topic_id',
+        'suggestion_id',
         'topic_th',
         'topic_en',
         'topic_status',

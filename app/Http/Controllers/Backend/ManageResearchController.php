@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Research;
 use App\Models\StatusResearch;
 use App\Models\Comment;
+use App\Models\SendSuggestionResearch;
 use Illuminate\Support\Facades\DB;
 
 class ManageResearchController extends Controller
@@ -69,9 +70,11 @@ class ManageResearchController extends Controller
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->get();
 
+        $suggestions = SendSuggestionResearch::get();
+        
         DB::disconnect('status_researchs');
         DB::disconnect('researchs');
         DB::disconnect('comments');
-        return view('backend.pages.manage_research', compact('data', 'topic_status', 'comments'));
+        return view('backend.pages.manage_research', compact('data', 'topic_status', 'comments', 'suggestions'));
     }
 }

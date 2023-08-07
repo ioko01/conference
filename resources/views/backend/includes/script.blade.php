@@ -197,6 +197,8 @@
 @endif
 
 @if (Request::is('backend/researchs/management') || Request::is('backend/users'))
+    <script src="{{ asset('js/suggestion-detail-modal.js?v=4', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('js/default-modal.js?v=4', env('REDIRECT_HTTPS')) }}"></script>
     <script>
         function loading_export(name) {
             document.getElementById("export").disabled = true

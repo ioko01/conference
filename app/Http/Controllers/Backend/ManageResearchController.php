@@ -65,7 +65,7 @@ class ManageResearchController extends Controller
             'comments.name as comment_name',
             'comments.path as comment_path',
             'comments.extension as comment_ext',
-            'comments.created_at as comment_update',
+            'comments.created_at as created_at',
             'comments.status as comment_status',
         )
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')

@@ -28,8 +28,7 @@ class CommentFileUploadController extends Controller
         write_logs(__FUNCTION__, "error");
         alert('ผิดพลาด', 'ไม่สามารถส่งไฟล์ไปให้นักวิจัยแก้ไขได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         return $request->validate([
-            'file_comment' => 'required',
-            'file_comment' => 'mimes:pdf,doc,docx|max:10240'
+            'file_comment' => 'required|mimes:pdf,doc,docx|max:10240'
         ]);
     }
 

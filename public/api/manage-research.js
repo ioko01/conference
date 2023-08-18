@@ -637,6 +637,7 @@ function manage_index(id, status) {
                 `);
 
                 if (status >= 5) {
+                    let tbl_elm = "";
                     for (let i = 0; i < 3; i++) {
                         const suggestion = res.suggestion;
                         let suggestion_elm = "";
@@ -670,17 +671,21 @@ function manage_index(id, status) {
                                     )}`,
                             };
                             const json = JSON.stringify(data);
-                            $(`#tbl_${id}`).append(`
-                                <td class="p-0 px-2" style="border-top: 0px solid transparent;width: 33%;">
-                                <button style="min-width: 100px;" class="btn rounded-0 btn-sm btn-outline-success w-100 mb-3" onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '${escape(
-                                    json
-                                )}')">
-                                    <i class="fas fa-link"></i> ลิงค์</button>
-                                    <br />
-                                    ${suggestion_elm}
-                                
-                                </td>
-                        `);
+                            tbl_elm += `
+                            <td class="p-0 px-2" style="border-top: 0px solid transparent;width: 33%;">
+                            <button style="min-width: 100px;" class="btn rounded-0 btn-sm btn-outline-success w-100 mb-3" onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '${escape(
+                                json
+                            )}')">
+                                <i class="fas fa-link"></i> ลิงค์</button>
+                                <br />
+                                ${suggestion_elm}
+                            </td>`;
+                            if (i == 2) {
+                                $(`#tbl_${id}`).html(``);
+                                $(`#tbl_${id}`).append(tbl_elm);
+                            } else {
+                                $(`#tbl_${id}`).html(`<td style="border-top: 0px solid transparent;" colspan="3">-</td>`);
+                            }
                         });
                     }
                 } else {
@@ -707,8 +712,11 @@ function update_status(topic_id, status) {
             },
             success: function (data) {
                 if (data.success) {
-                    $(`#select_${topic_id} option`).removeAttr('selected');
-                    $(`#select_${topic_id} option:selected`).attr('selected', 'selected');
+                    $(`#select_${topic_id} option`).removeAttr("selected");
+                    $(`#select_${topic_id} option:selected`).attr(
+                        "selected",
+                        "selected"
+                    );
                     Swal.fire({
                         title: "สำเร็จ",
                         html: `เปลี่ยนสถานะบทความสำเร็จ`,

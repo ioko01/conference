@@ -684,7 +684,9 @@ function manage_index(id, status) {
                                 $(`#tbl_${id}`).html(``);
                                 $(`#tbl_${id}`).append(tbl_elm);
                             } else {
-                                $(`#tbl_${id}`).html(`<td style="border-top: 0px solid transparent;" colspan="3">-</td>`);
+                                $(`#tbl_${id}`).html(
+                                    `<td style="border-top: 0px solid transparent;" colspan="3">-</td>`
+                                );
                             }
                         });
                     }

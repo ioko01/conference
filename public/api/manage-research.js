@@ -572,6 +572,129 @@ function check_type(type, topic_id, title, status_value, text_status) {
     }
 }
 
+function escape(htmlStr) {
+    return htmlStr
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function manage_index(id, status) {
+    $.ajax({
+        method: "GET",
+        url: "/backend/researchs/management/ajax",
+        success: function (res) {
+            if (status >= 7) {
+                const comments = res.comments;
+                let comment_elm = "";
+                comments.forEach((element) => {
+                    if (id == element.comment_topic_id) {
+                        if (element.comment_path) {
+                            comment_elm += `<a target="_blank" class="text-info"
+                            href="${element.comment_path}"
+                            title="คลิกที่นี่เพิ่อดาวน์โหลดไฟล์">
+            
+                            &bull; <i style="font-size: 10px;" class="fst-normal"
+                                class="mb-0">${element.comment_name}
+                                ${
+                                    element.comment_status == "pass"
+                                        ? '&nbsp;<i class="fas fa-check text-green"></i>'
+                                        : '&nbsp;<i class="fas fa-times text-red"></i>'
+                                }
+                            </i><br />
+                        </a>
+                        <div style="border-bottom: 1px dotted #ccc;" class="my-2">
+            
+                        </div>`;
+                        }
+                    }
+                });
+
+                $(`#${id}`).html(`
+                    <div class="text-start">
+                        <button type="button" class="btn btn-sm btn-info rounded-0 text-white w-100 mb-3" onclick="open_modal(this, 'file')">
+                            <i class="fas fa-upload"></i> อัพโหลด / ลบไฟล์
+                        </button>
+                        <input type="hidden" value="${id}">
+
+                        <input type="hidden" name="error_file_comment" id="error_file_comment">
+                        ${comment_elm}
+                    </div>
+                `);
+            } else {
+                $(`#${id}`).html("-");
+            }
+            if (status >= 5) {
+                $(`#sug_${id}`).html(`
+                    <table class="w-100">
+                        <tbody>
+                            <tr id="tbl_${id}">
+                            </tr>
+                        </tbody>
+                    </table>
+                `);
+
+                if (status >= 5) {
+                    for (let i = 0; i < 3; i++) {
+                        const suggestion = res.suggestion;
+                        let suggestion_elm = "";
+                        suggestion.forEach((element) => {
+                            if (
+                                id == element.topic_id &&
+                                element.number == i + 1
+                            ) {
+                                const path = element.path;
+                                suggestion_elm += `
+                                <a class="text-info d-block" href="${path}" download>
+                                &bull; <i style="font-size: 10px;" class="fst-normal">${element.name}</i></a>
+                                    <div style="border-bottom: 1px dotted #ccc;" class="my-2"> </div>
+                                `;
+                            }
+                        });
+
+                        get_topic_id(id, (res) => {
+                            const data = {
+                                topic_id: String(id),
+                                topic_th: res.topic_th,
+                                topic_en: res.topic_en,
+                                link:
+                                    window.location.host +
+                                    `/suggestion/${btoa(
+                                        String(
+                                            `${i + 1}|${id}|${String(
+                                                res.created_at
+                                            )}`
+                                        )
+                                    )}`,
+                            };
+                            const json = JSON.stringify(data);
+                            $(`#tbl_${id}`).append(`
+                                <td class="p-0 px-2" style="border-top: 0px solid transparent;width: 33%;">
+                                <button style="min-width: 100px;" class="btn rounded-0 btn-sm btn-outline-success w-100 mb-3" onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '${escape(
+                                    json
+                                )}')">
+                                    <i class="fas fa-link"></i> ลิงค์</button>
+                                    <br />
+                                    ${suggestion_elm}
+                                
+                                </td>
+                        `);
+                        });
+                    }
+                } else {
+                    $(`#tbl_${id}`).append(
+                        `<td style="border-top: 0px solid transparent;" colspan="3"> - </td>`
+                    );
+                }
+            } else {
+                $(`#sug_${id}`).html("-");
+            }
+        },
+    });
+}
+
 function update_status(topic_id, status) {
     try {
         const _token = $('meta[name="csrf-token"]').attr("content");
@@ -584,12 +707,15 @@ function update_status(topic_id, status) {
             },
             success: function (data) {
                 if (data.success) {
+                    $(`#select_${topic_id} option`).removeAttr('selected');
+                    $(`#select_${topic_id} option:selected`).attr('selected', 'selected');
                     Swal.fire({
                         title: "สำเร็จ",
                         html: `เปลี่ยนสถานะบทความสำเร็จ`,
                         icon: "success",
                         confirmButtonColor: "#3085d6",
                     });
+
                     $("#research_modal").modal("dispose");
                     $("#research_modal").remove();
                 } else {
@@ -600,6 +726,7 @@ function update_status(topic_id, status) {
                         confirmButtonColor: "#3085d6",
                     });
                 }
+                manage_index(topic_id, status);
             },
             beforeSend: function () {
                 console.log("กำลังโหลด");

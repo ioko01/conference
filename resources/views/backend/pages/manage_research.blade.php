@@ -92,8 +92,8 @@
                                     </td>
                                     <td>
                                         @if (auth()->user()->is_admin == 3 || auth()->user()->is_admin == 2)
-                                            <select name="topic_status" class="form-select"
-                                                onchange="open_modal(this, 'change_status')">
+                                            <select id="select_{{ $value->topic_id }}" name="topic_status"
+                                                class="form-select" onchange="open_modal(this, 'change_status')">
 
                                                 @foreach ($topic_status as $status)
                                                     <option value="{{ $status->id }}"
@@ -114,10 +114,11 @@
                                             onclick="open_modal(this, 'detail')">รายละเอียด</button>
                                         <input type="hidden" value="{{ $value->topic_id }}">
                                     </td>
-                                    <td>
+                                    <td id="{{ $value->topic_id }}">
                                         @if ($value->status_id >= 7)
                                             <div class="text-start">
-                                                <button type="button" class="btn btn-sm btn-info rounded-0 text-white w-100 mb-3"
+                                                <button type="button"
+                                                    class="btn btn-sm btn-info rounded-0 text-white w-100 mb-3"
                                                     onclick="open_modal(this, 'file')">
 
                                                     <i class="fas fa-upload"></i> อัพโหลด / ลบไฟล์
@@ -160,13 +161,14 @@
                                             -
                                         @endif
                                     </td>
-                                    <td>
+                                    <td id="sug_{{ $value->topic_id }}">
                                         <table class="w-100">
                                             <tbody>
                                                 <tr>
                                                     @if ($value->status_id >= 5)
                                                         @for ($i = 0; $i < 3; $i++)
-                                                            <td class="p-0 px-2" style="border-top: 0px solid transparent;width: 33%;">
+                                                            <td class="p-0 px-2"
+                                                                style="border-top: 0px solid transparent;width: 33%;">
                                                                 @php
                                                                     $data = [
                                                                         'topic_id' => $value->topic_id,
@@ -174,10 +176,9 @@
                                                                         'topic_en' => $value->topic_en,
                                                                         'link' => Request::root() . '/suggestion/' . base64_encode(strval($i + 1) . '|' . $value->topic_id . '|' . $value->created_at),
                                                                     ];
-                                                                    
                                                                 @endphp
-                                                                <button
-                                                                    style="min-width: 100px;" class="btn rounded-0 btn-sm btn-outline-success w-100 mb-3"
+                                                                <button style="min-width: 100px;"
+                                                                    class="btn rounded-0 btn-sm btn-outline-success w-100 mb-3"
                                                                     onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '{{ json_encode($data) }}')">
                                                                     <i class="fas fa-link"></i> ลิงค์</button>
                                                                 <br />

@@ -110,6 +110,10 @@
     <script src="{{ asset('api/get-research-with-topic-id.js?v=4', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
+@if (Request::is('backend/researchs/management'))
+    <script src="{{ asset('api/get-research-with-topic-id.js?v=4', env('REDIRECT_HTTPS')) }}"></script>
+@endif
+
 @if (Request::is('backend/proceeding/*/research') ||
         Request::is('backend/proceeding/*/research/*/edit') ||
         Request::is('backend/researchs/management') ||

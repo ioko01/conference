@@ -198,6 +198,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 'researchs.topic_en as topic_en',
                 'researchs.topic_status as topic_status',
                 'researchs.presenter as presenter',
+                'researchs.created_at as created_at',
                 'faculties.id as faculty_id',
                 'posters.name as poster_name',
                 'videos.link as video_link'
@@ -222,6 +223,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::prefix('researchs')->group(function () {
                 Route::get('management', [ManageResearchController::class, 'index'])->name('backend.research.index');
+                Route::get('management/ajax', [ManageResearchController::class, 'index_ajax'])->name('backend.research.index_ajax');
                 Route::get('management/times/1', [EditResearchFirstController::class, 'index'])->name('backend.research.first.index');
                 Route::get('management/times/2', [EditResearchSecondController::class, 'index'])->name('backend.research.second.index');
                 Route::put('comment-file-upload/{topic_id}', [CommentFileUploadController::class, 'update']);

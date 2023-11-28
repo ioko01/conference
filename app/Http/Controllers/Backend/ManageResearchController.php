@@ -8,6 +8,7 @@ use App\Models\Research;
 use App\Models\StatusResearch;
 use App\Models\Comment;
 use App\Models\SendSuggestionResearch;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -71,12 +72,26 @@ class ManageResearchController extends Controller
             ->leftjoin('researchs', 'researchs.topic_id', '=', 'comments.topic_id')
             ->get();
 
-        $suggestions = SendSuggestionResearch::get();
+        // $suggestions = SendSuggestionResearch::get();
+
+        $expert = User::select(
+            'users.id as expert_id',
+            'users.prefix as expert_prefix',
+            'users.fullname as expert_fullname',
+            'users.phone as expert_phone',
+            'users.institution as expert_institution',
+            'users.email as expert_email'
+        )
+            ->where('users.person_attend', 'expert')
+            ->leftjoin('conferences', 'users.conference_id', '=', 'conferences.id')
+            ->where('conferences.status', 1)
+            ->get();
 
         DB::disconnect('status_researchs');
         DB::disconnect('researchs');
         DB::disconnect('comments');
-        return view('backend.pages.manage_research', compact('data', 'topic_status', 'comments', 'suggestions'));
+        DB::disconnect('users');
+        return view('backend.pages.manage_research', compact('data', 'topic_status', 'comments', 'expert'));
     }
 
 

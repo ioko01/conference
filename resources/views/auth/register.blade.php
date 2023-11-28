@@ -131,7 +131,11 @@
                                             </div>
                                         @endforeach
 
-                                        <p style="color:red" class="text-small">* โควต้าเจ้าภาพร่วมกรุณาติดต่อต้นสังกัด
+                                        <p style="color:red" class="text-small">
+                                            *
+                                            ลงทะเบียนผู้ทรงคุณวุฒิต้องรอการตรวจสอบจากระบบ
+                                            <br />
+                                            * โควต้าเจ้าภาพร่วมกรุณาติดต่อต้นสังกัด
                                             หากท่านเป็นบุคลากรภายในมหาวิทยาลัยราชภัฏเลย
                                             และบทความของท่านเป็นของมหาวิทยาลัยอื่น
                                             จะต้องลงทะเบียนเป็น "บุคคลภายนอก"
@@ -142,7 +146,7 @@
                                                 <label for="institution">สังกัด / หน่วยงาน <i class="text-red text-small">*
                                                         ตัวอย่าง:
                                                         มหาวิทยาลัยราชภัฏเลย</i></label>
-                                                <input @if (old('position_id') != '2') disabled @endif type="text"
+                                                <input @if (old('position_id') != '2' && old('position_id') != '4') disabled @endif type="text"
                                                     name="institution" id="institution"
                                                     class="form-control @error('institution') is-invalid @enderror"
                                                     value="{{ old('institution') }}" autocomplete="institution">

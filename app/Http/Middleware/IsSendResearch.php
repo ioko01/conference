@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsAdmin
+class IsSendResearch
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->is_admin == 1 || auth()->user()->is_admin == 2 || auth()->user()->is_admin == 3) {
+        if (auth()->user()->person_attend == 'send' || auth()->user()->is_admin == 2 || auth()->user()->is_admin == 3) {
             return $next($request);
         }
         abort(401);

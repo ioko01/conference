@@ -14,6 +14,7 @@
                     <button id="export" onclick="loading_export('researchs')" class="btn btn-info rounded-0 mb-3"><i
                             class="fas fa-file-export"></i> Export to Excel</button>
                     <strong class="text-red d-block mb-2">อาจใช้เวลาในการเขียนไฟล์หลายนาที</strong>
+                    <input type="hidden" id="auth_id" value="{{ auth()->user()->id }}">
                 </div>
 
                 <div class="table-responsive">
@@ -21,24 +22,14 @@
                         <thead>
                             <tr class="text-center pagination-header">
                                 <th style="width: 5%;">#</th>
-                                <th style="width: 25%;" class="text-start">รายละเอียดบทความ</th>
+                                <th style="width: 40%;" class="text-start">รายละเอียดบทความ</th>
                                 <th style="width: 5%;">Slip<br />ชำระเงิน</th>
                                 <th style="width: 5%;">ไฟล์<br />WORD</th>
                                 <th style="width: 5%;">ไฟล์<br />PDF</th>
                                 <th style="width: 10%;">สถานะบทความ</th>
                                 <th style="width: 10%;">รายละเอียด</th>
+                                <th style="width: 10%;">ผู้ทรงคุณวุฒิ</th>
                                 <th style="width: 10%;">ส่งไฟล์ไปให้นักวิจัยแก้ไข</th>
-                                <th style="width: 25%;">ข้อเสนอแนะจากผู้ทรง ฯ
-                                    <table class="w-100">
-                                        <tbody>
-                                            <tr>
-                                                <td style="border-top: 0px solid transparent;">ผู้ทรง ฯ (1)</td>
-                                                <td style="border-top: 0px solid transparent;">ผู้ทรง ฯ (2)</td>
-                                                <td style="border-top: 0px solid transparent;">ผู้ทรง ฯ (3)</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -114,6 +105,24 @@
                                             onclick="open_modal(this, 'detail')">รายละเอียด</button>
                                         <input type="hidden" value="{{ $value->topic_id }}">
                                     </td>
+
+                                    <td id="sug_{{ $value->topic_id }}">
+                                        @if ($value->status_id >= 5)
+                                            @php
+                                                $data = [
+                                                    'list_expert' => $expert,
+                                                    'topic_id' => $value->topic_id,
+                                                    'topic_th' => $value->topic_th,
+                                                    'topic_en' => $value->topic_en,
+                                                    'link' => Request::root() . '/suggestion/' . base64_encode($value->topic_id . '|' . $value->created_at),
+                                                ];
+                                            @endphp
+                                            <button style="min-width: 100px;"
+                                                class="btn rounded-0 btn-sm btn-warning text-white w-100 mb-3"
+                                                onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '{{ json_encode($data) }}')">
+                                                <i class="fas fa-search-plus"></i> ขยาย</button>
+                                        @endif
+                                    </td>
                                     <td id="{{ $value->topic_id }}">
                                         @if ($value->status_id >= 7)
                                             <div class="text-start">
@@ -161,62 +170,7 @@
                                             -
                                         @endif
                                     </td>
-                                    <td id="sug_{{ $value->topic_id }}">
-                                        <table class="w-100">
-                                            <tbody>
-                                                <tr>
-                                                    @if ($value->status_id >= 5)
-                                                        @for ($i = 0; $i < 3; $i++)
-                                                            <td class="p-0 px-2"
-                                                                style="border-top: 0px solid transparent;width: 33%;">
-                                                                @php
-                                                                    $data = [
-                                                                        'topic_id' => $value->topic_id,
-                                                                        'topic_th' => $value->topic_th,
-                                                                        'topic_en' => $value->topic_en,
-                                                                        'link' => Request::root() . '/suggestion/' . base64_encode(strval($i + 1) . '|' . $value->topic_id . '|' . $value->created_at),
-                                                                    ];
-                                                                @endphp
-                                                                <button style="min-width: 100px;"
-                                                                    class="btn rounded-0 btn-sm btn-outline-success w-100 mb-3"
-                                                                    onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '{{ json_encode($data) }}')">
-                                                                    <i class="fas fa-link"></i> ลิงค์</button>
-                                                                <br />
-                                                                @forelse ($suggestions as $suggestion)
-                                                                    @if ($value->topic_id == $suggestion->topic_id && $suggestion->number == $i + 1)
-                                                                        <a class="text-info d-block"
-                                                                            href="{{ Storage::url($suggestion->path) }}"
-                                                                            download>
-                                                                            &bull; <i style="font-size: 10px;"
-                                                                                class="fst-normal">{{ $suggestion->name }}</i></a>
-                                                                        <div style="border-bottom: 1px dotted #ccc;"
-                                                                            class="my-2">
 
-                                                                        </div>
-                                                                    @endif
-                                                                @empty
-                                                                @endforelse
-                                                            </td>
-                                                        @endfor
-                                                    @else
-                                                        <td style="border-top: 0px solid transparent;" colspan="3">
-                                                            -
-                                                        </td>
-                                                    @endif
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-
-                                        {{-- @if (auth()->user()->is_admin == 3 || auth()->user()->is_admin == 2)
-                                            <a href="{{ route('backend.research.edit', $value->topic_id) }}"
-                                                class="btn btn-warning text-white rounded-0"><i
-                                                    class="nav-icon fa fa-edit"></i>แก้ไข</a>
-                                        @else
-                                            -
-                                        @endif --}}
-                                    </td>
                                 </tr>
                             @empty
                                 <tr class="text-center">

@@ -16,12 +16,17 @@ class CreateSendSuggestionResearchsTable extends Migration
         Schema::create('send_suggestion_researchs', function (Blueprint $table) {
             $table->id();
             $table->integer('conference_id')->comment('ไอดีการจัดงานประชุมวิชาการ')->nullable();
-            $table->string('user_id')->comment('ไอดีผู้สร้างหัวข้อนี้');
+            $table->string('user_send_id')->comment('ไอดีส่งไฟล์');
+            $table->string('user_receive_id')->comment('ไอดีผู้รับไฟล์');
             $table->string('topic_id')->comment('รหัสบทความ');
-            $table->string('ผู้ทรงคนที่')->comment('ผู้ทรงคนที่');
-            $table->text('name')->comment('ชื่อไฟล์');
-            $table->text('path')->comment('แหล่งที่อยู่ไฟล์');
-            $table->string('extension')->comment('นามสกุลไฟล์');
+
+            $table->text('file_admin_send')->comment('ชื่อไฟล์ตอนแอดมินส่ง')->nullable();
+            $table->text('path_admin_send')->comment('แหล่งที่อยู่ไฟล์ล์ตอนแอดมินส่ง')->nullable();
+            $table->string('extension_admin_send')->comment('นามสกุลไฟล์ล์ตอนแอดมินส่ง')->nullable();
+
+            $table->text('file_expert_receive')->comment('ชื่อไฟล์ตอนแอดมินรับ')->nullable();
+            $table->text('path_expert_receive')->comment('แหล่งที่อยู่ไฟล์ล์ตอนแอดมินรับ')->nullable();
+            $table->string('extension_expert_receive')->comment('นามสกุลไฟล์ล์ตอนแอดมินรับ')->nullable();
             $table->timestamps();
         });
     }

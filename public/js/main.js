@@ -10,10 +10,10 @@ window.addEventListener("load", function () {
 
 function copyText(e, text) {
     navigator.clipboard.writeText(text);
-    e.innerHTML = '<i class="fas fa-check"></i> คัดลอกสำเร็จ'
+    e.innerHTML = '<i class="fas fa-check"></i> คัดลอกสำเร็จ';
     setTimeout(() => {
-        e.innerHTML = '<i class="fas fa-copy"></i> คัดลอกลิงค์'
-    },3000)
+        e.innerHTML = '<i class="fas fa-copy"></i> คัดลอกลิงค์';
+    }, 3000);
 }
 
 function autosize() {

@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DownloadController;
 use App\Http\Controllers\Backend\EditResearchFirstController;
 use App\Http\Controllers\Backend\EditResearchSecondController;
+use App\Http\Controllers\Backend\ExpertUserController;
 use App\Http\Controllers\Backend\LineController;
 use App\Http\Controllers\Backend\LinkOralController as BackendLinkOralController;
 use App\Http\Controllers\Backend\ManageResearchController;
@@ -99,10 +100,6 @@ Route::get('contract', function () {
     return view('frontend.pages.contract');
 })->name('contract');
 
-Route::get('suggestion/{link}', [SuggestionController::class, 'index'])->name('suggestion.index');
-Route::post('suggestion/{link}/store', [SuggestionController::class, 'store'])->name('suggestion.store');
-Route::delete('suggestion/{link}/{id}/delete', [SuggestionController::class, 'destroy'])->name('suggestion.delete');
-
 Route::post('attend', [RegisterAttendController::class, 'store'])->name('attend.store');
 Route::get('payment', [PaymentController::class, 'index'])->name('payment');
 Route::get('list/research', [ListResearchController::class, 'index'])->name('list.research.index');
@@ -128,57 +125,70 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('download', [FileDownloadController::class, 'index'])->name('download');
 
     Route::prefix('employee')->group(function () {
+
+        Route::middleware('is_expert')->group(function () {
+            //ไฟล์ข้อเสนอแนะ
+            Route::get('suggestion', [SuggestionController::class, 'index'])->name('suggestion.index');
+            // Route::get('suggestion/{link}', [SuggestionController::class, 'index'])->name('suggestion.index');
+            Route::post('suggestion/{link}/store', [SuggestionController::class, 'store'])->name('suggestion.store');
+            Route::delete('suggestion/{link}/{id}/delete', [SuggestionController::class, 'destroy'])->name('suggestion.delete');
+        });
+
+
+
         Route::get('account', [AccountController::class, 'index'])->name('account.index');
         Route::get('change-password', [PasswordController::class, 'change_password'])->name('user.change_password');
         Route::put('update-password', [PasswordController::class, 'update_password'])->name('user.update_password');
 
-        // ส่งบทความฉบับแก้ไข
-        Route::get('research/send', [ResearchController::class, 'index'])->name('employee.research.index');
-        Route::get('research/show/{topic_id}', [ResearchController::class, 'show'])->name('employee.research.show');
-        Route::post('research/send/store', [ResearchController::class, 'store'])->name('employee.research.store');
-        Route::get('research/edit/{topic_id}', [ResearchController::class, 'edit'])->name('employee.research.edit');
-        Route::put('research/edit/{topic_id}/update', [ResearchController::class, 'update'])->name('employee.research.update');
+        Route::middleware('is_send_research')->group(function () {
+            // ส่งบทความฉบับแก้ไข
+            Route::get('research/send', [ResearchController::class, 'index'])->name('employee.research.index');
+            Route::get('research/show/{topic_id}', [ResearchController::class, 'show'])->name('employee.research.show');
+            Route::post('research/send/store', [ResearchController::class, 'store'])->name('employee.research.store');
+            Route::get('research/edit/{topic_id}', [ResearchController::class, 'edit'])->name('employee.research.edit');
+            Route::put('research/edit/{topic_id}/update', [ResearchController::class, 'update'])->name('employee.research.update');
 
-        // ส่งบทความฉบับแก้ไข ครั้งที่ 1
-        Route::get('research/send-edit/show/{id}', [SendEditResearchController::class, 'show'])->name('employee.research.send.edit');
-        Route::post('research/send-edit/word/{id}/store', [SendEditWordController::class, 'store'])->name('employee.research.send.word.store');
-        Route::put('research/send-edit/word/{id}/update', [SendEditWordController::class, 'update'])->name('employee.research.send.word.update');
-        Route::post('research/send-edit/pdf/{id}/store', [SendEditPdfController::class, 'store'])->name('employee.research.send.pdf.store');
-        Route::put('research/send-edit/pdf/{id}/update', [SendEditPdfController::class, 'update'])->name('employee.research.send.pdf.update');
-        Route::post('research/send-edit/stm/{id}/store', [SendEditStatementController::class, 'store'])->name('employee.research.send.stm.store');
-        Route::put('research/send-edit/stm/{id}/update', [SendEditStatementController::class, 'update'])->name('employee.research.send.stm.update');
-
-
-        Route::post('research/send-edit/all/1/{id}/store', [SendEditAllController::class, 'store'])->name('employee.research.send.all.store');
-        Route::put('research/send-edit/all/1/{id}/update', [SendEditAllController::class, 'update'])->name('employee.research.send.all.update');
+            // ส่งบทความฉบับแก้ไข ครั้งที่ 1
+            Route::get('research/send-edit/show/{id}', [SendEditResearchController::class, 'show'])->name('employee.research.send.edit');
+            Route::post('research/send-edit/word/{id}/store', [SendEditWordController::class, 'store'])->name('employee.research.send.word.store');
+            Route::put('research/send-edit/word/{id}/update', [SendEditWordController::class, 'update'])->name('employee.research.send.word.update');
+            Route::post('research/send-edit/pdf/{id}/store', [SendEditPdfController::class, 'store'])->name('employee.research.send.pdf.store');
+            Route::put('research/send-edit/pdf/{id}/update', [SendEditPdfController::class, 'update'])->name('employee.research.send.pdf.update');
+            Route::post('research/send-edit/stm/{id}/store', [SendEditStatementController::class, 'store'])->name('employee.research.send.stm.store');
+            Route::put('research/send-edit/stm/{id}/update', [SendEditStatementController::class, 'update'])->name('employee.research.send.stm.update');
 
 
-        // ส่งบทความฉบับแก้ไข ครั้งที่ 2
-        Route::post('research/send-edit/all/2/{id}/store', [SendEditAllTwoController::class, 'store'])->name('employee.research.send.all.two.store');
-        Route::put('research/send-edit/all/2/{id}/update', [SendEditAllTwoController::class, 'update'])->name('employee.research.send.all.two.update');
+            Route::post('research/send-edit/all/1/{id}/store', [SendEditAllController::class, 'store'])->name('employee.research.send.all.store');
+            Route::put('research/send-edit/all/1/{id}/update', [SendEditAllController::class, 'update'])->name('employee.research.send.all.update');
 
 
-        Route::get('research/send-edit-2/show/{id}', [SendEditResearchTwoController::class, 'show'])->name('employee.research.send.two.edit');
-        Route::post('research/send-edit/word_2/{id}/store', [SendEditWordTwoController::class, 'store'])->name('employee.research.send.two.word.store');
-        Route::put('research/send-edit/word_2/{id}/update', [SendEditWordTwoController::class, 'update'])->name('employee.research.send.two.word.update');
-        Route::post('research/send-edit/pdf_2/{id}/store', [SendEditPdfTwoController::class, 'store'])->name('employee.research.send.two.pdf.store');
-        Route::put('research/send-edit/pdf_2/{id}/update', [SendEditPdfTwoController::class, 'update'])->name('employee.research.send.two.pdf.update');
-        Route::post('research/send-edit/stm_2/{id}/store', [SendEditStatementTwoController::class, 'store'])->name('employee.research.send.two.stm.store');
-        Route::put('research/send-edit/stm_2/{id}/update', [SendEditStatementTwoController::class, 'update'])->name('employee.research.send.two.stm.update');
+            // ส่งบทความฉบับแก้ไข ครั้งที่ 2
+            Route::post('research/send-edit/all/2/{id}/store', [SendEditAllTwoController::class, 'store'])->name('employee.research.send.all.two.store');
+            Route::put('research/send-edit/all/2/{id}/update', [SendEditAllTwoController::class, 'update'])->name('employee.research.send.all.two.update');
 
 
-        Route::get('research/uploadfile/{id}', [UploadfileController::class, 'show'])->name('employee.research.uploadfile');
-        Route::post('research/uploadfile/{id}/store', [UploadfileController::class, 'store'])->name('employee.research.uploadfile.store');
-        Route::put('research/uploadfile/{id}/update', [UploadfileController::class, 'update'])->name('employee.research.uploadfile.update');
+            Route::get('research/send-edit-2/show/{id}', [SendEditResearchTwoController::class, 'show'])->name('employee.research.send.two.edit');
+            Route::post('research/send-edit/word_2/{id}/store', [SendEditWordTwoController::class, 'store'])->name('employee.research.send.two.word.store');
+            Route::put('research/send-edit/word_2/{id}/update', [SendEditWordTwoController::class, 'update'])->name('employee.research.send.two.word.update');
+            Route::post('research/send-edit/pdf_2/{id}/store', [SendEditPdfTwoController::class, 'store'])->name('employee.research.send.two.pdf.store');
+            Route::put('research/send-edit/pdf_2/{id}/update', [SendEditPdfTwoController::class, 'update'])->name('employee.research.send.two.pdf.update');
+            Route::post('research/send-edit/stm_2/{id}/store', [SendEditStatementTwoController::class, 'store'])->name('employee.research.send.two.stm.store');
+            Route::put('research/send-edit/stm_2/{id}/update', [SendEditStatementTwoController::class, 'update'])->name('employee.research.send.two.stm.update');
 
-        Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
-        Route::post('payment/{payment_upload}/store', [PaymentController::class, 'store'])->name('employee.payment.store');
 
-        Route::put('pdf/{pdf_upload}/upload', [PdfController::class, 'update'])->name('employee.pdf.update');
-        Route::post('pdf/{pdf_upload}/store', [PdfController::class, 'store'])->name('employee.pdf.store');
+            Route::get('research/uploadfile/{id}', [UploadfileController::class, 'show'])->name('employee.research.uploadfile');
+            Route::post('research/uploadfile/{id}/store', [UploadfileController::class, 'store'])->name('employee.research.uploadfile.store');
+            Route::put('research/uploadfile/{id}/update', [UploadfileController::class, 'update'])->name('employee.research.uploadfile.update');
 
-        Route::put('word/{word_upload}/upload', [WordController::class, 'update'])->name('employee.word.update');
-        Route::post('word/{word_upload}/store', [WordController::class, 'store'])->name('employee.word.store');
+            Route::put('payment/{payment_upload}/upload', [PaymentController::class, 'update'])->name('employee.payment.update');
+            Route::post('payment/{payment_upload}/store', [PaymentController::class, 'store'])->name('employee.payment.store');
+
+            Route::put('pdf/{pdf_upload}/upload', [PdfController::class, 'update'])->name('employee.pdf.update');
+            Route::post('pdf/{pdf_upload}/store', [PdfController::class, 'store'])->name('employee.pdf.store');
+
+            Route::put('word/{word_upload}/upload', [WordController::class, 'update'])->name('employee.word.update');
+            Route::post('word/{word_upload}/store', [WordController::class, 'store'])->name('employee.word.store');
+        });
     });
 
     Route::middleware('is_admin')->group(function () {
@@ -213,6 +223,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         Route::prefix('backend')->group(function () {
+
+            Route::get('get-expert/{id}', [ExpertUserController::class, 'index']);
+            Route::get('get-expert-user/{topic_id}', [ExpertUserController::class, 'get_expert_user']);
+            Route::get('get-expert-user-with-id/{id}/{topic_id}', [ExpertUserController::class, 'get_expert_user_with_id']);
+            Route::get('get-file-expert/{topic_id}', [ExpertUserController::class, 'get_file_expert']);
+            Route::post('add-file-expert', [ExpertUserController::class, 'add_file_expert']);
+            Route::delete('expert-file-delete/{topic_id}', [ExpertUserController::class, 'destroy']);
+
             //ผลการพิจารณาแก้ไขครั้งที่ 1
             Route::put('research/passed/1/update-status/{id}', [ResearchPassedController::class, 'update_passed']);
             Route::put('conference/{id}/update_status_proceedings', [ConferenceController::class, 'update_status_proceedings'])->name('backend.conference.update_status_proceedings');

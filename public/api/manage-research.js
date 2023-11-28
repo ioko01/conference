@@ -395,7 +395,7 @@ function add_suggestion_modal(topic_id) {
             });
         },
         beforeSend: function () {
-            console.log("กำลังโหลด");
+            console.log("กำลังโหลดๅ");
             let op_modal = false;
             $("#modal").on("show.bs.modal", function () {
                 if (!op_modal) {
@@ -467,7 +467,7 @@ function update_status_research(topic_id) {
             });
         },
         beforeSend: function () {
-            console.log("กำลังโหลด");
+            console.log("กำลังโหลด2");
             let op_modal = false;
             $("#modal").on("show.bs.modal", function () {
                 if (!op_modal) {
@@ -626,7 +626,7 @@ function manage_index(id, status) {
             } else {
                 $(`#${id}`).html("-");
             }
-            if (status >= 5) {
+            if (status >= 7) {
                 $(`#sug_${id}`).html(`
                     <table class="w-100">
                         <tbody>
@@ -636,7 +636,7 @@ function manage_index(id, status) {
                     </table>
                 `);
 
-                if (status >= 5) {
+                if (status >= 7) {
                     let tbl_elm = "";
                     for (let i = 0; i < 3; i++) {
                         const suggestion = res.suggestion;
@@ -654,8 +654,12 @@ function manage_index(id, status) {
                                 `;
                             }
                         });
-
+                        $(`#tbl_${id}`).html(
+                            `<td class="text-sm" style="border-top: 0px solid transparent;" colspan="3">กำลังโหลด</td>`
+                        );
                         get_topic_id(id, (res) => {
+                            const date = new Date(res.created_at)
+                            // console.log(date.format("yyyy-MM-dd hh:mm:ss"));
                             const data = {
                                 topic_id: String(id),
                                 topic_th: res.topic_th,
@@ -670,24 +674,25 @@ function manage_index(id, status) {
                                         )
                                     )}`,
                             };
-                            const json = JSON.stringify(data);
-                            tbl_elm += `
-                            <td class="p-0 px-2" style="border-top: 0px solid transparent;width: 33%;">
-                            <button style="min-width: 100px;" class="btn rounded-0 btn-sm btn-outline-success w-100 mb-3" onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '${escape(
-                                json
-                            )}')">
-                                <i class="fas fa-link"></i> ลิงค์</button>
-                                <br />
-                                ${suggestion_elm}
-                            </td>`;
-                            if (i == 2) {
-                                $(`#tbl_${id}`).html(``);
-                                $(`#tbl_${id}`).append(tbl_elm);
-                            } else {
-                                $(`#tbl_${id}`).html(
-                                    `<td style="border-top: 0px solid transparent;" colspan="3">-</td>`
-                                );
-                            }
+                            
+                            // const json = JSON.stringify(data);
+                            // tbl_elm += `
+                            // <td class="p-0 px-2" style="border-top: 0px solid transparent;width: 33%;">
+                            // <button style="min-width: 100px;" class="btn rounded-0 btn-sm btn-outline-success w-100 mb-3" onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '${escape(
+                            //     json
+                            // )}')">
+                            //     <i class="fas fa-link"></i> ลิงค์</button>
+                            //     <br />
+                            //     ${suggestion_elm}
+                            // </td>`;
+                            // if (i == 2) {
+                            //     $(`#tbl_${id}`).html(``);
+                            //     $(`#tbl_${id}`).append(tbl_elm);
+                            // } else {
+                            //     $(`#tbl_${id}`).html(
+                            //         `<td class="text-sm" style="border-top: 0px solid transparent;" colspan="3">กำลังโหลด</td>`
+                            //     );
+                            // }
                         });
                     }
                 } else {
@@ -739,7 +744,7 @@ function update_status(topic_id, status) {
                 manage_index(topic_id, status);
             },
             beforeSend: function () {
-                console.log("กำลังโหลด");
+                console.log("กำลังโหลด3");
             },
             error: function (error) {
                 if (!navigator.onLine) {

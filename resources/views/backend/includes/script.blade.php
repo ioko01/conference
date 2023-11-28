@@ -126,6 +126,8 @@
     <script>
         $(document).ready(function() {
             $(`.dataTable`).DataTable({
+                deferRender: true,
+                orderClasses: false,
                 pageLength: 20,
                 lengthChange: true,
                 bAutoWidth: false,
@@ -161,6 +163,8 @@
     <script>
         $(document).ready(function() {
             $(`.dataTable`).DataTable({
+                deferRender: true,
+                orderClasses: false,
                 pageLength: 10,
                 lengthChange: true,
                 bAutoWidth: false,

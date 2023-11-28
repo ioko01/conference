@@ -17,7 +17,7 @@ function open_modal_default(modalId, modalSize = "sm", textTitle, data) {
      */
     const detail = modal_detail(data);
     let createModal = `
-            <div class="modal fade" id="card_modal" data-bs-backdrop="static"
+            <div style="overflow: auto;" class="modal fade" id="card_modal" data-bs-backdrop="static"
             data-bs-keyboard="true" tabindex="-1" aria-labelledby="${textTitle}" aria-hidden="true">
                 <div class="modal-dialog modal-${modalSize}">
                     <div class="modal-content">

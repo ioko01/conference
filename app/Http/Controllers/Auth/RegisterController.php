@@ -223,7 +223,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if ($data["person_attend"] == "attend") {
+        if (!isset($data["person_attend"])) {
+            return Validator::make($data, [
+                'prefix' => 'required|string',
+                'fullname' => 'required|string',
+                'sex' => 'required',
+                'phone' => 'required|string|max:10',
+                'institution' =>  'required|string',
+                'position_id' => 'required',
+                'email' => 'required|string|email|unique:users',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
+        } else if ($data["person_attend"] == "attend") {
             return Validator::make($data, [
                 'prefix' => 'required|string',
                 'fullname' => 'required|string',
@@ -287,14 +298,25 @@ class RegisterController extends Controller
             }
             $check_requirement = null;
             $address = null;
+        } elseif ($data['position_id'] == '4') {
+            $data['person_attend'] = 'expert';
+            $institution = $data['institution'];
+            $address = null;
+            $check_requirement = null;
         } else {
             $institution = $data['institution'];
             $check_requirement = $data['receive_check'];
             $address = $data['address'];
         }
-        if ($data["person_attend"] == "attend") {
+
+        if (isset($data["person_attend"])) {
+            if ($data["person_attend"] == "attend") {
+                $check_requirement = null;
+            }
+        } else {
             $check_requirement = null;
         }
+
 
         write_logs(__FUNCTION__, "info");
         return User::create([

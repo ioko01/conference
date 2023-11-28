@@ -25,10 +25,10 @@ class CreateUsersTable extends Migration
             $table->enum('check_requirement', ['before', 'after'])->comment('ความต้องการในการรับใบเสร็จรับเงิน')->nullable();
             $table->integer('position_id')->comment('รหัสสถานะการเข้าร่วม');
             $table->integer('kota_id')->nullable()->comment('รหัสโควต้าเจ้าภาพร่วม');
-            $table->enum('person_attend', ['send', 'attend'])->comment('ชนิดการเข้าร่วม "send=ส่งผลงาน attend=เข้าร่วมงานทั่วไป"');
+            $table->enum('person_attend', ['send', 'attend', 'expert'])->comment('ชนิดการเข้าร่วม "send=ส่งผลงาน attend=เข้าร่วมงานทั่วไป" expert=ผู้ทรงคุณวุฒิ');
             $table->string('email')->unique()->comment('อีเมล');
             $table->timestamp('email_verified_at')->nullable()->comment('ยืนยันอีเมล');
-            $table->boolean('is_admin')->default(0);
+            $table->boolean('is_admin')->default(0)->comment('0=ผู้ลงทะเบียนทั่วไป, 1=แอดมินเฉพาะเอาไว้ดูข้อมูล, 2=แอดมิน, 3=ซุปเปอร์แอดมิน');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

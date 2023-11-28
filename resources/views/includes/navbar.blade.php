@@ -16,6 +16,9 @@
                             @if (auth()->user()->person_attend == 'send')
                                 <p style="color: #fff!important;background:  sandybrown!important;border-radius: 0.5em;"
                                     class="nav-link px-2">ท่านลงทะเบียนส่งผลงาน</p>
+                            @elseif(auth()->user()->person_attend == 'expert')
+                                <p style="color: #fff!important;background:  sandybrown!important;border-radius: 0.5em;"
+                                    class="nav-link px-2">ท่านลงทะเบียนเป็นผู้ทรงคุณวุฒิ</p>
                             @else
                                 <p style="color: #fff!important;background:  sandybrown!important;border-radius: 0.5em;"
                                     class="nav-link px-2">ท่านลงทะเบียนเข้าร่วมงาน</p>
@@ -147,53 +150,64 @@
                             </a>
                         </li>
                     @else
-                        <li class="nav-item dropdown">
-                            <a style="color: sandybrown!important;" class="nav-link dropdown-toggle" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                ส่งบทความ
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
-                                        aria-current="page"
-                                        href="@guest
+                        @if ($expert = DB::table('users')->select('position_id')->where('users.id', auth()->user()->id)->where('users.position_id', '4')->first())
+                            <li class="nav-item">
+                                <a style="color: sandybrown!important;"
+                                    class="nav-link {{ Request::is('register') ? 'active' : '' }}"
+                                    href="{{ route('suggestion.index') }}">
+                                    ตรวจสอบไฟล์บทความ
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a style="color: sandybrown!important;" class="nav-link dropdown-toggle" href="#"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ส่งบทความ
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item {{ Request::is('employee/research/send') ? 'active' : '' }}"
+                                            aria-current="page"
+                                            href="@guest
 {{ route('login') }}
 @else
 {{ route('employee.research.index') }} @endguest">ส่งบทความ</a>
-                                </li>
+                                    </li>
 
-                                <li>
-                                    <a class="dropdown-item {{ Request::is('employee/research/show/*') ? 'active' : '' }}"
-                                        aria-current="page"
-                                        href="{{ route('employee.research.show', auth()->user()->id) }}">บทความของฉัน</a>
-                                </li>
-
-                                <li>
-                                    @if ($conference = DB::table('conferences')->select('id')->where('status', 1)->orWhere('status_research_edit', 1)->orWhere('status_research_edit_two', 1)->first())
-                                        <a class="dropdown-item {{ Request::is('employee/research/send-edit/show/*') ? 'active' : '' }}"
+                                    <li>
+                                        <a class="dropdown-item {{ Request::is('employee/research/show/*') ? 'active' : '' }}"
                                             aria-current="page"
-                                            href="{{ route('employee.research.send.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไข</a>
-                                    @endif
-                                </li>
+                                            href="{{ route('employee.research.show', auth()->user()->id) }}">บทความของฉัน</a>
+                                    </li>
 
-                                <li>
-                                    @if ($conference = DB::table('conferences')->select('id')->where('status', 1)->where('status_research_edit_two', 1)->first())
-                                        <a class="dropdown-item {{ Request::is('employee/research/send-edit-2/show/*') ? 'active' : '' }}"
+                                    <li>
+                                        @if ($conference = DB::table('conferences')->select('id')->where('status', 1)->orWhere('status_research_edit', 1)->orWhere('status_research_edit_two', 1)->first())
+                                            <a class="dropdown-item {{ Request::is('employee/research/send-edit/show/*') ? 'active' : '' }}"
+                                                aria-current="page"
+                                                href="{{ route('employee.research.send.edit', auth()->user()->id) }}">ส่งบทความฉบับแก้ไข</a>
+                                        @endif
+                                    </li>
+
+                                    <li>
+                                        @if ($conference = DB::table('conferences')->select('id')->where('status', 1)->where('status_research_edit_two', 1)->first())
+                                            <a class="dropdown-item {{ Request::is('employee/research/send-edit-2/show/*') ? 'active' : '' }}"
+                                                aria-current="page"
+                                                href="{{ route('employee.research.send.two.edit', auth()->user()->id) }}">ส่งบทความแก้ไขหลังนำเสนอ</a>
+                                        @endif
+
+
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item {{ Request::is('employee/research/uploadfile/*') ? 'active' : '' }}"
                                             aria-current="page"
-                                            href="{{ route('employee.research.send.two.edit', auth()->user()->id) }}">ส่งบทความแก้ไขหลังนำเสนอ</a>
-                                    @endif
+                                            href="{{ route('employee.research.uploadfile', auth()->user()->id) }}">อัพโหลดลิงค์วิดีโอและไฟล์โปสเตอร์</a>
+                                    </li>
 
+                                </ul>
+                            </li>
+                        @endif
 
-                                </li>
-
-                                <li>
-                                    <a class="dropdown-item {{ Request::is('employee/research/uploadfile/*') ? 'active' : '' }}"
-                                        aria-current="page"
-                                        href="{{ route('employee.research.uploadfile', auth()->user()->id) }}">อัพโหลดลิงค์วิดีโอและไฟล์โปสเตอร์</a>
-                                </li>
-
-                            </ul>
-                        </li>
                     @endguest
 
                     <li class="nav-item dropdown">

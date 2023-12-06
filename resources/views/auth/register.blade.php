@@ -198,8 +198,8 @@
                                             <div class="form-check">
                                                 <input onchange="toggle_attend(this, '{{ route('register') }}')"
                                                     class="form-check-input" type="radio" name="person_attend"
-                                                    id="send" @if (old('person_attend') === 'send' || empty(old('person_attend'))) checked @endif
-                                                    value="send">
+                                                    id="send" @if (old('position_id') == '4') disabled @endif
+                                                    @if (old('person_attend') === 'send' || empty(old('person_attend'))) checked @endif value="send">
                                                 <label class="form-check-label" for="send">
                                                     ลงทะเบียนส่งผลงาน <span
                                                         class="text-red text-small">(บุคคลภายนอกจะต้องชำระค่าลงทะเบียน
@@ -213,8 +213,8 @@
                                             <div class="form-check">
                                                 <input onchange="toggle_attend(this, '{{ route('attend.store') }}')"
                                                     class="form-check-input" type="radio" name="person_attend"
-                                                    id="attend" @if (endDate('end_research')->day < 0 || old('person_attend') === 'attend') checked @endif
-                                                    value="attend">
+                                                    id="attend" @if (old('position_id') == '4') disabled @endif
+                                                    @if (endDate('end_research')->day < 0 || old('person_attend') === 'attend') checked @endif value="attend">
                                                 <label class="form-check-label" for="attend">
                                                     ลงทะเบียนเข้าร่วมงานทั่วไป
                                                 </label>

@@ -7,22 +7,19 @@
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
                     aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                    aria-label="Slide 4"></button>
+                    aria-label="Slide 4"></button> --}}
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img style="cursor: pointer"
-                        title="https://drive.google.com/file/d/1A0Wpi7UcyshwqQ7Xuz31cF2WqKgIuFIo/view?usp=share_link"
-                        onclick="window.open('https\:\/\/drive.google.com/file/d/1A0Wpi7UcyshwqQ7Xuz31cF2WqKgIuFIo/view?usp=share_link')"
-                        src="{{ asset('images/banner-04.jpg', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
-                        alt="banner4">
+                    <img style="cursor: pointer" src="{{ asset('images/banner.jpg', env('REDIRECT_HTTPS')) }}"
+                        class="d-block w-100" alt="banner">
                 </div>
-                <div class="carousel-item">
+                {{-- <div class="carousel-item">
                     <img style="cursor: pointer"
                         title="https://drive.google.com/file/d/1RTJERejDQBTjeGRdxfasEpbDRwGF3uDQ/view?usp=share_link"
                         onclick="window.open('https\:\/\/drive.google.com/file/d/1RTJERejDQBTjeGRdxfasEpbDRwGF3uDQ/view?usp=share_link')"
@@ -36,7 +33,7 @@
                 <div class="carousel-item">
                     <img src="{{ asset('images/banner-01.webp', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
                         alt="banner1">
-                </div>
+                </div> --}}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev">
@@ -51,7 +48,7 @@
         </div>
     </header>
 
-    <div class="d-flex align-items-center p-md-5 py-5 bg-white justify-content-center text-green w-100" id="countdown">
+    <div class="d-flex align-items-center p-md-5 py-5 bg-white justify-content-center text-primary w-100" id="countdown">
     </div>
 
     <div style="overflow: hidden;" class="row bg-white m-0">
@@ -124,7 +121,7 @@
                             LINE OPEN CHAT</strong></h1>
         @endif
         <img src="{{ Storage::url($line->line_path) }}" alt="LINE OPEN CHAT" width="150px">
-        <a target="_blank" href="{{ $line->line_link }}" class="d-block text-green fw-bold">เข้าร่วม LINE OPEN CHAT</a>
+        <a target="_blank" href="{{ $line->line_link }}" class="d-block text-primary fw-bold">เข้าร่วม LINE OPEN CHAT</a>
         @if ($loop->last)
             </div>
             </div>
@@ -139,7 +136,7 @@
                 <div class="row m-0">
                     <div class="col-6 mx-auto">
                         <img style="box-shadow: 5px 5px 15px 0px #ccc!important;"
-                            src="{{ asset('images/Poster-eddit.webp', env('REDIRECT_HTTPS')) }}" alt="banner"
+                            src="{{ asset('images/Poster-eddit.jpg', env('REDIRECT_HTTPS')) }}" alt="banner"
                             width="100%">
                     </div>
                 </div>
@@ -153,7 +150,7 @@
     <div class="bg-white p-5 text-center">
         <div style="overflow: hidden">
             <div class="animate grow">
-                <div style="border-top: 5px solid var(--color-green);" class="mx-5"></div>
+                <div style="border-top: 5px solid var(--color-primary);" class="mx-5"></div>
             </div>
         </div>
     </div>
@@ -164,10 +161,10 @@
             <div class="animate fade-right">
                 <div class="position-relative w-50 w-md-100 me-auto">
                     <div
-                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid #30ac33;">
+                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid var(--color-primary);">
                     </div>
                     <div
-                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid #30ac33;">
+                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid var(--color-primary);">
                     </div>
                     <div class="row justify-content-center m-0 p-5">
                         <div class="col-md-10 w-100 rounded-0 px-3">
@@ -187,49 +184,51 @@
                                         <tr>
                                             <td>1</td>
                                             <td>Call for paper</td>
-                                            <td>ปัจจุบัน – 5 มกราคม 2566</td>
+                                            <td>ปัจจุบัน – 5 มกราคม 2567</td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>วันสุดท้ายการชำระค่าลงทะเบียน</td>
-                                            <td>ปัจจุบัน – 5 มกราคม 2566</td>
+                                            <td>ปัจจุบัน – 5 มกราคม 2567</td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>ประกาศผลพิจารณา</td>
-                                            <td>31 มกราคม 2566</td>
-                                            <td><strong class="text-danger">เลื่อนเป็น 7 กุมภาพันธ์ 2566</strong></td>
+                                            <td>2 กุมภาพันธ์ 2567</td>
+                                            <td></td>
+                                            {{-- <td><strong class="text-danger">เลื่อนเป็น 7 กุมภาพันธ์ 2566</strong></td> --}}
                                         </tr>
                                         <tr>
                                             <td>4</td>
                                             <td>ปิดรับผลงานฉบับแก้ไข</td>
-                                            <td>15 กุมภาพันธ์ 2566</td>
-                                            <td><strong class="text-danger">เลื่อนเป็น 28 กุมภาพันธ์ 2566</strong></td>
+                                            <td>20 กุมภาพันธ์ 2567</td>
+                                            <td></td>
+                                            {{-- <td><strong class="text-danger">เลื่อนเป็น 28 กุมภาพันธ์ 2566</strong></td> --}}
                                         </tr>
                                         <tr>
                                             <td>5</td>
                                             <td>ลงทะเบียนเข้าร่วมงาน</td>
-                                            <td>ปัจจุบัน – 24 กุมภาพันธ์ 2566</td>
+                                            <td>ปัจจุบัน – 23 กุมภาพันธ์ 2567</td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <td>6</td>
                                             <td>ประกาศรายชื่อผู้เข้าร่วมงานทั้งหมด</td>
-                                            <td>1 มีนาคม 2566</td>
+                                            <td>1 มีนาคม 2567</td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <td>7</td>
                                             <td>นำเสนอผลงาน</td>
-                                            <td>22 มีนาคม 2566</td>
+                                            <td>22 มีนาคม 2567</td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <td>8</td>
                                             <td>เผยแพร่ Proceeding</td>
-                                            <td>เมษายน 2566</td>
+                                            <td>เมษายน 2567 เป็นต้นไป</td>
                                             <td></td>
                                         </tr>
                                     </tbody>
@@ -272,35 +271,37 @@
                         <div style="word-wrap: break-word;" class="col-md-10 w-100 rounded-0">
                             <h1 class="animate delay-fade-right" style="color: #2cb0c0;">หลักการและเหตุผล</h1>
                             <p style="line-height: 25px;">
-                                &emsp;ภายใต้สภาวการณ์โลกที่เต็มไปด้วยความผันผวน (Volatility) ความไม่แน่นอน (Uncertainty)
-                                ความซับซ้อนสูง (Complexity) และความคลุมเครือยากที่จะคาดเดา (Ambiguity) หรือที่เรียกกันว่า
-                                VUCA นั้น ส่งผลกระทบอย่างรุนแรงต่อยุทธศาสตร์การพัฒนาประเทศ
-                                รัฐบาลไทยจึงดำเนินการปรับปรุงแผนการปฏิรูปประเทศเพื่อรับมือกับพลวัตการเปลี่ยนแปลงใน 13 ด้าน
-                                ที่จะเน้นเฉพาะกิจกรรมสำคัญ (Big Rock)
-                                ซึ่งประเด็นด้านเศรษฐกิจเป็นอีกประเด็นสำคัญที่จะช่วยพัฒนาประเทศให้มีความมั่นคง มั่งคั่ง
-                                และยั่งยืน เพราะส่งผลกระทบสำคัญต่อความเป็นอยู่ของประชาชนในมิติต่าง ๆ ตามมาอีกด้วย
+                                &emsp;จากกระแสนโยบายรัฐบาลในปัจจุบันที่มุ่งเน้นการสร้างสรรค์ Soft Power ของไทย หรือ
+                                “พลังละมุน” ที่ให้ความสำคัญกับการใช้ฐานทรัพยากรทางวัฒนธรรมในแต่ละท้องถิ่นของประเทศ
+                                เพื่อให้เกิดพลังในการดึงดูด โน้มน้าวใจให้เกิดการเปลี่ยนแปลงด้านความคิดและพฤติกรรม
+                                ให้เกิดความสนใจ และต้องการครอบครองหรือทำตามอย่างที่ผู้สร้างอิทธิพลด้วยพลังทุนวัฒนธรรมนั้นๆ
+                                ต้องการให้เป็นไป จนสามารถนำไปสู่การสร้างรายได้ในมิติเศรษฐกิจที่มูลค่าสูงได้
+                                ดังจะเห็นได้จากการจัดตั้งหน่วยงาน Thailand Creative Content Agency
+                                ที่จะมาดูแลส่งเสริมทุนวัฒนธรรมใน 8 ด้าน ได้แก่ อาหาร ดนตรี ภาพยนตร์ หนังสือ ศิลปะ
+                                การออกแบบ/แฟชั่น กีฬา และการท่องเที่ยว
                                 <br />&emsp;
-                                แนวคิดหลักในการปฏิรูปประเทศด้านเศรษฐกิจมุ่งเน้นเสริมสร้างทักษะกำลังคนในระบบให้สอดคล้องกับความต้องการของภาคอุตสาหกรรม
-                                และบริการมากกว่า 35 ล้านคนโดยมุ่งกระตุ้นรายได้เพิ่มขึ้นผ่านการสร้างเศรษฐกิจมูลค่าสูง (High
-                                Value Economy) ด้วยฐานเกษตรชีวภาพ (Bio-economy) และการท่องเที่ยวคุณภาพสูง (High Value
-                                Tourism) ซึ่งกระทรวงการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรม (อว.)
-                                มีส่วนรับผิดชอบในการพัฒนาศักยภาพคนเพื่อเป็นพลังในการขับเคลื่อนเศรษฐกิจ
-                                และส่งต่อเป็นหมุดหมายในการพลิกโฉมประเทศ และบรรจุในแผนพัฒนาเศรษฐกิจและสังคมแห่งชาติ ฉบับที่
-                                13 เพื่อสร้างสังคมก้าวหน้า และขับเคลื่อนประเทศสู่เศรษฐกิจสร้างมูลค่าอย่างยั่งยืน
-                                <br />&emsp; การวิจัย ซึ่งเป็นภารกิจหลักที่สำคัญของหน่วยงานภายใต้กระทรวงการอุดมศึกษา
-                                วิทยาศาสตร์ วิจัยและนวัตกรรม จึงมีบทบาทสำคัญที่ไม่เพียงแต่สร้างองค์ความรู้ใหม่ ๆ
-                                แต่ยังต้องพลิกโฉมงานวิจัยให้เกิดการสร้างเทคโนโลยี และนวัตกรรมพร้อมใช้
-                                ที่จะช่วยยกระดับภาคการผลิต และอุตสาหกรรมตั้งแต่ต้นน้ำ กลางน้ำ
-                                จนถึงปลายน้ำให้สามารถยกระดับมูลค่าการผลิตแบบเดิม ให้เกิดคุณค่าเพิ่ม
-                                และสร้างมูลค่าเพิ่มได้ด้วยตัวชุมชน และวิสาหกิจขนาดกลางและขนาดย่อม
-                                รวมถึงสร้างผู้ประกอบการใหม่ เพื่อสร้างรากฐานภาคการผลิต และการบริการให้เข้มแข็ง
-                                พร้อมต่อยอดสู่การเป็นผู้ประกอบการที่จะสร้างผลกระทบทางเศรษฐกิจของประเทศในภาพรวมได้
-                                <br />&emsp; ดังนั้น สถาบันวิจัยและพัฒนา มหาวิทยาลัยราชภัฏเลย
-                                จึงได้จัดการประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ ครั้งที่ 9 ประจำปี 2566 ขึ้น ภายใต้ชื่อ
-                                “งานวิจัยเชิงพื้นที่เพื่อยกระดับเศรษฐกิจมูลค่าสูงของชุมชน” หรือ Area-based Research to
-                                Strengthen the Community’s High Value Economy Conference 2023 ขึ้น
+                                หัวใจสำคัญในการสร้างพลังละมุน หรือ Soft Power
+                                ของไทยให้สามารถมีอิทธิพลต่อคนที่ต่างวัฒนธรรมกันได้
+                                จึงจำเป็นต้องมีฐานข้อมูลทุนวัฒนธรรมที่ครอบคลุมในทุกภูมิภาคของประเทศ ในทุกๆ ด้าน ทุกๆ มิติ
+                                ทั้งในด้านวิทยาศาสตร์ สังคมศาสตร์ และมนุษยศาสตร์ เพื่อให้สามารถวิเคราะห์จุดเด่นที่มีศักยภาพ
+                                และบูรณาการความรู้ต่างๆ สู่การสร้างสรรค์คุณค่าที่เป็นสากล
+                                ผ่านการใช้สื่อสร้างสรรค์รูปแบบต่างๆ
+                                ที่จะสามารถโน้มน้าวใจจนก่อให้เกิดการเปลี่ยนแปลงทางความคิดและพฤติกรรมได้
+                                <br />&emsp;
+                                การวิจัย เพื่อการสร้างองค์ความรู้ และนวัตกรรมใหม่ๆ จึงเป็นเครื่องมือ
+                                ที่บุคลากรทางการศึกษาในทุกระดับ จะสามารถมีส่วนช่วยในการขับเคลื่อน และผลักดันให้ชุมชนท้องถิ่น
+                                ภาครัฐ และภาคเอกชน สามารถมีข้อมูล และชุดความรู้ ไปสู่การพัฒนาพลังละมุน หรือ Soft Power
+                                ของประเทศตามนโยบายของรัฐบาลได้อย่างมีประสิทธิภาพ นำไปสู่การกระจายรายได้
+                                และลดความเหลื่อมล้ำในด้านเศรษฐกิจ สังคม และสิ่งแวดล้อมได้
+                                <br />&emsp;
+                                ดังนั้น มหาวิทยาลัยราชภัฏเลย ร่วมกับมหาวิทยาลัยเครือข่ายและสมาคมวิชาชีพ ได้แก่ คุรุสภา
+                                มหาวิทยาลัยราชภัฏมหาสารคาม มหาวิทยาลัยราชภัฏร้อยเอ็ด มหาวิทยาลัยราชภัฏสกลนคร
+                                และมหาวิทยาลัยราชภัฏอุดรธานี จึงได้ร่วมกันจัดการประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ
+                                ครั้งที่ 10 ประจำปี 2567 ขึ้น ภายใต้ชื่อ “วิจัยและนวัตกรรมเพื่อการพัฒนา Soft Power
+                                ท้องถิ่นสู่การสร้างสรรค์ระดับสากล” หรือ Research and Innovation to Develop Local Soft Power
+                                for Global Value Conference 2024 ขึ้น
                                 เพื่อเป็นเวทีในการนำเสนอผลงานวิชาการโดยแบ่งกลุ่มนำเสนอผลงานออกเป็น 5 กลุ่ม คือ 1)
-                                กลุ่มมนุษยศาสตร์/สังคมศาสตร์ 2) กลุ่มครุศาสตร์ 3) กลุ่มวิทยาศาสตร์และเทคโนโลยี 4)
+                                กลุ่มครุศาสตร์ 2) กลุ่มมนุษยศาสตร์/สังคมศาสตร์ 3) กลุ่มวิทยาศาสตร์และเทคโนโลยี 4)
                                 กลุ่มบริหารธุรกิจ บริการ และการท่องเที่ยว และ 5) กลุ่มวิศวกรรม และอุตสาหกรรม
                                 โดยรูปแบบการนำเสนอผลงาน แบ่งเป็น ภาคบรรยาย (Oral Presentation) และภาคโปสเตอร์ (Poster
                                 Presentation) ซึ่งผู้นำเสนอผลงานและผู้เข้าร่วมประชุม
@@ -319,37 +320,40 @@
             <div class="animate fade-right">
                 <div class="position-relative w-50 w-md-100 me-auto">
                     <div
-                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid #30ac33;">
+                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid var(--color-primary);">
                     </div>
                     <div
-                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid #30ac33;">
+                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid var(--color-primary);">
                     </div>
                     <div class="row justify-content-center m-0 p-5">
                         <div style="word-wrap: break-word;" class="col-md-10 w-100 rounded-0 px-3">
                             <h1 style="color: #2cb0c0;">วัตถุประสงค์ของโครงการ</h1>
-                            <p style="line-height: 25px;">1. เพื่อเป็นเวทีในการเผยแพร่ผลงานทางวิชาการของอาจารย์ นักวิจัย
-                                นิสิต นักศึกษาในระดับอุดมศึกษาภายในและภายนอกมหาวิทยาลัย ตลอดจนหน่วยงานต่างๆ
-                                <br /> 2. เพื่อเป็นการสนับสนุนการบูรณาการผลงานวิจัยไปสู่การสร้างนวัตกรรมและการพัฒนาชุมชน
-                                สังคม
+                            <p style="line-height: 25px;">
+                                1. เพื่อเป็นเวทีในการเผยแพร่ผลงานทางวิชาการของอาจารย์ นักวิจัย นิสิต
+                                นักศึกษาในระดับอุดมศึกษาภายในและภายนอกมหาวิทยาลัย ตลอดจนหน่วยงานต่างๆ
+                                <br />
+                                2. เพื่อเป็นการสนับสนุนการบูรณาการผลงานวิจัยไปสู่การสร้างนวัตกรรมและการพัฒนาชุมชน สังคม
                                 และประเทศชาติ
-                                <br /> 3. เพื่อให้อาจารย์ นักวิจัย นิสิต
-                                นักศึกษาในระดับอุดมศึกษาทั้งภายในและภายนอกมหาวิทยาลัย ตลอดจนหน่วยงานต่างๆ
-                                ได้แลกเปลี่ยนเรียนรู้ และสร้างเครือข่ายทางวิชาการ
+                                <br />
+                                3. เพื่อให้อาจารย์ นักวิจัย นิสิต นักศึกษาในระดับอุดมศึกษาทั้งภายในและภายนอกมหาวิทยาลัย
+                                ตลอดจนหน่วยงานต่างๆ ได้แลกเปลี่ยนเรียนรู้ และสร้างเครือข่ายทางวิชาการ
                             </p>
 
                             <h1 style="color: #2cb0c0;">เป้าหมายโครงการ</h1>
-                            <p style="line-height: 25px;">คณาจารย์ นักวิจัย นิสิต นักศึกษา
-                                ในระดับอุดมศึกษาบุคลากรจากหน่วยงานต่างๆ และผู้สนใจทั่วไป</p>
+                            <p style="line-height: 25px;">
+                                คณาจารย์ นักวิจัย นิสิต นักศึกษา ในระดับอุดมศึกษาบุคลากรจากหน่วยงานต่างๆ และผู้สนใจทั่วไป
+                            </p>
 
                             <h1 style="color: #2cb0c0;">ระยะเวลา</h1>
-                            <p style="line-height: 25px;">วันพุธที่ 22 มีนาคม 2566</p>
+                            <p style="line-height: 25px;">วันศุกร์ที่ 22 มีนาคม 2567</p>
 
                             <h1 style="color: #2cb0c0;">สถานที่จัดประชุมวิชาการ</h1>
                             <p style="line-height: 25px;">รูปแบบ Teleconference ผ่านระบบ Zoom Meeting และ Google Meet</p>
 
 
                             <h1 style="color: #2cb0c0;">รูปแบบการประชุม</h1>
-                            <p style="line-height: 25px;">1. การบรรยายพิเศษ
+                            <p style="line-height: 25px;">
+                                1. การบรรยายพิเศษ
                                 <br /> 2. การนำเสนอผลงานวิชาการภาคบรรยาย (Oral Presentation)
                                 <br /> 3. การนำเสนอผลงานวิชาการภาคโปสเตอร์ (Poster Presentation)
                                 <br /> 4. การคัดเลือกบทความดีเด่น (Best paper)
@@ -459,10 +463,10 @@
             <div class="animate fade-right">
                 <div class="position-relative w-100 w-md-100 me-auto">
                     <div
-                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid #30ac33;">
+                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-left: 40px solid var(--color-primary);">
                     </div>
                     <div
-                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid #30ac33;">
+                        style="position: absolute; top: inherit; left: 0; z-index:1; border-bottom: 40px solid transparent; border-right: 40px solid var(--color-primary);">
                     </div>
                     <div class="row justify-content-center m-0 p-5">
                         <div style="word-wrap: break-word;" class="col-md-10 w-100 rounded-0 px-3">
@@ -482,13 +486,13 @@
                             <p style="line-height: 25px;">
                                 1. การส่งต้นฉบับ ผู้นำเสนอจะต้องส่งต้นฉบับแบบพิมพ์ในรูปแบบของอิเล็กทรอนิกส์ไฟล์นามสกุล
                                 “.doc” (MS Word) และ “.pdf” (PDF) ทางเว็บไซต์ <a href="https://conference.lru.ac.th/"
-                                    class="text-green">https://conference.lru.ac.th/</a> ดังต่อไปนี้
+                                    class="text-primary">https://conference.lru.ac.th/</a> ดังต่อไปนี้
                                 <br /> &emsp; 1.1 ไฟล์บทความฉบับเต็ม (MS Word)
                                 <br /> &emsp; 1.2 ไฟล์บทความฉบับเต็มที่ไม่ระบุชื่อสกุลและหน่วยงานที่สังกัดของผู้แต่ง (PDF)
                                 (เพื่อส่งให้ผู้ทรงคุณวุฒิพิจารณาบทความ)
                                 <br /> 2. ผู้นำเสนอผลงาน สามารถดาวน์โหลดรูปแบบการจัดทำบทความฉบับเต็ม (Full Paper) ได้ที่
                                 <a href="https://conference.lru.ac.th/"
-                                    class="text-green">https://conference.lru.ac.th/</a>
+                                    class="text-primary">https://conference.lru.ac.th/</a>
                             </p>
 
                             <h1 style="color: #2cb0c0;">การพิจารณาผลงาน</h1>
@@ -501,6 +505,8 @@
                                 <br />4. พิจารณามอบเกียรติบัตรให้แก่ผู้ได้รับการคัดเลือกบทความระดับดีเด่น
                                 โดยกรรมการผู้ทรงคุณวุฒิร่วมประเมินผลงานที่นำเสนอทั้งภาคบรรยาย (Oral Presentation)
                                 และภาคโปสเตอร์ (Poster Presentation)
+                                <br />5. พิจารณาคัดเลือกบทความระดับดีเด่นเพื่อตีพิมพ์เผยแพร่ในวารสารวิจัยและพัฒนา
+                                มหาวิทยาลัยราชภัฏเลย (TCI2) และวารสารครุศาสตร์ มหาวิทยาลัยราชภัฏเลย (TCI2)
                             </p>
 
                             <h1 style="color: #2cb0c0;">
@@ -513,13 +519,10 @@
                                 บทความของท่านจะไม่ได้รับการตีพิมพ์ในรายงานสืบเนื่องจากการประชุมวิชาการในครั้งนี้
                                 <br />2. บทความที่ตีพิมพ์ในรายงานสืบเนื่องจากการประชุมวิชาการระดับชาติ (Proceeding)
                                 ทางผู้จัดการประชุมจะดำเนินการขอรหัสตัวระบุวัตถุดิจิตอล (DOI) ทุกบทความ
-                                หากเจ้าของบทความไม่ประสงค์ให้มีเลขที่ DOI ให้แจ้งมายังผู้จัดการประชุมเป็นลายลักษณ์อักษร
-                                มาที่ E-Mail: <a href="mailto:lruconference2023@gmail.com"
-                                    class="text-green">lruconference2023@gmail.com</a>
+                                หากเจ้าของบทความไม่ประสงค์ให้มีเลขที่ DOI ให้แจ้งมายังผู้จัดการประชุม
                                 <br />3. สำหรับผู้เข้าร่วมการนำเสนอผลงานทุกท่านจะได้รับเกียรติบัตรการนำเสนอผลงาน
                                 ซึ่งสามารถดาวน์โหลดได้ผ่านทาง <a href="https://conference.lru.ac.th/"
-                                    class="text-green">https://conference.lru.ac.th/</a> ตั้งแต่วันที่ 1
-                                เมษายน 2566
+                                    class="text-primary">https://conference.lru.ac.th/</a> ภายในช่วงเดือนเมษายน 2567
                                 เป็นต้นไป
                             </p>
                         </div>

@@ -55,6 +55,7 @@ use App\Models\Conference;
 use App\Models\Download;
 use App\Models\Line;
 use App\Models\Research;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -308,6 +309,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
         Route::prefix('backend')->group(function () {
+
+            // Clear application cache:
+
+            Route::get('/clear-cache', function () {
+                Artisan::call('cache:clear');
+                return 'Application cache has been cleared';
+            });
+
+            Route::get('/route-cache', function () {
+                Artisan::call('route:cache');
+                return 'Routes cache has been cleared';
+            });
+            //Clear config cache:
+
+            Route::get('/config-cache', function () {
+                Artisan::call('config:cache');
+                return 'Config cache has been cleared';
+            });
+            // Clear view cache:
+
+            Route::get('/view-clear', function () {
+                Artisan::call('view:clear');
+                return 'View cache has been cleared';
+            });
 
             Route::get('researchs/passed', [ResearchPassedController::class, 'index'])->name('backend.researchs.passed.index');
             Route::put('research/passed/update-status/{id}', [ResearchPassedController::class, 'update']);

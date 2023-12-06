@@ -14,7 +14,7 @@
                                 {{ $conference_id->name }}
                             @endif
                         </h4>
-                        <h4 class="text-green py-3">
+                        <h4 class="text-primary py-3">
                             {{ config('app.name') }}
                         </h4>
                     </div>

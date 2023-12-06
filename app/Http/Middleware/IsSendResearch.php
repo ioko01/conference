@@ -19,6 +19,6 @@ class IsSendResearch
         if (auth()->user()->person_attend == 'send' || auth()->user()->is_admin == 2 || auth()->user()->is_admin == 3) {
             return $next($request);
         }
-        abort(401);
+        return redirect('/')->with('error', "ไม่สามารถเข้าถึงได้");
     }
 }

@@ -19,6 +19,6 @@ class IsAdmin
         if (auth()->user()->is_admin == 1 || auth()->user()->is_admin == 2 || auth()->user()->is_admin == 3) {
             return $next($request);
         }
-        abort(401);
+        return redirect('/')->with('error', "ไม่สามารถเข้าถึงได้");
     }
 }

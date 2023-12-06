@@ -51,7 +51,7 @@
                             <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                                 @csrf
                                 <button onclick="thisDisabled(this)" type="submit"
-                                    class="btn btn-lg btn-dark w-100 rounded-0">คลิกที่นี่เพื่อส่งรหัสอีกครั้ง</button>
+                                    class="btn btn-lg btn-success w-100 rounded-0 my-2">คลิกที่นี่เพื่อส่งรหัสอีกครั้ง</button>
                                 <a href="/" class="btn btn-lg btn-warning text-white w-100 rounded-0"
                                     onclick="thisDisabled(this)">กลับไปยังหน้าแรก</a>
                             </form>

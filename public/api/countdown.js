@@ -40,25 +40,25 @@ function countdown() {
                         <h1 class="fw-bold">ปิดรับบทความในอีก</h1><br/>
                         <hr/>
                         <div class="row m-0">
-                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center text-green">
+                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center text-primary">
                                 <div class="box-countdown fw-bold">
                                     <div>${days}</div>
                                     <div>วัน</div> 
                                 </div>  
                             </div>
-                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center text-green">
+                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center text-primary">
                                 <div class="box-countdown fw-bold">
                                     <div>${hours}</div>
                                     <div>ชั่วโมง</div> 
                                 </div>
                             </div>
-                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center text-green">
+                            <div class="d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center text-primary">
                                 <div class="box-countdown fw-bold">
                                     <div>${minutes}</div>
                                     <div>นาที</div> 
                                 </div>
                             </div>
-                            <div class="p-0 d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center text-green">
+                            <div class="p-0 d-flex col-12 col-sm-6 col-lg-3 mb-3 justify-content-center text-primary">
                                 <div class="box-countdown fw-bold">
                                     <div>${seconds}</div>
                                     <div>วินาที</div> 

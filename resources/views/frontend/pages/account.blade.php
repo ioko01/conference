@@ -5,13 +5,13 @@
         <div class="col-md-6 mx-auto">
             <div class="card">
                 <div class="card-content">
-                    <div class="card-header bg-green rounded-0">
+                    <div class="card-header bg-primary rounded-0">
                         <strong>
                             <i class="nav-icon fas fa-user"></i> รายละเอียดผู้ใช้งาน
                         </strong>
                     </div>
                     <div class="card-body">
-                        @if ($user->is_admin == 2)
+                        @if ($user->is_admin == 3)
                             <p>
                                 <strong>สถานะ <span class="text-green">ซุปเปอร์แอดมิน</span></strong>
                             </p>
@@ -23,7 +23,7 @@
                                             <span class="text-green">
                                                 @if ($user->is_admin == 0)
                                                     ผู้ใช้งานทั่วไป
-                                                @elseif($user->is_admin == 1)
+                                                @elseif($user->is_admin == 1 || $user->is_admin == 2)
                                                     แอดมิน
                                                 @endif
                                             </span>

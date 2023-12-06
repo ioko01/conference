@@ -332,6 +332,7 @@ class RegisterController extends Controller
             'person_attend' => $data['person_attend'],
             'email' => $data['email'],
             'email_verified_at' => $data['person_attend'] == 'attend' ? date("Y/m/d") : null,
+            // 'email_verified_at' => $data['person_attend'] != 'expert' ? date("Y/m/d") : null,
             'password' => Hash::make($data['password']),
             'conference_id' => isset($conference_id->id) ? $conference_id->id : null
         ]);

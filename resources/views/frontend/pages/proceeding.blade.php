@@ -10,7 +10,7 @@
                         {{ $conference->name }}
                     @endif
                 </h4>
-                <h4 class="text-green py-3">
+                <h4 class="text-primary py-3">
                     {{ config('app.name') }}
                 </h4>
             </div>
@@ -19,7 +19,7 @@
                     <div class="animate fade-up row">
                         <div class="col-md-6 mb-3">
 
-                            <div class="bg-green text-white position-relative">
+                            <div class="bg-primary text-white position-relative">
                                 <div style="border: 10px solid white;
                                             border-top:10px solid transparent;
                                             border-bottom:10px solid transparent;
@@ -62,7 +62,7 @@
                                                                         src="{{ Storage::url($proceeding->path) }}"
                                                                         alt="{{ $proceeding->name }}">
                                                                     <a target="_blank"
-                                                                        class="btn btn-green mt-3 text-white rounded-0"
+                                                                        class="btn btn-primary mt-3 text-white rounded-0"
                                                                         href="{{ Storage::url($proceeding->path) }}"
                                                                         download="{{ $proceeding->name }}.{{ $proceeding->extension }}">ดาวน์โหลด</a>
                                                                 </div>
@@ -102,9 +102,9 @@
                                 <input type="text" name="search_proceedings" id="search_proceedings"
                                     @if (isset($_GET['search_proceedings'])) value="{{ $_GET['search_proceedings'] }}" @endif
                                     class="form-control w-100 p-4" placeholder="ค้นหาบทความ">
-                                <button style="min-width: 80px;border: none;background-color: var(--color-green);"
+                                <button style="min-width: 80px;border: none;background-color: var(--color-primary);"
                                     type="submit" class="w-25 rounded-0 text-nowrap position-relative">
-                                    <div style="border: 10px solid var(--color-green);
+                                    <div style="border: 10px solid var(--color-primary);
                                                 border-top:10px solid transparent;
                                                 border-left:10px solid transparent;
                                                 border-bottom:10px solid transparent;
@@ -128,10 +128,10 @@
                         <div class="animate fade-up my-5 border">
                             <div class="d-flex position-relative">
 
-                                <div style="transform:translateY(-50%);background-color: var(--color-green);height:40px;left:-1px;"
+                                <div style="transform:translateY(-50%);background-color: var(--color-primary);height:40px;left:-1px;"
                                     class="px-5 position-absolute">
 
-                                    <div style="border: 20px solid var(--color-green);
+                                    <div style="border: 20px solid var(--color-primary);
                                 border-top:20px solid transparent;
                                 border-right:20px solid transparent;
                                 border-bottom:20px solid transparent;

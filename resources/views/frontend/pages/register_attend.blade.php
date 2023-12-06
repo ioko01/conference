@@ -5,7 +5,7 @@
     <div id="register-content" class="bg-white text-blue p-5 my-5">
         <div class="inner-content-header">
             <h4 class="text-center">ลงทะเบียนเข้าร่วมงาน</h4>
-            <h4 class="text-green py-3">
+            <h4 class="text-primary py-3">
                 {{ config('app.name') }}
             </h4>
         </div>

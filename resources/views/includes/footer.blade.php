@@ -6,9 +6,9 @@
             มหาวิทยาลัยราชภัฏเลย อาคาร 20 ชั้น 4 เลขที่ 234 ถ.เลย-เชียงคาน อ.เมือง จ.เลย 42000<br />โทร. 0-4283-5224-8 ต่อ
             41141-2, 51143<br />โทรศัพท์มือถือ 08-6643-7010
             <br />โทรสาร 0-4281-3061, 0-4281-1143<br />E-Mail: <a href="mailto:research_lru@hotmail.com"
-                class="text-green">research_lru@hotmail.com</a>
+                class="text-primary">research_lru@hotmail.com</a>
             <br />Website: <a href="https://research.lru.ac.th"
-                class="text-green">https://research.lru.ac.th</a><br />ผู้ประสานงาน: (คุณสุพัตรา
+                class="text-primary">https://research.lru.ac.th</a><br />ผู้ประสานงาน: (คุณสุพัตรา
             จันทร์รอด/ คุณปริญญา จิตรโคตร/
             คุณปรัตถกร พลดาหาญ)
         </div>

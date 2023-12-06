@@ -7,7 +7,7 @@
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="navbar-toggler-icon fas fa-bars text-green"></i>
+                <i class="navbar-toggler-icon fas fa-bars text-primary"></i>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
@@ -252,7 +252,7 @@
                     @endauth
                     @guest
                     </ul>
-                    <a href="{{ route('login') }}" class="btn rounded-0 btn-green text-white mx-3"><i
+                    <a href="{{ route('login') }}" class="btn rounded-0 btn-primary text-white mx-3"><i
                             class="fas fa-sign-in"></i> เข้าสู่ระบบ</a>
                 @else
                     <li class="nav-item dropdown">

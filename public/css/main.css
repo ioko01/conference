@@ -40,11 +40,13 @@
 }
 
 :root {
+    --color-primary: #ffa800;
     --color-green: #30ac33;
     --color-blue: #131f5b;
     --color-lightblue: #253585;
     --color-yellow: #e8ee3b;
     --color-bluesky: #2cb0c0;
+    --color-text-primary: white;
     --bg-color-cream: #f9ecde;
     --bg-color-lightcream: #fefdf9;
     --bg-color-shadowcream: #ede3e1;
@@ -57,12 +59,12 @@ body {
 }
 
 .form-check-input:checked {
-    background-color: var(--color-green) !important;
-    border-color: var(--color-green) !important;
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
 }
 
 .form-check-input:focus {
-    border-color: #30ac3283 !important;
+    border-color: var(--color-primary) !important;
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgb(149 241 96 / 25%) !important;
 }
@@ -354,7 +356,7 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 5px solid var(--color-green);
+    border: 5px solid var(--color-primary);
     background: white;
     font-size: calc(16px + 0.5vw);
     height: 120px;
@@ -540,6 +542,35 @@ input[type="number"] {
     background-color: var(--color-green);
 }
 
+.btn-primary {
+    color: var(--color-text-primary) !important;
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+}
+
+.btn-primary:hover {
+    opacity: 0.8;
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+}
+
+.btn-outline-primary {
+    color: var(--color-primary);
+    border-color: var(--color-primary) !important;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    border-color: var(--color-primary) !important;
+    background-color: var(--color-primary) !important;
+}
+
+.btn-outline-primary:disabled,
+.btn-outline-primary.disabled {
+    color: #ccc;
+    border: 1px solid #ccc !important;
+}
+
 .btn.btn-inherit {
     border-color: inherit;
     background-color: inherit;
@@ -623,9 +654,9 @@ a {
 }
 
 .btn.btn-login {
-    background-color: var(--color-green);
+    background-color: var(--color-primary);
     border: none;
-    color: white;
+    color: var(--color-text-primary);
 }
 
 .btn.btn-login:hover {
@@ -640,7 +671,7 @@ a {
     right: 20px;
     width: 60px;
     height: 60px;
-    background-color: var(--color-green);
+    background-color: var(--color-primary);
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -678,6 +709,11 @@ a {
     color: white;
 }
 
+.bg-primary {
+    background-color: var(--color-primary) !important;
+    color: var(--color-text-primary) !important;
+}
+
 .bg-cream {
     background-color: var(--bg-color-cream);
 }
@@ -692,6 +728,10 @@ a {
 
 .text-bluesky {
     color: var(--color-bluesky);
+}
+
+.text-primary {
+    color: var(--color-primary) !important;
 }
 
 .text-green {
@@ -783,7 +823,7 @@ form.dropdown-item:hover {
 
 .inner-content-header h4:last-child {
     text-align: left;
-    border-bottom: 1px solid var(--color-green);
+    border-bottom: 1px solid var(--color-primary) !important;
 }
 
 .form-control,
@@ -973,7 +1013,7 @@ form.dropdown-item:hover {
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: var(--color-green);
+    background: var(--color-primary);
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {

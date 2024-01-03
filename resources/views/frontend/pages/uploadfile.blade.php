@@ -5,7 +5,7 @@
     <div class="bg-white text-blue p-5 my-5">
 
         <div class="inner-content-header">
-            <h4 class="text-center fw-bold"><i class="nav-icon fas fa-1x fa-upload"></i> อัพโหลดวิดีโอ/โปสเตอร์ <br />
+            <h4 class="text-center fw-bold"><i class="nav-icon fas fa-1x fa-upload"></i> อัพโหลดโปสเตอร์ <br />
                 @if ($conference)
                     {{ $conference->name }}
                 @endif
@@ -21,7 +21,7 @@
                     <tr class="text-center">
                         <th style="width: 10%;">#</th>
                         <th style="width: auto;min-width: 200px;">รายละเอียดบทความ</th>
-                        <th style="width: 20%;">ลิงค์วิดีโอ</th>
+                        {{-- <th style="width: 20%;">ลิงค์วิดีโอ</th> --}}
                         <th style="width: 150px;">ไฟล์ Poster</th>
                         <th style="width: 10%;">รายละเอียด</th>
                     </tr>
@@ -44,7 +44,7 @@
                                     รูปแบบบทความ : {{ $value->present }}
                                 </strong>
                             </td>
-                            <td>
+                            {{-- <td>
                                 @if (strtolower($value->present) == strtolower('Poster'))
                                     @if ($value->video_link)
                                         <a href="{{ $value->video_link }}">{{ $value->video_link }}</a>
@@ -73,7 +73,7 @@
                                                     </strong>
                                                 </h1>
                                             @endif
-                                            {{-- <strong class="text-red d-block">หมดเวลาส่งวิดีโอ</strong> --}}
+                                            
                                         @endif
                                     @else
                                         -
@@ -85,7 +85,7 @@
                                         </strong>
                                     </h1>
                                 @endif
-                            </td>
+                            </td> --}}
                             <td>
                                 @if (strtolower($value->present) == strtolower('Poster'))
                                     @if ($value->poster_name)

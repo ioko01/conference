@@ -186,9 +186,11 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                         $slip = $active_sheet->getCell('P' . $row)->getValue();
                         $word = $active_sheet->getCell('U' . $row)->getValue();
                         $pdf = $active_sheet->getCell('W' . $row)->getValue();
+
+                        $year = $active_sheet->getCell('H' . $row)->getValue();
                         if ($row != 1) {
                             if (isset($slip)) {
-                                $active_sheet->getCell('P' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/สลิปชำระเงิน/' . $slip);
+                                $active_sheet->getCell('P' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%20' . $year . '/บทความ/สลิปชำระเงิน/' . $slip);
                                 $active_sheet->getStyle('P' . $row)->applyFromArray([
                                     'font' => [
                                         'color' => [
@@ -198,7 +200,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                                 ]);
                             }
                             if (isset($word)) {
-                                $active_sheet->getCell('U' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/words/' . $word);
+                                $active_sheet->getCell('U' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%20' . $year . '/บทความ/words/' . $word);
                                 $active_sheet->getStyle('U' . $row)->applyFromArray([
                                     'font' => [
                                         'color' => [
@@ -208,7 +210,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                                 ]);
                             }
                             if (isset($pdf)) {
-                                $active_sheet->getCell('W' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%202566/บทความ/pdf/' . $pdf);
+                                $active_sheet->getCell('W' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%20' . $year . '/บทความ/pdf/' . $pdf);
                                 $active_sheet->getStyle('W' . $row)->applyFromArray([
                                     'font' => [
                                         'color' => [

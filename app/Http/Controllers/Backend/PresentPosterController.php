@@ -32,6 +32,8 @@ class PresentPosterController extends Controller
             'present_posters.id as id',
             'present_posters.topic_th as topic_th',
             'present_posters.present_poster_id as present_poster_id',
+            'present_posters.time_start as time_start',
+            'present_posters.time_end as time_end',
             'present_posters.link as link',
             'present_posters.path as path',
             'faculties.name as name',
@@ -60,6 +62,8 @@ class PresentPosterController extends Controller
             'topic_th' => $request->topic_th,
             'present_poster_id' => $request->present_poster_id,
             'faculty_id' => $request->faculty_id,
+            'time_start' => $request->time_start,
+            'time_end' => $request->time_end,
             'link' => $request->link ? $request->link : $request->video_link,
             'path' => $poster->path,
             'extension' => $poster->extension
@@ -80,6 +84,8 @@ class PresentPosterController extends Controller
             'present_posters.id as id',
             'present_posters.topic_th as topic_th',
             'present_posters.present_poster_id as present_poster_id',
+            'present_posters.time_start as time_start',
+            'present_posters.time_end as time_end',
             'present_posters.link as link',
             'present_posters.path as path',
             'faculties.name as name',
@@ -97,6 +103,8 @@ class PresentPosterController extends Controller
             'present_posters.id as id',
             'present_posters.topic_th as topic_th',
             'present_posters.present_poster_id as present_poster_id',
+            'present_posters.time_start as time_start',
+            'present_posters.time_end as time_end',
             'present_posters.link as link',
             'present_posters.path as path',
             'present_posters.faculty_id as faculty_id',
@@ -124,6 +132,8 @@ class PresentPosterController extends Controller
             'topic_th' => $request->topic_th,
             'present_poster_id' => $request->present_poster_id,
             'faculty_id' => $request->faculty_id,
+            'time_start' => $request->time_start,
+            'time_end' => $request->time_end,
             'link' => $request->link ? $request->link : $request->video_link
         ]);
         PresentPoster::where('id', $id)->update($data);

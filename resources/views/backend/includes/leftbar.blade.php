@@ -129,7 +129,10 @@
                             </a>
                         </li>
 
-                        <li class="nav-item @if (Request::is('backend/posters') || Request::is('backend/orals') || Request::is('backend/orals/link')) menu-is-opening menu-open @endif">
+                        <li class="nav-item @if (Request::is('backend/posters') ||
+                                Request::is('backend/orals') ||
+                                Request::is('backend/orals/link') ||
+                                Request::is('backend/posters/link')) menu-is-opening menu-open @endif">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-chart-line"></i>
                                 <p>
@@ -150,6 +153,15 @@
                                         class="nav-link @if (Request::is('backend/orals')) active @endif">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>ผลงานนำเสนอ Oral</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('backend.posters.link.index') }}"
+                                        class="nav-link @if (Request::is('backend/posters/link')) active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>ลิงค์นำเสนอ Poster<br />
+                                            <small class="text-warning">(ใช้เมื่อไม่ได้อัดคลิปวิดีโอ)</small>
+                                        </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

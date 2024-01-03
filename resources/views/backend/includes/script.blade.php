@@ -79,6 +79,8 @@
         Request::is('backend/manuals') ||
         Request::is('backend/orals/link') ||
         Request::is('backend/orals/link/*/edit') ||
+        Request::is('backend/posters/link') ||
+        Request::is('backend/posters/link/*/edit') ||
         Request::is('backend/proceeding/*/topic') ||
         Request::is('backend/proceeding/*/topic/*/edit') ||
         Request::is('backend/proceeding/*/file') ||
@@ -93,7 +95,10 @@
     <script src="{{ asset('js/default-modal.js?v=4', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
-@if (Request::is('backend/orals/link') || Request::is('backend/orals/link/*/edit'))
+@if (Request::is('backend/orals/link') ||
+        Request::is('backend/orals/link/*/edit') ||
+        Request::is('backend/posters/link') ||
+        Request::is('backend/posters/link/*/edit'))
     <script src="{{ asset('js/oral-detail-modal.js?v=4', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('js/default-modal.js?v=4', env('REDIRECT_HTTPS')) }}"></script>
 @endif
@@ -105,7 +110,10 @@
     <script src="{{ asset('api/get-research-with-topic-id.js?v=4', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
-@if (Request::is('backend/orals') || Request::is('backend/oral/*/edit'))
+@if (Request::is('backend/orals') ||
+        Request::is('backend/oral/*/edit') ||
+        Request::is('backend/posters') ||
+        Request::is('backend/poster/*/edit'))
     <script src="{{ asset('js/present-oral.js?v=4', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('api/get-research-with-topic-id.js?v=4', env('REDIRECT_HTTPS')) }}"></script>
 @endif

@@ -17,8 +17,7 @@
                         <input type="hidden" name="topic_th" value="{!! $present_poster->topic_th !!}">
                         <div class="col-md-12 mb-3">
                             <label>ชื่อบทความ:
-                                <span id="topic"><span
-                                        class="text-success">{!! $present_poster->topic_th !!}</span></span>
+                                <span id="topic"><span class="text-success">{!! $present_poster->topic_th !!}</span></span>
                             </label>
                         </div>
                         <div class="col-md-4 mb-3">
@@ -53,11 +52,45 @@
                             @enderror
                         </div>
                     </div>
+
+                    <div class="col-md-12 mb-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="type_present" id="no_video"
+                                value="no_video" @if ($present_poster->time_start && $present_poster->time_end) checked @endif>
+                            <label class="form-check-label text-bold" for="no_video">
+                                นำเสนอโดยไม่อัพโหลดคลิปวิดีโอ</i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 mb-3">
+                        <label for="time_start">เวลาเริ่มการนำเสนอ</label>
+                        <input type="time" name="time_start" id="time_start"
+                            class="form-control rounded-0 @error('time_start') is-invalid @enderror"
+                            value="{{ $present_poster->time_start }}" @if (!$present_poster->time_start && !$present_poster->time_end) disabled @endif>
+                        @error('time_start')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 mb-3">
+                        <label for="time_end">เวลาสิ้นสุดการนำเสนอ</label>
+                        <input type="time" name="time_end" id="time_end"
+                            class="form-control rounded-0 @error('time_end') is-invalid @enderror"
+                            value="{{ $present_poster->time_end }}" @if (!$present_poster->time_start && !$present_poster->time_end) disabled @endif>
+                        @error('time_end')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="link">ลิงค์คลิปวิดีโอ</label>
                             <input value="{{ $present_poster->link }}" type="text" name="link" id="link"
-                                class="form-control rounded-0 @error('link') is-invalid @enderror">
+                                class="form-control rounded-0 @error('link') is-invalid @enderror"
+                                @if ($present_poster->time_start && $present_poster->time_end) disabled @endif>
                             @error('link')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -67,7 +100,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button onclick="thisDisabled(this)" class="btn btn-warning text-white rounded-0"><i class="fa fa-save"></i> แก้ไข</button>
+                            <button onclick="thisDisabled(this)" class="btn btn-warning text-white rounded-0"><i
+                                    class="fa fa-save"></i> แก้ไข</button>
                         </div>
                     </div>
                 </form>

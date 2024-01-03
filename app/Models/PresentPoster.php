@@ -17,6 +17,8 @@ class PresentPoster extends Model
         'link',
         'path',
         'extension',
-        'conference_id'
+        'conference_id',
+        'time_start',
+        'time_end'
     ];
 }

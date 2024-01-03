@@ -201,7 +201,7 @@
                                     <li>
                                         <a class="dropdown-item {{ Request::is('employee/research/uploadfile/*') ? 'active' : '' }}"
                                             aria-current="page"
-                                            href="{{ route('employee.research.uploadfile', auth()->user()->id) }}">อัพโหลดลิงค์วิดีโอและไฟล์โปสเตอร์</a>
+                                            href="{{ route('employee.research.uploadfile', auth()->user()->id) }}">อัพโหลดไฟล์โปสเตอร์</a>
                                     </li>
 
                                 </ul>
@@ -220,6 +220,11 @@
                                 <a class="dropdown-item {{ Request::is('orals/link') ? 'active' : '' }}"
                                     aria-current="page" href="{{ route('orals.link.index') }}">ลิงค์นำเสนอผลงาน Oral</a>
                             </li>
+
+                            {{-- <li>
+                                <a class="dropdown-item {{ Request::is('posters/link') ? 'active' : '' }}"
+                                    aria-current="page" href="{{ route('posters.link.index') }}">ลิงค์นำเสนอผลงาน Poster</a>
+                            </li> --}}
 
                             <li>
                                 <a class="dropdown-item {{ Request::is('orals') ? 'active' : '' }}" aria-current="page"

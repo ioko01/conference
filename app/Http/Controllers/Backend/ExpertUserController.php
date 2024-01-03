@@ -30,6 +30,24 @@ class ExpertUserController extends Controller
     {
     }
 
+    public function get_expert_with_json(){
+        $expert = User::select(
+            'users.id as expert_id',
+            'users.prefix as expert_prefix',
+            'users.fullname as expert_fullname',
+            'users.phone as expert_phone',
+            'users.institution as expert_institution',
+            'users.email as expert_email'
+        )
+            ->where('users.person_attend', 'expert')
+            ->leftjoin('conferences', 'users.conference_id', '=', 'conferences.id')
+            ->where('conferences.status', 1)
+            ->get();
+
+        DB::disconnect('users');
+        return response()->json($expert);
+    }
+
     protected function validation($request)
     {
         write_logs(__FUNCTION__, "error");
@@ -121,7 +139,7 @@ class ExpertUserController extends Controller
                 $count = $suggestion->count_topic_id + 1;
             }
 
-            $name = 'บทความ_' . strval($request->topic_id) . "_" . $count . "." . $extension;
+            $name = 'ไฟล์ที่ส่งไปให้ผู้ทรง_บทความ_' . strval($request->topic_id) . "_" . $count . "." . $extension;
             $path = 'public/ประชุมวิชาการ ' . $conference->year  . '/ไฟล์บทความส่งให้ผู้ทรงอ่าน/' . strval($request->topic_id);
 
             $data = array_filter([
@@ -157,7 +175,6 @@ class ExpertUserController extends Controller
     {
         $create = $this->file($request)->data;
         $id = SendSuggestionResearch::create($create)->id;
-
 
         write_logs(__FUNCTION__, "info");
 

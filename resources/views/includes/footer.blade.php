@@ -18,11 +18,12 @@
                     <img style="max-width: 180px; width: 100%;"
                         src="{{ asset('images/revert-logo.png', env('REDIRECT_HTTPS')) }}" alt="logo-footer">
                     <p>
-                        การประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ ครั้งที่ 9 ประจำปี 2566
-                        “งานวิจัยเชิงพื้นที่เพื่อยกระดับเศรษฐกิจมูลค่าสูงของชุมชน”
-                        Area-based Research to Strengthen the Community’s High Value Economy
-                        วันพุธที่ 22 มีนาคม พ.ศ. 2566
+                        การประชุมวิชาการระดับชาติ ราชภัฏเลยวิชาการ ครั้งที่ 10 ประจำปี พ.ศ. 2567
+                        “วิจัยและนวัตกรรมเพื่อการพัฒนา Soft Power ท้องถิ่นสู่การสร้างสรรค์ระดับสากล”
+                        Research and Innovation to Develop Local Soft Power for Global Value
+                        วันศุกร์ที่ 22 มีนาคม พ.ศ. 2567
                         ผ่านระบบ Teleconference
+
                     </p>
                 </div>
                 <div class="col-md-3 offset-md-5 d-md-flex align-self-end">

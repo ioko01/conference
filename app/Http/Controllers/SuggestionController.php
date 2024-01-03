@@ -65,10 +65,10 @@ class SuggestionController extends Controller
     {
         $conference = Conference::where('status', 1)->first();
         $result = new SendSuggestionResearch;
-        $suggestion = SendSuggestionResearch::select(DB::raw('COUNT(topic_id) as count_topic_id'))->where('topic_id', $request->topic_id)->where('file_admin_send', '!=', '')->first();
+        $suggestion = SendSuggestionResearch::select(DB::raw('COUNT(topic_id) as count_topic_id'))->where('topic_id', $request->topic_id)->where('file_expert_receive', '!=', '')->first();
         $this->validation($request);
-        if ($request->file('admin_send_file')) {
-            $upload = $request->file('admin_send_file');
+        if ($request->file('suggestion_upload')) {
+            $upload = $request->file('suggestion_upload');
             $extension = $upload->extension();
 
             $count = 1;
@@ -76,29 +76,23 @@ class SuggestionController extends Controller
                 $count = $suggestion->count_topic_id + 1;
             }
 
-            $name = 'บทความ_' . strval($request->topic_id) . "_" . $count . "." . $extension;
+            $name = 'ไฟล์ส่งไปให้นักวิจัยแก้ไข_บทความ_' . strval($request->topic_id) . "_" . $count . "." . $extension;
             $path = 'public/ประชุมวิชาการ ' . $conference->year  . '/ไฟล์บทความผู้ทรงส่งมา/' . strval($request->topic_id);
 
             $data = array_filter([
-                'conference_id' => auth()->user()->conference_id,
-                'user_admin_id' => auth()->user()->id,
-                'user_expert_id' => $request->expert_receive_id,
+                'conference_id' => $request->conference_id,
+                'user_admin_id' => $request->user_admin_id,
+                'user_expert_id' => auth()->user()->id,
                 'topic_id' => $request->topic_id,
-                'file_admin_send' => $name,
-                'path_admin_send' => $path . "/" . $name,
-                'extension_admin_send' => $extension,
+                'file_expert_receive' => $name,
+                'path_expert_receive' => $path . "/" . $name,
+                'extension_expert_receive' => $extension,
             ]);
 
             $result->data = $data;
             $result->upload = $upload->storeAs($path, $name);
         } else {
-            $data = array_filter([
-                'conference_id' => auth()->user()->conference_id,
-                'user_admin_id' => auth()->user()->id,
-                'user_expert_id' => $request->expert_receive_id,
-                'topic_id' => $request->topic_id,
-            ]);
-            $result->data = $data;
+            alert('ผิดพลาด', 'ไม่สามารถอัพโหลดไฟล์ข้อเสนอแนะได้กรุณาตรวจสอบความถูกต้องอีกครั้ง', 'error')->showConfirmButton('ปิด', '#3085d6');
         }
 
         write_logs(__FUNCTION__, "info");
@@ -141,15 +135,50 @@ class SuggestionController extends Controller
             ->get();
 
 
+        $suggestions_expert = SendSuggestionResearch::select(
+            'send_suggestion_researchs.id AS sug_id',
+            'send_suggestion_researchs.conference_id AS conference_id',
+            'send_suggestion_researchs.user_admin_id AS user_admin_id',
+            'send_suggestion_researchs.user_expert_id AS user_expert_id',
+            'send_suggestion_researchs.topic_id AS topic_id',
+            'send_suggestion_researchs.file_admin_send AS file_admin_send',
+            'send_suggestion_researchs.path_admin_send AS path_admin_send',
+            'send_suggestion_researchs.extension_admin_send AS extension_admin_send',
+            'send_suggestion_researchs.file_expert_receive AS file_expert_receive',
+            'send_suggestion_researchs.path_expert_receive AS path_expert_receive',
+            'send_suggestion_researchs.extension_expert_receive AS extension_expert_receive',
+            'users.prefix AS prefix',
+            'users.fullname AS fullname',
+            'users.sex AS sex',
+            'users.phone AS phone',
+            'users.institution AS institution',
+            'users.position_id AS position_id',
+            'users.person_attend AS person_attend',
+            'users.email AS email',
+        )
+            ->leftjoin('users', 'users.id', '=', 'send_suggestion_researchs.user_expert_id')
+            ->leftjoin('conferences', 'send_suggestion_researchs.conference_id', '=', 'conferences.id')
+            ->where('conferences.status', 1)
+            ->where('send_suggestion_researchs.user_expert_id', auth()->user()->id)
+            ->where('send_suggestion_researchs.path_expert_receive', '!=', '')
+            ->get();
+
+
         DB::disconnect('send_suggestion_researchs');
         DB::disconnect('conferences');
-        return view('frontend.pages.suggestion', compact('suggestions', 'conference'));
+        return view('frontend.pages.suggestion', compact('suggestions', 'suggestions_expert', 'conference'));
     }
 
-    protected function store(Request $request, $link)
+    public function send_index($topic_id)
     {
-        SendSuggestionResearch::create($this->file($request, $link)->data);
+        $conference = Conference::where('status', 1)->first();
 
+        return view('frontend.pages.send_suggestion', compact('conference', 'topic_id'));
+    }
+
+    protected function store(Request $request)
+    {
+        SendSuggestionResearch::create($this->file($request)->data);
 
         write_logs(__FUNCTION__, "info");
         alert('สำเร็จ', 'อัพโหลดข้อเสนอแนะสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
@@ -164,10 +193,13 @@ class SuggestionController extends Controller
         if (Storage::exists($_suggestion->path_admin_send)) {
             Storage::delete($_suggestion->path_admin_send);
         }
-        $delete_file = SendSuggestionResearch::where('id', $id)->delete();
+
+        SendSuggestionResearch::where('id', $id)->delete();
         write_logs(__FUNCTION__, "warning");
 
+        alert('สำเร็จ', 'ลบข้อเสนอแนะสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
         DB::disconnect('send_suggestion_researchs');
-        return response()->json($delete_file);
+        // return response()->json($delete_file);
+        return back()->with('success', 'ลบข้อเสนอแนะสำเร็จ');
     }
 }

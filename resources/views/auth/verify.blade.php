@@ -50,7 +50,7 @@
 
                             <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                                 @csrf
-                                <button onclick="thisDisabled(this)" type="submit"
+                                <button onclick="thisDisabled(this);open_loading_modal('#modal', 'lg', 'กำลังโหลด', 'กำลังส่งอีเมล กรุณารอสักครู่ (อาจใช้เวลานานถึง 5 นาที)')" type="submit"
                                     class="btn btn-lg btn-success w-100 rounded-0 my-2">คลิกที่นี่เพื่อส่งรหัสอีกครั้ง</button>
                                 <a href="/" class="btn btn-lg btn-warning text-white w-100 rounded-0"
                                     onclick="thisDisabled(this)">กลับไปยังหน้าแรก</a>
@@ -62,4 +62,5 @@
             </div>
         </div>
     </div>
+    <div id="modal"></div>
 @endsection

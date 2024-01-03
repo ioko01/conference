@@ -29,7 +29,7 @@
                     <div class="row w-100">
                         <div class="col-md-7">
                             <form id="form_register"
-                                @if (old('person_attend') == 'send') action="{{ route('register') }}" @elseif(old('person_attend') == 'attend') action="{{ route('attend.store') }}" @elseif(endDate('end_research')->day >= 0) action="{{ route('register') }}" @else action="{{ route('attend.store') }}" @endif
+                                @if (old('person_attend') == 'send') action="{{ route('register') }}" @elseif(old('person_attend') == 'attend' || old('position_id') == '4') action="{{ route('attend.store') }}" @elseif(endDate('end_research')->day >= 0) action="{{ route('register') }}" @else action="{{ route('attend.store') }}" @endif
                                 method="POST">
                                 @csrf
                                 <div class="row mb-4">
@@ -120,7 +120,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="position_id"
                                                     id="position_{{ $position->id }}" value="{{ $position->id }}"
-                                                    onchange="toggle_position(this)"
+                                                    onchange="toggle_position(this, '{{ route('register') }}', '{{ route('attend.store') }}')"
                                                     @if (!old('position_id')) @if ($position->id == $positions->first()->id)
                                             checked @endif
                                                 @elseif(old('position_id') == $position->id) checked @endif>
@@ -320,9 +320,10 @@
                                 </div>
 
                                 <div class="d-block">
-                                    <input onclick="thisDisabled(this)" name="register"
-                                        class="btn btn-green rounded-0 text-white text-white w-100" type="submit"
-                                        value="ลงทะเบียน">
+                                    <input
+                                        onclick="thisDisabled(this);open_loading_modal('#modal', 'lg', 'กำลังโหลด', 'กำลังเพิ่มข้อมูลลงระบบ กรุณารอสักครู่ (อาจใช้เวลานานถึง 5 นาที)')"
+                                        name="register" class="btn btn-green rounded-0 text-white text-white w-100"
+                                        type="submit" value="ลงทะเบียน">
                                 </div>
                             </form>
                         </div>
@@ -356,4 +357,5 @@
 
     </div>
     <!-- End Content -->
+    <div id="modal"></div>
 @endsection

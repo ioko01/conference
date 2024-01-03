@@ -35,7 +35,7 @@
         <script src="{{ asset('js/default-modal.js?v=6', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('suggestion/*'))
+    @if (Request::is('employee/suggestion') || Request::is('employee/suggestion/*'))
         <script src="{{ asset('api/delete.js?v=6', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 

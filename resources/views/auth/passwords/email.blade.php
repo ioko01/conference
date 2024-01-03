@@ -33,7 +33,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-green text-white rounded-0 w-100">
+                                <button onclick="thisDisabled(this);open_loading_modal('#modal', 'lg', 'กำลังโหลด', 'กำลังส่งอีเมล กรุณารอสักครู่ (อาจใช้เวลานานถึง 5 นาที)')" type="submit" class="btn btn-green text-white rounded-0 w-100">
                                     {{ __('ส่งลิงค์รีเซ็ตรหัสผ่าน') }}
                                 </button>
                             </div>
@@ -44,4 +44,5 @@
         </div>
     </div>
 </div>
+<div id="modal"></div>
 @endsection

@@ -7,8 +7,10 @@ use App\Models\Conference;
 use App\Models\Kota;
 use App\Models\Position;
 use App\Models\Tip;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterAttendController extends Controller
 {
@@ -59,21 +61,41 @@ class RegisterAttendController extends Controller
             $institution = $request->institution;
         }
 
-        Attend::create([
-            'prefix' => $request->prefix,
-            'fullname' => $request->fullname,
-            'sex' => $request->sex,
-            'phone' => $request->phone,
-            'institution' => $institution,
-            'position_id' => $request->position_id,
-            'kota_id' => isset($request->kota_id) ? $request->kota_id : null,
-            'email' => $request->email,
-            'conference_id' => isset($conference_id->id) ? $conference_id->id : null,
-            'person_attend' => "attend"
-        ]);
+        if ($request->position_id == '4') {
+            User::create([
+                'prefix' => $request->prefix,
+                'fullname' => $request->fullname,
+                'sex' => $request->sex,
+                'phone' => $request->phone,
+                'institution' => $request->institution,
+                'address' => null,
+                'check_requirement' => null,
+                'position_id' => $request->position_id,
+                'kota_id' => isset($data['kota_id']) ? $data['kota_id'] : null,
+                'person_attend' => "expert",
+                'email' => $request->email,
+                'email_verified_at' => null,
+                'password' => Hash::make($request->password),
+                'conference_id' => isset($conference_id->id) ? $conference_id->id : null
+            ]);
+        } else {
+            Attend::create([
+                'prefix' => $request->prefix,
+                'fullname' => $request->fullname,
+                'sex' => $request->sex,
+                'phone' => $request->phone,
+                'institution' => $institution,
+                'position_id' => $request->position_id,
+                'kota_id' => isset($request->kota_id) ? $request->kota_id : null,
+                'email' => $request->email,
+                'conference_id' => isset($conference_id->id) ? $conference_id->id : null,
+                'person_attend' => "attend"
+            ]);
+        }
+
 
         write_logs(__FUNCTION__, "info");
-        alert('สำเร็จ', 'ลงทะเบียนเข้าร่วมงานสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+        alert('สำเร็จ', 'ลงทะเบียนสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
 
         DB::disconnect('conferences');
         DB::disconnect('attends');

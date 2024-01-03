@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\EditResearchSecondController;
 use App\Http\Controllers\Backend\ExpertUserController;
 use App\Http\Controllers\Backend\LineController;
 use App\Http\Controllers\Backend\LinkOralController as BackendLinkOralController;
+use App\Http\Controllers\Backend\LinkPosterController as BackendLinkPosterController;
 use App\Http\Controllers\Backend\ManageResearchController;
 use App\Http\Controllers\Backend\ManualController;
 use App\Http\Controllers\Backend\PresentOralController;
@@ -30,6 +31,7 @@ use App\Http\Controllers\Backend\ResearchController as BackendResearchController
 use App\Http\Controllers\Backend\ResearchPassedController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\LinkOralController;
+use App\Http\Controllers\LinkPosterController;
 use App\Http\Controllers\ListAttendController;
 use App\Http\Controllers\ListResearchController;
 use App\Http\Controllers\MailController;
@@ -107,6 +109,7 @@ Route::get('list/research', [ListResearchController::class, 'index'])->name('lis
 Route::get('list/attend', [ListAttendController::class, 'index'])->name('list.attend.index');
 
 Route::get('posters', [PosterController::class, 'index'])->name('posters.index');
+Route::get('posters/link', [LinkPosterController::class, 'index'])->name('posters.link.index');
 Route::get('orals', [OralController::class, 'index'])->name('orals.index');
 Route::get('orals/link', [LinkOralController::class, 'index'])->name('orals.link.index');
 
@@ -130,9 +133,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::middleware('is_expert')->group(function () {
             //ไฟล์ข้อเสนอแนะ
             Route::get('suggestion', [SuggestionController::class, 'index'])->name('suggestion.index');
+            Route::get('suggestion/{topic_id}', [SuggestionController::class, 'send_index'])->name('suggestion.send_index');
             // Route::get('suggestion/{link}', [SuggestionController::class, 'index'])->name('suggestion.index');
-            Route::post('suggestion/{link}/store', [SuggestionController::class, 'store'])->name('suggestion.store');
-            Route::delete('suggestion/{link}/{id}/delete', [SuggestionController::class, 'destroy'])->name('suggestion.delete');
+            Route::post('suggestion/store', [SuggestionController::class, 'store'])->name('suggestion.store');
+            Route::delete('suggestion/{id}/delete', [SuggestionController::class, 'destroy'])->name('suggestion.delete');
         });
 
 
@@ -225,6 +229,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::prefix('backend')->group(function () {
 
+            Route::get('get-expert-json', [ExpertUserController::class, 'get_expert_with_json']);
+
             Route::get('get-expert/{id}', [ExpertUserController::class, 'index']);
             Route::get('get-expert-user/{topic_id}', [ExpertUserController::class, 'get_expert_user']);
             Route::get('get-expert-user-with-id/{id}/{topic_id}', [ExpertUserController::class, 'get_expert_user_with_id']);
@@ -262,6 +268,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('poster/{topic_id}/edit', [PresentPosterController::class, 'edit'])->name('backend.poster.edit');
             Route::put('poster/{topic_id}/update', [PresentPosterController::class, 'update'])->name('backend.poster.update');
             Route::delete('poster/{id}/delete', [PresentPosterController::class, 'destroy'])->name('backend.poster.delete');
+
+            Route::get('posters/link', [BackendLinkPosterController::class, 'index'])->name('backend.posters.link.index');
+            Route::post('posters/link/store', [BackendLinkPosterController::class, 'store'])->name('backend.poster.link.store');
+            Route::get('posters/link/{id}/edit', [BackendLinkPosterController::class, 'edit'])->name('backend.poster.link.edit');
+            Route::put('posters/link/{id}/update', [BackendLinkPosterController::class, 'update'])->name('backend.poster.link.update');
+            Route::delete('posters/link/{id}/delete', [BackendLinkPosterController::class, 'destroy'])->name('backend.poster.link.delete');
 
             Route::get('orals', [PresentOralController::class, 'index'])->name('backend.orals.index');
             Route::post('oral/store', [PresentOralController::class, 'store'])->name('backend.oral.store');
@@ -311,6 +323,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::prefix('backend')->group(function () {
 
             // Clear application cache:
+
+            Route::get('/queue-restart', function () {
+                Artisan::call('queue:restart');
+                return 'Queue has been restarted';
+            });
 
             Route::get('/clear-cache', function () {
                 Artisan::call('cache:clear');

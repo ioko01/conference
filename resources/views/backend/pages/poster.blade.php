@@ -42,6 +42,59 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-12 mb-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="type_present" id="no_video"
+                                    value="no_video"
+                                    @if (old('type_present') !== null) @if (old('type_present') == 'no_video') checked @endif
+                                    @endif>
+                                <label class="form-check-label text-bold" for="no_video">
+                                    นำเสนอโดยไม่อัพโหลดคลิปวิดีโอ <strong class="text-red text-sm">(ใช้เมื่อไม่ได้อัดคลิปวิดีโอ)</strong></i>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 mb-3">
+                            <label for="time_start">เวลาเริ่มการนำเสนอ</label>
+                            <input value="{{ old('time_start') }}" type="time" name="time_start" id="time_start"
+                                class="form-control rounded-0 @error('time_start') is-invalid @enderror"
+                                @if (old('type_present') == null) disabled @endif>
+                            @error('time_start')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 mb-3">
+                            <label for="time_end">เวลาสิ้นสุดการนำเสนอ</label>
+                            <input value="{{ old('time_end') }}" type="time" name="time_end" id="time_end"
+                                class="form-control rounded-0 @error('time_end') is-invalid @enderror"
+                                @if (old('type_present') == null) disabled @endif>
+                            @error('time_end')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div id="video_link_content"></div>
+                        <div class="col-md-12 mb-3">
+                            <label>ลิงค์คลิปวิดีโอ:
+                                <span id="video_link"><span class="text-red">กรุณากรอกรหัสบทความ</span></span>
+                            </label>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="link">เปลี่ยนลิงค์คลิปวิดีโอ
+                                <strong class="text-red text-sm">(ใส่เมื่อต้องการแก้ไขลิงค์วิดีโอ)</strong></label>
+                            <input value="{{ old('link') }}" type="text" name="link" id="link"
+                                class="form-control rounded-0 @error('link') is-invalid @enderror"
+                                @if (old('type_present') != null) disabled @endif>
+                            @error('link')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="faculty_id">กลุ่มบทความ</label>
                             <select name="faculty_id" id="faculty_id"
@@ -61,27 +114,12 @@
                                 </span>
                             @enderror
                         </div>
-                        <div id="video_link_content"></div>
-                        <div class="col-md-12 mb-3">
-                            <label>ลิงค์คลิปวิดีโอ:
-                                <span id="video_link"><span class="text-red">กรุณากรอกรหัสบทความ</span></span>
-                            </label>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="link">เปลี่ยนลิงค์คลิปวิดีโอ
-                                <strong class="text-red text-sm">(ใส่เมื่อต้องการแก้ไขลิงค์วิดีโอ)</strong></label>
-                            <input value="{{ old('link') }}" type="text" name="link" id="link"
-                                class="form-control rounded-0 @error('link') is-invalid @enderror">
-                            @error('link')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button onclick="thisDisabled(this)" class="btn btn-success rounded-0"><i class="fa fa-save"></i> บันทึก</button>
+                            <button onclick="thisDisabled(this)" class="btn btn-success rounded-0"><i
+                                    class="fa fa-save"></i> บันทึก</button>
                         </div>
                     </div>
                 </form>
@@ -101,6 +139,7 @@
                                 <th>#</th>
                                 <th style="width: 10%;">รหัสการนำเสนอ</th>
                                 <th style="width: auto;">รายละเอียดบทความ</th>
+                                <th style="width: 15%;" class="text-center">เวลาในการนำเสนอ</th>
                                 <th style="width: 150px;" class="text-center">โปสเตอร์</th>
                                 <th style="width: 5%;" class="text-right">แก้ไข</th>
                                 <th style="width: 5%;">ลบ</th>
@@ -116,6 +155,15 @@
                                         <a target="_blank" href="{{ $present_poster->link }}">
                                             <strong class="text-primary text-sm">{{ $present_poster->link }}</strong>
                                         </a>
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($present_poster->time_start && $present_poster->time_end)
+                                            <strong class="text-green">{{ substr($present_poster->time_start, 0, -3) }} -
+                                                {{ substr($present_poster->time_end, 0, -3) }} น.</strong>
+                                        @else
+                                            -
+                                        @endif
+
                                     </td>
                                     <td class="text-center">
                                         <button class="btn btn-link"

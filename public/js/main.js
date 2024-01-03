@@ -59,3 +59,25 @@ function thisDisabled(e) {
         }
     }, 10);
 }
+
+function open_loading_modal(modalId, modalSize = "sm", textTitle, data) {
+    /**
+     *  @param {String | String[] | object} data
+     */
+
+    let createModal = `
+            <div style="overflow: auto;" class="modal fade" id="card_modal" data-bs-backdrop="static"
+            data-bs-keyboard="false" tabindex="-1" aria-labelledby="${textTitle}" aria-hidden="true">
+                <div class="modal-dialog modal-${modalSize}">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="staticBackdropLabel">${textTitle}</h2>
+                        </div>
+                        <div class="modal-body text-center py-5" id="modal_body">${data}</div>
+                    </div>
+                </div>
+            </div>`;
+
+    $(modalId).html(createModal);
+    $("#card_modal").modal("show");
+}

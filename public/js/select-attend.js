@@ -11,7 +11,7 @@ function toggle_attend(e, route) {
     const form_password = document.getElementById("form_password");
     const form_register = document.getElementById("form_register");
     const position_2 = document.getElementById("position_2");
-    console.log(e.value);
+
     if (e.value === "attend") {
         form_address.classList.remove("d-block");
         form_address.classList.add("d-none");

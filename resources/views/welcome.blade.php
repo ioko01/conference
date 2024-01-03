@@ -8,31 +8,36 @@
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
                 {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 2"></button> --}}
+                {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
                     aria-label="Slide 4"></button> --}}
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
+                <div style="background-color: antiquewhite" class="carousel-item active">
+                    <img src="{{ asset('images/banner2.jpg', env('REDIRECT_HTTPS')) }}" class="m-auto d-block w-50"
+                        alt="banner2">
+                </div>
+                {{-- <div class="carousel-item">
                     <img style="cursor: pointer" src="{{ asset('images/banner.jpg', env('REDIRECT_HTTPS')) }}"
                         class="d-block w-100" alt="banner">
-                </div>
+                </div> --}}
+
+
+                {{-- 
+                
+                <div class="carousel-item">
+                    <img src="{{ asset('images/banner-01.webp', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
+                        alt="banner1">
+                </div> --}}
+
                 {{-- <div class="carousel-item">
                     <img style="cursor: pointer"
                         title="https://drive.google.com/file/d/1RTJERejDQBTjeGRdxfasEpbDRwGF3uDQ/view?usp=share_link"
                         onclick="window.open('https\:\/\/drive.google.com/file/d/1RTJERejDQBTjeGRdxfasEpbDRwGF3uDQ/view?usp=share_link')"
                         src="{{ asset('images/banner-03.jpg', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
                         alt="banner3">
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('images/banner-02.jpg', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
-                        alt="banner2">
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('images/banner-01.webp', env('REDIRECT_HTTPS')) }}" class="d-block w-100"
-                        alt="banner1">
                 </div> --}}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -136,7 +141,7 @@
                 <div class="row m-0">
                     <div class="col-6 mx-auto">
                         <img style="box-shadow: 5px 5px 15px 0px #ccc!important;"
-                            src="{{ asset('images/Poster-eddit.jpg', env('REDIRECT_HTTPS')) }}" alt="banner"
+                            src="{{ asset('images/Poster-eddit.jpg?v=2', env('REDIRECT_HTTPS')) }}" alt="banner"
                             width="100%">
                     </div>
                 </div>
@@ -185,13 +190,13 @@
                                             <td>1</td>
                                             <td>Call for paper</td>
                                             <td>ปัจจุบัน – 5 มกราคม 2567</td>
-                                            <td></td>
+                                            <td><strong class="text-danger">เลื่อนเป็น 15 มกราคม 2567</strong></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>วันสุดท้ายการชำระค่าลงทะเบียน</td>
                                             <td>ปัจจุบัน – 5 มกราคม 2567</td>
-                                            <td></td>
+                                            <td><strong class="text-danger">เลื่อนเป็น 15 มกราคม 2567</strong></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
@@ -398,8 +403,9 @@
                                 ใช้เวลาในการนำเสนอ เรื่องละไม่เกิน 20 นาที (รวมซักถาม 5 นาที) รูปแบบการจัดทำบทความฉบับเต็ม
                                 (Full Paper) สามารถดาวน์โหลดได้ที่ https://conference.lru.ac.th/
                                 <br />
-                                2. การนำเสนอผลงานวิจัยในรูปแบบโปสเตอร์ (Poster Presentation)กว้าง 80 ซม. X สูง 120 ซม.
-                                โดยจัดทำโปสเตอร์ตามรูปแบบที่กำหนดและอัดคลิปวิดีโอนำเสนอความยาวไม่เกิน 15 นาที
+                                2. การนำเสนอผลงานวิจัยในรูปแบบโปสเตอร์ (Poster Presentation) กว้าง 80 ซม. X สูง 120 ซม.
+                                โดยจัดทำโปสเตอร์ตามรูปแบบที่กำหนดและเข้าร่วมนำเสนอผลงานในวันประชุมวิชาการในรูปแบบออนไลน์
+                                ระยะเวลานำเสนอไม่เกิน 5 นาที (รวมซักถามไม่เกิน 10 นาที)
                                 โดยสามารถดาวน์โหลด template ของโปสเตอร์ได้ที่ https://conference.lru.ac.th/
                                 <br />
                                 <strong style="color: brown;">การจัดทำโปสเตอร์ประกอบด้วยหัวข้อต่อไปนี้</strong><br />
@@ -534,4 +540,5 @@
 
     <br />
     <!-- End Content -->
+
 @endsection

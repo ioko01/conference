@@ -64,3 +64,15 @@ const delay = (() => {
         timer = setTimeout(callback, ms);
     };
 })();
+
+$("#no_video").change((e) => {
+    if (e.currentTarget.checked) {
+        $("#time_start").removeAttr("disabled");
+        $("#time_end").removeAttr("disabled");
+        $("#link").attr("disabled", true);
+    } else {
+        $("#time_start").attr("disabled", true);
+        $("#time_end").attr("disabled", true);
+        $("#link").removeAttr("disabled");
+    }
+});

@@ -623,84 +623,47 @@ function manage_index(id, status) {
                         ${comment_elm}
                     </div>
                 `);
+
+                $.ajax({
+                    url: `/backend/get-expert-json`,
+                    method: "GET",
+                    success: function (res) {
+                        get_topic_id(id, (res2) => {
+                            const json_data = {
+                                list_expert: res,
+                                topic_id: id,
+                                topic_th: res2.topic_th,
+                                topic_en: res2.topic_en,
+                            };
+
+                            const stringify_json = JSON.stringify(json_data);
+
+                            const json = stringify_json.replace(
+                                /[\u007F-\uFFFF]/g,
+                                function (chr) {
+                                    return (
+                                        "\\u" +
+                                        (
+                                            "0000" +
+                                            chr.charCodeAt(0).toString(16)
+                                        ).substr(-4)
+                                    );
+                                }
+                            );
+
+                            $(`#sug_${id}`).html(`
+                            <button style="min-width: 100px;" class="btn rounded-0 btn-sm btn-warning text-white w-100 mb-3"
+                            onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '${escape(
+                                json
+                            )}')">
+                            <i class="fas fa-search-plus"></i> ขยาย</button>
+                        `);
+                        });
+                    },
+                    error: function (err) {},
+                });
             } else {
                 $(`#${id}`).html("-");
-            }
-            if (status >= 7) {
-                $(`#sug_${id}`).html(`
-                    <table class="w-100">
-                        <tbody>
-                            <tr id="tbl_${id}">
-                            </tr>
-                        </tbody>
-                    </table>
-                `);
-
-                if (status >= 7) {
-                    let tbl_elm = "";
-                    for (let i = 0; i < 3; i++) {
-                        const suggestion = res.suggestion;
-                        let suggestion_elm = "";
-                        suggestion.forEach((element) => {
-                            if (
-                                id == element.topic_id &&
-                                element.number == i + 1
-                            ) {
-                                const path = element.path;
-                                suggestion_elm += `
-                                <a class="text-info d-block" href="${path}" download>
-                                &bull; <i style="font-size: 10px;" class="fst-normal">${element.name}</i></a>
-                                    <div style="border-bottom: 1px dotted #ccc;" class="my-2"> </div>
-                                `;
-                            }
-                        });
-                        $(`#tbl_${id}`).html(
-                            `<td class="text-sm" style="border-top: 0px solid transparent;" colspan="3">กำลังโหลด</td>`
-                        );
-                        get_topic_id(id, (res) => {
-                            const date = new Date(res.created_at)
-                            // console.log(date.format("yyyy-MM-dd hh:mm:ss"));
-                            const data = {
-                                topic_id: String(id),
-                                topic_th: res.topic_th,
-                                topic_en: res.topic_en,
-                                link:
-                                    window.location.host +
-                                    `/suggestion/${btoa(
-                                        String(
-                                            `${i + 1}|${id}|${String(
-                                                res.created_at
-                                            )}`
-                                        )
-                                    )}`,
-                            };
-                            
-                            // const json = JSON.stringify(data);
-                            // tbl_elm += `
-                            // <td class="p-0 px-2" style="border-top: 0px solid transparent;width: 33%;">
-                            // <button style="min-width: 100px;" class="btn rounded-0 btn-sm btn-outline-success w-100 mb-3" onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '${escape(
-                            //     json
-                            // )}')">
-                            //     <i class="fas fa-link"></i> ลิงค์</button>
-                            //     <br />
-                            //     ${suggestion_elm}
-                            // </td>`;
-                            // if (i == 2) {
-                            //     $(`#tbl_${id}`).html(``);
-                            //     $(`#tbl_${id}`).append(tbl_elm);
-                            // } else {
-                            //     $(`#tbl_${id}`).html(
-                            //         `<td class="text-sm" style="border-top: 0px solid transparent;" colspan="3">กำลังโหลด</td>`
-                            //     );
-                            // }
-                        });
-                    }
-                } else {
-                    $(`#tbl_${id}`).append(
-                        `<td style="border-top: 0px solid transparent;" colspan="3"> - </td>`
-                    );
-                }
-            } else {
                 $(`#sug_${id}`).html("-");
             }
         },
@@ -731,8 +694,9 @@ function update_status(topic_id, status) {
                         confirmButtonColor: "#3085d6",
                     });
 
-                    $("#research_modal").modal("dispose");
-                    $("#research_modal").remove();
+                    $("#research_modal").modal("hide");
+                    // $("#research_modal").modal("dispose");
+                    // $("#research_modal").remove();
                 } else {
                     Swal.fire({
                         title: "ผิดพลาด",
@@ -950,4 +914,13 @@ function update_suggestion(topic_id) {
     } catch (error) {
         throw error;
     }
+}
+
+function escape(htmlStr) {
+    return htmlStr
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
 }

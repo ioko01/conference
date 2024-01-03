@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Poster extends Model
+class LinkPoster extends Model
 {
     use HasFactory;
-    protected $table = 'posters';
+    protected $table = 'link_posters';
     protected $fillable = [
         'user_id',
-        'topic_id',
-        'name',
+        'room',
+        'link',
         'path',
         'extension',
+        'faculty_id',
         'conference_id',
+        'name'
     ];
 }

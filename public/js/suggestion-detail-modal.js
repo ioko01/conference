@@ -315,7 +315,7 @@ function get_expert_list(topic_id) {
             $("#expert-list").html(`
             <div style="border: 1px solid #A8B5E0;background-color:#DAF0F7;" class="d-flex flex-column p-2 my-4 p-3 rounded justify-content-between">
                 <div class="w-100 text-center">
-                กำหลังโหลดรายชื่อ
+                กำลังโหลดรายชื่อ
                 </div>
             </div>
             `);

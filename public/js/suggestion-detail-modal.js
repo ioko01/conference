@@ -213,7 +213,7 @@ function get_expert_list(topic_id) {
         success: function (res) {
             $("#expert-list").html("");
             const old_user_id = [];
-            let is_file = false;
+            let is_file = [];
             if (res) {
                 res.map((data) => {
                     let append_admin_send_file = "";
@@ -221,14 +221,14 @@ function get_expert_list(topic_id) {
                     if (!old_user_id.includes(data.user_expert_id)) {
                         old_user_id.push(data.user_expert_id);
 
-                        res.map((file) => {
+                        res.map((file, index) => {
                             // console.log(res);
-                            if (!is_file) {
+                            if (!is_file.includes(file.topic_id)) {
                                 if (
                                     file.path_admin_send ||
                                     file.path_expert_receive
                                 ) {
-                                    is_file = true;
+                                    is_file[index] = file.user_expert_id;
                                 }
                             }
                             if (file.file_admin_send) {
@@ -251,7 +251,13 @@ function get_expert_list(topic_id) {
                                 }
                             }
                         });
-                        // console.log(data);
+
+                        const filtered = is_file.filter(function (el) {
+                            return el != null;
+                        });
+
+                        console.log(filtered);
+
                         $("#expert-list").append(`
                     <div id="expert_${
                         data.user_expert_id
@@ -261,9 +267,12 @@ function get_expert_list(topic_id) {
                             data.user_expert_id
                         }" class="text-end">
                             <p class="text-danger"><strong>**ต้องลบไฟล์ออกให้หมดก่อนถึงจะลบรายชื่อออกได้ และถ้ามีผู้ทรงคุณวุฒิส่งไฟล์มาแล้วจะไม่สามารถลบรายชื่อได้</strong></p>
-                            <button class="btn btn-danger text-end rounded-0 text-end" onclick="confirm_delete_expert('${
-                                data.fullname
-                            }', ${data.user_expert_id})">ลบรายชื่อ ${is_file}</button>
+                            ${
+                                !filtered.includes(data.user_expert_id)
+                                    ? `<button class="btn btn-danger text-end rounded-0 text-end" data-bs-dismiss="modal" onclick="confirm_delete_expert('${data.fullname}', ${data.user_expert_id}, ${data.sug_id})">ลบรายชื่อ</button>`
+                                    : ``
+                            }
+                            
                         </div>
                             <p>
                             <strong class="text-warning">${
@@ -459,7 +468,7 @@ function delete_suggestion(id) {
     });
 }
 
-function confirm_delete_expert(expert_name, expert_id) {
+function confirm_delete_expert(expert_name, expert_id, sug_id) {
     const _token = $('meta[name="csrf-token"]').attr("content");
 
     const json = get_data.replace(/[\u007F-\uFFFF]/g, function (chr) {
@@ -492,7 +501,7 @@ function confirm_delete_expert(expert_name, expert_id) {
                         ต้องการลบรายชื่อ <strong class="text-red">"${expert_name}"</strong> หรือไม่ ?
                     </div>
                     <div id="modal_footer" class="modal-footer">
-                        <button onclick="thisDisabled(this);delete_expert('${expert_id}')" type="button" class="btn btn-success text-white rounded-0">ตกลง</button>
+                        <button onclick="thisDisabled(this);delete_expert('${sug_id}')" type="button" class="btn btn-success text-white rounded-0">ตกลง</button>
                         <button onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '${escape(
                             json
                         )}')" data-bs-dismiss="modal" type="button" class="btn btn-secondary text-white rounded-0">ย้อนกลับ</button>
@@ -525,8 +534,23 @@ function delete_expert(id) {
 
                 Swal.fire({
                     title: "สำเร็จ",
-                    html: `ลบบทความแล้ว`,
+                    html: `ลบรายชื่อสำเร็จ`,
                     icon: "success",
+                    confirmButtonColor: "#3085d6",
+                });
+            } else {
+                $("#suggestion_modal").modal("hide");
+                open_modal_default(
+                    "#modal",
+                    "xl",
+                    "ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ",
+                    get_data
+                );
+
+                Swal.fire({
+                    title: "ผิดพลาด",
+                    html: `ไม่สามารถลบรายชื่อได้`,
+                    icon: "error",
                     confirmButtonColor: "#3085d6",
                 });
             }

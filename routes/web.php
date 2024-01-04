@@ -237,7 +237,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('get-file-expert/{topic_id}', [ExpertUserController::class, 'get_file_expert']);
             Route::post('add-file-expert', [ExpertUserController::class, 'add_file_expert']);
             Route::delete('expert-file-delete/{topic_id}', [ExpertUserController::class, 'destroy']);
-            Route::delete('expert-name-delete/{expert_id}', [ExpertUserController::class, 'destroy_name']);
+            Route::delete('expert-name-delete/{sug_id}', [ExpertUserController::class, 'destroy_name']);
 
             //ผลการพิจารณาแก้ไขครั้งที่ 1
             Route::put('research/passed/1/update-status/{id}', [ResearchPassedController::class, 'update_passed']);

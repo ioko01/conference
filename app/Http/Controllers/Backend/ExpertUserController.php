@@ -30,7 +30,8 @@ class ExpertUserController extends Controller
     {
     }
 
-    public function get_expert_with_json(){
+    public function get_expert_with_json()
+    {
         $expert = User::select(
             'users.id as expert_id',
             'users.prefix as expert_prefix',
@@ -198,10 +199,14 @@ class ExpertUserController extends Controller
     public function destroy_name($id)
     {
         // $_suggestion = SendSuggestionResearch::find($id);
-        $delete_expert_name = SendSuggestionResearch::where('user_expert_id', $id)->delete();
+        $delete_expert_name = SendSuggestionResearch::where('id', $id)->delete();
         write_logs(__FUNCTION__, "warning");
 
         DB::disconnect('send_suggestion_researchs');
-        return response()->json($delete_expert_name);
+        if ($delete_expert_name) {
+            return response()->json($delete_expert_name);
+        } else {
+            return response()->json(0);
+        }
     }
 }

@@ -221,10 +221,10 @@
                                     aria-current="page" href="{{ route('orals.link.index') }}">ลิงค์นำเสนอผลงาน Oral</a>
                             </li>
 
-                            {{-- <li>
+                            <li>
                                 <a class="dropdown-item {{ Request::is('posters/link') ? 'active' : '' }}"
                                     aria-current="page" href="{{ route('posters.link.index') }}">ลิงค์นำเสนอผลงาน Poster</a>
-                            </li> --}}
+                            </li>
 
                             <li>
                                 <a class="dropdown-item {{ Request::is('orals') ? 'active' : '' }}" aria-current="page"

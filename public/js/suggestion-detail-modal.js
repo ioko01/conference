@@ -108,7 +108,7 @@ function add_expert(topic_id) {
         },
         error: function (err) {
             if (err.statusText == "Not Found") {
-                console.log("ไม่มีผู้ทรงชื่อนี้");
+                // console.log("ไม่มีผู้ทรงชื่อนี้");
                 $("#expert-list-search").html(`
                 <div style="border: 1px solid #ee6969;background-color:#fde0e0;" class="d-flex flex-column p-2 my-4 p-3 rounded justify-content-between">
                     ไม่มีรายชื่อนี้
@@ -213,6 +213,7 @@ function get_expert_list(topic_id) {
         success: function (res) {
             $("#expert-list").html("");
             const old_user_id = [];
+            let is_file = false;
             if (res) {
                 res.map((data) => {
                     let append_admin_send_file = "";
@@ -221,7 +222,15 @@ function get_expert_list(topic_id) {
                         old_user_id.push(data.user_expert_id);
 
                         res.map((file) => {
-                            console.log(res);
+                            // console.log(res);
+                            if (!is_file) {
+                                if (
+                                    file.path_admin_send ||
+                                    file.path_expert_receive
+                                ) {
+                                    is_file = true;
+                                }
+                            }
                             if (file.file_admin_send) {
                                 if (
                                     data.user_expert_id == file.user_expert_id
@@ -242,7 +251,7 @@ function get_expert_list(topic_id) {
                                 }
                             }
                         });
-
+                        // console.log(data);
                         $("#expert-list").append(`
                     <div id="expert_${
                         data.user_expert_id
@@ -252,7 +261,9 @@ function get_expert_list(topic_id) {
                             data.user_expert_id
                         }" class="text-end">
                             <p class="text-danger"><strong>**ต้องลบไฟล์ออกให้หมดก่อนถึงจะลบรายชื่อออกได้ และถ้ามีผู้ทรงคุณวุฒิส่งไฟล์มาแล้วจะไม่สามารถลบรายชื่อได้</strong></p>
-                            <button class="btn btn-danger text-end rounded-0 text-end">ลบรายชื่อ</button>
+                            <button class="btn btn-danger text-end rounded-0 text-end" onclick="confirm_delete_expert('${
+                                data.fullname
+                            }', ${data.user_expert_id})">ลบรายชื่อ ${is_file}</button>
                         </div>
                             <p>
                             <strong class="text-warning">${
@@ -354,7 +365,7 @@ function modal_detail(data) {
                 <hr />
             <p class="text-danger">ใส่ชื่อผู้ทรงคุณวุฒิเพื่อส่งไฟล์ไปให้ผู้ทรงคุณวุฒิ</p>
             <div class="d-flex w-100 justify-content-center position-relative gap-2">
-                <input autocomplete="off" onfocusout="focusout_input()" onfocus="filter_data_input(this, '${list_expert}')" onkeyup="filter_data_input(this, '${list_expert}')" class="form-control my-auto" type="text" id="name_expert_input" placeholder="ค้นหาชื่อผู้ทรงคุณวุฒิ"/>
+                <input autocomplete="off" onfocusout="focusout_input()" onfocus="filter_data_input(this, '${list_expert}')" onkeyup="filter_data_input(this, '${list_expert}')" class="form-control my-auto" type="search" id="name_expert_input" placeholder="ค้นหาชื่อผู้ทรงคุณวุฒิ"/>
                 <input type="hidden" id="name_expert_hidden"/>
                 <button class="btn btn-outline-success text-nowrap rounded-0" onclick="add_expert('${json.topic_id}')" id="add_expert_user">ค้นหาผู้ทรงคุณวุฒิ</button>
                 <ul style="top: 100%;z-index: 9999;" class="position-absolute search-list shadow"></ul>
@@ -426,6 +437,81 @@ function delete_suggestion(id) {
     $.ajax({
         method: "DELETE",
         url: `/backend/expert-file-delete/${id}`,
+        data: { _token },
+        success: function (res) {
+            if (res == 1) {
+                $("#suggestion_modal").modal("hide");
+                open_modal_default(
+                    "#modal",
+                    "xl",
+                    "ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ",
+                    get_data
+                );
+
+                Swal.fire({
+                    title: "สำเร็จ",
+                    html: `ลบบทความแล้ว`,
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                });
+            }
+        },
+    });
+}
+
+function confirm_delete_expert(expert_name, expert_id) {
+    const _token = $('meta[name="csrf-token"]').attr("content");
+
+    const json = get_data.replace(/[\u007F-\uFFFF]/g, function (chr) {
+        return "\\u" + ("0000" + chr.charCodeAt(0).toString(16)).substr(-4);
+    });
+
+    let createModal = `
+                <div id="form_modal_confirm"></div>
+                    `;
+    $("#modal").html(createModal);
+    $("#modal_body").html(
+        `<div class="text-center">กำลังโหลดข้อมูล กรุณารอสักครู่</div>`
+    );
+    $("#suggestion_modal").modal("hide");
+    $("#suggestion_modal").modal("show");
+
+    $("#form_modal_confirm").html(`
+    <form enctype="multipart/form-data" method="POST" action="/backend/expert-name-delete/${expert_id}">
+        <div class="modal fade" id="suggestion_modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+            aria-labelledby="ลบไฟล์" aria-hidden="true">
+            <input type="hidden" name="_token" value="${_token}" />
+            <input type="hidden" name="_method" value="DELETE" />
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">ลบไฟล์</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div id="modal_body" class="modal-body">
+                        ต้องการลบรายชื่อ <strong class="text-red">"${expert_name}"</strong> หรือไม่ ?
+                    </div>
+                    <div id="modal_footer" class="modal-footer">
+                        <button onclick="thisDisabled(this);delete_expert('${expert_id}')" type="button" class="btn btn-success text-white rounded-0">ตกลง</button>
+                        <button onclick="open_modal_default('#modal', 'xl', 'ลิงค์ผู้ทรง ฯ ส่งไฟล์ข้อเสนอแนะ', '${escape(
+                            json
+                        )}')" data-bs-dismiss="modal" type="button" class="btn btn-secondary text-white rounded-0">ย้อนกลับ</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+    `);
+    $("#suggestion_modal").modal("show");
+}
+
+function delete_expert(id) {
+    const _token = $('meta[name="csrf-token"]').attr("content");
+
+    $.ajax({
+        method: "DELETE",
+        url: `/backend/expert-name-delete/${id}`,
         data: { _token },
         success: function (res) {
             if (res == 1) {

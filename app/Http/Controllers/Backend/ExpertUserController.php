@@ -194,4 +194,14 @@ class ExpertUserController extends Controller
         DB::disconnect('send_suggestion_researchs');
         return response()->json($delete_file);
     }
+
+    public function destroy_name($id)
+    {
+        // $_suggestion = SendSuggestionResearch::find($id);
+        $delete_expert_name = SendSuggestionResearch::where('user_expert_id', $id)->delete();
+        write_logs(__FUNCTION__, "warning");
+
+        DB::disconnect('send_suggestion_researchs');
+        return response()->json($delete_expert_name);
+    }
 }

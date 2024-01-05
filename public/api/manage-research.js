@@ -19,6 +19,7 @@ function detail_modal(topic_id) {
                     </div>
                 </div>
             </div>`;
+
     $.ajax({
         method: "GET",
         url: "/show-research-detail/" + topic_id,
@@ -43,10 +44,10 @@ function detail_modal(topic_id) {
                 </div>
                 <div class="mb-3">
                     <strong class="text-green">ชื่อผู้นำเสนอบทความ: </strong><span
-                        class="text-dark">${data.presenter.replaceAll(
-                            "|",
-                            ", "
-                        )}</span>
+                        class="text-dark">${data.presenter
+                            .replaceAll("!!", "")
+                            .replaceAll("ดร.", " ดร.")
+                            .replaceAll("|", ", ")}</span>
                 </div>
                 <div class="mb-3">
                     <strong class="text-green">กลุ่มบทความ: </strong><span

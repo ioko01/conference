@@ -153,6 +153,7 @@ function add_file(topic_id, receive) {
                 `);
 
                 $(`#expert_${receive} .send_file`).val("");
+                $(`#delete_list_expert_${receive} button`).remove();
             }
         },
         error: function (err) {},

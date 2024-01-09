@@ -346,11 +346,11 @@
                                 <span
                                     class="text-small text-success">({{ $researchs_in_sendfile_distinct && $researchs_out_sendfile_distinct && $researchs_kota_sendfile_distinct ? number_format(($researchs_in_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') : 0 }}%)</span></span></strong><br>
                         <strong class="text-small">&bullet; บุคลากรภายนอก <span class="text-small">จำนวน
-                                {{ $researchs_out_sendfile_distinct }} บทความ
+                                {{ $researchs_out_sendfile_distinct ? $researchs_out_sendfile_distinct: 0 }} บทความ
                                 <span
                                     class="text-small text-success">({{ $researchs_in_sendfile_distinct && $researchs_out_sendfile_distinct && $researchs_kota_sendfile_distinct ? number_format(($researchs_out_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') : 0 }}%)</span></span></strong><br>
                         <strong class="text-small">&bullet; เจ้าภาพร่วม <span class="text-small">จำนวน
-                                {{ $researchs_kota_sendfile_distinct }} บทความ
+                                {{ $researchs_kota_sendfile_distinct ? $researchs_kota_sendfile_distinct : 0 }} บทความ
                                 <span
                                     class="text-small text-success">({{ $researchs_in_sendfile_distinct && $researchs_out_sendfile_distinct && $researchs_kota_sendfile_distinct ? number_format(($researchs_kota_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') : 0 }}%)</span></span></strong>
                     </div>

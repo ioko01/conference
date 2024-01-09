@@ -169,6 +169,10 @@ class DashboardController extends Controller
         $researchs_out_sendfile_distinct = 0;
         $researchs_kota_sendfile_distinct = 0;
         foreach ($count_sendfile_distinct as $value) {
+            $researchs_in_sendfile_distinct = intval($researchs_in - $value->count_research_not_sendfile_distinct);
+            $researchs_out_sendfile_distinct = intval($researchs_out - $value->count_research_not_sendfile_distinct);
+            $researchs_kota_sendfile_distinct = intval($researchs_kota - $value->count_research_not_sendfile_distinct);
+            
             if ($value->position_id == 1) {
                 $researchs_in_sendfile_distinct = intval($researchs_in - $value->count_research_not_sendfile_distinct);
             } else if ($value->position_id == 2) {

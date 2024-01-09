@@ -135,7 +135,7 @@ class DashboardController extends Controller
                 $researchs_kota_distinct = $value->count_research_distinct;
             }
         }
-        
+
         $chart_distinct->labels(['บุคลากรภายใน', 'บุคลากรภายนอก', 'เจ้าภาพร่วม']);
         $chart_distinct->displayLegend(false);
         $chart_distinct->dataset('บทความ', 'column', [$researchs_in_distinct, $researchs_out_distinct, $researchs_kota_distinct])->color("#ffc107");
@@ -168,11 +168,17 @@ class DashboardController extends Controller
         $researchs_in_sendfile_distinct = 0;
         $researchs_out_sendfile_distinct = 0;
         $researchs_kota_sendfile_distinct = 0;
+        if (!in_array(1, $count_sendfile_distinct->toArray())) {
+            $researchs_in_sendfile_distinct = intval($researchs_in);
+        }
+        if (!in_array(2, $count_sendfile_distinct->toArray())) {
+            $researchs_out_sendfile_distinct = intval($researchs_out);
+        }
+        if (!in_array(3, $count_sendfile_distinct->toArray())) {
+            $researchs_kota_sendfile_distinct = intval($researchs_kota);
+        }
+
         foreach ($count_sendfile_distinct as $value) {
-            $researchs_in_sendfile_distinct = intval($researchs_in - $value->count_research_not_sendfile_distinct);
-            $researchs_out_sendfile_distinct = intval($researchs_out - $value->count_research_not_sendfile_distinct);
-            $researchs_kota_sendfile_distinct = intval($researchs_kota - $value->count_research_not_sendfile_distinct);
-            
             if ($value->position_id == 1) {
                 $researchs_in_sendfile_distinct = intval($researchs_in - $value->count_research_not_sendfile_distinct);
             } else if ($value->position_id == 2) {

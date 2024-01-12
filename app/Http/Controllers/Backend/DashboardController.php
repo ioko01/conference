@@ -41,14 +41,14 @@ class DashboardController extends Controller
             ->get();
 
         $researchs_distinct = Research::select(
-            DB::raw('COUNT(DISTINCT TRIM(researchs.topic_th)) AS topic_th')
+            DB::raw('COUNT(DISTINCT TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS topic_th')
         )
             ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
             ->where('conferences.status', 1)
             ->first();
 
         $researchs_not_sendfile = Research::select(
-            DB::raw('COUNT(DISTINCT TRIM(researchs.topic_th)) AS topic_th')
+            DB::raw('COUNT(DISTINCT TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS topic_th')
         )
             ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
             ->leftjoin('pdf', 'pdf.topic_id', 'researchs.topic_id')
@@ -66,7 +66,7 @@ class DashboardController extends Controller
         $conference = Conference::where('status', 1)->first();
 
         $count = Research::select(
-            DB::raw('COUNT(TRIM(researchs.topic_th)) AS count_research'),
+            DB::raw('COUNT(TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS count_research'),
             DB::raw('users.position_id AS position_id')
         )
             ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
@@ -104,7 +104,7 @@ class DashboardController extends Controller
 
 
         $count_distinct = Research::select(
-            DB::raw('COUNT(DISTINCT TRIM(researchs.topic_th)) AS count_research_distinct'),
+            DB::raw('COUNT(DISTINCT TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS count_research_distinct'),
             DB::raw('users.position_id AS position_id')
         )
             ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
@@ -142,7 +142,7 @@ class DashboardController extends Controller
 
 
         $count_sendfile_distinct = Research::select(
-            DB::raw('COUNT(DISTINCT TRIM(researchs.topic_th)) AS count_research_not_sendfile_distinct'),
+            DB::raw('COUNT(DISTINCT TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS count_research_not_sendfile_distinct'),
             DB::raw('users.position_id AS position_id')
         )
             ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')

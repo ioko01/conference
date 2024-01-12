@@ -269,17 +269,17 @@
                     {!! $chart->container() !!}
                     <div>
                         <strong class="text-small">&bullet; บุคลากรภายใน <span class="text-small">จำนวน
-                                {{ $researchs_in ? $researchs_in : 0 }} บทความ
+                                {{ $researchs_in }} บทความ
                                 <span
-                                    class="text-small text-success">({{ $researchs_in && $researchs_out && $researchs_kota ? number_format(($researchs_in / ($researchs_in + $researchs_out + $researchs_kota)) * 100, 2, '.', '') : 0 }}%)</span></span></strong><br>
+                                    class="text-small text-success">({{ number_format(($researchs_in / ($researchs_in + $researchs_out + $researchs_kota)) * 100, 2, '.', '') }}%)</span></span></strong><br>
                         <strong class="text-small">&bullet; บุคลากรภายนอก <span class="text-small">จำนวน
-                                {{ $researchs_out ? $researchs_out : 0 }} บทความ
+                                {{ $researchs_out }} บทความ
                                 <span
-                                    class="text-small text-success">({{ $researchs_in && $researchs_out && $researchs_kota ? number_format(($researchs_out / ($researchs_in + $researchs_out + $researchs_kota)) * 100, 2, '.', '') : 0 }}%)</span></span></strong><br>
+                                    class="text-small text-success">({{ number_format(($researchs_out / ($researchs_in + $researchs_out + $researchs_kota)) * 100, 2, '.', '') }}%)</span></span></strong><br>
                         <strong class="text-small">&bullet; เจ้าภาพร่วม <span class="text-small">จำนวน
-                                {{ $researchs_kota ? $researchs_kota : 0 }} บทความ
+                                {{ $researchs_kota }} บทความ
                                 <span
-                                    class="text-small text-success">({{ $researchs_in && $researchs_out && $researchs_kota ? number_format(($researchs_kota / ($researchs_in + $researchs_out + $researchs_kota)) * 100, 2, '.', '') : 0 }}%)</span></span></strong>
+                                    class="text-small text-success">({{ number_format(($researchs_kota / ($researchs_in + $researchs_out + $researchs_kota)) * 100, 2, '.', '') }}%)</span></span></strong>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -305,17 +305,17 @@
                     {!! $chart_distinct->container() !!}
                     <div>
                         <strong class="text-small">&bullet; บุคลากรภายใน <span class="text-small">จำนวน
-                                {{ $researchs_in_distinct ? $researchs_in_distinct : 0 }} บทความ
+                                {{ $researchs_in_distinct }} บทความ
                                 <span
-                                    class="text-small text-success">({{ $researchs_in_distinct && $researchs_out_distinct && $researchs_kota_distinct ? number_format(($researchs_in_distinct / ($researchs_in_distinct + $researchs_out_distinct + $researchs_kota_distinct)) * 100, 2, '.', '') : 0 }}%)</span></span></strong><br>
+                                    class="text-small text-success">({{ number_format(($researchs_in_distinct / ($researchs_in_distinct + $researchs_out_distinct + $researchs_kota_distinct)) * 100, 2, '.', '') }}%)</span></span></strong><br>
                         <strong class="text-small">&bullet; บุคลากรภายนอก <span class="text-small">จำนวน
-                                {{ $researchs_out_distinct ? $researchs_out_distinct : 0 }} บทความ
+                                {{ $researchs_out_distinct }} บทความ
                                 <span
-                                    class="text-small text-success">({{ $researchs_in_distinct && $researchs_out_distinct && $researchs_kota_distinct ? number_format(($researchs_out_distinct / ($researchs_in_distinct + $researchs_out_distinct + $researchs_kota_distinct)) * 100, 2, '.', '') : 0 }}%)</span></span></strong><br>
+                                    class="text-small text-success">({{ number_format(($researchs_out_distinct / ($researchs_in_distinct + $researchs_out_distinct + $researchs_kota_distinct)) * 100, 2, '.', '') }}%)</span></span></strong><br>
                         <strong class="text-small">&bullet; เจ้าภาพร่วม <span class="text-small">จำนวน
-                                {{ $researchs_kota_distinct ? $researchs_kota_distinct : 0 }} บทความ
+                                {{ $researchs_kota_distinct }} บทความ
                                 <span
-                                    class="text-small text-success">({{ $researchs_in_distinct && $researchs_out_distinct && $researchs_kota_distinct ? number_format(($researchs_kota_distinct / ($researchs_in_distinct + $researchs_out_distinct + $researchs_kota_distinct)) * 100, 2, '.', '') : 0 }}%)</span></span></strong>
+                                    class="text-small text-success">({{ number_format(($researchs_kota_distinct / ($researchs_in_distinct + $researchs_out_distinct + $researchs_kota_distinct)) * 100, 2, '.', '') }}%)</span></span></strong>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -342,17 +342,17 @@
                     {!! $chart_sendfile_distinct->container() !!}
                     <div>
                         <strong class="text-small">&bullet; บุคลากรภายใน <span class="text-small">จำนวน
-                                {{ $researchs_in_sendfile_distinct ? $researchs_in_sendfile_distinct : 0 }} บทความ
+                                {{ $researchs_in_sendfile_distinct }} บทความ
                                 <span
-                                    class="text-small text-success">({{ $researchs_in_sendfile_distinct && $researchs_out_sendfile_distinct && $researchs_kota_sendfile_distinct ? number_format(($researchs_in_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') : 0 }}%)</span></span></strong><br>
+                                    class="text-small text-success">({{ number_format(($researchs_in_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') }}%)</span></span></strong><br>
                         <strong class="text-small">&bullet; บุคลากรภายนอก <span class="text-small">จำนวน
-                                {{ $researchs_out_sendfile_distinct ? $researchs_out_sendfile_distinct: 0 }} บทความ
+                                {{ $researchs_out_sendfile_distinct }} บทความ
                                 <span
-                                    class="text-small text-success">({{ $researchs_in_sendfile_distinct && $researchs_out_sendfile_distinct && $researchs_kota_sendfile_distinct ? number_format(($researchs_out_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') : 0 }}%)</span></span></strong><br>
+                                    class="text-small text-success">({{ number_format(($researchs_out_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') }}%)</span></span></strong><br>
                         <strong class="text-small">&bullet; เจ้าภาพร่วม <span class="text-small">จำนวน
-                                {{ $researchs_kota_sendfile_distinct ? $researchs_kota_sendfile_distinct : 0 }} บทความ
+                                {{ $researchs_kota_sendfile_distinct }} บทความ
                                 <span
-                                    class="text-small text-success">({{ $researchs_in_sendfile_distinct && $researchs_out_sendfile_distinct && $researchs_kota_sendfile_distinct ? number_format(($researchs_kota_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') : 0 }}%)</span></span></strong>
+                                    class="text-small text-success">({{ number_format(($researchs_kota_sendfile_distinct / ($researchs_in_sendfile_distinct + $researchs_out_sendfile_distinct + $researchs_kota_sendfile_distinct)) * 100, 2, '.', '') }}%)</span></span></strong>
                     </div>
                 </div>
                 <!-- /.card-body -->

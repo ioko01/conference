@@ -34,7 +34,9 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
             DB::raw(
                 '"" AS note'
             ),
-            'researchs.topic_th AS topic_th',
+            DB::raw(
+                'REPLACE(researchs.topic_th, "เเ", "แ")  AS topic_th'
+            ),
             'researchs.topic_en AS topic_en',
             'status_researchs.name AS topic_status',
             'conferences.year AS year',
@@ -228,7 +230,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                     $get_first_name = [];
                     $ids = [];
                     foreach ($get_values as $key => $get_value) {
-                        if (!array_search(trim($get_value), $get_first_name)) {
+                        if (!array_search(str_replace(' ', '', $get_value), str_replace(' ', '', $get_first_name))) {
                             array_push($get_first_name, trim($get_value));
                             array_push($ids, $get_ids[$key]);
                         } else {
@@ -264,8 +266,8 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                 $get_research_duplicate = ["prev" => [], "curr" => []];
                 for ($row = 1; $row <= $highestRow; $row++) {
                     foreach ($name_duplicated as $key => $name_duplicate) {
-                        if (trim($active_sheet->getCell('E' . $row)->getValue()) == $name_duplicate) {
-                            if ($id = array_search($name_duplicate, $get_first_name, true)) {
+                        if (str_replace(' ', '', $active_sheet->getCell('E' . $row)->getValue()) == str_replace(' ', '', $name_duplicate)) {
+                            if ($id = array_search(str_replace(' ', '', $name_duplicate), str_replace(' ', '', $get_first_name), true)) {
                                 if ($ids[$id] != $active_sheet->getCell('A' . $row)->getValue()) {
                                     $active_sheet->getCell('E' . $row)->setValue($name_duplicate);
                                     array_push($get_research_duplicate["prev"], $ids[$id]);
@@ -275,6 +277,8 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                         }
                     }
                 }
+
+
 
                 $get_row_research_file = ["file" => [], "without_file" => []];
                 for ($row = 1; $row <= $highestRow; $row++) {

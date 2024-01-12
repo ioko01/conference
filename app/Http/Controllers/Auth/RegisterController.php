@@ -67,6 +67,8 @@ class RegisterController extends Controller
             'ท่านผู้หญิง',
             'คุณหญิง',
             'คุณ',
+            'พระ',
+            'พระมหา',
             'พลเอก',
             'พลโท',
             'พลตรี',

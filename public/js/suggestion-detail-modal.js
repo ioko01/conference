@@ -237,7 +237,7 @@ function get_expert_list(topic_id) {
                                     data.user_expert_id == file.user_expert_id
                                 ) {
                                     append_admin_send_file += `<li style="border: 1px solid #A8B5E0;background-color: #DAF0F7;" class="d-flex justify-content-between align-items-center px-2 my-2">
-                                    <a href="/${file.path_admin_send}">${file.file_admin_send}</a> 
+                                    <a href="/storage/${file.path_admin_send}">${file.file_admin_send}</a> 
                                     <button class="btn btn-link text-danger fw-bold rounded-0 p-1 m-1" data-bs-dismiss="modal" onclick="confirm_delete_suggestion('${topic_id}','${file.file_admin_send}', ${file.sug_id})">ลบไฟล์</button>
                                 </li>`;
                                 }
@@ -248,7 +248,7 @@ function get_expert_list(topic_id) {
                                     data.user_expert_id == file.user_expert_id
                                 ) {
                                     append_expert_receive_file += `<li style="border: 1px solid #A8B5E0;background-color: #DAF0F7;" class="d-flex justify-content-between align-items-center p-2 my-2">
-                                    <a href="/${file.path_expert_receive}">${file.file_expert_receive}</a></li>`;
+                                    <a href="/storage/${file.path_expert_receive}">${file.file_expert_receive}</a></li>`;
                                 }
                             }
                         });

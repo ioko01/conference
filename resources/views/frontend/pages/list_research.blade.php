@@ -59,7 +59,7 @@
                                             @endif
                                         @endif
                                     @else
-                                        @if (countDate($research->created_at, 1, 'days'))
+                                        @if (countDate($research->created_at, 7, 'days'))
                                             <span class="text-small text-warning">{{ $research->topic_status }}</span>
                                         @else
                                             @if ($research->position_id === 1)

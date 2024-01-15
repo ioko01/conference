@@ -150,6 +150,68 @@
                 <!-- /.card-body -->
             </div>
         </div>
+        <div class="col-lg-3 col-md-4 col-sm-6"></div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card card-success">
+                <div class="card-header rounded-0">
+                    <h3 class="card-title"><i class="fas fa-user-check"></i> ผู้ทรงคุณวุฒิ<br /><span
+                            class="text-sm">(ยืนยันแล้ว)</span></h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-around">
+                        <strong class="text-success mr-auto">
+                            <span class="d-none d-md-block">
+                                ทั้งหมด
+                            </span>
+                        </strong>
+                        <strong style="font-size: calc(5vw + 30px);"
+                            class="text-success h1 mx-auto">{{ count($expert) }}</strong>
+                        <strong class="text-success ms-auto mt-auto">ไอดี</strong>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card card-danger">
+                <div class="card-header rounded-0">
+                    <h3 class="card-title"><i class="fas fa-user-times"></i> ผู้ทรงคุณวุฒิ<br /><span
+                            class="text-sm">(ไม่ยืนยัน)</span></h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-around">
+                        <strong class="text-danger mr-auto">
+                            <span class="d-none d-md-block">
+                                ทั้งหมด
+                            </span>
+                        </strong>
+                        <strong style="font-size: calc(5vw + 30px);"
+                            class="text-danger h1 mx-auto">{{ count($expert_not_verify_email) }}</strong>
+                        <strong class="text-danger ms-auto mt-auto">ไอดี</strong>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
 
 
     </div>

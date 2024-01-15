@@ -19,6 +19,20 @@ class DashboardController extends Controller
         // $path = public_path('storage');
         // $storage = File::exists($path);
 
+        $expert = User::leftjoin('conferences', 'conferences.id', 'users.conference_id')
+            ->where('conferences.status', 1)
+            ->where('users.is_admin', 0)
+            ->where('users.person_attend', 'expert')
+            ->where('users.email_verified_at', '!=', null)
+            ->get();
+
+        $expert_not_verify_email = User::leftjoin('conferences', 'conferences.id', 'users.conference_id')
+            ->where('conferences.status', 1)
+            ->where('users.is_admin', 0)
+            ->where('users.person_attend', 'expert')
+            ->where('users.email_verified_at',  null)
+            ->get();
+
         $admin = User::leftjoin('conferences', 'conferences.id', 'users.conference_id')
             ->where('conferences.status', 1)
             ->where('users.is_admin', '>', 0)
@@ -195,7 +209,7 @@ class DashboardController extends Controller
         DB::disconnect('conferences');
         DB::disconnect('researchs');
         DB::disconnect('users');
-        return view('backend.pages.dashboard', compact('researchs_kota_distinct', 'researchs_out_distinct', 'researchs_in_distinct', 'chart_distinct', 'researchs', 'users', 'conference', 'users_not_verify_email', 'admin', 'chart', 'researchs_in', 'researchs_out', 'researchs_kota', 'researchs_distinct', 'researchs_not_sendfile', 'researchs_in_sendfile_distinct', 'researchs_out_sendfile_distinct', 'researchs_kota_sendfile_distinct', 'chart_sendfile_distinct'));
+        return view('backend.pages.dashboard', compact('researchs_kota_distinct', 'researchs_out_distinct', 'researchs_in_distinct', 'chart_distinct', 'researchs', 'users', 'conference', 'users_not_verify_email', 'admin', 'chart', 'researchs_in', 'researchs_out', 'researchs_kota', 'researchs_distinct', 'researchs_not_sendfile', 'researchs_in_sendfile_distinct', 'researchs_out_sendfile_distinct', 'researchs_kota_sendfile_distinct', 'chart_sendfile_distinct', 'expert', 'expert_not_verify_email'));
     }
 
     // protected function storage()

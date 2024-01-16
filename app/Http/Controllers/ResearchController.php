@@ -31,6 +31,7 @@ class ResearchController extends Controller
         $conference_id = Conference::where('status_research', 1)->first();
 
         $prefixs = [
+            'ดร.',
             'นาย',
             'นาง',
             'นางสาว',
@@ -350,6 +351,7 @@ class ResearchController extends Controller
         write_logs(__FUNCTION__, "info");
 
         $prefixs = [
+            'ดร.',
             'นาย',
             'นาง',
             'นางสาว',
@@ -360,6 +362,8 @@ class ResearchController extends Controller
             'ท่านผู้หญิง',
             'คุณหญิง',
             'คุณ',
+            'พระ',
+            'พระมหา',
             'พลเอก',
             'พลโท',
             'พลตรี',

@@ -53,7 +53,8 @@
                                                 <br />ไม่ต้องชำระเงิน</span>
                                         @else
                                             @if ($research->payment)
-                                                <span class="text-small text-green">ชำระเงินแล้ว</span>
+                                                {{-- <span class="text-small text-green">ชำระเงินแล้ว</span> --}}
+                                                <span class="text-small text-warning">รอการตรวจสอบ</span>
                                             @else
                                                 <span class="text-small text-danger">ค้างชำระเงิน</span>
                                             @endif
@@ -70,7 +71,8 @@
                                                     <br />ไม่ต้องชำระเงิน</span>
                                             @else
                                                 @if ($research->payment)
-                                                    <span class="text-small text-green">ชำระเงินแล้ว</span>
+                                                    {{-- <span class="text-small text-green">ชำระเงินแล้ว</span> --}}
+                                                    <span class="text-small text-warning">รอการตรวจสอบ</span>
                                                 @else
                                                     <span class="text-small text-danger">ค้างชำระเงิน</span>
                                                 @endif

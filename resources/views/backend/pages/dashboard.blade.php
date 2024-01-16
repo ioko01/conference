@@ -283,7 +283,7 @@
             <div class="card card-success">
                 <div class="card-header rounded-0">
                     <h3 class="card-title"><i class="fas fa-book"></i> บทความ<br /><span class="text-sm">(ไม่ซ้ำกัน
-                            มี WORD และ PDF)</span></h3>
+                            มี WORD หรือ PDF)</span></h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">

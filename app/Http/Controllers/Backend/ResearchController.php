@@ -50,10 +50,10 @@ class ResearchController extends Controller
         write_logs(__FUNCTION__, "info");
 
         $prefixs = [
-            'ดร.',
             'นาย',
             'นาง',
             'นางสาว',
+            'ดร.',
             'หม่อมเจ้า',
             'หม่อมราชวงศ์',
             'หม่อมหลวง',

@@ -31,10 +31,10 @@ class ResearchController extends Controller
         $conference_id = Conference::where('status_research', 1)->first();
 
         $prefixs = [
-            'ดร.',
             'นาย',
             'นาง',
             'นางสาว',
+            'ดร.',
             'หม่อมเจ้า',
             'หม่อมราชวงศ์',
             'หม่อมหลวง',
@@ -351,10 +351,10 @@ class ResearchController extends Controller
         write_logs(__FUNCTION__, "info");
 
         $prefixs = [
-            'ดร.',
             'นาย',
             'นาง',
             'นางสาว',
+            'ดร.',
             'หม่อมเจ้า',
             'หม่อมราชวงศ์',
             'หม่อมหลวง',
@@ -504,6 +504,7 @@ class ResearchController extends Controller
             'ผู้ช่วยศาสตราจารย์',
             'ผู้ช่วยศาสตราจารย์พิเศษ',
         ];
+
         DB::disconnect('faculties');
         DB::disconnect('degrees');
         DB::disconnect('branches');

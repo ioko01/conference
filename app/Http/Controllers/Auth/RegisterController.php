@@ -57,10 +57,10 @@ class RegisterController extends Controller
         $tips = Tip::where('group', '1')->get();
 
         $prefixs = [
-            'ดร.',
             'นาย',
             'นาง',
             'นางสาว',
+            'ดร.',
             'หม่อมเจ้า',
             'หม่อมราชวงศ์',
             'หม่อมหลวง',

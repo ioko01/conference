@@ -62,7 +62,7 @@ class DashboardController extends Controller
             ->first();
 
         $researchs_not_sendfile = Research::select(
-            DB::raw('COUNT(DISTINCT TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS topic_th')
+            DB::raw('COUNT(TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS topic_th')
         )
             ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
             ->leftjoin('pdf', 'pdf.topic_id', 'researchs.topic_id')
@@ -156,7 +156,7 @@ class DashboardController extends Controller
 
 
         $count_sendfile_distinct = Research::select(
-            DB::raw('COUNT(DISTINCT TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS count_research_not_sendfile_distinct'),
+            DB::raw('COUNT(TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS count_research_not_sendfile_distinct'),
             DB::raw('users.position_id AS position_id')
         )
             ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')

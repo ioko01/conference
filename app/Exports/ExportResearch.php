@@ -298,8 +298,10 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                                     $this->setRowColor($active_sheet, $row, "บทความนี้ไม่ส่งไฟล์ WORD และไฟล์ PDF", $columnLoopLimiter, 'FFB366');
                                 }
                             } else {
-                                for ($i = 0; $i < count($get_row_research_file["file"]); $i++) {
-                                    $this->setRowColor($active_sheet, $row, "บทความนี้ชื่อบทความซ้ำกับบทความที่ " . $get_row_research_file["file"][$i], $columnLoopLimiter, 'FFFF66');
+                                if (in_array($get_research_duplicate["prev"][$key], $get_row_research_file["file"])) {
+                                    for ($i = 0; $i < count($get_row_research_file["file"]); $i++) {
+                                        $this->setRowColor($active_sheet, $row, "บทความนี้ชื่อบทความซ้ำกับบทความที่ " . $get_research_duplicate["prev"][$key], $columnLoopLimiter, 'FFFF66');
+                                    }
                                 }
                             }
                         }

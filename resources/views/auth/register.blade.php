@@ -292,7 +292,7 @@
 
                                 <div id="form_password"
                                     class="row mb-4 @if (old('person_attend') == 'attend') d-none @endif">
-                                    @if (endDate('end_research')->day >= 0)
+                                    @if (endDate('end_research')->day >= 0 || old('position_id') == '4')
                                         <div class="col-md-6">
                                             <div class="d-flex justify-content-between">
                                                 <label for="password">รหัสผ่าน</label>

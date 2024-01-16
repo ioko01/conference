@@ -35,6 +35,21 @@ function toggle_position(e, route_register, route_expert) {
         if (e.value == "4") {
             form_password.classList.remove("d-none");
             form_register.setAttribute("action", route_expert);
+            form_password.innerHTML = `
+            <div class="col-md-6">
+                <div class="d-flex justify-content-between">
+                    <label for="password">รหัสผ่าน</label>
+                    <div class="toggle-password"><button style="text-decoration:none;" class="btn btn-link text-green p-0"><i class="fas fa-eye"></i> แสดงรหัสผ่าน</button></div>
+                </div>
+                <input type="password" name="password" id="password" class="form-control eye-icon ">
+            </div>
+            <div class="col-md-6">
+                <label for="password_confirmation">ยืนยันรหัสผ่าน</label>
+                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control ">
+            </div>
+
+            `;
+            
         } else {
             if (item.value == "attend" && item.checked) {
                 form_password.classList.add("d-none");

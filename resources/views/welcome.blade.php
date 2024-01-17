@@ -16,8 +16,8 @@
             </div>
             <div class="carousel-inner">
                 <div style="background-color: antiquewhite" class="carousel-item active">
-                    <img src="{{ asset('images/banner2.jpg', env('REDIRECT_HTTPS')) }}" class="m-auto d-block w-50"
-                        alt="banner2">
+                    <img src="{{ asset('images/banner3.jpg', env('REDIRECT_HTTPS')) }}" class="m-auto d-block w-50"
+                        alt="banner3">
                 </div>
                 {{-- <div class="carousel-item">
                     <img style="cursor: pointer" src="{{ asset('images/banner.jpg', env('REDIRECT_HTTPS')) }}"
@@ -202,7 +202,7 @@
                                             <td>3</td>
                                             <td>ประกาศผลพิจารณา</td>
                                             <td>2 กุมภาพันธ์ 2567</td>
-                                            <td></td>
+                                            <td><strong class="text-danger">เลื่อนเป็น 9 กุมภาพันธ์ 2567</strong></td>
                                             {{-- <td><strong class="text-danger">เลื่อนเป็น 7 กุมภาพันธ์ 2566</strong></td> --}}
                                         </tr>
                                         <tr>

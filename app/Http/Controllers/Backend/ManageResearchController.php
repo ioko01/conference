@@ -19,6 +19,7 @@ class ManageResearchController extends Controller
         $topic_status = StatusResearch::get();
         $data = Research::select(
             'researchs.id as id',
+            'researchs.note as note',
             'researchs.topic_id as topic_id',
             'status_researchs.name as topic_status',
             'topic_th',

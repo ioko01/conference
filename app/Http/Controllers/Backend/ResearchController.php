@@ -19,6 +19,7 @@ class ResearchController extends Controller
     {
         $researchs = Research::select(
             'researchs.id as id',
+            'researchs.note as note',
             'researchs.topic_id as topic_id',
             'researchs.topic_th as topic_th',
             'researchs.topic_en as topic_en',

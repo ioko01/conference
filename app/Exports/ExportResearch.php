@@ -32,7 +32,7 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                 ) AS sex'
             ),
             DB::raw(
-                '"" AS note'
+                'researchs.note AS note',
             ),
             DB::raw(
                 'REPLACE(researchs.topic_th, "เเ", "แ")  AS topic_th'
@@ -188,9 +188,26 @@ class ExportResearch implements FromCollection, WithHeadings, ShouldAutoSize, Wi
                         $slip = $active_sheet->getCell('P' . $row)->getValue();
                         $word = $active_sheet->getCell('U' . $row)->getValue();
                         $pdf = $active_sheet->getCell('W' . $row)->getValue();
-
+                        $note = $active_sheet->getCell('D' . $row)->getValue();
                         $year = $active_sheet->getCell('H' . $row)->getValue();
                         if ($row != 1) {
+
+                            if (isset($note)) {
+                                $active_sheet->getStyle('A' . $row . ':' . $column . $row)->getFill()
+                                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                                    ->getStartColor()
+                                    ->setARGB('FFA9A9');
+
+                                $active_sheet->getStyle('D' . $row)->applyFromArray([
+                                    'font' => [
+                                        'color' => [
+                                            'rgb' => 'FF0000'
+                                        ],
+                                        'bold' => true
+                                    ]
+                                ]);
+                            }
+
                             if (isset($slip)) {
                                 $active_sheet->getCell('P' . $row)->getHyperlink()->setUrl(config('app.url') . '/storage/public/ประชุมวิชาการ%20' . $year . '/บทความ/สลิปชำระเงิน/' . $slip);
                                 $active_sheet->getStyle('P' . $row)->applyFromArray([

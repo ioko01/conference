@@ -62,14 +62,17 @@ class DashboardController extends Controller
             ->first();
 
         $researchs_not_sendfile = Research::select(
-            DB::raw('COUNT(TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS topic_th')
+            DB::raw('COUNT(DISTINCT TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS topic_th')
         )
             ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
-            ->leftjoin('pdf', 'pdf.topic_id', 'researchs.topic_id')
             ->leftjoin('words', 'words.topic_id', 'researchs.topic_id')
+            ->leftjoin('pdf', 'pdf.topic_id', 'researchs.topic_id')
             ->where('conferences.status', 1)
-            ->where([['words.name', NULL], ['pdf.name', NULL]])
+            ->whereRaw('(words.name IS NOT NULL OR pdf.name IS NOT NULL)')
+            ->where('researchs.note', NULL)
             ->first();
+
+
 
         $users_not_verify_email = User::leftjoin('conferences', 'conferences.id', 'users.conference_id')
             ->where('conferences.status', 1)
@@ -156,7 +159,7 @@ class DashboardController extends Controller
 
 
         $count_sendfile_distinct = Research::select(
-            DB::raw('COUNT(TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS count_research_not_sendfile_distinct'),
+            DB::raw('COUNT(DISTINCT TRIM(REPLACE(REPLACE(researchs.topic_th, " ", ""), "เเ", "แ"))) AS count_research_not_sendfile_distinct'),
             DB::raw('users.position_id AS position_id')
         )
             ->leftjoin('conferences', 'conferences.id', 'researchs.conference_id')
@@ -164,10 +167,10 @@ class DashboardController extends Controller
             ->leftjoin('words', 'words.topic_id', 'researchs.topic_id')
             ->leftjoin('pdf', 'pdf.topic_id', 'researchs.topic_id')
             ->where('conferences.status', 1)
-            ->where([['words.name', NULL], ['pdf.name', NULL]])
+            ->whereRaw('(words.name IS NOT NULL OR pdf.name IS NOT NULL)')
+            ->where('researchs.note', NULL)
             ->groupBy('users.position_id')
             ->get();
-
 
 
         $chart_sendfile_distinct = new UserChart;
@@ -194,11 +197,11 @@ class DashboardController extends Controller
 
         foreach ($count_sendfile_distinct as $value) {
             if ($value->position_id == 1) {
-                $researchs_in_sendfile_distinct = intval($researchs_in - $value->count_research_not_sendfile_distinct);
+                $researchs_in_sendfile_distinct = intval($researchs_in - ($researchs_in - $value->count_research_not_sendfile_distinct));
             } else if ($value->position_id == 2) {
-                $researchs_out_sendfile_distinct = intval($researchs_out - $value->count_research_not_sendfile_distinct);
+                $researchs_out_sendfile_distinct = intval($researchs_out - ($researchs_out - $value->count_research_not_sendfile_distinct));
             } else if ($value->position_id == 3) {
-                $researchs_kota_sendfile_distinct = intval($researchs_kota - $value->count_research_not_sendfile_distinct);
+                $researchs_kota_sendfile_distinct = intval($researchs_kota - ($researchs_kota - $value->count_research_not_sendfile_distinct));
             }
         }
 

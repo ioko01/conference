@@ -302,7 +302,7 @@
                             </span>
                         </strong>
                         <strong style="font-size: calc(5vw + 30px);"
-                            class="text-success h1 mx-auto">{!! count($researchs) - $researchs_not_sendfile->topic_th !!}</strong>
+                            class="text-success h1 mx-auto">{!! $researchs_not_sendfile->topic_th !!}</strong>
                         <strong class="text-success ms-auto mt-auto">บทความ</strong>
                     </div>
                 </div>

@@ -287,24 +287,29 @@
 
                             </td>
                             <td>
-                                @if ($value->status_id >= 7)
-                                    @forelse ($comments as $key => $comment)
-                                        @if ($comment->comment_topic_id == $value->topic_id)
-                                            <div class="text-start">
-                                                <a class="text-green" target="_blank"
-                                                    href="{{ Storage::url($comment->comment_path) }}">
-                                                    &bull; <i style="font-size: 10px;">{{ $comment->comment_name }}</i>
-                                                </a>
-                                            </div>
-                                            <div style="border-bottom: 1px dotted #ccc;" class="my-2"></div>
-                                        @endif
-                                    @empty
-                                        <h1 class="text-warning text-center">
-                                            <strong style="font-size: calc(.1vw + 10px);">
-                                                (รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)
-                                            </strong>
-                                        </h1>
-                                    @endforelse
+                                @if ($value->research_passed == 1 || $value->research_passed == 2)
+                                    @if ($value->status_id >= 7)
+                                        @forelse ($comments as $key => $comment)
+                                            @if ($comment->comment_topic_id == $value->topic_id)
+                                                <div class="text-start">
+                                                    <a class="text-green" target="_blank"
+                                                        href="{{ Storage::url($comment->comment_path) }}">
+                                                        &bull; <i
+                                                            style="font-size: 10px;">{{ $comment->comment_name }}</i>
+                                                    </a>
+                                                </div>
+                                                <div style="border-bottom: 1px dotted #ccc;" class="my-2"></div>
+                                            @endif
+                                        @empty
+                                            <h1 class="text-warning text-center">
+                                                <strong style="font-size: calc(.1vw + 10px);">
+                                                    (รอบทความแก้ไขจากผู้ทรงคุณวุฒิ)
+                                                </strong>
+                                            </h1>
+                                        @endforelse
+                                    @else
+                                        -
+                                    @endif
                                 @else
                                     -
                                 @endif

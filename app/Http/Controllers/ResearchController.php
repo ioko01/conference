@@ -264,6 +264,7 @@ class ResearchController extends Controller
         $data = Research::select(
             'researchs.id as id',
             'researchs.topic_id as topic_id',
+            'researchs.research_passed as research_passed',
             'researchs.created_at as created_at',
             'status_researchs.name as topic_status',
             'topic_th',

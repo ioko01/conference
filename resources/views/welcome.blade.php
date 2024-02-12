@@ -7,8 +7,8 @@
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
-                {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button> --}}
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
                 {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
@@ -16,13 +16,20 @@
             </div>
             <div class="carousel-inner">
                 <div style="background-color: antiquewhite" class="carousel-item active">
-                    <img src="{{ asset('images/banner3.jpg', env('REDIRECT_HTTPS')) }}" class="m-auto d-block w-50"
-                        alt="banner3">
+                    <img style="cursor: pointer"
+                        title=" https://drive.google.com/drive/folders/16cJ4glvXON-RnQwS1TfqlXtiqDYmQRu8?usp=drive_link"
+                        onclick="window.open(' https\:\/\/drive.google.com/drive/folders/16cJ4glvXON-RnQwS1TfqlXtiqDYmQRu8?usp=drive_link')"
+                        src="{{ asset('images/banner5.jpg', env('REDIRECT_HTTPS')) }}" class="m-auto d-block w-50"
+                        alt="banner5">
                 </div>
-                {{-- <div class="carousel-item">
-                    <img style="cursor: pointer" src="{{ asset('images/banner.jpg', env('REDIRECT_HTTPS')) }}"
-                        class="d-block w-100" alt="banner">
-                </div> --}}
+                <div style="background-color: antiquewhite" class="carousel-item">
+                    <img style="cursor: pointer"
+                        title="https://drive.google.com/drive/folders/1QWoD_tfV0Ta0iJltvQqXMY5DYk3ClHOM?usp=sharing"
+                        onclick="window.open('https\:\/\/drive.google.com/drive/folders/1QWoD_tfV0Ta0iJltvQqXMY5DYk3ClHOM?usp=sharing')"
+                        src="{{ asset('images/banner4.jpg', env('REDIRECT_HTTPS')) }}" class="m-auto d-block w-50"
+                        alt="banner4">
+                </div>
+                
 
 
                 {{-- 

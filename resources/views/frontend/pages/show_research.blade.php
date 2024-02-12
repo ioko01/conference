@@ -311,7 +311,11 @@
                                         -
                                     @endif
                                 @else
-                                    -
+                                    <h1 class="text-warning text-center">
+                                        <strong style="font-size: calc(.1vw + 10px);">
+                                            (อยู่ในระหว่างการพิจารณา)
+                                        </strong>
+                                    </h1>
                                 @endif
                             </td>
                             <td>

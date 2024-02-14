@@ -756,14 +756,23 @@ function update_status_passed(topic_id, status, type) {
             },
             success: function (data) {
                 if (data.success) {
+                    $(`#research_passed_${topic_id} option`).removeAttr(
+                        "selected"
+                    );
+                    $(`#research_passed_${topic_id} option:selected`).attr(
+                        "selected",
+                        "selected"
+                    );
                     Swal.fire({
                         title: "สำเร็จ",
                         html: `เปลี่ยนสถานะข้อเสนอแนะสำเร็จ`,
                         icon: "success",
                         confirmButtonColor: "#3085d6",
                     });
-                    $("#research_modal").modal("dispose");
-                    $("#research_modal").remove();
+
+                    $("#research_modal").modal("hide");
+                    // $("#research_modal").modal("dispose");
+                    // $("#research_modal").remove();
 
                     if (status == 2) {
                         $(`#suggestion_container_${topic_id}`).html(

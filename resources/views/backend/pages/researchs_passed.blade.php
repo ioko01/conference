@@ -49,8 +49,8 @@
                                         </p>
                                     </td>
                                     <td>
-                                        <select name="research_passed" class="form-select"
-                                            onchange="open_modal(this, 'change_research_passed')">
+                                        <select id="research_passed_{{ $value->topic_id }}" name="research_passed"
+                                            class="form-select" onchange="open_modal(this, 'change_research_passed')">
 
                                             @for ($i = 0; $i < 4; $i++)
                                                 <option value="{{ $i }}"

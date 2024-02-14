@@ -9,6 +9,8 @@
                     aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
                     aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
                 {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
@@ -16,6 +18,10 @@
             </div>
             <div class="carousel-inner">
                 <div style="background-color: antiquewhite" class="carousel-item active">
+                    <img src="{{ asset('images/banner6.jpg', env('REDIRECT_HTTPS')) }}" class="m-auto d-block w-50"
+                        alt="banner6">
+                </div>
+                <div style="background-color: antiquewhite" class="carousel-item">
                     <img style="cursor: pointer"
                         title=" https://drive.google.com/drive/folders/16cJ4glvXON-RnQwS1TfqlXtiqDYmQRu8?usp=drive_link"
                         onclick="window.open(' https\:\/\/drive.google.com/drive/folders/16cJ4glvXON-RnQwS1TfqlXtiqDYmQRu8?usp=drive_link')"
@@ -29,7 +35,7 @@
                         src="{{ asset('images/banner4.jpg', env('REDIRECT_HTTPS')) }}" class="m-auto d-block w-50"
                         alt="banner4">
                 </div>
-                
+
 
 
                 {{-- 

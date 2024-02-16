@@ -136,7 +136,7 @@
                                                         @if (in_array($value->topic_id, ['']) || $value->status_research_edit == 1)
                                                             @if (in_array($value->topic_id, ['']) || (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1))
                                                                 @if ($value->status_id >= 7)
-                                                                    @if (endDate('end_research_edit_notice_1')->day >= 0)
+                                                                    @if (endDate('end_research_edit_notice_1')->day >= 0 && $value->status_research_edit_notice_1 == 1)
                                                                         <button type="button"
                                                                             class="btn btn-warning text-white rounded-0 w-100 my-1"
                                                                             onclick="open_modal(this, 'edit_research_first'@if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path)) , 'PUT' @endif)">
@@ -166,7 +166,7 @@
                                                                 @endif
                                                             @elseif(in_array($value->topic_id, ['']) || $value->research_passed == 2)
                                                                 @if ($value->status_id >= 7)
-                                                                    @if (endDate('end_research_edit_notice_2')->day >= 0)
+                                                                    @if (endDate('end_research_edit_notice_2')->day >= 0 && $value->status_research_edit_notice_2 == 1)
                                                                         <button type="button"
                                                                             class="btn btn-warning text-white rounded-0 w-100 my-1"
                                                                             onclick="open_modal(this, 'edit_research_first'@if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path)) , 'PUT' @endif)">
@@ -230,7 +230,7 @@
                                                         @if (in_array($value->topic_id, ['']) || $value->status_research_edit == 1)
                                                             @if (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1)
                                                                 @if ($value->status_id >= 7)
-                                                                    @if (endDate('end_research_edit_notice_1')->day >= 0)
+                                                                    @if (endDate('end_research_edit_notice_1')->day >= 0 && $value->status_research_edit_notice_1 == 1)
                                                                         <button type="button"
                                                                             class="btn btn-green text-white rounded-0 w-100 my-1"
                                                                             onclick="open_modal(this, 'edit_research_first')">
@@ -255,7 +255,7 @@
                                                                 @endif
                                                             @elseif(in_array($value->topic_id, ['']) || $value->research_passed == 2)
                                                                 @if ($value->status_id >= 7)
-                                                                    @if (endDate('end_research_edit_notice_2')->day >= 0)
+                                                                    @if (endDate('end_research_edit_notice_2')->day >= 0 && $value->status_research_edit_notice_2 == 1)
                                                                         <button type="button"
                                                                             class="btn btn-green text-white rounded-0 w-100 my-1"
                                                                             onclick="open_modal(this, 'edit_research_first')">

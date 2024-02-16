@@ -132,21 +132,31 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="border-0" colspan="3">
-                                                        @if (in_array($value->topic_id, [""]) || $value->status_research_edit == 1)
-                                                            @if (in_array($value->topic_id, [""]) || endDate('end_research_edit')->day >= 0 && $value->research_passed == 1)
+                                                        {{-- in_array($value->topic_id, ['']) ใส่บทความที่สามารถให้สว่งเข้ามาในระบบได้ --}}
+                                                        @if (in_array($value->topic_id, ['']) || $value->status_research_edit == 1)
+                                                            @if (in_array($value->topic_id, ['']) || (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1))
                                                                 @if ($value->status_id >= 7)
-                                                                    <button type="button"
-                                                                        class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                                                        onclick="open_modal(this, 'edit_research_first'@if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path)) , 'PUT' @endif)">
-                                                                        @if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path))
-                                                                            <i class="nav-icon fas fa-upload"></i>
-                                                                            แก้ไขไฟล์ฉบับแก้ไข
-                                                                        @else
-                                                                            <i class="nav-icon fas fa-upload"></i>
-                                                                            อัพโหลดไฟล์ฉบับแก้ไข
-                                                                        @endif
-                                                                    </button>
-                                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                                    @if (endDate('end_research_edit_notice_1')->day >= 0)
+                                                                        <button type="button"
+                                                                            class="btn btn-warning text-white rounded-0 w-100 my-1"
+                                                                            onclick="open_modal(this, 'edit_research_first'@if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path)) , 'PUT' @endif)">
+                                                                            @if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path))
+                                                                                <i class="nav-icon fas fa-upload"></i>
+                                                                                แก้ไขไฟล์ฉบับแก้ไข
+                                                                            @else
+                                                                                <i class="nav-icon fas fa-upload"></i>
+                                                                                อัพโหลดไฟล์ฉบับแก้ไข
+                                                                            @endif
+                                                                        </button>
+                                                                        <input type="hidden"
+                                                                            value="{{ $value->topic_id }}">
+                                                                    @else
+                                                                        <h1 class="text-danger text-center">
+                                                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1
+                                                                            </strong>
+                                                                        </h1>
+                                                                    @endif
                                                                 @else
                                                                     <h1 class="text-danger text-center">
                                                                         <strong style="font-size: calc(.1vw + 10px);">
@@ -154,20 +164,29 @@
                                                                         </strong>
                                                                     </h1>
                                                                 @endif
-                                                            @elseif(in_array($value->topic_id, [""]) || $value->research_passed == 2)
+                                                            @elseif(in_array($value->topic_id, ['']) || $value->research_passed == 2)
                                                                 @if ($value->status_id >= 7)
-                                                                    <button type="button"
-                                                                        class="btn btn-warning text-white rounded-0 w-100 my-1"
-                                                                        onclick="open_modal(this, 'edit_research_first'@if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path)) , 'PUT' @endif)">
-                                                                        @if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path))
-                                                                            <i class="nav-icon fas fa-upload"></i>
-                                                                            แก้ไขไฟล์ฉบับแก้ไข
-                                                                        @else
-                                                                            <i class="nav-icon fas fa-upload"></i>
-                                                                            อัพโหลดไฟล์ฉบับแก้ไข
-                                                                        @endif
-                                                                    </button>
-                                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                                    @if (endDate('end_research_edit_notice_2')->day >= 0)
+                                                                        <button type="button"
+                                                                            class="btn btn-warning text-white rounded-0 w-100 my-1"
+                                                                            onclick="open_modal(this, 'edit_research_first'@if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path)) , 'PUT' @endif)">
+                                                                            @if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path))
+                                                                                <i class="nav-icon fas fa-upload"></i>
+                                                                                แก้ไขไฟล์ฉบับแก้ไข
+                                                                            @else
+                                                                                <i class="nav-icon fas fa-upload"></i>
+                                                                                อัพโหลดไฟล์ฉบับแก้ไข
+                                                                            @endif
+                                                                        </button>
+                                                                        <input type="hidden"
+                                                                            value="{{ $value->topic_id }}">
+                                                                    @else
+                                                                        <h1 class="text-danger text-center">
+                                                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1
+                                                                            </strong>
+                                                                        </h1>
+                                                                    @endif
                                                                 @else
                                                                     <h1 class="text-danger text-center">
                                                                         <strong style="font-size: calc(.1vw + 10px);">
@@ -208,16 +227,25 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="border-0" colspan="3">
-                                                        @if (in_array($value->topic_id, [""]) || $value->status_research_edit == 1)
+                                                        @if (in_array($value->topic_id, ['']) || $value->status_research_edit == 1)
                                                             @if (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1)
                                                                 @if ($value->status_id >= 7)
-                                                                    <button type="button"
-                                                                        class="btn btn-green text-white rounded-0 w-100 my-1"
-                                                                        onclick="open_modal(this, 'edit_research_first')">
-                                                                        <i class="nav-icon fas fa-upload"></i>
-                                                                        อัพโหลดไฟล์ฉบับแก้ไข
-                                                                    </button>
-                                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                                    @if (endDate('end_research_edit_notice_1')->day >= 0)
+                                                                        <button type="button"
+                                                                            class="btn btn-green text-white rounded-0 w-100 my-1"
+                                                                            onclick="open_modal(this, 'edit_research_first')">
+                                                                            <i class="nav-icon fas fa-upload"></i>
+                                                                            อัพโหลดไฟล์ฉบับแก้ไข
+                                                                        </button>
+                                                                        <input type="hidden"
+                                                                            value="{{ $value->topic_id }}">
+                                                                    @else
+                                                                        <h1 class="text-danger text-center">
+                                                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1
+                                                                            </strong>
+                                                                        </h1>
+                                                                    @endif
                                                                 @else
                                                                     <h1 class="text-danger text-center">
                                                                         <strong style="font-size: calc(.1vw + 10px);">
@@ -225,15 +253,24 @@
                                                                         </strong>
                                                                     </h1>
                                                                 @endif
-                                                            @elseif(in_array($value->topic_id, [""]) || $value->research_passed == 2)
+                                                            @elseif(in_array($value->topic_id, ['']) || $value->research_passed == 2)
                                                                 @if ($value->status_id >= 7)
-                                                                    <button type="button"
-                                                                        class="btn btn-green text-white rounded-0 w-100 my-1"
-                                                                        onclick="open_modal(this, 'edit_research_first')">
-                                                                        <i class="nav-icon fas fa-upload"></i>
-                                                                        อัพโหลดไฟล์ฉบับแก้ไข
-                                                                    </button>
-                                                                    <input type="hidden" value="{{ $value->topic_id }}">
+                                                                    @if (endDate('end_research_edit_notice_2')->day >= 0)
+                                                                        <button type="button"
+                                                                            class="btn btn-green text-white rounded-0 w-100 my-1"
+                                                                            onclick="open_modal(this, 'edit_research_first')">
+                                                                            <i class="nav-icon fas fa-upload"></i>
+                                                                            อัพโหลดไฟล์ฉบับแก้ไข
+                                                                        </button>
+                                                                        <input type="hidden"
+                                                                            value="{{ $value->topic_id }}">
+                                                                    @else
+                                                                        <h1 class="text-danger text-center">
+                                                                            <strong style="font-size: calc(.1vw + 10px);">
+                                                                                สิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1
+                                                                            </strong>
+                                                                        </h1>
+                                                                    @endif
                                                                 @else
                                                                     <h1 class="text-danger text-center">
                                                                         <strong style="font-size: calc(.1vw + 10px);">

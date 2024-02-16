@@ -52,7 +52,11 @@ class SendEditResearchController extends Controller
             'send_edit_statements.extension as edit_stm_ext',
             'send_edit_statements.updated_at as edit_stm_update',
             'conferences.status_research_edit as status_research_edit',
-            'conferences.status_research_edit_two as status_research_edit_two'
+            'conferences.status_research_edit_two as status_research_edit_two',
+            'conferences.status_research_edit_notice_1 as status_research_edit_notice_1',
+            'conferences.end_research_edit_notice_1 as end_research_edit_notice_1',
+            'conferences.status_research_edit_notice_2 as status_research_edit_notice_2',
+            'conferences.end_research_edit_notice_2 as end_research_edit_notice_2',
         )
             ->leftjoin('faculties', 'researchs.faculty_id', '=', 'faculties.id')
             ->leftjoin('branches', 'researchs.branch_id', '=', 'branches.id')

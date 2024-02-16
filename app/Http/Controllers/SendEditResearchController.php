@@ -21,6 +21,7 @@ class SendEditResearchController extends Controller
         $data = Research::select(
             'researchs.id as id',
             'researchs.topic_id as topic_id',
+            'researchs.note as note',
             'researchs.research_passed as research_passed',
             'researchs.research_passed_1 as research_passed_1',
             'researchs.research_suggestion as research_suggestion',

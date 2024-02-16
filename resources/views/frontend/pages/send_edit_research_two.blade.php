@@ -28,6 +28,12 @@
                         <tr class="text-center">
                             <td>{{ $key + 1 }}</td>
                             <td class="text-start">
+                                @if ($value->note)
+                                    <strong style="font-size: 12px" class="text-danger">
+                                        *หมายเหตุ : {{ $value->note }}
+                                    </strong>
+                                    <br />
+                                @endif
                                 <strong style="font-size: 12px" class="text-warning">
                                     รหัสบทความ : {{ $value->topic_id }}
                                 </strong>

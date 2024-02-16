@@ -266,6 +266,7 @@ class ResearchController extends Controller
             'researchs.topic_id as topic_id',
             'researchs.research_passed as research_passed',
             'researchs.created_at as created_at',
+            'researchs.note as note',
             'status_researchs.name as topic_status',
             'topic_th',
             'topic_en',

@@ -15,9 +15,11 @@ function modal_detail(data) {
                 .replaceAll("!!", "")
                 .replaceAll("ดร.", " ดร.")
                 .replaceAll("|", ", ")}</span></p>
-            <p class="h5"><span>Link</span> : </span><a target="_blank" href="${
+            <p class="h5"><span>Link</span> : ${
                 data.video_link
-            }">${data.video_link}</a></p>
+                    ? `</span><a target="_blank" href="${data.video_link}">${data.video_link}</a>`
+                    : "-"
+            }</p>
             <hr />
             <img src="${data.poster_path}" class="img-fluid" alt="${
         data.topic_id

@@ -352,12 +352,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 return 'View cache has been cleared';
             });
 
+            
             Route::get('researchs/passed', [ResearchPassedController::class, 'index'])->name('backend.researchs.passed.index');
             Route::put('research/passed/update-status/{id}', [ResearchPassedController::class, 'update']);
-
+            
             Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('backend.user.edit');
             Route::put('user/{id}/update', [UserController::class, 'update'])->name('backend.user.update');
-
+            
+            Route::put('user/{id}/reset-password', [UserController::class, 'reset_password'])->name('backend.user.reset_password');
+            
             Route::get('user/{id}/change-password', [UserController::class, 'change_password'])->name('backend.user.change_password');
             Route::put('user/{id}/update-password', [UserController::class, 'update_password'])->name('backend.user.update_password');
 

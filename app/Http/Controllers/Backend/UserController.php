@@ -189,4 +189,17 @@ class UserController extends Controller
         DB::disconnect('users');
         return back()->with("status", "เปลี่ยนรหัสผ่านสำเร็จ");
     }
+
+    protected function reset_password($id)
+    {
+        #Update the new Password
+        User::where('id', $id)->update([
+            'password' => Hash::make("123456789")
+        ]);
+        write_logs(__FUNCTION__, "info");
+        alert('สำเร็จ', 'เปลี่ยนรหัสผ่านสำเร็จ', 'success')->showConfirmButton('ปิด', '#3085d6');
+
+        DB::disconnect('users');
+        return back()->with("status", "เปลี่ยนรหัสผ่านสำเร็จ");
+    }
 }

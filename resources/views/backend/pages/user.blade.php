@@ -25,6 +25,7 @@
                                 @if (auth()->user()->is_admin === 2 || auth()->user()->is_admin === 3)
                                     <th>แก้ไข</th>
                                     <th class="text-center">#</th>
+                                    <th class="text-center">รีเซ็ตรหัสผ่าน</th>
                                 @endif
                             </tr>
                         </thead>
@@ -71,6 +72,14 @@
                                             @else
                                             @endif
                                         </td>
+
+                                        <td class="text-center">
+                                            <button class="btn btn-warning rounded-0"
+                                                onclick="open_modal('{{ $user->email }}', '{{ route('backend.user.reset_password', $user->id) }}')"><i
+                                                    class="nav-icon fa fa-key"></i>
+                                                รีเซ็ตรหัสผ่าน</button>
+                                        </td>
+                                        {{-- href="{{ route('backend.user.reset_password', $user->id) }}" --}}
                                     @endif
                                 </tr>
                                 @empty
@@ -84,4 +93,5 @@
                 </div>
             </div>
         </div>
+        <div id="modal"></div>
     @endsection

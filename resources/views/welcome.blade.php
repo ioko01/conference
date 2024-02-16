@@ -18,7 +18,10 @@
             </div>
             <div class="carousel-inner">
                 <div style="background-color: antiquewhite" class="carousel-item active">
-                    <img src="{{ asset('images/banner6.jpg', env('REDIRECT_HTTPS')) }}" class="m-auto d-block w-50"
+                    <img style="cursor: pointer"
+                        title="https://drive.google.com/drive/folders/1x_tvJuo-QUu_caqhj95sV8lyMKn9svnx?usp=sharing"
+                        onclick="window.open('https\:\/\/drive.google.com/drive/folders/1x_tvJuo-QUu_caqhj95sV8lyMKn9svnx?usp=sharing')"
+                        src="{{ asset('images/banner6.jpg', env('REDIRECT_HTTPS')) }}" class="m-auto d-block w-50"
                         alt="banner6">
                 </div>
                 <div style="background-color: antiquewhite" class="carousel-item">

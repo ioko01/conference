@@ -34,7 +34,8 @@
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
-<script src="{{ asset('vendor/plugins/jquery-mousewheel/jquery.mousewheel.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
+<script src="{{ asset('vendor/plugins/jquery-mousewheel/jquery.mousewheel.js?v=1.4', env('REDIRECT_HTTPS')) }}">
+</script>
 <script src="{{ asset('vendor/plugins/raphael/raphael.min.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
 <script src="{{ asset('vendor/plugins/jquery-mapael/jquery.mapael.min.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
 <script src="{{ asset('vendor/plugins/jquery-mapael/maps/usa_states.min.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
@@ -120,6 +121,10 @@
 
 @if (Request::is('backend/researchs/management'))
     <script src="{{ asset('api/get-research-with-topic-id.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
+@endif
+
+@if (Request::is('backend/users'))
+    <script src="{{ asset('api/reset-password.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
 @if (Request::is('backend/proceeding/*/research') ||

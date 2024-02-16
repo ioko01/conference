@@ -128,6 +128,36 @@
                     </div>
                     <div class="row m-0">
                         <div class="col-lg-4 col-md-6 mb-3">
+                            <label for="end_research_edit_notice_1">วันสิ้นสุดการรับบทความฉบับแก้ไข
+                                ที่มีประกาศรายชื่อครั้งที่
+                                1 <span class="text-red">(เพื่มทีหลังได้)</span></label>
+                            <input
+                                @if ($conference->end_research_edit_notice_1) value="{{ date('Y-m-d\TH:i', strtotime($conference->end_research_edit_notice_1)) }}" @endif
+                                type="datetime-local" name="end_research_edit_notice_1" id="end_research_edit_notice_1"
+                                class="form-control rounded-0 @error('end_research_edit_notice_1') is-invalid @enderror">
+                            @error('end_research_edit_notice_1')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <label for="end_research_edit_notice_2">วันสิ้นสุดการรับบทความฉบับแก้ไข
+                                ที่มีประกาศรายชื่อครั้งที่
+                                2 <span class="text-red">(เพิ่มทีหลังได้)</span></label>
+                            <input
+                                @if ($conference->end_research_edit_notice_2) value="{{ date('Y-m-d\TH:i', strtotime($conference->end_research_edit_notice_2)) }}" @endif
+                                type="datetime-local" name="end_research_edit_notice_2" id="end_research_edit_notice_2"
+                                class="form-control rounded-0 @error('end_research_edit_notice_2') is-invalid @enderror">
+                            @error('end_research_edit_notice_2')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-lg-4 col-md-6 mb-3">
                             <label for="end_attend">วันสิ้นสุดการลงทะเบียนเข้าร่วมงาน</label>
                             <input value="{{ date('Y-m-d\TH:i', strtotime($conference->end_attend)) }}"
                                 type="datetime-local" name="end_attend" id="end_attend"
@@ -379,8 +409,9 @@
                                 </tr>
                                 <tr>
                                     <td>วันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1<br /><span
-                                        class="text-red text-xs fw-bold">คำแนะนำ:
-                                        บทความที่ผ่านการพิจารณารอบที่ 1 จะปิดรับบทความตามวันที่กำหนด ส่วนการรับบทความแก้ไขหลังนำเสนอ ต้องมากดปิดใช้งานเอง</span></td>
+                                            class="text-red text-xs fw-bold">คำแนะนำ:
+                                            บทความที่ผ่านการพิจารณารอบที่ 1 จะปิดรับบทความตามวันที่กำหนด
+                                            ส่วนการรับบทความแก้ไขหลังนำเสนอ ต้องมากดปิดใช้งานเอง</span></td>
                                     <td colspan="2" class="text-left text-xs">
                                         {{ thaiDateFormat($conference->end_research_edit) }}
                                     </td>
@@ -416,6 +447,106 @@
                                         </form>
                                     </td>
                                 </tr>
+
+
+
+
+
+
+
+
+                                <tr>
+                                    <td>วันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1 (ประกาศรายชื่อ ครั้งที่ 1)<br /><span
+                                            class="text-red text-xs fw-bold">คำแนะนำ:
+                                            บทความที่ผ่านการพิจารณารอบที่ 1 (ครั้งที่ 1) จะปิดรับบทความตามวันที่กำหนด</span>
+                                    </td>
+                                    <td colspan="2" class="text-left text-xs">
+                                        @if ($conference->end_research_edit_notice_1)
+                                            {{ thaiDateFormat($conference->end_research_edit_notice_1) }}
+                                        @else
+                                            -
+                                        @endif
+
+                                    </td>
+                                    <td>
+                                        <form method="POST"
+                                            action="{{ route('backend.conference.update_status', $conference->id) }}"
+                                            class="d-flex">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="custom-control custom-switch">
+                                                <input
+                                                    onchange="javascript:document.getElementById('change_research_edit_notice_1_{{ $key }}').click()"
+                                                    type="checkbox" class="custom-control-input"
+                                                    id="switch_research_edit_notice_1_{{ $key }}"
+                                                    @if ($conference->status_research_edit_notice_1 == 1) checked @endif>
+
+                                                @if ($conference->status_research_edit_notice_1 == 1)
+                                                    <label style="font-size: 10px;"
+                                                        class="custom-control-label text-success"
+                                                        for="switch_research_edit_notice_1_{{ $key }}">เปิดใช้งานอยู่</label>
+                                                @else
+                                                    <label style="font-size: 10px;"
+                                                        class="custom-control-label text-danger"
+                                                        for="switch_research_edit_notice_1_{{ $key }}">ปิดใช้งาน</label>
+                                                @endif
+                                            </div>
+                                            <input type="submit" class="d-none"
+                                                id="change_research_edit_notice_1_{{ $key }}"
+                                                name="change_status_research_edit_notice_1"
+                                                @if ($conference->status_research_edit_notice_1 == 1) value=0
+                                    @else
+                                    value=1 @endif>
+                                        </form>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>วันสิ้นสุดการรับบทความฉบับแก้ไขครั้งที่ 1 (ประกาศรายชื่อ ครั้งที่ 2)<br /><span
+                                            class="text-red text-xs fw-bold">คำแนะนำ:
+                                            บทความที่ผ่านการพิจารณารอบที่ 1 (ครั้งที่ 2) จะปิดรับบทความตามวันที่กำหนด</span>
+                                    </td>
+                                    <td colspan="2" class="text-left text-xs">
+                                        @if ($conference->end_research_edit_notice_2)
+                                            {{ thaiDateFormat($conference->end_research_edit_notice_2) }}
+                                        @else
+                                            -
+                                        @endif
+
+                                    </td>
+                                    <td>
+                                        <form method="POST"
+                                            action="{{ route('backend.conference.update_status', $conference->id) }}"
+                                            class="d-flex">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="custom-control custom-switch">
+                                                <input
+                                                    onchange="javascript:document.getElementById('change_research_edit_notice_2_{{ $key }}').click()"
+                                                    type="checkbox" class="custom-control-input"
+                                                    id="switch_research_edit_notice_2_{{ $key }}"
+                                                    @if ($conference->status_research_edit_notice_2 == 1) checked @endif>
+
+                                                @if ($conference->status_research_edit_notice_2 == 1)
+                                                    <label style="font-size: 10px;"
+                                                        class="custom-control-label text-success"
+                                                        for="switch_research_edit_notice_2_{{ $key }}">เปิดใช้งานอยู่</label>
+                                                @else
+                                                    <label style="font-size: 10px;"
+                                                        class="custom-control-label text-danger"
+                                                        for="switch_research_edit_notice_2_{{ $key }}">ปิดใช้งาน</label>
+                                                @endif
+                                            </div>
+                                            <input type="submit" class="d-none"
+                                                id="change_research_edit_notice_2_{{ $key }}"
+                                                name="change_status_research_edit_notice_2"
+                                                @if ($conference->status_research_edit_notice_2 == 1) value=0
+                                    @else
+                                    value=1 @endif>
+                                        </form>
+                                    </td>
+                                </tr>
+
                                 <tr>
                                     <td>วันสิ้นสุดการรับบทความแก้ไขหลังนำเสนอ <br /><span
                                             class="text-red text-xs fw-bold">คำแนะนำ:

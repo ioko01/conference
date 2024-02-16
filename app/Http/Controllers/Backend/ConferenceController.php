@@ -58,6 +58,8 @@ class ConferenceController extends Controller
             'end_payment' => $request->end_payment,
             'end_attend' => $request->end_attend,
             'end_research_edit' => $request->end_research_edit,
+            'end_research_edit_notice_1' => $request->end_research_edit_notice_1,
+            'end_research_edit_notice_2' => $request->end_research_edit_notice_2,
             'end_research_edit_two' => $request->end_research_edit_two,
             'end_poster_and_video' => $request->end_poster_and_video,
             'consideration' => $request->consideration,
@@ -86,6 +88,8 @@ class ConferenceController extends Controller
             'end_payment' => $request->end_payment,
             'end_attend' => $request->end_attend,
             'end_research_edit' => $request->end_research_edit,
+            'end_research_edit_notice_1' => $request->end_research_edit_notice_1,
+            'end_research_edit_notice_2' => $request->end_research_edit_notice_2,
             'end_research_edit_two' => $request->end_research_edit_two,
             'end_poster_and_video' => $request->end_poster_and_video,
             'consideration' => $request->consideration,
@@ -141,6 +145,8 @@ class ConferenceController extends Controller
                 'status_payment' => 0,
                 'status_attend' => 0,
                 'status_research_edit' => 0,
+                'status_research_edit_notice_1' => 0,
+                'status_research_edit_notice_2' => 0,
                 'status_research_edit_two' => 0,
                 'status_poster_and_video' => 0,
                 'status_present_poster' => 0,
@@ -152,6 +158,8 @@ class ConferenceController extends Controller
             User::where('id', auth()->user()->id)->update(['conference_id' => NULL]);
         } else {
             $change_status_research_edit = $request->change_status_research_edit;
+            $change_status_research_edit_notice_1 = $request->change_status_research_edit_notice_1;
+            $change_status_research_edit_notice_2 = $request->change_status_research_edit_notice_2;
             $change_status_poster_and_video = $request->change_status_poster_and_video;
             $change_status_research_edit_two = $request->change_status_research_edit_two;
 
@@ -168,6 +176,8 @@ class ConferenceController extends Controller
                 'status_payment' => $request->change_status_payment,
                 'status_attend' => $request->change_status_attend,
                 'status_research_edit' => $change_status_research_edit,
+                'status_research_edit_notice_1' => $change_status_research_edit_notice_1,
+                'status_research_edit_notice_2' => $change_status_research_edit_notice_2,
                 'status_research_edit_two' => $change_status_research_edit_two,
                 'status_poster_and_video' => $change_status_poster_and_video,
                 'status_present_poster' => $request->change_status_present_poster,

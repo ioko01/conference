@@ -138,11 +138,13 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="border-0" colspan="3">
-                                                        {{-- in_array($value->topic_id, ['']) ใส่บทความที่สามารถให้สว่งเข้ามาในระบบได้ --}}
+                                                        {{-- in_array($value->topic_id, ['67112', '67017', '67020', '67022', '67030', '67036', '67040', '67041', '67042', '67045', '67046', '67048', '67049', '67064', '67074', '67075', '67076', '67080', '67084', '67088', '67097', '67098', '67100', '67103', '67104', '67105', '67112', '67114', '67118', '67122', '67123', '67127', '67134', '67136']) ใส่บทความที่สามารถให้สว่งเข้ามาในระบบได้ --}}
                                                         @if (in_array($value->topic_id, ['']) || $value->status_research_edit == 1)
-                                                            @if (in_array($value->topic_id, ['']) || (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1))
+                                                            @if (in_array($value->topic_id, ['']) ||
+                                                                    (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1))
                                                                 @if (in_array($value->topic_id, ['']) || $value->status_id >= 7)
-                                                                    @if (in_array($value->topic_id, ['']) || (endDate('end_research_edit_notice_1')->day >= 0 && $value->status_research_edit_notice_1 == 1))
+                                                                    @if (in_array($value->topic_id, ['']) ||
+                                                                            (endDate('end_research_edit_notice_1')->day >= 0 && $value->status_research_edit_notice_1 == 1))
                                                                         <button type="button"
                                                                             class="btn btn-warning text-white rounded-0 w-100 my-1"
                                                                             onclick="open_modal(this, 'edit_research_first'@if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path)) , 'PUT' @endif)">
@@ -172,7 +174,8 @@
                                                                 @endif
                                                             @elseif(in_array($value->topic_id, ['']) || $value->research_passed == 2)
                                                                 @if (in_array($value->topic_id, ['']) || $value->status_id >= 7)
-                                                                    @if (in_array($value->topic_id, ['']) || (endDate('end_research_edit_notice_2')->day >= 0 && $value->status_research_edit_notice_2 == 1))
+                                                                    @if (in_array($value->topic_id, ['']) ||
+                                                                            (endDate('end_research_edit_notice_2')->day >= 0 && $value->status_research_edit_notice_2 == 1))
                                                                         <button type="button"
                                                                             class="btn btn-warning text-white rounded-0 w-100 my-1"
                                                                             onclick="open_modal(this, 'edit_research_first'@if (isset($value->edit_word_path) && isset($value->edit_pdf_path) && isset($value->edit_stm_path)) , 'PUT' @endif)">
@@ -234,9 +237,11 @@
                                                 <tr>
                                                     <td class="border-0" colspan="3">
                                                         @if (in_array($value->topic_id, ['']) || $value->status_research_edit == 1)
-                                                            @if (in_array($value->topic_id, ['']) || (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1))
+                                                            @if (in_array($value->topic_id, ['']) ||
+                                                                    (endDate('end_research_edit')->day >= 0 && $value->research_passed == 1))
                                                                 @if (in_array($value->topic_id, ['']) || $value->status_id >= 7)
-                                                                    @if (in_array($value->topic_id, ['']) || endDate('end_research_edit_notice_1')->day >= 0 && $value->status_research_edit_notice_1 == 1)
+                                                                    @if (in_array($value->topic_id, ['']) ||
+                                                                            (endDate('end_research_edit_notice_1')->day >= 0 && $value->status_research_edit_notice_1 == 1))
                                                                         <button type="button"
                                                                             class="btn btn-green text-white rounded-0 w-100 my-1"
                                                                             onclick="open_modal(this, 'edit_research_first')">
@@ -261,7 +266,8 @@
                                                                 @endif
                                                             @elseif(in_array($value->topic_id, ['']) || $value->research_passed == 2)
                                                                 @if (in_array($value->topic_id, ['']) || $value->status_id >= 7)
-                                                                    @if (in_array($value->topic_id, ['']) || (endDate('end_research_edit_notice_2')->day >= 0 && $value->status_research_edit_notice_2 == 1))
+                                                                    @if (in_array($value->topic_id, ['']) ||
+                                                                            (endDate('end_research_edit_notice_2')->day >= 0 && $value->status_research_edit_notice_2 == 1))
                                                                         <button type="button"
                                                                             class="btn btn-green text-white rounded-0 w-100 my-1"
                                                                             onclick="open_modal(this, 'edit_research_first')">
@@ -565,7 +571,7 @@
                                 @if ($value->research_passed_1 == 0)
                                     <h1 class="text-warning text-center">
                                         <strong style="font-size: calc(.1vw + 10px);">
-                                            -
+                                            กำลังดำเนินการ
                                         </strong>
                                     </h1>
                                 @elseif ($value->research_passed_1 == 1)

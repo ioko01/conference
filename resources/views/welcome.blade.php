@@ -2,6 +2,43 @@
 
 @section('content')
     <!-- Poster -->
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_notice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h1 style="line-height: 60px" class="text-blue">นักวิจัยที่นำเสนอบทความในรูปแบบ Poster </br>
+                        สามารถส่งไฟล์ Poster ได้ตามขั้นตอนดังนี้ </br>
+                        1. Login เข้าสู่ระบบ </br>
+                        2. คลิ๊กที่ส่งบทความ </br>
+                        3. คลิ๊กที่อัพโหลดไฟล์โปสเตอร์</br>
+                        <span class="text-red">
+                            <h1 style="line-height: 60px">*นักวิจัยสามารถอัพโหลดไฟล์ Poster ได้ตั้งแต่บัดนี้ - 20 มีนาคม
+                                2567 และนำเสนอผลงานในวันที่ 22 มีนาคม 2567</h1>
+                        </span>
+                        สำหรับนักวิจัยที่นำเสนอบทความในรูปแบบ Oral ให้รอนำเสนอบทความในวันที่ 22 มีนาคม 2567 ไม่ต้องอัพโหลดไฟล์ Poster</br>
+                        <span>
+                            <h1 style="line-height: 60px" class="text-green">ตรวจสอบกำหนดการนำเสนอได้ที่ : </h1>
+                            <a href="/orals/schedule">
+                                <h1>1. กำหนดการการนำเสนอผลงาน Oral Presentation</h1>
+                            </a>
+                            <a href="/posters/schedule">
+                                <h1>2. กำหนดการการนำเสนอผลงาน Poster Presentation</h1>
+                            </a>
+                        </span>
+                    </h1>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <header id="poster1">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -142,7 +179,8 @@
                             LINE OPEN CHAT</strong></h1>
         @endif
         <img src="{{ Storage::url($line->line_path) }}" alt="LINE OPEN CHAT" width="150px">
-        <a target="_blank" href="{{ $line->line_link }}" class="d-block text-primary fw-bold">เข้าร่วม LINE OPEN CHAT</a>
+        <a target="_blank" href="{{ $line->line_link }}" class="d-block text-primary fw-bold">เข้าร่วม LINE OPEN
+            CHAT</a>
         @if ($loop->last)
             </div>
             </div>
@@ -556,5 +594,4 @@
 
     <br />
     <!-- End Content -->
-
 @endsection

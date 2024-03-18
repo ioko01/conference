@@ -104,7 +104,7 @@
     <script src="{{ asset('js/default-modal.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
 @endif
 
-@if (Request::is('backend/posters') || Request::is('backend/poster/*/edit'))
+@if (Request::is('backend/posters') || Request::is('backend/posters/schedule') || Request::is('backend/poster/*/edit'))
     <script src="{{ asset('js/poster-detail-modal.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('js/default-modal.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('js/present-poster.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
@@ -112,9 +112,11 @@
 @endif
 
 @if (Request::is('backend/orals') ||
+        Request::is('backend/oral/schedule') ||
         Request::is('backend/oral/*/edit') ||
         Request::is('backend/posters') ||
-        Request::is('backend/poster/*/edit'))
+        Request::is('backend/poster/*/edit') ||
+        Request::is('backend/posters/schedule'))
     <script src="{{ asset('js/present-oral.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
     <script src="{{ asset('api/get-research-with-topic-id.js?v=1.4', env('REDIRECT_HTTPS')) }}"></script>
 @endif

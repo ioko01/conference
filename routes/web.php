@@ -36,8 +36,10 @@ use App\Http\Controllers\ListAttendController;
 use App\Http\Controllers\ListResearchController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OralController;
+use App\Http\Controllers\OralScheduleController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PosterController;
+use App\Http\Controllers\PosterScheduleController;
 use App\Http\Controllers\ProceedingController;
 use App\Http\Controllers\RegisterAttendController;
 use App\Http\Controllers\SendEditAllController;
@@ -110,8 +112,10 @@ Route::get('list/research', [ListResearchController::class, 'index'])->name('lis
 Route::get('list/attend', [ListAttendController::class, 'index'])->name('list.attend.index');
 
 Route::get('posters', [PosterController::class, 'index'])->name('posters.index');
+Route::get('posters/schedule', [PosterScheduleController::class, 'index'])->name('posters_schedule.index');
 Route::get('posters/link', [LinkPosterController::class, 'index'])->name('posters.link.index');
 Route::get('orals', [OralController::class, 'index'])->name('orals.index');
+Route::get('orals/schedule', [OralScheduleController::class, 'index'])->name('orals_schedule.index');
 Route::get('orals/link', [LinkOralController::class, 'index'])->name('orals.link.index');
 
 Route::get('proceeding/{year}', [ProceedingController::class, 'index'])->name('proceeding.index');
@@ -266,6 +270,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::put('research/{topic_id}/update', [BackendResearchController::class, 'update'])->name('backend.research.update');
 
             Route::get('posters', [PresentPosterController::class, 'index'])->name('backend.posters.index');
+            Route::get('posters/schedule', [PresentPosterController::class, 'schedule'])->name('backend.posters_schedule.schedule');
+            Route::get('posters/schedule/{topic_id}/edit', [PresentPosterController::class, 'edit_schedule'])->name('backend.posters_schedule.edit_schedule');
+            Route::get('posters/schedule/{topic_id}/update', [PresentPosterController::class, 'update_schedule'])->name('backend.posters_schedule.update_schedule');
             Route::post('poster/store', [PresentPosterController::class, 'store'])->name('backend.poster.store');
             Route::get('poster/{topic_id}/edit', [PresentPosterController::class, 'edit'])->name('backend.poster.edit');
             Route::put('poster/{topic_id}/update', [PresentPosterController::class, 'update'])->name('backend.poster.update');
@@ -277,7 +284,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::put('posters/link/{id}/update', [BackendLinkPosterController::class, 'update'])->name('backend.poster.link.update');
             Route::delete('posters/link/{id}/delete', [BackendLinkPosterController::class, 'destroy'])->name('backend.poster.link.delete');
 
-            Route::get('orals', [PresentOralController::class, 'index'])->name('backend.orals.index');
+            // Route::get('orals', [PresentOralController::class, 'index'])->name('backend.orals.index');
+            Route::get('orals/schedule', [PresentOralController::class, 'schedule'])->name('backend.orals_schedule.schedule');
             Route::post('oral/store', [PresentOralController::class, 'store'])->name('backend.oral.store');
             Route::get('oral/{topic_id}/edit', [PresentOralController::class, 'edit'])->name('backend.oral.edit');
             Route::put('oral/{topic_id}/update', [PresentOralController::class, 'update'])->name('backend.oral.update');

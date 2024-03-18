@@ -21,7 +21,7 @@ class PresentOralController extends Controller
         ]);
     }
 
-    public function index()
+    public function schedule()
     {
         $faculties = Faculty::get();
         $present_orals = PresentOral::select(
@@ -40,7 +40,7 @@ class PresentOralController extends Controller
 
         DB::disconnect('faculties');
         DB::disconnect('present_orals');
-        return view('backend.pages.oral', compact('faculties', 'present_orals'));
+        return view('backend.pages.oral_schedule', compact('faculties', 'present_orals'));
     }
 
     protected function store(Request $request)

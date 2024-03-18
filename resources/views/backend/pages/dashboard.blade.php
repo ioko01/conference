@@ -388,7 +388,7 @@
             <div class="card card-success">
                 <div class="card-header rounded-0">
                     <h3 class="card-title"><i class="fas fa-chart-area"></i> กราฟบทความ<br /><span
-                            class="text-sm">(ไม่ซ้ำกัน มี WORD หรือ PDF)</span>
+                            class="text-sm">(กรองทั้งหมด)</span>
                     </h3>
 
                     <div class="card-tools">

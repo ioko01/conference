@@ -18,6 +18,7 @@
 
                 <div>
                     <h1>ลิงค์นำเสนอ Oral Presentation</h1>
+                    <a href="/orals/schedule" class="h1 text-green"> >> คลิ๊กที่นี่เพื่อตรวจสอบกำหนดการเสนอผลงาน Oral Presentation <<</a>
                 </div>
                 @forelse ($faculties as $key => $faculty)
                     <div class="animate fade-up my-5">

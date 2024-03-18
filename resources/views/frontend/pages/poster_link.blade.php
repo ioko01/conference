@@ -18,6 +18,7 @@
 
                 <div>
                     <h1>ลิงค์นำเสนอ Poster Presentation</h1>
+                    <a href="/posters/schedule" class="h1 text-green"> >> คลิ๊กที่นี่เพื่อตรวจสอบกำหนดการเสนอผลงาน Poster Presentation <<</a>
                 </div>
                 @forelse ($faculties as $key => $faculty)
                     <div class="animate fade-up my-5">

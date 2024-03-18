@@ -1,60 +1,63 @@
 @section('script')
     <!-- Scripts -->
-    <script src="{{ asset('js/jquery-3.6.0.min.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
 
-    <script src="{{ asset('js/app.js?v=1.6a', env('REDIRECT_HTTPS')) }}" defer></script>
-    <script src="{{ asset('js/main.js?v=1.6a', env('REDIRECT_HTTPS')) }}" defer></script>
-    <script src="{{ asset('js/animate.js?v=1.6a', env('REDIRECT_HTTPS')) }}" defer></script>
+    <script src="{{ asset('js/app.js?v=1.6b', env('REDIRECT_HTTPS')) }}" defer></script>
+    <script src="{{ asset('js/main.js?v=1.6b', env('REDIRECT_HTTPS')) }}" defer></script>
+    <script src="{{ asset('js/animate.js?v=1.6b', env('REDIRECT_HTTPS')) }}" defer></script>
 
     @if (Request::is('employee/research/show/*'))
-        <script src="{{ asset('js/preview-image-payment.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/preview-image-payment.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('/'))
-        <script src="{{ asset('api/countdown.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('api/countdown.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('employee/research/show/*') ||
             Request::is('employee/research/send-edit/show/*') ||
             Request::is('employee/research/send-edit-2/show/*') ||
             Request::is('employee/research/uploadfile/*'))
-        <script src="{{ asset('api/send-edit-upload-research.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('api/send-edit-upload-research.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('employee*') || Request::is('admin*'))
-        <script src="{{ asset('api/select-faculty.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('api/select-faculty.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('register'))
-        <script src="{{ asset('js/show-hide-password.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
-        <script src="{{ asset('js/select-kota.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
-        <script src="{{ asset('js/select-attend.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/show-hide-password.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/select-kota.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/select-attend.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('employee/research/uploadfile/*') || Request::is('posters') || Request::is('orals/link'))
-        <script src="{{ asset('js/default-modal.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+    @if (Request::is('employee/research/uploadfile/*') ||
+            Request::is('posters') ||
+            Request::is('orals/link') ||
+            Request::is('posters/schedule'))
+        <script src="{{ asset('js/default-modal.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('employee/suggestion') || Request::is('employee/suggestion/*'))
-        <script src="{{ asset('api/delete.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('api/delete.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('employee/research/uploadfile/*'))
-        <script src="{{ asset('api/upload-video-poster.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
-        <script src="{{ asset('js/upload-poster-detail-modal.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('api/upload-video-poster.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/upload-poster-detail-modal.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
-    @if (Request::is('posters'))
-        <script src="{{ asset('js/poster-detail-modal.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+    @if (Request::is('posters') || Request::is('posters/schedule'))
+        <script src="{{ asset('js/poster-detail-modal.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('orals/link'))
-        <script src="{{ asset('js/oral-detail-modal.js?v=1.6a', env('REDIRECT_HTTPS')) }}"></script>
+        <script src="{{ asset('js/oral-detail-modal.js?v=1.6b', env('REDIRECT_HTTPS')) }}"></script>
     @endif
 
     @if (Request::is('employee/research/*'))
         @if (!Request::is('employee/research/send'))
-            <script src="{{ asset('vendor/plugins/datatables/datatables.min.js?v=1.6a', env('REDIRECT_HTTPS')) }}" defer></script>
+            <script src="{{ asset('vendor/plugins/datatables/datatables.min.js?v=1.6b', env('REDIRECT_HTTPS')) }}" defer></script>
             <script>
                 $(document).ready(function() {
                     $(`.dataTable`).DataTable({
@@ -89,8 +92,8 @@
         @endif
     @endif
 
-    @if (Request::is('list/*') || Request::is('orals') || Request::is('orals/link'))
-        <script src="{{ asset('vendor/plugins/datatables/datatables.min.js?v=1.6a', env('REDIRECT_HTTPS')) }}" defer></script>
+    @if (Request::is('list/*') || Request::is('orals') || Request::is('orals/link') || Request::is('orals/schedule'))
+        <script src="{{ asset('vendor/plugins/datatables/datatables.min.js?v=1.6b', env('REDIRECT_HTTPS')) }}" defer></script>
         <script>
             $(document).ready(function() {
                 $(`.dataTable`).DataTable({
@@ -125,7 +128,7 @@
     @endif
 
     @if (Request::is('proceeding/*'))
-        <script src="{{ asset('vendor/plugins/datatables/datatables.min.js?v=1.6a', env('REDIRECT_HTTPS')) }}" defer></script>
+        <script src="{{ asset('vendor/plugins/datatables/datatables.min.js?v=1.6b', env('REDIRECT_HTTPS')) }}" defer></script>
         <script>
             $(document).ready(function() {
                 $(`.dataTable`).DataTable({
@@ -158,4 +161,9 @@
             });
         </script>
     @endif
+    <script type="text/javascript">
+        window.onload = () => {
+            $('#modal_notice').modal('show');
+        };
+    </script>
 @endsection

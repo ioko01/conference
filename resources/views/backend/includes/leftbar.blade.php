@@ -131,6 +131,8 @@
 
                         <li class="nav-item @if (Request::is('backend/posters') ||
                                 Request::is('backend/orals') ||
+                                Request::is('backend/posters/schedule') ||
+                                Request::is('backend/orals/schedule') ||
                                 Request::is('backend/orals/link') ||
                                 Request::is('backend/posters/link')) menu-is-opening menu-open @endif">
                             <a href="#" class="nav-link">
@@ -149,10 +151,10 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('backend.orals.index') }}"
-                                        class="nav-link @if (Request::is('backend/orals')) active @endif">
+                                    <a href="{{ route('backend.orals_schedule.schedule') }}"
+                                        class="nav-link @if (Request::is('backend/orals/schedule')) active @endif">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>ผลงานนำเสนอ Oral</p>
+                                        <p>กำหนดการนำเสนอ Oral</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -165,10 +167,17 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('backend.posters_schedule.schedule') }}"
+                                        class="nav-link @if (Request::is('backend/posters/schedule')) active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>กำหนดการนำเสนอ Poster</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('backend.posters.index') }}"
                                         class="nav-link @if (Request::is('backend/posters')) active @endif">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>ผลงานนำเสนอ Poster</p>
+                                        <p>แสดง Poster</p>
                                     </a>
                                 </li>
                             </ul>

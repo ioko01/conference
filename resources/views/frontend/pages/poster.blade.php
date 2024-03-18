@@ -35,13 +35,17 @@
                                     <i class="fas fa-3x fa-search-plus text-white"> <span
                                             class="text-xl">ดูภาพขนาดใหญ่</span></i>
                                 </div>
-                                <img class="loading-lazy-img" width="100%" onload="" src="{{ $present_poster->path }}" alt="{{ $present_poster->topic_th }}" loading="lazy">
+                                <img class="loading-lazy-img" width="100%" onload=""
+                                    src="{{ $present_poster->path }}" alt="{{ $present_poster->topic_th }}" loading="lazy">
                             </div>
                             <div class="card-footer bg-white">
                                 <strong>
-                                    <p>ลิงค์: <br /><a target="_blank"
-                                            href="{{ $present_poster->link }}">{{ $present_poster->link }}</a>
-                                    </p>
+                                    @if ($present_poster->link)
+                                        <p>ลิงค์: <br /><a target="_blank"
+                                                href="{{ $present_poster->link }}">{{ $present_poster->link }}</a>
+                                        </p>
+                                    @endif
+
                                     <p>ชื่อบทความ: <br />
                                         {!! $present_poster->topic_th !!}</p>
                                 </strong>

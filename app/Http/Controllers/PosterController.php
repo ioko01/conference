@@ -24,6 +24,7 @@ class PosterController extends Controller
             ->leftjoin('faculties', 'faculties.id', 'present_posters.faculty_id')
             ->leftjoin('conferences', 'conferences.id', 'present_posters.conference_id')
             ->where('conferences.status', 1)
+            ->where('present_posters.path', '!=', '')
             ->orderBy('present_posters.present_poster_id')
             ->get();
         foreach ($present_posters as $present_poster) {

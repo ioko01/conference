@@ -17,32 +17,32 @@
         <!-- Font Awesome -->
 
         <link rel="stylesheet"
-            href="{{ asset('fontawesome-free-6.0.0-web/css/all.min.css?v=4', env('REDIRECT_HTTPS')) }}" />
+            href="{{ asset('fontawesome-free-6.0.0-web/css/all.min.css?v=1.6b', env('REDIRECT_HTTPS')) }}" />
 
 
 
         {{-- script --}}
 
-        <script src="{{ asset('js/preloading.js?v=4', env('REDIRECT_HTTPS')) }}" async></script>
+        <script src="{{ asset('js/preloading.js?v=1.6b', env('REDIRECT_HTTPS')) }}" async></script>
 
 
 
         <!-- Styles -->
 
-        <link href="{{ asset('css/app.css?v=4', env('REDIRECT_HTTPS')) }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css?v=1.6b', env('REDIRECT_HTTPS')) }}" rel="stylesheet">
 
-        <link href="{{ asset('css/main.min.css?v=4', env('REDIRECT_HTTPS')) }}" rel="stylesheet">
+        <link href="{{ asset('css/main.min.css?v=1.6b', env('REDIRECT_HTTPS')) }}" rel="stylesheet">
 
 
 
         @if (Request::is('employee/research/*') || Request::is('list/*'))
-            <link rel="stylesheet" href="{{ asset('css/paginate.css?v=4', env('REDIRECT_HTTPS')) }}">
+            <link rel="stylesheet" href="{{ asset('css/paginate.css?v=1.6b', env('REDIRECT_HTTPS')) }}">
 
-            <link rel="stylesheet" href="{{ asset('css/ligne.css?v=4', env('REDIRECT_HTTPS')) }}">
+            <link rel="stylesheet" href="{{ asset('css/ligne.css?v=1.6b', env('REDIRECT_HTTPS')) }}">
         @endif
 
         @if (Request::is('employee/research/send-edit/show/*'))
-            <link rel="stylesheet" href="{{ asset('vendor/plugins/quill/quill.snow.css?v=4', env('REDIRECT_HTTPS')) }}">
+            <link rel="stylesheet" href="{{ asset('vendor/plugins/quill/quill.snow.css?v=1.6b', env('REDIRECT_HTTPS')) }}">
         @endif
 
 

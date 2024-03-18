@@ -223,18 +223,26 @@
 
                             <li>
                                 <a class="dropdown-item {{ Request::is('posters/link') ? 'active' : '' }}"
-                                    aria-current="page" href="{{ route('posters.link.index') }}">ลิงค์นำเสนอผลงาน Poster</a>
+                                    aria-current="page" href="{{ route('posters.link.index') }}">ลิงค์นำเสนอผลงาน
+                                    Poster</a>
                             </li>
 
                             <li>
-                                <a class="dropdown-item {{ Request::is('orals') ? 'active' : '' }}" aria-current="page"
-                                    href="{{ route('orals.index') }}">ผลงานนำเสนอ Oral</a>
+                                <a class="dropdown-item {{ Request::is('orals/schedule') ? 'active' : '' }}"
+                                    aria-current="page" href="{{ route('orals_schedule.index') }}">กำหนดการนำเสนอ
+                                    Oral</a>
                             </li>
 
                             <li>
+                                <a class="dropdown-item {{ Request::is('posters/schedule') ? 'active' : '' }}"
+                                    aria-current="page" href="{{ route('posters_schedule.index') }}">กำหนดการนำเสนอ
+                                    Poster</a>
+                            </li>
+
+                            {{-- <li>
                                 <a class="dropdown-item {{ Request::is('posters') ? 'active' : '' }}" aria-current="page"
-                                    href="{{ route('posters.index') }}">ผลงานนำเสนอ Poster</a>
-                            </li>
+                                    href="{{ route('posters.index') }}">ดู Poster</a>
+                            </li> --}}
 
                         </ul>
                     </li>

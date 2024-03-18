@@ -112,8 +112,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <select name="research_passed" class="form-select"
-                                            onchange="open_modal(this, 'change_research_passed_1')">
+                                        <select id="research_passed_{{ $value->topic_id }}" name="research_passed"
+                                            class="form-select" onchange="open_modal(this, 'change_research_passed_1')">
 
                                             @for ($i = 0; $i < 3; $i++)
                                                 <option value="{{ $i }}"
